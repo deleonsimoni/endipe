@@ -1,0 +1,874 @@
+<!--==========================
+    Top Bar
+  ============================-->
+<section id="topbar" class="d-none d-lg-block">
+    <div class="container clearfix">
+        <!-- <div class="contact-info float-left">
+            <i class="fa fa-envelope-o"></i> <a href="mailto:contact@example.com">contact@example.com</a>
+            <i class="fa fa-phone"></i> +1 5589 55488 55
+        </div> -->
+        <div class="social-links float-right">
+            <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+            <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
+            <a href="#" class="instagram"><i class="fa fa-instagram"></i></a>
+            <a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a>
+            <a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a>
+        </div>
+    </div>
+</section>
+
+<!--==========================
+    Header
+  ============================-->
+<header id="header">
+    <div class="container">
+
+        <div id="logo" class="pull-left">
+            <h1><a [routerLink]="['/home']" fragment="body" class="scrollto">Endi<span>pe</span></a></h1>
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <!-- <a href="#body"><img src="img/logo.png" alt="" title="" /></a>-->
+        </div>
+
+        <nav id="nav-menu-container">
+            <ul class="nav-menu">
+                <li class="menu-active"><a [routerLink]="['/home']" fragment="body">Home</a></li>
+                <li><a [routerLink]="['/home']" fragment="services">Eixos</a></li>
+                <li><a [routerLink]="['/home']" fragment="timetable">Cronograma</a></li>
+                <li><a [routerLink]="['/home']" fragment="team">Coordenadores</a></li>
+                <li><a [routerLink]="['/home']" fragment="contact">Contato</a></li>
+                
+                 <!--<li><a [routerLink]="['/home']" fragment="about">Sobre</a></li>
+                <li><a [routerLink]="['/home']" fragment="services">Serviços</a></li>
+                <li><a [routerLink]="['/home']" fragment="portfolio">Portfolio</a></li>
+                <li class="menu-has-children"><a href="">Drop Down</a>
+                    <ul>
+                        <li><a href="#">Drop Down 1</a></li>
+                        <li><a href="#">Drop Down 3</a></li>
+                        <li><a href="#">Drop Down 4</a></li>
+                        <li><a href="#">Drop Down 5</a></li>
+                    </ul>
+                </li> -->
+            </ul>
+        </nav><!-- #nav-menu-container -->
+    </div>
+</header><!-- #header -->
+
+<!--==========================
+    Intro Section
+  ============================-->
+<section id="intro">
+
+    <div class="intro-content">
+        <h2>XX Endipe <span>|</span> Rio 2020</h2>
+        <div>
+            <a class="btn-get-started scrollto" style="cursor: pointer" [routerLink]="['/home']" fragment="pricing">Inscreva-se</a>
+            <!-- href="#about"  -->
+            <!-- <a href="#portfolio" class="btn-projects scrollto">Our Projects</a> -->
+        </div>
+    </div>
+
+    <div id="intro-carousel" class="owl-carousel">
+        <div class="item" style="background-image: url('assets/img/intro-carousel/1.jpg');"></div>
+        <div class="item" style="background-image: url('assets/img/intro-carousel/2.jpg');"></div>
+        <div class="item" style="background-image: url('assets/img/intro-carousel/3.jpg');"></div>
+        <div class="item" style="background-image: url('assets/img/intro-carousel/4.jpg');"></div>
+        <div class="item" style="background-image: url('assets/img/intro-carousel/5.jpg');"></div>
+    </div>
+
+</section><!-- #intro -->
+
+<main id="main">
+
+    <!--==========================
+      Sobre Section
+    ============================-->
+    <section id="about" class="wow fadeInUp">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 about-img">
+                    <img src="assets/img/about-img.jpg" alt="">
+                </div>
+
+                <div class="col-lg-6 content">
+                    <h2>FAZERES-SABERES PEDAGÓGICOS</h2>
+                    <h2 class="child">Diálogos, insurgências e políticas</h2>
+                    <!-- <h3>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim
+                        id est laborum.</h3> -->
+                    <ul>
+                        <li>
+                            <strong>14 a 17 de julho de 2020</strong>
+                        </li>
+                        <li *ngFor="let instituicao of instituicoes">
+                            {{ instituicao }}
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+
+        </div>
+    </section><!-- #about -->
+
+    <!--==========================
+      Apresentação Section
+    ============================-->
+    <section id="clients" class="wow fadeInUp">
+        <div class="container">
+            <div class="section-header">
+                <h2>Apresentação</h2>
+                <p>Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem
+                    sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os
+                    embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum sobreviveu não só a cinco séculos,
+                    como também ao salto para a editoração eletrônica, permanecendo essencialmente inalterado. Se
+                    popularizou na década de 60, quando a Letraset lançou decalques contendo passagens de Lorem Ipsum, e
+                    mais recentemente quando passou a ser integrado a softwares de editoração eletrônica como Aldus
+                    PageMaker.</p>
+            </div>
+        </div>
+    </section><!-- #apresentação -->
+
+    <!--==========================
+      Eixos Section
+    ============================-->
+    <section id="services">
+        <div class="container">
+            <div class="section-header">
+                <h2>Eixos</h2>
+                <!-- <p>Sed tamen tempor magna labore dolore dolor sint tempor duis magna elit veniam aliqua esse amet veniam
+                    enim export quid quid veniam aliqua eram noster malis nulla duis fugiat culpa esse aute nulla ipsum
+                    velit export irure minim illum fore</p> -->
+            </div>
+
+            <div class="row">
+
+                <div class="col-lg-6" *ngFor="let eixo of eixos">
+                    <div class="box wow fadeInLeft">
+                        <!-- <div class="icon"><i class="fa fa-bar-chart"></i></div> -->
+                        <h4 class="title"><a href="">{{ eixo.titulo }}</a></h4>
+                        <p class="description">
+                            {{ eixo.tema }}
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section><!-- #eixos -->
+
+    <!--==========================
+      Cronograma Section
+    ============================-->
+    <section id="timetable" class="wow fadeInUp">
+        <div class="container">
+            <div class="section-header">
+                <h2>Cronograma</h2>
+            </div>
+            <table class="table table-responsive table-striped tabelaCronograma" style="background-color: white">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th class="text-center">
+                      1º Dia
+                    </th>
+                    <th class="text-center">
+                      2º Dia
+                    </th>
+                    <th class="text-center">
+                      3º Dia
+                    </th>
+                    <th class="text-center">
+                      4º Dia
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th class="text-nowrap" scope="row">08:30 - 10:00</th>
+                    <td><code> --- </code></td>
+                    <td>Minicurso & Roda de Conversa</td>
+                    <td>Minicurso & Roda de Conversa</td>
+                    <td>Minicurso & Roda de Conversa</td>
+                  </tr>
+                  <tr>
+                    <th class="text-nowrap" scope="row">10:00 - 12:00</th>
+                    <td><code> --- </code></td>
+                    <td>Simpósios dos Eixos</td>
+                    <td>Simpósios dos Eixos</td>
+                    <td>Simpósios dos Eixos</td>
+                  </tr>
+                  <tr>
+                    <th class="text-nowrap" scope="row">12:00 - 13:00</th>
+                    <td><code> --- </code></td>
+                    <td>Intervalo</td>
+                    <td>Intervalo</td>
+                    <td>Intervalo</td>
+                  </tr>
+                  <tr>
+                    <th class="text-nowrap" scope="row">13:00 - 15:00</th>
+                    <td>Credenciamento Apresentações culturais</td>
+                    <td>Painéis & Pôsteres</td>
+                    <td>Painéis & Pôsteres</td>
+                    <td>Painéis & Pôsteres</td>
+                  </tr>
+                  <tr>
+                    <th class="text-nowrap" scope="row">15:00 - 17:00</th>
+                    <td>Credenciamento Apresentações culturais</td>
+                    <td>Painéis & Pôsteres</td>
+                    <td>Painéis & Pôsteres / Reuniões de Entidades e de Redes</td>
+                    <td>Painéis & Pôsteres / Reuniões de Entidades e de Redes</td>
+                  </tr>
+                  <tr>
+                    <th class="text-nowrap" scope="row">17:00 - 18:00</th>
+                    <td>Sessão Solene de Abertura</td>
+                    <td>Apresentações culturais</td>
+                    <td>Apresentações culturais</td>
+                    <td>Apresentações culturais</td>
+                  </tr>
+                  <tr>
+                    <th class="text-nowrap" scope="row">18:00 - 20:00</th>
+                    <td>Mesa de Abertura</td>
+                    <td>Sessões Especiais</td>
+                    <td>Sessões Especiais</td>
+                    <td>Sessão de Encerramento Assembleia ENDIPE</td>
+                  </tr>
+                  <tr>
+                    <th class="text-nowrap" scope="row">20:00 - 22:00</th>
+                    <td>Apresentação cultural</td>
+                    <td>Lançamento de livros e de Redes Apresentações culturais</td>
+                    <td>Lançamento de livros e de Redes Apresentações culturais</td>
+                    <td><code> --- </code></td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </section><!-- #cronograma -->
+
+    <!--==========================
+      Clients Section
+    ============================-->
+    <!-- <section id="clients" class="wow fadeInUp">
+        <div class="container">
+            <div class="section-header">
+                <h2>Clients</h2>
+                <p>Sed tamen tempor magna labore dolore dolor sint tempor duis magna elit veniam aliqua esse amet veniam
+                    enim export quid quid veniam aliqua eram noster malis nulla duis fugiat culpa esse aute nulla ipsum
+                    velit export irure minim illum fore</p>
+            </div>
+
+            <div class="owl-carousel clients-carousel">
+                <img src="assets/img/clients/client-1.png" alt="">
+                <img src="assets/img/clients/client-2.png" alt="">
+                <img src="assets/img/clients/client-3.png" alt="">
+                <img src="assets/img/clients/client-4.png" alt="">
+                <img src="assets/img/clients/client-5.png" alt="">
+                <img src="assets/img/clients/client-6.png" alt="">
+                <img src="assets/img/clients/client-7.png" alt="">
+                <img src="assets/img/clients/client-8.png" alt="">
+            </div>
+
+        </div>
+    </section> -->
+    <!-- #clients -->
+
+    <!--==========================
+      Our Portfolio Section
+    ============================-->
+    <!-- <section id="portfolio" class="wow fadeInUp">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Portfolio</h2>
+                <p>Sed tamen tempor magna labore dolore dolor sint tempor duis magna elit veniam aliqua esse amet veniam
+                    enim export quid quid veniam aliqua eram noster malis nulla duis fugiat culpa esse aute nulla ipsum
+                    velit export irure minim illum fore</p>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row no-gutters">
+
+                <div class="col-lg-3 col-md-4">
+                    <div class="portfolio-item wow fadeInUp">
+                        <a href="assets/img/portfolio/1.jpg" class="portfolio-popup">
+                            <img src="assets/img/portfolio/1.jpg" alt="">
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-info">
+                                    <h2 class="wow fadeInUp">Portfolio Item 1</h2>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4">
+                    <div class="portfolio-item wow fadeInUp">
+                        <a href="assets/img/portfolio/2.jpg" class="portfolio-popup">
+                            <img src="assets/img/portfolio/2.jpg" alt="">
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-info">
+                                    <h2 class="wow fadeInUp">Portfolio Item 2</h2>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4">
+                    <div class="portfolio-item wow fadeInUp">
+                        <a href="assets/img/portfolio/3.jpg" class="portfolio-popup">
+                            <img src="assets/img/portfolio/3.jpg" alt="">
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-info">
+                                    <h2 class="wow fadeInUp">Portfolio Item 3</h2>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4">
+                    <div class="portfolio-item wow fadeInUp">
+                        <a href="assets/img/portfolio/4.jpg" class="portfolio-popup">
+                            <img src="assets/img/portfolio/4.jpg" alt="">
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-info">
+                                    <h2 class="wow fadeInUp">Portfolio Item 4</h2>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4">
+                    <div class="portfolio-item wow fadeInUp">
+                        <a href="assets/img/portfolio/5.jpg" class="portfolio-popup">
+                            <img src="assets/img/portfolio/5.jpg" alt="">
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-info">
+                                    <h2 class="wow fadeInUp">Portfolio Item 5</h2>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4">
+                    <div class="portfolio-item wow fadeInUp">
+                        <a href="assets/img/portfolio/6.jpg" class="portfolio-popup">
+                            <img src="assets/img/portfolio/6.jpg" alt="">
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-info">
+                                    <h2 class="wow fadeInUp">Portfolio Item 6</h2>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4">
+                    <div class="portfolio-item wow fadeInUp">
+                        <a href="assets/img/portfolio/7.jpg" class="portfolio-popup">
+                            <img src="assets/img/portfolio/7.jpg" alt="">
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-info">
+                                    <h2 class="wow fadeInUp">Portfolio Item 7</h2>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4">
+                    <div class="portfolio-item wow fadeInUp">
+                        <a href="assets/img/portfolio/8.jpg" class="portfolio-popup">
+                            <img src="assets/img/portfolio/8.jpg" alt="">
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-info">
+                                    <h2 class="wow fadeInUp">Portfolio Item 8</h2>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section> -->
+    <!-- #portfolio -->
+
+    <!--==========================
+      Testimonials Section
+    ============================-->
+    <!-- <section id="testimonials" class="wow fadeInUp">
+        <div class="container">
+            <div class="section-header">
+                <h2>Testimonials</h2>
+                <p>Sed tamen tempor magna labore dolore dolor sint tempor duis magna elit veniam aliqua esse amet veniam
+                    enim export quid quid veniam aliqua eram noster malis nulla duis fugiat culpa esse aute nulla ipsum
+                    velit export irure minim illum fore</p>
+            </div>
+            <div class="owl-carousel testimonials-carousel">
+
+                <div class="testimonial-item">
+                    <p>
+                        <img src="assets/img/quote-sign-left.png" class="quote-sign-left" alt="">
+                        Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus.
+                        Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
+                        <img src="assets/img/quote-sign-right.png" class="quote-sign-right" alt="">
+                    </p>
+                    <img src="assets/img/testimonial-1.jpg" class="testimonial-img" alt="">
+                    <h3>Saul Goodman</h3>
+                    <h4>Ceo &amp; Founder</h4>
+                </div>
+
+                <div class="testimonial-item">
+                    <p>
+                        <img src="assets/img/quote-sign-left.png" class="quote-sign-left" alt="">
+                        Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram
+                        malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.
+                        <img src="assets/img/quote-sign-right.png" class="quote-sign-right" alt="">
+                    </p>
+                    <img src="assets/img/testimonial-2.jpg" class="testimonial-img" alt="">
+                    <h3>Sara Wilsson</h3>
+                    <h4>Designer</h4>
+                </div>
+
+                <div class="testimonial-item">
+                    <p>
+                        <img src="assets/img/quote-sign-left.png" class="quote-sign-left" alt="">
+                        Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis
+                        minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.
+                        <img src="assets/img/quote-sign-right.png" class="quote-sign-right" alt="">
+                    </p>
+                    <img src="assets/img/testimonial-3.jpg" class="testimonial-img" alt="">
+                    <h3>Jena Karlis</h3>
+                    <h4>Store Owner</h4>
+                </div>
+
+                <div class="testimonial-item">
+                    <p>
+                        <img src="assets/img/quote-sign-left.png" class="quote-sign-left" alt="">
+                        Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim
+                        velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum
+                        veniam.
+                        <img src="assets/img/quote-sign-right.png" class="quote-sign-right" alt="">
+                    </p>
+                    <img src="assets/img/testimonial-4.jpg" class="testimonial-img" alt="">
+                    <h3>Matt Brandon</h3>
+                    <h4>Freelancer</h4>
+                </div>
+
+                <div class="testimonial-item">
+                    <p>
+                        <img src="assets/img/quote-sign-left.png" class="quote-sign-left" alt="">
+                        Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim
+                        culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum
+                        quid.
+                        <img src="assets/img/quote-sign-right.png" class="quote-sign-right" alt="">
+                    </p>
+                    <img src="assets/img/testimonial-5.jpg" class="testimonial-img" alt="">
+                    <h3>John Larson</h3>
+                    <h4>Entrepreneur</h4>
+                </div>
+
+            </div>
+
+        </div>
+    </section> -->
+    <!-- #testimonials -->
+
+
+    <!--==========================
+      Coordenadores Section
+    ============================-->
+    <section id="team" class="wow fadeInUp">
+        <div class="container">
+            <div class="section-header">
+                <h2>Coordenadores</h2>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="member">
+                        <div class="pic">
+                            <img src="assets/img/team-2.jpg" alt="">
+                            <h3>Giseli Barreto da Cruz</h3>
+                            <h4>UFRJ</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="member">
+                        <div class="pic">
+                            <img src="assets/img/team-2.jpg" alt="">
+                            <h3>Claudia de Oliveira Fernandes</h3>
+                            <h4>UNIRIO</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="member">
+                        <div class="pic">
+                            <img src="assets/img/team-2.jpg" alt="">
+                            <h3>Vera Maria Ferrão Candau</h3>
+                            <h4>PUC-Rio</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!-- #coordenadores -->
+
+    <!--==========================
+      Ingressos Section
+    ============================-->
+    <section id="pricing" class="wow fadeInUp">
+        <div class="container">
+            <div class="section-header">
+                <h2>Inscrição</h2>
+            </div>
+            <div class="row">
+                <mat-tab-group animationDuration="2000ms" disableRipple>
+                    <mat-tab label="Estudantes de Graduação e Pós-Graduação">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6">
+                                <div class="span4">
+                                    <div class="pricing-box-wrap">
+                                        <div class="pricing-heading">
+                                            <h3>Lote 1</h3>
+                                            <p>Disponível até 19/03/2020 <br> ou término do lote</p>
+                                        </div>
+                                        <div class="pricing-terms">
+                                            <h6>R$60,00 <small>/Pessoa</small></h6>
+                                        </div>
+                                        <div class="pricing-content">
+                                            <ul>
+                                                <li><i class="icon-ok"></i> Lorem ipsum dolor sit amet</li>
+                                                <li><i class="icon-ok"></i> Lorem ipsum dolor sit amet</li>
+                                                <li><i class="icon-ok"></i> Lorem ipsum dolor sit amet</li>
+                                                <li><i class="icon-ok"></i> Lorem ipsum dolor sit amet</li>
+                                            </ul>
+                                        </div>
+                                        <div class="pricing-action">
+                                            <a href="#" class="btn btn-medium btn-theme"><i class="icon-bolt"></i>
+                                                REGISTRAR-SE</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6">
+                                <div class="span4">
+                                    <div class="pricing-box-wrap">
+                                        <div class="pricing-heading">
+                                            <h3>Lote 2</h3>
+                                            <p>Disponível até 19/03/2020 <br> ou término do lote</p>
+                                        </div>
+                                        <div class="pricing-terms">
+                                            <h6>R$75,00 <small>/Pessoa</small></h6>
+                                        </div>
+                                        <div class="pricing-content">
+                                            <ul>
+                                                <li><i class="icon-ok"></i> Lorem ipsum dolor sit amet</li>
+                                                <li><i class="icon-ok"></i> Lorem ipsum dolor sit amet</li>
+                                                <li><i class="icon-ok"></i> Lorem ipsum dolor sit amet</li>
+                                                <li><i class="icon-ok"></i> Lorem ipsum dolor sit amet</li>
+                                            </ul>
+                                        </div>
+                                        <div class="pricing-action">
+                                            <a href="#" class="btn btn-medium btn-theme"><i class="icon-bolt"></i>
+                                                REGISTRAR-SE</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6">
+                                <div class="span4">
+                                    <div class="pricing-box-wrap">
+                                        <div class="pricing-heading">
+                                            <h3>Lote 3</h3>
+                                            <p>Disponível até 19/03/2020 <br> ou término do lote</p>
+                                        </div>
+                                        <div class="pricing-terms">
+                                            <h6>R$95,00 <small>/Pessoa</small></h6>
+                                        </div>
+                                        <div class="pricing-content">
+                                            <ul>
+                                                <li><i class="icon-ok"></i> Lorem ipsum dolor sit amet</li>
+                                                <li><i class="icon-ok"></i> Lorem ipsum dolor sit amet</li>
+                                                <li><i class="icon-ok"></i> Lorem ipsum dolor sit amet</li>
+                                                <li><i class="icon-ok"></i> Lorem ipsum dolor sit amet</li>
+                                            </ul>
+                                        </div>
+                                        <div class="pricing-action">
+                                            <a href="#" class="btn btn-medium btn-theme"><i class="icon-bolt"></i>
+                                                REGISTRAR-SE</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-tab>
+                    <mat-tab label="Pesquisador(a) e Professor(a) de Educação Superior">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6">
+                                <div class="span4">
+                                    <div class="pricing-box-wrap">
+                                        <div class="pricing-heading">
+                                            <h3>Lote 1</h3>
+                                            <p>Disponível até 19/03/2020 <br> ou término do lote</p>
+                                        </div>
+                                        <div class="pricing-terms">
+                                            <h6>R$60,00 <small>/Pessoa</small></h6>
+                                        </div>
+                                        <div class="pricing-content">
+                                            <ul>
+                                                <li><i class="icon-ok"></i> Lorem ipsum dolor sit amet</li>
+                                                <li><i class="icon-ok"></i> Lorem ipsum dolor sit amet</li>
+                                                <li><i class="icon-ok"></i> Lorem ipsum dolor sit amet</li>
+                                                <li><i class="icon-ok"></i> Lorem ipsum dolor sit amet</li>
+                                            </ul>
+                                        </div>
+                                        <div class="pricing-action">
+                                            <a href="#" class="btn btn-medium btn-theme"><i class="icon-bolt"></i>
+                                                REGISTRAR-SE</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6">
+                                <div class="span4">
+                                    <div class="pricing-box-wrap">
+                                        <div class="pricing-heading">
+                                            <h3>Lote 2</h3>
+                                            <p>Disponível até 19/03/2020 <br> ou término do lote</p>
+                                        </div>
+                                        <div class="pricing-terms">
+                                            <h6>R$75,00 <small>/Pessoa</small></h6>
+                                        </div>
+                                        <div class="pricing-content">
+                                            <ul>
+                                                <li><i class="icon-ok"></i> Lorem ipsum dolor sit amet</li>
+                                                <li><i class="icon-ok"></i> Lorem ipsum dolor sit amet</li>
+                                                <li><i class="icon-ok"></i> Lorem ipsum dolor sit amet</li>
+                                                <li><i class="icon-ok"></i> Lorem ipsum dolor sit amet</li>
+                                            </ul>
+                                        </div>
+                                        <div class="pricing-action">
+                                            <a href="#" class="btn btn-medium btn-theme"><i class="icon-bolt"></i>
+                                                REGISTRAR-SE</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6">
+                                <div class="span4">
+                                    <div class="pricing-box-wrap">
+                                        <div class="pricing-heading">
+                                            <h3>Lote 3</h3>
+                                            <p>Disponível até 19/03/2020 <br> ou término do lote</p>
+                                        </div>
+                                        <div class="pricing-terms">
+                                            <h6>R$95,00 <small>/Pessoa</small></h6>
+                                        </div>
+                                        <div class="pricing-content">
+                                            <ul>
+                                                <li><i class="icon-ok"></i> Lorem ipsum dolor sit amet</li>
+                                                <li><i class="icon-ok"></i> Lorem ipsum dolor sit amet</li>
+                                                <li><i class="icon-ok"></i> Lorem ipsum dolor sit amet</li>
+                                                <li><i class="icon-ok"></i> Lorem ipsum dolor sit amet</li>
+                                            </ul>
+                                        </div>
+                                        <div class="pricing-action">
+                                            <a href="#" class="btn btn-medium btn-theme"><i class="icon-bolt"></i>
+                                                REGISTRAR-SE</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-tab>
+                    <mat-tab label="Professor(a) de Educação Básica">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6">
+                                <div class="span4">
+                                    <div class="pricing-box-wrap">
+                                        <div class="pricing-heading">
+                                            <h3>Lote 1</h3>
+                                            <p>Disponível até 19/03/2020 <br> ou término do lote</p>
+                                        </div>
+                                        <div class="pricing-terms">
+                                            <h6>R$60,00 <small>/Pessoa</small></h6>
+                                        </div>
+                                        <div class="pricing-content">
+                                            <ul>
+                                                <li><i class="icon-ok"></i> Lorem ipsum dolor sit amet</li>
+                                                <li><i class="icon-ok"></i> Lorem ipsum dolor sit amet</li>
+                                                <li><i class="icon-ok"></i> Lorem ipsum dolor sit amet</li>
+                                                <li><i class="icon-ok"></i> Lorem ipsum dolor sit amet</li>
+                                            </ul>
+                                        </div>
+                                        <div class="pricing-action">
+                                            <a href="#" class="btn btn-medium btn-theme"><i class="icon-bolt"></i>
+                                                REGISTRAR-SE</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6">
+                                <div class="span4">
+                                    <div class="pricing-box-wrap">
+                                        <div class="pricing-heading">
+                                            <h3>Lote 2</h3>
+                                            <p>Disponível até 19/03/2020 <br> ou término do lote</p>
+                                        </div>
+                                        <div class="pricing-terms">
+                                            <h6>R$75,00 <small>/Pessoa</small></h6>
+                                        </div>
+                                        <div class="pricing-content">
+                                            <ul>
+                                                <li><i class="icon-ok"></i> Lorem ipsum dolor sit amet</li>
+                                                <li><i class="icon-ok"></i> Lorem ipsum dolor sit amet</li>
+                                                <li><i class="icon-ok"></i> Lorem ipsum dolor sit amet</li>
+                                                <li><i class="icon-ok"></i> Lorem ipsum dolor sit amet</li>
+                                            </ul>
+                                        </div>
+                                        <div class="pricing-action">
+                                            <a href="#" class="btn btn-medium btn-theme"><i class="icon-bolt"></i>
+                                                REGISTRAR-SE</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6">
+                                <div class="span4">
+                                    <div class="pricing-box-wrap">
+                                        <div class="pricing-heading">
+                                            <h3>Lote 3</h3>
+                                            <p>Disponível até 19/03/2020 <br> ou término do lote</p>
+                                        </div>
+                                        <div class="pricing-terms">
+                                            <h6>R$95,00 <small>/Pessoa</small></h6>
+                                        </div>
+                                        <div class="pricing-content">
+                                            <ul>
+                                                <li><i class="icon-ok"></i> Lorem ipsum dolor sit amet</li>
+                                                <li><i class="icon-ok"></i> Lorem ipsum dolor sit amet</li>
+                                                <li><i class="icon-ok"></i> Lorem ipsum dolor sit amet</li>
+                                                <li><i class="icon-ok"></i> Lorem ipsum dolor sit amet</li>
+                                            </ul>
+                                        </div>
+                                        <div class="pricing-action">
+                                            <a href="#" class="btn btn-medium btn-theme"><i class="icon-bolt"></i>
+                                                REGISTRAR-SE</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-tab>
+                </mat-tab-group>
+            </div>
+        </div>
+    </section><!-- #pricing -->
+
+    <!--==========================
+      Contact Section
+    ============================-->
+    <section id="contact" class="wow fadeInUp">
+        <div class="container">
+            <div class="section-header">
+                <h2>Contato</h2>
+                <!-- <p>Sed tamen tempor magna labore dolore dolor sint tempor duis magna elit veniam aliqua esse amet veniam
+                    enim export quid quid veniam aliqua eram noster malis nulla duis fugiat culpa esse aute nulla ipsum
+                    velit export irure minim illum fore</p> -->
+            </div>
+
+            <div class="row contact-info">
+
+                <div class="col-md-4">
+                    <div class="contact-address">
+                        <i class="ion-ios-location-outline"></i>
+                        <h3>Endereço</h3>
+                        <address>Rua São Francisco Xavier, 524 - Grupo 12.037-F <br> CEP 20550-013 - Rio de Janeiro (RJ)
+                        </address>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="contact-phone">
+                        <i class="ion-ios-telephone-outline"></i>
+                        <h3>Telefone</h3>
+                        <p><a href="tel:+155895548855">+1 5589 55488 55</a></p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="contact-email">
+                        <i class="ion-ios-email-outline"></i>
+                        <h3>Email</h3>
+                        <p><a href="mailto:secretaria@seminarioredes.com.br">secretaria@seminarioredes.com.br</a></p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="container mb-4">
+            <iframe
+                src="https://maps.google.com/maps?q=Rua%20S%C3%A3o%20Francisco%20Xavier%2C%20524%20-%20Grupo%2012.037-F%20CEP%2020550-013%20-%20Rio%20de%20Janeiro%20(RJ)&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                width="100%" height="380" frameborder="0" style="border:0" allowfullscreen></iframe>
+        </div>
+
+        <div class="container">
+            <div class="form">
+                <div id="sendmessage">Sua mensagem foi enviada. Obrigado!</div>
+                <div id="errormessage"></div>
+                <form action="" method="post" role="form" class="contactForm">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <input type="text" name="name" class="form-control" id="name" placeholder="Nome"
+                                data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                            <div class="validation"></div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <input type="email" class="form-control" name="email" id="email" placeholder="Email"
+                                data-rule="email" data-msg="Please enter a valid email" />
+                            <div class="validation"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="subject" id="subject" placeholder="Assunto"
+                            data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+                        <div class="validation"></div>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" name="message" rows="5" data-rule="required"
+                            data-msg="Please write something for us" placeholder="Mensagem"></textarea>
+                        <div class="validation"></div>
+                    </div>
+                    <div class="text-center"><button type="submit">Enviar</button></div>
+                </form>
+            </div>
+
+        </div>
+    </section><!-- #contact -->
+
+</main>
+
+<!--==========================
+    Footer
+  ============================-->
+<footer id="footer">
+    <div class="container">
+        <div class="copyright">
+            &copy; Copyright <strong>UFRJ</strong>. Todos direitos reservados
+        </div>
+        <div class="credits">
+            Desenvolvido por <a href="https://google.com/">InfinityBit</a>
+        </div>
+    </div>
+</footer>
+
+<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
