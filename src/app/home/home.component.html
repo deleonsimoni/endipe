@@ -8,11 +8,11 @@
             <i class="fa fa-phone"></i> +1 5589 55488 55
         </div> -->
         <div class="social-links float-right">
-            <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
-            <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
-            <a href="#" class="instagram"><i class="fa fa-instagram"></i></a>
-            <a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a>
-            <a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a>
+            <a href="#" class="twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="google-plus"><i class="fab fa-google-plus-g"></i></a>
+            <a href="#" class="linkedin"><i class="fab fa-linkedin"></i></a>
         </div>
     </div>
 </section>
@@ -36,8 +36,8 @@
                 <li><a [routerLink]="['/home']" fragment="timetable">Cronograma</a></li>
                 <li><a [routerLink]="['/home']" fragment="team">Coordenadores</a></li>
                 <li><a [routerLink]="['/home']" fragment="contact">Contato</a></li>
-                
-                 <!--<li><a [routerLink]="['/home']" fragment="about">Sobre</a></li>
+
+                <!--<li><a [routerLink]="['/home']" fragment="about">Sobre</a></li>
                 <li><a [routerLink]="['/home']" fragment="services">Serviços</a></li>
                 <li><a [routerLink]="['/home']" fragment="portfolio">Portfolio</a></li>
                 <li class="menu-has-children"><a href="">Drop Down</a>
@@ -61,7 +61,8 @@
     <div class="intro-content">
         <h2>XX Endipe <span>|</span> Rio 2020</h2>
         <div>
-            <a class="btn-get-started scrollto" style="cursor: pointer" [routerLink]="['/home']" fragment="pricing">Inscreva-se</a>
+            <a class="btn-get-started scrollto" style="cursor: pointer" [routerLink]="['/home']"
+                fragment="pricing">Inscreva-se</a>
             <!-- href="#about"  -->
             <!-- <a href="#portfolio" class="btn-projects scrollto">Our Projects</a> -->
         </div>
@@ -85,10 +86,6 @@
     <section id="about" class="wow fadeInUp">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6 about-img">
-                    <img src="assets/img/about-img.jpg" alt="">
-                </div>
-
                 <div class="col-lg-6 content">
                     <h2>FAZERES-SABERES PEDAGÓGICOS</h2>
                     <h2 class="child">Diálogos, insurgências e políticas</h2>
@@ -102,7 +99,35 @@
                             {{ instituicao }}
                         </li>
                     </ul>
-
+                </div>
+                <div class="col-lg-6 agenda">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="agenda-titulo">
+                                <h2>Agenda</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="agenda-items col-lg-6">
+                            <ul>
+                                <li><i class="fa fa-calendar-day mr-2"></i> Lorem ipsum dolor sit amet</li>
+                                <li><i class="fa fa-calendar-day mr-2"></i> Lorem ipsum dolor sit amet</li>
+                                <li><i class="fa fa-calendar-day mr-2"></i> Lorem ipsum dolor sit amet</li>
+                                <li><i class="fa fa-calendar-day mr-2"></i> Lorem ipsum dolor sit amet</li>
+                                <li><i class="fa fa-calendar-day mr-2"></i> Lorem ipsum dolor sit amet</li>
+                            </ul>
+                        </div>
+                        <div class="agenda-items col-md-6">
+                            <ul>
+                                <li><i class="fa fa-calendar-day mr-2"></i> Lorem ipsum dolor sit amet</li>
+                                <li><i class="fa fa-calendar-day mr-2"></i> Lorem ipsum dolor sit amet</li>
+                                <li><i class="fa fa-calendar-day mr-2"></i> Lorem ipsum dolor sit amet</li>
+                                <li><i class="fa fa-calendar-day mr-2"></i> Lorem ipsum dolor sit amet</li>
+                                <li><i class="fa fa-calendar-day mr-2"></i> Lorem ipsum dolor sit amet</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -142,7 +167,7 @@
             <div class="row">
 
                 <div class="col-lg-6" *ngFor="let eixo of eixos">
-                    <div class="box wow fadeInLeft">
+                    <div class="box wow fadeInLeft" (click)="openDialogEixo(eixo)">
                         <!-- <div class="icon"><i class="fa fa-bar-chart"></i></div> -->
                         <h4 class="title"><a href="">{{ eixo.titulo }}</a></h4>
                         <p class="description">
@@ -164,83 +189,83 @@
             <div class="section-header">
                 <h2>Cronograma</h2>
             </div>
-            <table class="table table-responsive table-striped tabelaCronograma" style="background-color: white">
+            <table class="table table-responsive table-striped tabelaCronograma">
                 <thead>
-                  <tr>
-                    <th></th>
-                    <th class="text-center">
-                      1º Dia
-                    </th>
-                    <th class="text-center">
-                      2º Dia
-                    </th>
-                    <th class="text-center">
-                      3º Dia
-                    </th>
-                    <th class="text-center">
-                      4º Dia
-                    </th>
-                  </tr>
+                    <tr>
+                        <th></th>
+                        <th class="text-center">
+                            1º Dia
+                        </th>
+                        <th class="text-center">
+                            2º Dia
+                        </th>
+                        <th class="text-center">
+                            3º Dia
+                        </th>
+                        <th class="text-center">
+                            4º Dia
+                        </th>
+                    </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th class="text-nowrap" scope="row">08:30 - 10:00</th>
-                    <td><code> --- </code></td>
-                    <td>Minicurso & Roda de Conversa</td>
-                    <td>Minicurso & Roda de Conversa</td>
-                    <td>Minicurso & Roda de Conversa</td>
-                  </tr>
-                  <tr>
-                    <th class="text-nowrap" scope="row">10:00 - 12:00</th>
-                    <td><code> --- </code></td>
-                    <td>Simpósios dos Eixos</td>
-                    <td>Simpósios dos Eixos</td>
-                    <td>Simpósios dos Eixos</td>
-                  </tr>
-                  <tr>
-                    <th class="text-nowrap" scope="row">12:00 - 13:00</th>
-                    <td><code> --- </code></td>
-                    <td>Intervalo</td>
-                    <td>Intervalo</td>
-                    <td>Intervalo</td>
-                  </tr>
-                  <tr>
-                    <th class="text-nowrap" scope="row">13:00 - 15:00</th>
-                    <td>Credenciamento Apresentações culturais</td>
-                    <td>Painéis & Pôsteres</td>
-                    <td>Painéis & Pôsteres</td>
-                    <td>Painéis & Pôsteres</td>
-                  </tr>
-                  <tr>
-                    <th class="text-nowrap" scope="row">15:00 - 17:00</th>
-                    <td>Credenciamento Apresentações culturais</td>
-                    <td>Painéis & Pôsteres</td>
-                    <td>Painéis & Pôsteres / Reuniões de Entidades e de Redes</td>
-                    <td>Painéis & Pôsteres / Reuniões de Entidades e de Redes</td>
-                  </tr>
-                  <tr>
-                    <th class="text-nowrap" scope="row">17:00 - 18:00</th>
-                    <td>Sessão Solene de Abertura</td>
-                    <td>Apresentações culturais</td>
-                    <td>Apresentações culturais</td>
-                    <td>Apresentações culturais</td>
-                  </tr>
-                  <tr>
-                    <th class="text-nowrap" scope="row">18:00 - 20:00</th>
-                    <td>Mesa de Abertura</td>
-                    <td>Sessões Especiais</td>
-                    <td>Sessões Especiais</td>
-                    <td>Sessão de Encerramento Assembleia ENDIPE</td>
-                  </tr>
-                  <tr>
-                    <th class="text-nowrap" scope="row">20:00 - 22:00</th>
-                    <td>Apresentação cultural</td>
-                    <td>Lançamento de livros e de Redes Apresentações culturais</td>
-                    <td>Lançamento de livros e de Redes Apresentações culturais</td>
-                    <td><code> --- </code></td>
-                  </tr>
+                    <tr>
+                        <th class="text-nowrap" scope="row">08:30 - 10:00</th>
+                        <td><code> --- </code></td>
+                        <td>Minicurso & Roda de Conversa</td>
+                        <td>Minicurso & Roda de Conversa</td>
+                        <td>Minicurso & Roda de Conversa</td>
+                    </tr>
+                    <tr>
+                        <th class="text-nowrap" scope="row">10:00 - 12:00</th>
+                        <td><code> --- </code></td>
+                        <td>Simpósios dos Eixos</td>
+                        <td>Simpósios dos Eixos</td>
+                        <td>Simpósios dos Eixos</td>
+                    </tr>
+                    <tr>
+                        <th class="text-nowrap" scope="row">12:00 - 13:00</th>
+                        <td><code> --- </code></td>
+                        <td>Intervalo</td>
+                        <td>Intervalo</td>
+                        <td>Intervalo</td>
+                    </tr>
+                    <tr>
+                        <th class="text-nowrap" scope="row">13:00 - 15:00</th>
+                        <td>Credenciamento Apresentações culturais</td>
+                        <td>Painéis & Pôsteres</td>
+                        <td>Painéis & Pôsteres</td>
+                        <td>Painéis & Pôsteres</td>
+                    </tr>
+                    <tr>
+                        <th class="text-nowrap" scope="row">15:00 - 17:00</th>
+                        <td>Credenciamento Apresentações culturais</td>
+                        <td>Painéis & Pôsteres</td>
+                        <td>Painéis & Pôsteres / Reuniões de Entidades e de Redes</td>
+                        <td>Painéis & Pôsteres / Reuniões de Entidades e de Redes</td>
+                    </tr>
+                    <tr>
+                        <th class="text-nowrap" scope="row">17:00 - 18:00</th>
+                        <td>Sessão Solene de Abertura</td>
+                        <td>Apresentações culturais</td>
+                        <td>Apresentações culturais</td>
+                        <td>Apresentações culturais</td>
+                    </tr>
+                    <tr>
+                        <th class="text-nowrap" scope="row">18:00 - 20:00</th>
+                        <td>Mesa de Abertura</td>
+                        <td>Sessões Especiais</td>
+                        <td>Sessões Especiais</td>
+                        <td>Sessão de Encerramento Assembleia ENDIPE</td>
+                    </tr>
+                    <tr>
+                        <th class="text-nowrap" scope="row">20:00 - 22:00</th>
+                        <td>Apresentação cultural</td>
+                        <td>Lançamento de livros e de Redes Apresentações culturais</td>
+                        <td>Lançamento de livros e de Redes Apresentações culturais</td>
+                        <td><code> --- </code></td>
+                    </tr>
                 </tbody>
-              </table>
+            </table>
         </div>
     </section><!-- #cronograma -->
 
@@ -552,7 +577,8 @@
                                             </ul>
                                         </div>
                                         <div class="pricing-action">
-                                            <a href="#" class="btn btn-medium btn-theme"><i class="icon-bolt"></i>
+                                            <a (click)="openDialog()" class="btn btn-medium btn-theme"><i
+                                                    class="icon-bolt"></i>
                                                 REGISTRAR-SE</a>
                                         </div>
                                     </div>
@@ -577,7 +603,8 @@
                                             </ul>
                                         </div>
                                         <div class="pricing-action">
-                                            <a href="#" class="btn btn-medium btn-theme"><i class="icon-bolt"></i>
+                                            <a (click)="openDialog()" class="btn btn-medium btn-theme"><i
+                                                    class="icon-bolt"></i>
                                                 REGISTRAR-SE</a>
                                         </div>
                                     </div>
@@ -602,7 +629,8 @@
                                             </ul>
                                         </div>
                                         <div class="pricing-action">
-                                            <a href="#" class="btn btn-medium btn-theme"><i class="icon-bolt"></i>
+                                            <a (click)="openDialog()" class="btn btn-medium btn-theme"><i
+                                                    class="icon-bolt"></i>
                                                 REGISTRAR-SE</a>
                                         </div>
                                     </div>
@@ -631,7 +659,8 @@
                                             </ul>
                                         </div>
                                         <div class="pricing-action">
-                                            <a href="#" class="btn btn-medium btn-theme"><i class="icon-bolt"></i>
+                                            <a (click)="openDialog()" class="btn btn-medium btn-theme"><i
+                                                    class="icon-bolt"></i>
                                                 REGISTRAR-SE</a>
                                         </div>
                                     </div>
@@ -656,7 +685,8 @@
                                             </ul>
                                         </div>
                                         <div class="pricing-action">
-                                            <a href="#" class="btn btn-medium btn-theme"><i class="icon-bolt"></i>
+                                            <a (click)="openDialog()" class="btn btn-medium btn-theme"><i
+                                                    class="icon-bolt"></i>
                                                 REGISTRAR-SE</a>
                                         </div>
                                     </div>
@@ -681,7 +711,8 @@
                                             </ul>
                                         </div>
                                         <div class="pricing-action">
-                                            <a href="#" class="btn btn-medium btn-theme"><i class="icon-bolt"></i>
+                                            <a (click)="openDialog()" class="btn btn-medium btn-theme"><i
+                                                    class="icon-bolt"></i>
                                                 REGISTRAR-SE</a>
                                         </div>
                                     </div>
@@ -710,7 +741,8 @@
                                             </ul>
                                         </div>
                                         <div class="pricing-action">
-                                            <a href="#" class="btn btn-medium btn-theme"><i class="icon-bolt"></i>
+                                            <a (click)="openDialog()" class="btn btn-medium btn-theme"><i
+                                                    class="icon-bolt"></i>
                                                 REGISTRAR-SE</a>
                                         </div>
                                     </div>
@@ -735,7 +767,8 @@
                                             </ul>
                                         </div>
                                         <div class="pricing-action">
-                                            <a href="#" class="btn btn-medium btn-theme"><i class="icon-bolt"></i>
+                                            <a (click)="openDialog()" class="btn btn-medium btn-theme"><i
+                                                    class="icon-bolt"></i>
                                                 REGISTRAR-SE</a>
                                         </div>
                                     </div>
@@ -760,7 +793,8 @@
                                             </ul>
                                         </div>
                                         <div class="pricing-action">
-                                            <a href="#" class="btn btn-medium btn-theme"><i class="icon-bolt"></i>
+                                            <a (click)="openDialog()" class="btn btn-medium btn-theme"><i
+                                                    class="icon-bolt"></i>
                                                 REGISTRAR-SE</a>
                                         </div>
                                     </div>

@@ -1,5 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
+import { MatDialogRef, MatDialog } from '@angular/material/dialog';
+import { ModalInscricaoComponent } from '../modal-inscricao/modal-inscricao.component';
+import { ModalEixoComponent } from '../modal-eixo/modal-eixo.component';
 
 @Component({
   selector: 'app-home',
@@ -8,6 +11,9 @@ import { Router, NavigationEnd } from '@angular/router';
   encapsulation: ViewEncapsulation.None
 })
 export class HomeComponent implements OnInit {
+
+  subscriptionType: string;
+  subscriptionValue: number;
 
   instituicoes = [
     'Universidade Federal do Rio de Janeiro - UFRJ',
@@ -88,7 +94,8 @@ export class HomeComponent implements OnInit {
   ];
 
   constructor(
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) {
 
     this.router.events.subscribe(event => {
@@ -108,4 +115,20 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
+  openDialog(): void {
+    const dialogRef = this.dialog.open(ModalInscricaoComponent, {
+      // width: '250px',
+      data: {subscriptionType: this.subscriptionType, subscriptionValue: this.subscriptionValue }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    });
+  }
+
+  public openDialogEixo(eixo) {
+    const dialogRef = this.dialog.open(ModalEixoComponent, {
+      data: { item: eixo }
+    });
+  }
 }

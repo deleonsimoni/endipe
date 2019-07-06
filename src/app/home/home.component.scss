@@ -1,10 +1,43 @@
-#about .content {
-  h2 {
-    font-size: 32px;
+#about {
+  .content {
+    h2 {
+      font-size: 32px;
+    }
+    h2.child {
+      font-size: 28px;
+      font-weight: 500;
+    }
   }
-  h2.child {
-    font-size: 28px;
-    font-weight: 500;
+  .agenda {
+    background: rgb(247, 247, 247);
+    box-shadow: 10px 10px 15px rgba(73, 78, 92, 0.1);
+    -webkit-box-shadow: 10px 10px 15px rgba(73, 78, 92, 0.1);
+    -moz-box-shadow: 10px 10px 15px rgba(73, 78, 92, 0.1);
+    border-radius: 16px;
+    -moz-border-radius: 16px;
+    -webkit-border-radius: 16px;
+    padding: 26px 20px;
+    .agenda-titulo h2{
+      font-family: "Raleway", sans-serif;
+      color: #0c2e8a;
+      font-weight: 700;
+      font-size: 36px;
+      text-align: center;
+    }
+    .agenda-items {
+      text-align: center;
+      font-size: 14px;
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        li {
+          list-style: none;
+          padding: 10px 0;
+          margin: 0 0 0 0;
+        }
+      }
+    }
   }
 }
 
@@ -175,36 +208,42 @@
 
 mat-tab-group {
   width: 100%;
+  .mat-tab-header {
+    border-bottom: none;
+    div.mat-tab-header-pagination-chevron {
+      border-color: #fff;
+    }
+  }
   .mat-tab-body {
     padding-top: 20px;
   }
-  .mat-tab-body-content { 
-    overflow: hidden
+  .mat-tab-body-content {
+    overflow: hidden;
   }
-  .mat-tab-label{
+  .mat-tab-label {
     width: auto;
-    .mat-tab-label-content{
-      width: 270px;
+    .mat-tab-label-content {
+      width: 300px;
       white-space: normal;
       font-size: 16px;
-      color: #e8edf2;
+      color: #fff;
       text-transform: uppercase;
       font-weight: 700;
     }
-  } 
+  }
 }
 
-.mat-tab-labels .mat-ripple.mat-tab-label-active{
-  opacity: 1
+.mat-tab-labels .mat-ripple.mat-tab-label-active {
+  opacity: 1;
 }
 
-.mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar{
-  background: #e8edf2;
+.mat-tab-group.mat-primary .mat-ink-bar,
+.mat-tab-nav-bar.mat-primary .mat-ink-bar {
+  background: #fff;
   height: 2px;
-
+}
 //CSS CRONOGRAMA
 #timetable {
-
   .tabelaCronograma {
     background-color: #fff;
   }
@@ -212,6 +251,4 @@ mat-tab-group {
   .section-header h2::before {
     background: #fff;
   }
-
-}
 }
