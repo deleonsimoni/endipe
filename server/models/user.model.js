@@ -4,7 +4,7 @@ const UserSchema = new mongoose.Schema({
   fullname: {
     type: String,
     required: true
-  },
+  },  
   email: {
     type: String,
     required: true,
@@ -20,9 +20,48 @@ const UserSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   },
-  houses:[
-    {type: mongoose.Schema.Types.ObjectId, ref: 'House'}
-  ],
+  dateBirth: {
+    type: Date
+  },
+  document:{
+    type: String,
+    required: true
+  },
+
+  address:{
+    street: String,
+    number: String,
+    zip: String,
+    city: String,
+    district: String,
+    country: String,
+    state: String
+  },
+
+  phones:{
+    cellphone: String,
+    telphone: String
+  },
+  
+  participation:{
+    profile: String,
+    groupId: String,
+    modalityId: String
+  },
+  institution:{
+    name: String,
+    initials: String
+  },
+  axis:{
+    icCoordinator: Boolean,
+    icExpert: Boolean,
+    name: String,
+    imReceipt: Buffer
+  },
+  payment:{
+    code: String,
+    amount: Number
+  },
   roles: [{
     type: String,
   }]
