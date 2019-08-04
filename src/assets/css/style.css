@@ -163,7 +163,9 @@ h6 {
   height: 60vh;
   position: relative;
   background: url("../img/intro-carousel/1.jpg") no-repeat;
-  background-size: cover;
+  /*background-size: cover;*/
+  background-position-x: center;
+  background-size: contain;
 }
 
 #intro .intro-content {
