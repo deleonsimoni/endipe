@@ -7,6 +7,16 @@
         <h2 mat-dialog-title>{{ eixo.tema }}</h2>
         <div mat-dialog-content>
             <p>{{ eixo.descricao }}</p>
+            <br>
+            <ul>
+                    <li>
+                        <strong>Coordenação</strong>
+                    </li>
+                    <li *ngFor="let coordenador of eixo.coordenacao">
+                            {{ coordenador }}
+                    </li>
+                </ul>
         </div>
+
     </div>
 </div>

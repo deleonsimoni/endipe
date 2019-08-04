@@ -34,7 +34,6 @@
                 <li class="menu-active"><a [routerLink]="['/home']" fragment="body">Home</a></li>
                 <li><a [routerLink]="['/home']" fragment="services">Eixos</a></li>
                 <li><a [routerLink]="['/home']" fragment="team">Organização</a></li>
-                <li><a [routerLink]="['/home']" fragment="timetable">Comitê</a></li>
                 <li><a [routerLink]="['/home']" fragment="timetable">Histórico</a></li>
                 <li><a [routerLink]="['/home']" fragment="timetable">Programação</a></li>
                 <li><a [routerLink]="['/home']" fragment="timetable">Modalidades</a></li>
@@ -92,16 +91,22 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 content">
-                    <h2>FAZERES-SABERES PEDAGÓGICOS</h2>
-                    <h2 class="child">Diálogos, insurgências e políticas</h2>
+                    <h2>Tema</h2>
+                    <h2 class="child">FAZERES-SABERES PEDAGÓGICOS: diálogos, insurgências e políticas</h2>
+                    
                     <!-- <h3>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim
                         id est laborum.</h3> -->
                     <ul>
                         <li>
-                            <strong>14 a 17 de julho de 2020</strong>
+                            <strong>Dias: 14 a 17 de julho de 2020</strong>
                         </li>
-                        <li *ngFor="let instituicao of instituicoes">
-                            {{ instituicao }}
+                        <li>
+                            <strong>Locais</strong>
+                        </li>
+                        <li>
+                            Campus da Faculdade de Educação da UFRJ, do Instituto Benjamim Constant e da Escola de
+                            Educação da UNIRIO, todos localizados na Av. Pasteur, no bairro da Urca, com realização da
+                            sessão de abertura no espaço cultural Vivo Rio, situado no Aterro do Flamengo.
                         </li>
                     </ul>
                 </div>
@@ -146,13 +151,52 @@
         <div class="container">
             <div class="section-header">
                 <h2>Apresentação</h2>
-                <p>Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem
-                    sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os
-                    embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum sobreviveu não só a cinco séculos,
-                    como também ao salto para a editoração eletrônica, permanecendo essencialmente inalterado. Se
-                    popularizou na década de 60, quando a Letraset lançou decalques contendo passagens de Lorem Ipsum, e
-                    mais recentemente quando passou a ser integrado a softwares de editoração eletrônica como Aldus
-                    PageMaker.</p>
+                <p style="text-align: left;">
+                    A realização do seminário “A Didática em Questão”, em 1982, na PUC-Rio, referência
+                    especialmente significativa da gênese do movimento hoje materializado nos ENDIPES
+                    (Encontro Nacional de Didática e Prática de Ensino), estava marcada pelo contexto de forte
+                    compromisso com a construção dos caminhos de redemocratização da sociedade brasileira.
+                    Para todos os implicados, esta era uma exigência iniludível: articular os processos
+                    educacionais com as dinâmicas de transformação e reconstrução do estado democrático de
+                    direito no país. Além disso, outro foco fundamental foi a superação da orientação tecnicista
+                    então predominante na área didática.
+                    Hoje: a Didática e a área de educação estão desafiadas por um contexto marcado por forte
+                    retrocesso nas conquistas de direitos, nas políticas sociais e educacionais; afirmam-se
+                    políticas neoliberais, o conservadorismo no plano político e ético, multiplicam-se as
+                    desigualdades, violências, discriminações e intolerâncias, e se afirma o que podemos chamar
+                    de um neotecnicismo. Atrevemo-nos a afirmar que a educação apresenta um quadro sombrio,
+                    anacrônico e incompetente. É este o contexto que nos desafia a superar a falta de ânimo, o
+                    cansaço e a desesperança.
+                    <br/>
+                    Que caminhos podemos trilhar? O que propor para essa 20ª edição do ENDIPE a se realizar
+                    no Rio de Janeiro em 2020?
+                    <br/>
+                    <br/>
+                    <strong>
+                    - Promover um amplo diálogo com os diferentes atores sociais<br/>
+                    - Visibilizar e socializar práticas educativas insurgentes<br/>
+                    - Valorizar a profissão docente<br/>
+                    - Favorecer a superação do “formato escolar” dominante - Reinventar a escola<br/>
+                    <br/>
+                    </strong>
+                    Muitos são os nossos desafios neste momento sombrio que estamos vivendo. No entanto,
+                    juntos/as, estamos chamados/as a resistir, insurgir e criar espaços de diálogo orientados a
+                    construir processos educativos que fortaleçam a democracia, a justiça e a solidariedade no
+                    nosso país.
+                    Esperamos que, quase quarenta anos depois, esse ENDIPE também fique marcado, pelo forte
+                    compromisso com a construção dos caminhos de afirmação da democracia brasileira. Uma
+                    marca não só do primeiro, mas de todos os ENDIPES que se sucederam. Que consigamos,
+                    como sempre, articular os processos educacionais com as dinâmicas de transformação e
+                    construção de uma sociedade justa e plural em que a democracia seja uma prática cotidiana.
+                    Nesta direção queremos situar o XX ENDIPE – Rio 2020.
+                    <br/>
+                    
+                    <i class="pull-right">
+                    Rio de Janeiro, 27 de março de 2019.
+                    Comitê Organizador 
+                    </i>
+                
+                </p>
             </div>
         </div>
     </section><!-- #apresentação -->
@@ -185,6 +229,51 @@
 
         </div>
     </section><!-- #eixos -->
+
+    
+<!--==========================
+      organizacao Section
+    ============================-->
+    <section id="team" class="wow fadeInUp">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Coordenadores</h2>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="member">
+                            <div class="pic">
+                                
+                                <h3>Giseli Barreto da Cruz</h3>
+                                <h4>UFRJ</h4>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="col-lg-4 col-md-6">
+                        <div class="member">
+                            <div class="pic">
+                                
+                                <h3>Claudia de Oliveira Fernandes</h3>
+                                <h4>UNIRIO</h4>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="col-lg-4 col-md-6">
+                        <div class="member">
+                            <div class="pic">
+                                
+                                <h3>Vera Maria Ferrão Candau</h3>
+                                <h4>PUC-Rio</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section><!-- #coordenadores -->
+
+    
 
     <!--==========================
       Cronograma Section
@@ -509,47 +598,7 @@
     <!-- #testimonials -->
 
 
-    <!--==========================
-      Coordenadores Section
-    ============================-->
-    <section id="team" class="wow fadeInUp">
-        <div class="container">
-            <div class="section-header">
-                <h2>Coordenadores</h2>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 col-md-6">
-                    <div class="member">
-                        <div class="pic">
-                            <img src="assets/img/team-2.jpg" alt="">
-                            <h3>Giseli Barreto da Cruz</h3>
-                            <h4>UFRJ</h4>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <div class="member">
-                        <div class="pic">
-                            <img src="assets/img/team-2.jpg" alt="">
-                            <h3>Claudia de Oliveira Fernandes</h3>
-                            <h4>UNIRIO</h4>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <div class="member">
-                        <div class="pic">
-                            <img src="assets/img/team-2.jpg" alt="">
-                            <h3>Vera Maria Ferrão Candau</h3>
-                            <h4>PUC-Rio</h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section><!-- #coordenadores -->
+    
 
     <!--==========================
       Ingressos Section
