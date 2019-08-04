@@ -156,7 +156,8 @@ h6 {
   height: 60vh;
   position: relative;
   background: url("./assets/img/banner.jpeg") no-repeat;
-  background-size: cover;
+  background-position-x: center;
+  background-size: contain;
 }
 
 #intro .intro-content {
