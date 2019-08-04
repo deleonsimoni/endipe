@@ -50,9 +50,43 @@
   }
 }
 
+#historico{
+  background: #50d8af;
+  position: relative;
+  border-top: 1px solid #f2f2f2;
+  padding: 50px 0;
+  .timetable-box-wrapper {
+    text-align: center;
+    background: #e8edf2;
+    position: relative;
+    margin: 0 0;
+    padding: 30px 30px;
+    -webkit-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.03);
+    -moz-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.03);
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.03);
+    border-radius: 16px;
+    -moz-border-radius: 16px;
+    -webkit-border-radius: 16px;
+    .timetable-content {
+      text-align: center;
+      font-size: 14px;
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        li {
+          list-style: none;
+          padding: 8px 0 8px 0;
+          margin: 0 0 0 0;
+        }
+      }
+    }
+  }
+}
+
+
 #timetable {
   position: relative;
-  background: #50d8af;
   border-top: 1px solid #f2f2f2;
   padding: 50px 0;
   .timetable-box-wrapper {
@@ -243,7 +277,7 @@ mat-tab-group {
   height: 2px;
 }
 //CSS CRONOGRAMA
-#timetable {
+#historico {
   .tabelaCronograma {
     background-color: #fff;
   }

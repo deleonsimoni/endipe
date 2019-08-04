@@ -9,13 +9,15 @@ import { UtilNgxMaterialModule } from './util-ngx-material/util-ngx-material.mod
 import { ModalInscricaoComponent } from './modal-inscricao/modal-inscricao.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalEixoComponent } from './modal-eixo/modal-eixo.component';
+import { ModalProgramacaoComponent } from './modal-programacao/modal-programacao.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     ModalInscricaoComponent,
-    ModalEixoComponent
+    ModalEixoComponent,
+    ModalProgramacaoComponent
   ],
   imports: [
     BrowserModule,

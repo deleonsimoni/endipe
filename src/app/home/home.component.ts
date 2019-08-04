@@ -3,6 +3,8 @@ import { Router, NavigationEnd } from '@angular/router';
 import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { ModalInscricaoComponent } from '../modal-inscricao/modal-inscricao.component';
 import { ModalEixoComponent } from '../modal-eixo/modal-eixo.component';
+import { ModalProgramacaoComponent } from '../modal-programacao/modal-programacao.component';
+
 
 @Component({
   selector: 'app-home',
@@ -318,6 +320,35 @@ export class HomeComponent implements OnInit {
     }
   ];
 
+  programacoes = [
+    {
+      titulo: 'Visão Geral',
+      horarios: [
+          [
+          '08:30 - 10:00', '', 'Minicurso & Roda de Conversa', 'Minicurso & Roda de Conversa', 'Minicurso & Roda de Conversa'
+          ],
+          [
+          '10:15 - 12:30', '', 'Simpósios', 'Simpósios', 'Simpósios'
+          ],
+          [
+          '12:30 - 13:30', '', 'Intervalo', 'Intervalo', 'Intervalo'
+          ],
+          [
+          '13:30 - 15:30', 'Credenciamento Apresentações culturais', 'Painéis & Pôsteres', 'Painéis & Pôsteres', 'Painéis & Pôsteres'
+          ],
+          [
+          '16:00 - 18:00', 'Credenciamento Apresentações culturais Sessão Solene de Abertura', 'Painéis & Pôsteres', 'Painéis & Pôsteres / Reuniões de Entidades e de Redes', 'Painéis & Pôsteres / Reuniões de Entidades e de Redes'
+          ],
+          [
+          '18:00 - 20:00', 'Mesa de Abertura', 'Sessões Especiais', 'Sessões Especiais', 'Sessão de Encerramento Assembleia ENDIPE'
+          ],
+          [
+          '20:00 - 22:00', 'Apresentação cultural', 'Lançamento de livros e de Redes Apresentações culturais', 'Lançamento de livros e de Redes Apresentações culturais', ''
+          ],
+      ]
+    }
+  ]
+
   constructor(
     private router: Router,
     private dialog: MatDialog
@@ -354,6 +385,12 @@ export class HomeComponent implements OnInit {
   public openDialogEixo(eixo) {
     const dialogRef = this.dialog.open(ModalEixoComponent, {
       data: { item: eixo }
+    });
+  }
+
+  public openDialogProgramacao(programacao) {
+    const dialogRef = this.dialog.open(ModalProgramacaoComponent, {
+      data: { item: programacao }
     });
   }
 }

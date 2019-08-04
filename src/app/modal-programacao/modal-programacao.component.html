@@ -1,0 +1,28 @@
+<table class="table table-responsive table-striped tabelaCronograma">
+        <thead>
+            <tr>
+                <th></th>
+                <th class="text-center">
+                    1º Dia
+                </th>
+                <th class="text-center">
+                    2º Dia
+                </th>
+                <th class="text-center">
+                    3º Dia
+                </th>
+                <th class="text-center">
+                    4º Dia
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let horarios of programacao.horarios">
+                <th class="text-nowrap" scope="row">08:30 - 10:00</th>
+                <td>{{horarios[0]}}</td>
+                <td>{{horarios[0]}}</td>
+                <td>{{horarios[0]}}</td>
+                <td>{{horarios[0]}}</td>
+            </tr>
+        </tbody>
+    </table>
