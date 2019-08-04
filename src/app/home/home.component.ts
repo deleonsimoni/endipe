@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
     'Instituto Superior de Educação do Rio de Janeiro - ISERJ'
   ];
 
-  comite = [
+  comites = [
     'Andrea Vilella Mafra da Silva – ISERJ',
     'Antonio Flavio Barbosa Moreira – UCP',
     'Claudia de Oliveira Fernandes – UNIRIO',
@@ -51,7 +51,7 @@ export class HomeComponent implements OnInit {
     'Yrlla Ribeiro de Oliveira Carneiro da Silva – INES'
   ];
 
-  secretaria = [
+  secretarias = [
     'Silvana Mesquita – PUC-Rio',
     'Helena Fontoura – FFP/UERJ',
     'Talita da Silva Campelo – EB/SME-Caxias'

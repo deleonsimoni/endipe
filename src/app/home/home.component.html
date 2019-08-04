@@ -237,49 +237,39 @@
     <section id="team" class="wow fadeInUp">
             <div class="container">
                 <div class="section-header">
-                    <h2>Coordenadores</h2>
+                    <h2>Organização</h2>
                 </div>
                 <div class="row">
-                    <strong>
-                        O XX ENDIPE – Rio 2020 é uma organização conjunta das seguintes instituições:
-                    </strong>
-                    <ul>
+
+                    <ul style="list-style: none;">
                             <li>
-                                <strong>Coordenação</strong>
+                                <strong>O XX ENDIPE – Rio 2020 é uma organização conjunta das seguintes instituições:</strong>
                             </li>
-                            <li *ngFor="let organizacao of instituicoes">
-                                    {{ organizacao }}
+                            <li *ngFor="let instituicao of instituicoes">
+                                    {{ instituicao }}
                             </li>
+                            <li>
+                                <strong>Comitê</strong>
+                            </li>
+                            <li *ngFor="let comite of comites">
+                                    {{ comite }}
+                            </li>
+                            <li>
+                                <strong>Secretaria</strong>
+                            </li>
+                            <li *ngFor="let secretaria of secretarias">
+                                    {{ secretaria }}
+                            </li>
+                            <li *ngFor="let grupos of gruposDeTrabalho">
+                                <strong>{{grupos.nome}}</strong>
+                                <ul style="list-style: none;">
+                                    <li *ngFor="let pessoas of grupos.equipe">
+                                        {{pessoas}}
+                                    </li>
+                                </ul>
+                            </li>
+
                     </ul>
-                    <div class="col-lg-2 col-md-6">
-                        <div class="member">
-                            <div class="pic">
-                                
-                                <h3>Giseli Barreto da Cruz</h3>
-                                <h4>UFRJ</h4>
-                            </div>
-                        </div>
-                    </div>
-    
-                    <div class="col-lg-4 col-md-6">
-                        <div class="member">
-                            <div class="pic">
-                                
-                                <h3>Claudia de Oliveira Fernandes</h3>
-                                <h4>UNIRIO</h4>
-                            </div>
-                        </div>
-                    </div>
-    
-                    <div class="col-lg-4 col-md-6">
-                        <div class="member">
-                            <div class="pic">
-                                
-                                <h3>Vera Maria Ferrão Candau</h3>
-                                <h4>PUC-Rio</h4>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section><!-- #coordenadores -->
