@@ -240,7 +240,18 @@
                     <h2>Coordenadores</h2>
                 </div>
                 <div class="row">
-                    <div class="col-lg-4 col-md-6">
+                    <strong>
+                        O XX ENDIPE – Rio 2020 é uma organização conjunta das seguintes instituições:
+                    </strong>
+                    <ul>
+                            <li>
+                                <strong>Coordenação</strong>
+                            </li>
+                            <li *ngFor="let organizacao of instituicoes">
+                                    {{ organizacao }}
+                            </li>
+                    </ul>
+                    <div class="col-lg-2 col-md-6">
                         <div class="member">
                             <div class="pic">
                                 
