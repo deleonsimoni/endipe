@@ -29,7 +29,8 @@ import { ModalProgramacaoComponent } from './modal-programacao/modal-programacao
   ],
   entryComponents: [
     ModalInscricaoComponent,
-    ModalEixoComponent
+    ModalEixoComponent,
+    ModalProgramacaoComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

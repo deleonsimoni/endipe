@@ -346,7 +346,47 @@ export class HomeComponent implements OnInit {
           '20:00 - 22:00', 'Apresentação cultural', 'Lançamento de livros e de Redes Apresentações culturais', 'Lançamento de livros e de Redes Apresentações culturais', ''
           ],
       ]
-    }
+    },
+    {
+      titulo: 'Abertura',
+      horarios: [ ]
+    },
+    {
+      titulo: 'Atividades Culturais',
+      horarios: [ ]
+    },
+    {
+      titulo: 'Minicursos',
+      horarios: [ ]
+    },
+    {
+      titulo: 'Rodas de Conversa',
+      horarios: [ ]
+    },
+    {
+      titulo: 'Simpósios',
+      horarios: [ ]
+    },
+    {
+      titulo: 'Painéis',
+      horarios: [ ]
+    },
+    {
+      titulo: 'Pôsteres',
+      horarios: [ ]
+    },
+    {
+      titulo: 'Sessões Especiais',
+      horarios: [ ]
+    },
+    {
+      titulo: 'Lançamentos de Livros',
+      horarios: [ ]
+    },
+    {
+      titulo: 'Reuniões de Entidades e de Redes',
+      horarios: [ ]
+    },
   ]
 
   constructor(

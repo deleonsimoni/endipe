@@ -464,12 +464,11 @@
             <div class="section-header">
                 <h2>Programação</h2>
             </div>
-
+            Clique para ver os horários de cada sessão abaixo:<br/><br/>
             <div class="row">
-
                 <div class="col-lg-6" *ngFor="let programacao of programacoes">
-                    <div class="box wow fadeInLeft" (click)="openDialogPRogramacao(programacao)">
-                        <h4 class="title"><a href="">{{ programacao.titulo }}</a></h4>
+                    <div class="box wow fadeInLeft" (click)="openDialogProgramacao(programacao)">
+                        <h4 class="title"><a>{{ programacao.titulo }}</a></h4>
                     </div>
                 </div>
 
