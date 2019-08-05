@@ -31,16 +31,15 @@
 
         <nav id="nav-menu-container">
             <ul class="nav-menu">
-                <li class="menu-active"><a [routerLink]="['/home']" fragment="body">Home</a></li>
+                <li class="menu-active"><a [routerLink]="['/home']" fragment="about">Home</a></li>
                 <li><a [routerLink]="['/home']" fragment="services">Eixos</a></li>
                 <li><a [routerLink]="['/home']" fragment="team">Organização</a></li>
-                <li><a [routerLink]="['/home']" fragment="timetable">Histórico</a></li>
-                <li><a [routerLink]="['/home']" fragment="timetable">Programação</a></li>
-                <li><a [routerLink]="['/home']" fragment="timetable">Modalidades</a></li>
-                <li><a [routerLink]="['/home']" fragment="timetable">Normas</a></li>
-                <li><a [routerLink]="['/home']" fragment="timetable">Prazos</a></li>
+                <li><a [routerLink]="['/home']" fragment="historico">Histórico</a></li>
+                <li><a [routerLink]="['/home']" fragment="programacao">Programação</a></li>
+                <li><a [routerLink]="['/home']" fragment="modalidades">Modalidades</a></li>
+                <li><a [routerLink]="['/home']" fragment="normas">Normas</a></li>
                 <li><a [routerLink]="['/home']" fragment="contact">Contato</a></li>
-                <li><a [routerLink]="['/home']" fragment="contact">Login</a></li>
+                <li><a [routerLink]="['/home']" >Login</a></li>
                 <!--<li><a [routerLink]="['/home']" fragment="about">Sobre</a></li>
                 <li><a [routerLink]="['/home']" fragment="services">Serviços</a></li>
                 <li><a [routerLink]="['/home']" fragment="portfolio">Portfolio</a></li>
@@ -456,7 +455,7 @@
     <!--==========================
       Cronograma Section
     ============================-->
-    <section id="timetable" class="wow fadeInUp">
+    <section id="programacao" class="wow fadeInUp">
         <div class="container">
             <div class="section-header">
                 <h2>Programação</h2>
@@ -506,7 +505,7 @@
                                 máximo, três sessões de uma hora e meia cada, para um grupo limitado de participantes, com inscrição
                                 prévia, a ser realizada conforme cronograma do evento. As propostas de Minicursos serão avaliadas e
                                 selecionadas pelo Comitê Científico, conforme as normas definidas para a sua submissão e avaliação.
-                                <br><strong style="color: red;cursor: pointer;">Normas</strong>
+                                <br><strong (click)="openDialogNormas()" style="color: red;cursor: pointer;">Normas</strong>
                             </p>
                         </div>
                     </div>
@@ -522,7 +521,7 @@
                                     grupo limitado de participantes, com inscrição prévia, a ser realizada conforme cronograma do evento.
                                     As propostas de Rodas de Conversa serão avaliadas e selecionadas pelo Comitê Científico, conforme as
                                     normas definidas para a sua submissão e avaliação.
-                                    <br><strong style="color: red;cursor: pointer;">Normas</strong>
+                                    <br><strong (click)="openDialogNormas()" style="color: red;cursor: pointer;">Normas</strong>
                             </p>
                         </div>
                     </div>
@@ -536,7 +535,7 @@
                                     sendo um, obrigatoriamente, de professor/a da Educação Básica. O Painel deverá ser proposto por um
                                     coordenador e seus trabalhos avaliados conjuntamente, conforme as normas definidas para a sua
                                     submissão e avaliação.
-                                    <br><strong style="color: red;cursor: pointer;">Normas</strong>
+                                    <br><strong (click)="openDialogNormas()" style="color: red;cursor: pointer;">Normas</strong>
                             </p>
                         </div>
                     </div>
@@ -552,7 +551,7 @@
                                     e/ou Professor da Educação Superior. Pretende-se que o Pôster seja debatido em salas de
                                     comunicações com mediações de professores convidados. As propostas de Pôsteres serão avaliadas e
                                     selecionadas pelo Comitê Científico, conforme as normas definidas para a sua submissão e avaliação.
-                                    <br><strong style="color: red;cursor: pointer;">Normas</strong>
+                                    <br><strong (click)="openDialogNormas()" style="color: red;cursor: pointer;">Normas</strong>
                             </p>
                         </div>
                     </div>
@@ -889,7 +888,7 @@
                     <div class="contact-address">
                         <i class="ion-ios-location-outline"></i>
                         <h3>Endereço</h3>
-                        <address>Rua São Francisco Xavier, 524 - Grupo 12.037-F <br> CEP 20550-013 - Rio de Janeiro (RJ)
+                        <address>Avenida Pasteur, 250, Urca, Rio de Janeiro-RJ, Brasil <br> CEP 22290-902
                         </address>
                     </div>
                 </div>
@@ -906,7 +905,7 @@
                     <div class="contact-email">
                         <i class="ion-ios-email-outline"></i>
                         <h3>Email</h3>
-                        <p><a href="mailto:secretaria@seminarioredes.com.br">secretaria@seminarioredes.com.br</a></p>
+                        <p><a href="mailto:xxendiperio2020@gmail.com">xxendiperio2020@gmail.com</a></p>
                     </div>
                 </div>
 
@@ -915,7 +914,7 @@
 
         <div class="container mb-4">
             <iframe
-                src="https://maps.google.com/maps?q=Rua%20S%C3%A3o%20Francisco%20Xavier%2C%20524%20-%20Grupo%2012.037-F%20CEP%2020550-013%20-%20Rio%20de%20Janeiro%20(RJ)&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3673.9456816491347!2d-43.17654963460574!3d-22.952227484988722!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x99801d8e741eb1%3A0x9a2669530f282519!2sUFRJ+-+Instituto+de+Economia!5e0!3m2!1spt-BR!2sbr!4v1564980506225!5m2!1spt-BR!2sbr"
                 width="100%" height="380" frameborder="0" style="border:0" allowfullscreen></iframe>
         </div>
 
@@ -957,7 +956,7 @@
 
 <!--==========================
     Footer
-  ============================-->
+  ============================
 <footer id="footer">
     <div class="container">
         <div class="copyright">
@@ -967,6 +966,6 @@
             Desenvolvido por <a href="https://google.com/">InfinityBit</a>
         </div>
     </div>
-</footer>
+</footer>-->
 
 <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
