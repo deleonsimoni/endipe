@@ -114,27 +114,21 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="agenda-titulo">
-                                <h2>Agenda</h2>
+                                <h2>Cronograma</h2>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="agenda-items col-lg-6">
+                        <div class="agenda-items" style="text-align: left">
                             <ul>
-                                <li><i class="fa fa-calendar-day mr-2"></i> Lorem ipsum dolor sit amet</li>
-                                <li><i class="fa fa-calendar-day mr-2"></i> Lorem ipsum dolor sit amet</li>
-                                <li><i class="fa fa-calendar-day mr-2"></i> Lorem ipsum dolor sit amet</li>
-                                <li><i class="fa fa-calendar-day mr-2"></i> Lorem ipsum dolor sit amet</li>
-                                <li><i class="fa fa-calendar-day mr-2"></i> Lorem ipsum dolor sit amet</li>
-                            </ul>
-                        </div>
-                        <div class="agenda-items col-md-6">
-                            <ul>
-                                <li><i class="fa fa-calendar-day mr-2"></i> Lorem ipsum dolor sit amet</li>
-                                <li><i class="fa fa-calendar-day mr-2"></i> Lorem ipsum dolor sit amet</li>
-                                <li><i class="fa fa-calendar-day mr-2"></i> Lorem ipsum dolor sit amet</li>
-                                <li><i class="fa fa-calendar-day mr-2"></i> Lorem ipsum dolor sit amet</li>
-                                <li><i class="fa fa-calendar-day mr-2"></i> Lorem ipsum dolor sit amet</li>
+                                <li><i class="fa fa-calendar-day mr-2"></i> Início das Inscrições -> 26 de agosto de 2019</li>
+                                <li><i class="fa fa-calendar-day mr-2"></i> Submissão de Trabalhos -> 16 de outubro a 18 de dezembro de 2019 </li>
+                                <li><i class="fa fa-calendar-day mr-2"></i> Avaliação pelo Comitê Cientifico -> Até 13 de abril de 2020</li>
+                                <li><i class="fa fa-calendar-day mr-2"></i> Divulgação dos trabalhos aprovados -> 14-20 de abril de 2020</li>
+                                <li><i class="fa fa-calendar-day mr-2"></i> Recursos -> 20-27 de abril de 2020</li>
+                                <li><i class="fa fa-calendar-day mr-2"></i> Resposta aos recursos -> Até 15 de maio de 2020</li>
+                                <li><i class="fa fa-calendar-day mr-2"></i> Divulgação da programação completa -> Até 30 de maio de 2020</li>
+                                <li><i class="fa fa-calendar-day mr-2"></i> Inscrição nos Minicursos e nas Rodas de Conversa -> 01-20 de junho de 2020</li>
                             </ul>
                         </div>
                     </div>
@@ -216,9 +210,9 @@
             <div class="row">
 
                 <div class="col-lg-6" *ngFor="let eixo of eixos">
-                    <div class="box wow fadeInLeft" (click)="openDialogEixo(eixo)">
+                    <div style="cursor: pointer;" class="box wow fadeInLeft" (click)="openDialogEixo(eixo)">
                         <!-- <div class="icon"><i class="fa fa-bar-chart"></i></div> -->
-                        <h4 class="title"><a href="">{{ eixo.titulo }}</a></h4>
+                        <h4 class="title"><a>{{ eixo.titulo }}</a></h4>
                         <p class="description">
                             {{ eixo.tema }}
                         </p>
@@ -251,26 +245,30 @@
                             <li>
                                 <strong>Comitê</strong>
                             </li>
-                            <li *ngFor="let comite of comites">
+                            <li *ngFor="let comite of comites" >
                                     {{ comite }}
                             </li>
                             <li>
                                 <strong>Secretaria</strong>
                             </li>
-                            <li *ngFor="let secretaria of secretarias">
+                            <li *ngFor="let secretaria of secretarias" >
                                     {{ secretaria }}
                             </li>
-                            <li *ngFor="let grupos of gruposDeTrabalho">
-                                <strong>{{grupos.nome}}</strong>
-                                <ul style="list-style: none;">
-                                    <li *ngFor="let pessoas of grupos.equipe">
-                                        {{pessoas}}
-                                    </li>
-                                </ul>
-                            </li>
+                            
 
                     </ul>
+
+                   
                 </div>
+
+                <div *ngFor="let grupos of gruposDeTrabalho" class="row" style="margin-bottom: 30px;">
+                    <strong class="col-lg-12" style="padding: 0">{{grupos.nome}}</strong>
+                    <hr/>
+                    <div *ngFor="let pessoas of grupos.equipe" class="col-lg-3" style="padding: 4px; text-align: left">
+                           {{pessoas}}
+                    </div>
+                </div>
+
             </div>
         </section><!-- #coordenadores -->
 
@@ -284,7 +282,7 @@
                     <h2>Histórico</h2>
                 </div>
 
-                <div class="col-xs-12 content">
+                <div class="col-xs-12 content" style="color: white;">
                         Na virada dos anos de 1970 para 1980, quando a sociedade brasileira já manifestava sinais
                         mais contundentes de oposição à ditadura militar que se instalara em 1964, um grupo de
                         educadores brasileiros deu início a um movimento que acabou por expressar, no campo
@@ -297,7 +295,6 @@
                         realização de três encontros em cada uma destas áreas, em 1987 eles se fundiram e deram
                         origem a um encontro único, que foi denominado de IV ENDIPE. Desde então a didática e as
                         práticas de ensino têm sido alvo de discussões bianuais que congregam pesquisadores,
-                        <br/><br/>
                         especialistas, dirigentes educacionais, professores e estudantes dos mais distintos espaços do
                         país e do exterior.
                         <br/><br/>
@@ -467,7 +464,7 @@
             Clique para ver os horários de cada sessão abaixo:<br/><br/>
             <div class="row">
                 <div class="col-lg-6" *ngFor="let programacao of programacoes">
-                    <div class="box wow fadeInLeft" (click)="openDialogProgramacao(programacao)">
+                    <div style="cursor: pointer;" class="box wow fadeInLeft" (click)="openDialogProgramacao(programacao)">
                         <h4 class="title"><a>{{ programacao.titulo }}</a></h4>
                     </div>
                 </div>
@@ -478,246 +475,145 @@
     <!-- #cronograma -->
 
     <!--==========================
-      Clients Section
-    ============================-->
-    <!-- <section id="clients" class="wow fadeInUp">
-        <div class="container">
-            <div class="section-header">
-                <h2>Clients</h2>
-                <p>Sed tamen tempor magna labore dolore dolor sint tempor duis magna elit veniam aliqua esse amet veniam
-                    enim export quid quid veniam aliqua eram noster malis nulla duis fugiat culpa esse aute nulla ipsum
-                    velit export irure minim illum fore</p>
-            </div>
-
-            <div class="owl-carousel clients-carousel">
-                <img src="assets/img/clients/client-1.png" alt="">
-                <img src="assets/img/clients/client-2.png" alt="">
-                <img src="assets/img/clients/client-3.png" alt="">
-                <img src="assets/img/clients/client-4.png" alt="">
-                <img src="assets/img/clients/client-5.png" alt="">
-                <img src="assets/img/clients/client-6.png" alt="">
-                <img src="assets/img/clients/client-7.png" alt="">
-                <img src="assets/img/clients/client-8.png" alt="">
-            </div>
-
-        </div>
-    </section> -->
-    <!-- #clients -->
-
-    <!--==========================
-      Our Portfolio Section
-    ============================-->
-    <!-- <section id="portfolio" class="wow fadeInUp">
-        <div class="container">
-            <div class="section-header">
-                <h2>Our Portfolio</h2>
-                <p>Sed tamen tempor magna labore dolore dolor sint tempor duis magna elit veniam aliqua esse amet veniam
-                    enim export quid quid veniam aliqua eram noster malis nulla duis fugiat culpa esse aute nulla ipsum
-                    velit export irure minim illum fore</p>
-            </div>
-        </div>
-
-        <div class="container-fluid">
-            <div class="row no-gutters">
-
-                <div class="col-lg-3 col-md-4">
-                    <div class="portfolio-item wow fadeInUp">
-                        <a href="assets/img/portfolio/1.jpg" class="portfolio-popup">
-                            <img src="assets/img/portfolio/1.jpg" alt="">
-                            <div class="portfolio-overlay">
-                                <div class="portfolio-info">
-                                    <h2 class="wow fadeInUp">Portfolio Item 1</h2>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-4">
-                    <div class="portfolio-item wow fadeInUp">
-                        <a href="assets/img/portfolio/2.jpg" class="portfolio-popup">
-                            <img src="assets/img/portfolio/2.jpg" alt="">
-                            <div class="portfolio-overlay">
-                                <div class="portfolio-info">
-                                    <h2 class="wow fadeInUp">Portfolio Item 2</h2>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-4">
-                    <div class="portfolio-item wow fadeInUp">
-                        <a href="assets/img/portfolio/3.jpg" class="portfolio-popup">
-                            <img src="assets/img/portfolio/3.jpg" alt="">
-                            <div class="portfolio-overlay">
-                                <div class="portfolio-info">
-                                    <h2 class="wow fadeInUp">Portfolio Item 3</h2>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-4">
-                    <div class="portfolio-item wow fadeInUp">
-                        <a href="assets/img/portfolio/4.jpg" class="portfolio-popup">
-                            <img src="assets/img/portfolio/4.jpg" alt="">
-                            <div class="portfolio-overlay">
-                                <div class="portfolio-info">
-                                    <h2 class="wow fadeInUp">Portfolio Item 4</h2>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-4">
-                    <div class="portfolio-item wow fadeInUp">
-                        <a href="assets/img/portfolio/5.jpg" class="portfolio-popup">
-                            <img src="assets/img/portfolio/5.jpg" alt="">
-                            <div class="portfolio-overlay">
-                                <div class="portfolio-info">
-                                    <h2 class="wow fadeInUp">Portfolio Item 5</h2>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-4">
-                    <div class="portfolio-item wow fadeInUp">
-                        <a href="assets/img/portfolio/6.jpg" class="portfolio-popup">
-                            <img src="assets/img/portfolio/6.jpg" alt="">
-                            <div class="portfolio-overlay">
-                                <div class="portfolio-info">
-                                    <h2 class="wow fadeInUp">Portfolio Item 6</h2>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-4">
-                    <div class="portfolio-item wow fadeInUp">
-                        <a href="assets/img/portfolio/7.jpg" class="portfolio-popup">
-                            <img src="assets/img/portfolio/7.jpg" alt="">
-                            <div class="portfolio-overlay">
-                                <div class="portfolio-info">
-                                    <h2 class="wow fadeInUp">Portfolio Item 7</h2>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-4">
-                    <div class="portfolio-item wow fadeInUp">
-                        <a href="assets/img/portfolio/8.jpg" class="portfolio-popup">
-                            <img src="assets/img/portfolio/8.jpg" alt="">
-                            <div class="portfolio-overlay">
-                                <div class="portfolio-info">
-                                    <h2 class="wow fadeInUp">Portfolio Item 8</h2>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-    </section> -->
-    <!-- #portfolio -->
-
-    <!--==========================
       Testimonials Section
     ============================-->
-    <!-- <section id="testimonials" class="wow fadeInUp">
+     <section id="modalidades" class="wow fadeInUp">
         <div class="container">
             <div class="section-header">
-                <h2>Testimonials</h2>
-                <p>Sed tamen tempor magna labore dolore dolor sint tempor duis magna elit veniam aliqua esse amet veniam
-                    enim export quid quid veniam aliqua eram noster malis nulla duis fugiat culpa esse aute nulla ipsum
-                    velit export irure minim illum fore</p>
+                <h2>Modalidades</h2>
             </div>
-            <div class="owl-carousel testimonials-carousel">
-
-                <div class="testimonial-item">
-                    <p>
-                        <img src="assets/img/quote-sign-left.png" class="quote-sign-left" alt="">
-                        Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus.
-                        Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
-                        <img src="assets/img/quote-sign-right.png" class="quote-sign-right" alt="">
-                    </p>
-                    <img src="assets/img/testimonial-1.jpg" class="testimonial-img" alt="">
-                    <h3>Saul Goodman</h3>
-                    <h4>Ceo &amp; Founder</h4>
+            
+            <div class="row">
+                    <div class="col-lg-6">
+                        <div class="box wow fadeInLeft">
+                            <h4 class="title">Convidado de Sessão Especial</h4>
+                            <p class="description">
+                                    As Sessões Especiais, dedicadas à celebração da vigésima edição do evento, serão propostas pelo
+                                    Comitê Organizador e destinadas ao debate sobre a constituição do campo da Didática no Brasil,
+                                    devendo contar preferencialmente com a presença dos coordenadores de todas as edições do ENDIPE
+                                    e de pesquisadores e professores de referência nas áreas de Didática, Currículo e Formação de
+                                    Professores.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="box wow fadeInLeft">
+                            <h4 class="title">Mediador de Minicurso</h4>
+                            <p class="description">
+                                Os Minicursos se destinarão ao desenvolvimento didático de assunto relevante e associado às
+                                temáticas dos eixos do evento. Suas propostas poderão ser apresentadas por um ou mais professores
+                                da Educação Básica e da Educação Superior, devendo ser planejado para, no mínimo, duas e, no
+                                máximo, três sessões de uma hora e meia cada, para um grupo limitado de participantes, com inscrição
+                                prévia, a ser realizada conforme cronograma do evento. As propostas de Minicursos serão avaliadas e
+                                selecionadas pelo Comitê Científico, conforme as normas definidas para a sua submissão e avaliação.
+                                <br><strong style="color: red;cursor: pointer;">Normas</strong>
+                            </p>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="testimonial-item">
-                    <p>
-                        <img src="assets/img/quote-sign-left.png" class="quote-sign-left" alt="">
-                        Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram
-                        malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.
-                        <img src="assets/img/quote-sign-right.png" class="quote-sign-right" alt="">
-                    </p>
-                    <img src="assets/img/testimonial-2.jpg" class="testimonial-img" alt="">
-                    <h3>Sara Wilsson</h3>
-                    <h4>Designer</h4>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="box wow fadeInLeft">
+                            <h4 class="title">Mediador de Roda de Conversa</h4>
+                            <p class="description">
+                                    As Rodas de Conversa se destinarão ao debate de assunto relevante e associado às temáticas dos eixos
+                                    do evento. Suas propostas poderão ser apresentadas por um ou mais professores da Educação Básica e
+                                    da Educação Superior, devendo ser planejada para uma sessão de uma hora e meia cada, para um
+                                    grupo limitado de participantes, com inscrição prévia, a ser realizada conforme cronograma do evento.
+                                    As propostas de Rodas de Conversa serão avaliadas e selecionadas pelo Comitê Científico, conforme as
+                                    normas definidas para a sua submissão e avaliação.
+                                    <br><strong style="color: red;cursor: pointer;">Normas</strong>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="box wow fadeInLeft">
+                            <h4 class="title">Coordenador e expositor de Painel</h4>
+                            <p class="description">
+                                    Os Painéis têm como finalidade a apresentação de trabalhos elaborados pelos autores, decorrentes de
+                                    pesquisas concluídas ou experiências de ensino consolidadas. O tema do Painel deverá se relacionar
+                                    com um dos eixos do Encontro e a sua proposta deverá conter três trabalhos de instituições diferentes,
+                                    sendo um, obrigatoriamente, de professor/a da Educação Básica. O Painel deverá ser proposto por um
+                                    coordenador e seus trabalhos avaliados conjuntamente, conforme as normas definidas para a sua
+                                    submissão e avaliação.
+                                    <br><strong style="color: red;cursor: pointer;">Normas</strong>
+                            </p>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="testimonial-item">
-                    <p>
-                        <img src="assets/img/quote-sign-left.png" class="quote-sign-left" alt="">
-                        Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis
-                        minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.
-                        <img src="assets/img/quote-sign-right.png" class="quote-sign-right" alt="">
-                    </p>
-                    <img src="assets/img/testimonial-3.jpg" class="testimonial-img" alt="">
-                    <h3>Jena Karlis</h3>
-                    <h4>Store Owner</h4>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="box wow fadeInLeft">
+                            <h4 class="title">Expositor de Pôster</h4>
+                            <p class="description">
+                                    Os Pôsteres têm como finalidade a apresentação de trabalho decorrente de pesquisas em andamento
+                                    ou experiências de ensino em realização. O tema do Pôster deverá se relacionar com um dos eixos do
+                                    Encontro, podendo ser submetido por estudantes de pós-graduação, professor da Educação Básica
+                                    e/ou Professor da Educação Superior. Pretende-se que o Pôster seja debatido em salas de
+                                    comunicações com mediações de professores convidados. As propostas de Pôsteres serão avaliadas e
+                                    selecionadas pelo Comitê Científico, conforme as normas definidas para a sua submissão e avaliação.
+                                    <br><strong style="color: red;cursor: pointer;">Normas</strong>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="box wow fadeInLeft">
+                            <h4 class="title">Simposista</h4>
+                            <p class="description">
+                                    Os Simpósios serão propostos pelo Comitê Organizador, referentes a cada um dos eixos do 20º ENDIPE
+                                    – Rio 2020. Eles serão formados por três simposistas, preferencialmente de instituições e Estados
+                                    diferentes, sendo um deles do Rio de Janeiro. O conjunto de Simpósios envolverá pesquisadores
+                                    nacionais e estrangeiros e professores da Educação Básica e da Educação Superior com produção
+                                    referente às Didáticas e Práticas de Ensino.
+                            </p>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="testimonial-item">
-                    <p>
-                        <img src="assets/img/quote-sign-left.png" class="quote-sign-left" alt="">
-                        Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim
-                        velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum
-                        veniam.
-                        <img src="assets/img/quote-sign-right.png" class="quote-sign-right" alt="">
-                    </p>
-                    <img src="assets/img/testimonial-4.jpg" class="testimonial-img" alt="">
-                    <h3>Matt Brandon</h3>
-                    <h4>Freelancer</h4>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="box wow fadeInLeft">
+                            <h4 class="title">Ouvinte</h4>
+                            <p class="description">
+                                Serão aceitas no 20º ENDIPE – Rio 2020 inscrições de ouvintes sem apresentação de trabalho. Poderão
+                                se inscrever nessa modalidade professores da Educação Básica e da Educação Superior, pesquisadores,
+                                estudantes de pós-graduação e estudantes de graduação.
+                            </p>
+                        </div>
+                    </div>
+                    
                 </div>
-
-                <div class="testimonial-item">
-                    <p>
-                        <img src="assets/img/quote-sign-left.png" class="quote-sign-left" alt="">
-                        Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim
-                        culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum
-                        quid.
-                        <img src="assets/img/quote-sign-right.png" class="quote-sign-right" alt="">
-                    </p>
-                    <img src="assets/img/testimonial-5.jpg" class="testimonial-img" alt="">
-                    <h3>John Larson</h3>
-                    <h4>Entrepreneur</h4>
-                </div>
-
-            </div>
-
+            
         </div>
-    </section> -->
+    </section> 
     <!-- #testimonials -->
 
 
+     <!--==========================
+      Cronograma Section
+    ============================-->
+    <section id="normas" class="wow fadeInUp">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Normas</h2>
+                </div>
+                Atenção, leia as normas para não perder detalhes especificos sobre sua participação<br/><br/>
+                <div class="row">
+                    <div style="cursor: pointer;" class="col-lg-6">
+                        <div class="box wow fadeInLeft" (click)="openDialogNormas()">
+                            <h4 class="title" style="color: red; font-weight: bold;"><a>Ver Normas</a></h4>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <!-- #cronograma -->
     
 
     <!--==========================
       Ingressos Section
     ============================-->
-    <section id="pricing" class="wow fadeInUp">
+    <!--<section id="pricing" class="wow fadeInUp">
         <div class="container">
             <div class="section-header">
                 <h2>Inscrição</h2>
@@ -973,7 +869,7 @@
                 </mat-tab-group>
             </div>
         </div>
-    </section><!-- #pricing -->
+    </section>--><!-- #pricing -->
 
     <!--==========================
       Contact Section

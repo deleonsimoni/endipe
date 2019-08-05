@@ -10,6 +10,7 @@ import { ModalInscricaoComponent } from './modal-inscricao/modal-inscricao.compo
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalEixoComponent } from './modal-eixo/modal-eixo.component';
 import { ModalProgramacaoComponent } from './modal-programacao/modal-programacao.component';
+import { ModalNormasComponent } from './modal-normas/modal-normas.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { ModalProgramacaoComponent } from './modal-programacao/modal-programacao
     HomeComponent,
     ModalInscricaoComponent,
     ModalEixoComponent,
-    ModalProgramacaoComponent
+    ModalProgramacaoComponent,
+    ModalNormasComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +32,8 @@ import { ModalProgramacaoComponent } from './modal-programacao/modal-programacao
   entryComponents: [
     ModalInscricaoComponent,
     ModalEixoComponent,
-    ModalProgramacaoComponent
+    ModalProgramacaoComponent,
+    ModalNormasComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

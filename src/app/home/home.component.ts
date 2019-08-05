@@ -4,6 +4,7 @@ import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { ModalInscricaoComponent } from '../modal-inscricao/modal-inscricao.component';
 import { ModalEixoComponent } from '../modal-eixo/modal-eixo.component';
 import { ModalProgramacaoComponent } from '../modal-programacao/modal-programacao.component';
+import { ModalNormasComponent } from '../modal-normas/modal-normas.component';
 
 
 @Component({
@@ -431,6 +432,13 @@ export class HomeComponent implements OnInit {
   public openDialogProgramacao(programacao) {
     const dialogRef = this.dialog.open(ModalProgramacaoComponent, {
       data: { item: programacao }
+    });
+  }
+
+  public openDialogNormas() {
+    const dialogRef = this.dialog.open(ModalNormasComponent, {
+      data: {  },
+      height: '550vh'
     });
   }
 }
