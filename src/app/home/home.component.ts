@@ -5,6 +5,7 @@ import { ModalInscricaoComponent } from '../modal-inscricao/modal-inscricao.comp
 import { ModalEixoComponent } from '../modal-eixo/modal-eixo.component';
 import { ModalProgramacaoComponent } from '../modal-programacao/modal-programacao.component';
 import { ModalNormasComponent } from '../modal-normas/modal-normas.component';
+import { ModalApoiadoresComponent } from '../modal-apoiadores/modal-apoiadores.component';
 
 
 @Component({
@@ -434,10 +435,16 @@ export class HomeComponent implements OnInit {
       data: { item: programacao }
     });
   }
-
+  
   public openDialogNormas() {
     const dialogRef = this.dialog.open(ModalNormasComponent, {
       data: {  },
+      height: '550vh'
+    });
+  }
+  public openDialogApoiadores(apoiadores) {
+    const dialogRef = this.dialog.open(ModalApoiadoresComponent, {
+      data: { item: apoiadores },
       height: '550vh'
     });
   }

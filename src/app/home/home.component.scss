@@ -133,7 +133,53 @@
     }
   }
 }
+#hospedagem{
+  background: #50d8af;
+  position: relative;
+  border-top: 1px solid #f2f2f2;
+  padding: 50px 0;
+  p {
+    color: white;
+  }
+  h4 {
+    color: white;
+    font-weight: bold;
+  }
+  .tabelaCronograma {
+    background-color: #fff;
+  }
 
+  .section-header h2::before {
+    background: #fff;
+  }
+  .timetable-box-wrapper {
+    text-align: center;
+    background: #e8edf2;
+    position: relative;
+    margin: 0 0;
+    padding: 30px 30px;
+    -webkit-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.03);
+    -moz-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.03);
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.03);
+    border-radius: 16px;
+    -moz-border-radius: 16px;
+    -webkit-border-radius: 16px;
+    .timetable-content {
+      text-align: center;
+      font-size: 14px;
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        li {
+          list-style: none;
+          padding: 8px 0 8px 0;
+          margin: 0 0 0 0;
+        }
+      }
+    }
+  }
+}
 
 #timetable {
   position: relative;
@@ -338,7 +384,7 @@ mat-tab-group {
 }
 
 #normas{
-
+  padding: 50px 0;
   .cta-btn {
     font-family: "Montserrat", sans-serif;
     font-weight: 700;
@@ -371,7 +417,7 @@ mat-tab-group {
 }
 
 #programacao {
-  
+    padding: 50px 0;
    .contact-info {
     margin-bottom: 20px;
     text-align: center;

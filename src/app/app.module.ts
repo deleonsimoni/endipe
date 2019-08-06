@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalEixoComponent } from './modal-eixo/modal-eixo.component';
 import { ModalProgramacaoComponent } from './modal-programacao/modal-programacao.component';
 import { ModalNormasComponent } from './modal-normas/modal-normas.component';
+import { ModalApoiadoresComponent } from './modal-apoiadores/modal-apoiadores.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ModalNormasComponent } from './modal-normas/modal-normas.component';
     ModalInscricaoComponent,
     ModalEixoComponent,
     ModalProgramacaoComponent,
-    ModalNormasComponent
+    ModalNormasComponent,
+    ModalApoiadoresComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +35,9 @@ import { ModalNormasComponent } from './modal-normas/modal-normas.component';
     ModalInscricaoComponent,
     ModalEixoComponent,
     ModalProgramacaoComponent,
-    ModalNormasComponent
+    ModalNormasComponent,
+    ModalApoiadoresComponent
+
   ],
   providers: [],
   bootstrap: [AppComponent]

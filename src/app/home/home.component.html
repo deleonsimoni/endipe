@@ -38,6 +38,7 @@
                 <li><a [routerLink]="['/home']" fragment="programacao">Programação</a></li>
                 <li><a [routerLink]="['/home']" fragment="modalidades">Modalidades</a></li>
                 <li><a [routerLink]="['/home']" fragment="normas">Normas</a></li>
+                <li><a [routerLink]="['/home']" fragment="hospedagem">Hospedagem</a></li>
                 <li><a [routerLink]="['/home']" fragment="contact">Contato</a></li>
                 <li><a [routerLink]="['/home']" >Login</a></li>
                 <!--<li><a [routerLink]="['/home']" fragment="about">Sobre</a></li>
@@ -253,21 +254,20 @@
                             <li *ngFor="let secretaria of secretarias" >
                                     {{ secretaria }}
                             </li>
-                            
+                            <li >
+                                <div class="row contact-info" style="cursor: pointer;">
+                                    <div>
+                                        <div  class="box wow fadeInLeft" (click)="openDialogApoiadores(gruposDeTrabalho)">
+                                            <h4 class="title"><a>+ Todos Apoiadores</a></h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
 
                     </ul>
 
                    
                 </div>
-
-                <div *ngFor="let grupos of gruposDeTrabalho" class="row" style="margin-bottom: 30px;">
-                    <strong class="col-lg-12" style="padding: 0">{{grupos.nome}}</strong>
-                    <hr/>
-                    <div *ngFor="let pessoas of grupos.equipe" class="col-lg-3" style="padding: 4px; text-align: left">
-                           {{pessoas}}
-                    </div>
-                </div>
-
             </div>
         </section><!-- #coordenadores -->
 
@@ -474,7 +474,7 @@
     <!-- #cronograma -->
 
     <!--==========================
-      Testimonials Section
+      modalidades Section
     ============================-->
      <section id="modalidades" class="wow fadeInUp">
         <div class="container">
@@ -608,6 +608,41 @@
         </section>
         <!-- #cronograma -->
     
+
+        <!--==========================
+      hospedagem Section
+    ============================-->
+     <section id="hospedagem" class="wow fadeInUp">
+        <div class="container">
+            <div class="section-header">
+                <h2>Hospedagem</h2>
+            </div>
+            <div class="row contact-info" style="text-align: left;cursor: pointer;">
+                <p class="box wow fadeInLeft">Informações sobre:</p><br/><br/>
+                <div class="col-lg-12">
+                    <div  class="box wow fadeInLeft">
+                        <h4 class="title"><a>Hospedagem</a></h4>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div  class="box wow fadeInLeft">
+                        <h4 class="title"><a>Alimentação</a></h4>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div  class="box wow fadeInLeft">
+                        <h4 class="title"><a>Transporte</a></h4>
+                    </div>
+                </div>
+
+            </div>
+            <strong style="color:red">*Informações a partir de dezembro</strong>
+        </div>
+    </section> 
+    <!-- #testimonials -->
+
+
+
 
     <!--==========================
       Ingressos Section

@@ -1,0 +1,19 @@
+<ul style="list-style: none;">
+
+    <li *ngFor="let grupos of apoiadores">
+        {{grupos.nome}}
+        <ul style="list-style: none;">
+            <li *ngFor="let pessoas of grupos.equipe">
+                    {{pessoas}}
+            </li>
+        </ul>
+    </li>
+</ul>
+<!--
+<div  class="row" style="margin-bottom: 30px;">
+    <strong class="col-lg-12" style="padding: 0">{{grupos.nome}}</strong>
+    <hr/>
+    <div *ngFor="let pessoas of grupos.equipe" class="col-lg-3" style="padding: 4px; text-align: left">
+           
+    </div>
+</div>-->
