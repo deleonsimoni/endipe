@@ -1,7 +1,7 @@
 <ul style="list-style: none;">
 
     <li *ngFor="let grupos of apoiadores">
-        {{grupos.nome}}
+        <strong>{{grupos.nome}}</strong><br/>
         <ul style="list-style: none;">
             <li *ngFor="let pessoas of grupos.equipe">
                     {{pessoas}}
