@@ -461,9 +461,9 @@
                 <h2>Programação</h2>
             </div>
             Clique para ver os horários de cada sessão abaixo:<br/><br/>
-            <div class="row">
+            <div class="row contact-info" style="text-align: left;cursor: pointer;">
                 <div class="col-lg-6" *ngFor="let programacao of programacoes">
-                    <div style="cursor: pointer;" class="box wow fadeInLeft" (click)="openDialogProgramacao(programacao)">
+                    <div  class="box wow fadeInLeft" (click)="openDialogProgramacao(programacao)">
                         <h4 class="title"><a>{{ programacao.titulo }}</a></h4>
                     </div>
                 </div>
@@ -505,7 +505,7 @@
                                 máximo, três sessões de uma hora e meia cada, para um grupo limitado de participantes, com inscrição
                                 prévia, a ser realizada conforme cronograma do evento. As propostas de Minicursos serão avaliadas e
                                 selecionadas pelo Comitê Científico, conforme as normas definidas para a sua submissão e avaliação.
-                                <br><strong (click)="openDialogNormas()" style="color: red;cursor: pointer;">Normas</strong>
+                                <br><p (click)="openDialogNormas()" class="pull-right" style="color: #0c2e8a;cursor: pointer;">Normas</p>
                             </p>
                         </div>
                     </div>
@@ -521,8 +521,8 @@
                                     grupo limitado de participantes, com inscrição prévia, a ser realizada conforme cronograma do evento.
                                     As propostas de Rodas de Conversa serão avaliadas e selecionadas pelo Comitê Científico, conforme as
                                     normas definidas para a sua submissão e avaliação.
-                                    <br><strong (click)="openDialogNormas()" style="color: red;cursor: pointer;">Normas</strong>
-                            </p>
+                                    <br><p (click)="openDialogNormas()" class="pull-right" style="color: #0c2e8a;cursor: pointer;">Normas</p>
+                                </p>
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -535,8 +535,8 @@
                                     sendo um, obrigatoriamente, de professor/a da Educação Básica. O Painel deverá ser proposto por um
                                     coordenador e seus trabalhos avaliados conjuntamente, conforme as normas definidas para a sua
                                     submissão e avaliação.
-                                    <br><strong (click)="openDialogNormas()" style="color: red;cursor: pointer;">Normas</strong>
-                            </p>
+                                    <br><p (click)="openDialogNormas()" class="pull-right" style="color: #0c2e8a;cursor: pointer;">Normas</p>
+                                </p>
                         </div>
                     </div>
                 </div>
@@ -551,8 +551,8 @@
                                     e/ou Professor da Educação Superior. Pretende-se que o Pôster seja debatido em salas de
                                     comunicações com mediações de professores convidados. As propostas de Pôsteres serão avaliadas e
                                     selecionadas pelo Comitê Científico, conforme as normas definidas para a sua submissão e avaliação.
-                                    <br><strong (click)="openDialogNormas()" style="color: red;cursor: pointer;">Normas</strong>
-                            </p>
+                                    <br><p (click)="openDialogNormas()" class="pull-right" style="color: #0c2e8a;cursor: pointer;">Normas</p>
+                                </p>
                         </div>
                     </div>
                     <div class="col-lg-6">
