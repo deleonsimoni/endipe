@@ -1,0 +1,35 @@
+#register {
+  padding: 60px 60px;
+  .form  {
+    h2[mt-2] {
+      margin-top: 16px;
+    }
+    input {
+      padding: 10px 14px;
+      border-radius: 0;
+      box-shadow: none;
+      font-size: 15px;
+    }
+    div.form-check {
+      .form-check-input{
+        margin-top: .4rem
+      }
+      label {
+        font-size: 15px;
+        color: #495057
+      }
+    }
+    div.form-check[last] {
+      padding-bottom: 8px;
+    }
+    button {
+      background: #50d8af;
+      border: 0;
+      border-radius: 3px;
+      padding: 10px 30px;
+      color: #fff;
+      transition: 0.4s;
+      cursor: pointer;
+    }
+  }
+}

@@ -1,0 +1,219 @@
+<!--==========================
+    Top Bar
+  ============================-->
+<section id="topbar" class="d-none d-lg-block">
+    <div class="container clearfix">
+        <!-- <div class="contact-info float-left">
+            <i class="fa fa-envelope-o"></i> <a href="mailto:contact@example.com">contact@example.com</a>
+            <i class="fa fa-phone"></i> +1 5589 55488 55
+        </div> -->
+        <div class="social-links float-right">
+            <a href="#" class="twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="google-plus"><i class="fab fa-google-plus-g"></i></a>
+            <a href="#" class="linkedin"><i class="fab fa-linkedin"></i></a>
+        </div>
+    </div>
+</section>
+
+<!--==========================
+    Header
+  ============================-->
+<header id="header">
+    <div class="container">
+
+        <div id="logo" class="pull-left">
+            <h1><a [routerLink]="['/home']" fragment="body" class="scrollto">Endi<span>pe</span></a></h1>
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <!-- <a href="#body"><img src="img/logo.png" alt="" title="" /></a>-->
+        </div>
+
+        <nav id="nav-menu-container">
+            <ul class="nav-menu">
+                <li class="menu-active"><a [routerLink]="['/home']" fragment="body">Home</a></li>
+                <li><a [routerLink]="['/home']" fragment="services">Eixos</a></li>
+                <li><a [routerLink]="['/home']" fragment="team">Organização</a></li>
+                <li><a [routerLink]="['/home']" fragment="timetable">Histórico</a></li>
+                <li><a [routerLink]="['/home']" fragment="timetable">Programação</a></li>
+                <li><a [routerLink]="['/home']" fragment="timetable">Modalidades</a></li>
+                <li><a [routerLink]="['/home']" fragment="timetable">Normas</a></li>
+                <li><a [routerLink]="['/home']" fragment="timetable">Prazos</a></li>
+                <li><a [routerLink]="['/home']" fragment="contact">Contato</a></li>
+                <li><a [routerLink]="['/home']" fragment="contact">Login</a></li>
+                <!--<li><a [routerLink]="['/home']" fragment="about">Sobre</a></li>
+                <li><a [routerLink]="['/home']" fragment="services">Serviços</a></li>
+                <li><a [routerLink]="['/home']" fragment="portfolio">Portfolio</a></li>
+                <li class="menu-has-children"><a href="">Drop Down</a>
+                    <ul>
+                        <li><a href="#">Drop Down 1</a></li>
+                        <li><a href="#">Drop Down 3</a></li>
+                        <li><a href="#">Drop Down 4</a></li>
+                        <li><a href="#">Drop Down 5</a></li>
+                    </ul>
+                </li> -->
+            </ul>
+        </nav><!-- #nav-menu-container -->
+    </div>
+</header><!-- #header -->
+
+<!--==========================
+    Intro Section
+  ============================-->
+<main id="main">
+
+    <div class="container" id="register">
+        <div class="form">
+            <form [formGroup]="registerForm" (ngSubmit)="register()" role="form" class="contactForm">
+                <div class="section-header">
+                    <h2>Dados Pessoais</h2>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <input type="text" name="name" class="form-control" id="name" placeholder="Nome"
+                            data-rule="minlen:4" data-msg="Please enter at least 4 chars" formControlName="fullname" />
+                        <div class="validation"></div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <input type="email" class="form-control" name="email" id="email" placeholder="Email"
+                            data-rule="email" data-msg="Please enter a valid email" formControlName="email" />
+                        <div class="validation"></div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <input type="text" name="birth-date" class="form-control" id="birth-date"
+                            placeholder="Data de nascimento" data-rule="minlen:4"
+                            data-msg="Please enter at least 4 chars" formControlName="dateBirth" />
+                        <div class="validation"></div>
+                    </div>
+                    <div class="form-group col-md-4" formGroupName="phones">
+                        <input type="text" name="telephone" class="form-control" id="telephone" placeholder="Telefone"
+                            data-rule="minlen:4" data-msg="Please enter at least 4 chars" formControlName="telephone" />
+                        <div class="validation"></div>
+                    </div>
+                    <div class="form-group col-md-4" formGroupName="phones">
+                        <input type="text" class="form-control" name="cellphone" id="cellphone" placeholder="Celular"
+                            data-rule="email" data-msg="Please enter a valid email" formControlName="cellphone" />
+                        <div class="validation"></div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <input type="password" name="password" class="form-control" id="password" placeholder="Senha"
+                            data-rule="minlen:4" data-msg="Please enter at least 4 chars" formControlName="password" />
+                        <div class="validation"></div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <input type="password" class="form-control" name="cf-password" id="cf-password"
+                            placeholder="Confirmar senha" data-rule="email" data-msg="Please enter a valid email"
+                            formControlName="cfPassword" />
+                        <div class="validation"></div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
+                                value="opcao1" checked>
+                            <label class="form-check-label" for="exampleRadios1">
+                                Sou estrangeiro
+                            </label>
+                        </div>
+                        <div class="form-check" last>
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"
+                                value="opcao2">
+                            <label class="form-check-label" for="exampleRadios2">
+                                Não sou estrangeiro
+                            </label>
+                        </div>
+                        <input type="text" class="form-control" name="document" id="document" placeholder="Document"
+                            data-rule="email" data-msg="Please enter a valid email" formControlName="document" />
+                        <div class="validation"></div>
+                    </div>
+                </div>
+
+                <div class="section-header">
+                    <h2 mt-2>Endereço</h2>
+                </div>
+                <div class="form-row" formGroupName="address">
+                    <div class="form-group col-md-6">
+                        <input type="text" name="street" class="form-control" id="street" placeholder="Endereço"
+                            data-rule="minlen:4" data-msg="Please enter at least 4 chars" formControlName="street" />
+                        <div class="validation"></div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <input type="text" class="form-control" name="num" id="num" placeholder="Nº" data-rule="email"
+                            data-msg="Please enter a valid email" formControlName="num" />
+                        <div class="validation"></div>
+                    </div>
+                </div>
+                <div class="form-row" formGroupName="address">
+                    <div class="form-group col-md-6">
+                        <input type="text" name="zip" class="form-control" id="zip" placeholder="Código postal"
+                            data-rule="minlen:4" data-msg="Please enter at least 4 chars" formControlName="zip" />
+                        <div class="validation"></div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <input type="text" class="form-control" name="city" id="city" placeholder="Cidade"
+                            data-rule="email" data-msg="Please enter a valid email" formControlName="city" />
+                        <div class="validation"></div>
+                    </div>
+                </div>
+                <div class="form-row" formGroupName="address">
+                    <div class="form-group col-md-4">
+                        <input type="text" name="district" class="form-control" id="district" placeholder="Bairro"
+                            data-rule="minlen:4" data-msg="Please enter at least 4 chars" formControlName="district" />
+                        <div class="validation"></div>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <input type="text" class="form-control" name="country" id="country" placeholder="País"
+                            data-rule="email" data-msg="Please enter a valid email" formControlName="country" />
+                        <div class="validation"></div>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <input type="text" class="form-control" name="state" id="state" placeholder="Estado"
+                            data-rule="email" data-msg="Please enter a valid email" formControlName="state" />
+                        <div class="validation"></div>
+                    </div>
+                </div>
+
+                <div class="section-header">
+                    <h2 mt-2>Instituição</h2>
+                </div>
+                <div class="form-row" formGroupName="institution">
+                    <div class="form-group col-md-8">
+                        <input type="text" name="ies-name" class="form-control" id="ies-name" placeholder="Nome"
+                            data-rule="minlen:4" data-msg="Please enter at least 4 chars"
+                            formControlName="name" />
+                        <div class="validation"></div>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <input type="text" class="form-control" name="ies-sg" id="ies-sg" placeholder="Sigla"
+                            data-rule="email" data-msg="Please enter a valid email" formControlName="initials" />
+                        <div class="validation"></div>
+                    </div>
+                </div>
+                <div class="text-center"><button type="submit">Enviar</button></div>
+            </form>
+        </div>
+
+    </div>
+
+</main>
+
+<!--==========================
+    Footer
+  ============================-->
+<footer id="footer">
+    <div class="container">
+        <div class="copyright">
+            &copy; Copyright <strong>UFRJ</strong>. Todos direitos reservados
+        </div>
+        <div class="credits">
+            Desenvolvido por <a href="https://google.com/">InfinityBit</a>
+        </div>
+    </div>
+</footer>
+
+<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>

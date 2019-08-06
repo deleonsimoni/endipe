@@ -8,10 +8,14 @@ import { HomeComponent } from './home/home.component';
 import { UtilNgxMaterialModule } from './util-ngx-material/util-ngx-material.module';
 import { ModalInscricaoComponent } from './modal-inscricao/modal-inscricao.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
 import { ModalEixoComponent } from './modal-eixo/modal-eixo.component';
 import { ModalProgramacaoComponent } from './modal-programacao/modal-programacao.component';
 import { ModalNormasComponent } from './modal-normas/modal-normas.component';
 import { ModalApoiadoresComponent } from './modal-apoiadores/modal-apoiadores.component';
+import { RegisterComponent } from './register/register.component';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -21,7 +25,8 @@ import { ModalApoiadoresComponent } from './modal-apoiadores/modal-apoiadores.co
     ModalEixoComponent,
     ModalProgramacaoComponent,
     ModalNormasComponent,
-    ModalApoiadoresComponent
+    ModalApoiadoresComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -29,17 +34,23 @@ import { ModalApoiadoresComponent } from './modal-apoiadores/modal-apoiadores.co
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    UtilNgxMaterialModule
+    UtilNgxMaterialModule,
+    HttpClientModule
   ],
   entryComponents: [
     ModalInscricaoComponent,
     ModalEixoComponent,
     ModalProgramacaoComponent,
     ModalNormasComponent,
-    ModalApoiadoresComponent
-
+    ModalApoiadoresComponent,
+    RegisterComponent
   ],
-  providers: [],
+  providers: [
+    {
+      provide: 'BASE_API_URL',
+      useValue: environment.host
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
