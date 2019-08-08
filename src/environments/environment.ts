@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  host: 'http://localhost:4040/api'
+  host: 'https://iurifrontman.localtunnel.me/api'
 };
 
 /*
