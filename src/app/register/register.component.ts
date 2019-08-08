@@ -54,10 +54,12 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    this.authService.createUser(this.registerForm.value)
-      .subscribe((res) => {
-        console.log(res);
-      });
+    if (this.registerForm.valid) {
+      this.authService.createUser(this.registerForm.value)
+        .subscribe((res) => {
+          console.log(res);
+        });
+    }
   }
 
 }
