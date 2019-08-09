@@ -17,6 +17,8 @@ import { ModalApoiadoresComponent } from './modal-apoiadores/modal-apoiadores.co
 import { RegisterComponent } from './register/register.component';
 import { environment } from '../environments/environment';
 import { LoginComponent } from './login/login.component';
+import { FooterComponent } from './footer/footer.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { LoginComponent } from './login/login.component';
     ModalNormasComponent,
     ModalApoiadoresComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    FooterComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

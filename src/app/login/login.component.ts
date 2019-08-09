@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -7,9 +9,41 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  private loginForm: FormGroup;
+
+  constructor(
+    private builder: FormBuilder,
+    private authService: AuthService
+  ) {
+
+    this.loginForm = this.builder.group({
+      email: [null],
+      password: [null]
+    });
+
+  }
 
   ngOnInit() {
+  }
+
+  public login() {
+    this.authService.loginUser(this.loginForm.value)
+      .subscribe((res: any) => {
+        localStorage.setItem('token', res.token);
+        setTimeout(() => {
+          this.authService.me()
+            .subscribe(res => {
+              console.log(res);
+            });
+        }, 500);
+      });
+  }
+
+  retrieveMyData() {
+    this.authService.me()
+      .subscribe(res => {
+        console.log(res);
+      });
   }
 
 }

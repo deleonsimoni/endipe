@@ -55,6 +55,7 @@ export class RegisterComponent implements OnInit {
 
   register() {
     if (this.registerForm.valid) {
+      this.registerForm.value.dateBirth = new Date();
       this.authService.createUser(this.registerForm.value)
         .subscribe((res) => {
           console.log(res);
