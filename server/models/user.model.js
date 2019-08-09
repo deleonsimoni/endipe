@@ -32,6 +32,11 @@ const UserSchema = new mongoose.Schema({
     required: true
   },
 
+  checkStandards: {
+    type: Boolean,
+    default: false
+  },
+
   address:{
     street: String,
     complement: String,
@@ -63,12 +68,14 @@ const UserSchema = new mongoose.Schema({
     name: String,
     imReceipt: Buffer
   },
-  payment:{
-    code: String,
-    amount: Number
-  },
   roles: [{
-    type: String,
+    name: String,
+    id: Number,
+    payment:{
+      code: String,
+      amount: Number,
+      icPaid: {type: Boolean, default: false}
+    }
   }]
 }, {
   versionKey: false
