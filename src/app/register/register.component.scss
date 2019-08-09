@@ -16,7 +16,11 @@
       }
       label {
         font-size: 15px;
-        color: #495057
+        color: #495057;
+        a {
+          color: #0c2e8a;
+          text-decoration: underline 
+        }
       }
     }
     div.form-check[last] {

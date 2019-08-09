@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
+import { MatDialog } from '@angular/material';
+import { ModalNormasComponent } from '../modal-normas/modal-normas.component';
 
 @Component({
   selector: 'app-register',
@@ -13,7 +15,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private builder: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private dialog: MatDialog
   ) {
 
     this.registerForm = this.builder.group({
@@ -49,11 +52,10 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.registerForm.removeControl('cf-password');
-    // console.log(this.registerForm.value);
   }
 
-  register() {
+  public register(): void {
+    this.registerForm.removeControl('cf-password');
     if (this.registerForm.valid) {
       this.registerForm.value.dateBirth = new Date();
       this.authService.createUser(this.registerForm.value)
@@ -61,6 +63,12 @@ export class RegisterComponent implements OnInit {
           console.log(res);
         });
     }
+  }
+
+  public openRules(): void {
+    const dialogRef = this.dialog.open(ModalNormasComponent, {
+      data: {  },
+    });
   }
 
 }

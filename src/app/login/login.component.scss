@@ -1,4 +1,6 @@
-#login .box {
+#login {
+  padding: 60px 0 40px 0;
+  .box {
     h4 {
       margin-left: 0px;
     }
@@ -6,58 +8,60 @@
       margin-left: 0px;
     }
   }
+}
 
-  #login {
-    padding: 30px 0 0 0;
+#login .box {
+  padding: 40px;
+  margin-bottom: 40px;
+  box-shadow: 0px 0px 18px 14px rgba(73, 78, 92, 0.1);
+  background: #fff;
+  transition: 0.4s;
+  form input {
+    padding: 10px 14px;
+    border-radius: 0;
+    box-shadow: none;
+    font-size: 15px;
   }
-  
-  #login .box {
-    padding: 40px;
-    margin-bottom: 40px;
-    box-shadow: 0px 0px 18px 14px rgba(73, 78, 92, 0.1);
-    background: #fff;
-    transition: 0.4s;
-  }
-  
-  #login .box .icon {
-    float: left;
-  }
-  
-  #login .box .icon i {
-    color: #444;
-    font-size: 64px;
-    transition: 0.5s;
-    line-height: 0;
-    margin-top: 34px;
-  }
-  
-  #login .box .icon i:before {
-    background: #0c2e8a;
-    background: linear-gradient(45deg, #50d8af 0%, #a3ebd5 100%);
-    background-clip: border-box;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-  
-  #login .box h4 {
-    margin-left: 100px;
-    font-weight: 700;
-    margin-bottom: 15px;
-    font-size: 22px;
-  }
-  
-  #login .box h4 a {
-    color: #444;
-  }
-  
-  #login .box p {
-    font-size: 14px;
-    margin-left: 100px;
-    margin-bottom: 0;
-    line-height: 24px;
-  }
+}
 
-  
+#login .box .icon {
+  float: left;
+}
+
+#login .box .icon i {
+  color: #444;
+  font-size: 64px;
+  transition: 0.5s;
+  line-height: 0;
+  margin-top: 34px;
+}
+
+#login .box .icon i:before {
+  background: #0c2e8a;
+  background: linear-gradient(45deg, #50d8af 0%, #a3ebd5 100%);
+  background-clip: border-box;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+#login .box h4 {
+  margin-left: 100px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  font-size: 22px;
+}
+
+#login .box h4 a {
+  color: #444;
+}
+
+#login .box p {
+  font-size: 14px;
+  margin-left: 100px;
+  margin-bottom: 0;
+  line-height: 24px;
+}
+
 #login .login-content .btn-get-started,
 #login .login-content .btn-projects {
   font-family: "Raleway", sans-serif;
@@ -70,6 +74,7 @@
   transition: 0.5s;
   margin: 10px;
   color: #fff;
+  cursor: pointer;
 }
 
 #login .login-content .btn-get-started {
@@ -88,12 +93,14 @@
 }
 
 #login a {
-    color: white;
-  }
+  padding: 8px;
+  text-decoration: underline;
+  color: #0c2e8a;
+}
 
 #login a:hover {
-    color: black;
-  }
+  color: #50d8af;
+}
 
 #login .login-content .btn-projects:hover {
   background: none;
