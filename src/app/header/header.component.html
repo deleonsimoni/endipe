@@ -40,8 +40,8 @@
                 <li><a [routerLink]="['/home']" fragment="normas">Normas</a></li>
                 <li><a [routerLink]="['/home']" fragment="hospedagem">Hospedagem</a></li>
                 <li><a [routerLink]="['/home']" fragment="contact">Contato</a></li>
-                <li *ngIf="isAuth"><a [routerLink]="'/login'">Login</a></li>
-                <li *ngIf="!isAuth" class="menu-has-children"><a >Ações</a>
+                <li *ngIf="!isAuth"><a [routerLink]="'/login'">Login</a></li>
+                <li *ngIf="isAuth" class="menu-has-children"><a >Ações</a>
                     <ul>
                         <li><a [routerLink]="['/pagamento']">Pagamento</a></li>
                         <li><a [routerLink]="['/submissao']">Submissão</a></li>

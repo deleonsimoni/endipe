@@ -28,41 +28,46 @@
                             [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD/MM/YYYY' }" autocomplete="false" />
                     </div>
                     <div class="form-group col-md-4" formGroupName="phones">
-                        <input type="text" name="telephone" class="form-control" id="telephone" placeholder="Telefone" formControlName="telephone"  [dropSpecialCharacters]="true" mask="(00) 0000-0000"/>
+                        <input type="text" name="telephone" class="form-control" id="telephone" placeholder="Telefone"
+                            formControlName="telephone" [dropSpecialCharacters]="true" mask="(00) 0000-0000" />
                         <div class="validation"></div>
                     </div>
                     <div class="form-group col-md-4" formGroupName="phones">
-                        <input type="text" class="form-control" name="cellphone" id="cellphone" placeholder="Celular" formControlName="cellphone" [dropSpecialCharacters]="true" mask="(00) 00000-0000"/>
+                        <input type="text" class="form-control" name="cellphone" id="cellphone" placeholder="Celular"
+                            formControlName="cellphone" [dropSpecialCharacters]="true" mask="(00) 00000-0000" />
                         <div class="validation"></div>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <input type="password" name="password" class="form-control" id="password" placeholder="Senha" formControlName="password" />
+                        <input type="password" name="password" class="form-control" id="password" placeholder="Senha"
+                            formControlName="password" />
                         <div class="validation"></div>
                     </div>
                     <div class="form-group col-md-6">
-                        <input type="password" class="form-control" name="cf-password" id="cf-password" placeholder="Confirmar senha" formControlName="cfPassword" />
+                        <input type="password" class="form-control" name="cf-password" id="cf-password"
+                            placeholder="Confirmar senha" formControlName="cfPassword" />
                         <div class="validation"></div>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
-                                value="opcao1" checked (click)="docType = 'Documento'">
-                            <label class="form-check-label" for="exampleRadios1">
+                            <input class="form-check-input" type="radio" name="icForeign" id="foreign1" [value]="true"
+                                formControlName="icForeign">
+                            <label class="form-check-label" for="foreign1">
                                 Sou estrangeiro
                             </label>
                         </div>
                         <div class="form-check" last>
-                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"
-                                value="opcao2" (click)="docType = 'CPF'">
-                            <label class="form-check-label" for="exampleRadios2">
+                            <input class="form-check-input" type="radio" name="icForeign" id="foreign2" [value]="false"
+                                formControlName="icForeign">
+                            <label class="form-check-label" for="foreign2">
                                 Não sou estrangeiro
                             </label>
                         </div>
-                        <input type="text" class="form-control" name="document" id="document" placeholder="{{ docType }}" formControlName="document" [dropSpecialCharacters]="true" mask="000.000.000-00"/>
+                        <input type="text" class="form-control" name="document" id="document" placeholder="Document"
+                            formControlName="document" [dropSpecialCharacters]="true" mask="000.000.000-00" />
                         <div class="validation"></div>
                     </div>
                 </div>
@@ -84,7 +89,8 @@
                 </div>
                 <div class="form-row" formGroupName="address">
                     <div class="form-group col-md-6">
-                        <input type="text" name="zip" class="form-control" id="zip" placeholder="Código postal" formControlName="zip"  [dropSpecialCharacters]="true" mask="00000-000"/>
+                        <input type="text" name="zip" class="form-control" id="zip" placeholder="Código postal"
+                            formControlName="zip" [dropSpecialCharacters]="true" mask="00000-000" />
                         <div class="validation"></div>
                     </div>
                     <div class="form-group col-md-6">
@@ -129,62 +135,60 @@
                 <div class="section-header">
                     <h2 mt-2>Categoria</h2>
                 </div>
-                <div formArrayName="roles" *ngFor="let item of registerForm.get('roles').controls; let i = index;">
-                    <div class="row" [formArrayName]="i">
-                        <div class="col-md-4">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="id" id="radio1" [value]="1"
-                                    formControlName="id">
-                                <label class="form-check-label" for="radio1">
-                                    Convidado de sessão especial
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="id" id="radio2" [value]="2"
-                                    formControlName="id">
-                                <label class="form-check-label" for="radio2">
-                                    Mediador de roda de conversa
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="id" id="radio3" [value]="3"
-                                    formControlName="id">
-                                <label class="form-check-label" for="radio3">
-                                    Expositor de pôster
-                                </label>
-                            </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="modalityId" id="radio1" [value]="1"
+                                formControlName="modalityId">
+                            <label class="form-check-label" for="radio1">
+                                Convidado de sessão especial
+                            </label>
                         </div>
-                        <div class="col-md-4">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="id" id="radio4" [value]="4"
-                                    formControlName="id">
-                                <label class="form-check-label" for="radio4">
-                                    Mediador de minicurso
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="id" id="radio7" [value]="7"
-                                    formControlName="id">
-                                <label class="form-check-label" for="radio7">
-                                    Ouvinte
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="id" id="radio6" [value]="6"
-                                    formControlName="id">
-                                <label class="form-check-label" for="radio6">
-                                    Simposista
-                                </label>
-                            </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="modalityId" id="radio2" [value]="2"
+                                formControlName="modalityId">
+                            <label class="form-check-label" for="radio2">
+                                Mediador de roda de conversa
+                            </label>
                         </div>
-                        <div class="col-md-4">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="id" id="radio5" [value]="5"
-                                    formControlName="id">
-                                <label class="form-check-label" for="radio5">
-                                    Coordenador e expositor de painel
-                                </label>
-                            </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="modalityId" id="radio3" [value]="3"
+                                formControlName="modalityId">
+                            <label class="form-check-label" for="radio3">
+                                Expositor de pôster
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="modalityId" id="radio4" [value]="4"
+                                formControlName="modalityId">
+                            <label class="form-check-label" for="radio4">
+                                Mediador de minicurso
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="modalityId" id="radio7" [value]="7"
+                                formControlName="modalityId">
+                            <label class="form-check-label" for="radio7">
+                                Ouvinte
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="modalityId" id="radio6" [value]="6"
+                                formControlName="modalityId">
+                            <label class="form-check-label" for="radio6">
+                                Simposista
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="modalityId" id="radio5" [value]="5"
+                                formControlName="modalityId">
+                            <label class="form-check-label" for="radio5">
+                                Coordenador e expositor de painel
+                            </label>
                         </div>
                     </div>
                 </div>
@@ -198,7 +202,7 @@
                         </label>
                     </div>
                 </div>
-                <div class="text-center pt-5"><button type="submit" >Enviar</button></div>
+                <div class="text-center pt-5"><button type="submit">Enviar</button></div>
             </form>
         </div>
 

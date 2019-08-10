@@ -8,7 +8,7 @@ import { HomeComponent } from './home/home.component';
 import { UtilNgxMaterialModule } from './util-ngx-material/util-ngx-material.module';
 import { ModalInscricaoComponent } from './modal-inscricao/modal-inscricao.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { ModalEixoComponent } from './modal-eixo/modal-eixo.component';
 import { ModalProgramacaoComponent } from './modal-programacao/modal-programacao.component';
@@ -25,6 +25,7 @@ import { CertificadoComponent } from './certificado/certificado.component';
 import { ModalCadastroSucessoComponent } from './modal-cadastro-sucesso/modal-cadastro-sucesso.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import {NgxMaskModule} from 'ngx-mask';
+import { InterceptorService } from './services/interceptor.service';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,11 @@ import {NgxMaskModule} from 'ngx-mask';
     {
       provide: 'BASE_API_URL',
       useValue: environment.host
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorService,
+      multi: true
     }
   ],
   bootstrap: [AppComponent]

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-modal-cadastro-sucesso',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ModalCadastroSucessoComponent implements OnInit {
 
-  constructor() { }
+  public count = 10;
+
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit() {
+    setInterval(() => {
+      this.count--;
+      if (this.count === 0) {
+        // this.router.navigate(['/home']);
+      }
+    }, 1000);
   }
 
 }

@@ -38,6 +38,7 @@ export class RegisterComponent implements OnInit {
       password: [null, [Validators.required, Validators.min(6)]],
       cfPassword: [null, [Validators.required, Validators.min(6)]],
       dateBirth: [null, [Validators.required]],
+      icForeign: [false],
       document: [null, [Validators.required]],
       address: this.builder.group({
         street: [null, [Validators.required]],
@@ -57,6 +58,7 @@ export class RegisterComponent implements OnInit {
         name: [null, [Validators.required]],
         initials: [null]
       }),
+      modalityId: [null],
       roles: this.builder.array([
         this.createGroup()
       ]),
@@ -76,12 +78,12 @@ export class RegisterComponent implements OnInit {
   }
 
   public register() {
-    console.log(this.registerForm.value);
     const form = this.validatePassword();
     if (this.registerForm.valid && form != null) {
       this.authService.createUser(form)
         .subscribe(_ => this.exibirModalSucesso(), err => console.log(err));
     }
+    // this.exibirModalSucesso();
   }
 
   private validatePassword(): FormGroup {
