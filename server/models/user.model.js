@@ -16,6 +16,10 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  icAcceptTerms: {
+    type: Boolean,
+    default: false
+  },
   icForeign: {
     type: Boolean,
     default: false
@@ -74,6 +78,7 @@ const UserSchema = new mongoose.Schema({
     payment:{
       code: String,
       amount: Number,
+      pathImage: String,
       icPaid: {type: Boolean, default: false}
     }
   }]
