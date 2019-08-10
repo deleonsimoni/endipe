@@ -23,6 +23,8 @@ import { PagamentoComponent } from './pagamento/pagamento.component';
 import { SubmissaoComponent } from './submissao/submissao.component';
 import { CertificadoComponent } from './certificado/certificado.component';
 import { ModalCadastroSucessoComponent } from './modal-cadastro-sucesso/modal-cadastro-sucesso.component';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import {NgxMaskModule} from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,9 @@ import { ModalCadastroSucessoComponent } from './modal-cadastro-sucesso/modal-ca
     ReactiveFormsModule,
     AppRoutingModule,
     UtilNgxMaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    BsDatepickerModule.forRoot(),
+    NgxMaskModule.forRoot()
   ],
   entryComponents: [
     ModalInscricaoComponent,

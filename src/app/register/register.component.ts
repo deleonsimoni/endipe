@@ -14,17 +14,24 @@ import { Router, Route } from '@angular/router';
 export class RegisterComponent implements OnInit {
 
   public registerForm: FormGroup;
+  public docType = 'Documento';
 
   constructor(
     private builder: FormBuilder,
     private authService: AuthService,
     private dialog: MatDialog,
     private rota: Router
-
   ) {
 
-    this.registerForm = this.builder.group({
+    this.createForm();
 
+  }
+
+  ngOnInit() {
+  }
+
+  private createForm(): void {
+    this.registerForm = this.builder.group({
       fullname: [null, [Validators.required]],
       // tslint:disable-next-line: max-line-length
       email: [null, [Validators.required, Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)]],
@@ -49,33 +56,51 @@ export class RegisterComponent implements OnInit {
       institution: this.builder.group({
         name: [null, [Validators.required]],
         initials: [null]
-      })
-
+      }),
+      roles: this.builder.array([
+        this.createGroup()
+      ]),
+      icAcceptTerms: [false]
     });
-
   }
 
-  ngOnInit() {
+  private createGroup(): FormGroup {
+    return this.builder.group({
+      id: [1, [Validators.required]],
+      payment: this.builder.group({
+        code: [null],
+        amount: [null],
+        icPaid: [null]
+      })
+    });
   }
 
-  public register(): void {
-    this.registerForm.removeControl('cf-password');
-    if (this.registerForm.valid) {
-      this.registerForm.value.dateBirth = new Date();
-      this.authService.createUser(this.registerForm.value)
-        .subscribe((res) => {
-          this.exibirModalSucesso();
-        },
-        (err) => {
-          console.log(err);
-        });
+  public register() {
+    console.log(this.registerForm.value);
+    const form = this.validatePassword();
+    if (this.registerForm.valid && form != null) {
+      this.authService.createUser(form)
+        .subscribe(_ => this.exibirModalSucesso(), err => console.log(err));
     }
+  }
+
+  private validatePassword(): FormGroup {
+    const form = this.registerForm.value;
+
+    if (form.password === form.cfPassword) {
+
+      this.registerForm.removeControl('cf-password');
+      return this.registerForm.value;
+
+    }
+
+    return null;
   }
 
   private exibirModalSucesso(): void {
 
     const dialogRef = this.dialog.open(ModalCadastroSucessoComponent, {
-      data: {  },
+      data: {},
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -85,7 +110,7 @@ export class RegisterComponent implements OnInit {
 
   public openRules(): void {
     const dialogRef = this.dialog.open(ModalNormasComponent, {
-      data: {  },
+      data: {},
     });
   }
 

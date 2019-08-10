@@ -6,7 +6,7 @@ import {
   MatFormFieldModule,
   MatButtonModule,
   MatInputModule,
-  MatStepperModule
+  MatStepperModule,
 } from '@angular/material';
 
 @NgModule({

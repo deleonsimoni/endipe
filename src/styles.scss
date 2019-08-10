@@ -1012,6 +1012,13 @@ body.mobile-nav-active #mobile-nav-toggle {
   background: #2dc899;
 }
 
+.theme-green .bs-datepicker-head {
+  background-color: #50d8af;
+}
+
+.theme-green .bs-datepicker-body table td span.selected {
+  background-color: #0c2e8a;
+}
 
 @media (min-width: 768px) {
   #contact .contact-address,
