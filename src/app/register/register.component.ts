@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { MatDialog } from '@angular/material';
 import { ModalNormasComponent } from '../modal-normas/modal-normas.component';
+import { ModalCadastroSucessoComponent } from '../modal-cadastro-sucesso/modal-cadastro-sucesso.component';
+import { Router, Route } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -16,7 +18,9 @@ export class RegisterComponent implements OnInit {
   constructor(
     private builder: FormBuilder,
     private authService: AuthService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private rota: Router
+
   ) {
 
     this.registerForm = this.builder.group({
@@ -60,9 +64,23 @@ export class RegisterComponent implements OnInit {
       this.registerForm.value.dateBirth = new Date();
       this.authService.createUser(this.registerForm.value)
         .subscribe((res) => {
-          console.log(res);
+          this.exibirModalSucesso();
+        },
+        (err) => {
+          console.log(err);
         });
     }
+  }
+
+  private exibirModalSucesso(): void {
+
+    const dialogRef = this.dialog.open(ModalCadastroSucessoComponent, {
+      data: {  },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.rota.navigate(['/home']);
+    });
   }
 
   public openRules(): void {

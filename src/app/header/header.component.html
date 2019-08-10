@@ -40,7 +40,15 @@
                 <li><a [routerLink]="['/home']" fragment="normas">Normas</a></li>
                 <li><a [routerLink]="['/home']" fragment="hospedagem">Hospedagem</a></li>
                 <li><a [routerLink]="['/home']" fragment="contact">Contato</a></li>
-                <li><a [routerLink]="'/login'">Login</a></li>
+                <li *ngIf="isAuth"><a [routerLink]="'/login'">Login</a></li>
+                <li  class="menu-has-children"><a >Ações</a>
+                    <ul>
+                        <li><a [routerLink]="['/pagamento']">Pagamento</a></li>
+                        <li><a [routerLink]="['/submissao']">Submissão</a></li>
+                        <li><a [routerLink]="['/certificados']">Certificados</a></li>
+                    </ul>
+                </li>
+
                 <!--<li><a [routerLink]="['/home']" fragment="about">Sobre</a></li>
                 <li><a [routerLink]="['/home']" fragment="services">Serviços</a></li>
                 <li><a [routerLink]="['/home']" fragment="portfolio">Portfolio</a></li>

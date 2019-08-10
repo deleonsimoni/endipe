@@ -19,6 +19,10 @@ import { environment } from '../environments/environment';
 import { LoginComponent } from './login/login.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
+import { PagamentoComponent } from './pagamento/pagamento.component';
+import { SubmissaoComponent } from './submissao/submissao.component';
+import { CertificadoComponent } from './certificado/certificado.component';
+import { ModalCadastroSucessoComponent } from './modal-cadastro-sucesso/modal-cadastro-sucesso.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +36,11 @@ import { HeaderComponent } from './header/header.component';
     RegisterComponent,
     LoginComponent,
     FooterComponent,
-    HeaderComponent
+    HeaderComponent,
+    PagamentoComponent,
+    SubmissaoComponent,
+    CertificadoComponent,
+    ModalCadastroSucessoComponent
   ],
   imports: [
     BrowserModule,
@@ -49,6 +57,7 @@ import { HeaderComponent } from './header/header.component';
     ModalProgramacaoComponent,
     ModalNormasComponent,
     ModalApoiadoresComponent,
+    ModalCadastroSucessoComponent,
     RegisterComponent
   ],
   providers: [
