@@ -57,10 +57,8 @@ const UserSchema = new mongoose.Schema({
     telephone: String
   },
   
-  participation:{
-    profile: String,
-    groupId: String,
-    modalityId: String
+  modalityId:{
+    type: Number
   },
   institution:{
     name: String,
@@ -73,7 +71,6 @@ const UserSchema = new mongoose.Schema({
     imReceipt: Buffer
   },
   roles: [{
-    name: String,
     id: Number,
     payment:{
       code: String,
