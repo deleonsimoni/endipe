@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material';
 import { ModalNormasComponent } from '../modal-normas/modal-normas.component';
 import { ModalCadastroSucessoComponent } from '../modal-cadastro-sucesso/modal-cadastro-sucesso.component';
 import { Router, Route } from '@angular/router';
+import { ShareDataService } from '../services/share-data.service';
 
 @Component({
   selector: 'app-register',
@@ -20,7 +21,8 @@ export class RegisterComponent implements OnInit {
     private builder: FormBuilder,
     private authService: AuthService,
     private dialog: MatDialog,
-    private rota: Router
+    private rota: Router,
+    private share: ShareDataService
   ) {
 
     this.createForm();
@@ -81,7 +83,11 @@ export class RegisterComponent implements OnInit {
     const form = this.validatePassword();
     if (this.registerForm.valid && form != null) {
       this.authService.createUser(form)
-        .subscribe(_ => this.exibirModalSucesso(), err => console.log(err));
+        .subscribe((res: any) => {
+          this.authService.setUser(this.authService.getDecodedAccessToken(res.token), res.token);
+          this.share.shareData.next(true);
+          this.exibirModalSucesso();
+        }, err => console.log(err));
     }
     // this.exibirModalSucesso();
   }

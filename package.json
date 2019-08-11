@@ -47,6 +47,7 @@
     "morgan": "^1.9.1",
     "ng2-dragula": "^1.5.0",
     "ngx-bootstrap": "^5.1.1",
+    "ngx-dropzone-wrapper": "^8.0.0",
     "ngx-mask": "^8.0.3",
     "nodemon": "^1.17.5",
     "passport": "^0.4.0",

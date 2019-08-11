@@ -1,5 +1,8 @@
 const prices = [
-    {id: 1, name: 'Estudantes de curso Normal/EM', seasons:[
+    {
+        id: 1,
+        name: 'Estudantes de curso Normal/EM',
+        seasons: [
             {
                 dateIni: new Date(2019, 7, 1),
                 dateEnd: new Date(2019, 8, 30),
@@ -21,9 +24,11 @@ const prices = [
                 price: 100.00
             }
         ]
-    }
-    ,
-    {id: 2, name: 'Estudantes de Graduação', seasons:[
+    },
+    {
+        id: 2,
+        name: 'Estudantes de Graduação',
+        seasons: [
             {
                 dateIni: new Date(2019, 7, 1),
                 dateEnd: new Date(2019, 8, 30),
@@ -45,9 +50,11 @@ const prices = [
                 price: 100.00
             }
         ]
-    }
-,
-    {id: 3, name: 'Estudantes de Pós-Graduação', seasons:[
+    },
+    {
+        id: 3,
+        name: 'Estudantes de Pós-Graduação',
+        seasons: [
             {
                 dateIni: new Date(2019, 7, 1),
                 dateEnd: new Date(2019, 8, 30),
@@ -69,9 +76,11 @@ const prices = [
                 price: 200.00
             }
         ]
-    }
-    ,
-    {id: 4, name: 'Professores da Educação Básica', seasons:[
+    },
+    {
+        id: 4,
+        name: 'Professores da Educação Básica',
+        seasons: [
             {
                 dateIni: new Date(2019, 7, 1),
                 dateEnd: new Date(2019, 8, 30),
@@ -93,9 +102,11 @@ const prices = [
                 price: 200.00
             }
         ]
-    }
-    ,
-    {id: 5, name: 'Professores da Educação Superior', seasons:[
+    },
+    {
+        id: 5,
+        name: 'Professores da Educação Superior',
+        seasons: [
             {
                 dateIni: new Date(2019, 7, 1),
                 dateEnd: new Date(2019, 8, 30),
@@ -119,3 +130,7 @@ const prices = [
         ]
     }
 ]
+
+module.exports = {
+    prices
+}; 

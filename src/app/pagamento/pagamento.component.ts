@@ -10,36 +10,43 @@ import { UserService } from '../services/user.service';
 export class PagamentoComponent implements OnInit {
 
   public paymentForm: FormGroup;
-  public idCategoria: Number;
-  public valorTotal: Number;
+  public idCategoria: number;
+  public valorTotal: number;
 
   public categorias = [
-    {id: 1, name: 'Estudantes de curso Normal/EM'},
-    {id: 2, name: 'Estudantes de Graduação'},
-    {id: 3, name: 'Estudantes de Pós-Graduação'},
-    {id: 4, name: 'Professores da Educação Básica'},
-    {id: 5, name: 'Professores da Educação Superior'}
+    { id: 1, name: 'Estudantes de curso Normal/EM' },
+    { id: 2, name: 'Estudantes de Graduação' },
+    { id: 3, name: 'Estudantes de Pós-Graduação' },
+    { id: 4, name: 'Professores da Educação Básica' },
+    { id: 5, name: 'Professores da Educação Superior' }
   ];
 
   constructor(
     private builder: FormBuilder,
     private userService: UserService,
-    ) {
+  ) {
 
-      this.paymentForm = this.builder.group({
-        fullname: [null, []]
-      });
+    this.paymentForm = this.builder.group({
+      id: [null]
+    });
 
-    }
+  }
 
   ngOnInit() {
+
+    this.paymentForm.valueChanges.subscribe(res => {
+      if (res) {
+        this.atualizarValor(res.id);
+      }
+    });
+
   }
-  
+
   public atualizarValor(id): void {
     this.userService.atualizarValor(id)
-        .subscribe((res: any) => {
-          this.valorTotal = res.price;
-        },
+      .subscribe((res: any) => {
+        this.valorTotal = res.price;
+      },
         (err) => {
           console.log(err);
         });
@@ -55,8 +62,8 @@ export class PagamentoComponent implements OnInit {
       .subscribe((res) => {
         console.log(res);
       },
-      (err) => {
-        console.log(err);
-      });
+        (err) => {
+          console.log(err);
+        });
   }
 }

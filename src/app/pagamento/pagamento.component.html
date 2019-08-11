@@ -1,33 +1,33 @@
 <!--==========================
-    Intro Section
+    Payment
   ============================-->
-  <main id="main">
-
-        <div class="container" id="payment">
-            <div class="form">
-                <form [formGroup]="paymentForm" (ngSubmit)="pagar()" role="form" class="contactForm">
+<main id="payment">
+    <div class="container payment-content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box">
                     <div class="section-header">
-                        <h2>Pagamentos</h2>
+                        <h2>Pagamento</h2>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group col-xs-12">
-                            <select [(ngModel)]="idCategoria">
-                                <option *ngFor="let categoria of categorias" [ngValue]="categoria.id">{{categoria.name}}</option>
-                            </select>
+                    <form [formGroup]="paymentForm" (ngSubmit)="pagar()" role="form" class="contactForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="id">Selecione a categoria</label>
+                                <select name="id" formControlName="id">
+                                    <option *ngFor="let categoria of categorias" [ngValue]="categoria.id">
+                                        {{categoria.name}}
+                                    </option>
+                                </select>
+                            </div>
+                            <h3>Valor Total R${{valorTotal}}</h3>
                         </div>
-                        <h3>
-
-                            Valor Total R${{valorTotal}}
-
-                        </h3>
-                    </div>
-                    <div class="text-center pt-5"><button type="submit">Realizar Pagamento</button></div>
-                </form>
+                        <div class="text-center pt-5"><button type="submit">Realizar Pagamento</button></div>
+                    </form>
+                </div>
             </div>
-    
         </div>
-    
-    </main>
-    
-    
-    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+    </div>
+</main>
+
+
+<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import * as jwt_decode from "jwt-decode";
+import { ShareDataService } from '../services/share-data.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -13,7 +14,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private builder: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private share: ShareDataService
   ) {
 
     this.loginForm = this.builder.group({
@@ -29,15 +31,8 @@ export class LoginComponent implements OnInit {
   public login() {
     this.authService.loginUser(this.loginForm.value)
       .subscribe((res: any) => {
-
-        this.authService.setUser(this.authService.getDecodedAccessToken(res.token),res.token);
-        //localStorage.setItem('token', res.token);
-        /*setTimeout(() => {
-          this.authService.me()
-            .subscribe(res => {
-              console.log(res);
-            });
-        }, 500);*/
+        this.authService.setUser(this.authService.getDecodedAccessToken(res.token), res.token);
+        this.share.shareData.next(true);
       });
   }
 

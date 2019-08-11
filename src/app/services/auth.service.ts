@@ -22,9 +22,7 @@ export class AuthService {
   }
 
   me() {
-    const token = localStorage.getItem(TOKEN_KEY);
-    const header = new HttpHeaders().set('Authorization', 'Bearer ' + token);
-    return this.http.get(`${this.baseUrl}/auth/me`, { headers: header });
+    return this.http.get(`${this.baseUrl}/auth/me`);
   }
 
   setUser(user, token): void {

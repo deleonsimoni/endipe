@@ -15,7 +15,7 @@ const Prices = require('../config/prices');
 module.exports = {
   insert,
   payment,
-  price
+  getPrice
 }
 
 async function insert(user) {
@@ -31,10 +31,11 @@ async function payment(form) {
   return await new User(user).save();
 }
 
-function price(id) {
-  let dateNow = Date.now;
-  let seasons = Prices.find(price => price.id === id).seasons;
+function getPrice(id) {
+  let dateNow = new Date();
+
+  let seasons = Prices.prices.filter(price => price.id == id)[0].seasons;
   
-  return seasons.filter(season => dateNow >= season.dateIni && dateNow <= season.dateEnd)[0].price;
+  return seasons.filter(season => dateNow.getTime() >= season.dateIni.getTime() && dateNow.getTime() <= season.dateEnd.getTime())[0].price;
 
 }

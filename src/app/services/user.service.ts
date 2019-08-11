@@ -12,12 +12,12 @@ export class UserService {
   ) { }
 
 
-  atualizarValor(form) {
+  pagar(form) {
     return this.http.post(`${this.baseUrl}/user/payment`, form);
   }
 
-  pagar(form) {
-    return this.http.get(`${this.baseUrl}/user/price/` + form);
+  atualizarValor(id) {
+    return this.http.get(`${this.baseUrl}/user/price/` + id);
   }
 
 }

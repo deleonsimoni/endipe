@@ -26,6 +26,6 @@ async function payment(req, res) {
 }
 
 async function price(req, res) {
-  let price = userCtrl.getPrice(request.params.id);
+  let price = userCtrl.getPrice(req.params.id);
   res.json({ price });
 }
