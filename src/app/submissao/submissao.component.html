@@ -22,6 +22,18 @@
                                         </select>
                                     </div>
                                 </div>
+
+
+                                <div class="custom-file" style="width: auto;">
+                                    <input type="file" class="custom-file-input" 
+                                           accept="application/pdf"
+                                           (change)="upload($event.target.files, fileInput)" 
+                                           id="customPreReadFile" #fileInput/>
+                                    <label class="custom-file-label" for="customPreReadFile">{{getFileName()}}</label>
+                                  </div>
+
+                                  
+
                                 <div class="form-group col-md-6">
                                     <div formArrayName="authors" *ngFor="let item of submissionForm.get('authors').controls; let i = index;">
                                         <div [formArrayName]="i">

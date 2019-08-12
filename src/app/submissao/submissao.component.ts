@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { UploadService } from '../services/upload.service'
+
 
 @Component({
   selector: 'app-submissao',
@@ -19,7 +22,11 @@ export class SubmissaoComponent implements OnInit {
   ];
 
   constructor(
-    private builder: FormBuilder
+    private builder: FormBuilder,
+    private uploadService: UploadService,
+    private toastr: ToastrService,
+    private identifier: string,
+    private file: any
   ) { }
 
   ngOnInit() {
@@ -45,6 +52,23 @@ export class SubmissaoComponent implements OnInit {
       }
     });
 
+  }
+
+  public upload(files: FileList, fileInput: any) {
+    if(files[0].type.indexOf('pdf') === -1){
+      this.toastr.error('O arquivo selecionado não é um PDF.', 'Error');
+      fileInput.value = '';
+      return;
+    }
+    this.toastr.info('Uploading file...');
+    this.uploadService.uploadFile(files[0], this.identifier).subscribe(data => {
+      this.toastr.success('Upload feito com sucesso.', 'Success');
+    });
+  }
+
+  public getFileName(): string {
+    const fileName = this.file ? this.file.name : 'Upload Trabalho';
+    return fileName;
   }
 
   private createFields() {
