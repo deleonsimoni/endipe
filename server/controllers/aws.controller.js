@@ -1,4 +1,5 @@
 const AWS = require('aws-sdk');
+const config = require('./config');
 
 module.exports = {
     S3Uploader
@@ -19,10 +20,14 @@ function S3Uploader(request) {
       region: "<S3 BUCKET REGION>"
     });
     */
-    let s3 = new AWS.S3();
+    const s3 = new AWS.S3({
+        accessKeyId: config.AWS_ACCESS_KEY,
+        secretAccessKey: config.AWS_SECRET_ACCESS_KEY
+    });
+
     function uploadFile(key, file) {
       var s3Config = {
-        Bucket: "<BUCKET NAME>",
+        Bucket: 'endiperio2020',
         Key: key,
         Body: file
       };

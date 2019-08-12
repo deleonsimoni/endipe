@@ -24,6 +24,10 @@ const envVarsSchema = Joi.object({
   .description('Email'),
   MAIL_SECRET: Joi.string()
   .description('Secret Main'),
+  AWS_ACCESS_KEY: Joi.string()
+  .description('Secret Main'),
+  AWS_SECRET_ACCESS_KEY: Joi.string()
+  .description('Secret Main'),
   MONGO_PORT: Joi.number()
     .default(27017)
 }).unknown()
@@ -45,7 +49,9 @@ const config = {
     port: envVars.MONGO_PORT
   },
   MAIL_FROM: envVars.MAIL_FROM,
-  MAIL_SECRET: envVars.MAIL_SECRET
+  MAIL_SECRET: envVars.MAIL_SECRET,
+  AWS_ACCESS_KEY: envVars.AWS_ACCESS_KEY,
+  AWS_SECRET_ACCESS_KEY: envVars.AWS_SECRET_ACCESS_KEY
 };
 
 module.exports = config;
