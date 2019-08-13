@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import { UploadService } from '../services/upload.service';
 import { ToastrService } from 'ngx-toastr';
-import { UploadService } from '../services/upload.service'
-
-
 @Component({
   selector: 'app-submissao',
   templateUrl: './submissao.component.html',
@@ -20,13 +18,13 @@ export class SubmissaoComponent implements OnInit {
     'Minicurso',
     'Roda de conversa'
   ];
+  private identifier: string;
+  private file: any;
 
   constructor(
     private builder: FormBuilder,
     private uploadService: UploadService,
-    private toastr: ToastrService,
-    private identifier: string,
-    private file: any
+    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
@@ -55,7 +53,8 @@ export class SubmissaoComponent implements OnInit {
   }
 
   public upload(files: FileList, fileInput: any) {
-    if(files[0].type.indexOf('pdf') === -1){
+    console.log(files, fileInput);
+    if (files[0].type.indexOf('pdf') === -1){
       this.toastr.error('O arquivo selecionado não é um PDF.', 'Error');
       fileInput.value = '';
       return;

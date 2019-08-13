@@ -24,8 +24,10 @@ import { SubmissaoComponent } from './submissao/submissao.component';
 import { CertificadoComponent } from './certificado/certificado.component';
 import { ModalCadastroSucessoComponent } from './modal-cadastro-sucesso/modal-cadastro-sucesso.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-import {NgxMaskModule} from 'ngx-mask';
+import { NgxMaskModule } from 'ngx-mask';
 import { InterceptorService } from './services/interceptor.service';
+
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -54,7 +56,8 @@ import { InterceptorService } from './services/interceptor.service';
     UtilNgxMaterialModule,
     HttpClientModule,
     BsDatepickerModule.forRoot(),
-    NgxMaskModule.forRoot()
+    NgxMaskModule.forRoot(),
+    ToastrModule.forRoot()
   ],
   entryComponents: [
     ModalInscricaoComponent,

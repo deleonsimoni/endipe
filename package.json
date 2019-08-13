@@ -50,6 +50,7 @@
     "ngx-bootstrap": "^5.1.1",
     "ngx-dropzone-wrapper": "^8.0.0",
     "ngx-mask": "^8.0.3",
+    "ngx-snackbar": "^2.0.1",
     "ngx-toastr": "^10.0.4",
     "nodemailer": "^6.3.0",
     "nodemon": "^1.17.5",
