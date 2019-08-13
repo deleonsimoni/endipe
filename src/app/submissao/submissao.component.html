@@ -7,7 +7,7 @@
             <div class="offset-md-1 col-md-10">
                 <div class="box">
                     <div class="form">
-                        <form role="form" class="contactForm" [formGroup]="submissionForm">
+                        <form role="form" class="contactForm" [formGroup]="submissionForm" (ngSubmit)="upload()">
                             <div class="section-header">
                                 <h2>Submissão de trabalho</h2>
                             </div>
@@ -26,9 +26,10 @@
 
                                 <div class="custom-file" style="width: auto;">
                                     <input type="file" class="custom-file-input" 
-                                           accept="application/pdf"
-                                           (change)="upload($event.target.files, fileInput)" 
-                                           id="customPreReadFile" #fileInput/>
+                                           accept="application/pdf,
+                                                   application/msword,
+                                                   application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                                           id="customPreReadFile" (change)="setFileName($event.target.files, fileInput)" #fileInput/>
                                     <label class="custom-file-label" for="customPreReadFile">{{getFileName()}}</label>
                                   </div>
 

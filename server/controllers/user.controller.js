@@ -44,19 +44,26 @@ function getPrice(id) {
 
 }
 
-async function uploadWork(req) {
-  var id = req.params.id;
-  var s3Uploader = new S3Uploader(req);
+async function uploadWork(req, res) {
+
   var form = new IncomingForm();
   var fileName = '';
   var buffer = null;
+  var formulario = null;
+
+  form.on('field', (name, value) => { 
+    formulario = JSON.parse(value);
+  });
 
   form.on('file', (field, file) => {
     fileName = file.name;
     buffer = fs.readFileSync(file.path);
   });
-  form.on('end', () => {
-    s3Uploader.uploadFile(fileName, buffer).then(fileData => {
+
+  form.on('end', () => {    
+    S3Uploader.uploadFile(fileName, buffer).then(fileData => {
+      formulario;
+      //await new User(user).save();
       res.json({
         successful: true,
         fileData
@@ -67,5 +74,5 @@ async function uploadWork(req) {
     });
   });
   form.parse(req);
-
+  return res;
 }

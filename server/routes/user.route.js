@@ -20,8 +20,8 @@ router.route('/')
   .post(asyncHandler(insert));
 
 async function uploadWork(req, res) {
-  let user = await userCtrl.uploadWork(req);
-  res.json(user);
+  let response = await userCtrl.uploadWork(req, res);
+  res.json(response);
 }
 
 async function submitWork(req, res) {

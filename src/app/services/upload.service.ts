@@ -12,9 +12,10 @@ export class UploadService {
     private http: HttpClient
   ) { }
 
-  uploadFile(file: File, id: string): Observable<any> {
+  uploadFile(file: File, id: string, formulario: any): Observable<any> {
     const formData: FormData = new FormData();
-    formData.append('file', file, '${id}/${file.name}');
-    return this.http.post(`${this.baseUrl}/user/uploadWork` + id, formData);
+    formData.append('file', file, `${id}/${file.name}`);
+    formData.append('formulario', JSON.stringify(formulario));
+    return this.http.post(`${this.baseUrl}/user/uploadWork/${id}`, formData);
   }
 }

@@ -18,8 +18,7 @@ export class SubmissaoComponent implements OnInit {
     'Minicurso',
     'Roda de conversa'
   ];
-  private identifier: string;
-  private file: any;
+  private files: FileList;
 
   constructor(
     private builder: FormBuilder,
@@ -52,22 +51,24 @@ export class SubmissaoComponent implements OnInit {
 
   }
 
-  public upload(files: FileList, fileInput: any) {
-    console.log(files, fileInput);
-    if (files[0].type.indexOf('pdf') === -1){
+  public upload() {
+    if (this.files[0].type.indexOf('pdf') === -1){
       this.toastr.error('O arquivo selecionado não é um PDF.', 'Error');
-      fileInput.value = '';
+      //fileInput.value = '';
       return;
     }
-    this.toastr.info('Uploading file...');
-    this.uploadService.uploadFile(files[0], this.identifier).subscribe(data => {
+    this.uploadService.uploadFile(this.files[0], 'EndipeRio2020', this.submissionForm.value).subscribe(data => {
       this.toastr.success('Upload feito com sucesso.', 'Success');
     });
   }
 
   public getFileName(): string {
-    const fileName = this.file ? this.file.name : 'Upload Trabalho';
+    const fileName = this.files ? this.files[0].name : 'Upload Trabalho';
     return fileName;
+  }
+
+  public setFileName(files: FileList): void {
+    this.files = files;
   }
 
   private createFields() {
