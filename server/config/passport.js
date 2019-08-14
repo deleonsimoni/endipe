@@ -32,6 +32,7 @@ const jwtLogin = new JwtStrategy({
   done(null, user);
 });
 
+
 passport.use(jwtLogin);
 passport.use(localLogin);
 

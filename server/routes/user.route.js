@@ -2,7 +2,6 @@ const express = require('express');
 const passport = require('passport');
 const asyncHandler = require('express-async-handler');
 const userCtrl = require('../controllers/user.controller');
-var formidable = require('formidable');
 
 const router = express.Router();
 module.exports = router;
@@ -12,7 +11,6 @@ router.use(passport.authenticate('jwt', { session: false }))
 router.get('/price/:id', passport.authenticate('jwt', { session: false }), price);
 
 router.post('/payment', passport.authenticate('jwt', { session: false }), payment);
-router.post('/submitWork', passport.authenticate('jwt', { session: false }), submitWork);
 router.post('/uploadWork/:id', passport.authenticate('jwt', { session: false }), uploadWork);
 
 
@@ -21,12 +19,8 @@ router.route('/')
 
 async function uploadWork(req, res) {
   let response = await userCtrl.uploadWork(req, res);
+  console.log('Devolvi Pro front');
   res.json(response);
-}
-
-async function submitWork(req, res) {
-  let user = await userCtrl.insert(req.body);
-  res.json(user);
 }
 
 async function insert(req, res) {

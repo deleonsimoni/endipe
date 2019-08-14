@@ -12,16 +12,38 @@
                     <form [formGroup]="paymentForm" (ngSubmit)="pagar()" role="form" class="contactForm">
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="id">Selecione a categoria</label>
+                                Para qual categoria gostaria de se inscrever? <br/><br/>
                                 <select name="id" formControlName="id">
                                     <option *ngFor="let categoria of categorias" [ngValue]="categoria.id">
                                         {{categoria.name}}
                                     </option>
                                 </select>
                             </div>
-                            <h3>Valor Total R${{valorTotal}}</h3>
+                            <br/>
                         </div>
-                        <div class="text-center pt-5"><button type="submit">Realizar Pagamento</button></div>
+
+                        <div class="form-row">
+                            <h3>Valor Total<strong> R${{valorTotal}}</strong></h3>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                O pagamento deverá ser realizado via <strong>tranferência bancária</strong> para a conta do congresso Endipe. 
+                                Após pagamento, enviar comprovante via email para: endiperio2020@gmail.com
+                                <br/><br/>
+                                Conta para transferência:
+                                <br/><strong>Banco do Brasil
+                                <br/>Endipe Rio 2020
+                                <br/>CNPJ: 01.123.123/0001-21
+                                <br/>Agência: 1222 Conta: 225346-8</strong>
+                                
+                            </div>
+                        </div>
+
+
+
+
+                        <!--<div class="text-center pt-5"><button type="submit">Realizar Pagamento</button></div>-->
                     </form>
                 </div>
             </div>

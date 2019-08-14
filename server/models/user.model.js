@@ -70,6 +70,18 @@ const UserSchema = new mongoose.Schema({
     name: String,
     imReceipt: Buffer
   },
+  works: [{
+    protocol: Number,
+    title: String,
+    optionId: Number,
+    option: String,
+    pathS3: String,
+    author: [
+      {
+        name: String
+      }
+    ],
+  }],
   roles: [{
     id: Number,
     payment:{

@@ -60,11 +60,14 @@ async function uploadWork(req, res) {
     buffer = fs.readFileSync(file.path);
   });
 
-  form.on('end', () => {    
+  form.on('end', () => {  
+    console.log('imprimindo for ', formulario);  
     S3Uploader.uploadFile(fileName, buffer).then(fileData => {
-      formulario;
-      //await new User(user).save();
+      formulario.pathS3 = fileName;
+      req.user.works = formulario;
+      new User(req.user).save();
       res.json({
+        user: req.user,
         successful: true,
         fileData
       });
