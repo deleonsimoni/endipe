@@ -76,7 +76,7 @@ const UserSchema = new mongoose.Schema({
     optionId: Number,
     option: String,
     pathS3: String,
-    author: [
+    authors: [
       {
         name: String
       }
