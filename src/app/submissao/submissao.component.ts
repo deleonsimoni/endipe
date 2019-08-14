@@ -1,13 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import { Component, OnInit, Input, Output } from '@angular/core';
+import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { UploadService } from '../services/upload.service';
 import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs';
+import { EventEmitter } from 'events';
 @Component({
   selector: 'app-submissao',
   templateUrl: './submissao.component.html',
   styleUrls: ['./submissao.component.scss']
 })
 export class SubmissaoComponent implements OnInit {
+
+  @Input() receberDados = new Observable();
+  @Output() enviarDados = new EventEmitter();
 
   public submissionForm: FormGroup;
   public authors = new Array();
@@ -24,20 +29,21 @@ export class SubmissaoComponent implements OnInit {
     private builder: FormBuilder,
     private uploadService: UploadService,
     private toastr: ToastrService
-  ) { }
+  ) {
+    this.receberDados.subscribe(res => console.log(res));
+  }
 
   ngOnInit() {
 
     this.createForm();
-    console.log(this.submissionForm.value);
 
   }
 
   private createForm(): void {
 
     this.submissionForm = this.builder.group({
-      option: [null],
-      title: [null],
+      option: [null, [Validators.required]],
+      title: [null, [Validators.required]],
       authors: this.builder.array([
         this.createFields()
       ])
@@ -52,14 +58,16 @@ export class SubmissaoComponent implements OnInit {
   }
 
   public upload() {
-    if (this.files[0].type.indexOf('pdf') === -1){
-      this.toastr.error('O arquivo selecionado não é um PDF.', 'Error');
-      //fileInput.value = '';
-      return;
+    if (this.submissionForm.valid) {
+      if (this.files[0].type.indexOf('pdf') === -1){
+        this.toastr.error('O arquivo selecionado não é um PDF.', 'Error');
+        //fileInput.value = '';
+        return;
+      }
+      this.uploadService.uploadFile(this.files[0], 'EndipeRio2020', this.submissionForm.value).subscribe(data => {
+        this.toastr.success('Upload feito com sucesso.', 'Success');
+      });
     }
-    this.uploadService.uploadFile(this.files[0], 'EndipeRio2020', this.submissionForm.value).subscribe(data => {
-      this.toastr.success('Upload feito com sucesso.', 'Success');
-    });
   }
 
   public getFileName(): string {

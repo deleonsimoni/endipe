@@ -16,6 +16,7 @@ export class RegisterComponent implements OnInit {
 
   public registerForm: FormGroup;
   public docType = 'Documento';
+  public submit = false;
 
   constructor(
     private builder: FormBuilder,
@@ -37,8 +38,8 @@ export class RegisterComponent implements OnInit {
       fullname: [null, [Validators.required]],
       // tslint:disable-next-line: max-line-length
       email: [null, [Validators.required, Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)]],
-      password: [null, [Validators.required, Validators.min(6)]],
-      cfPassword: [null, [Validators.required, Validators.min(6)]],
+      password: [null, [Validators.required, Validators.minLength(6)]],
+      cfPassword: [null, [Validators.required, Validators.minLength(6)]],
       dateBirth: [null, [Validators.required]],
       icForeign: [false],
       document: [null, [Validators.required]],
@@ -80,6 +81,7 @@ export class RegisterComponent implements OnInit {
   }
 
   public register() {
+    this.submit = true;
     const form = this.validatePassword();
     if (this.registerForm.valid && form != null) {
       this.authService.createUser(form)
@@ -122,4 +124,19 @@ export class RegisterComponent implements OnInit {
     });
   }
 
+  get validate() {
+    return this.registerForm.controls;
+  }
+
+  get phones() {
+    return this.registerForm.get('phones').controls;
+  }
+
+  get address() {
+    return this.registerForm.get('address').controls;
+  }
+
+  get institution() {
+    return this.registerForm.get('institution').controls;
+  }
 }

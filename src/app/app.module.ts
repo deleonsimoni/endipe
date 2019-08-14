@@ -28,6 +28,8 @@ import { NgxMaskModule } from 'ngx-mask';
 import { InterceptorService } from './services/interceptor.service';
 
 import { ToastrModule } from 'ngx-toastr';
+import { TrabalhosComponent } from './trabalhos/trabalhos.component';
+import { ListarTrabalhosComponent } from './listar-trabalhos/listar-trabalhos.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,9 @@ import { ToastrModule } from 'ngx-toastr';
     PagamentoComponent,
     SubmissaoComponent,
     CertificadoComponent,
-    ModalCadastroSucessoComponent
+    ModalCadastroSucessoComponent,
+    TrabalhosComponent,
+    ListarTrabalhosComponent
   ],
   imports: [
     BrowserModule,
