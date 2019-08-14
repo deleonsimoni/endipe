@@ -61,11 +61,20 @@ async function uploadWork(req, res) {
   });
 
   form.on('end', () => {  
-    console.log('imprimindo for ', formulario);  
+   /* formulario.pathS3 = fileName;
+      req.user.works = formulario;
+    console.log('imprimindo for ', formulario);  */
     S3Uploader.uploadFile(fileName, buffer).then(fileData => {
       formulario.pathS3 = fileName;
-      req.user.works = formulario;
-      new User(req.user).save();
+      req.user.works = [formulario];
+
+      User.findOneAndUpdate({_id: req.user._id}, {$push: {works: req.user.works}}, function (err, doc) {
+          if (err) {
+              console.log("erro ao atualizar o usuario: ", err);
+          } else {
+              console.log("update document success");
+          }
+        });
       res.json({
         user: req.user,
         successful: true,

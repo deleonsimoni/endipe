@@ -26,7 +26,7 @@
             <div class="row">
                 <div class="col-lg-6 content">
                     <h2>Tema</h2>
-                    <h2 class="child">FAZERES-SABERES PEDAGÓGICOS: diálogos, insurgências e políticas</h2>
+                    <h2 class="child"><strong style="color:red">FAZERES-SABERES PEDAGÓGICOS: diálogos, insurgências e políticas</strong></h2>
                     
                     <!-- <h3>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim
                         id est laborum.</h3> -->
@@ -38,9 +38,29 @@
                             <strong>Locais</strong>
                         </li>
                         <li>
-                            Campus da Faculdade de Educação da UFRJ, do Instituto Benjamim Constant e da Escola de
-                            Educação da UNIRIO, todos localizados na Av. Pasteur, no bairro da Urca, com realização da
-                            sessão de abertura no espaço cultural Vivo Rio, situado no Aterro do Flamengo.
+                            <ul>
+                                <li>
+                                    - Campus da Faculdade de Educação da UFRJ
+                                </li>
+                                
+                                <li>
+                                    - Campus do Instituto Benjamim Constant
+                                </li>
+                                    
+                                <li>
+                                    - Campus da Escola de Educação da UNIRIO
+                                </li>
+                                    
+                                <li>
+                                    Todos localizados na Av. Pasteur, no bairro da Urca
+                                </li>
+
+                                <li>
+                                    <strong style="color: #0c2e8a">ABERTURA NO ESPACO CULTURAL VIVO RIO, situado no Aterro do FLAMENGO</strong>
+                                </li>
+
+                            </ul>
+                            
                         </li>
                     </ul>
                 </div>
@@ -48,13 +68,14 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="agenda-titulo">
-                                <h2>Cronograma</h2>
+                                <h2 style="color:red">NOTÍCIAS</h2>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="agenda-items" style="text-align: left">
                             <ul>
+                                <li><i class="mr-2" style="text-align: left;"></i>O RIO DE JANEIRO ESPERA POR VOCÊ! APROVEITE OS DESCONTOS E FAÇA LOgO A SUA INSCRIÇÃO PARA O MAIOR EVENTO DE EDUCAÇÃO</li>
                                 <li><i class="fa fa-calendar-day mr-2"></i> Início das Inscrições -> 26 de agosto de 2019</li>
                                 <li><i class="fa fa-calendar-day mr-2"></i> Submissão de Trabalhos -> 16 de outubro a 18 de dezembro de 2019 </li>
                                 <li><i class="fa fa-calendar-day mr-2"></i> Avaliação pelo Comitê Cientifico -> Até 13 de abril de 2020</li>
@@ -79,7 +100,7 @@
         <div class="container">
             <div class="section-header">
                 <h2>Apresentação</h2>
-                <p style="text-align: left;">
+                <p style="text-align: justify;">
                     A realização do seminário “A Didática em Questão”, em 1982, na PUC-Rio, referência
                     especialmente significativa da gênese do movimento hoje materializado nos ENDIPES
                     (Encontro Nacional de Didática e Prática de Ensino), estava marcada pelo contexto de forte
@@ -144,11 +165,11 @@
             <div class="row">
 
                 <div class="col-lg-6" *ngFor="let eixo of eixos">
-                    <div style="cursor: pointer;" class="box wow fadeInLeft" (click)="openDialogEixo(eixo)">
+                    <div style="cursor: pointer; color: #0c2e8a;" class="box wow fadeInLeft" (click)="openDialogEixo(eixo)">
                         <!-- <div class="icon"><i class="fa fa-bar-chart"></i></div> -->
                         <h4 class="title"><a>{{ eixo.titulo }}</a></h4>
                         <p class="description">
-                            {{ eixo.tema }}
+                            <strong>{{ eixo.tema }}</strong>
                         </p>
                     </div>
                 </div>

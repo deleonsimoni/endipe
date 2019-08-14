@@ -4,18 +4,18 @@
         <i class="fa fa-times" (click)="close()"></i>
     </div>
     <div class="row">
-        <h2 mat-dialog-title>{{ eixo.tema }}</h2>
+        <h2 mat-dialog-title style="color: #0c2e8a;"><strong>{{ eixo.tema }}</strong></h2>
         <div mat-dialog-content>
-            <p>{{ eixo.descricao }}</p>
+            <p style="text-align: justify; color: #0c2e8a;">{{ eixo.descricao }}</p>
             <br>
-            <ul>
+            <!--<ul>
                 <li>
                     <strong>Coordenação</strong>
                 </li>
                 <li *ngFor="let coordenador of eixo.coordenacao">
                     {{ coordenador }}
                 </li>
-            </ul>
+            </ul>-->
         </div>
 
     </div>
