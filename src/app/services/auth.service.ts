@@ -26,8 +26,8 @@ export class AuthService {
   }
 
   setUser(user, token): void {
-    window.localStorage.setItem(TOKEN_KEY,  token);
-    (<any> window).user = user;
+    window.localStorage.setItem(TOKEN_KEY, token);
+    (<any>window).user = user;
   }
 
   public getUser(): string {
@@ -39,10 +39,15 @@ export class AuthService {
   }
 
   public getDecodedAccessToken(token: string): any {
-    try{
-        return jwt_decode(token);
-    } catch(Error){
-        return null;
+
+    try {
+
+      return jwt_decode(token);
+
+    } catch (error) {
+
+      return null;
+
     }
   }
 

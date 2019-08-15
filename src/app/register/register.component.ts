@@ -4,7 +4,7 @@ import { AuthService } from '../services/auth.service';
 import { MatDialog } from '@angular/material';
 import { ModalNormasComponent } from '../modal-normas/modal-normas.component';
 import { ModalCadastroSucessoComponent } from '../modal-cadastro-sucesso/modal-cadastro-sucesso.component';
-import { Router, Route } from '@angular/router';
+import { Router } from '@angular/router';
 import { ShareDataService } from '../services/share-data.service';
 
 @Component({
@@ -30,8 +30,7 @@ export class RegisterComponent implements OnInit {
 
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   private createForm(): void {
     this.registerForm = this.builder.group({
@@ -129,14 +128,14 @@ export class RegisterComponent implements OnInit {
   }
 
   get phones() {
-    return this.registerForm.get('phones').controls;
+    return this.registerForm.get('phones');
   }
 
   get address() {
-    return this.registerForm.get('address').controls;
+    return this.registerForm.get('address');
   }
 
   get institution() {
-    return this.registerForm.get('institution').controls;
+    return this.registerForm.get('institution');
   }
 }

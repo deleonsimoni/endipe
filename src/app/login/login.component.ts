@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import * as jwt_decode from "jwt-decode";
 import { ShareDataService } from '../services/share-data.service';
@@ -11,6 +11,7 @@ import { ShareDataService } from '../services/share-data.service';
 export class LoginComponent implements OnInit {
 
   private loginForm: FormGroup;
+  public submit = false;
 
   constructor(
     private builder: FormBuilder,
@@ -19,8 +20,9 @@ export class LoginComponent implements OnInit {
   ) {
 
     this.loginForm = this.builder.group({
-      email: [null],
-      password: [null]
+      // tslint:disable-next-line: max-line-length
+      email: [null, [Validators.required, Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)]],
+      password: [null, [Validators.required, Validators.minLength(6)]]
     });
 
   }
@@ -29,18 +31,26 @@ export class LoginComponent implements OnInit {
   }
 
   public login() {
-    this.authService.loginUser(this.loginForm.value)
-      .subscribe((res: any) => {
-        this.authService.setUser(this.authService.getDecodedAccessToken(res.token), res.token);
-        this.share.shareData.next(true);
-      });
+    this.submit = true;
+    if (this.loginForm.valid) {
+      this.authService.loginUser(this.loginForm.value)
+        .subscribe((res: any) => {
+          this.authService.setUser(this.authService.getDecodedAccessToken(res.token), res.token);
+          this.share.shareData.next(true);
+        }, err => {
+          console.log(err);
+        });
+    }
   }
 
-  retrieveMyData() {
+  private retrieveMyData() {
     this.authService.me()
       .subscribe(res => {
         console.log(res);
       });
   }
 
+  get validate() {
+    return this.loginForm.controls;
+  }
 }
