@@ -31,11 +31,11 @@
                         </thead>
                         <tbody>
                             <tr  *ngFor="let horarios of programacao.horarios">
-                                <th class="text-nowrap" scope="row">{{horarios[0]}}</th>
-                                <td>{{horarios[1]}}</td>
-                                <td>{{horarios[2]}}</td>
-                                <td>{{horarios[3]}}</td>
-                                <td>{{horarios[4]}}</td>
+                                <th class="text-nowrap" scope="row" [innerHTML]="horarios[0]"></th>
+                                <td [innerHTML]="horarios[1]"></td>
+                                <td [innerHTML]="horarios[2]"></td>
+                                <td [innerHTML]="horarios[3]"></td>
+                                <td [innerHTML]="horarios[4]"></td>
                             </tr>
                         </tbody>
                     </table>

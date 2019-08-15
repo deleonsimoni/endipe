@@ -20,17 +20,17 @@ export class HomeComponent implements OnInit {
   subscriptionValue: number;
 
   instituicoes = [
-    'Universidade Federal do Rio de Janeiro - UFRJ',
-    'Universidade Federal do Estado do Rio de Janeiro - UNIRIO',
-    'Universidade Federal Fluminense - UFF',
-    'Universidade Federal Rural do Rio de Janeiro - UFRRJ',
-    'Universidade Estadual do Rio de Janeiro - UERJ',
+    'Universidade Federal do Rio de Janeiro – UFRJ',
+    'Universidade Federal do Estado do Rio de Janeiro – UNIRIO',
+    'Universidade Federal Fluminense – UFF',
+    'Universidade Federal Rural do Rio de Janeiro – UFRRJ',
+    'Universidade Estadual do Rio de Janeiro – UERJ',
     'Universidade Estácio de Sá – UNESA',
-    'Universidade Católica de Petrópolis - UCP',
-    'Pontifícia Universidade Católica do Rio de Janeiro - PUC - Rio',
-    'Instituto Benjamim Constant - IBC',
+    'Universidade Católica de Petrópolis – UCP',
+    'Pontifícia Universidade Católica do Rio de Janeiro – PUC-Rio',
+    'Instituto Benjamim Constant – IBC',
     'Instituto Nacional de Educação de Surdos – INES',
-    'Instituto Superior de Educação do Rio de Janeiro - ISERJ'
+    'Instituto Superior de Educação do Rio de Janeiro – ISERJ'
   ];
 
   comites = [
@@ -336,16 +336,16 @@ export class HomeComponent implements OnInit {
           '12:30 - 13:30', '', 'Intervalo', 'Intervalo', 'Intervalo'
           ],
           [
-          '13:30 - 15:30', 'Credenciamento Apresentações culturais', 'Painéis & Pôsteres', 'Painéis & Pôsteres', 'Painéis & Pôsteres'
+          '13:30 - 15:30', 'Credenciamento <br/> Apresentações culturais', 'Painéis & Pôsteres', 'Painéis & Pôsteres', 'Painéis & Pôsteres'
           ],
           [
-          '16:00 - 18:00', 'Credenciamento Apresentações culturais Sessão Solene de Abertura', 'Painéis & Pôsteres', 'Painéis & Pôsteres / Reuniões de Entidades e de Redes', 'Painéis & Pôsteres / Reuniões de Entidades e de Redes'
+          '16:00 - 18:00', 'Credenciamento <br/> Apresentações Culturais <br/> Sessão Solene de Abertura', 'Painéis & Pôsteres', 'Painéis & Pôsteres / Reuniões de Entidades e de Redes', 'Painéis & Pôsteres / Reuniões de Entidades e de Redes'
           ],
           [
           '18:00 - 20:00', 'Mesa de Abertura', 'Sessões Especiais', 'Sessões Especiais', 'Sessão de Encerramento Assembleia ENDIPE'
           ],
           [
-          '20:00 - 22:00', 'Apresentação cultural', 'Lançamento de livros e de Redes Apresentações culturais', 'Lançamento de livros e de Redes Apresentações culturais', ''
+          '20:00 - 22:00', 'Apresentação cultural', 'Lançamento de livros e de Redes', 'Lançamento de livros e de Redes', ''
           ],
       ]
     },
