@@ -24,6 +24,7 @@ import { SubmissaoComponent } from './submissao/submissao.component';
 import { CertificadoComponent } from './certificado/certificado.component';
 import { ModalCadastroSucessoComponent } from './modal-cadastro-sucesso/modal-cadastro-sucesso.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { NgxMaskModule } from 'ngx-mask';
 import { InterceptorService } from './services/interceptor.service';
 
@@ -60,6 +61,7 @@ import { ListarTrabalhosComponent } from './listar-trabalhos/listar-trabalhos.co
     UtilNgxMaterialModule,
     HttpClientModule,
     BsDatepickerModule.forRoot(),
+    BsDropdownModule.forRoot(),
     NgxMaskModule.forRoot(),
     ToastrModule.forRoot()
   ],

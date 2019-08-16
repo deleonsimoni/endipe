@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import * as jwt_decode from "jwt-decode";
 import { ShareDataService } from '../services/share-data.service';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -16,7 +18,9 @@ export class LoginComponent implements OnInit {
   constructor(
     private builder: FormBuilder,
     private authService: AuthService,
-    private share: ShareDataService
+    private share: ShareDataService,
+    private toastr: ToastrService,
+    private router: Router
   ) {
 
     this.loginForm = this.builder.group({
@@ -37,8 +41,11 @@ export class LoginComponent implements OnInit {
         .subscribe((res: any) => {
           this.authService.setUser(this.authService.getDecodedAccessToken(res.token), res.token);
           this.share.shareData.next(true);
+          this.router.navigate(['home']);
         }, err => {
-          console.log(err);
+          if (err.status === 401) {
+            this.toastr.error('Email ou senha inválida', 'Erro: ');
+          }
         });
     }
   }

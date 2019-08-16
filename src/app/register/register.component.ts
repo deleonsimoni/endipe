@@ -6,6 +6,7 @@ import { ModalNormasComponent } from '../modal-normas/modal-normas.component';
 import { ModalCadastroSucessoComponent } from '../modal-cadastro-sucesso/modal-cadastro-sucesso.component';
 import { Router } from '@angular/router';
 import { ShareDataService } from '../services/share-data.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -23,7 +24,8 @@ export class RegisterComponent implements OnInit {
     private authService: AuthService,
     private dialog: MatDialog,
     private rota: Router,
-    private share: ShareDataService
+    private share: ShareDataService,
+    private toastr: ToastrService
   ) {
 
     this.createForm();
@@ -89,6 +91,8 @@ export class RegisterComponent implements OnInit {
           this.share.shareData.next(true);
           this.exibirModalSucesso();
         }, err => console.log(err));
+    } else {
+      this.toastr.error('Preencha os campos do formulário corretamente.', 'Erro: ');
     }
     // this.exibirModalSucesso();
   }
