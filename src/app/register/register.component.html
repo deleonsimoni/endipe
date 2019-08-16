@@ -107,8 +107,8 @@
                             </label>
                         </div>
                         <input type="text" class="form-control" name="document" id="document"
-                            placeholder="{{ registerForm.value.icForeign ? 'CPF' : 'Passport' }}"
-                            formControlName="document" [dropSpecialCharacters]="true" mask="000.000.000-00" />
+                            placeholder="{{ registerForm.value.icForeign ? 'Passport' : 'CPF' }}"
+                            formControlName="document"  />
                         <div *ngIf="(validate.document.errors.required && submit) || (validate.document.errors.required && !validate.document.pristine)"
                             class="alert alert-danger">
                             <div [hidden]="!validate.document.errors.required">
