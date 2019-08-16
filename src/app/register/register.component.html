@@ -109,7 +109,7 @@
                         <input type="text" class="form-control" name="document" id="document"
                             placeholder="{{ registerForm.value.icForeign ? 'Passport' : 'CPF' }}"
                             formControlName="document"  />
-                        <div *ngIf="(validate.document.errors.required && submit) || (validate.document.errors.required && !validate.document.pristine)"
+                        <div *ngIf="(validate.document.errors && submit) || (validate.document.errors && !validate.document.pristine)"
                             class="alert alert-danger">
                             <div [hidden]="!validate.document.errors.required">
                                 Preencha o campo {{ registerForm.value.icForeign ? 'CPF' : 'Passport' }}
@@ -146,7 +146,7 @@
                 <div class="form-row" formGroupName="address">
                     <div class="form-group col-md-6">
                         <input type="text" name="zip" class="form-control" id="zip" placeholder="Código postal"
-                            formControlName="zip" [dropSpecialCharacters]="true" mask="00000-000" />
+                            formControlName="zip" [dropSpecialCharacters]="true" mask="00000-000" [validation]="false"/>
                         <div *ngIf="(address.controls.zip.errors && submit) || (address.controls.zip.errors && !address.controls.zip.pristine)"
                             class="alert alert-danger">
                             <div [hidden]="!address.controls.zip.errors.required">
@@ -285,6 +285,12 @@
                         <label class="form-check-label" for="termo">
                             Li e concordo com o <a [routerLink]="" (click)="openRules()">termo de uso</a>
                         </label>
+                        <div *ngIf="(validate.icAcceptTerms.errors && submit)"
+                            class="alert alert-danger">
+                            <div [hidden]="!validate.icAcceptTerms.errors.required">
+                                Aceite as normas para prosseguir
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="text-center pt-5"><button type="submit">Enviar</button></div>

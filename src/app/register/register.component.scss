@@ -10,7 +10,8 @@
       box-shadow: none;
       font-size: 15px;
     }
-    div.form-group div.alert{
+    div.form-group div.alert,
+    div.form-check div.alert{
       margin-bottom: 0rem;
       margin-top: 1px;
       padding: 0.3rem 1.25rem;

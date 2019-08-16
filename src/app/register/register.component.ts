@@ -62,12 +62,14 @@ export class RegisterComponent implements OnInit {
         name: [null, [Validators.required]],
         initials: [null]
       }),
-      modalityId: [null],
+      modalityId: [1],
       roles: this.builder.array([
         this.createGroup()
       ]),
-      icAcceptTerms: [false]
+      icAcceptTerms: [false, [Validators.requiredTrue]]
     });
+
+    this.registerForm.controls.icAcceptTerms.valueChanges.subscribe(res => console.log(res));
   }
 
   private createGroup(): FormGroup {
@@ -90,7 +92,18 @@ export class RegisterComponent implements OnInit {
           this.authService.setUser(this.authService.getDecodedAccessToken(res.token), res.token);
           this.share.shareData.next(true);
           this.exibirModalSucesso();
-        }, err => console.log(err));
+        }, err => {
+          if (err.status === 500) {
+            if (err.error.message.match('email')) {
+              this.toastr.error('Email já registrado.', 'Erro: ');
+            }
+            if (err.error.message.match('document')) {
+              this.toastr.error('CPF ou Passport já cadastrado.', 'Erro: ');
+            }
+          }
+        });
+    } else if (this.registerForm.valid && form == null) {
+      this.toastr.error('Senhas não conferem.', 'Erro: ');
     } else {
       this.toastr.error('Preencha os campos do formulário corretamente.', 'Erro: ');
     }
