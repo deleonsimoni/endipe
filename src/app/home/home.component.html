@@ -75,15 +75,9 @@
                     <div class="row">
                         <div class="agenda-items" style="text-align: left">
                             <ul>
-                                <li><i class="mr-2" style="text-align: left;"></i>O RIO DE JANEIRO ESPERA POR VOCÊ! APROVEITE OS DESCONTOS E FAÇA LOgO A SUA INSCRIÇÃO PARA O MAIOR EVENTO DE EDUCAÇÃO</li>
-                                <li><i class="fa fa-calendar-day mr-2"></i> Início das Inscrições -> 26 de agosto de 2019</li>
-                                <li><i class="fa fa-calendar-day mr-2"></i> Submissão de Trabalhos -> 16 de outubro a 18 de dezembro de 2019 </li>
-                                <li><i class="fa fa-calendar-day mr-2"></i> Avaliação pelo Comitê Cientifico -> Até 13 de abril de 2020</li>
-                                <li><i class="fa fa-calendar-day mr-2"></i> Divulgação dos trabalhos aprovados -> 14-20 de abril de 2020</li>
-                                <li><i class="fa fa-calendar-day mr-2"></i> Recursos -> 20-27 de abril de 2020</li>
-                                <li><i class="fa fa-calendar-day mr-2"></i> Resposta aos recursos -> Até 15 de maio de 2020</li>
-                                <li><i class="fa fa-calendar-day mr-2"></i> Divulgação da programação completa -> Até 30 de maio de 2020</li>
-                                <li><i class="fa fa-calendar-day mr-2"></i> Inscrição nos Minicursos e nas Rodas de Conversa -> 01-20 de junho de 2020</li>
+                                <li><i class="mr-2" style="text-align: left;"></i>O RIO DE JANEIRO ESPERA POR VOCÊ! APROVEITE OS DESCONTOS E FAÇA Logo A SUA INSCRIÇÃO PARA O MAIOR EVENTO DE EDUCAÇÃO</li>
+                                <li><i class="mr-2" style="text-align: left;"></i>Em breve mais notícias</li>
+
                             </ul>
                         </div>
                     </div>
@@ -243,13 +237,44 @@
                             <li >
                                 <div class="row contact-info" style="cursor: pointer;">
                                     <div>
-                                        <div  class="box wow fadeInLeft" (click)="openDialogApoiadores(gruposDeTrabalho)">
+                                        <div  class="box wow fadeInLeft" (click)="openDialogApoiadores(gruposDeTrabalho, imagensApoiadores)">
                                             <h4 class="title" style="color: red"><a>+ GRUPOS DE TRABALHO</a></h4>
                                         </div>
                                     </div>
                                 </div>
                             </li>
 
+                    </ul>
+
+                   
+                </div>
+            </div>
+        </section><!-- #coordenadores -->
+
+        <!--==========================
+      organizacao Section
+    ============================-->
+    <section id="comiteCientifico" class="wow fadeInUp">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Comitê Científico</h2>
+                </div>
+                <div class="row">
+
+                    <ul style="list-style: none;">
+                            <li>
+                                <strong>Coordenação Geral:</strong>
+                            </li>
+                            <li *ngFor="let coordenacao of coordenacoesGerais">
+                                    {{ coordenacao }}
+                            </li>
+                    </ul>
+
+                    <ul  style="list-style: none;" *ngFor="let eixo of eixos">
+                        <strong>{{ eixo.titulo + ' - ' + eixo.tema }}</strong>
+                        <li *ngFor="let coordenador of eixo.coordenacao" >
+                                {{ coordenador }}
+                        </li>
                     </ul>
 
                    
@@ -466,7 +491,7 @@
                                 máximo, três sessões de uma hora e meia cada, para um grupo limitado de participantes, com inscrição
                                 prévia, a ser realizada conforme cronograma do evento. As propostas de Minicursos serão avaliadas e
                                 selecionadas pelo Comitê Científico, conforme as normas definidas para a sua submissão e avaliação.
-                                <br><p (click)="openDialogNormas()" class="pull-right" style="color: #0c2e8a;cursor: pointer;">Normas</p>
+                                <br><p (click)="openDialogMinicurso()" class="pull-right" style="color: #0c2e8a;cursor: pointer;">Normas</p>
                             </p>
                         </div>
                     </div>
@@ -482,7 +507,7 @@
                                     grupo limitado de participantes, com inscrição prévia, a ser realizada conforme cronograma do evento.
                                     As propostas de Rodas de Conversa serão avaliadas e selecionadas pelo Comitê Científico, conforme as
                                     normas definidas para a sua submissão e avaliação.
-                                    <br><p (click)="openDialogNormas()" class="pull-right" style="color: #0c2e8a;cursor: pointer;">Normas</p>
+                                    <br><p (click)="openDialogRoda()" class="pull-right" style="color: #0c2e8a;cursor: pointer;">Normas</p>
                                 </p>
                         </div>
                     </div>
@@ -496,7 +521,7 @@
                                     sendo um, obrigatoriamente, de professor/a da Educação Básica. O Painel deverá ser proposto por um
                                     coordenador e seus trabalhos avaliados conjuntamente, conforme as normas definidas para a sua
                                     submissão e avaliação.
-                                    <br><p (click)="openDialogNormas()" class="pull-right" style="color: #0c2e8a;cursor: pointer;">Normas</p>
+                                    <br><p (click)="openDialogPainel()" class="pull-right" style="color: #0c2e8a;cursor: pointer;">Normas</p>
                                 </p>
                         </div>
                     </div>
@@ -512,7 +537,7 @@
                                     e/ou Professor da Educação Superior. Pretende-se que o Pôster seja debatido em salas de
                                     comunicações com mediações de professores convidados. As propostas de Pôsteres serão avaliadas e
                                     selecionadas pelo Comitê Científico, conforme as normas definidas para a sua submissão e avaliação.
-                                    <br><p (click)="openDialogNormas()" class="pull-right" style="color: #0c2e8a;cursor: pointer;">Normas</p>
+                                    <br><p (click)="openDialogPoster()" class="pull-right" style="color: #0c2e8a;cursor: pointer;">Normas</p>
                                 </p>
                         </div>
                     </div>
@@ -568,7 +593,46 @@
             </div>
         </section>
         <!-- #cronograma -->
-    
+
+             <!--==========================
+      Cronograma Section
+    ============================-->
+    <section id="prazos" class="wow fadeInUp">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Prazos</h2>
+                </div>
+                <div class="col-lg-12 agenda">
+                        <div class="row">
+                            <div class="agenda-items" style="text-align: left">
+                                <ul>
+                                    <li><i class="mr-2"></i> Início das Inscrições -> 26 de agosto de 2019</li>
+                                    <li><i class="mr-2"></i> Submissão de Trabalhos -> 16 de outubro a 18 de dezembro de 2019 </li>
+                                    <li><i class="mr-2"></i> Avaliação pelo Comitê Cientifico -> Até 13 de abril de 2020</li>
+                                    <li><i class="mr-2"></i> Divulgação dos trabalhos aprovados -> 14-20 de abril de 2020</li>
+                                    <li><i class="mr-2"></i> Recursos -> 20-27 de abril de 2020</li>
+                                    <li><i class="mr-2"></i> Resposta aos recursos -> Até 15 de maio de 2020</li>
+                                    <li><i class="mr-2"></i> Divulgação da programação completa -> Até 30 de maio de 2020</li>
+                                    <li><i class="mr-2"></i> Inscrição nos Minicursos e nas Rodas de Conversa -> 01-20 de junho de 2020</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </section>
+        <!-- #cronograma -->
+
+                  <!--==========================
+      Cronograma Section
+    ============================-->
+    <section id="anais" class="wow fadeInUp">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Anais</h2>
+                </div>
+            </div>
+        </section>
+        <!-- #cronograma -->
 
         <!--==========================
       hospedagem Section
@@ -601,6 +665,24 @@
         </div>
     </section> 
     <!-- #testimonials -->
+
+       <!--==========================
+      parcerias Section
+    ============================-->
+    <section id="parcerias" class="wow fadeInUp">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Parcerias</h2>
+                </div>
+
+                <img style="padding: 1px" src="./assets/img/parceiros/assb.png" alt="parceiros">
+                <img style="padding: 1px" src="./assets/img/parceiros/assb.png" alt="parceiros">
+                <img style="padding: 1px" src="./assets/img/parceiros/assb.png" alt="parceiros">
+                <img style="padding: 1px" src="./assets/img/parceiros/assb.png" alt="parceiros">
+
+            </div>
+        </section>
+        <!-- #cronograma -->
 
 
 

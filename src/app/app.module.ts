@@ -13,6 +13,11 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ModalEixoComponent } from './modal-eixo/modal-eixo.component';
 import { ModalProgramacaoComponent } from './modal-programacao/modal-programacao.component';
 import { ModalNormasComponent } from './modal-normas/modal-normas.component';
+import { ModalNormasMinicursoComponent } from './modal-normas/modal-mediador-minu-curso.component';
+import { ModalNormasRodaConversaComponent } from './modal-normas/modal-mediador-conversa.component';
+import { ModalNormasPainelComponent } from './modal-normas/modal-expositor-painel.component';
+import { ModalNormasPosterComponent } from './modal-normas/modal-expositor-poster.component';
+
 import { ModalApoiadoresComponent } from './modal-apoiadores/modal-apoiadores.component';
 import { RegisterComponent } from './register/register.component';
 import { environment } from '../environments/environment';
@@ -26,7 +31,7 @@ import { ModalCadastroSucessoComponent } from './modal-cadastro-sucesso/modal-ca
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { NgxMaskModule } from 'ngx-mask';
 import { InterceptorService } from './services/interceptor.service';
-
+import { OwlModule } from 'ngx-owl-carousel';
 import { ToastrModule } from 'ngx-toastr';
 import { TrabalhosComponent } from './trabalhos/trabalhos.component';
 import { ListarTrabalhosComponent } from './listar-trabalhos/listar-trabalhos.component';
@@ -39,6 +44,10 @@ import { ListarTrabalhosComponent } from './listar-trabalhos/listar-trabalhos.co
     ModalEixoComponent,
     ModalProgramacaoComponent,
     ModalNormasComponent,
+    ModalNormasMinicursoComponent,
+    ModalNormasRodaConversaComponent,
+    ModalNormasPainelComponent,
+    ModalNormasPosterComponent,
     ModalApoiadoresComponent,
     RegisterComponent,
     LoginComponent,
@@ -52,6 +61,8 @@ import { ListarTrabalhosComponent } from './listar-trabalhos/listar-trabalhos.co
     ListarTrabalhosComponent
   ],
   imports: [
+    BrowserModule,
+    OwlModule,
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
@@ -68,6 +79,10 @@ import { ListarTrabalhosComponent } from './listar-trabalhos/listar-trabalhos.co
     ModalEixoComponent,
     ModalProgramacaoComponent,
     ModalNormasComponent,
+    ModalNormasMinicursoComponent,
+    ModalNormasRodaConversaComponent,
+    ModalNormasPainelComponent,
+    ModalNormasPosterComponent,
     ModalApoiadoresComponent,
     ModalCadastroSucessoComponent,
     RegisterComponent

@@ -6,6 +6,10 @@ import { ModalEixoComponent } from '../modal-eixo/modal-eixo.component';
 import { ModalProgramacaoComponent } from '../modal-programacao/modal-programacao.component';
 import { ModalNormasComponent } from '../modal-normas/modal-normas.component';
 import { ModalApoiadoresComponent } from '../modal-apoiadores/modal-apoiadores.component';
+import { ModalNormasRodaConversaComponent } from '../modal-normas/modal-mediador-conversa.component';
+import { ModalNormasPainelComponent } from '../modal-normas/modal-expositor-painel.component';
+import { ModalNormasMinicursoComponent } from '../modal-normas/modal-mediador-minu-curso.component';
+import { ModalNormasPosterComponent } from '../modal-normas/modal-expositor-poster.component';
 
 
 @Component({
@@ -31,6 +35,36 @@ export class HomeComponent implements OnInit {
     'Instituto Benjamim Constant – IBC',
     'Instituto Nacional de Educação de Surdos – INES',
     'Instituto Superior de Educação do Rio de Janeiro – ISERJ'
+  ];
+
+  coordenacoesGerais = [
+    'Andrea Fetzner – UNIRIO',
+    'Antonio Flavio Barbosa Moreira – UCP',
+    'Carmen Teresa Gabriel – UFRJ',
+    'Claudia de Oliveira Fernandes – UNIRIO',
+    'Giseli Barreto da Cruz – UFRJ',
+    'Graça Regina Reis – EB/Cap-UFRJ',
+    'Inês Barbosa de Oliveira – UNESA',
+    'Maria Inês Marcondes – PUC-Rio',
+    'Naiara Miranda Rust – IBC',
+    'Rosanne Dias Evangelista – UERJ',
+    'Vera Maria Ferrão Candau – PUC-Rio',
+    'Yrlla Ribeiro de Oliveira Carneiro da Silva – INES'
+  ];
+
+  imagensApoiadores = [
+    './assets/img/parceiros/unirio.png',
+    './assets/img/parceiros/ufrrj.png',
+    './assets/img/parceiros/ufrj2.png',
+    './assets/img/parceiros/uff.png',
+    './assets/img/parceiros/uerj.png',
+    './assets/img/parceiros/ucp.png',
+    './assets/img/parceiros/puc.png',
+    './assets/img/parceiros/iserj.png',
+    './assets/img/parceiros/ines.png',
+    './assets/img/parceiros/febf.png',
+    './assets/img/parceiros/estacio.png',
+    './assets/img/parceiros/assb.png',
   ];
 
   comites = [
@@ -219,7 +253,7 @@ export class HomeComponent implements OnInit {
         'Rosalva Drummond – EB/CAp-ISERJ'
       ]
     }
-  ]
+  ];
 
   eixos = [
     {
@@ -231,12 +265,13 @@ export class HomeComponent implements OnInit {
       estratégias formativas e mediações didáticas; formação presencial, semipresencial e a distância; narrativas:
       investigação e formação de professores;
       metodologias e práticas curriculares de formação docente.`,
-      /*coordenacao: [
+      coordenacao: [
         'Alexandra Garcia Ferreira Lima – UERJ FFP',
         'Graça Regina Reis – CAp UFRJ',
         'Monica Vasconcellos – UFF',
+        'Naiara Miranda Rust – IBC',
         'Victor Giraldo – UFRJ'
-      ],*/
+      ],
       pareceristas: [ ]
     },
     {
@@ -246,11 +281,11 @@ export class HomeComponent implements OnInit {
       políticas curriculares, as escolas e as salas de aula; culturas, conhecimentos e currículos; aprendizagens, currículos e avaliações;
       políticas de avaliação, as escolas e as salas de aula; culturas, conhecimentos e as diferentes dimensões da avaliação:
       políticas, sociais, pedagógicas e curriculares; metodologias e práticas curriculares e avaliativas.`,
-      /*coordenacao: [
+      coordenacao: [
         'Maria Inês Marcondes – PUC-Rio',
         'Rosanne Evangelista Dias – UERJ',
         'Vania Finholdt Angelo Leite – FFP/UERJ'
-      ],*/
+      ],
       pareceristas: [ ]
     },
     {
@@ -262,11 +297,11 @@ export class HomeComponent implements OnInit {
       interculturalidade e didática; articulação entre igualdade e diferença nas práticas pedagógicas,
       construindo processos educativos que questionam as lógicas dominantes e empoderem sujeitos subalternizados,
       seus saberes e práticas; metodologias e práticas curriculares em Direitos Humanos, Interculturalidade e Religiões.`,
-      /*coordenacao: [
+      coordenacao: [
         'Ana Ivenicki – UFRJ',
         'Andrea Rosana Fetzener – UNIRIO',
         'Vera Maria Ferrão Candau – PUC-Rio'
-      ],*/
+      ],
       pareceristas: [ ]
     },
     {
@@ -278,11 +313,12 @@ export class HomeComponent implements OnInit {
       reflexões e pesquisas que apostam na potência de projetos e práticas cotidianas que assumem a tessitura da escola democrática
       como devir e como possibilidade; processo que só pode se viabilizar com e na diferença, no respeito mútuo, no cuidado de
       todas as formas de vida, não apenas a humana, e na valorização da alteridade, numa perspectiva inclusiva.`,
-      /*coordenacao: [
+      coordenacao: [
         'Inês Barbosa de Oliveira – ESTÁCIO',
         'Marcia Pletsch – UFRRJ',
-        'Talita Vidal Pereira – FEBEF/UERJ'
-      ],*/
+        'Talita Vidal Pereira – FEBEF/UERJ',
+        'Yrlla Ribeiro de Oliveira Carneiro da Silva – INES'
+      ],
       pareceristas: [ ]
     },
     {
@@ -296,11 +332,11 @@ export class HomeComponent implements OnInit {
       educativas nas múltiplas redes educativas; educação online: dos ambientes virtuais de aprendizagens às
       práticas de app-learning; educar em tempos de fake news, fazeressaberes didáticos; educação e Cibercultura;
       políticas de formação na interface Educação e Comunicação.`,
-      /*coordenacao: [
+      coordenacao: [
         'Adriana Hoffman – UNIRIO',
         'Edméa Oliveira dos Santos – UFRRJ',
         'Walcea Barreto Alves – UFF'
-      ],*/
+      ],
       pareceristas: [ ]
     },
     {
@@ -313,11 +349,11 @@ export class HomeComponent implements OnInit {
       estudantes imigrantes e filhos de mulheres e adolescentes privadas de liberdade; insurgências nas práticas pedagógicas cotidianas;
       metodologias e práticas de ensino com crianças, jovens, adultos e idosos; conflitos nas relações intergeracionais;
       programas de governo, movimentos sociais e a sociedade civil nas ações educativas.`,
-      /*coordenacao: [
+      coordenacao: [
         'Anelise Nascimento – UFRRJ',
         'Patricia Baroni – UFRJ',
         'Wânia Gonzalez – UNESA'
-      ],*/
+      ],
       pareceristas: [ ]
     }
   ];
@@ -435,16 +471,45 @@ export class HomeComponent implements OnInit {
       data: { item: programacao }
     });
   }
-  
+
   public openDialogNormas() {
     const dialogRef = this.dialog.open(ModalNormasComponent, {
       data: {  },
       height: '550vh'
     });
   }
-  public openDialogApoiadores(apoiadores) {
+
+  public openDialogMinicurso() {
+    const dialogRef = this.dialog.open(ModalNormasMinicursoComponent, {
+      data: {  },
+      height: '550vh'
+    });
+  }
+
+  public openDialogPainel() {
+    const dialogRef = this.dialog.open(ModalNormasPainelComponent, {
+      data: {  },
+      height: '550vh'
+    });
+  }
+
+  public openDialogRoda() {
+    const dialogRef = this.dialog.open(ModalNormasRodaConversaComponent, {
+      data: {  },
+      height: '550vh'
+    });
+  }
+
+  public openDialogPoster() {
+    const dialogRef = this.dialog.open(ModalNormasPosterComponent, {
+      data: {  },
+      height: '550vh'
+    });
+  }
+
+  public openDialogApoiadores(apoiadores, imagens) {
     const dialogRef = this.dialog.open(ModalApoiadoresComponent, {
-      data: { item: apoiadores },
+      data: { item: apoiadores, imagensApoiadores: imagens },
       height: '550vh'
     });
   }
