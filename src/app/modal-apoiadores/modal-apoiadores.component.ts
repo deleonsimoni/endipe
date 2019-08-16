@@ -9,7 +9,9 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 export class ModalApoiadoresComponent implements OnInit {
 
   public apoiadores: any;
+  public imagensApoiadores: any;
 
+  
   constructor(
     public dialogRef: MatDialogRef<ModalApoiadoresComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -17,6 +19,8 @@ export class ModalApoiadoresComponent implements OnInit {
 
   ngOnInit() {
     this.apoiadores = this.data.item;
+    this.imagensApoiadores = this.data.imagensApoiadores;
+
   }
 
   public close() {
