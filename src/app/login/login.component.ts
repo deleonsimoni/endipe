@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['home']);
         }, err => {
           if (err.status === 401) {
-            this.toastr.error('Email ou senha inválida', 'Erro: ');
+            this.toastr.error('Email ou senha inválidos', 'Erro: ');
           }
         });
     }

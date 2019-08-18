@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  host: 'http://localhost:4040/api'
+  host: 'http://xxendiperio2020.com.br:8080/api'
 };
 
 /*
