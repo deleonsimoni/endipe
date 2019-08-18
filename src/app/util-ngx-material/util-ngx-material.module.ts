@@ -7,6 +7,10 @@ import {
   MatButtonModule,
   MatInputModule,
   MatStepperModule,
+  MatSidenavModule,
+  MatIconModule,
+  MatToolbarModule,
+  MatListModule
 } from '@angular/material';
 
 @NgModule({
@@ -16,7 +20,11 @@ import {
     MatFormFieldModule,
     MatButtonModule,
     MatInputModule,
-    MatStepperModule
+    MatStepperModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatToolbarModule,
+    MatListModule
   ]
 })
 export class UtilNgxMaterialModule { }

@@ -1,3 +1,21 @@
 <app-header></app-header>
+<!-- <mat-sidenav-container class="example-container" (backdropClick)="close('backdrop')">
+    <mat-sidenav #drawer  disableClose
+        [ngClass]="{hidden: !(isHandset$ | async)}"
+        [mode]="(isHandset$ | async) ? 'over' : 'side'"
+        [opened]="!(isHandset$ | async)"
+    >
+        <p><button mat-button (click)="close('toggle button')">Toggle</button></p>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <p><button mat-button (click)="sidenav.open()">Open</button></p>
+        <p>Closed due to: {{reason}}</p>
+    </mat-sidenav-content>
+</mat-sidenav-container> -->
+
+<!-- <div *ngIf="!shouldRun">Please open on Stackblitz to see result</div> -->
+
+
 <router-outlet></router-outlet>
 <app-footer></app-footer>

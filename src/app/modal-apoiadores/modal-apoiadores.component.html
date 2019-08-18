@@ -1,20 +1,30 @@
 <div class="row">
-        <ul style="list-style: none;">
-    
-            <li *ngFor="let grupos of apoiadores">
-                <strong>{{grupos.nome}}</strong><br/>
-                <ul style="list-style: none;">
-                    <li *ngFor="let pessoas of grupos.equipe">
-                            {{pessoas}}
-                    </li>
-                </ul>
-            </li>
-        </ul>
+    <div class="col-md-4" *ngFor="let grupos of apoiadores">
+        <h4><strong>{{grupos.nome}}</strong></h4>
+        <!-- <ul style="list-style: none;">
+        <li *ngFor="let pessoas of grupos.equipe">
+            {{pessoas}}
+        </li>
+    </ul> -->
+        <p *ngFor="let pessoas of grupos.equipe">{{ pessoas }}</p>
     </div>
+    <!-- <ul style="list-style: none;">
+
+        <li *ngFor="let grupos of apoiadores">
+            <strong>{{grupos.nome}}</strong><br />
+            <ul style="list-style: none;">
+                <li *ngFor="let pessoas of grupos.equipe">
+                    {{pessoas}}
+                </li>
+            </ul>
+        </li>
+    </ul> -->
+</div>
 
 <div class="row">
-    <div *ngFor="let imagem of imagensApoiadores">
-    <img width="{{imagem.includes('ufrj2') ? 200 : 140}}" height="120" style="padding: 4px" src="{{imagem}}" alt="{{imagem}}">
+    <div class="col-md-2 img-parceiros" *ngFor="let imagem of imagensApoiadores">
+        <img src="{{ imagem }}" alt="{{ imagem }}">
+    </div>
 </div>
 
 <!--

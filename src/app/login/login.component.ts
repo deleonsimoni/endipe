@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
-import * as jwt_decode from "jwt-decode";
+import * as jwt_decode from 'jwt-decode';
 import { ShareDataService } from '../services/share-data.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
