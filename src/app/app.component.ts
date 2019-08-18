@@ -39,9 +39,10 @@ export class AppComponent implements OnInit{
       'id': ''
     });
 
+    /*
     const body = document.querySelector('#body');
     body.append('<button type="button" id="mobile-nav-toggle"><i class="fa fa-bars"></i></button>');
-    body.append('<div id="mobile-body-overly"></div>');
+    body.append('<div id="mobile-body-overly"></div>');*/
 
     $('body').append($mobile_nav);
     $('body').prepend('<button type="button" id="mobile-nav-toggle"><i class="fa fa-bars"></i></button>');

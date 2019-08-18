@@ -27,7 +27,7 @@
                                             accept="application/pdf, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document"
                                             data-max-size="2048"
                                             id="customPreReadFile"
-                                            (change)="setFileName($event.target.files, fileInput)" #fileInput />
+                                            (change)="setFileName($event.target.files)" #fileInput />
                                         <label class="custom-file-label" for="customPreReadFile">{{getFileName()}}</label>
                                     </div>
                                 </div>
