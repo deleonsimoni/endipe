@@ -1,14 +1,17 @@
-<div class="row">
-    <div class="col-md-4" *ngFor="let grupos of apoiadores">
-        <h4><strong>{{grupos.nome}}</strong></h4>
-        <!-- <ul style="list-style: none;">
+<i class="fa fa-times pointer" (click)="close()"></i> 
+<div class="container">
+    <div class="scroll">
+        <div class="row">
+            <div class="col-md-6" *ngFor="let grupos of apoiadores; let i = index">
+                <h4 [ngClass]="{'mt-4': i > 1}"><strong>{{ grupos.nome }}</strong></h4>
+                <!-- <ul style="list-style: none;">
         <li *ngFor="let pessoas of grupos.equipe">
             {{pessoas}}
         </li>
     </ul> -->
-        <p *ngFor="let pessoas of grupos.equipe">{{ pessoas }}</p>
-    </div>
-    <!-- <ul style="list-style: none;">
+                <p *ngFor="let pessoas of grupos.equipe">{{ pessoas }}</p>
+            </div>
+            <!-- <ul style="list-style: none;">
 
         <li *ngFor="let grupos of apoiadores">
             <strong>{{grupos.nome}}</strong><br />
@@ -19,19 +22,49 @@
             </ul>
         </li>
     </ul> -->
-</div>
+        </div>
 
-<div class="row">
-    <div class="col-md-2 img-parceiros" *ngFor="let imagem of imagensApoiadores">
-        <img src="{{ imagem }}" alt="{{ imagem }}">
+        <div class="mt-4">
+            <div class="row align-items-center">
+                <div class="col-md-2 text-center">
+                    <img src="../../assets/img/parceiros/ufrj2.png" alt="imagem parceiros">
+                </div>
+                <div class="col-md-2 text-center">
+                    <img src="../../assets/img/parceiros/estacio.png" alt="imagem parceiros">
+                </div>
+                <div class="col-md-2 text-center">
+                    <img src="../../assets/img/parceiros/febf.png" alt="imagem parceiros">
+                </div>
+                <div class="col-md-2 text-center">
+                    <img src="../../assets/img/parceiros/ucp.png" alt="imagem parceiros">
+                </div>
+                <div class="col-md-2 text-center">
+                    <img src="../../assets/img/parceiros/uerj.png" alt="imagem parceiros">
+                </div>
+                <div class="col-md-2 text-center">
+                    <img src="../../assets/img/parceiros/iserj.png" alt="imagem parceiros">
+                </div>
+            </div>
+            <div class="row mt-4 align-items-center">
+                <div class="col-md-2 text-center">
+                    <img src="../../assets/img/parceiros/ines.png" alt="imagem parceiros">
+                </div>
+                <div class="col-md-2 text-center">
+                    <img src="../../assets/img/parceiros/puc.png" alt="imagem parceiros">
+                </div>
+                <div class="col-md-2 text-center">
+                    <img src="../../assets/img/parceiros/uff.png" alt="imagem parceiros">
+                </div>
+                <div class="col-md-2 text-center">
+                    <img src="../../assets/img/parceiros/assb.png" alt="imagem parceiros">
+                </div>
+                <div class="col-md-2 text-center">
+                    <img src="../../assets/img/parceiros/ufrrj.png" alt="imagem parceiros">
+                </div>
+                <div class="col-md-2 text-center">
+                    <img src="../../assets/img/parceiros/unirio.png" alt="imagem parceiros">
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-
-<!--
-<div  class="row" style="margin-bottom: 30px;">
-    <strong class="col-lg-12" style="padding: 0">{{grupos.nome}}</strong>
-    <hr/>
-    <div *ngFor="let pessoas of grupos.equipe" class="col-lg-3" style="padding: 4px; text-align: left">
-           
-    </div>
-</div>-->

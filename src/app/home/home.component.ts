@@ -47,7 +47,7 @@ export class HomeComponent implements OnInit {
     'Inês Barbosa de Oliveira – UNESA',
     'Maria Inês Marcondes – PUC-Rio',
     'Naiara Miranda Rust – IBC',
-    'Rosanne Dias Evangelista – UERJ',
+    'Rosana Evangelista Dias – UERJ',
     'Vera Maria Ferrão Candau – PUC-Rio',
     'Yrlla Ribeiro de Oliveira Carneiro da Silva – INES'
   ];
@@ -65,6 +65,14 @@ export class HomeComponent implements OnInit {
     './assets/img/parceiros/febf.png',
     './assets/img/parceiros/estacio.png',
     './assets/img/parceiros/assb.png',
+  ];
+
+  imagensParcerias = [
+    './assets/img/parcerias/capes.jpg',
+    './assets/img/parcerias/cnpq.png',
+    './assets/img/parcerias/faperj.png',
+    './assets/img/parcerias/fe.png',
+    './assets/img/parcerias/joseBonifacio.png'
   ];
 
   comites = [
@@ -96,7 +104,6 @@ export class HomeComponent implements OnInit {
   ];
 
   gruposDeTrabalho = [
-    
     {
       nome: 'Apoio aos preletores',
       equipe: [
@@ -120,7 +127,7 @@ export class HomeComponent implements OnInit {
       ]
     },
     {
-      nome: "Atividades culturais",
+      nome: 'Atividades culturais',
       equipe: [
         'Sandra Maciel – UFF (coord.)',
         'Adrianne Ogeda – UNIRIO',
@@ -131,7 +138,7 @@ export class HomeComponent implements OnInit {
         'Lea Tiriba – UNIRIO',
         'Lucia Cavalieri – UFF',
         'Monique Andries Nogueira – UFRJ',
-        'Siomara Vieira Moreira Borba – UERJ',
+        'Silvia Soter – UFRJ',
         'Tatiana Bezerra Fagundes – EB/SME-Rio e FME-Niterói',
         'Wilson Cardoso Júnior – UFRJ'
       ]
@@ -259,6 +266,7 @@ export class HomeComponent implements OnInit {
     {
       titulo: 'Eixo 1',
       tema: 'Didáticas entre diálogos, insurgências e políticas: tensões e perspectivas na relação com Formação docente',
+      temaCurto: 'com Formação docente',
       descricao: `Esse eixo temático prioriza as políticas de formação docente e os desafios de sua implementação,
       permanência e consolidação; concepções de formação de professores; formação centrada na escola e espaços colaborativos de formação;
       formação inicial e continuada; estágios curriculares e parcerias com as escolas; didáticas nos cursos de formação de professores;
@@ -277,6 +285,7 @@ export class HomeComponent implements OnInit {
     {
       titulo: 'Eixo 2',
       tema: 'Didáticas entre diálogos, insurgências e políticas: tensões e perspectivas na relação com Currículo e Avaliação',
+      temaCurto: 'com Currículo e Avaliação',
       descricao: `Esse eixo temático prioriza os currículos e as avaliações nos contextos históricos e contemporâneos;
       políticas curriculares, as escolas e as salas de aula; culturas, conhecimentos e currículos; aprendizagens, currículos e avaliações;
       políticas de avaliação, as escolas e as salas de aula; culturas, conhecimentos e as diferentes dimensões da avaliação:
@@ -292,6 +301,7 @@ export class HomeComponent implements OnInit {
       titulo: 'Eixo 3',
       tema: `Didáticas entre diálogos, insurgências e políticas: tensões e perspectivas na relação em Direitos Humanos,
        Interculturalidade e Religiões`,
+      temaCurto: `em Direitos Humanos, Interculturalidade e Religiões`,
       descricao: `Esse eixo temático prioriza as diferenças culturais que desafiam o cotidiano escolar;
       relações entre diferenças, direitos humanos e processos de ensino-aprendizagem; questões religiosas,
       interculturalidade e didática; articulação entre igualdade e diferença nas práticas pedagógicas,
@@ -308,6 +318,7 @@ export class HomeComponent implements OnInit {
       titulo: 'Eixo 4',
       tema: `Didáticas entre diálogos, insurgências e políticas: tensões e perspectivas na relação entre Novas epistemologias,
        Diferença, Biodiversidade, Democracia e Inclusão`,
+      temaCurto: `entre Novas epistemologias, Diferença, Biodiversidade, Democracia e Inclusão`,
       descricao: `Esse eixo temático prioriza produções que, de uma perspectiva insurgente,
       lançam mão de novas epistemologias para pensar as tensões e desafios educacionais no contexto atual;
       reflexões e pesquisas que apostam na potência de projetos e práticas cotidianas que assumem a tessitura da escola democrática
@@ -325,6 +336,7 @@ export class HomeComponent implements OnInit {
       titulo: 'Eixo 5',
       tema: `Didáticas entre diálogos, insurgências e políticas: tensões e perspectivas na relação entre Educação,
        Comunicação e Tecnologia`,
+      temaCurto: `entre Educação, Comunicação e Tecnologia`,
       descricao: `Esse eixo temático prioriza o debate sobre educar com as mídias, para as mídias e pelas mídias;
       imagens, literacias e linguagens multimodais nas práticas pedagógicas e na formação de professores;
       cinema e educação; a informática na educação: a didática e o pensamento computacional na escola básica
@@ -343,6 +355,7 @@ export class HomeComponent implements OnInit {
       titulo: 'Eixo 6',
       tema: `Didáticas entre diálogos, insurgências e políticas: tensões e perspectivas na relação entre Infâncias,
       Juventudes e Vida Adulta`,
+      temaCurto: `entre Infâncias, Juventudes e Vida Adulta`,
       descricao: `Esse eixo temático prioriza as abordagens teóricas, metodológicas e epistemológicas sobre infâncias,
       juventudes e vida adulta e sua relação com a educação; políticas públicas de educação para bebês, crianças, jovens,
       adultos e idosos; perspectivas de futuro, garantia de direitos e vulnerabilidade das infâncias e juventudes pobres no Brasil;
@@ -447,6 +460,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    
   }
 
   openDialog(): void {

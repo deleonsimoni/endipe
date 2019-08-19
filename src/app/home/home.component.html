@@ -25,7 +25,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 content">
-                    <h2>Tema</h2>
+                    <h2>TEMA</h2>
                     <h2 class="child"><strong style="color:red">FAZERES-SABERES PEDAGÓGICOS: diálogos, insurgências e políticas</strong></h2>
                     
                     <!-- <h3>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim
@@ -73,12 +73,10 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="agenda-items" style="text-align: left">
-                            <ul>
-                                <li><i class="mr-2" style="text-align: left;"></i>O RIO DE JANEIRO ESPERA POR VOCÊ! APROVEITE OS DESCONTOS E FAÇA Logo A SUA INSCRIÇÃO PARA O MAIOR EVENTO DE EDUCAÇÃO</li>
-                                <li><i class="mr-2" style="text-align: left;"></i>Em breve mais notícias</li>
-
-                            </ul>
+                        <div class="agenda-items">
+                                O RIO DE JANEIRO ESPERA POR VOCÊ!<br/>
+                                Aproveite os descontos e faça logo a sua inscrição para o maior evento da área de Educação<br/><br/>
+                                Em breve mais notícias
                         </div>
                     </div>
                 </div>
@@ -135,7 +133,6 @@
                     <br/>
                     
                     <i class="pull-right">
-                    Rio de Janeiro, 27 de março de 2019.
                     Comitê Organizador 
                     </i>
                 
@@ -186,17 +183,17 @@
 
                 <ul style="list-style: none;">
                     <li>
-                        <strong>GiSELI BARRETO DA CRUZ – UFRJ</strong>
+                        <strong>Giseli Barreto da Cruz – UFRJ</strong>
                     </li>
                     <li>
-                        <strong>CLAUDIA DE OLIVEIRA FERNANDES – UNIRIO</strong>
+                        <strong>Claudia de Oliveira Fernandes – UNIRIO</strong>
                     </li>
                         <ul style="list-style: none;">
                             <li>
-                                <strong>COORDENAÇÃO EMÉRITA</strong>
+                                <strong>Coordenação Emérita</strong>
                             </li>
                             <li>
-                                <strong>VERA MARIA FERRÃO CANDAU – PUC-Rio</strong>
+                                <strong>Vera Maria Ferrão Candau – PUC-Rio</strong>
                             </li>
                         </ul>
                 </ul>
@@ -217,7 +214,7 @@
 
                     <ul style="list-style: none;">
                             <li>
-                                <strong>INSTITUIÇÕES</strong>
+                                <strong>Instituições</strong>
                             </li>
                             <li *ngFor="let instituicao of instituicoes">
                                     {{ instituicao }}
@@ -260,23 +257,31 @@
                     <h2>Comitê Científico</h2>
                 </div>
                 <div class="row">
-
-                    <ul style="list-style: none;">
-                            <li>
-                                <strong>Coordenação Geral:</strong>
-                            </li>
-                            <li *ngFor="let coordenacao of coordenacoesGerais">
-                                    {{ coordenacao }}
-                            </li>
+                    <ul>
+                        <ul style="list-style: none;">
+                                <li>
+                                    <strong>Coordenação Geral:</strong>
+                                </li>
+                                <li *ngFor="let coordenacao of coordenacoesGerais">
+                                        {{ coordenacao }}
+                                </li>
+                        </ul>
+                        <br/>
+                        <ul style="list-style: none;">
+                                <li>
+                                    <strong>Didáticas entre diálogos, insurgências e políticas: tensões e perspectivas na relação:</strong>
+                                </li>
+                                <br/>
+                                <ul  style="list-style: none;" *ngFor="let eixo of eixos">
+                                    <strong>{{ eixo.titulo + ' - ' + eixo.temaCurto }}</strong>
+                                    <li *ngFor="let coordenador of eixo.coordenacao" >
+                                            {{ coordenador }}
+                                    </li>
+                                    <br/>
+                                </ul>
+                        </ul>
+                        
                     </ul>
-
-                    <ul  style="list-style: none;" *ngFor="let eixo of eixos">
-                        <strong>{{ eixo.titulo + ' - ' + eixo.tema }}</strong>
-                        <li *ngFor="let coordenador of eixo.coordenacao" >
-                                {{ coordenador }}
-                        </li>
-                    </ul>
-
                    
                 </div>
             </div>
@@ -332,7 +337,7 @@
                         <tr>
                             <td>2014</td>
                             <td>XVII ENDIPE – “A Didática e as práticas de ensino nas relações entre escola, formação de professores e a sociedade”</td>
-                            <td>Maris Socorro Lucena Lima</td>
+                            <td>Maria do Socorro Lucena Lima</td>
                             <td>Universidade do Estado do Ceará – Fortaleza/CE</td>
                         </tr>                        
                         <tr>
@@ -604,18 +609,46 @@
                 </div>
                 <div class="col-lg-12 agenda">
                         <div class="row">
-                            <div class="agenda-items" style="text-align: left">
-                                <ul>
-                                    <li><i class="mr-2"></i> Início das Inscrições -> 26 de agosto de 2019</li>
-                                    <li><i class="mr-2"></i> Submissão de Trabalhos -> 16 de outubro a 18 de dezembro de 2019 </li>
-                                    <li><i class="mr-2"></i> Avaliação pelo Comitê Cientifico -> Até 13 de abril de 2020</li>
-                                    <li><i class="mr-2"></i> Divulgação dos trabalhos aprovados -> 14-20 de abril de 2020</li>
-                                    <li><i class="mr-2"></i> Recursos -> 20-27 de abril de 2020</li>
-                                    <li><i class="mr-2"></i> Resposta aos recursos -> Até 15 de maio de 2020</li>
-                                    <li><i class="mr-2"></i> Divulgação da programação completa -> Até 30 de maio de 2020</li>
-                                    <li><i class="mr-2"></i> Inscrição nos Minicursos e nas Rodas de Conversa -> 01-20 de junho de 2020</li>
-                                </ul>
-                            </div>
+                            <table class="table table-responsive table-striped tabelaCronograma">
+
+                                <tbody>
+
+                                    <tr>                                        
+                                        <th class="text-nowrap">Início das Inscrições</th>
+                                        <th class="text-nowrap">26 de agosto de 2019</th>
+                                    </tr> 
+                                    <tr>                                        
+                                        <th class="text-nowrap">Submissão de Trabalhos</th>
+                                        <th class="text-nowrap">16 de outubro a 18 de dezembro de 2019</th>
+                                    </tr> 
+                                    <tr>                                        
+                                        <th class="text-nowrap">Avaliação pelo Comitê Cientifico</th>
+                                        <th class="text-nowrap">Até 13 de abril de 2020</th>
+                                    </tr> 
+                                    <tr>                                        
+                                        <th class="text-nowrap">Divulgação dos trabalhos aprovados</th>
+                                        <th class="text-nowrap">14-20 de abril de 2020</th>
+                                    </tr> 
+                                    <tr>                                        
+                                        <th class="text-nowrap">Recursos</th>
+                                        <th class="text-nowrap">20-27 de abril de 2020</th>
+                                    </tr> 
+                                    <tr>                                        
+                                        <th class="text-nowrap">Resposta aos recursos</th>
+                                        <th class="text-nowrap">Até 15 de maio de 2020</th>
+                                    </tr> 
+                                    <tr>                                        
+                                        <th class="text-nowrap">Divulgação da programação completa</th>
+                                        <th class="text-nowrap">Até 30 de maio de 2020</th>
+                                    </tr> 
+                                    <tr>                                        
+                                        <th class="text-nowrap">Inscrição nos Minicursos e nas Rodas de Conversa</th>
+                                        <th class="text-nowrap">01-20 de junho de 2020</th>
+                                    </tr> 
+                                    
+                                       
+                                </tbody>
+                            </table>
                         </div>
                     </div>
             </div>
@@ -630,6 +663,9 @@
                 <div class="section-header">
                     <h2>Anais</h2>
                 </div>
+                <!-- <div class="row"> -->
+                    <p>Anais não disponíveis.</p>
+                <!-- </div> -->
             </div>
         </section>
         <!-- #cronograma -->
@@ -673,13 +709,12 @@
             <div class="container">
                 <div class="section-header">
                     <h2>Parcerias</h2>
+                </div> 
+                <div class="row" >
+                    <div class="col-md-3 text-center" *ngFor="let parceria of imagensParcerias">
+                        <img  class="image-responsive" height="100px" width="{{parceria.includes('fe') ? 300 : 200}}" style="padding: 1px" src="{{parceria}}" alt="{{parceria}}">
+                    </div>
                 </div>
-
-                <img style="padding: 1px" src="./assets/img/parceiros/assb.png" alt="parceiros">
-                <img style="padding: 1px" src="./assets/img/parceiros/assb.png" alt="parceiros">
-                <img style="padding: 1px" src="./assets/img/parceiros/assb.png" alt="parceiros">
-                <img style="padding: 1px" src="./assets/img/parceiros/assb.png" alt="parceiros">
-
             </div>
         </section>
         <!-- #cronograma -->

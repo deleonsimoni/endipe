@@ -38,6 +38,10 @@ export class AuthService {
     return localStorage.getItem(TOKEN_KEY);
   }
 
+  public logout() {
+    localStorage.removeItem(TOKEN_KEY);
+  }
+
   public getDecodedAccessToken(token: string): any {
 
     try {

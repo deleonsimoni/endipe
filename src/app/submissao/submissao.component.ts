@@ -59,14 +59,15 @@ export class SubmissaoComponent implements OnInit {
 
   public upload() {
     if (this.submissionForm.valid) {
-      if (this.files[0].type.indexOf('pdf') === -1){
-        this.toastr.error('O arquivo selecionado não é um PDF.', 'Error');
+      if (this.files[0].type.indexOf('pdf') === -1 || this.files[0].type.indexOf('doc') === -1 || this.files[0].type.indexOf('docx') === -1){
+        this.toastr.error('O arquivo selecionado precisa ser um PDF ou um DOC.', 'Atenção');
         //fileInput.value = '';
         return;
+      } else {
+        this.uploadService.uploadFile(this.files[0], 'EndipeRio2020', this.submissionForm.value).subscribe(data => {
+          this.toastr.success('Upload feito com sucesso.', 'Sucesso');
+        });
       }
-      this.uploadService.uploadFile(this.files[0], 'EndipeRio2020', this.submissionForm.value).subscribe(data => {
-        this.toastr.success('Upload feito com sucesso.', 'Success');
-      });
     }
   }
 

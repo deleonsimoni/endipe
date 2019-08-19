@@ -12,5 +12,8 @@ div.container {
     .scroll {
         overflow-y: auto;
         height: 80vh;
+        strong{
+            color: red;
+        }
     }
 }
