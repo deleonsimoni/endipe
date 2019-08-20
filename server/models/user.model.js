@@ -57,9 +57,12 @@ const UserSchema = new mongoose.Schema({
     telephone: String
   },
   
-  modalityId:{
-    type: Number
-  },
+  modalityId:[
+    {
+      type: Number
+    }
+  ],
+  
   institution:{
     name: String,
     initials: String

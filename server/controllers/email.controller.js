@@ -23,7 +23,7 @@ function sendMail(to, subject, text) {
         from: config.MAIL_FROM,
         to: to,
         subject: subject,
-        text: text
+        html: text
       };
       
       transporter.sendMail(mailOptions, function(error, info){
