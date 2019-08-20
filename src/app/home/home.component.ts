@@ -459,9 +459,7 @@ export class HomeComponent implements OnInit {
 
   }
 
-  ngOnInit() {
-    
-  }
+  ngOnInit() { }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(ModalInscricaoComponent, {

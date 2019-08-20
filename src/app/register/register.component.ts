@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl, FormArray } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { MatDialog } from '@angular/material';
 import { ModalNormasComponent } from '../modal-normas/modal-normas.component';
@@ -18,6 +18,15 @@ export class RegisterComponent implements OnInit {
   public registerForm: FormGroup;
   public docType = 'Documento';
   public submit = false;
+  public categories = [
+    {id: 1, name: 'Convidado de sessão especial'},
+    {id: 2, name: 'Mediador de roda de conversa'},
+    {id: 3, name: 'Expositor de pôster'},
+    {id: 4, name: 'Mediador de minicurso'},
+    {id: 5, name: 'Coordenador e expositor de painel'},
+    {id: 6, name: 'Simposista'},
+    {id: 7, name: 'Ouvinte'}
+  ];
 
   constructor(
     private builder: FormBuilder,
