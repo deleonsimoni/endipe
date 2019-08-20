@@ -31,7 +31,9 @@ export class SubmissaoComponent implements OnInit {
     {id: 5, name: 'Educação, Comunicação e Técnologia'},
     {id: 6, name: 'Infâncias, Juventudes e Vida Adulta'}
   ];
-  private files: FileList;
+  private filesDOC: FileList;
+  private filesPDF: FileList;
+
 
   constructor(
     private builder: FormBuilder,
@@ -69,12 +71,15 @@ export class SubmissaoComponent implements OnInit {
 
   public upload() {
     if (this.submissionForm.valid) {
-      if (this.files[0].type.indexOf('pdf') === -1 || this.files[0].type.indexOf('doc') === -1 || this.files[0].type.indexOf('docx') === -1){
-        this.toastr.error('O arquivo selecionado precisa ser um PDF ou um DOC.', 'Atenção');
+      if (this.filesPDF[0].type.indexOf('pdf') === -1){
+        this.toastr.error('O arquivo Upload PDF precisa ser um PDF.', 'Atenção');
         //fileInput.value = '';
         return;
+      } if(this.filesDOC[0].type.indexOf('doc') === -1){
+        this.toastr.error('O arquivo Upload DOC precisa ser um DOC.', 'Atenção');
+        return;
       } else {
-        this.uploadService.uploadFile(this.files[0], 'EndipeRio2020', this.submissionForm.value).subscribe(data => {
+        this.uploadService.uploadFile(this.filesDOC[0], this.filesPDF[0], 'EndipeRio2020', this.submissionForm.value).subscribe(() => {
           this.toastr.success('Upload feito com sucesso.', 'Sucesso');
         });
       }
@@ -82,21 +87,21 @@ export class SubmissaoComponent implements OnInit {
   }
 
   public getFileNameDOC(): string {
-    const fileName = this.files ? this.files[0].name : 'Upload DOC';
+    const fileName = this.filesDOC ? this.filesDOC[0].name : 'Upload DOC';
     return fileName;
   }
 
   public getFileNamePDF(): string {
-    const fileName = this.files ? this.files[0].name : 'Upload PDF';
+    const fileName = this.filesPDF ? this.filesPDF[0].name : 'Upload PDF';
     return fileName;
   }
 
   public setFileNameDOC(files: FileList): void {
-    this.files = files;
+    this.filesDOC = files;
   }
 
   public setFileNamePDF(files: FileList): void {
-    this.files = files;
+    this.filesPDF = files;
   }
 
   private createFields() {

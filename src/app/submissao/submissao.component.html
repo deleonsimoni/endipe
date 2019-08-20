@@ -33,17 +33,17 @@
                                         placeholder="Título" formControlName="title" />
                                     <div class="custom-file mt-2">
                                         <input type="file" class="custom-file-input"
-                                            accept="application/pdf, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                                            accept="application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document"
                                             data-max-size="2048" id="customPreReadFile"
-                                            (change)="setFileName($event.target.files)" #fileInput />
+                                            (change)="setFileNameDOC($event.target.files)" #fileInput />
                                         <label class="custom-file-label"
                                             for="customPreReadFile">{{ getFileNameDOC() }}</label>
                                     </div>
                                     <div class="custom-file mt-2">
                                         <input type="file" class="custom-file-input"
-                                            accept="application/pdf, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                                            accept="application/pdf"
                                             data-max-size="2048" id="customPreReadFile"
-                                            (change)="setFileName($event.target.files)" #fileInput />
+                                            (change)="setFileNamePDF($event.target.files)" #fileInput />
                                         <label class="custom-file-label"
                                             for="customPreReadFile">{{ getFileNamePDF() }}</label>
                                     </div>

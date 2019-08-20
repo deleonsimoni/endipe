@@ -24,6 +24,14 @@ const UserSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
+  icPaidOut: {
+    type: Boolean,
+    default: false
+  },
+  icAdmin: {
+    type: Boolean,
+    default: false
+  },
   createdAt: {
     type: Date,
     default: Date.now
@@ -62,7 +70,7 @@ const UserSchema = new mongoose.Schema({
       type: Number
     }
   ],
-  
+
   institution:{
     name: String,
     initials: String
@@ -76,12 +84,13 @@ const UserSchema = new mongoose.Schema({
   works: [{
     protocol: Number,
     title: String,
-    optionId: Number,
-    option: String,
-    pathS3: String,
+    modalityId: Number,
+    axisId: Number,
+    pathS3DOC: String,
+    pathS3PDF: String,
     authors: [
       {
-        name: String
+        email: String
       }
     ],
   }],
