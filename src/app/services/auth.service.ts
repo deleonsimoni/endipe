@@ -30,7 +30,7 @@ export class AuthService {
     (<any>window).user = user;
   }
 
-  public getUser(): string {
+  public getUser() {
     return (<any>window).user;
   }
 

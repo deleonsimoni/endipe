@@ -6,6 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { PagamentoComponent } from './pagamento/pagamento.component';
 import { SubmissaoComponent } from './submissao/submissao.component';
 import { TrabalhosComponent } from './trabalhos/trabalhos.component';
+import { AdminComponent } from './admin/admin.component';
 
 const routes: Routes = [
   {
@@ -32,6 +33,10 @@ const routes: Routes = [
   {
     path: 'meus-trabalhos',
     component: TrabalhosComponent
+  },
+  {
+    path: 'admin',
+    component: AdminComponent
   }
 ];
 

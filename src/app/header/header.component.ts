@@ -14,13 +14,15 @@ export class HeaderComponent implements OnInit {
 
   // public token: String;
   public isAuth = false;
+  public user: any;
   // public isAuth = new Subject();
 
   constructor(
     private authService: AuthService,
     private share: ShareDataService,
     private toastr: ToastrService,
-    private rota: Router
+    private rota: Router,
+    private auth: AuthService
   ) { }
 
   ngOnInit() {
@@ -32,6 +34,8 @@ export class HeaderComponent implements OnInit {
       this.isAuth = false;
     }
 
+    this.user = this.auth.getDecodedAccessToken(this.auth.getToken());
+    console.log(this.user);
     this.verifyUser();
 
   }

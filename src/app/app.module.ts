@@ -36,6 +36,7 @@ import { OwlModule } from 'ngx-owl-carousel';
 import { ToastrModule } from 'ngx-toastr';
 import { TrabalhosComponent } from './trabalhos/trabalhos.component';
 import { ListarTrabalhosComponent } from './listar-trabalhos/listar-trabalhos.component';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { ListarTrabalhosComponent } from './listar-trabalhos/listar-trabalhos.co
     CertificadoComponent,
     ModalCadastroSucessoComponent,
     TrabalhosComponent,
-    ListarTrabalhosComponent
+    ListarTrabalhosComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
