@@ -9,7 +9,6 @@ module.exports = router;
 router.use(passport.authenticate('jwt', { session: false }))
 
 router.get('/price/:id', passport.authenticate('jwt', { session: false }), price);
-
 router.post('/payment', passport.authenticate('jwt', { session: false }), payment);
 router.post('/uploadWork/:id', passport.authenticate('jwt', { session: false }), uploadWork);
 

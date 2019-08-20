@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
-import { Subject } from 'rxjs';
 import { ShareDataService } from '../services/share-data.service';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -19,7 +19,8 @@ export class HeaderComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private share: ShareDataService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private rota: Router
   ) { }
 
   ngOnInit() {
@@ -51,6 +52,7 @@ export class HeaderComponent implements OnInit {
     this.authService.logout();
     this.isAuth = false;
     this.toastr.success('Esperamos que você volte logo.', 'Sucesso');
+    this.rota.navigate(['/home']);
   }
 
 }
