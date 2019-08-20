@@ -47,44 +47,85 @@ function getPrice(id) {
 async function uploadWork(req, res) {
 
   var form = new IncomingForm();
-  var fileName = '';
-  var buffer = null;
+  var fileNameDOC = '';
+  var bufferDOC = null;
+  var fileNamePDF = '';
+  var bufferPDF = null;
   var formulario = null;
+  var contador = 0;
 
-  form.on('field', (name, value) => { 
+  /*form.on('field', (name, value) => { 
     formulario = JSON.parse(value);
-  });
+    console.log(formulario);
+  });*/
 
-  form.on('file', (field, file) => {
-    fileName = file.name;
-    buffer = fs.readFileSync(file.path);
-  });
-
-  form.on('end', () => {  
-   /* formulario.pathS3 = fileName;
-      req.user.works = formulario;
-    console.log('imprimindo for ', formulario);  */
-    S3Uploader.uploadFile(fileName, buffer).then(fileData => {
-      formulario.pathS3 = fileName;
-      req.user.works = [formulario];
-
-      User.findOneAndUpdate({_id: req.user._id}, {$push: {works: req.user.works}}, function (err, doc) {
-          if (err) {
-              console.log("erro ao atualizar o usuario: ", err);
-          } else {
-              console.log("update document success");
-          }
-        });
-      res.json({
-        user: req.user,
-        successful: true,
-        fileData
-      });
-    }).catch(err => {
-        console.log(err);
-        res.sendStatus(500);
+ // var formfields = await new Promise(function (resolve, reject) {
+    console.log('agora aqui');
+    form.on('field', (name, value) => { 
+      formulario = JSON.parse(value);
+      console.log(formulario);
+      resolve(formulario);
     });
-  });
-  form.parse(req);
+
+  //});
+
+  
+
+  //formfields = await new Promise(function (resolve, reject) {
+    form.on('file', (field, file) => {
+
+      if(contador === 0){
+        fileNamePDF = file.name;
+        bufferPDF = fs.readFileSync(file.path);
+        contador++;
+      } else {
+        fileNameDOC = file.name;
+        bufferDOC = fs.readFileSync(file.path);
+      }
+
+      resolve(true);
+
+    });
+  //});
+
+ // formfields = await new Promise(function (resolve, reject) {
+    form.on('end', () => {
+      console.log('imprimindo for ', formulario); 
+      S3Uploader.uploadFile(fileNameDOC, bufferDOC).then(fileData => {
+        S3Uploader.uploadFile(fileNamePDF, bufferPDF).then(fileData => {
+          formulario.pathS3DOC = fileNameDOC;
+          formulario.pathS3PDF = fileNamePDF;
+          req.user.works = formulario;
+    
+          User.findOneAndUpdate({_id: req.user._id}, {$push: {works: req.user.works}}, function (err, doc) {
+              if (err) {
+                  console.log("erro ao atualizar o usuario: ", err);
+              } else {
+                  console.log("update document success");
+              }
+            });
+          res.json({
+            user: req.user,
+            successful: true
+            //fileData
+          });
+         return resolve(res);
+        }).catch(err => {
+            console.log(err);
+            res.sendStatus(500);
+            return  reject(res);
+
+        });
+      }).catch(err => {
+          console.log(err);
+          res.sendStatus(500);
+          return  reject(res);
+
+      });
+    });
+  //});
+
+
+  //form.parse(req);
   return res;
 }

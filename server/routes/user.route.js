@@ -17,6 +17,8 @@ router.route('/')
   .post(asyncHandler(insert));
 
 async function uploadWork(req, res) {
+  console.log('aqui');
+
   let response = await userCtrl.uploadWork(req, res);
   console.log('Devolvi Pro front');
   res.json(response);
