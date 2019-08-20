@@ -18,10 +18,18 @@ export class SubmissaoComponent implements OnInit {
   public authors = new Array();
   public showAdd = true;
   public workOptions = [
-    'Pôster',
-    'Painel',
-    'Minicurso',
-    'Roda de conversa'
+    {id: 1, name: 'Pôster'},
+    {id: 2, name: 'Painel'},
+    {id: 3, name: 'Minicurso'},
+    {id: 4, name: 'Roda de conversa'}
+  ];
+  public eixos = [
+    {id: 1, name: 'Formação docente'},
+    {id: 2, name: 'Currículo e avaliação'},
+    {id: 3, name: 'Direitos humanos, Interculturalidade e Religiões'},
+    {id: 4, name: 'Nova epistemologia, Diferença, Biodiversidade, Democracia e Inclusão'},
+    {id: 5, name: 'Educação, Comunicação e Técnologia'},
+    {id: 6, name: 'Infâncias, Juventudes e Vida Adulta'}
   ];
   private files: FileList;
 
@@ -36,13 +44,15 @@ export class SubmissaoComponent implements OnInit {
   ngOnInit() {
 
     this.createForm();
+    this.submissionForm.valueChanges.subscribe(res => console.log(res));
 
   }
 
   private createForm(): void {
 
     this.submissionForm = this.builder.group({
-      option: [null, [Validators.required]],
+      axisId: [null, [Validators.required]],
+      modalityId: [null, [Validators.required]],
       title: [null, [Validators.required]],
       authors: this.builder.array([
         this.createFields()
@@ -71,18 +81,27 @@ export class SubmissaoComponent implements OnInit {
     }
   }
 
-  public getFileName(): string {
-    const fileName = this.files ? this.files[0].name : 'Upload Trabalho';
+  public getFileNameDOC(): string {
+    const fileName = this.files ? this.files[0].name : 'Upload DOC';
     return fileName;
   }
 
-  public setFileName(files: FileList): void {
+  public getFileNamePDF(): string {
+    const fileName = this.files ? this.files[0].name : 'Upload PDF';
+    return fileName;
+  }
+
+  public setFileNameDOC(files: FileList): void {
+    this.files = files;
+  }
+
+  public setFileNamePDF(files: FileList): void {
     this.files = files;
   }
 
   private createFields() {
     return this.builder.group({
-      name: [null]
+      email: [null]
     });
   }
 

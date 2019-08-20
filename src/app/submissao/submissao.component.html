@@ -13,22 +13,39 @@
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <input type="text" name="title" class="form-control" id="title" placeholder="Título"
-                                        formControlName="title" />
-                                    <div class="mt-2">
-                                        <select class="form-control" id="opt" formControlName="option">
-                                            <option>Selecione o tipo</option>
-                                            <option *ngFor="let option of workOptions" [value]="option">{{ option }}
+                                    <div>
+                                        <select class="form-control" id="opt" formControlName="modalityId">
+                                            <option disabled="true" [selected]="!submissionForm.value.modalityId">Selecione
+                                                a modalidade</option>
+                                            <option *ngFor="let option of workOptions" [value]="option.id">{{ option.name }}
                                             </option>
                                         </select>
+                                    </div>
+                                    <div class="mt-2">
+                                        <select class="form-control" placeholder="Eixo" id="opt" formControlName="axisId">
+                                            <option disabled="true" [selected]="!submissionForm.value.axisId">Selecione o
+                                                eixo</option>
+                                            <option *ngFor="let eixo of eixos" [value]="eixo.id">{{ eixo.name }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <input type="text" name="title" class="form-control mt-2" id="title"
+                                        placeholder="Título" formControlName="title" />
+                                    <div class="custom-file mt-2">
+                                        <input type="file" class="custom-file-input"
+                                            accept="application/pdf, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                                            data-max-size="2048" id="customPreReadFile"
+                                            (change)="setFileName($event.target.files)" #fileInput />
+                                        <label class="custom-file-label"
+                                            for="customPreReadFile">{{ getFileNameDOC() }}</label>
                                     </div>
                                     <div class="custom-file mt-2">
                                         <input type="file" class="custom-file-input"
                                             accept="application/pdf, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-                                            data-max-size="2048"
-                                            id="customPreReadFile"
+                                            data-max-size="2048" id="customPreReadFile"
                                             (change)="setFileName($event.target.files)" #fileInput />
-                                        <label class="custom-file-label" for="customPreReadFile">{{getFileName()}}</label>
+                                        <label class="custom-file-label"
+                                            for="customPreReadFile">{{ getFileNamePDF() }}</label>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6">
@@ -36,8 +53,8 @@
                                         *ngFor="let item of submissionForm.get('authors').controls; let i = index;">
                                         <div [formArrayName]="i">
                                             <input type="text" name="autor" class="form-control"
-                                                [ngClass]="{'mt-2': i >= 1}" id="autor" placeholder="Autor"
-                                                formControlName="name" />
+                                                [ngClass]="{'mt-2': i >= 1}" id="autor" placeholder="Email do participante"
+                                                formControlName="email" />
                                         </div>
                                     </div>
                                     <button class="btn-get-started" type="button" (click)="addAuthors()"
