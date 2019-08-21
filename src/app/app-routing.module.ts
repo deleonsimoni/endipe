@@ -7,6 +7,7 @@ import { PagamentoComponent } from './pagamento/pagamento.component';
 import { SubmissaoComponent } from './submissao/submissao.component';
 import { TrabalhosComponent } from './trabalhos/trabalhos.component';
 import { AdminComponent } from './admin/admin.component';
+import { CertificadoComponent } from './certificado/certificado.component';
 
 const routes: Routes = [
   {
@@ -29,6 +30,10 @@ const routes: Routes = [
   {
     path: 'pagamento',
     component: PagamentoComponent
+  },
+  {
+    path: 'certificados',
+    component: CertificadoComponent
   },
   {
     path: 'meus-trabalhos',

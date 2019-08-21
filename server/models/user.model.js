@@ -24,10 +24,6 @@ const UserSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
-  icPaidOut: {
-    type: Boolean,
-    default: false
-  },
   icAdmin: {
     type: Boolean,
     default: false
@@ -81,6 +77,13 @@ const UserSchema = new mongoose.Schema({
     name: String,
     imReceipt: Buffer
   },
+  payment: {
+    amount: Number,
+    categoryId: Number,
+    pathS3: String,
+    icPaid: Boolean
+  },
+
   works: [{
     protocol: Number,
     title: String,
@@ -95,13 +98,7 @@ const UserSchema = new mongoose.Schema({
     ],
   }],
   roles: [{
-    id: Number,
-    payment:{
-      code: String,
-      amount: Number,
-      pathImage: String,
-      icPaid: {type: Boolean, default: false}
-    }
+    id: Number
   }]
 }, {
   versionKey: false

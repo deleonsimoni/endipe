@@ -70,29 +70,54 @@ export class SubmissaoComponent implements OnInit {
   }
 
   public upload() {
-    if (this.submissionForm.valid) {
-      if (this.filesPDF[0].type.indexOf('pdf') === -1){
+      if (!this.filesPDF) {
+        this.toastr.error('É necessário selecionar o arquivo PDF', 'Atenção');
+        return;
+      } if (!this.filesDOC[0]) {
+        // tslint:disable-next-line: align
+        this.toastr.error('É necessário selecionar o arquivo DOC', 'Atenção');
+        return;
+      } if (this.filesPDF[0].type.indexOf('pdf') === -1){
         this.toastr.error('O arquivo Upload PDF precisa ser um PDF.', 'Atenção');
         //fileInput.value = '';
         return;
-      } if(this.filesDOC[0].type.indexOf('doc') === -1){
+      // tslint:disable-next-line: align
+      } if(this.filesDOC[0].type.indexOf('doc') === -1) {
         this.toastr.error('O arquivo Upload DOC precisa ser um DOC.', 'Atenção');
         return;
+      // tslint:disable-next-line: align
+      } if (!this.submissionForm.value.axisId) {
+        this.toastr.error('Selecione um eixo.', 'Atenção');
+        return;
+      } if (!this.submissionForm.value.modalityId) {
+        // tslint:disable-next-line: align
+        this.toastr.error('Selecione uma modalidade.', 'Atenção');
+        return;
+      } if (!this.submissionForm.value.title) {
+        // tslint:disable-next-line: align
+        this.toastr.error('Selecione o titulo do trabalho.', 'Atenção');
+        return;
+      } if (this.submissionForm.value.authors && !this.submissionForm.value.authors[0].email) {
+        // tslint:disable-next-line: align
+        this.toastr.error('Indique ao menos um autor do trabalho.', 'Atenção');
+        return;
       } else {
-        this.uploadService.uploadFile(this.filesDOC[0], this.filesPDF[0], 'EndipeRio2020', this.submissionForm.value).subscribe(() => {
-          this.toastr.success('Upload feito com sucesso.', 'Sucesso');
+        this.uploadService.uploadFile(this.filesDOC[0], this.filesPDF[0], 'trabalhos', this.submissionForm.value).subscribe(() => {
+          this.toastr.success('Trabalho submetido com sucesso.', 'Sucesso');
+          this.submissionForm.reset();
+          this.filesDOC = null;
+          this.filesPDF = null;
         });
       }
-    }
   }
 
   public getFileNameDOC(): string {
-    const fileName = this.filesDOC ? this.filesDOC[0].name : 'Upload DOC';
+    const fileName = this.filesDOC ? this.filesDOC[0].name : 'DOC/DOCX Sem Identificação';
     return fileName;
   }
 
   public getFileNamePDF(): string {
-    const fileName = this.filesPDF ? this.filesPDF[0].name : 'Upload PDF';
+    const fileName = this.filesPDF ? this.filesPDF[0].name : 'PDF Com Identificação';
     return fileName;
   }
 

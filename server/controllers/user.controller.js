@@ -17,9 +17,10 @@ const S3Uploader = require('./aws.controller');
 
 module.exports = {
   insert,
-  payment,
+  generatePayment,
   getPrice,
-  uploadWork
+  uploadWork,
+  getUsers
 }
 
 async function insert(user) {
@@ -30,10 +31,12 @@ async function insert(user) {
   return await new User(user).save();
 }
 
-async function payment(form) {
-  let amount = price(form.idCategoria);
-  return await new User(user).save();
+async function getUsers() {
+  return await User.find()
+                    .select('fullname email createdAt document phones modalityId payment works')
+                    .sort({ fullname: 1 });
 }
+
 
 function getPrice(id) {
   let dateNow = new Date();
@@ -42,6 +45,54 @@ function getPrice(id) {
   
   return seasons.filter(season => dateNow.getTime() >= season.dateIni.getTime() && dateNow.getTime() <= season.dateEnd.getTime())[0].price;
 
+}
+
+async function generatePayment(req, res) {
+  var form = new IncomingForm();
+  var fileName = '';
+  var buffer = null;
+  var formulario = null;
+  var payment = null;
+
+  form.on('field', (name, value) => { 
+    formulario = JSON.parse(value);
+  });
+
+  form.on('file', (field, file) => {
+    fileName = 'xxendiperio2020/' + file.name;
+    buffer = fs.readFileSync(file.path);
+  });
+
+  form.on('end', () => {
+
+    S3Uploader.uploadFile(fileName, buffer).then(fileData => {
+      console.log(formulario);
+      let amount = getPrice(formulario.categoryId);
+
+      payment = {
+        amount: amount,
+        categoryId: formulario.categoryId,
+        pathS3: fileName,
+        icPaid: false
+      }
+
+      req.user.payment = payment;
+
+      User.findOneAndUpdate({_id: req.user._id}, {$push: {payment: req.user.payment}}, function (err, doc) {
+          if (err) {
+              console.log("erro ao atualizar o usuario: ", err);
+          } else {
+              console.log("Pagamento registrado com sucesso");
+          }
+        });
+     
+    }).catch(err => {
+        console.log(err);
+        res.sendStatus(500);
+    });
+  });
+
+  form.parse(req);
 }
 
 async function uploadWork(req, res) {
@@ -60,11 +111,10 @@ async function uploadWork(req, res) {
   });*/
 
  // var formfields = await new Promise(function (resolve, reject) {
-    console.log('agora aqui');
     form.on('field', (name, value) => { 
       formulario = JSON.parse(value);
       console.log(formulario);
-      resolve(formulario);
+      //resolve(formulario);
     });
 
   //});
@@ -75,15 +125,15 @@ async function uploadWork(req, res) {
     form.on('file', (field, file) => {
 
       if(contador === 0){
-        fileNamePDF = file.name;
+        fileNamePDF = 'xxendiperio2020/' + file.name;
         bufferPDF = fs.readFileSync(file.path);
         contador++;
       } else {
-        fileNameDOC = file.name;
+        fileNameDOC = 'xxendiperio2020/' + file.name;
         bufferDOC = fs.readFileSync(file.path);
       }
 
-      resolve(true);
+      //resolve(true);
 
     });
   //});
@@ -109,23 +159,23 @@ async function uploadWork(req, res) {
             successful: true
             //fileData
           });
-         return resolve(res);
+         //return resolve(res);
         }).catch(err => {
             console.log(err);
             res.sendStatus(500);
-            return  reject(res);
+           // return  reject(res);
 
         });
       }).catch(err => {
           console.log(err);
           res.sendStatus(500);
-          return  reject(res);
+          //return  reject(res);
 
       });
     });
   //});
 
 
-  //form.parse(req);
+  form.parse(req);
   return res;
 }

@@ -9,8 +9,6 @@ module.exports = {
 
 
 function sendMail(to, subject, text) {
-    console.log('Enviando Email para: ' + to);
-
     var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
