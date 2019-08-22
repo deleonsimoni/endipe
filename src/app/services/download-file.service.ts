@@ -1,5 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { saveAs } from 'file-saver';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,10 @@ export class DownloadFileService {
   ) { }
 
   getFile(fileName) {
-    //return this.http.get(`${this.baseUrl}user/downloadFile?fileName=${fileName}`);
-    return this.http.get(`${this.baseUrl}/user/downloadFile?fileName=xxendiperio2020/trabalhos/Boletos.pdf`);
-
+    this.http.get(`${this.baseUrl}user/downloadFile?fileName=${fileName}`).subscribe((res: any) => {
+      const arrayBufferView = new Uint8Array(res.data.Body.data);
+      const blob = new Blob([arrayBufferView], { type: 'application/octet-stream' } );
+      saveAs(blob, fileName);
+    });
   }
 }

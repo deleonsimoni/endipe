@@ -22,7 +22,9 @@ export class AuthService {
   }
 
   me() {
-    return this.http.get(`${this.baseUrl}/auth/me`);
+    this.http.get(`${this.baseUrl}/auth/me`).subscribe((res: any) => {
+      this.setUser(null, res.token);
+    });
   }
 
   setUser(user, token): void {

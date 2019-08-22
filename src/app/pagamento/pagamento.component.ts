@@ -87,6 +87,8 @@ export class PagamentoComponent implements OnInit {
       this.uploadService.gerarPagamento(this.filesPDF[0], 'comprovantes', this.paymentForm.value).subscribe(() => {
         this.toastr.success('Pagamento recebido com sucesso', 'Sucesso');
         this.paymentForm.reset();
+        this.authService.me();
+        this.user = this.authService.getDecodedAccessToken(this.authService.getToken());
         this.filesPDF = null;
       });
     }
