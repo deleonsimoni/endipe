@@ -25,6 +25,10 @@ export class AuthService {
     return this.http.get(`${this.baseUrl}/auth/me`);
   }
 
+  public adminData() {
+    return this.http.get(`${this.baseUrl}/admin/usrs`);
+  }
+
   setUser(user, token): void {
     window.localStorage.setItem(TOKEN_KEY, token);
     (<any>window).user = user;
