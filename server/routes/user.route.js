@@ -9,7 +9,7 @@ module.exports = router;
 router.use(passport.authenticate('jwt', { session: false }))
 
 router.get('/price/:id', passport.authenticate('jwt', { session: false }), price);
-router.get('/usrs', passport.authenticate('jwt', { session: false }), getUsers);
+router.get('/downloadFile', passport.authenticate('jwt', { session: false }), downloadFile);
 router.post('/payment', passport.authenticate('jwt', { session: false }), payment);
 router.post('/uploadWork/xxendiperio2020/:id', passport.authenticate('jwt', { session: false }), uploadWork);
 router.post('/gerarPagamento/xxendiperio2020/:id', passport.authenticate('jwt', { session: false }), payment);
@@ -22,18 +22,14 @@ async function uploadWork(req, res) {
   res.json(response);
 }
 
+async function downloadFile(req, res) {
+  let response = await userCtrl.downloadFileS3(req.query.fileName);
+  res.json(response);
+}
+
 async function insert(req, res) {
   let user = await userCtrl.insert(req.body);
   res.json(user);
-}
-
-async function getUsers(req, res) {
-  //if(req.user.icAdmin){
-    let users = await userCtrl.getUsers(req.body);
-    res.json(users);
-  /*} else {
-    res.sendStatus(401);
-  }*/
 }
 
 async function payment(req, res) {

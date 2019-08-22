@@ -8,6 +8,8 @@ import { AuthService } from '../services/auth.service';
 })
 export class AdminComponent implements OnInit {
 
+  public users = [];
+
   constructor(
     private authService: AuthService
   ) { }
@@ -18,6 +20,9 @@ export class AdminComponent implements OnInit {
 
   private retrieveAdminData() {
     this.authService.adminData()
-      .subscribe(res => console.log(res));
+      .subscribe((res: any[]) => {
+        this.users = res;
+        console.log(this.users);
+      });
   }
 }
