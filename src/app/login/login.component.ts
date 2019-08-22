@@ -5,6 +5,9 @@ import * as jwt_decode from 'jwt-decode';
 import { ShareDataService } from '../services/share-data.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { DownloadFileService } from '../services/download-file.service';
+import { saveAs } from 'file-saver';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -18,6 +21,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private builder: FormBuilder,
     private authService: AuthService,
+    private baixar: DownloadFileService,
+
     private share: ShareDataService,
     private toastr: ToastrService,
     private router: Router
@@ -54,6 +59,31 @@ export class LoginComponent implements OnInit {
     this.authService.me()
       .subscribe(res => {
         console.log(res);
+      });
+  }
+
+  public baixara() {
+    this.baixar.getFile('a')
+      .subscribe((res: any) => {
+            
+            /*var newBlob = new Blob([res.data], { type: "application/pdf" });
+            if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+                window.navigator.msSaveOrOpenBlob(newBlob);
+                return;
+            }
+            const data = window.URL.createObjectURL(newBlob);
+            var link = document.createElement('a');
+            link.href = data;
+            link.download = "Je kar.pdf";
+            link.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }));
+            setTimeout(function () {
+                window.URL.revokeObjectURL(data);
+                link.remove(); application/octet-stream
+            }, 100);*/
+            console.log('start download:', res);
+             var blob = new Blob([res], { type: "application/pdf" } );
+             saveAs(blob, 'oi.pdf');
+            
       });
   }
 

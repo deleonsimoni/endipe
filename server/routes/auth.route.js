@@ -28,9 +28,5 @@ function login(req, res) {
   let user = req.user;
   let token = authCtrl.generateToken(user);
   emailSender.sendMail(user.email, 'Inscrição Realizada com Sucesso', templateEmail.inscricaoSucesso);
-
-  //user = user.toObject();
-  //res.json({ user, token });
   res.json({ token });
-
 }

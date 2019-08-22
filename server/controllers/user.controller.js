@@ -20,7 +20,7 @@ module.exports = {
   generatePayment,
   getPrice,
   uploadWork,
-  getUsers
+  downloadFileS3
 }
 
 async function insert(user) {
@@ -30,13 +30,6 @@ async function insert(user) {
   console.log('Inserindo usuário no banco');
   return await new User(user).save();
 }
-
-async function getUsers() {
-  return await User.find()
-                    .select('fullname email createdAt document phones modalityId payment works')
-                    .sort({ fullname: 1 });
-}
-
 
 function getPrice(id) {
   let dateNow = new Date();
@@ -78,7 +71,7 @@ async function generatePayment(req, res) {
 
       req.user.payment = payment;
 
-      User.findOneAndUpdate({_id: req.user._id}, {$push: {payment: req.user.payment}}, function (err, doc) {
+      User.findOneAndUpdate({_id: req.user._id}, {$set: {payment: req.user.payment}}, function (err, doc) {
           if (err) {
               console.log("erro ao atualizar o usuario: ", err);
           } else {
@@ -93,6 +86,11 @@ async function generatePayment(req, res) {
   });
 
   form.parse(req);
+}
+
+async function downloadFileS3(req) {
+  console.log('pegando Arquivo ' + req);
+  return await S3Uploader.downloadFile(req);
 }
 
 async function uploadWork(req, res) {
