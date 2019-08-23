@@ -4,14 +4,8 @@
 
 export const environment = {
   production: false,
-<<<<<<< HEAD
-  // host: 'http://xxendiperio2020.com.br/api'
-  host: 'http://localhost:8080/api'
-=======
   //host: 'http://xxendiperio2020.com.br/api'
   host: 'http://localhost:8080/api'
-
->>>>>>> 36d4cefcf50f16f68175eafc4906c79ee85086e7
 };
 
 /*

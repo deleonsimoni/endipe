@@ -45,53 +45,40 @@
                     <li class="menu-has-children pointer">
                         <a>ORGANIZAÇÃO <i class="fa fa-chevron-down"></i></a>
                         <ul>
-                            <li><a [routerLink]="['/home']" fragment="">Coordenação</a></li>
-                            <li><a [routerLink]="['/home']" fragment="">Instituições</a></li>
-                            <li><a [routerLink]="['/home']" fragment="">Comitê Organizador</a></li>
-                            <li><a [routerLink]="['/home']" fragment="">Secretaria</a></li>
-                            <li><a [routerLink]="['/home']" fragment="">Grupos de Trabalho</a></li>
-                            <li><a [routerLink]="['/home']" fragment="">Comitê Científico</a></li>
-                            <li><a [routerLink]="['/home']" fragment="">Parcerias</a></li>
-                            <li><a [routerLink]="['/home']" fragment="">Contato</a></li>
+                            <li><a [routerLink]="['/home']" fragment="team">Coordenação</a></li>
+                            <li><a [routerLink]="['/home']" fragment="team">Instituições</a></li>
+                            <li><a [routerLink]="['/home']" fragment="team">Comitê Organizador</a></li>
+                            <li><a [routerLink]="['/home']" fragment="team">Secretaria</a></li>
+                            <li><a [routerLink]="['/home']" fragment="team">Grupos de Trabalho</a></li>
+                            <li><a [routerLink]="['/home']" fragment="comiteCientifico">Comitê Científico</a></li>
+                            <li><a [routerLink]="['/home']" fragment="parcerias">Parcerias</a></li>
+                            <li><a [routerLink]="['/home']" fragment="contact">Contato</a></li>
                         </ul>
                     </li>
                     <li class="menu-has-children pointer">
-                        <a>PROGRAMAÇÃO <i class="fa fa-chevron-down"></i></a>
-                        <ul>
-                            <li><a [routerLink]="['/home']" fragment="">Visão Geral</a></li>
-                            <li><a [routerLink]="['/home']" fragment="">Abertura</a></li>
-                            <li><a [routerLink]="['/home']" fragment="">Atividades Culturais</a></li>
-                            <li><a [routerLink]="['/home']" fragment="">Lançamento de Livros</a></li>
-                            <li><a [routerLink]="['/home']" fragment="">Minicursos</a></li>
-                            <li><a [routerLink]="['/home']" fragment="">Painéis</a></li>
-                            <li><a [routerLink]="['/home']" fragment="">Pôsteres</a></li>
-                            <li><a [routerLink]="['/home']" fragment="">Reuniões de Entidades e de Redes</a></li>
-                            <li><a [routerLink]="['/home']" fragment="">Rodas de Conversa</a></li>
-                            <li><a [routerLink]="['/home']" fragment="">Sessões Especiais</a></li>
-                            <li><a [routerLink]="['/home']" fragment="">Simpósios</a></li>
-                        </ul>
+                        <a [routerLink]="['/home']" fragment="programacao">PROGRAMAÇÃO</a>
                     </li>
                     <li class="menu-has-children pointer">
                         <a>SUBMISSÃO <i class="fa fa-chevron-down"></i></a>
                         <ul>
                             <li><a [routerLink]="['/home']" fragment="modalidades">Modalidades</a></li>
                             <li><a [routerLink]="['/home']" fragment="normas">Normas</a></li>
-                            <li><a [routerLink]="['/home']" fragment="">Prazos</a></li>
-                            <li><a [routerLink]="['/home']" fragment="">Anais</a></li>
+                            <li><a [routerLink]="['/home']" fragment="prazos">Prazos</a></li>
+                            <li><a [routerLink]="['/home']" fragment="anais">Anais</a></li>
                         </ul>
                     </li>
                     <li class="menu-has-children pointer">
                         <a>RIO DE JANEIRO <i class="fa fa-chevron-down"></i></a>
                         <ul>
                             <li><a [routerLink]="['/home']" fragment="hospedagem">Hospedagem</a></li>
-                            <li><a [routerLink]="['/home']" fragment="">Transporte</a></li>
-                            <li><a [routerLink]="['/home']" fragment="">Alimentação</a></li>
-                            <li><a [routerLink]="['/home']" fragment="">Turismo</a></li>
-                            <li><a [routerLink]="['/home']" fragment="">Clima</a></li>
+                            <li><a [routerLink]="['/home']" fragment="hospedagem">Transporte</a></li>
+                            <li><a [routerLink]="['/home']" fragment="hospedagem">Alimentação</a></li>
+                            <li><a [routerLink]="['/home']" fragment="hospedagem">Turismo</a></li>
+                            <li><a [routerLink]="['/home']" fragment="hospedagem">Clima</a></li>
                         </ul>
                     </li>
                     <li class="pointer">
-                        <a class="text-danger" [routerLink]="['/register']" fragment="">INSCRIÇÃO</a>
+                        <a class="text-danger" *ngIf="!isAuth" [routerLink]="['/register']" fragment="">INSCRIÇÃO</a>
                     </li>
                     <li class="pointer" *ngIf="!isAuth"><a [routerLink]="['/login']">LOGIN</a></li>
                     <li *ngIf="isAuth" class="menu-has-children pointer">
@@ -100,7 +87,7 @@
                             <li><a [routerLink]="['/pagamento']">Pagamento</a></li>
                             <li><a [routerLink]="['/meus-trabalhos']">Submissão</a></li>
                             <li><a [routerLink]="['/certificados']">Certificados</a></li>
-                            <li *ngIf="user.icAdmin">
+                            <li *ngIf="user && user.icAdmin">
                                 <a [routerLink]="['/admin']">Dashboard</a>
                             </li>
                             <li><a class="pointer" (click)="logout()">Sair</a></li>

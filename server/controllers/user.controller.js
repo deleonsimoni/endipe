@@ -46,7 +46,6 @@ async function generatePayment(req, res) {
   var buffer = null;
   var formulario = null;
   var payment = null;
-
   form.on('field', (name, value) => { 
     formulario = JSON.parse(value);
   });
@@ -59,7 +58,6 @@ async function generatePayment(req, res) {
   form.on('end', () => {
 
     S3Uploader.uploadFile(fileName, buffer).then(fileData => {
-      console.log(formulario);
       let amount = getPrice(formulario.categoryId);
 
       payment = {
@@ -111,7 +109,6 @@ async function uploadWork(req, res) {
  // var formfields = await new Promise(function (resolve, reject) {
     form.on('field', (name, value) => { 
       formulario = JSON.parse(value);
-      console.log(formulario);
       //resolve(formulario);
     });
 

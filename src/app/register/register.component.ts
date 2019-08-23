@@ -16,6 +16,7 @@ import { ToastrService } from 'ngx-toastr';
 export class RegisterComponent implements OnInit {
 
   public registerForm: FormGroup;
+  public carregando = false;
   public docType = 'Documento';
   public submit = false;
   public categories = [
@@ -94,14 +95,18 @@ export class RegisterComponent implements OnInit {
 
   public register() {
     this.submit = true;
+    this.registerForm.value.email = this.registerForm.value.email.toLowerCase();
     const form = this.validatePassword();
     if (this.registerForm.valid && form != null) {
+      this.carregando = true;
       this.authService.createUser(form)
         .subscribe((res: any) => {
+          this.carregando = false;
           this.authService.setUser(this.authService.getDecodedAccessToken(res.token), res.token);
           this.share.shareData.next(true);
           this.exibirModalSucesso();
         }, err => {
+          this.carregando = false;
           if (err.status === 500) {
             if (err.error.message.match('email')) {
               this.toastr.error('Email já registrado.', 'Erro: ');

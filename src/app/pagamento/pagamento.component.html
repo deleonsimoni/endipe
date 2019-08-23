@@ -9,8 +9,13 @@
                     <div class="section-header">
                         <h2>Pagamento</h2>
                     </div>
+
+                        <div *ngIf="carregando">
+                            <i class="fas fa-spinner fa-pulse">Aguarde...</i>
+                        </div>
+
                         <form [formGroup]="paymentForm" (ngSubmit)="gerarPagamento()" role="form" class="contactForm">
-                            <div *ngIf="!user.payment">
+                            <div *ngIf="!user.payment && !carregando">
                                 <div class="form-row">
                                     <div class="form-group">
                                         Para qual categoria gostaria de se inscrever? <br/><br/>
@@ -69,8 +74,9 @@
 
 
                         <div *ngIf="!user.payment" class="row justify-content-center">
-                            <button class="btn-get-started" type="submit">Gerar Pagamento</button>
+                            <button *ngIf="!enviando" class="btn-get-started" type="submit">Confirmar e Enviar Comprovante</button>
                         </div>
+                        <div *ngIf="enviando" class="row justify-content-center"><button><i class="fas fa-spinner fa-pulse"></i></button></div>
 
                         <!--<div class="text-center pt-5"><button type="submit">Realizar Pagamento</button></div>-->
                     </form>

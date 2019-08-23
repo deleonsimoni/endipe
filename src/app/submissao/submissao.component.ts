@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { UploadService } from '../services/upload.service';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
+import { AuthService } from '../services/auth.service';
 import { EventEmitter } from 'events';
 @Component({
   selector: 'app-submissao',
@@ -14,6 +15,9 @@ export class SubmissaoComponent implements OnInit {
   @Input() receberDados = new Observable();
   @Output() enviarDados = new EventEmitter();
 
+  public user: any;
+  public carregando = true;
+  public enviando = false;
   public submissionForm: FormGroup;
   public authors = new Array();
   public showAdd = true;
@@ -38,7 +42,9 @@ export class SubmissaoComponent implements OnInit {
   constructor(
     private builder: FormBuilder,
     private uploadService: UploadService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private authService: AuthService
+
   ) {
     this.receberDados.subscribe(res => console.log(res));
   }
@@ -46,7 +52,10 @@ export class SubmissaoComponent implements OnInit {
   ngOnInit() {
 
     this.createForm();
-    this.submissionForm.valueChanges.subscribe(res => console.log(res));
+    this.authService.refresh().subscribe((res: any) => {
+      this.user = res.user;
+      this.carregando = false;
+    });
 
   }
 
@@ -82,7 +91,9 @@ export class SubmissaoComponent implements OnInit {
         //fileInput.value = '';
         return;
       // tslint:disable-next-line: align
-      } if(this.filesDOC[0].type.indexOf('doc') === -1) {
+      } if (this.filesDOC[0].type.indexOf('doc') === -1
+           && this.filesDOC[0].type.indexOf('docx') === -1
+           && this.filesDOC[0].type.indexOf('msword') === -1) {
         this.toastr.error('O arquivo Upload DOC precisa ser um DOC.', 'Atenção');
         return;
       // tslint:disable-next-line: align
@@ -102,11 +113,22 @@ export class SubmissaoComponent implements OnInit {
         this.toastr.error('Indique ao menos um autor do trabalho.', 'Atenção');
         return;
       } else {
+        this.enviando = true;
         this.uploadService.uploadFile(this.filesDOC[0], this.filesPDF[0], 'trabalhos', this.submissionForm.value).subscribe(() => {
+          this.carregando = true;
+          this.authService.refresh().subscribe((res: any) => {
+            this.user = res.user;
+            this.carregando = false;
+          });
+
+          this.enviando = false;
           this.toastr.success('Trabalho submetido com sucesso.', 'Sucesso');
           this.submissionForm.reset();
           this.filesDOC = null;
           this.filesPDF = null;
+        }, err => {
+          this.enviando = false;
+          this.toastr.error('Servidor momentaneamente inoperante.', 'Erro: ');
         });
       }
   }

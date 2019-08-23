@@ -52,13 +52,6 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  private retrieveMyData() {
-    this.authService.me()
-      .subscribe(res => {
-        console.log(res);
-      });
-  }
-
   get validate() {
     return this.loginForm.controls;
   }

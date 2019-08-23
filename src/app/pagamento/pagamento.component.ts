@@ -15,6 +15,8 @@ export class PagamentoComponent implements OnInit {
   public paymentForm: FormGroup;
   public idCategoria: number;
   public valorTotal: number;
+  public carregando = true;
+  public enviando = false;
 
   public categorias = [
     { id: 1, name: 'Estudantes de curso Normal/EM' },
@@ -25,7 +27,7 @@ export class PagamentoComponent implements OnInit {
   ];
 
   private filesPDF: FileList;
-  private user: any;
+  public user: any;
 
   constructor(
     private builder: FormBuilder,
@@ -43,7 +45,10 @@ export class PagamentoComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.authService.refresh().subscribe((res: any) => {
+      this.user = res.user;
+      this.carregando = false;
+    });
     this.paymentForm.valueChanges.subscribe(res => {
       if (res.categoryId) {
         this.atualizarValor(res.categoryId);
@@ -51,8 +56,6 @@ export class PagamentoComponent implements OnInit {
         this.valorTotal = null;
       }
     });
-
-    this.user = this.authService.getDecodedAccessToken(this.authService.getToken());
 
   }
 
@@ -84,12 +87,18 @@ export class PagamentoComponent implements OnInit {
       this.toastr.error('Selecione uma categoria para pagamento.', 'Atenção');
       return;
     } else {
+
+      this.enviando = true;
+
       this.uploadService.gerarPagamento(this.filesPDF[0], 'comprovantes', this.paymentForm.value).subscribe(() => {
-        this.toastr.success('Pagamento recebido com sucesso', 'Sucesso');
+        this.enviando = false;
+        this.user.payment = this.paymentForm.value;
+        this.toastr.success('Aguarde avaliação do pagamento', 'Sucesso');
         this.paymentForm.reset();
-        this.authService.me();
-        this.user = this.authService.getDecodedAccessToken(this.authService.getToken());
         this.filesPDF = null;
+      }, err => {
+        this.enviando = false;
+        this.toastr.error('Servidor momentaneamente inoperante.', 'Erro: ');
       });
     }
   }

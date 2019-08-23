@@ -21,6 +21,10 @@ export class AuthService {
     return this.http.post(`${this.baseUrl}/auth/register`, form);
   }
 
+  refresh() {
+    return this.http.get(`${this.baseUrl}/auth/refresh`);
+  }
+
   me() {
     this.http.get(`${this.baseUrl}/auth/me`).subscribe((res: any) => {
       this.setUser(null, res.token);

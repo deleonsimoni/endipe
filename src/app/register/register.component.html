@@ -112,7 +112,7 @@
                         <div *ngIf="(validate.document.errors && submit) || (validate.document.errors && !validate.document.pristine)"
                             class="alert alert-danger">
                             <div [hidden]="!validate.document.errors.required">
-                                Preencha o campo {{ registerForm.value.icForeign ? 'CPF' : 'Passport' }}
+                                Preencha o campo {{ !registerForm.value.icForeign ? 'CPF' : 'Passport' }}
                             </div>
                         </div>
                     </div>
@@ -145,12 +145,12 @@
                 </div>
                 <div class="form-row" formGroupName="address">
                     <div class="form-group col-md-6">
-                        <input type="text" name="zip" class="form-control" id="zip" placeholder="Código postal"
-                            formControlName="zip" [dropSpecialCharacters]="true" mask="00000-000" [validation]="false"/>
-                        <div *ngIf="(address.controls.zip.errors && submit) || (address.controls.zip.errors && !address.controls.zip.pristine)"
+                        <input type="text" name="district" class="form-control" id="district" placeholder="Bairro"
+                            formControlName="district" />
+                        <div *ngIf="(address.controls.district.errors && submit) || (address.controls.district.errors && !address.controls.district.pristine)"
                             class="alert alert-danger">
-                            <div [hidden]="!address.controls.zip.errors.required">
-                                Preencha o campo cep
+                            <div [hidden]="!address.controls.district.errors.required">
+                                Preencha o campo bairro
                             </div>
                         </div>
                     </div>
@@ -167,12 +167,12 @@
                 </div>
                 <div class="form-row" formGroupName="address">
                     <div class="form-group col-md-4">
-                        <input type="text" name="district" class="form-control" id="district" placeholder="Bairro"
-                            formControlName="district" />
-                        <div *ngIf="(address.controls.district.errors && submit) || (address.controls.district.errors && !address.controls.district.pristine)"
+                        <input type="text" class="form-control" name="state" id="state" placeholder="Estado"
+                            formControlName="state" />
+                        <div *ngIf="(address.controls.state.errors && submit) || (address.controls.state.errors && !address.controls.state.pristine)"
                             class="alert alert-danger">
-                            <div [hidden]="!address.controls.district.errors.required">
-                                Preencha o campo bairro
+                            <div [hidden]="!address.controls.state.errors.required">
+                                Preencha o campo estado
                             </div>
                         </div>
                     </div>
@@ -182,17 +182,17 @@
                         <div *ngIf="(address.controls.country.errors && submit) || (address.controls.country.errors && !address.controls.country.pristine)"
                             class="alert alert-danger">
                             <div [hidden]="!address.controls.country.errors.required">
-                                Preencha o campo cidade
+                                Preencha o campo país
                             </div>
                         </div>
                     </div>
                     <div class="form-group col-md-4">
-                        <input type="text" class="form-control" name="state" id="state" placeholder="Estado"
-                            formControlName="state" />
-                        <div *ngIf="(address.controls.state.errors && submit) || (address.controls.state.errors && !address.controls.state.pristine)"
+                        <input type="text" name="zip" class="form-control" id="zip" placeholder="Código postal"
+                            formControlName="zip" [dropSpecialCharacters]="true" mask="00000-000" [validation]="false"/>
+                        <div *ngIf="(address.controls.zip.errors && submit) || (address.controls.zip.errors && !address.controls.zip.pristine)"
                             class="alert alert-danger">
-                            <div [hidden]="!address.controls.state.errors.required">
-                                Preencha o campo estado
+                            <div [hidden]="!address.controls.zip.errors.required">
+                                Preencha o campo CEP
                             </div>
                         </div>
                     </div>
@@ -293,7 +293,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="text-center pt-5"><button type="submit">Enviar</button></div>
+                <div *ngIf="!carregando" class="text-center pt-5"><button type="submit">Enviar</button></div>
+                <div *ngIf="carregando" class="text-center pt-5"><button><i class="fas fa-spinner fa-pulse"></i></button></div>
+
             </form>
         </div>
 

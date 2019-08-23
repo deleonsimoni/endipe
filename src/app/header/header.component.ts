@@ -35,9 +35,7 @@ export class HeaderComponent implements OnInit {
     }
 
     this.user = this.auth.getDecodedAccessToken(this.auth.getToken());
-    console.log(this.user);
     this.verifyUser();
-
   }
 
   focusItem() {

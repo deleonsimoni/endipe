@@ -6,6 +6,7 @@ const emailSender = require('../controllers/email.controller');
 const authCtrl = require('../controllers/auth.controller');
 const config = require('../config/config');
 const templateEmail = require('../config/templateEmails');
+const User = require('../models/user.model');
 
 const router = express.Router();
 module.exports = router;
@@ -13,6 +14,7 @@ module.exports = router;
 router.post('/register', asyncHandler(register), login);
 router.post('/login', passport.authenticate('local', { session: false }), login);
 router.get('/me', passport.authenticate('jwt', { session: false }), login);
+router.get('/refresh', passport.authenticate('jwt', { session: false }), refresh);
 
 
 async function register(req, res, next) {
@@ -23,10 +25,17 @@ async function register(req, res, next) {
   next()
 }
 
+async function refresh(req, res) {
+  let user = await User.findById(req.user._id);
+  user = user.toObject();
+  delete user.hashedPassword;
+  res.json({ user });
+
+}
+
 function login(req, res) {
   console.log('registrando');
   let user = req.user;
   let token = authCtrl.generateToken(user);
-  emailSender.sendMail(user.email, 'Inscrição Realizada com Sucesso', templateEmail.inscricaoSucesso);
   res.json({ token });
 }
