@@ -10,6 +10,7 @@ import { ModalNormasRodaConversaComponent } from '../modal-normas/modal-mediador
 import { ModalNormasPainelComponent } from '../modal-normas/modal-expositor-painel.component';
 import { ModalNormasMinicursoComponent } from '../modal-normas/modal-mediador-minu-curso.component';
 import { ModalNormasPosterComponent } from '../modal-normas/modal-expositor-poster.component';
+import { DownloadFileService } from '../services/download-file.service';
 
 
 @Component({
@@ -22,6 +23,7 @@ export class HomeComponent implements OnInit {
 
   subscriptionType: string;
   subscriptionValue: number;
+  carregando = false;
 
   instituicoes = [
     'Universidade Federal do Rio de Janeiro – UFRJ',
@@ -68,11 +70,15 @@ export class HomeComponent implements OnInit {
   ];
 
   imagensParcerias = [
-    './assets/img/parcerias/capes.jpg',
+    './assets/img/parcerias/CAPES.png',
     './assets/img/parcerias/cnpq.png',
+    './assets/img/parcerias/Faculdade de Educação.jpg',
     './assets/img/parcerias/faperj.png',
-    './assets/img/parcerias/fe.png',
-    './assets/img/parcerias/joseBonifacio.png'
+    './assets/img/parcerias/FEBF.png',
+    './assets/img/parcerias/FUJB.png',
+    './assets/img/parcerias/UCP.jpg',
+    './assets/img/parcerias/UERJ_LOGO_COR_TP.png',
+    './assets/img/parcerias/UFRJ.png'
   ];
 
   comites = [
@@ -161,7 +167,7 @@ export class HomeComponent implements OnInit {
     },
     {
       nome: 'Inclusão e acessibilidade',
-      equipe:[
+      equipe: [
         'Bianca Della Libera – IBC (coord.)',
         'Yrlla Ribeiro de Oliveira Carneiro da Silva – INES (coord)',
         'Adriana do Carmo Corrêa Gonçalves – FEBF/UERJ',
@@ -250,7 +256,7 @@ export class HomeComponent implements OnInit {
     },
     {
       nome: 'Sistema de inscrição e secretaria',
-      equipe:[
+      equipe: [
         'Silvana Mesquita – PUC-Rio (coord.)',
         'Helena Amaral Fontoura – FFP/UERJ (coord.)',
         'Talita da Silva Campelo – EB/SME-Caxias',
@@ -280,7 +286,7 @@ export class HomeComponent implements OnInit {
         'Naiara Miranda Rust – IBC',
         'Victor Giraldo – UFRJ'
       ],
-      pareceristas: [ ]
+      pareceristas: []
     },
     {
       titulo: 'Eixo 2',
@@ -295,7 +301,7 @@ export class HomeComponent implements OnInit {
         'Rosanne Evangelista Dias – UERJ',
         'Vania Finholdt Angelo Leite – FFP/UERJ'
       ],
-      pareceristas: [ ]
+      pareceristas: []
     },
     {
       titulo: 'Eixo 3',
@@ -312,7 +318,7 @@ export class HomeComponent implements OnInit {
         'Andrea Rosana Fetzener – UNIRIO',
         'Vera Maria Ferrão Candau – PUC-Rio'
       ],
-      pareceristas: [ ]
+      pareceristas: []
     },
     {
       titulo: 'Eixo 4',
@@ -330,7 +336,7 @@ export class HomeComponent implements OnInit {
         'Talita Vidal Pereira – FEBF/UERJ',
         'Yrlla Ribeiro de Oliveira Carneiro da Silva – INES'
       ],
-      pareceristas: [ ]
+      pareceristas: []
     },
     {
       titulo: 'Eixo 5',
@@ -349,7 +355,7 @@ export class HomeComponent implements OnInit {
         'Edméa Oliveira dos Santos – UFRRJ',
         'Walcea Barreto Alves – UFF'
       ],
-      pareceristas: [ ]
+      pareceristas: []
     },
     {
       titulo: 'Eixo 6',
@@ -367,7 +373,7 @@ export class HomeComponent implements OnInit {
         'Patricia Baroni – UFRJ',
         'Wânia Gonzalez – UNESA'
       ],
-      pareceristas: [ ]
+      pareceristas: []
     }
   ];
 
@@ -375,74 +381,75 @@ export class HomeComponent implements OnInit {
     {
       titulo: 'Visão Geral',
       horarios: [
-          [
+        [
           '08:30 - 10:00', '', 'Minicurso & Roda de Conversa', 'Minicurso & Roda de Conversa', 'Minicurso & Roda de Conversa'
-          ],
-          [
+        ],
+        [
           '10:15 - 12:30', '', 'Simpósios', 'Simpósios', 'Simpósios'
-          ],
-          [
+        ],
+        [
           '12:30 - 13:30', '', 'Intervalo', 'Intervalo', 'Intervalo'
-          ],
-          [
+        ],
+        [
           '13:30 - 15:30', 'Credenciamento <br/> Apresentações culturais', 'Painéis & Pôsteres', 'Painéis & Pôsteres', 'Painéis & Pôsteres'
-          ],
-          [
+        ],
+        [
           '16:00 - 18:00', 'Credenciamento <br/> Apresentações Culturais <br/> Sessão Solene de Abertura', 'Painéis & Pôsteres', 'Painéis & Pôsteres / Reuniões de Entidades e de Redes', 'Painéis & Pôsteres / Reuniões de Entidades e de Redes'
-          ],
-          [
+        ],
+        [
           '18:00 - 20:00', 'Mesa de Abertura', 'Sessões Especiais', 'Sessões Especiais', 'Sessão de Encerramento Assembleia ENDIPE'
-          ],
-          [
+        ],
+        [
           '20:00 - 22:00', 'Apresentação cultural', 'Lançamento de livros e de Redes', 'Lançamento de livros e de Redes', ''
-          ],
+        ],
       ]
     },
     {
       titulo: 'Abertura',
-      horarios: [ ]
+      horarios: []
     },
     {
       titulo: 'Atividades Culturais',
-      horarios: [ ]
+      horarios: []
     },
     {
       titulo: 'Minicursos',
-      horarios: [ ]
+      horarios: []
     },
     {
       titulo: 'Rodas de Conversa',
-      horarios: [ ]
+      horarios: []
     },
     {
       titulo: 'Simpósios',
-      horarios: [ ]
+      horarios: []
     },
     {
       titulo: 'Painéis',
-      horarios: [ ]
+      horarios: []
     },
     {
       titulo: 'Pôsteres',
-      horarios: [ ]
+      horarios: []
     },
     {
       titulo: 'Sessões Especiais',
-      horarios: [ ]
+      horarios: []
     },
     {
       titulo: 'Lançamentos de Livros',
-      horarios: [ ]
+      horarios: []
     },
     {
       titulo: 'Reuniões de Entidades e de Redes',
-      horarios: [ ]
+      horarios: []
     },
   ]
 
   constructor(
     private router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private download: DownloadFileService
   ) {
 
     this.router.events.subscribe(event => {
@@ -451,7 +458,7 @@ export class HomeComponent implements OnInit {
         if (tree.fragment) {
           const element = document.querySelector('#' + tree.fragment);
           if (element) {
-            element.scrollIntoView({behavior: 'smooth', block: 'start', inline: 'nearest'});
+            element.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
           }
         }
       }
@@ -461,10 +468,27 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() { }
 
+  downloadTemplate(nameFile) {
+    const vm = this;
+
+    function sucessoDownload() {
+      vm.carregando = false;
+    }
+
+    function falhaDownload(err) {
+      this.toastr.error('Erro ao relizar download.', 'Erro: ');
+      console.log(err);
+      vm.carregando = false;
+    }
+
+    this.carregando = true;
+    this.download.getFile(nameFile, sucessoDownload, falhaDownload);
+  }
+
   openDialog(): void {
     const dialogRef = this.dialog.open(ModalInscricaoComponent, {
       // width: '250px',
-      data: {subscriptionType: this.subscriptionType, subscriptionValue: this.subscriptionValue }
+      data: { subscriptionType: this.subscriptionType, subscriptionValue: this.subscriptionValue }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -486,35 +510,35 @@ export class HomeComponent implements OnInit {
 
   public openDialogNormas() {
     const dialogRef = this.dialog.open(ModalNormasComponent, {
-      data: {  },
+      data: {},
       height: '550vh'
     });
   }
 
   public openDialogMinicurso() {
     const dialogRef = this.dialog.open(ModalNormasMinicursoComponent, {
-      data: {  },
+      data: {},
       height: '550vh'
     });
   }
 
   public openDialogPainel() {
     const dialogRef = this.dialog.open(ModalNormasPainelComponent, {
-      data: {  },
+      data: {},
       height: '550vh'
     });
   }
 
   public openDialogRoda() {
     const dialogRef = this.dialog.open(ModalNormasRodaConversaComponent, {
-      data: {  },
+      data: {},
       height: '550vh'
     });
   }
 
   public openDialogPoster() {
     const dialogRef = this.dialog.open(ModalNormasPosterComponent, {
-      data: {  },
+      data: {},
       height: '550vh'
     });
   }

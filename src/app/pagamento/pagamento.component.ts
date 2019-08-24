@@ -80,7 +80,11 @@ export class PagamentoComponent implements OnInit {
 
   public gerarPagamento() {
     if (!this.filesPDF) {
-      this.toastr.error('É necessário selecionar o arquivo de comprovantede vinculo com a instituição', 'Atenção');
+      this.toastr.error('É necessário selecionar o arquivo de comprovante do vinculo com a instituição', 'Atenção');
+      return;
+      // tslint:disable-next-line: align
+    } if (this.filesPDF[0].size > 2500 * 1027) {
+      this.toastr.error('O comprovante deve ter no máximo 2MB', 'Atenção');
       return;
     } if (!this.paymentForm.value.categoryId) {
       // tslint:disable-next-line: align

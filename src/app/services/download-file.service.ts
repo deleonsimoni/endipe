@@ -12,11 +12,14 @@ export class DownloadFileService {
     private http: HttpClient
   ) { }
 
-  getFile(fileName) {
-    this.http.get(`${this.baseUrl}user/downloadFile?fileName=${fileName}`).subscribe((res: any) => {
+  getFile(fileName, success, falha) {
+    this.http.get(`${this.baseUrl}/user/downloadFile?fileName=${fileName}`).subscribe((res: any) => {
       const arrayBufferView = new Uint8Array(res.data.Body.data);
-      const blob = new Blob([arrayBufferView], { type: 'application/octet-stream' } );
+      const blob = new Blob([arrayBufferView], { type: 'application/octet-stream' });
       saveAs(blob, fileName);
+      success();
+    }, err => {
+      falha(err);
     });
   }
 }

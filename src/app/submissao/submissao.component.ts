@@ -22,18 +22,18 @@ export class SubmissaoComponent implements OnInit {
   public authors = new Array();
   public showAdd = true;
   public workOptions = [
-    {id: 1, name: 'Pôster'},
-    {id: 2, name: 'Painel'},
-    {id: 3, name: 'Minicurso'},
-    {id: 4, name: 'Roda de conversa'}
+    { id: 1, name: 'Pôster' },
+    { id: 2, name: 'Painel' },
+    { id: 3, name: 'Minicurso' },
+    { id: 4, name: 'Roda de conversa' }
   ];
   public eixos = [
-    {id: 1, name: 'Formação docente'},
-    {id: 2, name: 'Currículo e avaliação'},
-    {id: 3, name: 'Direitos humanos, Interculturalidade e Religiões'},
-    {id: 4, name: 'Nova epistemologia, Diferença, Biodiversidade, Democracia e Inclusão'},
-    {id: 5, name: 'Educação, Comunicação e Técnologia'},
-    {id: 6, name: 'Infâncias, Juventudes e Vida Adulta'}
+    { id: 1, name: 'Formação docente' },
+    { id: 2, name: 'Currículo e avaliação' },
+    { id: 3, name: 'Direitos humanos, Interculturalidade e Religiões' },
+    { id: 4, name: 'Nova epistemologia, Diferença, Biodiversidade, Democracia e Inclusão' },
+    { id: 5, name: 'Educação, Comunicação e Técnologia' },
+    { id: 6, name: 'Infâncias, Juventudes e Vida Adulta' }
   ];
   private filesDOC: FileList;
   private filesPDF: FileList;
@@ -79,58 +79,66 @@ export class SubmissaoComponent implements OnInit {
   }
 
   public upload() {
-      if (!this.filesPDF) {
-        this.toastr.error('É necessário selecionar o arquivo PDF', 'Atenção');
-        return;
-      } if (!this.filesDOC[0]) {
-        // tslint:disable-next-line: align
-        this.toastr.error('É necessário selecionar o arquivo DOC', 'Atenção');
-        return;
-      } if (this.filesPDF[0].type.indexOf('pdf') === -1){
-        this.toastr.error('O arquivo Upload PDF precisa ser um PDF.', 'Atenção');
-        //fileInput.value = '';
-        return;
+    if (!this.filesPDF) {
+      this.toastr.error('É necessário selecionar o arquivo PDF', 'Atenção');
+      return;
+    } if (!this.filesDOC) {
       // tslint:disable-next-line: align
-      } if (this.filesDOC[0].type.indexOf('doc') === -1
-           && this.filesDOC[0].type.indexOf('docx') === -1
-           && this.filesDOC[0].type.indexOf('msword') === -1) {
-        this.toastr.error('O arquivo Upload DOC precisa ser um DOC.', 'Atenção');
-        return;
+      this.toastr.error('É necessário selecionar o arquivo DOC', 'Atenção');
+      return;
+    } if (this.filesPDF[0].type.indexOf('pdf') === -1) {
+      this.toastr.error('O arquivo Upload PDF precisa ser um PDF.', 'Atenção');
+      //fileInput.value = '';
+      return;
       // tslint:disable-next-line: align
-      } if (!this.submissionForm.value.axisId) {
-        this.toastr.error('Selecione um eixo.', 'Atenção');
-        return;
-      } if (!this.submissionForm.value.modalityId) {
-        // tslint:disable-next-line: align
-        this.toastr.error('Selecione uma modalidade.', 'Atenção');
-        return;
-      } if (!this.submissionForm.value.title) {
-        // tslint:disable-next-line: align
-        this.toastr.error('Selecione o titulo do trabalho.', 'Atenção');
-        return;
-      } if (this.submissionForm.value.authors && !this.submissionForm.value.authors[0].email) {
-        // tslint:disable-next-line: align
-        this.toastr.error('Indique ao menos um autor do trabalho.', 'Atenção');
-        return;
-      } else {
-        this.enviando = true;
-        this.uploadService.uploadFile(this.filesDOC[0], this.filesPDF[0], 'trabalhos', this.submissionForm.value).subscribe(() => {
-          this.carregando = true;
-          this.authService.refresh().subscribe((res: any) => {
-            this.user = res.user;
-            this.carregando = false;
-          });
-
-          this.enviando = false;
-          this.toastr.success('Trabalho submetido com sucesso.', 'Sucesso');
-          this.submissionForm.reset();
-          this.filesDOC = null;
-          this.filesPDF = null;
-        }, err => {
-          this.enviando = false;
-          this.toastr.error('Servidor momentaneamente inoperante.', 'Erro: ');
+    } if (this.filesDOC[0].type.indexOf('doc') === -1
+      && this.filesDOC[0].type.indexOf('docx') === -1
+      && this.filesDOC[0].type.indexOf('msword') === -1) {
+      this.toastr.error('O arquivo Upload DOC precisa ser um DOC.', 'Atenção');
+      return;
+      // tslint:disable-next-line: align
+    } if (this.filesPDF[0].size > 2500 * 1027) {
+      this.toastr.error('O arquivo PDF deve possuir no máximo 2MB', 'Atenção');
+      return;
+    } if (this.filesDOC[0].size > 2500 * 1027) {
+      // tslint:disable-next-line: align
+      this.toastr.error('O arquivo DOC deve possuir no máximo 2MB', 'Atenção');
+      return;
+      // tslint:disable-next-line: align
+    } if (!this.submissionForm.value.axisId) {
+      this.toastr.error('Selecione um eixo.', 'Atenção');
+      return;
+    } if (!this.submissionForm.value.modalityId) {
+      // tslint:disable-next-line: align
+      this.toastr.error('Selecione uma modalidade.', 'Atenção');
+      return;
+    } if (!this.submissionForm.value.title) {
+      // tslint:disable-next-line: align
+      this.toastr.error('Selecione o titulo do trabalho.', 'Atenção');
+      return;
+    } if (this.submissionForm.value.authors && !this.submissionForm.value.authors[0].email) {
+      // tslint:disable-next-line: align
+      this.toastr.error('Indique ao menos um autor do trabalho.', 'Atenção');
+      return;
+    } else {
+      this.enviando = true;
+      this.uploadService.uploadFile(this.filesDOC[0], this.filesPDF[0], 'trabalhos', this.submissionForm.value).subscribe(() => {
+        this.carregando = true;
+        this.authService.refresh().subscribe((res: any) => {
+          this.user = res.user;
+          this.carregando = false;
         });
-      }
+
+        this.enviando = false;
+        this.toastr.success('Trabalho submetido com sucesso.', 'Sucesso');
+        this.submissionForm.reset();
+        this.filesDOC = null;
+        this.filesPDF = null;
+      }, err => {
+        this.enviando = false;
+        this.toastr.error('Servidor momentaneamente inoperante.', 'Erro: ');
+      });
+    }
   }
 
   public getFileNameDOC(): string {

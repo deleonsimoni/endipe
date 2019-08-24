@@ -10,73 +10,76 @@
                         <h2>Pagamento</h2>
                     </div>
 
-                        <div *ngIf="carregando">
-                            <i class="fas fa-spinner fa-pulse">Aguarde...</i>
-                        </div>
+                    <div *ngIf="carregando">
+                        <i class="fas fa-spinner fa-pulse"></i>Aguarde...
+                    </div>
 
-                        <form [formGroup]="paymentForm" (ngSubmit)="gerarPagamento()" role="form" class="contactForm">
-                            <div *ngIf="!user.payment && !carregando">
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        Para qual categoria gostaria de se inscrever? <br/><br/>
-                                        <select name="id" formControlName="categoryId">
-                                            <option *ngFor="let categoria of categorias" [ngValue]="categoria.id">
-                                                {{categoria.name}}
-                                            </option>
-                                        </select>
-                                    </div>
-                                    <br/>
+                    <form [formGroup]="paymentForm" (ngSubmit)="gerarPagamento()" role="form" class="contactForm">
+                        <div *ngIf="!user.payment && !carregando">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    Para qual categoria gostaria de se inscrever? <br /><br />
+                                    <select name="id" formControlName="categoryId">
+                                        <option *ngFor="let categoria of categorias" [ngValue]="categoria.id">
+                                            {{categoria.name}}
+                                        </option>
+                                    </select>
                                 </div>
-
-                                <div class="form-row">
-                                    <h3>Valor Total<strong> R${{valorTotal}}</strong></h3>
-                                </div>
-
-                                <div class="custom-file col-md-4">
-                                    <input type="file" class="custom-file-input"
-                                        data-max-size="2048" id="customPreReadFile"
-                                        (change)="setFileNamePDF($event.target.files)" #fileInput />
-                                    <label class="custom-file-label"
-                                        for="customPreReadFile">{{ getFileNamePDF() }}</label>
-                                </div>
+                                <br />
                             </div>
-                            <div *ngIf="user.payment">
-                                       
-                                    <div class="form-row" *ngIf="!user.payment.icPaid">
-                                        <h3><strong style="color: rgb(161, 161, 28);">Aguarde, estamos validando seu pagamento</strong></h3>
-                                    </div>
-                                    <div class="form-row" *ngIf="user.payment.icPaid">
-                                        <h3><strong style="color: green;">Pagamento processado, agora você já pode submeter seus trabalhos</strong></h3>
-                                    </div>
 
-                                </div>
-                        <br/><br/>
+                            <div class="form-row">
+                                <h3>Valor Total<strong> R${{valorTotal}}</strong></h3>
+                            </div>
+
+                            <div class="custom-file col-md-4">
+                                <input type="file" class="custom-file-input" data-max-size="2048" id="customPreReadFile"
+                                    (change)="setFileNamePDF($event.target.files)" #fileInput />
+                                <label class="custom-file-label" for="customPreReadFile">{{ getFileNamePDF() }}</label>
+                            </div>
+                        </div>
+                        <div *ngIf="user.payment">
+
+                            <div class="form-row" *ngIf="!user.payment.icPaid">
+                                <h3 style="color: rgb(161, 161, 28);">Aguarde, estamos validando seu pagamento</h3>
+                            </div>
+                            <div class="form-row" *ngIf="user.payment.icPaid">
+                                <h3 style="color: green;">Pagamento processado, agora você já pode submeter seus
+                                    trabalhos</h3>
+                            </div>
+
+                        </div>
+                        <br /><br />
 
                         <div class="form-row">
                             <div class="form-group">
-                                O pagamento deverá ser realizado via <strong>transferência bancária</strong> para a conta do congresso Endipe. 
+                                O pagamento deverá ser realizado via <strong>transferência bancária</strong> para a
+                                conta do congresso Endipe.
                                 Após pagamento, enviar comprovante via email para: xxendiperio2020@gmail.com
-                                <br/>
-                                O prazo para verificação de comprovante de inscrição da categoria e realização da tranferência é de 5 dias.
-                                <br/><br/>
+                                <br />
+                                O prazo para verificação de comprovante de inscrição da categoria e realização da
+                                tranferência é de 5 dias.
+                                <br /><br />
                                 Vale lembrar que o pagamento da inscrição é condicionado para a submissão de trabalhos.
-                                <br/><br/>
+                                <br /><br />
 
                                 Conta para transferência:
-                                <br/><strong>Banco do Brasil
-                                <br/>FUNDACAO UNIVERSITARIA JOSE BONIFACIO
-                                <br/>CNPJ: 42.429.480/0001-50
-                                <br/>Agência: 2234-9
-                                <br/>Conta: 80.555-6</strong>
-                                
+                                <br /><strong>Banco do Brasil
+                                    <br />FUNDACAO UNIVERSITARIA JOSE BONIFACIO
+                                    <br />CNPJ: 42.429.480/0001-50
+                                    <br />Agência: 2234-9
+                                    <br />Conta: 80.555-6</strong>
+
                             </div>
                         </div>
 
 
                         <div *ngIf="!user.payment" class="row justify-content-center">
-                            <button *ngIf="!enviando" class="btn-get-started" type="submit">Confirmar e Enviar Comprovante</button>
+                            <button *ngIf="!enviando" class="btn-get-started" type="submit">Confirmar e Enviar
+                                Comprovante</button>
                         </div>
-                        <div *ngIf="enviando" class="row justify-content-center"><button><i class="fas fa-spinner fa-pulse"></i></button></div>
+                        <div *ngIf="enviando" class="row justify-content-center"><button><i
+                                    class="fas fa-spinner fa-pulse"></i></button></div>
 
                         <!--<div class="text-center pt-5"><button type="submit">Realizar Pagamento</button></div>-->
                     </form>

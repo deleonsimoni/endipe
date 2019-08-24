@@ -12,30 +12,36 @@
                                 <h2>Submissão de trabalho</h2>
                             </div>
                             <div *ngIf="carregando">
-                                <i class="fas fa-spinner fa-pulse">Aguarde...</i>
+                                <i class="fas fa-spinner fa-pulse"></i>Aguarde...
                             </div>
                             <div *ngIf="!carregando">
                                 <div *ngIf="!user.payment || !user.payment.icPaid ">
-                                    <h3><strong style="color:red">Para realizar submissões de trabalhos você precisa ter um pagamento válido</strong></h3>
+                                    <h1 style="color:red; font-family: 'Montserrat', sans-serif;">Para realizar
+                                        submissões de trabalhos você precisa ter
+                                        um pagamento válido</h1>
                                 </div>
                                 <div *ngIf="user.payment && user.payment.icPaid ">
                                     <div *ngIf="user.works && user.works.length > 0" class="form-row">
-                                        <h3><strong>Você já submeteu {{ user.works.length }} trabalho(s)</strong></h3>
+                                        <h3>Você já submeteu {{ user.works.length }} trabalho(s)</h3>
                                     </div>
-                                    <br/>
+                                    <br />
                                     <div *ngIf="!user.works || user.works.length < 2" class="form-row">
                                         <div class="form-group col-md-6">
                                             <div>
                                                 <select class="form-control" id="opt" formControlName="modalityId">
-                                                    <option disabled="true" [selected]="!submissionForm.value.modalityId">Selecione
+                                                    <option disabled="true"
+                                                        [selected]="!submissionForm.value.modalityId">Selecione
                                                         a modalidade</option>
-                                                    <option *ngFor="let option of workOptions" [value]="option.id">{{ option.name }}
+                                                    <option *ngFor="let option of workOptions" [value]="option.id">
+                                                        {{ option.name }}
                                                     </option>
                                                 </select>
                                             </div>
                                             <div class="mt-2">
-                                                <select class="form-control" placeholder="Eixo" id="opt" formControlName="axisId">
-                                                    <option disabled="true" [selected]="!submissionForm.value.axisId">Selecione o
+                                                <select class="form-control" placeholder="Eixo" id="opt"
+                                                    formControlName="axisId">
+                                                    <option disabled="true" [selected]="!submissionForm.value.axisId">
+                                                        Selecione o
                                                         eixo</option>
                                                     <option *ngFor="let eixo of eixos" [value]="eixo.id">{{ eixo.name }}
                                                     </option>
@@ -52,8 +58,7 @@
                                                     for="customPreReadFile">{{ getFileNameDOC() }}</label>
                                             </div>
                                             <div class="custom-file mt-2">
-                                                <input type="file" class="custom-file-input"
-                                                    accept="application/pdf"
+                                                <input type="file" class="custom-file-input" accept="application/pdf"
                                                     data-max-size="2048" id="customPreReadFile"
                                                     (change)="setFileNamePDF($event.target.files)" #fileInput />
                                                 <label class="custom-file-label"
@@ -65,17 +70,22 @@
                                                 *ngFor="let item of submissionForm.get('authors').controls; let i = index;">
                                                 <div [formArrayName]="i">
                                                     <input type="text" name="autor" class="form-control"
-                                                        [ngClass]="{'mt-2': i >= 1}" id="autor" placeholder="Email do participante"
-                                                        formControlName="email" />
+                                                        [ngClass]="{'mt-2': i >= 1}" id="autor"
+                                                        placeholder="Email do participante" formControlName="email" />
                                                 </div>
                                             </div>
                                             <button class="btn-get-started" type="button" (click)="addAuthors()"
                                                 *ngIf="showAdd"><i class="fas fa-plus"></i> Autores</button>
                                         </div>
                                     </div>
-                                    <div *ngIf="!user.works || user.works.length < 2" class="row justify-content-center">
-                                        <button *ngIf="!enviando" class="btn-get-started" type="submit">Submeter</button>
-                                        <div *ngIf="enviando" class="row justify-content-center"><button class="btn-get-started"><i class="fas fa-spinner fa-pulse"></i></button></div>
+                                    <div *ngIf="!user.works || user.works.length < 2"
+                                        class="row justify-content-center">
+                                        <button *ngIf="!enviando" class="btn-get-started"
+                                            type="submit">Submeter</button>
+
+                                        <div *ngIf="enviando" class="row justify-content-center"><button
+                                                class="btn-get-started"><i class="fas fa-spinner fa-pulse"></i></button>
+                                        </div>
 
                                     </div>
                                 </div>
