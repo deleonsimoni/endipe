@@ -9,40 +9,122 @@
                     <div class="section-header">
                         <h2>Painel Gerencial</h2>
                     </div>
-                    <div class="table-responsive">
-                        <table class="table" style="">
-                            <thead>
-                                <tr class="text-center">
-                                    <th scope="col">CPF</th>
-                                    <th scope="col">Nome</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Telefone</th>
-                                    <th scope="col">Trabalhos</th>
-                                    <th scope="col">Modalidade</th>
-                                    <th scope="col">Pagamento</th>
-                                    <th scope="col">Validar Pagamento</th>
-
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="text-center" *ngFor="let user of users">
-                                    <td>{{ user.document }}</td>
-                                    <td>{{ user.fullname }}</td>
-                                    <td>{{ user.email }}</td>
-                                    <td>{{ user.phones ? user.phones.telephone ? user.phones.telephone : '' : '' }} / {{ user.phones ? user.phones.cellphone ? user.phones.cellphone : '' : '' }}</td>
-                                    <td>{{ user.works.length > 1 ? user.works.length + ' trabalhos' : user.works.length + ' trabalho' }}</td>
-                                    <td>Ouvinte</td>
-                                    <td>{{ user.payment ? 'Ver Pagamento' : '' }}</td>
-
-                                    <td>
-                                        <div class="form-check">
-                                            <input type="checkbox" class="mr-2">
-                                            <label for="">Pago</label>
+                    <div *ngFor="let user of users" [ngClass]="{'mb-3': users.length > 1}">
+                        <div class="card-works" [ngClass]="{'no-radius-bottom': infos == true}">
+                            <!-- *ngFor="let user of users" -->
+                            <div class="row">
+                                <div class="col-sm-3 border-right">
+                                    <small>NOME</small>
+                                    <h4>{{ user.fullname }}</h4>
+                                </div>
+                                <div class="col-sm-3 border-right">
+                                    <small>EMAIL</small>
+                                    <h4>{{ user.email }}</h4>
+                                </div>
+                                <div class="col-sm-3 border-right">
+                                    <small>MODALIDADE</small>
+                                    <h4>{{ retrieveModality(user.modalityId[0]).name }}</h4>
+                                </div>
+                                <div class="col-sm-2 border-right">
+                                    <small>STATUS</small>
+                                    <h4>{{ user.payment && user.payment.icPaid == true ? 'Pagamento efetuado' : 'Pagamento pendente' }}
+                                    </h4>
+                                </div>
+                                <div class="col-sm-1 text-center align-self-center pointer"
+                                    (click)="infos = true ? infos == false : infos = true">
+                                    <i class="fa fa-chevron-down"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="work-content" *ngIf="infos == true" @showInfos>
+                            <div class="section first">
+                                <h6>Dados pessoais</h6>
+                            </div>
+                            <div class="row align-items-center">
+                                <div class="col-sm-4 mb-2">
+                                    <strong>Telefone</strong>
+                                    <p>{{ user.phones.telephone ? user.phones.telephone : '-----' }}</p>
+                                </div>
+                                <div class="col-sm-4 mb-2">
+                                    <strong>Celular</strong>
+                                    <p>{{ user.phones.cellphone ? user.phones.cellphone : '-----' }}</p>
+                                </div>
+                                <div class="col-sm-4 mb-2">
+                                    <strong>Data de inscrição</strong>
+                                    <p>{{ user.createdAt | date: 'dd/MM/yyyy' }}</p>
+                                </div>
+                            </div>
+                            <div class="section">
+                                <h6>Pagamento</h6>
+                            </div>
+                            <div class="row align-items-center">
+                                <div class="col-sm-4">
+                                    <strong>Categoria</strong>
+                                    <p>{{ user.payment && user.payment.categoryId ? retrieveCategories(user.payment.categoryId).name : '----' }}
+                                    </p>
+                                </div>
+                                <div class="col-sm-4">
+                                    <strong>Valor total</strong>
+                                    <p>{{ user.payment && user.payment.amount ? 'R$ ' + user.payment.amount : '----' }}
+                                    </p>
+                                </div>
+                                <div class="col-sm-4">
+                                    <strong>Confirmar pagamento</strong>
+                                    <div class="form-group">
+                                        <div class="form-check-inline">
+                                            <input class="form-check-input" type="radio" name="gridRadios"
+                                                id="gridRadios1" value="opcao1" checked>
+                                            <label class="form-check-label" for="gridRadios1">
+                                                Sim
+                                            </label>
                                         </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                        <div class="form-check-inline">
+                                            <input class="form-check-input" type="radio" name="gridRadios"
+                                                id="gridRadios2" value="opcao2">
+                                            <label class="form-check-label" for="gridRadios2">
+                                                Não
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <!-- <strong>Download comprovante</strong> -->
+                                    <p><a [routerLink]="" (click)="download(user.payment.pathS3)">Download
+                                            comprovante</a>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="section">
+                                <h6>Trabalhos</h6>
+                            </div>
+                            <div class="row" *ngFor="let work of user.works">
+                                <div class="col-sm-4 align-self-center">
+                                    <strong>Título</strong>
+                                    <p>{{ work.title }}</p>
+                                </div>
+                                <div class="col-sm-4 align-self-center">
+                                    <strong>Eixo</strong>
+                                    <p>{{ work.axisId }}</p>
+                                </div>
+                                <div class="col-sm-4 align-self-center">
+                                    <strong>Modalidade</strong>
+                                    <p>{{ retrieveModality(user.modalityId[0]).name }}</p>
+                                </div>
+                                <div class="col-sm-4 mt-2">
+                                    <strong>Autores</strong>
+                                    <span *ngFor="let author of work.authors">
+                                        <p>{{ author.email }}</p>
+                                    </span>
+                                </div>
+                                <div class="col-sm-4 mt-2">
+                                    <strong>Arquivos</strong>
+                                    <p><a [routerLink]="" (click)="download(work.pathS3DOC)">Download doc</a>
+                                    </p>
+                                    <p><a [routerLink]="" (click)="download(work.pathS3PDF)">Download pdf</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
