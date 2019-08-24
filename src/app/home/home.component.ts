@@ -274,7 +274,7 @@ export class HomeComponent implements OnInit {
       investigação e formação de professores;
       metodologias e práticas curriculares de formação docente.`,
       coordenacao: [
-        'Alexandra Garcia Ferreira Lima – UERJ FFP',
+        'Alexandra Garcia Ferreira Lima – FFP/UERJ',
         'Graça Regina Reis – CAp UFRJ',
         'Monica Vasconcellos – UFF',
         'Naiara Miranda Rust – IBC',
@@ -325,9 +325,9 @@ export class HomeComponent implements OnInit {
       como devir e como possibilidade; processo que só pode se viabilizar com e na diferença, no respeito mútuo, no cuidado de
       todas as formas de vida, não apenas a humana, e na valorização da alteridade, numa perspectiva inclusiva.`,
       coordenacao: [
-        'Inês Barbosa de Oliveira – ESTÁCIO',
+        'Inês Barbosa de Oliveira – UNESA',
         'Marcia Pletsch – UFRRJ',
-        'Talita Vidal Pereira – FEBEF/UERJ',
+        'Talita Vidal Pereira – FEBF/UERJ',
         'Yrlla Ribeiro de Oliveira Carneiro da Silva – INES'
       ],
       pareceristas: [ ]
