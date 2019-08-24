@@ -31,12 +31,12 @@
                                     </h4>
                                 </div>
                                 <div class="col-sm-1 text-center align-self-center pointer"
-                                    (click)="infos = true ? infos == false : infos = true">
+                                    (click)="(infos ? infos = false : infos = true);selectUser(user._id)">
                                     <i class="fa fa-chevron-down"></i>
                                 </div>
                             </div>
                         </div>
-                        <div class="work-content" *ngIf="infos == true" @showInfos>
+                        <div class="work-content" *ngIf="user._id == userSelect" @showInfos>
                             <div class="section first">
                                 <h6>Dados pessoais</h6>
                             </div>
@@ -71,20 +71,35 @@
                                 <div class="col-sm-4">
                                     <strong>Confirmar pagamento</strong>
                                     <div class="form-group">
+                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                            <button (click)="validarPagamento(user)"
+                                                [ngStyle]="{'background-color: green;color:white':  user.payment.icPaid, 'background-color: white;color: black': user.payment.icPaid}"
+                                                type="button" [ngClass]="{'btn btn-success': user.payment.icPaid}"
+                                                class="btn">Sim</button>
+                                            <button (click)="invalidarPagamento(user)"
+                                                [ngStyle]="{'background-color: red;color:white':  !user.payment.icPaid, 'background-color: white;color: black': user.payment.icPaid}"
+                                                type="button" [ngClass]="{'btn btn-danger': !user.payment.icPaid}"
+                                                class="btn">Não</button>
+                                        </div>
+
+
+
+
+                                        <!--
                                         <div class="form-check-inline">
                                             <input class="form-check-input" type="radio" name="gridRadios"
-                                                id="gridRadios1" value="opcao1" checked>
+                                                id="gridRadios1" value="opcao1" [(ngModel)]="user.payment.icPaid">
                                             <label class="form-check-label" for="gridRadios1">
                                                 Sim
                                             </label>
                                         </div>
                                         <div class="form-check-inline">
-                                            <input class="form-check-input" type="radio" name="gridRadios"
-                                                id="gridRadios2" value="opcao2">
+                                            <input class="form-check-input" type="radio" name="gridRadios" (click)=""
+                                                id="gridRadios2" value="opcao2" [(ngModel)]="user.payment.icPaid">
                                             <label class="form-check-label" for="gridRadios2">
                                                 Não
                                             </label>
-                                        </div>
+                                        </div>-->
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
@@ -124,6 +139,7 @@
                                     </p>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>

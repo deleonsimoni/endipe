@@ -11,6 +11,7 @@ import { ModalNormasPainelComponent } from '../modal-normas/modal-expositor-pain
 import { ModalNormasMinicursoComponent } from '../modal-normas/modal-mediador-minu-curso.component';
 import { ModalNormasPosterComponent } from '../modal-normas/modal-expositor-poster.component';
 import { DownloadFileService } from '../services/download-file.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -449,7 +450,9 @@ export class HomeComponent implements OnInit {
   constructor(
     private router: Router,
     private dialog: MatDialog,
-    private download: DownloadFileService
+    private download: DownloadFileService,
+    private toastr: ToastrService,
+
   ) {
 
     this.router.events.subscribe(event => {
@@ -476,7 +479,11 @@ export class HomeComponent implements OnInit {
     }
 
     function falhaDownload(err) {
-      this.toastr.error('Erro ao relizar download.', 'Erro: ');
+      if (err.status === 401) {
+        vm.toastr.error('Você precisa estar logado para fazer o download', 'Atenção: ');
+      } else {
+        vm.toastr.error('Erro ao relizar download. Tente novamente mais tarde', 'Erro: ');
+      }
       console.log(err);
       vm.carregando = false;
     }

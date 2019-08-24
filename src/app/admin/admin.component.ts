@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { trigger, style, state, transition, animate } from '@angular/animations';
 import { DownloadFileService } from '../services/download-file.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-admin',
@@ -47,14 +48,45 @@ export class AdminComponent implements OnInit {
   ];
 
   carregando = false;
+  userSelect: number;
 
   constructor(
     private authService: AuthService,
-    private downloadService: DownloadFileService
+    private downloadService: DownloadFileService,
+    @Inject('BASE_API_URL') private baseUrl: string,
+    private http: HttpClient
   ) { }
 
   ngOnInit() {
     this.retrieveAdminData();
+  }
+
+  validarPagamento(user) {
+
+    this.http.post(`${this.baseUrl}/admin/validatePayment/` + user._id, {}).subscribe((res: any) => {
+      user.payment.icPaid = true;
+    }, err => {
+      console.log(err);
+    });
+  }
+
+  invalidarPagamento(user) {
+    this.http.post(`${this.baseUrl}/admin/invalidatePayment/` + user._id, {}).subscribe((res: any) => {
+      user.payment.icPaid = false;
+    }, err => {
+      console.log(err);
+    });
+  }
+
+  selectUser(user) {
+
+    if (this.userSelect === user) {
+      this.userSelect = null;
+    } else {
+      this.userSelect = user;
+    }
+
+
   }
 
   download(nameFile) {
