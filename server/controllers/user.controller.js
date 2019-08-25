@@ -35,7 +35,7 @@ function getPrice(id) {
   let dateNow = new Date();
 
   let seasons = Prices.prices.filter(price => price.id == id)[0].seasons;
-  
+
   return seasons.filter(season => dateNow.getTime() >= season.dateIni.getTime() && dateNow.getTime() <= season.dateEnd.getTime())[0].price;
 
 }
@@ -46,7 +46,7 @@ async function generatePayment(req, res) {
   var buffer = null;
   var formulario = null;
   var payment = null;
-  form.on('field', (name, value) => { 
+  form.on('field', (name, value) => {
     formulario = JSON.parse(value);
   });
 
@@ -69,17 +69,17 @@ async function generatePayment(req, res) {
 
       req.user.payment = payment;
 
-      User.findOneAndUpdate({_id: req.user._id}, {$set: {payment: req.user.payment}}, function (err, doc) {
-          if (err) {
-              console.log("erro ao atualizar o usuario: ", err);
-          } else {
-              console.log("Pagamento registrado com sucesso");
-          }
-        });
-     
+      User.findOneAndUpdate({ _id: req.user._id }, { $set: { payment: req.user.payment } }, function (err, doc) {
+        if (err) {
+          console.log("erro ao atualizar o usuario: ", err);
+        } else {
+          console.log("Pagamento registrado com sucesso");
+        }
+      });
+
     }).catch(err => {
-        console.log(err);
-        res.sendStatus(500);
+      console.log(err);
+      res.sendStatus(500);
     });
   });
 
@@ -106,71 +106,72 @@ async function uploadWork(req, res) {
     console.log(formulario);
   });*/
 
- // var formfields = await new Promise(function (resolve, reject) {
-    form.on('field', (name, value) => { 
-      formulario = JSON.parse(value);
-      //resolve(formulario);
-    });
+  // var formfields = await new Promise(function (resolve, reject) {
+  form.on('field', (name, value) => {
+    formulario = JSON.parse(value);
+    //resolve(formulario);
+  });
 
   //});
 
-  
+
 
   //formfields = await new Promise(function (resolve, reject) {
-    form.on('file', (field, file) => {
+  form.on('file', (field, file) => {
 
-      if(contador === 0){
-        fileNamePDF = 'xxendiperio2020/' + file.name;
-        bufferPDF = fs.readFileSync(file.path);
-        contador++;
-      } else {
-        fileNameDOC = 'xxendiperio2020/' + file.name;
-        bufferDOC = fs.readFileSync(file.path);
-      }
+    if (contador === 0) {
+      fileNamePDF = 'xxendiperio2020/' + file.name;
+      bufferPDF = fs.readFileSync(file.path);
+      contador++;
+    } else {
+      fileNameDOC = 'xxendiperio2020/' + file.name;
+      bufferDOC = fs.readFileSync(file.path);
+    }
 
-      //resolve(true);
+    //resolve(true);
 
-    });
+  });
   //});
 
- // formfields = await new Promise(function (resolve, reject) {
-    form.on('end', () => {
-      console.log('imprimindo for ', formulario); 
-      S3Uploader.uploadFile(fileNameDOC, bufferDOC).then(fileData => {
-        S3Uploader.uploadFile(fileNamePDF, bufferPDF).then(fileData => {
-          formulario.pathS3DOC = fileNameDOC;
-          formulario.pathS3PDF = fileNamePDF;
-          req.user.works = formulario;
-    
-          User.findOneAndUpdate({_id: req.user._id}, {$push: {works: req.user.works}}, function (err, doc) {
-              if (err) {
-                  console.log("erro ao atualizar o usuario: ", err);
-              } else {
-                  console.log("update document success");
-              }
-            });
-          res.json({
-            user: req.user,
-            successful: true
-            //fileData
-          });
-         //return resolve(res);
-        }).catch(err => {
-            console.log(err);
-            res.sendStatus(500);
-           // return  reject(res);
+  // formfields = await new Promise(function (resolve, reject) {
+  form.on('end', () => {
+    console.log('imprimindo for ', formulario);
 
+    /*S3Uploader.uploadFile(fileNameDOC, bufferDOC).then(fileData => {
+      S3Uploader.uploadFile(fileNamePDF, bufferPDF).then(fileData => {
+        formulario.pathS3DOC = fileNameDOC;
+        formulario.pathS3PDF = fileNamePDF;
+        req.user.works = formulario;
+
+        User.findOneAndUpdate({ _id: req.user._id }, { $push: { works: req.user.works } }, function (err, doc) {
+          if (err) {
+            console.log("erro ao atualizar o usuario: ", err);
+          } else {
+            console.log("update document success");
+          }
         });
+        res.json({
+          user: req.user,
+          successful: true
+          //fileData
+        });
+        //return resolve(res);
       }).catch(err => {
-          console.log(err);
-          res.sendStatus(500);
-          //return  reject(res);
+        console.log(err);
+        res.sendStatus(500);
+        // return  reject(res);
 
       });
-    });
+    }).catch(err => {
+      console.log(err);
+      res.sendStatus(500);
+      //return  reject(res);
+
+    });*/
+  });
   //});
 
-
+  console.log(form.parse(req));
   form.parse(req);
   return res;
 }

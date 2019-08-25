@@ -34,7 +34,6 @@ async function refresh(req, res) {
 }
 
 function login(req, res) {
-  console.log('registrando');
   let user = req.user;
   let token = authCtrl.generateToken(user);
   res.json({ token });

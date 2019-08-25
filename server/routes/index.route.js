@@ -12,6 +12,6 @@ router.get('/health-check', (req, res) =>
 
 router.use('/auth', authRoutes);
 router.use('/user', userRoutes);
-router.use('/admin', adminRoutes);
+router.use('/admin', adminRoutes);//passar o middleware
 
 module.exports = router;
