@@ -157,7 +157,8 @@ h6 {
   height: 60vh;
   margin-top: 130px;
   position: relative;
-  background: url("./assets/img/banner.jpeg") no-repeat;
+  background: url("./assets/img/banner.jpg") no-repeat;
+  //background: url("./assets/img/banner_old.jpeg") no-repeat;
   background-position-x: center;
   background-size: contain;
 }
@@ -1085,6 +1086,7 @@ body.mobile-nav-active #mobile-nav-toggle {
     margin-left: 0;
     padding-bottom: 30px;
   }
+
 }
 
 @media (max-width: 767px) {

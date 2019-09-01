@@ -554,6 +554,19 @@ mat-tab-group {
   .back-to-top {
     bottom: 15px;
   }
+
+  #intro {
+      width: 100%;
+      height: 28vh;
+      margin-top: 85px;
+      position: relative;
+      background-position-x: center;
+      background-size: contain;
+  }
+
+  #about {
+    padding: 30px 0 30px 0;
+  }
 }
 
 /* Clients Section

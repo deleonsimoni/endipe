@@ -56,9 +56,9 @@ export class HomeComponent implements OnInit {
   ];
 
   imagensApoiadores = [
+    './assets/img/parceiros/ufrj2.png',
     './assets/img/parceiros/unirio.png',
     './assets/img/parceiros/ufrrj.png',
-    './assets/img/parceiros/ufrj2.png',
     './assets/img/parceiros/uff.png',
     './assets/img/parceiros/uerj.png',
     './assets/img/parceiros/ucp.png',

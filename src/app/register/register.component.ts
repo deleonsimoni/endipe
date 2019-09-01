@@ -53,6 +53,7 @@ export class RegisterComponent implements OnInit {
       cfPassword: [null, [Validators.required, Validators.minLength(6)]],
       dateBirth: [null, [Validators.required]],
       icForeign: [false],
+      isPCD: [false],
       document: [null, [Validators.required]],
       address: this.builder.group({
         street: [null, [Validators.required]],

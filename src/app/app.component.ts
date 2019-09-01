@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import $ from 'jquery';
+import { NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -44,7 +45,7 @@ export class AppComponent implements OnInit {
         body.append('<div id="mobile-body-overly"></div>');*/
 
         $('body').append($mobile_nav);
-        $('body').prepend('<button type="button" id="mobile-nav-toggle"><i class="fa fa-bars"></i></button>');
+        $('body').prepend('<button type="button" style="z-index:999999 !important;" id="mobile-nav-toggle"><i class="fa fa-bars"></i></button>');
         $('body').append('<div id="mobile-body-overly"></div>');
         $('#mobile-nav').find('.menu-has-children').prepend('<i class="fa fa-chevron-down"></i>');
 
@@ -90,20 +91,30 @@ export class AppComponent implements OnInit {
               }
             }
 
-            $('html, body').animate({
-              scrollTop: target.offset().top - top_space
-            }, 1500, 'easeInOutExpo');
+            if ($('body').hasClass('mobile-nav-active')) {
+              $('body').removeClass('mobile-nav-active');
+              $('#mobile-nav-toggle i').toggleClass('fa-times fa-bars');
+              $('#mobile-body-overly').fadeOut();
+            }
 
             if ($(this).parents('.nav-menu').length) {
               $('.nav-menu .menu-active').removeClass('menu-active');
               $(this).closest('li').addClass('menu-active');
             }
 
-            if ($('body').hasClass('mobile-nav-active')) {
-              $('body').removeClass('mobile-nav-active');
-              $('#mobile-nav-toggle i').toggleClass('fa-times fa-bars');
-              $('#mobile-body-overly').fadeOut();
-            }
+            this.router.events.subscribe(event => {
+              if (event instanceof NavigationEnd) {
+                const tree = this.router.parseUrl(this.router.url);
+                if (tree.fragment) {
+                  const element = document.querySelector('#' + tree.fragment);
+                  if (element) {
+
+                    element.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
+                  }
+                }
+              }
+            });
+
             return false;
           }
         }
