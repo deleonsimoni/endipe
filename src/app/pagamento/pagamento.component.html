@@ -32,8 +32,7 @@
                                 <h3>Valor Total<strong> R${{valorTotal}}</strong></h3>
                             </div>
 
-                            <div *ngIf="categoryId && (categoryId != 4 || categoryId != 5)"
-                                class="custom-file col-md-4">
+                            <div *ngIf="showUpload()" class="custom-file col-md-4">
                                 <input type="file" class="custom-file-input" data-max-size="2048" id="customPreReadFile"
                                     (change)="setFileNamePDF($event.target.files)" #fileInput />
                                 <label class="custom-file-label" for="customPreReadFile">{{ getFileNamePDF() }}</label>

@@ -28,6 +28,7 @@ import { HttpClient } from '@angular/common/http';
 export class AdminComponent implements OnInit {
 
   public users = [];
+  public allUsers = [];
   public infos = false;
   public modalities = [
     { id: 1, name: 'Convidado de sessão especial' },
@@ -38,6 +39,8 @@ export class AdminComponent implements OnInit {
     { id: 6, name: 'Simposista' },
     { id: 7, name: 'Ouvinte' }
   ];
+
+  public search: string;
 
   public categories = [
     { id: 1, name: 'Estudantes de curso Normal/EM' },
@@ -105,16 +108,24 @@ export class AdminComponent implements OnInit {
   private retrieveAdminData() {
     this.authService.adminData()
       .subscribe((res: any[]) => {
+        this.allUsers = res;
         this.users = res;
-        console.log(this.users);
       });
   }
 
-  retrieveModality(id) {
+  public retrieveModality(id) {
     return this.modalities.filter(element => element.id === id)[0];
   }
 
-  retrieveCategories(id) {
+  public retrieveCategories(id) {
     return this.categories.filter(element => element.id === id)[0];
+  }
+
+  public searchUser() {
+    if (this.search !== undefined && this.search !== '') {
+      this.users = this.allUsers.filter(user => user.document.match(this.search));
+    } else {
+      this.users = this.allUsers;
+    }
   }
 }
