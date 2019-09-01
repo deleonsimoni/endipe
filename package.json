@@ -5,7 +5,7 @@
     "ng": "ng",
     "serve": "node server",
     "startDev": "concurrently -c \"yellow.bold,green.bold\" -n \"SERVER,BUILD\" \"nodemon server\" \"ng serve --open --watch\"",
-    "start": "concurrently -c \"yellow.bold,green.bold\" -n \"SERVER,BUILD\" \"nodemon server\" \"ng build --open --watch\"",
+    "start": "concurrently -c \"yellow.bold,green.bold\" -n \"SERVER,BUILD\" \"nodemon server\" \"ng build --watch\"",
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",

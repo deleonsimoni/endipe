@@ -37,6 +37,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { TrabalhosComponent } from './trabalhos/trabalhos.component';
 import { ListarTrabalhosComponent } from './listar-trabalhos/listar-trabalhos.component';
 import { AdminComponent } from './admin/admin.component';
+import { AccordionModule } from 'ngx-bootstrap';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,8 @@ import { AdminComponent } from './admin/admin.component';
     BsDatepickerModule.forRoot(),
     BsDropdownModule.forRoot(),
     NgxMaskModule.forRoot(),
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    AccordionModule.forRoot()
   ],
   entryComponents: [
     ModalInscricaoComponent,

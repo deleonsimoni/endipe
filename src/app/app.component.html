@@ -1,21 +1,204 @@
-<app-header></app-header>
-<!-- <mat-sidenav-container class="example-container" (backdropClick)="close('backdrop')">
-    <mat-sidenav #drawer  disableClose
-        [ngClass]="{hidden: !(isHandset$ | async)}"
-        [mode]="(isHandset$ | async) ? 'over' : 'side'"
-        [opened]="!(isHandset$ | async)"
-    >
-        <p><button mat-button (click)="close('toggle button')">Toggle</button></p>
-    </mat-sidenav>
+<div class="example-container">
+    <mat-toolbar class="example-toolbar">
+        <div class="header">
+            <section id="topbar" class="d-none d-lg-block">
+                <div class="container clearfix">
+                    <div class="social-links float-right">
+                        <a href="https://www.facebook.com/xxendiperio2020/" target="_blank" class="facebook"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/endipe.riodejaneiro/" target="_blank" class="instagram"><i
+                                class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </section>
 
-    <mat-sidenav-content>
-        <p><button mat-button (click)="sidenav.open()">Open</button></p>
-        <p>Closed due to: {{reason}}</p>
-    </mat-sidenav-content>
-</mat-sidenav-container> -->
+            <header id="header">
+                <div class="container">
 
-<!-- <div *ngIf="!shouldRun">Please open on Stackblitz to see result</div> -->
+                    <div id="logo" class="pull-left">
+                        <h1><a [routerLink]="['/home']" fragment="body" class="scrollto">Endi<span>pe</span></a>
+                        </h1>
+                    </div>
+
+                    <nav id="nav-menu-container" [hidden]="isMobile == true">
+                        <ul class="nav-menu">
+                            <li class="menu-has-children pointer">
+                                <a>SOBRE <i class="fa fa-chevron-down"></i></a>
+                                <ul>
+                                    <li><a [routerLink]="['/home']" fragment="about">Tema</a></li>
+                                    <li><a [routerLink]="['/home']" fragment="clients">Apresentação</a></li>
+                                    <li><a [routerLink]="['/home']" fragment="services">Eixos</a></li>
+                                    <li><a [routerLink]="['/home']" fragment="historico">Histórico</a></li>
+                                </ul>
+                            </li>
+                            <li class="menu-has-children pointer">
+                                <a>ORGANIZAÇÃO <i class="fa fa-chevron-down"></i></a>
+                                <ul>
+                                    <li><a [routerLink]="['/home']" fragment="team">Coordenação</a></li>
+                                    <li><a [routerLink]="['/home']" fragment="team">Comitê Organizador</a></li>
+                                    <li><a [routerLink]="['/home']" fragment="comiteCientifico">Comitê
+                                            Científico</a></li>
+                                    <li><a [routerLink]="['/home']" fragment="parcerias">Parcerias</a></li>
+                                    <li><a [routerLink]="['/home']" fragment="contact">Contato</a></li>
+                                </ul>
+                            </li>
+                            <li class="menu-has-children pointer">
+                                <a [routerLink]="['/home']" fragment="programacao">PROGRAMAÇÃO</a>
+                            </li>
+                            <li class="menu-has-children pointer">
+                                <a>SUBMISSÃO <i class="fa fa-chevron-down"></i></a>
+                                <ul>
+                                    <li><a [routerLink]="['/home']" fragment="modalidades">Modalidades</a></li>
+                                    <li><a [routerLink]="['/home']" fragment="normas">Normas</a></li>
+                                    <li><a [routerLink]="['/home']" fragment="prazos">Prazos</a></li>
+                                    <li><a [routerLink]="['/home']" fragment="anais">Anais</a></li>
+                                </ul>
+                            </li>
+                            <li class="menu-has-children pointer">
+                                <a>RIO DE JANEIRO <i class="fa fa-chevron-down"></i></a>
+                                <ul>
+                                    <li><a [routerLink]="['/home']" fragment="hospedagem">Hospedagem</a></li>
+                                    <li><a [routerLink]="['/home']" fragment="hospedagem">Transporte</a></li>
+                                    <li><a [routerLink]="['/home']" fragment="hospedagem">Alimentação</a></li>
+                                    <li><a [routerLink]="['/home']" fragment="hospedagem">Turismo</a></li>
+                                    <li><a [routerLink]="['/home']" fragment="hospedagem">Clima</a></li>
+                                </ul>
+                            </li>
+                            <li class="pointer">
+                                <a class="text-danger" *ngIf="!isAuth" [routerLink]="['/register']"
+                                    fragment="">INSCRIÇÃO</a>
+                            </li>
+                            <li class="pointer" *ngIf="!isAuth"><a [routerLink]="['/login']">LOGIN</a></li>
+                            <li *ngIf="isAuth" class="menu-has-children pointer">
+                                <a [routerLink]="">AÇÕES <i class="fa fa-chevron-down"></i></a>
+                                <ul>
+                                    <li><a [routerLink]="['/pagamento']">Pagamento</a></li>
+                                    <li><a [routerLink]="['/meus-trabalhos']">Submissão</a></li>
+                                    <li><a [routerLink]="['/certificados']">Certificados</a></li>
+                                    <li *ngIf="user && user.icAdmin">
+                                        <a [routerLink]="['/admin']">Dashboard</a>
+                                    </li>
+                                    <li><a class="pointer" (click)="logout()">Sair</a></li>
+
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+
+                    <div id="logo" class="pull-right" [hidden]="isMobile == false">
+                        <ul class="nav-menu pointer">
+                            <li>
+                                <i class="fa fa-bars" (click)="sidenav.toggle()"></i>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </header>
+        </div>
+    </mat-toolbar>
+
+    <mat-sidenav-container class="example-sidenav-container">
+
+        <mat-sidenav-content>
+            <router-outlet></router-outlet>
+        </mat-sidenav-content>
+        <mat-sidenav #sidenav mode="over" [(opened)]="opened">
+            <accordion #accordion [isAnimated]="true" [closeOthers]="true">
+                <accordion-group>
+                    <a accordion-heading>SOBRE <i class="fa "
+                            [ngClass]="{'fa-chevron-down': !accordion.isOpen, 'fa-chevron-up': accordion.isOpen}"></i></a>
+                    <ul class="child-list">
+                        <li><a [routerLink]="['/home']" fragment="about" (click)="sidenav.toggle()">Tema</a></li>
+                        <li><a [routerLink]="['/home']" fragment="clients" (click)="sidenav.toggle()">Apresentação</a>
+                        </li>
+                        <li><a [routerLink]="['/home']" fragment="services" (click)="sidenav.toggle()">Eixos</a></li>
+                        <li><a [routerLink]="['/home']" fragment="historico" (click)="sidenav.toggle()">Histórico</a>
+                        </li>
+                    </ul>
+                </accordion-group>
+
+                <accordion-group>
+                    <a accordion-heading>ORGANIZAÇÃO <i class="fa fa-chevron-down"></i></a>
+                    <ul class="child-list">
+                        <li><a [routerLink]="['/home']" fragment="team" (click)="sidenav.toggle()">Coordenação</a></li>
+                        <li><a [routerLink]="['/home']" fragment="team" (click)="sidenav.toggle()">Comitê
+                                Organizador</a></li>
+                        <li><a [routerLink]="['/home']" fragment="comiteCientifico" (click)="sidenav.toggle()">Comitê
+                                Científico</a></li>
+                        <li><a [routerLink]="['/home']" fragment="parcerias" (click)="sidenav.toggle()">Parcerias</a>
+                        </li>
+                        <li><a [routerLink]="['/home']" fragment="contact" (click)="sidenav.toggle()">Contato</a></li>
+                    </ul>
+                </accordion-group>
+
+                <ul class="child-list">
+                    <li>
+                        <a accordion-heading [routerLink]="['/home']" fragment="programacao"
+                            (click)="sidenav.toggle()">PROGRAMAÇÃO</a>
+                    </li>
+                </ul>
+
+                <accordion-group>
+                    <a accordion-heading>SUBMISSÃO <i class="fa fa-chevron-down"></i></a>
+                    <ul class="child-list">
+                        <li><a [routerLink]="['/home']" fragment="modalidades"
+                                (click)="sidenav.toggle()">Modalidades</a></li>
+                        <li><a [routerLink]="['/home']" fragment="normas" (click)="sidenav.toggle()">Normas</a></li>
+                        <li><a [routerLink]="['/home']" fragment="prazos" (click)="sidenav.toggle()">Prazos</a></li>
+                        <li><a [routerLink]="['/home']" fragment="anais" (click)="sidenav.toggle()">Anais</a></li>
+                    </ul>
+                </accordion-group>
+
+                <accordion-group>
+                    <a accordion-heading>RIO DE JANEIRO <i class="fa fa-chevron-down"></i></a>
+                    <ul class="child-list">
+                        <li><a [routerLink]="['/home']" fragment="hospedagem" (click)="sidenav.toggle()">Hospedagem</a>
+                        </li>
+                        <li><a [routerLink]="['/home']" fragment="hospedagem" (click)="sidenav.toggle()">Transporte</a>
+                        </li>
+                        <li><a [routerLink]="['/home']" fragment="hospedagem" (click)="sidenav.toggle()">Alimentação</a>
+                        </li>
+                        <li><a [routerLink]="['/home']" fragment="hospedagem" (click)="sidenav.toggle()">Turismo</a>
+                        </li>
+                        <li><a [routerLink]="['/home']" fragment="hospedagem" (click)="sidenav.toggle()">Clima</a></li>
+                    </ul>
+                </accordion-group>
+
+                <ul class="child-list">
+                    <li>
+                        <a accordion-heading *ngIf="!isAuth" [routerLink]="['/register']"
+                            (click)="sidenav.toggle()">INSCRIÇÃO</a>
+                    </li>
+                </ul>
+
+                <ul class="child-list">
+                    <li>
+                        <a accordion-heading *ngIf="!isAuth" [routerLink]="['/login']"
+                            (click)="sidenav.toggle()">LOGIN</a>
+                    </li>
+                </ul>
+
+                <accordion-group>
+                    <a accordion-heading *ngIf="isAuth" [routerLink]="">AÇÕES <i class="fa fa-chevron-down"></i></a>
+                    <ul>
+                        <li><a [routerLink]="['/pagamento']" (click)="sidenav.toggle()">Pagamento</a></li>
+                        <li><a [routerLink]="['/meus-trabalhos']" (click)="sidenav.toggle()">Submissão</a></li>
+                        <li><a [routerLink]="['/certificados']" (click)="sidenav.toggle()">Certificados</a></li>
+                        <li *ngIf="user && user.icAdmin">
+                            <a [routerLink]="['/admin']" (click)="sidenav.toggle()">Dashboard</a>
+                        </li>
+                        <li><a class="pointer" (click)="logout()" (click)="sidenav.toggle()">Sair</a></li>
+
+                    </ul>
+                </accordion-group>
+            </accordion>
+        </mat-sidenav>
+    </mat-sidenav-container>
+</div>
 
 
-<router-outlet></router-outlet>
+
+
+<!-- <app-header></app-header> -->
+<!-- <router-outlet></router-outlet> -->
 <app-footer></app-footer>

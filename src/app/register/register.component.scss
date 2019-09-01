@@ -1,6 +1,6 @@
 #register {
-  padding: 160px 60px;
-  .form  {
+  padding: 60px 60px;
+  .form {
     h2[mt-2] {
       margin-top: 16px;
     }
@@ -11,22 +11,22 @@
       font-size: 15px;
     }
     div.form-group div.alert,
-    div.form-check div.alert{
+    div.form-check div.alert {
       margin-bottom: 0rem;
       margin-top: 1px;
       padding: 0.3rem 1.25rem;
       font-size: 13px;
     }
     div.form-check {
-      .form-check-input{
-        margin-top: .4rem
+      .form-check-input {
+        margin-top: 0.4rem;
       }
       label {
         font-size: 15px;
         color: #495057;
         a {
           color: #0c2e8a;
-          text-decoration: underline 
+          text-decoration: underline;
         }
       }
     }
