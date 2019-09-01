@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
-@import '~@angular/material/prebuilt-themes/indigo-pink.css';
-@import '~ngx-toastr/toastr';
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~ngx-toastr/toastr";
 
 body {
   background: #fff;
@@ -155,7 +155,6 @@ h6 {
 #intro {
   width: 100%;
   height: 60vh;
-  margin-top: 130px;
   position: relative;
   background: url("./assets/img/banner.jpg") no-repeat;
   //background: url("./assets/img/banner_old.jpeg") no-repeat;
@@ -216,7 +215,7 @@ h6 {
   transition: 0.5s;
   margin: 10px;
   // color: #fff;
-  color: #0c2e8a
+  color: #0c2e8a;
 }
 
 #intro .intro-content .btn-get-started {
@@ -533,7 +532,7 @@ body.mobile-nav-active #mobile-nav-toggle {
   --------------------------------*/
 
 #about {
-  padding: 60px 0 30px 0;
+  padding: 0px 0 30px 0;
 }
 
 #about .about-img {
@@ -1116,6 +1115,14 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 @media (max-width: 576px) {
+  #intro {
+    height: 50vh;
+  }
+  #about .content {
+    h2 {
+      font-size: 26px;
+    }
+  }
   #contact #google-map {
     margin-top: 20px;
   }

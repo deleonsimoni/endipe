@@ -22,7 +22,7 @@
     box-shadow: none;
     font-size: 15px;
   }
-  div.form-group div.alert{
+  div.form-group div.alert {
     margin-bottom: 0rem;
     margin-top: 1px;
     padding: 0.3rem 1.25rem;
@@ -111,4 +111,16 @@
 #login .login-content .btn-projects:hover {
   background: none;
   color: #50d8af !important;
+}
+
+@media only screen and (max-width: 576px) {
+  #login {
+    padding: 70px 40px;
+  }
+}
+
+@media only screen and (min-width: 796px) {
+  #login {
+    padding: 80px 40px;
+  }
 }
