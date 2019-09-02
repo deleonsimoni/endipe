@@ -1,5 +1,5 @@
 #submission {
-  padding: 160px 0 40px 0;
+  padding: 60px 0 40px 0;
   .box {
     h4 {
       margin-left: 0px;
@@ -85,15 +85,15 @@
 }
 
 #submission .submission-content button[type="button"].btn-get-started {
-    background-color: #50d8af;
-    color: #fff;
-    width: 100%;
-    border: none;
-    margin: 8px 0px;
-    height: calc(1.5em + .75rem + 2px);
-    i {
-        font-size: 14px;
-    }
+  background-color: #50d8af;
+  color: #fff;
+  width: 100%;
+  border: none;
+  margin: 8px 0px;
+  height: calc(1.5em + 0.75rem + 2px);
+  i {
+    font-size: 14px;
+  }
 }
 
 #submission .submission-content .btn-get-started {

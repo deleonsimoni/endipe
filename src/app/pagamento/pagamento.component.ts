@@ -42,6 +42,8 @@ export class PagamentoComponent implements OnInit {
       categoryId: [null]
     });
 
+    this.user = this.authService.getDecodedAccessToken(this.authService.getToken());
+
   }
 
   ngOnInit() {
@@ -84,7 +86,7 @@ export class PagamentoComponent implements OnInit {
       this.toastr.error('Selecione uma categoria para pagamento.', 'Atenção');
       return;
     }
-    if (this.paymentForm.value.categoryId !== 4 && this.paymentForm.value.categoryId !== 5) {
+    if (this.paymentForm.value.categoryId < 4) {
       if (!this.filesPDF) {
         this.toastr.error('É necessário selecionar o arquivo de comprovante do vinculo com a instituição', 'Atenção');
         return;
@@ -122,5 +124,9 @@ export class PagamentoComponent implements OnInit {
         (err) => {
           console.log(err);
         });
+  }
+
+  public showUpload() {
+    return this.paymentForm.value.categoryId && (this.paymentForm.value.categoryId < 4);
   }
 }

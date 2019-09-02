@@ -1021,6 +1021,12 @@ body.mobile-nav-active #mobile-nav-toggle {
   background-color: #0c2e8a;
 }
 
+@media only screen and(max-width: 1197px) {
+  .nav-menu a {
+    padding: 10px 4px;
+  }
+}
+
 @media (min-width: 768px) {
   #contact .contact-address,
   #contact .contact-phone,
@@ -1085,7 +1091,6 @@ body.mobile-nav-active #mobile-nav-toggle {
     margin-left: 0;
     padding-bottom: 30px;
   }
-
 }
 
 @media (max-width: 767px) {

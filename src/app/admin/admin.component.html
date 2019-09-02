@@ -9,10 +9,17 @@
                     <div class="section-header">
                         <h2>Painel Gerencial</h2>
                     </div>
-                    <div *ngFor="let user of users" [ngClass]="{'mb-3': users.length > 1}">
+
+                    <input type="text" class="form-control mb-4" [(ngModel)]="search" placeholder="Filtrar participante"
+                        (keyup)="searchUser()">
+
+                    <div *ngFor="let user of users; let i = index" [ngClass]="{'mb-3': users.length > 1}">
                         <div class="card-works" [ngClass]="{'no-radius-bottom': infos == true}">
-                            <!-- *ngFor="let user of users" -->
                             <div class="row">
+                                <div class="col-sm-1 border-right">
+                                    <small>ID</small>
+                                    <h4>{{ i + 1 }}</h4>
+                                </div>
                                 <div class="col-sm-3 border-right">
                                     <small>NOME</small>
                                     <h4>{{ user.fullname }}</h4>
@@ -21,13 +28,13 @@
                                     <small>EMAIL</small>
                                     <h4>{{ user.email }}</h4>
                                 </div>
-                                <div class="col-sm-3 border-right">
-                                    <small>MODALIDADE</small>
-                                    <h4>{{ retrieveModality(user.modalityId[0]).name }}</h4>
+                                <div class="col-sm-2 border-right">
+                                    <small>CPF</small>
+                                    <h4>{{ user.document }}</h4>
                                 </div>
                                 <div class="col-sm-2 border-right">
                                     <small>STATUS</small>
-                                    <h4>{{ user.payment && user.payment.icPaid == true ? 'Pagamento efetuado' : 'Pagamento pendente' }}
+                                    <h4>{{ user.payment && user.payment.icPaid == true ? 'Pagamento efetuado' : 'Aguardando liberação' }}
                                     </h4>
                                 </div>
                                 <div class="col-sm-1 text-center align-self-center pointer"
@@ -81,29 +88,9 @@
                                                 type="button" [ngClass]="{'btn btn-danger': !user.payment.icPaid}"
                                                 class="btn">Não</button>
                                         </div>
-
-
-
-
-                                        <!--
-                                        <div class="form-check-inline">
-                                            <input class="form-check-input" type="radio" name="gridRadios"
-                                                id="gridRadios1" value="opcao1" [(ngModel)]="user.payment.icPaid">
-                                            <label class="form-check-label" for="gridRadios1">
-                                                Sim
-                                            </label>
-                                        </div>
-                                        <div class="form-check-inline">
-                                            <input class="form-check-input" type="radio" name="gridRadios" (click)=""
-                                                id="gridRadios2" value="opcao2" [(ngModel)]="user.payment.icPaid">
-                                            <label class="form-check-label" for="gridRadios2">
-                                                Não
-                                            </label>
-                                        </div>-->
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
-                                    <!-- <strong>Download comprovante</strong> -->
                                     <p><a [routerLink]="" (click)="download(user.payment.pathS3)">Download
                                             comprovante</a>
                                     </p>
@@ -139,7 +126,6 @@
                                     </p>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
