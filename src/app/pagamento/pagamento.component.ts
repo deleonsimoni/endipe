@@ -83,7 +83,8 @@ export class PagamentoComponent implements OnInit {
       // tslint:disable-next-line: align
       this.toastr.error('Selecione uma categoria para pagamento.', 'Atenção');
       return;
-    } else if (this.paymentForm.value.categoryId !== 4 || this.paymentForm.value.categoryId !== 5) {
+    }
+    if (this.paymentForm.value.categoryId !== 4 && this.paymentForm.value.categoryId !== 5) {
       if (!this.filesPDF) {
         this.toastr.error('É necessário selecionar o arquivo de comprovante do vinculo com a instituição', 'Atenção');
         return;
@@ -92,21 +93,20 @@ export class PagamentoComponent implements OnInit {
         this.toastr.error('O comprovante deve ter no máximo 2MB', 'Atenção');
         return;
       }
-    } else {
-
-      this.enviando = true;
-
-      this.uploadService.gerarPagamento(this.filesPDF[0], 'comprovantes', this.paymentForm.value).subscribe(() => {
-        this.enviando = false;
-        this.user.payment = this.paymentForm.value;
-        this.toastr.success('Aguarde avaliação do pagamento', 'Sucesso');
-        this.paymentForm.reset();
-        this.filesPDF = null;
-      }, err => {
-        this.enviando = false;
-        this.toastr.error('Servidor momentaneamente inoperante.', 'Erro: ');
-      });
     }
+
+    this.enviando = true;
+
+    this.uploadService.gerarPagamento(this.filesPDF ? this.filesPDF[0] : null, 'comprovantes', this.user.document, this.paymentForm.value).subscribe(() => {
+      this.enviando = false;
+      this.user.payment = this.paymentForm.value;
+      this.toastr.success('Aguarde avaliação do pagamento', 'Sucesso');
+      this.paymentForm.reset();
+      this.filesPDF = null;
+    }, err => {
+      this.enviando = false;
+      this.toastr.error('Servidor momentaneamente inoperante.', 'Erro: ');
+    });
   }
 
   public pagar(): void {

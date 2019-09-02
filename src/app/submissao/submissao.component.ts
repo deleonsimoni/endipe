@@ -122,7 +122,7 @@ export class SubmissaoComponent implements OnInit {
       return;
     } else {
       this.enviando = true;
-      this.uploadService.uploadFile(this.filesDOC[0], this.filesPDF[0], 'trabalhos', this.submissionForm.value).subscribe(() => {
+      this.uploadService.uploadFile(this.filesDOC[0], this.filesPDF[0], 'trabalhos', this.user.document, this.submissionForm.value).subscribe(() => {
         this.carregando = true;
         this.authService.refresh().subscribe((res: any) => {
           this.user = res.user;
