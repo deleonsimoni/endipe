@@ -5,8 +5,7 @@
 export const environment = {
   production: false,
   // host: 'http://xxendiperio2020.com.br/api'
-  //host: 'http://localhost:8080/api'
-  host: 'https://breduka.localtunnel.me'
+  host: 'http://localhost:8080/api'
 };
 
 /*
