@@ -498,9 +498,7 @@ export class HomeComponent implements OnInit {
       data: { subscriptionType: this.subscriptionType, subscriptionValue: this.subscriptionValue }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-    });
+    dialogRef.afterClosed().subscribe();
   }
 
   public openDialogEixo(eixo) {

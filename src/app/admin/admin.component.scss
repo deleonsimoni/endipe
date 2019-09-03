@@ -1,6 +1,11 @@
 #submission {
   padding: 60px 0 40px 0;
   .box {
+    select {
+      border-radius: 0;
+      box-shadow: none;
+      font-size: 15px;
+    }
     input {
       padding: 10px 14px;
       border-radius: 0;
@@ -137,8 +142,8 @@
 
 #submission .box p {
   font-size: 14px;
-  margin-left: 100px;
-  margin-bottom: 0;
+  margin-left: 0px;
+  margin-bottom: 14px;
   line-height: 24px;
 }
 

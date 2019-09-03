@@ -41,6 +41,7 @@ export class AdminComponent implements OnInit {
   ];
 
   public search: string;
+  public status: string;
 
   public categories = [
     { id: 1, name: 'Estudantes de curso Normal/EM' },
@@ -127,5 +128,19 @@ export class AdminComponent implements OnInit {
     } else {
       this.users = this.allUsers;
     }
+  }
+
+  public filtrarStatus() {
+    this.search = '';
+    this.users = [];
+
+    if (this.status === '0') {
+      this.users = this.allUsers.filter(user => !user.payment);
+    } else if (this.status === '1') {
+      this.users = this.allUsers.filter(user => user.payment && user.payment.icPaid === false);
+    } else {
+      this.users = this.allUsers.filter(user => user.payment && user.payment.icPaid === true);
+    }
+
   }
 }

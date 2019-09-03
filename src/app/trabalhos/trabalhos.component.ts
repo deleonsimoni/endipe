@@ -24,12 +24,7 @@ export class TrabalhosComponent implements OnInit {
   private getWorks() {
 
     const token = this.auth.getDecodedAccessToken(this.auth.getToken());
-    console.log(token);
 
-  }
-
-  receiverWork($event) {
-    console.log($event);
   }
 
 }

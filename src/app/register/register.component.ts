@@ -79,8 +79,6 @@ export class RegisterComponent implements OnInit {
       ]),
       icAcceptTerms: [false, [Validators.requiredTrue]]
     });
-
-    this.registerForm.controls.icAcceptTerms.valueChanges.subscribe(res => console.log(res));
   }
 
   private createGroup(): FormGroup {

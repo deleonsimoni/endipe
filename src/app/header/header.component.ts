@@ -38,10 +38,6 @@ export class HeaderComponent implements OnInit {
     this.verifyUser();
   }
 
-  focusItem() {
-    console.log('chamando');
-  }
-
   verifyUser() {
     this.share.shareData.subscribe(data => {
       if (data) {

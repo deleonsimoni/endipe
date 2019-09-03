@@ -10,10 +10,22 @@
                         <h2>Painel Gerencial</h2>
                     </div>
 
-                    Total de {{allUsers.length}} inscritos
+                    <p>Total de {{ allUsers.length }} inscritos</p>
 
-                    <input type="text" class="form-control mb-4" [(ngModel)]="search"
-                        placeholder="Filtrar participante por CPF" (keyup)="searchUser()">
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            <input type="text" class="form-control mb-4" [(ngModel)]="search"
+                                placeholder="Filtrar participante por CPF" (keyup)="searchUser()">
+                        </div>
+                        <div class="col-md-4">
+                            <select class="form-control" [(ngModel)]="status" (change)="filtrarStatus()">
+                                <option value="0">Pagamento não efetuado</option>
+                                <option value="1">Aguardando validação</option>
+                                <option value="2">Pagamento válido</option>
+                            </select>
+                        </div>
+                    </div>
 
                     <div *ngFor="let user of users; let i = index" [ngClass]="{'mb-3': users.length > 1}">
                         <div class="card-works" [ngClass]="{'no-radius-bottom': infos == true}">

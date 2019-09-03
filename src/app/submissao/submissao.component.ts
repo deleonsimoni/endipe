@@ -56,7 +56,7 @@ export class SubmissaoComponent implements OnInit {
     private authService: AuthService
 
   ) {
-    this.receberDados.subscribe(res => console.log(res));
+    this.receberDados.subscribe();
   }
 
   ngOnInit() {
@@ -183,7 +183,6 @@ export class SubmissaoComponent implements OnInit {
 
   public addAuthors() {
     const authors = this.submissionForm.get('authors') as FormArray;
-    // console.log(authors.controls);
     if (authors.controls.length < 4) {
       authors.push(this.createFields());
     }
