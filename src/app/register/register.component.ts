@@ -125,7 +125,7 @@ export class RegisterComponent implements OnInit {
     // this.exibirModalSucesso();
   }
 
-  private onCheckChange(event) {
+  public onCheckChange(event) {
     const formArray: FormArray = this.registerForm.get('modalityId') as FormArray;
 
     if (event.target.checked) {

@@ -63,6 +63,21 @@
                                     <p>{{ user.createdAt | date: 'dd/MM/yyyy' }}</p>
                                 </div>
                             </div>
+                            <div class="row align-items-center">
+                                <div class="col-sm-4 mb-2">
+                                    <strong>PCD</strong>
+                                    <p>{{ user.isPCD ? 'Sim' : 'Não' }}</p>
+                                </div>
+                                <div class="col-sm-4 mb-2">
+                                    <strong>Estrangeiro</strong>
+                                    <p>{{ user.isForeign ? 'Sim' : 'Não' }}</p>
+                                </div>
+                                <div class="col-sm-4 mb-2">
+                                    <strong>Instituição:</strong>
+                                    <p>{{ user.institution.name ? user.institution?.initials + '-' + user.institution?.name : '----' }}
+                                    </p>
+                                </div>
+                            </div>
                             <div class="section">
                                 <h6>Pagamento</h6>
                             </div>
@@ -98,7 +113,7 @@
                                     </p>
                                 </div>
                             </div>
-                            <div class="section">
+                            <div *ngIf="user.works.length > 0" class="section">
                                 <h6>Trabalhos</h6>
                             </div>
                             <div class="row" *ngFor="let work of user.works">

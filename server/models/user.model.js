@@ -93,6 +93,7 @@ const UserSchema = new mongoose.Schema({
     protocol: Number,
     title: String,
     modalityId: Number,
+    typeWork: Number,
     axisId: Number,
     pathS3DOC: String,
     pathS3PDF: String,

@@ -14,7 +14,7 @@ module.exports = {
 
 async function getUsers() {
   return await User.find({ icAdmin: false })
-    .select('fullname email createdAt document phones modalityId payment works')
+    .select('fullname email createdAt document phones modalityId payment works institution isPCD icForeign')
     .sort({ fullname: 1 });
 }
 

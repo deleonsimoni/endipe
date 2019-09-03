@@ -21,6 +21,16 @@ export class SubmissaoComponent implements OnInit {
   public submissionForm: FormGroup;
   public authors = new Array();
   public showAdd = true;
+  public modalidadesUsuario: any[] = [];
+  public modalidades = [
+    { id: 1, name: 'Convidado de sessão especial' },
+    { id: 2, name: 'Mediador de roda de conversa' },
+    { id: 3, name: 'Expositor de pôster' },
+    { id: 4, name: 'Mediador de minicurso' },
+    { id: 5, name: 'Coordenador e/ou expositor de painel' },
+    { id: 6, name: 'Simposista' },
+    { id: 7, name: 'Ouvinte' }
+  ];
   public workOptions = [
     { id: 1, name: 'Pôster' },
     { id: 2, name: 'Painel' },
@@ -50,10 +60,15 @@ export class SubmissaoComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.createForm();
+    const vm = this;
     this.authService.refresh().subscribe((res: any) => {
       this.user = res.user;
+      if (this.user.modalityId) {
+        this.user.modalityId.forEach(function (value) {
+          vm.modalidadesUsuario.push(vm.modalidades.find(item => item.id == value));
+        });
+      }
       this.carregando = false;
     });
 
@@ -64,6 +79,7 @@ export class SubmissaoComponent implements OnInit {
     this.submissionForm = this.builder.group({
       axisId: [null, [Validators.required]],
       modalityId: [null, [Validators.required]],
+      typeWork: [null, [Validators.required]],
       title: [null, [Validators.required]],
       authors: this.builder.array([
         this.createFields()

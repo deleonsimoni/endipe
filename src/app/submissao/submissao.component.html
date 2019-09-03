@@ -27,11 +27,24 @@
                                     <br />
                                     <div *ngIf="!user.works || user.works.length < 2" class="form-row">
                                         <div class="form-group col-md-6">
+
                                             <div>
                                                 <select class="form-control" id="opt" formControlName="modalityId">
                                                     <option disabled="true"
                                                         [selected]="!submissionForm.value.modalityId">Selecione
                                                         a modalidade</option>
+                                                    <option *ngFor="let option of modalidadesUsuario"
+                                                        [value]="option.id">
+                                                        {{ option.name }}
+                                                    </option>
+                                                </select>
+                                            </div>
+
+                                            <div class="mt-2">
+                                                <select class="form-control" id="opt" formControlName="typeWork">
+                                                    <option disabled="true" [selected]="!submissionForm.value.typeWork">
+                                                        Selecione
+                                                        o tipo de trabalho</option>
                                                     <option *ngFor="let option of workOptions" [value]="option.id">
                                                         {{ option.name }}
                                                     </option>
