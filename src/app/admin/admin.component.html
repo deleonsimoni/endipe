@@ -30,10 +30,6 @@
                     <div *ngFor="let user of users; let i = index" [ngClass]="{'mb-3': users.length > 1}">
                         <div class="card-works" [ngClass]="{'no-radius-bottom': infos == true}">
                             <div class="row">
-                                <!--<div class="col-sm-1 border-right">
-                                    <small>ID</small>
-                                    <h4>{{ i + 1 }}</h4>
-                                </div>-->
                                 <div class="col-sm-3 border-right">
                                     <small>NOME</small>
                                     <h4>{{ user.fullname.toLowerCase() }}</h4>
@@ -48,7 +44,7 @@
                                 </div>
                                 <div class="col-sm-2 border-right">
                                     <small>STATUS</small>
-                                    <h4>{{ user.payment && user.payment.icPaid == true ? 'Pagamento efetuado' : 'Aguardando liberação' }}
+                                    <h4>{{ !user.payment ? 'Pagamento não efetuado' : user.payment.icPaid ? 'Pagamento válido' : 'Aguardando validação'}}
                                     </h4>
                                 </div>
                                 <div class="col-sm-1 text-center align-self-center pointer"
