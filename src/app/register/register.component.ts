@@ -73,7 +73,7 @@ export class RegisterComponent implements OnInit {
         name: [null, [Validators.required]],
         initials: [null]
       }),
-      modalityId: [1],
+      modalityId: new FormArray([]),
       roles: this.builder.array([
         this.createGroup()
       ]),
@@ -123,6 +123,31 @@ export class RegisterComponent implements OnInit {
       this.toastr.error('Preencha os campos do formulário corretamente.', 'Erro: ');
     }
     // this.exibirModalSucesso();
+  }
+
+  private onCheckChange(event) {
+    const formArray: FormArray = this.registerForm.get('modalityId') as FormArray;
+
+    if (event.target.checked) {
+      if (formArray.length === 2) {
+        event.target.checked = false;
+        this.toastr.error('Você pode selecionar no máximo duas modalidades', 'Atenção');
+        return;
+      }
+      formArray.push(new FormControl(event.target.value));
+    } else {
+      let i = 0;
+
+      formArray.controls.forEach((ctrl: FormControl) => {
+        if (ctrl.value === event.target.value) {
+          // Remove the unselected element from the arrayForm
+          formArray.removeAt(i);
+          return;
+        }
+
+        i++;
+      });
+    }
   }
 
   private validatePassword(): FormGroup {

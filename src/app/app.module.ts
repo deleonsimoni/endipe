@@ -38,6 +38,7 @@ import { TrabalhosComponent } from './trabalhos/trabalhos.component';
 import { ListarTrabalhosComponent } from './listar-trabalhos/listar-trabalhos.component';
 import { AdminComponent } from './admin/admin.component';
 import { AccordionModule } from 'ngx-bootstrap';
+import { MaskCpfPipe } from './pipes/mask-cpf.pipe';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { AccordionModule } from 'ngx-bootstrap';
     ModalCadastroSucessoComponent,
     TrabalhosComponent,
     ListarTrabalhosComponent,
-    AdminComponent
+    AdminComponent,
+    MaskCpfPipe
   ],
   imports: [
     BrowserModule,
