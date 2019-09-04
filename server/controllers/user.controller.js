@@ -57,7 +57,7 @@ async function generatePayment(req, res) {
   });
 
   form.on('file', (field, file) => {
-    fileName = config.PATH_S3_DEV ? config.PATH_S3_DEV + 'xxendiperio2020/' + file.name : 'xxendiperio2020/' + req.user.document + "_" + file.name;
+    fileName = config.PATH_S3_DEV ? config.PATH_S3_DEV + 'xxendiperio2020/' + file.name : 'xxendiperio2020/' + file.name;
     buffer = fs.readFileSync(file.path);
   });
 

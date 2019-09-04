@@ -28,7 +28,7 @@ const envVarsSchema = Joi.object({
     .description('Secret Main'),
   AWS_SECRET_ACCESS_KEY: Joi.string()
     .description('Secret Main'),
-  PATH_S3_DEV: Joi.string()
+  PATH_S3_DEV: Joi.string().allow('')
     .description('Path Developer AWS S3'),
   MONGO_PORT: Joi.number()
     .default(27017)

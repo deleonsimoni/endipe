@@ -130,7 +130,8 @@ export class HomeComponent implements OnInit {
         'Daniele Grazinolli – UFRJ',
         'Felipe da Silva Ferreira – EB/CEFET-RJ',
         'Fernanda Lahtermaher Oliveira – EB/CAp UFRJ',
-        'Rosemary dos Santos Oliveira – FEBF/UERJ'
+        'Rosemary dos Santos Oliveira – FEBF/UERJ',
+        'Bosco Mesquita (design gráfico)'
       ]
     },
     {

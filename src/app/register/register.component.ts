@@ -135,7 +135,7 @@ export class RegisterComponent implements OnInit {
   }
 
   public validarNome(nome) {
-    const regName = /^[a-zA-Z]+ [a-zA-Z]+$/;
+    const regName = /^[a-zA-Z ]{6,30}$/;
     const name = nome;
     if (!regName.test(name)) {
       return false;
