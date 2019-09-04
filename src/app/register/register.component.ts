@@ -97,6 +97,17 @@ export class RegisterComponent implements OnInit {
     this.registerForm.value.email = this.registerForm.value.email.toLowerCase();
     const form = this.validatePassword();
     if (this.registerForm.valid && form != null) {
+
+      if (!this.registerForm.value.icForeign && this.registerForm.value.document.length !== 11) {
+        this.toastr.error('CPF inválido.', 'Atenção: ');
+        return;
+      }
+
+      if (!this.validarNome(this.registerForm.value.fullname)) {
+        this.toastr.error('Digite o nome e sobrenome.', 'Atenção: ');
+        return;
+      }
+
       this.carregando = true;
       this.authService.createUser(form)
         .subscribe((res: any) => {
@@ -121,6 +132,16 @@ export class RegisterComponent implements OnInit {
       this.toastr.error('Preencha os campos do formulário corretamente.', 'Erro: ');
     }
     // this.exibirModalSucesso();
+  }
+
+  public validarNome(nome) {
+    const regName = /^[a-zA-Z]+ [a-zA-Z]+$/;
+    const name = nome;
+    if (!regName.test(name)) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
   public onCheckChange(event) {
