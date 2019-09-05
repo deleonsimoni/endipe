@@ -85,7 +85,9 @@
                         <a [routerLink]="">AÇÕES <i class="fa fa-chevron-down"></i></a>
                         <ul>
                             <li><a [routerLink]="['/pagamento']">Pagamento</a></li>
-                            <li><a [routerLink]="['/meus-trabalhos']">Submissão</a></li>
+                            <li *ngIf="user && user.icAdmin">
+                                <a [routerLink]="['/meus-trabalhos']">Submissão</a>
+                            </li>
                             <li><a [routerLink]="['/certificados']">Certificados</a></li>
                             <li *ngIf="user && user.icAdmin">
                                 <a [routerLink]="['/admin']">Dashboard</a>
