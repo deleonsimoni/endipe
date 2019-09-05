@@ -72,7 +72,7 @@ export class PagamentoComponent implements OnInit {
   }
 
   public getFileNamePDF(): string {
-    const fileName = this.filesPDF ? this.filesPDF[0].name : 'Upload Comprovante';
+    const fileName = this.filesPDF ? this.filesPDF[0].name : 'Comprovante da Categoria';
     return fileName;
   }
 
@@ -86,7 +86,7 @@ export class PagamentoComponent implements OnInit {
       this.toastr.error('Selecione uma categoria para pagamento.', 'Atenção');
       return;
     }
-    if (this.paymentForm.value.categoryId < 4) {
+    if (this.paymentForm.value.categoryId < 5) {
       if (!this.filesPDF) {
         this.toastr.error('É necessário selecionar o arquivo de comprovante do vinculo com a instituição', 'Atenção');
         return;
@@ -127,6 +127,6 @@ export class PagamentoComponent implements OnInit {
   }
 
   public showUpload() {
-    return this.paymentForm.value.categoryId && (this.paymentForm.value.categoryId < 4);
+    return this.paymentForm.value.categoryId && (this.paymentForm.value.categoryId < 5);
   }
 }

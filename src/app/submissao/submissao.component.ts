@@ -64,11 +64,11 @@ export class SubmissaoComponent implements OnInit {
     const vm = this;
     this.authService.refresh().subscribe((res: any) => {
       this.user = res.user;
-      if (this.user.modalityId) {
+      /*if (this.user.modalityId) {
         this.user.modalityId.forEach(function (value) {
           vm.modalidadesUsuario.push(vm.modalidades.find(item => item.id == value));
         });
-      }
+      }*/
       this.carregando = false;
     });
 
