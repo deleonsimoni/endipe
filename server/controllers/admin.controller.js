@@ -9,13 +9,24 @@ const S3Uploader = require('./aws.controller');
 module.exports = {
   getUsers,
   validatePayment,
-  invalidatePayment
+  invalidatePayment,
+  deleteByEmail
 }
 
 async function getUsers() {
   return await User.find({ icAdmin: false })
     .select('fullname email createdAt document phones modalityId payment works institution isPCD icForeign')
     .sort({ fullname: 1 });
+}
+
+async function deleteByEmail(emailDelete) {
+  return await User.findOneAndRemove({ email: emailDelete }, function (err, doc) {
+    if (err) {
+      console.log("erro ao deletar o usuario: " + emailDelete, err);
+    } else {
+      console.log("Usuário deletado com sucesso: " + emailDelete);
+    }
+  });
 }
 
 async function validatePayment(id) {
