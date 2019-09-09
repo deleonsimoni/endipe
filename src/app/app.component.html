@@ -75,6 +75,9 @@
                                     <li><a [routerLink]="['/pagamento']">Pagamento</a></li>
                                     <li><a [routerLink]="['/meus-trabalhos']">Submissão</a></li>
                                     <li><a [routerLink]="['/certificados']">Certificados</a></li>
+                                    <li *ngIf="user && user.icAdmin == false">
+                                        <a [routerLink]="['/perfil']">Perfil</a>
+                                    </li>
                                     <li *ngIf="user && user.icAdmin">
                                         <a [routerLink]="['/admin']">Dashboard</a>
                                     </li>
@@ -164,26 +167,27 @@
                     </ul>
                 </accordion-group>
 
-                <ul class="child-list">
+                <ul class="child-list" *ngIf="!isAuth">
                     <li>
-                        <a accordion-heading *ngIf="!isAuth" [routerLink]="['/register']"
-                            (click)="sidenav.toggle()">INSCRIÇÃO</a>
+                        <a accordion-heading [routerLink]="['/register']" (click)="sidenav.toggle()">INSCRIÇÃO</a>
                     </li>
                 </ul>
 
-                <ul class="child-list">
+                <ul class="child-list" *ngIf="!isAuth">
                     <li>
-                        <a accordion-heading *ngIf="!isAuth" [routerLink]="['/login']"
-                            (click)="sidenav.toggle()">LOGIN</a>
+                        <a accordion-heading [routerLink]="['/login']" (click)="sidenav.toggle()">LOGIN</a>
                     </li>
                 </ul>
 
                 <accordion-group>
                     <a accordion-heading *ngIf="isAuth" [routerLink]="">AÇÕES <i class="fa fa-chevron-down"></i></a>
-                    <ul>
+                    <ul class="child-list">
                         <li><a [routerLink]="['/pagamento']" (click)="sidenav.toggle()">Pagamento</a></li>
                         <li><a [routerLink]="['/meus-trabalhos']" (click)="sidenav.toggle()">Submissão</a></li>
                         <li><a [routerLink]="['/certificados']" (click)="sidenav.toggle()">Certificados</a></li>
+                        <li *ngIf="user && user.icAdmin == false">
+                            <a [routerLink]="['/perfil']" (click)="sidenav.toggle()">Perfil</a>
+                        </li>
                         <li *ngIf="user && user.icAdmin">
                             <a [routerLink]="['/admin']" (click)="sidenav.toggle()">Dashboard</a>
                         </li>

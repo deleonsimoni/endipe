@@ -19,6 +19,7 @@ const config = require('../config/config');
 
 module.exports = {
   insert,
+  update,
   generatePayment,
   getPrice,
   uploadWork,
@@ -31,6 +32,10 @@ async function insert(user) {
   delete user.password;
   console.log('Inserindo usuário no banco');
   return await new User(user).save();
+}
+
+async function update(user) {
+  return await User.findOneAndUpdate({ _id: user._id }, user, { new: true });
 }
 
 function getPrice(id) {

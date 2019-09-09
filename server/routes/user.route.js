@@ -13,6 +13,7 @@ router.get('/downloadFile', passport.authenticate('jwt', { session: false }), do
 router.post('/payment', passport.authenticate('jwt', { session: false }), payment);
 router.post('/uploadWork/xxendiperio2020/:id', passport.authenticate('jwt', { session: false }), uploadWork);
 router.post('/gerarPagamento/xxendiperio2020/:id', passport.authenticate('jwt', { session: false }), payment);
+router.put('/update', passport.authenticate('jwt', { session: false }), update);
 router.route('/')
   .post(asyncHandler(insert));
 
@@ -29,6 +30,13 @@ async function downloadFile(req, res) {
 
 async function insert(req, res) {
   let user = await userCtrl.insert(req.body);
+  res.json(user);
+}
+
+async function update(req, res) {
+  console.log(req.body);
+  let user = await userCtrl.update(req.body);
+  console.log(user);
   res.json(user);
 }
 
