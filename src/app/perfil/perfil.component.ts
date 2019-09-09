@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-perfil',
@@ -12,11 +13,14 @@ export class PerfilComponent implements OnInit {
 
   public userForm: FormGroup;
   public userData: any;
+  public carregando = false;
+  public submit = false;
 
   constructor(
     private builder: FormBuilder,
     private authService: AuthService,
-    private userService: UserService
+    private userService: UserService,
+    private toastr: ToastrService
   ) {
 
     this.userForm = this.builder.group({
@@ -63,9 +67,31 @@ export class PerfilComponent implements OnInit {
           this.userData[key] = this.userForm.value[key];
         }
       }
-      console.log(this.userData);
+
+      if (!this.validarNome(this.userForm.value.fullname)) {
+        this.toastr.error('Digite o nome e sobrenome.', 'Atenção: ');
+        return;
+      }
+
+      this.carregando = true;
+
       this.userService.updateData(this.userData)
-        .subscribe(res => console.log(res));
+        .subscribe(res => {
+          this.toastr.success('Dados atualizados com sucesso.')
+          this.carregando = false;
+        });
+    } else {
+      this.toastr.error('Preencha os campos do formulário corretamente.', 'Erro: ');
+    }
+  }
+
+  public validarNome(nome) {
+    const regName = /^[a-zA-Z ]{6,30}$/;
+    const name = nome;
+    if (!regName.test(name)) {
+      return false;
+    } else {
+      return true;
     }
   }
 
