@@ -2,7 +2,7 @@
 
     <div class="container" id="register">
         <div class="form">
-            <form [formGroup]="userForm" role="form" class="contactForm">
+            <form [formGroup]="userForm" role="form" class="contactForm" (ngSubmit)="updateUser()">
                 <div class="section-header">
                     <h2>Meu perfil</h2>
                 </div>
@@ -141,7 +141,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="text-center pt-2"><button (click)="updateUser()">Atualizar</button></div>
+                <div *ngIf="!carregando" class="text-center pt-5"><button type="submit">Atualizar</button></div>
+                <div *ngIf="carregando" class="text-center pt-5"><button><i
+                            class="fas fa-spinner fa-pulse"></i></button></div>
             </form>
         </div>
 
