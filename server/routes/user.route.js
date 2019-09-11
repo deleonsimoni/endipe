@@ -34,9 +34,7 @@ async function insert(req, res) {
 }
 
 async function update(req, res) {
-  console.log(req.body);
   let user = await userCtrl.update(req.body);
-  console.log(user);
   res.json(user);
 }
 
