@@ -126,6 +126,14 @@
                                 PCD (Pessoa com Deficiência)
                             </label>
                         </div>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                &nbsp;
+                            </label>
+                        </div>
+                        <input *ngIf="registerForm.value.isPCD" type="text" class="form-control" name="tipoDeficiencia"
+                            id="tipoDeficiencia" placeholder="Qual é o tipo de sua deficiência?"
+                            formControlName="deficiencyType" />
                     </div>
 
                 </div>

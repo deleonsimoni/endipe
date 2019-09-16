@@ -75,9 +75,9 @@
                                     <li><a [routerLink]="['/pagamento']">Pagamento</a></li>
                                     <li><a [routerLink]="['/meus-trabalhos']">Submissão</a></li>
                                     <li><a [routerLink]="['/certificados']">Certificados</a></li>
-                                    <li *ngIf="user && user.icAdmin == false">
+                                    <!--<li *ngIf="user && user.icAdmin == false">
                                         <a [routerLink]="['/perfil']">Perfil</a>
-                                    </li>
+                                    </li>-->
                                     <li *ngIf="user && user.icAdmin">
                                         <a [routerLink]="['/admin']">Dashboard</a>
                                     </li>
@@ -185,9 +185,9 @@
                         <li><a [routerLink]="['/pagamento']" (click)="sidenav.toggle()">Pagamento</a></li>
                         <li><a [routerLink]="['/meus-trabalhos']" (click)="sidenav.toggle()">Submissão</a></li>
                         <li><a [routerLink]="['/certificados']" (click)="sidenav.toggle()">Certificados</a></li>
-                        <li *ngIf="user && user.icAdmin == false">
+                        <!--<li *ngIf="user && user.icAdmin == false">
                             <a [routerLink]="['/perfil']" (click)="sidenav.toggle()">Perfil</a>
-                        </li>
+                        </li>-->
                         <li *ngIf="user && user.icAdmin">
                             <a [routerLink]="['/admin']" (click)="sidenav.toggle()">Dashboard</a>
                         </li>

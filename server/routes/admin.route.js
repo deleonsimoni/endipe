@@ -3,6 +3,8 @@ const passport = require('passport');
 const asyncHandler = require('express-async-handler');
 const userCtrl = require('../controllers/user.controller');
 const adminCtrl = require('../controllers/admin.controller');
+const emailSender = require('../controllers/email.controller');
+const templateEmail = require('../config/templateEmails');
 
 const router = express.Router();
 module.exports = router;
@@ -36,6 +38,7 @@ async function deleteByEmail(req, res) {
 async function validatePayment(req, res) {
   if (req.user.icAdmin) {
     let users = await adminCtrl.validatePayment(req.params.id);
+    emailSender.sendMail(user.email, 'Pagamento Homologado', templateEmail.pagamentoHomologado);
     res.json(users);
   } else {
     res.sendStatus(401);

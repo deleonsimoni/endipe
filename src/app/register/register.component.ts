@@ -54,6 +54,7 @@ export class RegisterComponent implements OnInit {
       dateBirth: [null, [Validators.required]],
       icForeign: [false],
       isPCD: [false],
+      deficiencyType: [null],
       document: [null, [Validators.required]],
       address: this.builder.group({
         street: [null, [Validators.required]],

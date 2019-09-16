@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   //host: 'http://xxendiperio2020.com.br/api'
+  //host: 'http://18.229.158.132:8080/api'
   host: 'http://localhost:8080/api'
 };
 

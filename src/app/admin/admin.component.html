@@ -74,7 +74,8 @@
                             <div class="row align-items-center">
                                 <div class="col-sm-4 mb-2">
                                     <strong>PCD</strong>
-                                    <p>{{ user.isPCD ? 'Sim' : 'Não' }}</p>
+                                    <p>{{ user.isPCD ? user.deficiencyType ? 'Sim - ' + user.deficiencyType : 'Sim'  : 'Não' }}
+                                    </p>
                                 </div>
                                 <div class="col-sm-4 mb-2">
                                     <strong>Estrangeiro</strong>

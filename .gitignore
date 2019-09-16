@@ -46,3 +46,7 @@ testem.log
 Thumbs.db
 .env
 /.env
+
+#resources
+/breduk
+/public
