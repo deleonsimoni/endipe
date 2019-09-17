@@ -10,8 +10,8 @@ const NewsSchema = new mongoose.Schema({
     default: Date.now
   },
   user: {
-    type: ObjectId,
-    required: true    
+    type: mongoose.Schema.Types.ObjectId,
+    required: true
   }
 });
 

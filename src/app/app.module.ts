@@ -40,6 +40,7 @@ import { AdminComponent } from './admin/admin.component';
 import { AccordionModule } from 'ngx-bootstrap';
 import { MaskCpfPipe } from './pipes/mask-cpf.pipe';
 import { PerfilComponent } from './perfil/perfil.component';
+import { AdminNewsComponent } from './admin-news/admin-news.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { PerfilComponent } from './perfil/perfil.component';
     ListarTrabalhosComponent,
     AdminComponent,
     MaskCpfPipe,
-    PerfilComponent
+    PerfilComponent,
+    AdminNewsComponent
   ],
   imports: [
     BrowserModule,

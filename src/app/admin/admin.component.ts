@@ -3,6 +3,7 @@ import { AuthService } from '../services/auth.service';
 import { trigger, style, state, transition, animate } from '@angular/animations';
 import { DownloadFileService } from '../services/download-file.service';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -56,6 +57,7 @@ export class AdminComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
+    private router: Router,
     private downloadService: DownloadFileService,
     @Inject('BASE_API_URL') private baseUrl: string,
     private http: HttpClient
@@ -141,6 +143,9 @@ export class AdminComponent implements OnInit {
     } else {
       this.users = this.allUsers.filter(user => user.payment && user.payment.icPaid === true);
     }
+  }
 
+  irParaNoticias() {
+    this.router.navigate(['/noticias']);
   }
 }

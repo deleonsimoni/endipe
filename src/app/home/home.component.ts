@@ -12,6 +12,7 @@ import { ModalNormasMinicursoComponent } from '../modal-normas/modal-mediador-mi
 import { ModalNormasPosterComponent } from '../modal-normas/modal-expositor-poster.component';
 import { DownloadFileService } from '../services/download-file.service';
 import { ToastrService } from 'ngx-toastr';
+import { NoticiasService } from '../services/noticias.service';
 
 
 @Component({
@@ -25,6 +26,7 @@ export class HomeComponent implements OnInit {
   subscriptionType: string;
   subscriptionValue: number;
   carregando = false;
+  noticias = [];
 
   instituicoes = [
     'Universidade Federal do Rio de Janeiro – UFRJ',
@@ -452,6 +454,7 @@ export class HomeComponent implements OnInit {
     private router: Router,
     private dialog: MatDialog,
     private download: DownloadFileService,
+    private noticiasService: NoticiasService,
     private toastr: ToastrService,
 
   ) {
@@ -470,7 +473,21 @@ export class HomeComponent implements OnInit {
 
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+
+    this.listarNoticias();
+
+  }
+
+
+  public listarNoticias() {
+    this.noticiasService.listar()
+      .subscribe((res: any) => {
+        this.noticias = res;
+      }, err => {
+        this.toastr.error('Ocorreu um erro ao listar noticias', 'Atenção: ');
+      });
+  }
 
   downloadTemplate(nameFile) {
     const vm = this;
