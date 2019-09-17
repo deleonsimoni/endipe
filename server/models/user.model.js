@@ -33,6 +33,9 @@ const UserSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
+  deficiencyType: {
+    type: String
+  },
   createdAt: {
     type: Date,
     default: Date.now
@@ -44,12 +47,10 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-
   checkStandards: {
     type: Boolean,
     default: false
   },
-
   address: {
     street: String,
     complement: String,
@@ -107,8 +108,8 @@ const UserSchema = new mongoose.Schema({
     id: Number
   }]
 }, {
-    versionKey: false
-  });
+  versionKey: false
+});
 
 
 module.exports = mongoose.model('User', UserSchema);

@@ -200,7 +200,7 @@ export class HomeComponent implements OnInit {
       equipe: [
         'Vania Finholdt Angelo Leite – FFP/UERJ (coord.)',
         'Alice Akemi Yamasaki – UFF',
-        'Cristina Spolidorio Freund – EB/CPII',
+        'Cristina Spolidoro Freund – EB/CPII',
         'Dinah Terra – UFF',
         'Giselle Martins dos Santos Ferreira – PUC-Rio',
         'Guilherme Augusto Rezende Lemos – UERJ'

@@ -2,6 +2,8 @@ const express = require('express');
 const passport = require('passport');
 const asyncHandler = require('express-async-handler');
 const userCtrl = require('../controllers/user.controller');
+const emailSender = require('../controllers/email.controller');
+const templateEmail = require('../config/templateEmails');
 
 const router = express.Router();
 module.exports = router;
@@ -19,6 +21,7 @@ router.route('/')
 
 async function uploadWork(req, res) {
   let response = await userCtrl.uploadWork(req, res);
+  emailSender.sendMail(user.email, 'Trabalho Submetido com Sucesso', templateEmail.trabalhoSubmetido);
   console.log('Devolvi Pro front');
   res.json(response);
 }
