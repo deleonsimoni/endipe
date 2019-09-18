@@ -136,7 +136,7 @@ export class RegisterComponent implements OnInit {
   }
 
   public validarNome(nome) {
-    const regName = /^[a-zA-Z ]{6,30}$/;
+    const regName = /^[a-zA-Z ]{6,80}$/;
     const name = nome;
     if (!regName.test(name)) {
       return false;
@@ -149,10 +149,8 @@ export class RegisterComponent implements OnInit {
     const form = this.registerForm.value;
 
     if (form.password === form.cfPassword) {
-
       this.registerForm.removeControl('cf-password');
       return this.registerForm.value;
-
     }
 
     return null;

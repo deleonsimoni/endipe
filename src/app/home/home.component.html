@@ -79,7 +79,9 @@
                             O RIO DE JANEIRO ESPERA POR VOCÊ!<br />
                             Aproveite os descontos e faça logo a sua inscrição para o maior evento da área de
                             Educação<br /><br />
-                            Em breve mais notícias
+                            <div *ngFor="let noticia of noticias">
+                                {{noticia.name}}<br /><br />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -514,7 +516,7 @@
                         <p class="description" style="text-align: justify;">
                             Os Minicursos se destinarão ao desenvolvimento didático de assunto relevante e associado às
                             temáticas dos eixos do evento. Suas propostas poderão ser apresentadas por um ou mais
-                            professores
+                            profissionais
                             da Educação Básica e da Educação Superior, devendo ser planejado para, no mínimo, duas e, no
                             máximo, três sessões de uma hora e meia cada, para um grupo limitado de participantes, com
                             inscrição
@@ -542,7 +544,7 @@
                         <p class="description" style="text-align: justify;">
                             As Rodas de Conversa se destinarão ao debate de assunto relevante e associado às temáticas
                             dos eixos
-                            do evento. Suas propostas poderão ser apresentadas por um ou mais professores da Educação
+                            do evento. Suas propostas poderão ser apresentadas por um ou mais profissionais da Educação
                             Básica e
                             da Educação Superior, devendo ser planejada para uma sessão de uma hora e meia cada, para um
                             grupo limitado de participantes, com inscrição prévia, a ser realizada conforme cronograma
@@ -597,9 +599,9 @@
                             andamento
                             ou experiências de ensino em realização. O tema do Pôster deverá se relacionar com um dos
                             eixos do
-                            Encontro, podendo ser submetido por estudantes de pós-graduação, professor da Educação
+                            Encontro, podendo ser submetido por estudantes de pós-graduação, profissionais da Educação
                             Básica
-                            e/ou Professor da Educação Superior. Pretende-se que o Pôster seja debatido em salas de
+                            e/ou profissionais da Educação Superior. Pretende-se que o Pôster seja debatido em salas de
                             comunicações com mediações de professores convidados. As propostas de Pôsteres serão
                             avaliadas e
                             selecionadas pelo Comitê Científico, conforme as normas definidas para a sua submissão e
