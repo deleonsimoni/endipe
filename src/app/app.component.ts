@@ -65,4 +65,8 @@ export class AppComponent implements OnInit {
     this.rota.navigate(['/home']);
   }
 
+  get userName(): string {
+    return this.user && this.user.fullname ? this.user.fullname.split(' ')[0] : '';
+  }
+
 }
