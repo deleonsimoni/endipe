@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
 import { ToastrService } from 'ngx-toastr';
+import * as moment from 'moment';
+import { Subscription } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-perfil',
@@ -22,7 +25,7 @@ export class PerfilComponent implements OnInit {
     private userService: UserService,
     private toastr: ToastrService
   ) {
-
+    moment.locale('pt-br');
     this.userForm = this.builder.group({
       fullname: [null, [Validators.required]],
       // tslint:disable-next-line: max-line-length
@@ -46,17 +49,21 @@ export class PerfilComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userData = this.authService.getDecodedAccessToken(this.authService.getToken());
-    this.fillForm();
+    this.authService.refresh().subscribe((res: any) => {
+      this.fillForm(res.user);
+    });
+
+    this.userForm.controls['email'].disable();
   }
 
-  private fillForm() {
+  private fillForm(user) {
+    this.userData = user;
     this.userForm.patchValue({
-      fullname: this.userData.fullname,
-      email: this.userData.email,
-      dateBirth: this.userData.dateBirth,
-      phones: this.userData.phones,
-      address: this.userData.address
+      fullname: user.fullname,
+      email: user.email,
+      dateBirth: moment(user.dateBirth).format('L'),
+      phones: user.phones,
+      address: user.address
     });
   }
 
@@ -73,12 +80,16 @@ export class PerfilComponent implements OnInit {
         return;
       }
 
+
       this.carregando = true;
 
       this.userService.updateData(this.userData)
         .subscribe(res => {
-          this.toastr.success('Dados atualizados com sucesso.')
+          this.toastr.success('Dados atualizados com sucesso.');
           this.carregando = false;
+          this.authService.refresh().subscribe((x: any) => {
+            this.fillForm(x.user);
+          });
         });
     } else {
       this.toastr.error('Preencha os campos do formulário corretamente.', 'Erro: ');
