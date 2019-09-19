@@ -17,7 +17,11 @@ export class UploadService {
     formData.append('fileArray', filePDF, `${id}/${document}_${filePDF.name}`);
     formData.append('fileArray', fileDOC, `${id}/${document}_${fileDOC.name}`);
     formData.append('formulario', JSON.stringify(formulario));
-    return this.http.post(`${this.baseUrl}/user/uploadWork/xxendiperio2020/${id}`, formData);
+    return this.http.post(`${this.baseUrl}/user/uploadWork2/xxendiperio2020/${id}`, formData);
+  }
+
+  uploadFile2(form) {
+    return this.http.post(`${this.baseUrl}/user/uploadWork2/xxendiperio2020`, form);
   }
 
   gerarPagamento(file: File, id: string, document: string, formulario: any): Observable<any> {

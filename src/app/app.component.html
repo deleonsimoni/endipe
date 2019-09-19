@@ -81,7 +81,7 @@
                                     <li *ngIf="user && user.icAdmin">
                                         <a [routerLink]="['/admin']">Dashboard</a>
                                     </li>
-                                    <li><a class="pointer" (click)="logout()">Sair</a></li>
+                                    <li><a style="cursor: pointer;" (click)="logout()">Sair</a></li>
 
                                 </ul>
                             </li>
@@ -191,7 +191,7 @@
                         <li *ngIf="user && user.icAdmin">
                             <a [routerLink]="['/admin']" (click)="sidenav.toggle()">Dashboard</a>
                         </li>
-                        <li><a class="pointer" (click)="logout()" (click)="sidenav.toggle()">Sair</a></li>
+                        <li><a style="cursor: pointer;" (click)="logout()" (click)="sidenav.toggle()">Sair</a></li>
 
                     </ul>
                 </accordion-group>

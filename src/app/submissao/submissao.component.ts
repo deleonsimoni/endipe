@@ -136,22 +136,33 @@ export class SubmissaoComponent implements OnInit {
       return;
     } else {
       this.enviando = true;
-      this.uploadService.uploadFile(this.filesDOC[0], this.filesPDF[0], 'trabalhos', this.user.document, this.submissionForm.value).subscribe(() => {
-        this.carregando = true;
-        this.authService.refresh().subscribe((res: any) => {
-          this.user = res.user;
+
+      this.submissionForm.value.arquivoPDF = this.filesPDF[0];
+      this.uploadService.uploadFile(this.filesDOC[0], this.filesPDF[0], 'trabalhos', this.user.document, this.submissionForm.value)
+        .subscribe(res => {
           this.carregando = false;
+          this.enviando = false;
+
+          if (res && res.temErro) {
+            this.toastr.error(res.mensagem, 'Erro: ');
+          } else {
+            this.carregando = true;
+            this.authService.refresh().subscribe((res: any) => {
+              this.user = res.user;
+              this.carregando = false;
+            });
+
+            this.toastr.success('Trabalho submetido com sucesso.', 'Sucesso');
+            this.submissionForm.reset();
+            this.filesDOC = null;
+            this.filesPDF = null;
+          }
+        }, err => {
+          this.enviando = false;
+          this.toastr.error('Servidor momentaneamente inoperante.', 'Erro: ');
         });
 
-        this.enviando = false;
-        this.toastr.success('Trabalho submetido com sucesso.', 'Sucesso');
-        this.submissionForm.reset();
-        this.filesDOC = null;
-        this.filesPDF = null;
-      }, err => {
-        this.enviando = false;
-        this.toastr.error('Servidor momentaneamente inoperante.', 'Erro: ');
-      });
+
     }
   }
 

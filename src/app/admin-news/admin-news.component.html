@@ -13,8 +13,7 @@
                     <div class="form-group col-md-12">
                         <input type="text" name="name" class="form-control" id="name" placeholder="Nome da Notícia"
                             formControlName="name" />
-                        <div *ngIf="(validate.name.errors && submit) || (validate.name.errors && !validate.name.pristine)"
-                            class="alert alert-danger">
+                        <div *ngIf="(validate.name.errors && !validate.name.pristine)" class="alert alert-danger">
                             <div [hidden]="!validate.name.errors.required">
                                 Preencha o campo nome da notícia
                             </div>
