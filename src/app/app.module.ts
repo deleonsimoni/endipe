@@ -41,6 +41,7 @@ import { AccordionModule } from 'ngx-bootstrap';
 import { MaskCpfPipe } from './pipes/mask-cpf.pipe';
 import { PerfilComponent } from './perfil/perfil.component';
 import { AdminNewsComponent } from './admin-news/admin-news.component';
+import { RegisterCoordinatorComponent } from './register-coordinator/register-coordinator.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { AdminNewsComponent } from './admin-news/admin-news.component';
     AdminComponent,
     MaskCpfPipe,
     PerfilComponent,
-    AdminNewsComponent
+    AdminNewsComponent,
+    RegisterCoordinatorComponent
   ],
   imports: [
     BrowserModule,
