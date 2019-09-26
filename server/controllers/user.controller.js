@@ -24,8 +24,7 @@ module.exports = {
   generatePayment,
   getPrice,
   uploadWork,
-  downloadFileS3,
-  uploadWork2
+  downloadFileS3
 }
 
 async function insert(user) {
@@ -122,141 +121,12 @@ async function downloadFileS3(req) {
   return await S3Uploader.downloadFile(req);
 }
 
-async function uploadWork(req, res) {
-
-  var form = new IncomingForm();
-  var fileNameDOC = '';
-  var bufferDOC = null;
-  var fileNamePDF = '';
-  var bufferPDF = null;
-  var formulario = null;
-  var contador = 0;
-  var userId = [];
-  var userFind = null;
-  var retorno = {
-    temErro: false,
-    mensagem: 'Trabalho submetido com sucesso'
-  };
-
-  /*form.on('field', (name, value) => { 
-    formulario = JSON.parse(value);
-    console.log(formulario);
-  });*/
-
-  // var formfields = await new Promise(function (resolve, reject) {
-  await form.on('field', async (name, value) => {
-    formulario = JSON.parse(value);
-    //resolve(formulario);
-  });
-
-  //});
-
-
-
-  //formfields = await new Promise(function (resolve, reject) {
-  await form.on('file', async (field, file) => {
-
-    if (contador === 0) {
-      fileNamePDF = config.PATH_S3_DEV ? config.PATH_S3_DEV + 'xxendiperio2020/' + file.name : 'xxendiperio2020/' + req.user.document + "_" + file.name;
-      bufferPDF = fs.readFileSync(file.path);
-      contador++;
-    } else {
-      fileNameDOC = config.PATH_S3_DEV ? config.PATH_S3_DEV + 'xxendiperio2020/' + file.name : 'xxendiperio2020/' + req.user.document + "_" + file.name;
-      bufferDOC = fs.readFileSync(file.path);
-    }
-
-    //resolve(true);
-
-  });
-  //});
-
-  // formfields = await new Promise(function (resolve, reject) {
-  await form.on('end', async () => {
-    //console.log('imprimindo for ', formulario);
-
-    for (let i = 0; i < formulario.authors.length; i++) {
-
-      userFind = await getUserByEmail(formulario.authors[i].email);
-      console.log('IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII' + formulario.authors[i].email);
-
-      console.log('USUUUUUUUUUARIO: ' + userFind);
-      if (userFind) {
-        if (!userFind.payment || !userFind.payment.icPaid) {
-          console.log(1);
-          retorno.temErro = true;
-          retorno.mensagem = `O usuário ${formulario.authors[i].email} não possui pagamento válido`
-          break;
-        } else if (userFind.works && userFind.works.length > 2) {
-          console.log(2);
-          retorno.temErro = true;
-          retorno.mensagem = `O usuário ${formulario.authors[i].email} já possui dois trabalhos submetidos`
-          break;
-        } else {
-          console.log(4);
-          userId.push(userFind._id);
-        }
-      } else {
-        console.log(3);
-        retorno.temErro = true;
-        retorno.mensagem = `O usuário ${formulario.authors[i].email} não está inscrito no congresso`
-        break;
-      }
-    };
-
-    if (retorno.temErro) {
-      console.log('aa');
-      return retorno;
-    }
-
-
-
-    /*S3Uploader.uploadFile(fileNameDOC, bufferDOC).then(fileData => {
-      S3Uploader.uploadFile(fileNamePDF, bufferPDF).then(fileData => {
-        formulario.pathS3DOC = fileNameDOC;
-        formulario.pathS3PDF = fileNamePDF;
-        req.user.works = formulario;
-
-        User.findOneAndUpdate({ _id: req.user._id }, { $push: { works: req.user.works } }, function (err, doc) {
-          if (err) {
-            console.log("erro ao atualizar o usuario: ", err);
-          } else {
-            console.log("update document success");
-          }
-        });
-        res.json({
-          user: req.user,
-          successful: true
-          //fileData
-        });
-        //return resolve(res);
-      }).catch(err => {
-        console.log(err);
-        res.sendStatus(500);
-        // return  reject(res);
-
-      });
-    }).catch(err => {
-      console.log(err);
-      res.sendStatus(500);
-      //return  reject(res);
-
-    });*/
-  });
-  //});
-  Promise.all(
-    await form.parse(req),
-  ).then(_ => { return retorno })
-    .catch(err => res.json({ err }));
-}
-
-
-
 async function getUserByEmail(email) {
   return await User.findOne({ email: email.toLowerCase() });
 }
 
 
-async function uploadWork2(req, res) {
+async function uploadWork(req, res) {
 
   let formulario = JSON.parse(req.body.formulario);
 
@@ -323,7 +193,7 @@ async function validatePaymentUsers(users) {
 
 }
 
-async function uploadWorks(works) {
+async function uploadWorks(files) {
 
   let retorno = {
     temErro: false,
@@ -333,10 +203,10 @@ async function uploadWorks(works) {
 
   let fileName;
 
-  for (let i = 0; i < works.length; i++) {
+  for (let i = 0; i < files.length; i++) {
 
-    fileName = config.PATH_S3_DEV ? config.PATH_S3_DEV + 'xxendiperio2020/works/' + works[i].name : 'xxendiperio2020/works/' + works[i].name;
-    await S3Uploader.uploadFile(fileName, works[i].data).then(fileData => {
+    fileName = config.PATH_S3_DEV ? config.PATH_S3_DEV + 'xxendiperio2020/works/' + files[i].name : 'xxendiperio2020/works/' + files[i].name;
+    await S3Uploader.uploadFile(fileName, files[i].data).then(fileData => {
       console.log('Arquivo submetido para AWS ' + fileName);
       retorno.filesS3.push(fileName);
     }, err => {

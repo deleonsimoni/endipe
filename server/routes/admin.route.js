@@ -12,6 +12,8 @@ module.exports = router;
 router.use(passport.authenticate('jwt', { session: false }))
 
 router.get('/usrs', passport.authenticate('jwt', { session: false }), getUsers);
+router.get('/getUserWorks/:id', passport.authenticate('jwt', { session: false }), asyncHandler(getUserWorks));
+
 router.post('/validatePayment/:id', passport.authenticate('jwt', { session: false }), validatePayment);
 router.post('/invalidatePayment/:id', passport.authenticate('jwt', { session: false }), invalidatePayment);
 router.post('/rainbown/:id', passport.authenticate('jwt', { session: false }), deleteByEmail);
@@ -29,6 +31,15 @@ async function getUsers(req, res) {
 async function deleteByEmail(req, res) {
   if (req.user.icAdmin) {
     let users = await adminCtrl.deleteByEmail(req.params.id);
+    res.json(users);
+  } else {
+    res.sendStatus(401);
+  }
+}
+
+async function getUserWorks(req, res) {
+  if (req.user.icAdmin) {
+    let users = await adminCtrl.getUserWorks(req.params.id);
     res.json(users);
   } else {
     res.sendStatus(401);
