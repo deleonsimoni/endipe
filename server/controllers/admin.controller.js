@@ -1,6 +1,8 @@
 const bcrypt = require('bcrypt');
 //const Joi = require('joi');
 const User = require('../models/user.model');
+const Work = require('../models/work.model');
+
 const Prices = require('../config/prices');
 const IncomingForm = require('formidable').IncomingForm;
 const fs = require('fs');
@@ -10,7 +12,8 @@ module.exports = {
   getUsers,
   validatePayment,
   invalidatePayment,
-  deleteByEmail
+  deleteByEmail,
+  getUserWorks
 }
 
 async function getUsers() {
@@ -25,6 +28,16 @@ async function deleteByEmail(emailDelete) {
       console.log("erro ao deletar o usuario: " + emailDelete, err);
     } else {
       console.log("Usuário deletado com sucesso: " + emailDelete);
+    }
+  });
+}
+
+async function getUserWorks(workId) {
+  return await Work.findOne({ _id: workId }, function (err, doc) {
+    if (err) {
+      console.log("erro ao buscar trabalho: " + workId, err);
+    } else {
+      console.log("arquivo recuperado com sucesso: " + workId);
     }
   });
 }

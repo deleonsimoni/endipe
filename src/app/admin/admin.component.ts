@@ -29,8 +29,15 @@ import { Router } from '@angular/router';
 export class AdminComponent implements OnInit {
 
   public users = [];
+  public works = [];
   public allUsers = [];
   public infos = false;
+  public carregandoTrabalhos = false;
+  public search: string;
+  public status: string;
+  public carregando = false;
+  public userSelect: number;
+
   public modalities = [
     { id: 1, name: 'Convidado de sessão especial' },
     { id: 2, name: 'Mediador de roda de conversa' },
@@ -40,9 +47,14 @@ export class AdminComponent implements OnInit {
     { id: 6, name: 'Simposista' },
     { id: 7, name: 'Ouvinte' }
   ];
-
-  public search: string;
-  public status: string;
+  public eixos = [
+    { id: 1, name: 'Formação docente' },
+    { id: 2, name: 'Currículo e avaliação' },
+    { id: 3, name: 'Direitos humanos, Interculturalidade e Religiões' },
+    { id: 4, name: 'Nova epistemologia, Diferença, Biodiversidade, Democracia e Inclusão' },
+    { id: 5, name: 'Educação, Comunicação e Técnologia' },
+    { id: 6, name: 'Infâncias, Juventudes e Vida Adulta' }
+  ];
 
   public categories = [
     { id: 1, name: 'Estudantes de curso Normal/EM' },
@@ -52,8 +64,6 @@ export class AdminComponent implements OnInit {
     { id: 5, name: 'Profissionais da Educação Superior' }
   ];
 
-  carregando = false;
-  userSelect: number;
 
   constructor(
     private authService: AuthService,
@@ -85,13 +95,31 @@ export class AdminComponent implements OnInit {
   }
 
   selectUser(user) {
-
-    if (this.userSelect === user) {
+    if (this.userSelect === user._id) {
       this.userSelect = null;
     } else {
-      this.userSelect = user;
+      this.userSelect = user._id;
+      if (user.works) {
+        this.getUserWorks(user.works);
+      }
     }
+  }
 
+  getUserWorks(userWorksId) {
+    this.works = [];
+    this.carregandoTrabalhos = true;
+
+    if (userWorksId) {
+      userWorksId.forEach(workId => {
+        this.http.get(`${this.baseUrl}/admin/getUserWorks/` + workId, {}).subscribe((res: any) => {
+          this.carregandoTrabalhos = false;
+          this.works.push(res);
+        }, err => {
+          this.carregandoTrabalhos = false;
+          console.log(err);
+        });
+      });
+    }
 
   }
 
@@ -120,28 +148,41 @@ export class AdminComponent implements OnInit {
     return this.modalities.filter(element => element.id === id)[0];
   }
 
+  public retrieveEixo(id) {
+    return this.eixos.filter(element => element.id === id)[0];
+  }
+
   public retrieveCategories(id) {
     return this.categories.filter(element => element.id === id)[0];
   }
 
   public searchUser() {
     if (this.search !== undefined && this.search !== '') {
-      this.users = this.allUsers.filter(user => user.document.match(this.search));
+      this.users = this.allUsers.filter(user => (user.document.match(this.search) || user.fullname.toLowerCase().match(this.search)));
     } else {
       this.users = this.allUsers;
     }
   }
 
   public filtrarStatus() {
-    this.search = '';
-    this.users = [];
 
-    if (this.status === '0') {
-      this.users = this.allUsers.filter(user => !user.payment);
-    } else if (this.status === '1') {
-      this.users = this.allUsers.filter(user => user.payment && user.payment.icPaid === false);
-    } else {
-      this.users = this.allUsers.filter(user => user.payment && user.payment.icPaid === true);
+    switch (parseInt(this.status)) {
+      case 0:
+        this.users = this.allUsers.filter(user => !user.payment);
+        break;
+      case 1:
+        this.users = this.allUsers.filter(user => user.payment && user.payment.icPaid === false);
+        break;
+      case 2:
+        this.users = this.allUsers.filter(user => user.payment && user.payment.icPaid === true);
+        break;
+      case 3:
+        this.users = this.allUsers.filter(user => user.isPCD);
+        break;
+
+      default:
+        this.users = this.allUsers;
+        break;
     }
   }
 

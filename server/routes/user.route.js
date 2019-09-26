@@ -4,25 +4,27 @@ const asyncHandler = require('express-async-handler');
 const userCtrl = require('../controllers/user.controller');
 const emailSender = require('../controllers/email.controller');
 const templateEmail = require('../config/templateEmails');
+const fileUpload = require('express-fileupload');
+
 
 const router = express.Router();
 module.exports = router;
 
 router.use(passport.authenticate('jwt', { session: false }))
 
-router.get('/price/:id', passport.authenticate('jwt', { session: false }), price);
+router.get('/price/:id', passport.authenticate('jwt', { session: false }), asyncHandler(price));
 router.get('/downloadFile', passport.authenticate('jwt', { session: false }), downloadFile);
+
+router.post('/uploadWork/xxendiperio2020/:id', [passport.authenticate('jwt', { session: false }), fileUpload()], asyncHandler(uploadWork));
 router.post('/payment', passport.authenticate('jwt', { session: false }), payment);
-router.post('/uploadWork/xxendiperio2020/:id', passport.authenticate('jwt', { session: false }), uploadWork);
 router.post('/gerarPagamento/xxendiperio2020/:id', passport.authenticate('jwt', { session: false }), payment);
+
 router.put('/update', passport.authenticate('jwt', { session: false }), update);
 router.route('/')
   .post(asyncHandler(insert));
 
 async function uploadWork(req, res) {
   let response = await userCtrl.uploadWork(req, res);
-  emailSender.sendMail(user.email, 'Trabalho Submetido com Sucesso', templateEmail.trabalhoSubmetido);
-  console.log('Devolvi Pro front');
   res.json(response);
 }
 

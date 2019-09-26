@@ -91,19 +91,9 @@ const UserSchema = new mongoose.Schema({
   },
 
   works: [{
-    protocol: Number,
-    title: String,
-    modalityId: Number,
-    typeWork: Number,
-    axisId: Number,
-    pathS3DOC: String,
-    pathS3PDF: String,
-    authors: [
-      {
-        email: String
-      }
-    ],
+    type: mongoose.Schema.Types.ObjectId
   }],
+
   roles: [{
     id: Number
   }]

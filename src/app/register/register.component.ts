@@ -104,7 +104,7 @@ export class RegisterComponent implements OnInit {
         return;
       }
 
-      if (!this.validarNome(this.registerForm.value.fullname)) {
+      if (!this.registerForm.value.fullname) {
         this.toastr.error('Digite o nome e sobrenome.', 'Atenção: ');
         return;
       }
@@ -136,7 +136,7 @@ export class RegisterComponent implements OnInit {
   }
 
   public validarNome(nome) {
-    const regName = /^[a-zA-Z ]{6,80}$/;
+    const regName = /^[a-zA-Z ]{6,400}$/;
     const name = nome;
     if (!regName.test(name)) {
       return false;
