@@ -24,7 +24,8 @@ module.exports = {
   generatePayment,
   getPrice,
   uploadWork,
-  downloadFileS3
+  downloadFileS3,
+  checkDocumentDup
 }
 
 async function insert(user) {
@@ -33,6 +34,11 @@ async function insert(user) {
   delete user.password;
   console.log('Inserindo usuário no banco');
   return await new User(user).save();
+}
+
+async function checkDocumentDup(cpf) {
+  let userFind = await User.find({ document: cpf }).select('document');
+  return userFind.length > 0 ? true : false;
 }
 
 async function update(user) {

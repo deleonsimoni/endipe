@@ -5,6 +5,10 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  document: {
+    type: String,
+    required: true
+  },
   email: {
     type: String,
     required: true,
@@ -42,10 +46,6 @@ const UserSchema = new mongoose.Schema({
   },
   dateBirth: {
     type: Date
-  },
-  document: {
-    type: String,
-    required: true
   },
   checkStandards: {
     type: Boolean,
