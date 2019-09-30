@@ -10,6 +10,7 @@ import { AdminComponent } from './admin/admin.component';
 import { CertificadoComponent } from './certificado/certificado.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { AdminNewsComponent } from './admin-news/admin-news.component';
+import { RegisterCoordinatorComponent } from './register-coordinator/register-coordinator.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,10 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent
+  },
+  {
+    path: 'register-coordinator',
+    component: RegisterCoordinatorComponent
   },
   {
     path: 'pagamento',
