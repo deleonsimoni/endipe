@@ -17,6 +17,10 @@ const WorkSchema = new mongoose.Schema({
   axisId: {
     type: Number
   },
+  createdAt: {
+    type: Date,
+    default: Date.now
+  },
   pathS3DOC: {
     type: String
   },

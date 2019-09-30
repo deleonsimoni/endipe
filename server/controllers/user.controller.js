@@ -47,7 +47,7 @@ async function update(user) {
 
 function getPrice(id) {
   let dateNow = new Date();
-
+  dateNow.setHours(0, 0, 0, 0)
   let seasons = Prices.prices.filter(price => price.id == id)[0].seasons;
 
   return seasons.filter(season => dateNow.getTime() >= season.dateIni.getTime() && dateNow.getTime() <= season.dateEnd.getTime())[0].price;
@@ -61,8 +61,6 @@ async function generatePayment(req, res) {
   var buffer = null;
   var formulario = null;
   var payment = null;
-
-
 
   form.on('field', (name, value) => {
     formulario = JSON.parse(value);
