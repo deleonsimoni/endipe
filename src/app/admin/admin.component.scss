@@ -195,13 +195,17 @@
       background: #50d8af;
       border: 2px solid #50d8af;
     }
-    a {
-      &:hover {
-        color: #50d8af;
-      }
-      padding: 8px;
-      text-decoration: underline;
-      color: #0c2e8a;
+  }
+}
+
+ul.nav {
+  a {
+    color: #0c2e8a;
+    text-decoration: none;
+    font-weight: 600;
+    &.active {
+      color: #fff;
+      background-color: #50d8af;
     }
   }
 }

@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="row justify-content-between">
+        <h1 mat-dialog-title>Cadastrar notícia</h1>
+        <i class="fa fa-times" (click)="closeModal()"></i>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div mat-dialog-content>
+                <form action="">
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <input type="text" name="name" id="name" class="form-control" placeholder="Nome da notícia">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <textarea name="description" id="description" cols="40" rows="6"></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="text-center">Enviar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

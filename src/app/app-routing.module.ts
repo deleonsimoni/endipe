@@ -6,11 +6,8 @@ import { LoginComponent } from './login/login.component';
 import { PagamentoComponent } from './pagamento/pagamento.component';
 import { SubmissaoComponent } from './submissao/submissao.component';
 import { TrabalhosComponent } from './trabalhos/trabalhos.component';
-import { AdminComponent } from './admin/admin.component';
 import { CertificadoComponent } from './certificado/certificado.component';
 import { PerfilComponent } from './perfil/perfil.component';
-import { AdminNewsComponent } from './admin-news/admin-news.component';
-import { RegisterCoordinatorComponent } from './register-coordinator/register-coordinator.component';
 
 const routes: Routes = [
   {
@@ -31,10 +28,6 @@ const routes: Routes = [
     component: RegisterComponent
   },
   {
-    path: 'register-coordinator',
-    component: RegisterCoordinatorComponent
-  },
-  {
     path: 'pagamento',
     component: PagamentoComponent
   },
@@ -47,16 +40,8 @@ const routes: Routes = [
     component: TrabalhosComponent
   },
   {
-    path: 'admin',
-    component: AdminComponent
-  },
-  {
     path: 'perfil',
     component: PerfilComponent
-  },
-  {
-    path: 'noticias',
-    component: AdminNewsComponent
   }
 ];
 

@@ -36,12 +36,12 @@ import { OwlModule } from 'ngx-owl-carousel';
 import { ToastrModule } from 'ngx-toastr';
 import { TrabalhosComponent } from './trabalhos/trabalhos.component';
 import { ListarTrabalhosComponent } from './listar-trabalhos/listar-trabalhos.component';
-import { AdminComponent } from './admin/admin.component';
 import { AccordionModule } from 'ngx-bootstrap';
-import { MaskCpfPipe } from './pipes/mask-cpf.pipe';
 import { PerfilComponent } from './perfil/perfil.component';
 import { AdminNewsComponent } from './admin-news/admin-news.component';
-import { RegisterCoordinatorComponent } from './register-coordinator/register-coordinator.component';
+import { AdminModule } from './admin/admin.module';
+import { PipesModule } from './pipes/pipes.module';
+import { AdminRoutingModule } from './admin/admin.routing';
 
 @NgModule({
   declarations: [
@@ -66,11 +66,8 @@ import { RegisterCoordinatorComponent } from './register-coordinator/register-co
     ModalCadastroSucessoComponent,
     TrabalhosComponent,
     ListarTrabalhosComponent,
-    AdminComponent,
-    MaskCpfPipe,
     PerfilComponent,
-    AdminNewsComponent,
-    RegisterCoordinatorComponent
+    AdminNewsComponent
   ],
   imports: [
     BrowserModule,
@@ -80,13 +77,16 @@ import { RegisterCoordinatorComponent } from './register-coordinator/register-co
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
+    AdminRoutingModule,
     UtilNgxMaterialModule,
     HttpClientModule,
     BsDatepickerModule.forRoot(),
     BsDropdownModule.forRoot(),
     NgxMaskModule.forRoot(),
     ToastrModule.forRoot(),
-    AccordionModule.forRoot()
+    AccordionModule.forRoot(),
+    AdminModule,
+    PipesModule
   ],
   entryComponents: [
     ModalInscricaoComponent,
