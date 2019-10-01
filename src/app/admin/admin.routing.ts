@@ -4,6 +4,7 @@ import { AdminComponent } from './admin.component';
 import { SubscribedComponent } from './subscribed/subscribed.component';
 import { NewsComponent } from './news/news.component';
 import { RegisterCoordinatorComponent } from './register-coordinator/register-coordinator.component';
+import { ReviewerComponent } from './reviewer/reviewer.component';
 
 const routes: Routes = [
     {
@@ -21,7 +22,7 @@ const routes: Routes = [
                 path: 'coordenadores', component: RegisterCoordinatorComponent
             },
             {
-                path: 'pareceristas', component: RegisterCoordinatorComponent
+                path: 'pareceristas', component: ReviewerComponent
             }
         ]
     }

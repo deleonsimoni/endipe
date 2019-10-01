@@ -12,6 +12,8 @@ import { RegisterCoordinatorComponent } from './register-coordinator/register-co
 import { ModalNewsComponent } from './modal-news/modal-news.component';
 import { ModalSubscribedComponent } from './modal-subscribed/modal-subscribed.component';
 import { ModalCoordinatorComponent } from './modal-coordinator/modal-coordinator.component';
+import { ReviewerComponent } from './reviewer/reviewer.component';
+import { ModalReviewerComponent } from './modal-reviewer/modal-reviewer.component';
 
 @NgModule({
     declarations: [
@@ -19,15 +21,18 @@ import { ModalCoordinatorComponent } from './modal-coordinator/modal-coordinator
         SubscribedComponent,
         NewsComponent,
         RegisterCoordinatorComponent,
+        ReviewerComponent,
         ModalNewsComponent,
         ModalSubscribedComponent,
-        ModalCoordinatorComponent
+        ModalCoordinatorComponent,
+        ModalReviewerComponent
     ],
     entryComponents: [
         AdminComponent,
         ModalNewsComponent,
         ModalSubscribedComponent,
-        ModalCoordinatorComponent
+        ModalCoordinatorComponent,
+        ModalReviewerComponent
     ],
     imports: [
         CommonModule,
