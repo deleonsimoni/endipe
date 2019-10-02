@@ -37,6 +37,10 @@ const UserSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
+  isNewPassword: {
+    type: Boolean,
+    default: false
+  },
   deficiencyType: {
     type: String
   },

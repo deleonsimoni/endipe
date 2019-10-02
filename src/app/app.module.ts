@@ -42,6 +42,8 @@ import { MaskCpfPipe } from './pipes/mask-cpf.pipe';
 import { PerfilComponent } from './perfil/perfil.component';
 import { AdminNewsComponent } from './admin-news/admin-news.component';
 import { RegisterCoordinatorComponent } from './register-coordinator/register-coordinator.component';
+import { EsqueciSenhaComponent } from './esqueci-senha/esqueci-senha.component';
+import { QuillModule } from 'ngx-quill';
 
 @NgModule({
   declarations: [
@@ -70,7 +72,8 @@ import { RegisterCoordinatorComponent } from './register-coordinator/register-co
     MaskCpfPipe,
     PerfilComponent,
     AdminNewsComponent,
-    RegisterCoordinatorComponent
+    RegisterCoordinatorComponent,
+    EsqueciSenhaComponent
   ],
   imports: [
     BrowserModule,
@@ -82,6 +85,7 @@ import { RegisterCoordinatorComponent } from './register-coordinator/register-co
     AppRoutingModule,
     UtilNgxMaterialModule,
     HttpClientModule,
+    QuillModule.forRoot(),
     BsDatepickerModule.forRoot(),
     BsDropdownModule.forRoot(),
     NgxMaskModule.forRoot(),
