@@ -35,9 +35,13 @@ export class ModalCoordinatorComponent implements OnInit {
     });
 
     this.coordinatorForm.get('axis').valueChanges.subscribe(res => {
-      const control = this.coordinatorForm.controls['authors'] as FormArray;
+      const control = this.coordinatorForm.get('authors') as FormArray;
       for (let i = control.length - 1; i >= 0; i--) {
-        control.removeAt(i);
+        if (i === 0) {
+          (this.coordinatorForm.get('authors') as FormArray).at(0).patchValue({ email: '' });
+        } else {
+          control.removeAt(i);
+        }
       }
     });
 

@@ -1,40 +1,30 @@
-<!--==========================
-    Intro Section
-  ============================-->
 <div class="form">
-    <form [formGroup]="newsForm" (ngSubmit)="cadastrar()" role="form" class="contactForm">
-        <!-- <div class="form-row">
-            <div class="form-group col-md-12">
-                <input type="text" name="name" class="form-control" id="name" placeholder="Nome da Notícia"
-                    formControlName="name" />
-                <div *ngIf="(validate.name.errors && !validate.name.pristine)" class="alert alert-danger">
-                    <div [hidden]="!validate.name.errors.required">
-                        Preencha o campo nome da notícia
-                    </div>
+    <div *ngFor="let noticia of noticias; let i = index" [ngClass]="{'mb-3': noticias.length > 1}">
+        <div class="card-news">
+            <!-- [ngClass]="{'no-radius-bottom': infos == true}" -->
+            <div class="row">
+                <div class="col-sm-11 border-right">
+                    <small>{{ noticia.name }}</small>
+                    <h4>{{ noticia.description }}</h4>
                 </div>
-            </div>
-        </div> -->
-
-        <!-- <div *ngIf="carregando" class="btn-get-started">
-            <button><i class="fas fa-spinner fa-pulse"></i></button>
-        </div> -->
-
-        <div *ngFor="let noticia of noticias; let i = index" [ngClass]="{'mb-3': noticias.length > 1}">
-            <div class="card-works" [ngClass]="{'no-radius-bottom': infos == true}">
-                <div class="row">
-                    <div class="col-sm-11 border-right">
-                        <small>Noticia</small>
-                        <h4>{{ noticia.name }}</h4>
-                    </div>
-                    <div class="col-sm-1 text-center align-self-center pointer" (click)="deletar(noticia)">
-                        <i style="color: red;" class="fa fa-trash"></i>
-                    </div>
+                <div class="col-sm-1 text-center align-self-center pointer" (click)="deletar(noticia)">
+                    <i class="fa fa-trash"></i>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="row justify-content-center">
-            <button class="btn-get-started" (click)="register()">Cadastrar</button>
+    <div *ngIf="!noticias || noticias.length < 1">
+        <div class="no-news">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h4>Não há notícias cadastradas</h4>
+                </div>
+            </div>
         </div>
-    </form>
+    </div>
+
+    <div class="row justify-content-end">
+        <button class="btn-get-started" (click)="register()">Cadastrar</button>
+    </div>
 </div>

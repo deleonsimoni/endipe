@@ -9,6 +9,8 @@ import { ModalReviewerComponent } from '../modal-reviewer/modal-reviewer.compone
 })
 export class ReviewerComponent implements OnInit {
 
+  public reviewers = [];
+
   constructor(
     private dialog: MatDialog
   ) { }

@@ -1,0 +1,34 @@
+div.container {
+  max-height: 80vh;
+  overflow: hidden;
+
+  h2 {
+    // font-size: 28px;
+    margin: 0px 24px 0px 0px;
+  }
+
+  i.fa-times {
+    cursor: pointer;
+  }
+
+  .reviewer {
+    width: 100%;
+
+    select,
+    input {
+      padding: 6px 14px;
+      border-radius: 0;
+      box-shadow: none;
+      font-size: 15px;
+    }
+
+    .btn-get-started {
+      background-color: #0c2e8a;
+      color: #fff;
+      width: 30%;
+      border: none;
+      margin: 16px 16px 16px 0px;
+      height: calc(1.5em + 0.75rem + 2px);
+    }
+  }
+}

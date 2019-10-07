@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormArray, Form, Validators } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { ModalCoordinatorComponent } from '../modal-coordinator/modal-coordinator.component';
 
@@ -9,7 +7,9 @@ import { ModalCoordinatorComponent } from '../modal-coordinator/modal-coordinato
   templateUrl: './register-coordinator.component.html',
   styleUrls: ['./register-coordinator.component.scss']
 })
-export class RegisterCoordinatorComponent implements OnInit {
+export class RegisterCoordinatorComponent {
+
+  public coordinators = [];
 
   constructor(
     private dialog: MatDialog
@@ -17,14 +17,6 @@ export class RegisterCoordinatorComponent implements OnInit {
 
   showRegister() {
     const dialogRef = this.dialog.open(ModalCoordinatorComponent);
-
     dialogRef.afterClosed().subscribe();
-    // if (this.coordinatorForm.valid) {
-    //   console.log(this.coordinatorForm.value);
-    //   return;
-    // }
-
-    // this.toastr.error('Preencha todos os campos.', 'Atenção: ');
-    // return;
   }
 }

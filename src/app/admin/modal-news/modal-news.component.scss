@@ -1,32 +1,34 @@
-h1.mat-dialog-title {
-  font-weight: 700;
-  margin-bottom: 15px;
-  font-size: 22px;
-}
+div.container {
+  max-height: 80vh;
+  overflow: hidden;
 
-h2.mat-dialog-title {
-  font-size: 20px;
-  font-weight: 500;
-}
-
-.img-parceiros {
-  img {
+  h2 {
+    // font-size: 28px;
+    margin: 0px 24px 0px 0px;
   }
-}
 
-input {
-  padding: 10px 14px;
-  border-radius: 0;
-  box-shadow: none;
-  font-size: 15px;
-}
+  i.fa-times {
+    cursor: pointer;
+  }
 
-button {
-  background: #50d8af;
-  border: 0;
-  border-radius: 3px;
-  padding: 10px 30px;
-  color: #fff;
-  transition: 0.4s;
-  cursor: pointer;
+  .reviewer {
+    width: 100%;
+
+    textarea,
+    input {
+      padding: 6px 14px;
+      border-radius: 0;
+      box-shadow: none;
+      font-size: 15px;
+    }
+
+    .btn-get-started {
+      background-color: #0c2e8a;
+      color: #fff;
+      width: 30%;
+      border: none;
+      margin: 0px 16px 0px 0px;
+      height: calc(1.5em + 0.75rem + 2px);
+    }
+  }
 }
