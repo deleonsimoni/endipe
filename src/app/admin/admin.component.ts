@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { trigger, style, state, transition, animate } from '@angular/animations';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-admin',
@@ -22,8 +23,42 @@ import { trigger, style, state, transition, animate } from '@angular/animations'
     ])
   ]
 })
-export class AdminComponent {
+export class AdminComponent implements OnInit {
 
-  constructor() { }
+  user: any;
+  menu: any[];
 
+  private adminRoutes = [
+    { name: 'INSCRITOS', path: '/admin/inscritos' },
+    { name: 'NOTICÍAS', path: '/admin/noticias' },
+    { name: 'COORDENADORES', path: '/admin/coordenadores' },
+  ];
+
+  private coordinatorRoutes = [
+    { name: 'PARECERISTAS', path: '/admin/pareceristas' },
+  ];
+
+  private reviewerRoutes = [
+    { name: 'INSCRITOS', path: '/admin/inscritos' },
+  ];
+
+  constructor(
+    private auth: AuthService
+  ) { }
+
+  ngOnInit() {
+    this.retrieveUser();
+  }
+
+  private retrieveUser() {
+    this.user = this.auth.getDecodedAccessToken(this.auth.getToken());
+
+    if (this.user && this.user.icAdmin) {
+      this.menu = this.adminRoutes;
+    } else if (this.user && this.user.icCoordinator) {
+      this.menu = this.coordinatorRoutes;
+    } else if (this.user && this.user.icReviewer) {
+      this.menu = this.reviewerRoutes;
+    }
+  }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material';
+import { AdminService } from '../admin.service';
 
 @Component({
   selector: 'app-modal-reviewer',
@@ -21,7 +22,8 @@ export class ModalReviewerComponent implements OnInit {
 
   constructor(
     private builder: FormBuilder,
-    private dialogRef: MatDialogRef<ModalReviewerComponent>
+    private dialogRef: MatDialogRef<ModalReviewerComponent>,
+    private adminService: AdminService
   ) { }
 
   ngOnInit() {
@@ -39,7 +41,10 @@ export class ModalReviewerComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  public registerReviewer() {
-    console.log(this.reviewerForm.value);
+  public saveReviewer(): void {
+    if (this.reviewerForm.valid) {
+      this.adminService.registerReviewers(this.reviewerForm.value)
+        .subscribe(this.close());
+    }
   }
 }

@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialogRef } from '@angular/material';
 import { ModalEixoComponent } from 'src/app/modal-eixo/modal-eixo.component';
+import { AdminService } from '../admin.service';
 
 @Component({
   selector: 'app-modal-coordinator',
@@ -25,6 +26,7 @@ export class ModalCoordinatorComponent implements OnInit {
     private builder: FormBuilder,
     private toastr: ToastrService,
     private dialogRef: MatDialogRef<ModalEixoComponent>,
+    private adminService: AdminService
   ) {
 
     this.coordinatorForm = this.builder.group({
@@ -63,6 +65,15 @@ export class ModalCoordinatorComponent implements OnInit {
 
   public close() {
     this.dialogRef.close();
+  }
+
+  public saveCoordinator(): void {
+    if (this.coordinatorForm.valid) {
+      this.adminService.registerCoordinator(this.coordinatorForm.value)
+        .subscribe(this.close());
+    } else {
+      this.toastr.error('Preencha todos os campos');
+    }
   }
 
 }

@@ -10,21 +10,9 @@
 
                     <div class="section-header">
                         <ul class="nav nav-pills">
-                            <li class="nav-item">
-                                <a class="nav-link" [routerLink]="['/admin/inscritos']"
-                                    routerLinkActive="active">INSCRITOS</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" [routerLink]="['/admin/noticias']"
-                                    routerLinkActive="active">NOTICIAS</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" [routerLink]="['/admin/coordenadores']"
-                                    routerLinkActive="active">COORDENADORES</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" [routerLink]="['/admin/pareceristas']"
-                                    routerLinkActive="active">PARECERISTAS</a>
+                            <li class="nav-item" *ngFor="let item of menu">
+                                <a class="nav-link" [routerLink]="[item.path]"
+                                    routerLinkActive="active">{{item.name}}</a>
                             </li>
                         </ul>
                     </div>
