@@ -44,6 +44,7 @@ import { AdminNewsComponent } from './admin-news/admin-news.component';
 import { RegisterCoordinatorComponent } from './register-coordinator/register-coordinator.component';
 import { EsqueciSenhaComponent } from './esqueci-senha/esqueci-senha.component';
 import { QuillModule } from 'ngx-quill';
+import { ResetSenhaComponent } from './reset-senha/reset-senha.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +74,8 @@ import { QuillModule } from 'ngx-quill';
     PerfilComponent,
     AdminNewsComponent,
     RegisterCoordinatorComponent,
-    EsqueciSenhaComponent
+    EsqueciSenhaComponent,
+    ResetSenhaComponent
   ],
   imports: [
     BrowserModule,

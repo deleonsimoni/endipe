@@ -11,6 +11,8 @@ import { CertificadoComponent } from './certificado/certificado.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { AdminNewsComponent } from './admin-news/admin-news.component';
 import { RegisterCoordinatorComponent } from './register-coordinator/register-coordinator.component';
+import { EsqueciSenhaComponent } from './esqueci-senha/esqueci-senha.component';
+import { ResetSenhaComponent } from './reset-senha/reset-senha.component';
 
 const routes: Routes = [
   {
@@ -29,6 +31,14 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent
+  },
+  {
+    path: 'esqueci-senha',
+    component: EsqueciSenhaComponent
+  },
+  {
+    path: 'reset-senha',
+    component: ResetSenhaComponent
   },
   {
     path: 'register-coordinator',

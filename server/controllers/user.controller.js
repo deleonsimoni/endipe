@@ -7,6 +7,8 @@ const IncomingForm = require('formidable').IncomingForm;
 const fs = require('fs');
 const S3Uploader = require('./aws.controller');
 const config = require('../config/config');
+const emailSender = require('../controllers/email.controller');
+const templateEmail = require('../config/templateEmails');
 
 
 /*const userSchema = Joi.object({
@@ -25,16 +27,59 @@ module.exports = {
   getPrice,
   uploadWork,
   downloadFileS3,
-  checkDocumentDup
+  checkDocumentDup,
+  generateNewPassword,
+  resetPassword
 }
 
 async function insert(user) {
   //user = await Joi.validate(user, userSchema, { abortEarly: false });
   user.hashedPassword = bcrypt.hashSync(user.password, 10);
   delete user.password;
-  console.log('Inserindo usuário no banco');
   return await new User(user).save();
 }
+
+async function generateNewPassword(user) {
+  const randomstring = Math.random().toString(36).slice(-8);
+
+  let response = {
+    status: 200, message: `Seu código para troca de senha foi enviado para seu email.`
+  };
+
+  await User.findByIdAndUpdate(user._id, {
+    '$set': {
+      mailCodePassword: randomstring
+    }
+  }, function (err, doc) {
+    if (err) response = { status: 500, message: err };
+    let email = templateEmail.esqueciSenha.replace("#senha#", randomstring);
+    emailSender.sendMail(user.email, 'Recuperação de Senha', email);
+  })
+
+  return response;
+
+}
+
+async function resetPassword(req, user) {
+  const hashString = bcrypt.hashSync(req.body.password, 10);
+
+  let response = {
+    status: 200, message: `Senha alterada com sucesso.`
+  };
+
+  await User.findByIdAndUpdate(user._id, {
+    '$set': {
+      mailCodePassword: null,
+      hashedPassword: hashString
+    }
+  }, function (err, doc) {
+    if (err) response = { status: 500, message: err };
+  })
+
+  return response;
+
+}
+
 
 async function checkDocumentDup(cpf) {
   let userFind = await User.find({ document: cpf }).select('document');

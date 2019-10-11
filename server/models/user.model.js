@@ -21,6 +21,10 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  mailCodePassword: {
+    type: String,
+    select: false
+  },
   icAcceptTerms: {
     type: Boolean,
     default: false
@@ -34,10 +38,6 @@ const UserSchema = new mongoose.Schema({
     default: false
   },
   isPCD: {
-    type: Boolean,
-    default: false
-  },
-  isNewPassword: {
     type: Boolean,
     default: false
   },

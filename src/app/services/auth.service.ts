@@ -17,6 +17,14 @@ export class AuthService {
     return this.http.post(`${this.baseUrl}/auth/login`, form);
   }
 
+  recuperarSenha(form) {
+    return this.http.post(`${this.baseUrl}/auth/forgotPassword`, form);
+  }
+
+  resetarSenha(form) {
+    return this.http.post(`${this.baseUrl}/auth/resetPassword`, form);
+  }
+
   createUser(form) {
     return this.http.post(`${this.baseUrl}/auth/register`, form);
   }

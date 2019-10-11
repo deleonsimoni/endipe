@@ -6,11 +6,11 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-esqueci-senha',
-  templateUrl: './esqueci-senha.component.html',
-  styleUrls: ['./esqueci-senha.component.scss']
+  selector: 'app-reset-senha',
+  templateUrl: './reset-senha.component.html',
+  styleUrls: ['./reset-senha.component.scss']
 })
-export class EsqueciSenhaComponent implements OnInit {
+export class ResetSenhaComponent implements OnInit {
 
   public loginForm: FormGroup;
   public submit = false;
@@ -25,8 +25,9 @@ export class EsqueciSenhaComponent implements OnInit {
 
     this.loginForm = this.builder.group({
       // tslint:disable-next-line: max-line-length
-      email: [null, [Validators.required, Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)]],
-      document: [null, [Validators.required]]
+      mailCodePassword: [null, [Validators.required]],
+      password: [null, [Validators.required, Validators.minLength(6)]],
+      cfPassword: [null, [Validators.required, Validators.minLength(6)]],
     });
 
   }
@@ -34,12 +35,18 @@ export class EsqueciSenhaComponent implements OnInit {
   ngOnInit() {
   }
 
-  public recuperarSenha() {
+  public resetarSenha() {
+
+    if (this.loginForm.value.password !== this.loginForm.value.cfPassword) {
+      this.toastr.error('Campo senha e confirmar senha não conferem', 'Erro: ');
+      return;
+    }
+
     this.submit = true;
     if (this.loginForm.valid) {
-      this.authService.recuperarSenha(this.loginForm.value)
+      this.authService.resetarSenha(this.loginForm.value)
         .subscribe((res: any) => {
-          this.toastr.success('Sua nova senha foi enviada para seu email', 'Sucesso: ');
+          this.toastr.success('Senha alterada com sucesso', 'Sucesso: ');
           this.router.navigate(['home']);
         }, err => {
           if (err.status === 401) {
@@ -55,5 +62,6 @@ export class EsqueciSenhaComponent implements OnInit {
   get validate() {
     return this.loginForm.controls;
   }
+
 
 }
