@@ -70,6 +70,19 @@ export class SubmissaoComponent implements OnInit {
       this.carregando = false;
     });
 
+
+    this.submissionForm.get('modalityId').valueChanges.subscribe(res => {
+      this.showAdd = true;
+      const control = this.submissionForm.get('authors') as FormArray;
+      for (let i = control.length - 1; i >= 0; i--) {
+        if (i === 0) {
+          (this.submissionForm.get('authors') as FormArray).at(0).patchValue({ email: '' });
+        } else {
+          control.removeAt(i);
+        }
+      }
+    });
+
   }
 
   private createForm(): void {
@@ -85,9 +98,15 @@ export class SubmissaoComponent implements OnInit {
     });
 
     this.submissionForm.controls.authors.valueChanges.subscribe(res => {
-      if (res.length >= 4) {
+
+      if (this.submissionForm.value.modalityId === '5' && res.length >= 13) {
         this.showAdd = false;
+      } else if (this.submissionForm.value.modalityId !== '5' && res.length >= 4) {
+        this.showAdd = false;
+      } else {
+        this.showAdd = true;
       }
+
     });
 
   }
@@ -192,8 +211,13 @@ export class SubmissaoComponent implements OnInit {
 
   public addAuthors() {
     const authors = this.submissionForm.get('authors') as FormArray;
-    if (authors.controls.length < 4) {
+    if (this.submissionForm.value.modalityId === '5' && authors.controls.length < 13) {
+      authors.push(this.createFields());
+    } else if (this.submissionForm.value.modalityId !== '5' && authors.controls.length < 4) {
       authors.push(this.createFields());
     }
   }
+
+
+
 }
