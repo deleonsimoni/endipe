@@ -44,13 +44,23 @@ export class ModalNewsComponent implements OnInit, OnDestroy {
   }
 
   public registerNotice() {
-    this.noticiasService.cadastrar(this.newsForm.value)
-      .pipe(takeUntil(this.noticiasUnsub$))
-      .subscribe((res: any) => {
-        this.toastr.success('Noticia cadastrada com sucesso', 'Sucesso');
-        this.close();
-      }, err => {
-        this.toastr.error('Ocorreu um erro ao cadastrar', 'Atenção: ');
-      });
+    if (this.newsForm.valid) {
+      this.noticiasService.cadastrar(this.newsForm.value)
+        .pipe(takeUntil(this.noticiasUnsub$))
+        .subscribe((res: any) => {
+          this.toastr.success('Noticia cadastrada com sucesso', 'Sucesso');
+          this.close();
+        }, err => {
+          this.toastr.error('Ocorreu um erro ao cadastrar', 'Atenção: ');
+        });
+    }
+  }
+
+  get nameNotice() {
+    return this.newsForm.get('name');
+  }
+
+  get descNotice() {
+    return this.newsForm.get('description');
   }
 }

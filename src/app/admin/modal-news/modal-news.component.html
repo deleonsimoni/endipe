@@ -11,13 +11,19 @@
             <div class="form-row justify-content-center">
                 <div class="form-group col-md-12">
                     <input type="text" name="notice" class="form-control" id="notice" placeholder="Nome da notícia"
-                        formControlName="name" />
-                </div>
+                        formControlName="name" [ngClass]="{'field-error': (nameNotice.errors && !nameNotice.pristine)}"/>
+                    </div>
+                    <div class="invalid-feedback" *ngIf="(nameNotice.errors && !nameNotice.pristine)">
+                        <span>Campo obrigatório</span>
+                    </div>
             </div>
             <div class="form-row justify-content-center">
                 <div class="form-group col-md-12">
                     <textarea name="description" id="description" cols="50" rows="6"
-                        formControlName="description"></textarea>
+                        formControlName="description" [ngClass]="{'field-error': (descNotice.errors && !descNotice.pristine)}"></textarea>
+                        <div class="invalid-feedback" *ngIf="(descNotice.errors && !descNotice.pristine)">
+                            Campo obrigatório
+                        </div>
                 </div>
             </div>
             <div class="row justify-content-end">
