@@ -60,17 +60,21 @@ export class AuthService {
     localStorage.removeItem(TOKEN_KEY);
   }
 
+  public getUserLogado(): any {
+
+    const token = this.getToken();
+    return this.getDecodedAccessToken(token);
+
+  }
+
   public getDecodedAccessToken(token: string): any {
 
     try {
-
       return jwt_decode(token);
-
     } catch (error) {
-
       return null;
-
     }
+
   }
 
 }

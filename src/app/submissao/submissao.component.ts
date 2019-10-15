@@ -1,10 +1,10 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { UploadService } from '../services/upload.service';
 import { ToastrService } from 'ngx-toastr';
-import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { EventEmitter } from 'events';
+import { Observable, Subject } from 'rxjs';
 @Component({
   selector: 'app-submissao',
   templateUrl: './submissao.component.html',
@@ -18,6 +18,7 @@ export class SubmissaoComponent implements OnInit {
   public user: any;
   public carregando = true;
   public enviando = false;
+  public sub: Subject<any>;
   public submissionForm: FormGroup;
   public authors = new Array();
   public showAdd = true;
@@ -112,6 +113,9 @@ export class SubmissaoComponent implements OnInit {
   }
 
   public upload() {
+
+    const usuarioLogado = this.authService.getUserLogado();
+
     if (!this.filesPDF) {
       this.toastr.error('É necessário selecionar o arquivo PDF', 'Atenção');
       return;
@@ -153,7 +157,16 @@ export class SubmissaoComponent implements OnInit {
       // tslint:disable-next-line: align
       this.toastr.error('Indique ao menos um autor do trabalho.', 'Atenção');
       return;
+    } if (this.validarEmailDuplicado(this.submissionForm.value.authors)) {
+      // tslint:disable-next-line: align
+      this.toastr.error('Existem emails duplicados para o envio. Revise os campos de autores.', 'Atenção');
+      return;
+    } if (this.validarUsuarioPrincipal(this.submissionForm.value.authors, usuarioLogado.email)) {
+      // tslint:disable-next-line: align
+      this.toastr.error('Você precisa ser um dos autores para submeter o trabalho.', 'Atenção');
+      return;
     } else {
+      return false;
       this.enviando = true;
 
       this.submissionForm.value.arquivoPDF = this.filesPDF[0];
@@ -183,6 +196,30 @@ export class SubmissaoComponent implements OnInit {
 
 
     }
+  }
+
+  public validarUsuarioPrincipal(autores: [], emailPrincipal: string): boolean {
+
+    Observable.create(observer => {
+      const emailFind = autores.filter(email => email == emailPrincipal)[0];
+      if (emailFind) {
+        return this.sub.next(false);
+      } else {
+        return this.sub.next(true);
+      }
+    });
+  }
+
+  public validarEmailDuplicado(autores: []): boolean {
+
+    const emailDuplicado = arr => arr.filter((item, index) => arr.indexOf(item) != index);
+
+    if (emailDuplicado(autores).length > 0) {
+      return true;
+    } else {
+      return false;
+    }
+
   }
 
   public getFileNameDOC(): string {
