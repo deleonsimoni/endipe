@@ -1,4 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
+
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -9,13 +11,13 @@ export class AdminService {
   private dbCoodinators: any[] = [];
   private dbReviewers: any[] = [];
 
-  constructor() { }
+  constructor(
+    @Inject('BASE_API_URL') private baseUrl: string,
+    private http: HttpClient
+  ) { }
 
   public registerCoordinator(form) {
-    return Observable.create(obs => {
-      this.dbCoodinators.push(form);
-      obs.next(this.dbCoodinators);
-    });
+    return this.http.post(`${this.baseUrl}/user/coordinator`, form);
   }
 
   public retrieveCoordinators() {

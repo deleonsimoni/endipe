@@ -70,7 +70,10 @@ export class ModalCoordinatorComponent implements OnInit {
   public saveCoordinator(): void {
     if (this.coordinatorForm.valid) {
       this.adminService.registerCoordinator(this.coordinatorForm.value)
-        .subscribe(this.close());
+        .subscribe(x => {
+          console.log(x);
+          this.close();
+        });
     } else {
       this.toastr.error('Preencha todos os campos');
     }

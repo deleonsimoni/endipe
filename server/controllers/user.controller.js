@@ -24,7 +24,8 @@ module.exports = {
   generatePayment,
   getPrice,
   uploadWork,
-  downloadFileS3
+  downloadFileS3,
+  createCoordinator
 }
 
 async function insert(user) {
@@ -254,4 +255,63 @@ async function updateUsers(users, workId) {
 
 }
 
+async function createCoordinator(coordinators) {
 
+  let retorno = {
+    temErro: false,
+    mensagem: '',
+    userEmail: [],
+    userId: []
+  }
+
+  let p1 = await validateCoordinator(coordinators.authors, retorno);
+  console.log('promise: ', p1);
+
+  if (retorno.temErro) {
+    return retorno;
+  } else {
+
+    retorno.userId.forEach(async user => {
+      await User.findOneAndUpdate({ _id: user }, { $set: { coordinator: coordinators.axis } });
+    });
+
+    retorno.mensagem = `Coordenador cadastrado com sucesso`;
+    retorno.temErro = false;
+
+  }
+
+  return retorno;
+
+}
+
+
+async function validateCoordinator(authors, retorno) {
+  let user;
+  let promise = await new Promise(function (resolve, reject) {
+    authors.forEach(async author => {
+      user = await getUserByEmail(author.email);
+      if (!user) {
+        retorno.userEmail.push(author.email);
+        retorno.temErro = true;
+        retorno.mensagem = `Usuário ${author.email} não está cadastrado no sistema`;
+        reject(retorno);
+      } else if (user.coordinator && user.coordinator.modalityId) {
+        retorno.userEmail.push(author.email);
+        retorno.temErro = true;
+        retorno.mensagem = `O usuário ${author.email} já possui cadastro como coordenador`;
+        reject(retorno);
+      } else if (user.reviewer && user.reviewer.modalityId) {
+        retorno.userEmail.push(author.email);
+        retorno.temErro = true;
+        retorno.mensagem = `O usuário ${author.email} já possui cadastro como parecerista`;
+        reject(retorno);
+      } else {
+        retorno.userId.push(user._id);
+        retorno.temErro = false;
+        resolve(retorno);
+      }
+    });
+  }).then(res => res).catch(err => err);
+
+  return promise;
+};
