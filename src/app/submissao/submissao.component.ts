@@ -92,6 +92,7 @@ export class SubmissaoComponent implements OnInit {
       axisId: [null, [Validators.required]],
       modalityId: [null, [Validators.required]],
       typeWork: [null, [Validators.required]],
+      usuarioPrincipal: [null],
       title: [null, [Validators.required]],
       authors: this.builder.array([
         this.createFields()
@@ -157,18 +158,10 @@ export class SubmissaoComponent implements OnInit {
       // tslint:disable-next-line: align
       this.toastr.error('Indique ao menos um autor do trabalho.', 'Atenção');
       return;
-    } if (this.validarEmailDuplicado(this.submissionForm.value.authors)) {
-      // tslint:disable-next-line: align
-      this.toastr.error('Existem emails duplicados para o envio. Revise os campos de autores.', 'Atenção');
-      return;
-    } if (this.validarUsuarioPrincipal(this.submissionForm.value.authors, usuarioLogado.email)) {
-      // tslint:disable-next-line: align
-      this.toastr.error('Você precisa ser um dos autores para submeter o trabalho.', 'Atenção');
-      return;
     } else {
-      return false;
       this.enviando = true;
 
+      this.submissionForm.value.usuarioPrincipal = usuarioLogado.email;
       this.submissionForm.value.arquivoPDF = this.filesPDF[0];
       this.uploadService.uploadFile(this.filesDOC[0], this.filesPDF[0], 'trabalhos', this.user.document, this.submissionForm.value)
         .subscribe(res => {
@@ -196,30 +189,6 @@ export class SubmissaoComponent implements OnInit {
 
 
     }
-  }
-
-  public validarUsuarioPrincipal(autores: [], emailPrincipal: string): boolean {
-
-    Observable.create(observer => {
-      const emailFind = autores.filter(email => email == emailPrincipal)[0];
-      if (emailFind) {
-        return this.sub.next(false);
-      } else {
-        return this.sub.next(true);
-      }
-    });
-  }
-
-  public validarEmailDuplicado(autores: []): boolean {
-
-    const emailDuplicado = arr => arr.filter((item, index) => arr.indexOf(item) != index);
-
-    if (emailDuplicado(autores).length > 0) {
-      return true;
-    } else {
-      return false;
-    }
-
   }
 
   public getFileNameDOC(): string {

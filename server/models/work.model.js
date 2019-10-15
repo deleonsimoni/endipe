@@ -27,6 +27,9 @@ const WorkSchema = new mongoose.Schema({
   pathS3PDF: {
     type: String
   },
+  mainAuthor: {
+    type: String
+  },
   authors: [{
     userId: {
       type: mongoose.Schema.Types.ObjectId,

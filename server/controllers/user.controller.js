@@ -178,8 +178,14 @@ async function getUserByEmail(email) {
 async function uploadWork(req, res) {
 
   let formulario = JSON.parse(req.body.formulario);
-
   console.log('Validando Usuarios' + JSON.stringify(formulario.authors));
+
+  let responseValidationEmails = await validateEmailsFrom(formulario.authors, formulario.usuarioPrincipal);
+  if (responseValidationEmails.temErro) {
+    console.log('dados inválidos do front: ' + JSON.stringify(responseValidationEmails));
+    return responseValidationEmails;
+  }
+
   let responseValidacao = await validatePaymentUsers(formulario.authors, formulario.modalityId);
   if (responseValidacao.temErro) {
     console.log('erro na validacao dos usuarios: ' + JSON.stringify(responseValidacao));
@@ -199,6 +205,62 @@ async function uploadWork(req, res) {
   let workId = await createWork(responseValidacao.user, responseUpload.filesS3, formulario);
   console.log('IDWORKJK ' + workId);
   return await updateUsers(responseValidacao.user, workId);
+
+}
+
+
+async function validateEmailsFrom(users, usuarioPrincipal) {
+
+  let resultado;
+  let retorno = {
+    temErro: false,
+    mensagem: ''
+  }
+
+  resultado = await validarUsuarioPrincipal(users, usuarioPrincipal);
+
+  if (resultado) {
+    retorno.temErro = true;
+    retorno.mensagem = `Você precisa ser um autor para submeter o trabalho`
+  }
+
+  resultado = await validarEmailDuplicado(users);
+
+  if (resultado) {
+    retorno.temErro = true;
+    retorno.mensagem = `Há emails duplicados, verifique o campo de autores`
+  }
+
+  return retorno;
+
+}
+
+async function validarUsuarioPrincipal(usuarios, emailPrincipal) {
+
+  let emailFind = await usuarios.filter(autor => autor.email == emailPrincipal)[0];
+  if (emailFind) {
+    return false;
+  } else {
+    return true;
+  }
+
+}
+
+async function validarEmailDuplicado(usuarios) {
+
+  var sorted_arr = usuarios.slice().sort();
+  var results = [];
+  for (var i = 0; i < sorted_arr.length - 1; i++) {
+    if (sorted_arr[i + 1].email == sorted_arr[i].email) {
+      results.push(sorted_arr[i]);
+    }
+  }
+
+  if (results.length > 0) {
+    return true;
+  } else {
+    return false;
+  }
 
 }
 
@@ -293,7 +355,7 @@ async function createWork(users, filesName, formulario) {
     modalityId: formulario.modalityId,
     typeWork: formulario.typeWork,
     axisId: formulario.axisId,
-
+    mainAuthor: formulario.usuarioPrincipal,
     pathS3DOC: filesName[0],
     pathS3PDF: filesName[1],
 
