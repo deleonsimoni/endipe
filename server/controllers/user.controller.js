@@ -180,7 +180,7 @@ async function uploadWork(req, res) {
   let formulario = JSON.parse(req.body.formulario);
 
   console.log('Validando Usuarios' + JSON.stringify(formulario.authors));
-  let responseValidacao = await validatePaymentUsers(formulario.authors);
+  let responseValidacao = await validatePaymentUsers(formulario.authors, formulario.modalityId);
   if (responseValidacao.temErro) {
     console.log('erro na validacao dos usuarios: ' + JSON.stringify(responseValidacao));
     return responseValidacao;
@@ -202,7 +202,7 @@ async function uploadWork(req, res) {
 
 }
 
-async function validatePaymentUsers(users) {
+async function validatePaymentUsers(users, modalityId) {
 
   let userFind;
   let retorno = {
@@ -224,9 +224,13 @@ async function validatePaymentUsers(users) {
         retorno.temErro = true;
         retorno.mensagem = `O usuário ${users[i].email} não possui pagamento válido`
         break;
-      } else if (userFind.works && userFind.works.length > 2) {
+      } else if (userFind.works && userFind.works.length >= 2) {
         retorno.temErro = true;
         retorno.mensagem = `O usuário ${users[i].email} já possui dois trabalhos submetidos`
+        break;
+      } else if (userFind.works.length == 1 && await validateModalityDup(userFind.works[0], modalityId)) {
+        retorno.temErro = true;
+        retorno.mensagem = `O usuário ${users[i].email} já possui trabalho submetido para esta modalidade`
         break;
       } else {
         retorno.user.push({ userId: userFind._id, userEmail: users[i].email });
@@ -239,6 +243,16 @@ async function validatePaymentUsers(users) {
   };
 
   return retorno;
+
+}
+
+async function validateModalityDup(workId, modalityId) {
+  let workFind = await Work.findById(workId);
+  if (workFind.modalityId == modalityId) {
+    return true;
+  } else {
+    return false;
+  }
 
 }
 
