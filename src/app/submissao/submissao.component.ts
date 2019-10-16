@@ -91,7 +91,7 @@ export class SubmissaoComponent implements OnInit {
     this.submissionForm = this.builder.group({
       axisId: [null, [Validators.required]],
       modalityId: [null, [Validators.required]],
-      typeWork: [null, [Validators.required]],
+      typeWork: [null],
       usuarioPrincipal: [null],
       title: [null, [Validators.required]],
       authors: this.builder.array([

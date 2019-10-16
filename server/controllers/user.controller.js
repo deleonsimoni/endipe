@@ -353,7 +353,6 @@ async function createWork(users, filesName, formulario) {
     protocol: protocol,
     title: formulario.title,
     modalityId: formulario.modalityId,
-    typeWork: formulario.typeWork,
     axisId: formulario.axisId,
     mainAuthor: formulario.usuarioPrincipal,
     pathS3DOC: filesName[0],

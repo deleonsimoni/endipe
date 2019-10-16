@@ -11,9 +11,6 @@ const WorkSchema = new mongoose.Schema({
   modalityId: {
     type: Number
   },
-  typeWork: {
-    type: Number
-  },
   axisId: {
     type: Number
   },
