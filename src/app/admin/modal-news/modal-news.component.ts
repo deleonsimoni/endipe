@@ -15,6 +15,7 @@ export class ModalNewsComponent implements OnInit, OnDestroy {
 
   public newsForm: FormGroup;
   private noticiasUnsub$ = new Subject();
+  public submit = false;
 
   constructor(
     private builder: FormBuilder,
@@ -44,6 +45,7 @@ export class ModalNewsComponent implements OnInit, OnDestroy {
   }
 
   public registerNotice() {
+    this.submit = true;
     if (this.newsForm.valid) {
       this.noticiasService.cadastrar(this.newsForm.value)
         .pipe(takeUntil(this.noticiasUnsub$))

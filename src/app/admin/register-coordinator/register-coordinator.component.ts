@@ -15,6 +15,15 @@ export class RegisterCoordinatorComponent implements OnInit, OnDestroy {
   public coordinators = [];
   private coordinatorsUnsub$ = new Subject();
 
+  public eixos = [
+    { id: 1, name: 'Eixo 1' },
+    { id: 2, name: 'Eixo 2' },
+    { id: 3, name: 'Eixo 3' },
+    { id: 4, name: 'Eixo 4' },
+    { id: 5, name: 'Eixo 5' },
+    { id: 6, name: 'Eixo 6' }
+  ];
+
   constructor(
     private dialog: MatDialog,
     private adminService: AdminService
@@ -41,6 +50,14 @@ export class RegisterCoordinatorComponent implements OnInit, OnDestroy {
       .pipe(
         takeUntil(this.coordinatorsUnsub$)
       )
-      .subscribe((coordinators: any[]) => this.coordinators = coordinators);
+      .subscribe(({ coordinators }) => this.coordinators = coordinators);
+  }
+
+  public removeCoordinator(id) {
+    this.adminService.deleteCoordinator(id)
+      .pipe(
+        takeUntil(this.coordinatorsUnsub$)
+      )
+      .subscribe(() => this.listCoordinators());
   }
 }

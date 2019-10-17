@@ -1,5 +1,5 @@
 div.container {
-  max-height: 80vh;
+  max-height: 100vh;
   overflow: hidden;
 
   h2 {
@@ -20,6 +20,14 @@ div.container {
       border-radius: 0;
       box-shadow: none;
       font-size: 15px;
+    }
+
+    div.form-group div.alert {
+      border-radius: 0px;
+      margin-bottom: 0rem;
+      margin-top: 1px;
+      padding: 0.3rem 1.25rem;
+      font-size: 13px;
     }
 
     .btn-get-started {

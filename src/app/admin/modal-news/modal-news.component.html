@@ -10,20 +10,22 @@
         <form role="form" class="reviewer" [formGroup]="newsForm" (ngSubmit)="registerNotice()">
             <div class="form-row justify-content-center">
                 <div class="form-group col-md-12">
-                    <input type="text" name="notice" class="form-control" id="notice" placeholder="Nome da notícia"
-                        formControlName="name" [ngClass]="{'field-error': (nameNotice.errors && !nameNotice.pristine)}"/>
+                    <input type="text" name="notice" class="form-control" id="notice" placeholder="Título da notícia"
+                        formControlName="name" />
+                    <div class="alert alert-danger"
+                        *ngIf="(nameNotice.errors && submit) || (nameNotice.errors && !nameNotice.pristine)">
+                        <span>Preencha o campo título</span>
                     </div>
-                    <div class="invalid-feedback" *ngIf="(nameNotice.errors && !nameNotice.pristine)">
-                        <span>Campo obrigatório</span>
-                    </div>
+                </div>
             </div>
             <div class="form-row justify-content-center">
                 <div class="form-group col-md-12">
                     <textarea name="description" id="description" cols="50" rows="6"
-                        formControlName="description" [ngClass]="{'field-error': (descNotice.errors && !descNotice.pristine)}"></textarea>
-                        <div class="invalid-feedback" *ngIf="(descNotice.errors && !descNotice.pristine)">
-                            Campo obrigatório
-                        </div>
+                        formControlName="description"></textarea>
+                    <div class="alert alert-danger"
+                        *ngIf="(descNotice.errors && submit) || (descNotice.errors && !descNotice.pristine)">
+                        <span>Preencha o campo descrição</span>
+                    </div>
                 </div>
             </div>
             <div class="row justify-content-end">

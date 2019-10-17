@@ -8,7 +8,6 @@ const fs = require('fs');
 const S3Uploader = require('./aws.controller');
 const config = require('../config/config');
 
-
 /*const userSchema = Joi.object({
   fullname: Joi.string().required(),
   email: Joi.string().email(),
@@ -25,7 +24,9 @@ module.exports = {
   getPrice,
   uploadWork,
   downloadFileS3,
-  createCoordinator
+  createCoordinator,
+  getCoordinator,
+  deleteCoordinator
 }
 
 async function insert(user) {
@@ -315,3 +316,12 @@ async function validateCoordinator(authors, retorno) {
 
   return promise;
 };
+
+async function getCoordinator() {
+  return await User.find({ coordinator: { $ne: null } }).sort({ fullname: 1 });
+}
+
+async function deleteCoordinator(id) {
+  await User.findByIdAndUpdate({ _id: id }, { $unset: { coordinator: '' } });
+  return null;
+}

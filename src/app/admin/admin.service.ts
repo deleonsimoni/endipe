@@ -21,7 +21,11 @@ export class AdminService {
   }
 
   public retrieveCoordinators() {
-    return Observable.create(obs => obs.next(this.dbCoodinators));
+    return this.http.get<any>(`${this.baseUrl}/user/coordinators`);
+  }
+
+  public deleteCoordinator(id) {
+    return this.http.delete(`${this.baseUrl}/user/coordinator/${id}`);
   }
 
   public registerReviewers(form) {

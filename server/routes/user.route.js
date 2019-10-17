@@ -14,7 +14,7 @@ router.use(passport.authenticate('jwt', { session: false }))
 
 router.get('/price/:id', passport.authenticate('jwt', { session: false }), asyncHandler(price));
 router.get('/downloadFile', passport.authenticate('jwt', { session: false }), downloadFile);
-router.get('/coordinator', passport.authenticate('jwt', { session: false }), getCoordinator);
+router.get('/coordinators', passport.authenticate('jwt', { session: false }), getCoordinator);
 router.get('/reviewer', passport.authenticate('jwt', { session: false }), getReviewer);
 
 router.post('/uploadWork/xxendiperio2020/:id', [passport.authenticate('jwt', { session: false }), fileUpload()], asyncHandler(uploadWork));
@@ -22,7 +22,7 @@ router.post('/payment', passport.authenticate('jwt', { session: false }), paymen
 router.post('/gerarPagamento/xxendiperio2020/:id', passport.authenticate('jwt', { session: false }), payment);
 router.post('/coordinator', passport.authenticate('jwt', { session: false }), createCoordinator);
 router.post('/reviewer', passport.authenticate('jwt', { session: false }), createReviewer);
-router.delete('/coordinator', passport.authenticate('jwt', { session: false }), deleteCoordinator);
+router.delete('/coordinator/:id', passport.authenticate('jwt', { session: false }), deleteCoordinator);
 router.delete('/reviewer', passport.authenticate('jwt', { session: false }), deleteReviewer);
 
 router.put('/update', passport.authenticate('jwt', { session: false }), update);
@@ -81,7 +81,7 @@ async function createReviewer(req, res) {
 }
 
 async function deleteCoordinator(req, res) {
-  let coordinators = await userCtrl.deleteCoordinator();
+  let coordinators = await userCtrl.deleteCoordinator(req.params.id);
   res.json({ coordinators });
 }
 

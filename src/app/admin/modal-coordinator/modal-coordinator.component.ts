@@ -13,6 +13,7 @@ import { AdminService } from '../admin.service';
 export class ModalCoordinatorComponent implements OnInit {
 
   public coordinatorForm: FormGroup;
+  public submit = false;
   public eixos = [
     { id: 1, name: 'Eixo 1' },
     { id: 2, name: 'Eixo 2' },
@@ -38,6 +39,7 @@ export class ModalCoordinatorComponent implements OnInit {
 
     this.coordinatorForm.get('axis').valueChanges.subscribe(res => {
       const control = this.coordinatorForm.get('authors') as FormArray;
+      this.submit = false;
       for (let i = control.length - 1; i >= 0; i--) {
         if (i === 0) {
           (this.coordinatorForm.get('authors') as FormArray).at(0).patchValue({ email: '' });
@@ -68,15 +70,22 @@ export class ModalCoordinatorComponent implements OnInit {
   }
 
   public saveCoordinator(): void {
+    this.submit = true;
     if (this.coordinatorForm.valid) {
       this.adminService.registerCoordinator(this.coordinatorForm.value)
         .subscribe(x => {
           console.log(x);
           this.close();
         });
-    } else {
-      this.toastr.error('Preencha todos os campos');
     }
+  }
+
+  get axis() {
+    return this.coordinatorForm.get('axis');
+  }
+
+  get authors() {
+    return this.coordinatorForm.get('authors')['controls'][0];
   }
 
 }
