@@ -179,6 +179,9 @@ export class AdminComponent implements OnInit {
       case 3:
         this.users = this.allUsers.filter(user => user.isPCD);
         break;
+      case 4:
+        this.users = this.allUsers.filter(user => user.works.length > 0);
+        break;
 
       default:
         this.users = this.allUsers;
