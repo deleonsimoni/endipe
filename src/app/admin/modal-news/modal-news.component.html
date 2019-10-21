@@ -20,8 +20,24 @@
             </div>
             <div class="form-row justify-content-center">
                 <div class="form-group col-md-12">
-                    <textarea name="description" id="description" cols="50" rows="6"
-                        formControlName="description"></textarea>
+                    <!-- <textarea name="description" id="description" cols="50" rows="6"
+                        formControlName="description"></textarea> -->
+
+                    <quill-editor formControlName="description" placeholder="Descrição da notícia">
+                        <div quill-editor-toolbar>
+                            <span class="ql-formats">
+                                <button class="ql-bold" [title]="'Bold'"></button>
+                            </span>
+                            <span class="ql-formats">
+                                <select class="ql-align" [title]="'Aligment'">
+                                    <option selected></option>
+                                    <option value="center"></option>
+                                    <option value="right"></option>
+                                    <option value="justify"></option>
+                                </select>
+                            </span>
+                        </div>
+                    </quill-editor>
                     <div class="alert alert-danger"
                         *ngIf="(descNotice.errors && submit) || (descNotice.errors && !descNotice.pristine)">
                         <span>Preencha o campo descrição</span>

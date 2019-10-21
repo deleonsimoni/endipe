@@ -38,7 +38,6 @@ import { TrabalhosComponent } from './trabalhos/trabalhos.component';
 import { ListarTrabalhosComponent } from './listar-trabalhos/listar-trabalhos.component';
 import { AccordionModule } from 'ngx-bootstrap';
 import { PerfilComponent } from './perfil/perfil.component';
-import { AdminNewsComponent } from './admin-news/admin-news.component';
 import { AdminModule } from './admin/admin.module';
 import { PipesModule } from './pipes/pipes.module';
 import { AdminRoutingModule } from './admin/admin.routing';
@@ -70,7 +69,6 @@ import { ResetSenhaComponent } from './reset-senha/reset-senha.component';
     TrabalhosComponent,
     ListarTrabalhosComponent,
     PerfilComponent,
-    AdminNewsComponent,
     EsqueciSenhaComponent,
     ResetSenhaComponent
   ],

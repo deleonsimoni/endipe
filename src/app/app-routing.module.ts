@@ -8,7 +8,6 @@ import { SubmissaoComponent } from './submissao/submissao.component';
 import { TrabalhosComponent } from './trabalhos/trabalhos.component';
 import { CertificadoComponent } from './certificado/certificado.component';
 import { PerfilComponent } from './perfil/perfil.component';
-import { AdminNewsComponent } from './admin-news/admin-news.component';
 import { EsqueciSenhaComponent } from './esqueci-senha/esqueci-senha.component';
 import { ResetSenhaComponent } from './reset-senha/reset-senha.component';
 

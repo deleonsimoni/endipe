@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-sm-11 border-right">
                     <small>{{ noticia.name }}</small>
-                    <h4>{{ noticia.description }}</h4>
+                    <h4 [innerHtml]="noticia.description"></h4>
                 </div>
                 <div class="col-sm-1 text-center align-self-center pointer" (click)="deletar(noticia)">
                     <i class="fa fa-trash"></i>
