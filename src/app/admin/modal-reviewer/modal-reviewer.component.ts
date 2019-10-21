@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material';
 import { AdminService } from '../admin.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-modal-reviewer',
@@ -23,7 +24,8 @@ export class ModalReviewerComponent implements OnInit {
   constructor(
     private builder: FormBuilder,
     private dialogRef: MatDialogRef<ModalReviewerComponent>,
-    private adminService: AdminService
+    private adminService: AdminService,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
@@ -44,7 +46,15 @@ export class ModalReviewerComponent implements OnInit {
   public saveReviewer(): void {
     if (this.reviewerForm.valid) {
       this.adminService.registerReviewers(this.reviewerForm.value)
-        .subscribe(this.close());
+        .subscribe(({ reviewers }: any) => {
+          if (reviewers.temErro) {
+            this.toastr.error(reviewers.mensagem);
+          } else {
+            this.close();
+          }
+        });
+    } else {
+      this.toastr.error('Preencha todos os campos');
     }
   }
 }

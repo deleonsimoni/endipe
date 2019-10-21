@@ -26,7 +26,10 @@ module.exports = {
   downloadFileS3,
   createCoordinator,
   getCoordinator,
-  deleteCoordinator
+  deleteCoordinator,
+  getReviewer,
+  createReviewer,
+  deleteReviewer
 }
 
 async function insert(user) {
@@ -266,14 +269,13 @@ async function createCoordinator(coordinators) {
   }
 
   let p1 = await validateCoordinator(coordinators.authors, retorno);
-  console.log('promise: ', p1);
 
   if (retorno.temErro) {
     return retorno;
   } else {
 
     retorno.userId.forEach(async user => {
-      await User.findOneAndUpdate({ _id: user }, { $set: { coordinator: coordinators.axis } });
+      await User.findOneAndUpdate({ _id: user }, { $set: { coordinator: { icModalityId: coordinators.axis } } });
     });
 
     retorno.mensagem = `Coordenador cadastrado com sucesso`;
@@ -287,34 +289,49 @@ async function createCoordinator(coordinators) {
 
 
 async function validateCoordinator(authors, retorno) {
+
   let user;
   let promise = await new Promise(function (resolve, reject) {
+
     authors.forEach(async author => {
+
       user = await getUserByEmail(author.email);
+
       if (!user) {
+
         retorno.userEmail.push(author.email);
         retorno.temErro = true;
         retorno.mensagem = `Usuário ${author.email} não está cadastrado no sistema`;
         reject(retorno);
-      } else if (user.coordinator && user.coordinator.modalityId) {
+
+      } else if (user.coordinator && user.coordinator.icModalityId) {
+
         retorno.userEmail.push(author.email);
         retorno.temErro = true;
         retorno.mensagem = `O usuário ${author.email} já possui cadastro como coordenador`;
         reject(retorno);
-      } else if (user.reviewer && user.reviewer.modalityId) {
+
+      } else if (user.reviewer && user.reviewer.icModalityId) {
+
         retorno.userEmail.push(author.email);
         retorno.temErro = true;
         retorno.mensagem = `O usuário ${author.email} já possui cadastro como parecerista`;
         reject(retorno);
+
       } else {
+
         retorno.userId.push(user._id);
         retorno.temErro = false;
         resolve(retorno);
+
       }
+
     });
+
   }).then(res => res).catch(err => err);
 
   return promise;
+
 };
 
 async function getCoordinator() {
@@ -323,5 +340,62 @@ async function getCoordinator() {
 
 async function deleteCoordinator(id) {
   await User.findByIdAndUpdate({ _id: id }, { $unset: { coordinator: '' } });
+  return null;
+}
+
+async function getReviewer() {
+  return await User.find({ reviewer: { $ne: null } }).sort({ fullname: 1 });
+}
+
+async function createReviewer(reviewer) {
+
+  let retorno = {
+    temErro: false,
+    mensagem: '',
+  };
+
+  const user = await validateReviewer(reviewer.email, retorno);
+
+  if (!retorno.temErro) {
+    await User.findOneAndUpdate({ _id: user._id }, { $set: { reviewer: { icModalityId: reviewer.axis } } });
+
+    retorno.mensagem = `Parecerista cadastrado com sucesso`;
+    retorno.temErro = false;
+  }
+
+  return retorno;
+
+}
+
+async function validateReviewer(email, retorno) {
+
+  const user = await getUserByEmail(email);
+
+  if (!user) {
+
+    retorno.temErro = true;
+    retorno.mensagem = `Usuário ${email} não está cadastrado no sistema`;
+
+  } else if (user.coordinator && user.coordinator.icModalityId) {
+
+    retorno.temErro = true;
+    retorno.mensagem = `O usuário ${email} já possui cadastro como coordenador`;
+
+  } else if (user.reviewer && user.reviewer.icModalityId) {
+
+    retorno.temErro = true;
+    retorno.mensagem = `O usuário ${email} já possui cadastro como parecerista`;
+
+  } else {
+
+    retorno.temErro = false;
+
+  }
+
+  return user;
+}
+
+async function deleteReviewer(id) {
+  await User.findByIdAndUpdate({ _id: id }, { $unset: { reviewer: '' } });
   return null;
 }

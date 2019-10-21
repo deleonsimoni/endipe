@@ -13,6 +13,7 @@ router.use(passport.authenticate('jwt', { session: false }))
 
 router.get('/usrs', passport.authenticate('jwt', { session: false }), getUsers);
 router.get('/getUserWorks/:id', passport.authenticate('jwt', { session: false }), asyncHandler(getUserWorks));
+router.get('/metrics', passport.authenticate('jwt', { session: false }), getMetrics);
 
 router.post('/validatePayment/:id', passport.authenticate('jwt', { session: false }), validatePayment);
 router.post('/invalidatePayment/:id', passport.authenticate('jwt', { session: false }), invalidatePayment);
@@ -63,4 +64,9 @@ async function invalidatePayment(req, res) {
   } else {
     res.sendStatus(401);
   }
+}
+
+async function getMetrics(req, res) {
+  let metrics = await adminCtrl.recoverMetrics();
+  res.json(metrics);
 }

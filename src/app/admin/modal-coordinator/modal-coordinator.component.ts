@@ -73,10 +73,15 @@ export class ModalCoordinatorComponent implements OnInit {
     this.submit = true;
     if (this.coordinatorForm.valid) {
       this.adminService.registerCoordinator(this.coordinatorForm.value)
-        .subscribe(x => {
-          console.log(x);
-          this.close();
+        .subscribe(({ coordinators }: any) => {
+          if (coordinators.temErro) {
+            this.toastr.error(coordinators.mensagem);
+          } else {
+            this.close();
+          }
         });
+    } else {
+      this.toastr.error('Preencha todos os campos');
     }
   }
 
@@ -85,7 +90,7 @@ export class ModalCoordinatorComponent implements OnInit {
   }
 
   get authors() {
-    return this.coordinatorForm.get('authors')['controls'][0];
+    return this.coordinatorForm.get('authors');
   }
 
 }

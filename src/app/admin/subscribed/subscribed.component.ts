@@ -3,6 +3,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { DownloadFileService } from 'src/app/services/download-file.service';
 import { HttpClient } from '@angular/common/http';
+import { AdminService } from '../admin.service';
 
 @Component({
   selector: 'app-subscribed',
@@ -20,6 +21,7 @@ export class SubscribedComponent implements OnInit {
   public status: string;
   public carregando = false;
   public userSelect: number;
+  public metrics: {};
 
   public modalities = [
     { id: 1, name: 'Convidado de sessão especial' },
@@ -40,44 +42,21 @@ export class SubscribedComponent implements OnInit {
     { id: 6, name: 'Infâncias, Juventudes e Vida Adulta' }
   ];
 
-  public categories = [
-    { id: 1, name: 'Estudantes de curso Normal/EM' },
-    { id: 2, name: 'Estudantes de Graduação' },
-    { id: 3, name: 'Estudantes de Pós-Graduação' },
-    { id: 4, name: 'Profissionais da Educação Básica' },
-    { id: 5, name: 'Profissionais da Educação Superior' }
-  ];
-
   constructor(
+    @Inject('BASE_API_URL') private baseUrl: string,
     private authService: AuthService,
     private router: Router,
     private downloadService: DownloadFileService,
-    @Inject('BASE_API_URL') private baseUrl: string,
-    private http: HttpClient
+    private http: HttpClient,
+    private adminService: AdminService
   ) { }
 
   ngOnInit() {
+    // this.retrieveMetrics();
     this.retrieveAdminData();
   }
 
-  validarPagamento(user) {
-
-    this.http.post(`${this.baseUrl}/admin/validatePayment/` + user._id, {}).subscribe((res: any) => {
-      user.payment.icPaid = true;
-    }, err => {
-      console.log(err);
-    });
-  }
-
-  invalidarPagamento(user) {
-    this.http.post(`${this.baseUrl}/admin/invalidatePayment/` + user._id, {}).subscribe((res: any) => {
-      user.payment.icPaid = false;
-    }, err => {
-      console.log(err);
-    });
-  }
-
-  selectUser(user) {
+  public receiverSelectedUser(user) {
     if (this.userSelect === user._id) {
       this.userSelect = null;
     } else {
@@ -88,7 +67,12 @@ export class SubscribedComponent implements OnInit {
     }
   }
 
-  getUserWorks(userWorksId) {
+  public retrieveMetrics() {
+    this.adminService.recoverMetrics()
+      .subscribe(metrics => this.metrics = metrics, err => console.log(err));
+  }
+
+  public getUserWorks(userWorksId) {
     this.works = [];
     this.carregandoTrabalhos = true;
 
@@ -106,7 +90,7 @@ export class SubscribedComponent implements OnInit {
 
   }
 
-  download(nameFile) {
+  public download(nameFile) {
     const vm = this;
     function sucessoDownload() {
       vm.carregando = false;
@@ -133,10 +117,6 @@ export class SubscribedComponent implements OnInit {
 
   public retrieveEixo(id) {
     return this.eixos.filter(element => element.id === id)[0];
-  }
-
-  public retrieveCategories(id) {
-    return this.categories.filter(element => element.id === id)[0];
   }
 
   public searchUser() {

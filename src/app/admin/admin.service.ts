@@ -8,13 +8,18 @@ import { Observable } from 'rxjs';
 })
 export class AdminService {
 
-  private dbCoodinators: any[] = [];
-  private dbReviewers: any[] = [];
-
   constructor(
     @Inject('BASE_API_URL') private baseUrl: string,
     private http: HttpClient
   ) { }
+
+  public validatePayment(id) {
+    return this.http.post(`${this.baseUrl}/admin/validatePayment/${id}`, {});
+  }
+
+  public invalidatePayment(id) {
+    return this.http.post(`${this.baseUrl}/admin/invalidatePayment/${id}`, {});
+  }
 
   public registerCoordinator(form) {
     return this.http.post(`${this.baseUrl}/user/coordinator`, form);
@@ -29,14 +34,18 @@ export class AdminService {
   }
 
   public registerReviewers(form) {
-    return Observable.create(obs => {
-      this.dbReviewers.push(form);
-      obs.next(this.dbReviewers);
-    });
+    return this.http.post(`${this.baseUrl}/user/reviewer`, form);
   }
 
   public retrieveReviewers() {
-    return Observable.create(obs => obs.next(this.dbReviewers));
+    return this.http.get<any>(`${this.baseUrl}/user/reviewer`);
   }
 
+  public deleteReviewer(id) {
+    return this.http.delete(`${this.baseUrl}/user/reviewer/${id}`);
+  }
+
+  public recoverMetrics() {
+    return this.http.get<any>(`${this.baseUrl}/admin/metrics`);
+  }
 }

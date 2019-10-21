@@ -55,9 +55,9 @@ export class AdminComponent implements OnInit {
 
     if (this.user && this.user.icAdmin) {
       this.menu = this.adminRoutes;
-    } else if (this.user && this.user.icCoordinator) {
+    } else if (this.user && this.user.coordinator) {
       this.menu = this.coordinatorRoutes;
-    } else if (this.user && this.user.icReviewer) {
+    } else if (this.user && this.user.reviewer) {
       this.menu = this.reviewerRoutes;
     }
   }

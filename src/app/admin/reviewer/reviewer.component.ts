@@ -40,6 +40,16 @@ export class ReviewerComponent implements OnInit, OnDestroy {
       .pipe(
         takeUntil(this.reviewersUnsub$)
       )
-      .subscribe((reviewers: any[]) => this.reviewers = reviewers);
+      .subscribe(({ reviewers }) => {
+        this.reviewers = reviewers;
+      });
+  }
+
+  public removeReviewer(id) {
+    this.adminService.deleteReviewer(id)
+      .pipe(
+        takeUntil(this.reviewersUnsub$)
+      )
+      .subscribe(() => this.listReviewers());
   }
 }

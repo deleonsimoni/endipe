@@ -16,24 +16,22 @@
                                     {{ eixo.name }}
                                 </option>
                             </select>
-                            <div class="alert alert-danger" *ngIf="axis.errors && submit">
+                            <!-- <div class="alert alert-danger" *ngIf="axis.errors && submit">
                                 <span>Escolha o eixo</span>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
                 <div class="form-row justify-content-center">
                     <div class="form-group col-md-12">
-                        <div formArrayName="authors"
-                            *ngFor="let item of coordinatorForm.get('authors').controls; let i = index;">
+                        <div formArrayName="authors" *ngFor="let item of authors.controls; let i = index;">
                             <div [formArrayName]="i">
                                 <input type="text" name="autor" class="form-control" [ngClass]="{'mt-2': i >= 1}"
                                     id="autor" placeholder="Email do coordenador" formControlName="email" />
                             </div>
-                            <div class="alert alert-danger"
-                                *ngIf="(authors.email == null && submit) || (authors.email == null && !authors.email.pristine)">
+                            <!-- <div class="alert alert-danger" *ngIf="(authors.email == null && submit)">
                                 <span>Preencha o campo email</span>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>

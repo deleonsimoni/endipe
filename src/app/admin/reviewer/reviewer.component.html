@@ -1,17 +1,18 @@
 <div class="form">
 
-    <div class="card-works" *ngFor="let reviewer of reviewers; let i = index" [ngClass]="{'mb-3': reviewers.length > 1}">
+    <div class="card-works" *ngFor="let reviewer of reviewers; let i = index"
+        [ngClass]="{'mb-3': reviewers.length > 1}">
         <div class="row">
-            <div class="col-sm-6 border-right">
+            <div class="col-sm-4 border-right">
+                <small>NOME</small>
+                <h4>{{ reviewer.fullname }}</h4>
+            </div>
+            <div class="col-sm-7 border-right">
                 <small>EMAIL</small>
                 <h4>{{ reviewer.email }}</h4>
             </div>
-            <div class="col-sm-5 border-right">
-                <small>NOME DO EIXO</small>
-                <h4>{{ reviewer.axis }}</h4>
-            </div>
             <div class="col-sm-1 text-center align-self-center pointer">
-                <i class="fa fa-chevron-down"></i>
+                <i class="fa fa-trash" (click)="removeReviewer(reviewer._id)"></i>
             </div>
         </div>
     </div>

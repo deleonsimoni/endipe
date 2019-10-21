@@ -1,0 +1,25 @@
+<div class="card-works" [ngClass]="{'no-radius-bottom': infos == true}">
+    <div class="row">
+        <div class="col-sm-3 border-right">
+            <small>NOME</small>
+            <h4>{{ subscribed.fullname.toLowerCase() }}</h4>
+        </div>
+        <div class="col-sm-3 border-right">
+            <small>EMAIL</small>
+            <h4>{{ subscribed.email.toLowerCase() }}</h4>
+        </div>
+        <div class="col-sm-3 border-right">
+            <small>CPF</small>
+            <h4>{{ subscribed.document | maskCpf }}</h4>
+        </div>
+        <div class="col-sm-2 border-right">
+            <small>STATUS</small>
+            <h4>{{ !subscribed.payment ? 'Pagamento não efetuado' : subscribed.payment.icPaid ? 'Pagamento válido' : 'Aguardando validação'}}
+            </h4>
+        </div>
+        <div class="col-sm-1 text-center align-self-center pointer"
+            (click)="(infos ? infos = false : infos = true);selectUser(subscribed);">
+            <i class="fa fa-chevron-down"></i>
+        </div>
+    </div>
+</div>

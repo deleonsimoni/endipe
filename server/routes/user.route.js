@@ -23,7 +23,7 @@ router.post('/gerarPagamento/xxendiperio2020/:id', passport.authenticate('jwt', 
 router.post('/coordinator', passport.authenticate('jwt', { session: false }), createCoordinator);
 router.post('/reviewer', passport.authenticate('jwt', { session: false }), createReviewer);
 router.delete('/coordinator/:id', passport.authenticate('jwt', { session: false }), deleteCoordinator);
-router.delete('/reviewer', passport.authenticate('jwt', { session: false }), deleteReviewer);
+router.delete('/reviewer/:id', passport.authenticate('jwt', { session: false }), deleteReviewer);
 
 router.put('/update', passport.authenticate('jwt', { session: false }), update);
 router.route('/')
@@ -76,7 +76,7 @@ async function createCoordinator(req, res) {
 }
 
 async function createReviewer(req, res) {
-  let reviewers = await userCtrl.createReviewer();
+  let reviewers = await userCtrl.createReviewer(req.body);
   res.json({ reviewers });
 }
 
@@ -86,6 +86,6 @@ async function deleteCoordinator(req, res) {
 }
 
 async function deleteReviewer(req, res) {
-  let reviewers = await userCtrl.deleteReviewer();
+  let reviewers = await userCtrl.deleteReviewer(req.params.id);
   res.json({ reviewers });
 }

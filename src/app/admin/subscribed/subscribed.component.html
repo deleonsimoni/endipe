@@ -1,5 +1,6 @@
 <div>
     <p>Total de {{ users.length }} inscritos</p>
+    <!-- <subscribers-metrics [metrics]="metrics"></subscribers-metrics> -->
 
     <div class="row">
         <div class="col-md-8">
@@ -18,8 +19,15 @@
         </div>
     </div>
 
-    <div *ngFor="let user of users; let i = index" [ngClass]="{'mb-3': users.length > 1}">
-        <div class="card-works" [ngClass]="{'no-radius-bottom': infos == true}">
+    <div *ngFor="let subscribed of users; let i = index" [ngClass]="{'mb-3': users.length > 1}">
+
+        <subscribers-card [subscribed]="subscribed" (selected)="receiverSelectedUser($event)">
+        </subscribers-card>
+
+        <work-content [subscribed]="subscribed" *ngIf="subscribed && subscribed._id == userSelect">
+        </work-content>
+
+        <!-- <div class="card-works" [ngClass]="{'no-radius-bottom': infos == true}">
             <div class="row">
                 <div class="col-sm-3 border-right">
                     <small>NOME</small>
@@ -43,8 +51,9 @@
                     <i class="fa fa-chevron-down"></i>
                 </div>
             </div>
-        </div>
-        <div class="work-content" *ngIf="user._id == userSelect" @showInfos>
+        </div> -->
+
+        <!-- <div class="work-content" *ngIf="user._id == userSelect" @showInfos>
             <div class="section first">
                 <h6>Dados pessoais</h6>
             </div>
@@ -151,6 +160,6 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>
