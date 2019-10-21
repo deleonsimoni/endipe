@@ -42,6 +42,9 @@ import { AdminNewsComponent } from './admin-news/admin-news.component';
 import { AdminModule } from './admin/admin.module';
 import { PipesModule } from './pipes/pipes.module';
 import { AdminRoutingModule } from './admin/admin.routing';
+import { EsqueciSenhaComponent } from './esqueci-senha/esqueci-senha.component';
+import { QuillModule } from 'ngx-quill';
+import { ResetSenhaComponent } from './reset-senha/reset-senha.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +70,9 @@ import { AdminRoutingModule } from './admin/admin.routing';
     TrabalhosComponent,
     ListarTrabalhosComponent,
     PerfilComponent,
-    AdminNewsComponent
+    AdminNewsComponent,
+    EsqueciSenhaComponent,
+    ResetSenhaComponent
   ],
   imports: [
     BrowserModule,
@@ -80,6 +85,7 @@ import { AdminRoutingModule } from './admin/admin.routing';
     AdminRoutingModule,
     UtilNgxMaterialModule,
     HttpClientModule,
+    QuillModule.forRoot(),
     BsDatepickerModule.forRoot(),
     BsDropdownModule.forRoot(),
     NgxMaskModule.forRoot(),

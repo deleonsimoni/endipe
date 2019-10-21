@@ -2,6 +2,7 @@ const express = require('express');
 const passport = require('passport');
 const asyncHandler = require('express-async-handler');
 const userCtrl = require('../controllers/user.controller');
+
 const emailSender = require('../controllers/email.controller');
 const templateEmail = require('../config/templateEmails');
 const fileUpload = require('express-fileupload');
@@ -9,6 +10,9 @@ const fileUpload = require('express-fileupload');
 
 const router = express.Router();
 module.exports = router;
+
+router.get('/testeBoleto', testeBoleto);
+
 
 router.use(passport.authenticate('jwt', { session: false }))
 
@@ -29,6 +33,10 @@ router.put('/update', passport.authenticate('jwt', { session: false }), update);
 router.route('/')
   .post(asyncHandler(insert));
 
+async function testeBoleto(req, res) {
+  //let response = await boletoctrl.gerar();
+  res.json(response);
+}
 
 async function uploadWork(req, res) {
   let response = await userCtrl.uploadWork(req, res);

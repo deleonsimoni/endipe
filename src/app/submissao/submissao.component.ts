@@ -1,10 +1,10 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { UploadService } from '../services/upload.service';
 import { ToastrService } from 'ngx-toastr';
-import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { EventEmitter } from 'events';
+import { Observable, Subject } from 'rxjs';
 @Component({
   selector: 'app-submissao',
   templateUrl: './submissao.component.html',
@@ -18,6 +18,7 @@ export class SubmissaoComponent implements OnInit {
   public user: any;
   public carregando = true;
   public enviando = false;
+  public sub: Subject<any>;
   public submissionForm: FormGroup;
   public authors = new Array();
   public showAdd = true;
@@ -70,6 +71,19 @@ export class SubmissaoComponent implements OnInit {
       this.carregando = false;
     });
 
+
+    this.submissionForm.get('modalityId').valueChanges.subscribe(res => {
+      this.showAdd = true;
+      const control = this.submissionForm.get('authors') as FormArray;
+      for (let i = control.length - 1; i >= 0; i--) {
+        if (i === 0) {
+          (this.submissionForm.get('authors') as FormArray).at(0).patchValue({ email: '' });
+        } else {
+          control.removeAt(i);
+        }
+      }
+    });
+
   }
 
   private createForm(): void {
@@ -77,7 +91,8 @@ export class SubmissaoComponent implements OnInit {
     this.submissionForm = this.builder.group({
       axisId: [null, [Validators.required]],
       modalityId: [null, [Validators.required]],
-      typeWork: [null, [Validators.required]],
+      typeWork: [null],
+      usuarioPrincipal: [null],
       title: [null, [Validators.required]],
       authors: this.builder.array([
         this.createFields()
@@ -85,14 +100,23 @@ export class SubmissaoComponent implements OnInit {
     });
 
     this.submissionForm.controls.authors.valueChanges.subscribe(res => {
-      if (res.length >= 4) {
+
+      if (this.submissionForm.value.modalityId === '5' && res.length >= 13) {
         this.showAdd = false;
+      } else if (this.submissionForm.value.modalityId !== '5' && res.length >= 4) {
+        this.showAdd = false;
+      } else {
+        this.showAdd = true;
       }
+
     });
 
   }
 
   public upload() {
+
+    const usuarioLogado = this.authService.getUserLogado();
+
     if (!this.filesPDF) {
       this.toastr.error('É necessário selecionar o arquivo PDF', 'Atenção');
       return;
@@ -137,6 +161,7 @@ export class SubmissaoComponent implements OnInit {
     } else {
       this.enviando = true;
 
+      this.submissionForm.value.usuarioPrincipal = usuarioLogado.email;
       this.submissionForm.value.arquivoPDF = this.filesPDF[0];
       this.uploadService.uploadFile(this.filesDOC[0], this.filesPDF[0], 'trabalhos', this.user.document, this.submissionForm.value)
         .subscribe(res => {
@@ -192,8 +217,13 @@ export class SubmissaoComponent implements OnInit {
 
   public addAuthors() {
     const authors = this.submissionForm.get('authors') as FormArray;
-    if (authors.controls.length < 4) {
+    if (this.submissionForm.value.modalityId === '5' && authors.controls.length < 13) {
+      authors.push(this.createFields());
+    } else if (this.submissionForm.value.modalityId !== '5' && authors.controls.length < 4) {
       authors.push(this.createFields());
     }
   }
+
+
+
 }

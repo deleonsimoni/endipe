@@ -5,6 +5,10 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  document: {
+    type: String,
+    required: true
+  },
   email: {
     type: String,
     required: true,
@@ -16,6 +20,10 @@ const UserSchema = new mongoose.Schema({
   hashedPassword: {
     type: String,
     required: true
+  },
+  mailCodePassword: {
+    type: String,
+    select: false
   },
   icAcceptTerms: {
     type: Boolean,
@@ -42,10 +50,6 @@ const UserSchema = new mongoose.Schema({
   },
   dateBirth: {
     type: Date
-  },
-  document: {
-    type: String,
-    required: true
   },
   checkStandards: {
     type: Boolean,

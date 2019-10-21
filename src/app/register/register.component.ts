@@ -122,8 +122,11 @@ export class RegisterComponent implements OnInit {
             if (err.error.message.match('email')) {
               this.toastr.error('Email já registrado.', 'Erro: ');
             }
+            if (err.error.message.match('cpf')) {
+              this.toastr.error('CPF ou passaporte já cadastrado.', 'Erro: ');
+            }
             if (err.error.message.match('document')) {
-              this.toastr.error('CPF ou Passport já cadastrado.', 'Erro: ');
+              this.toastr.error('CPF ou passaporte já cadastrado.', 'Erro: ');
             }
           }
         });

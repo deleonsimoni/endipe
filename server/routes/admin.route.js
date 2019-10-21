@@ -50,7 +50,7 @@ async function getUserWorks(req, res) {
 async function validatePayment(req, res) {
   if (req.user.icAdmin) {
     let users = await adminCtrl.validatePayment(req.params.id);
-    emailSender.sendMail(user.email, 'Pagamento Homologado', templateEmail.pagamentoHomologado);
+    emailSender.sendMail(users.email, 'Pagamento Homologado', templateEmail.pagamentoHomologado);
     res.json(users);
   } else {
     res.sendStatus(401);

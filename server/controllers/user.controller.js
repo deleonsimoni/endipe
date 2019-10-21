@@ -7,6 +7,8 @@ const IncomingForm = require('formidable').IncomingForm;
 const fs = require('fs');
 const S3Uploader = require('./aws.controller');
 const config = require('../config/config');
+const emailSender = require('../controllers/email.controller');
+const templateEmail = require('../config/templateEmails');
 
 /*const userSchema = Joi.object({
   fullname: Joi.string().required(),
@@ -29,15 +31,64 @@ module.exports = {
   deleteCoordinator,
   getReviewer,
   createReviewer,
-  deleteReviewer
+  deleteReviewer,
+  checkDocumentDup,
+  generateNewPassword,
+  resetPassword
 }
 
 async function insert(user) {
   //user = await Joi.validate(user, userSchema, { abortEarly: false });
   user.hashedPassword = bcrypt.hashSync(user.password, 10);
   delete user.password;
-  console.log('Inserindo usuário no banco');
   return await new User(user).save();
+}
+
+async function generateNewPassword(user) {
+  const randomstring = Math.random().toString(36).slice(-8);
+
+  let response = {
+    status: 200, message: `Seu código para troca de senha foi enviado para seu email.`
+  };
+
+  await User.findByIdAndUpdate(user._id, {
+    '$set': {
+      mailCodePassword: randomstring
+    }
+  }, function (err, doc) {
+    if (err) response = { status: 500, message: err };
+    let email = templateEmail.esqueciSenha.replace("#senha#", randomstring);
+    emailSender.sendMail(user.email, 'Recuperação de Senha', email);
+  })
+
+  return response;
+
+}
+
+async function resetPassword(req, user) {
+  const hashString = bcrypt.hashSync(req.body.password, 10);
+
+  let response = {
+    status: 200, message: `Senha alterada com sucesso.`
+  };
+
+  await User.findByIdAndUpdate(user._id, {
+    '$set': {
+      mailCodePassword: null,
+      hashedPassword: hashString
+    }
+  }, function (err, doc) {
+    if (err) response = { status: 500, message: err };
+  })
+
+  return response;
+
+}
+
+
+async function checkDocumentDup(cpf) {
+  let userFind = await User.find({ document: cpf }).select('document');
+  return userFind.length > 0 ? true : false;
 }
 
 async function update(user) {
@@ -46,7 +97,7 @@ async function update(user) {
 
 function getPrice(id) {
   let dateNow = new Date();
-
+  dateNow.setHours(0, 0, 0, 0)
   let seasons = Prices.prices.filter(price => price.id == id)[0].seasons;
 
   return seasons.filter(season => dateNow.getTime() >= season.dateIni.getTime() && dateNow.getTime() <= season.dateEnd.getTime())[0].price;
@@ -60,8 +111,6 @@ async function generatePayment(req, res) {
   var buffer = null;
   var formulario = null;
   var payment = null;
-
-
 
   form.on('field', (name, value) => {
     formulario = JSON.parse(value);
@@ -134,9 +183,15 @@ async function getUserByEmail(email) {
 async function uploadWork(req, res) {
 
   let formulario = JSON.parse(req.body.formulario);
-
   console.log('Validando Usuarios' + JSON.stringify(formulario.authors));
-  let responseValidacao = await validatePaymentUsers(formulario.authors);
+
+  let responseValidationEmails = await validateEmailsFrom(formulario.authors, formulario.usuarioPrincipal);
+  if (responseValidationEmails.temErro) {
+    console.log('dados inválidos do front: ' + JSON.stringify(responseValidationEmails));
+    return responseValidationEmails;
+  }
+
+  let responseValidacao = await validatePaymentUsers(formulario.authors, formulario.modalityId);
   if (responseValidacao.temErro) {
     console.log('erro na validacao dos usuarios: ' + JSON.stringify(responseValidacao));
     return responseValidacao;
@@ -158,7 +213,63 @@ async function uploadWork(req, res) {
 
 }
 
-async function validatePaymentUsers(users) {
+
+async function validateEmailsFrom(users, usuarioPrincipal) {
+
+  let resultado;
+  let retorno = {
+    temErro: false,
+    mensagem: ''
+  }
+
+  resultado = await validarUsuarioPrincipal(users, usuarioPrincipal);
+
+  if (resultado) {
+    retorno.temErro = true;
+    retorno.mensagem = `Você precisa ser um autor para submeter o trabalho`
+  }
+
+  resultado = await validarEmailDuplicado(users);
+
+  if (resultado) {
+    retorno.temErro = true;
+    retorno.mensagem = `Há emails duplicados, verifique o campo de autores`
+  }
+
+  return retorno;
+
+}
+
+async function validarUsuarioPrincipal(usuarios, emailPrincipal) {
+
+  let emailFind = await usuarios.filter(autor => autor.email == emailPrincipal)[0];
+  if (emailFind) {
+    return false;
+  } else {
+    return true;
+  }
+
+}
+
+async function validarEmailDuplicado(usuarios) {
+
+  var sorted_arr = usuarios.slice().sort();
+  var results = [];
+  for (var i = 0; i < sorted_arr.length - 1; i++) {
+    if (sorted_arr[i + 1].email == sorted_arr[i].email) {
+      results.push(sorted_arr[i]);
+    }
+  }
+
+  if (results.length > 0) {
+    return true;
+  } else {
+    return false;
+  }
+
+}
+
+async function validatePaymentUsers(users, modalityId) {
 
   let userFind;
   let retorno = {
@@ -180,9 +291,13 @@ async function validatePaymentUsers(users) {
         retorno.temErro = true;
         retorno.mensagem = `O usuário ${users[i].email} não possui pagamento válido`
         break;
-      } else if (userFind.works && userFind.works.length > 2) {
+      } else if (userFind.works && userFind.works.length >= 2) {
         retorno.temErro = true;
         retorno.mensagem = `O usuário ${users[i].email} já possui dois trabalhos submetidos`
+        break;
+      } else if (userFind.works.length == 1 && await validateModalityDup(userFind.works[0], modalityId)) {
+        retorno.temErro = true;
+        retorno.mensagem = `O usuário ${users[i].email} já possui trabalho submetido para esta modalidade`
         break;
       } else {
         retorno.user.push({ userId: userFind._id, userEmail: users[i].email });
@@ -195,6 +310,16 @@ async function validatePaymentUsers(users) {
   };
 
   return retorno;
+
+}
+
+async function validateModalityDup(workId, modalityId) {
+  let workFind = await Work.findById(workId);
+  if (workFind.modalityId == modalityId) {
+    return true;
+  } else {
+    return false;
+  }
 
 }
 
@@ -233,9 +358,8 @@ async function createWork(users, filesName, formulario) {
     protocol: protocol,
     title: formulario.title,
     modalityId: formulario.modalityId,
-    typeWork: formulario.typeWork,
     axisId: formulario.axisId,
-
+    mainAuthor: formulario.usuarioPrincipal,
     pathS3DOC: filesName[0],
     pathS3PDF: filesName[1],
 

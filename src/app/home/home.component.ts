@@ -28,6 +28,16 @@ export class HomeComponent implements OnInit {
   carregando = false;
   noticias = [];
 
+  configuracaoCarrossel = {
+    nav: true,
+    slideBy: 2,
+    margin: 14,
+    responsive: {
+      '0': { items: 1, margin: 5 },
+      '940': { items: 3, margin: 5 }
+    }
+  }
+
   instituicoes = [
     'Universidade Federal do Rio de Janeiro – UFRJ',
     'Universidade Federal do Estado do Rio de Janeiro – UNIRIO',

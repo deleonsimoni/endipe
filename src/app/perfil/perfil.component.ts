@@ -97,7 +97,7 @@ export class PerfilComponent implements OnInit {
   }
 
   public validarNome(nome) {
-    const regName = /^[a-zA-Z ]{6,30}$/;
+    const regName = /^[A-zÀ-ú ]{6,30}$/;
     const name = nome;
     if (!regName.test(name)) {
       return false;

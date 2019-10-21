@@ -17,6 +17,14 @@ export class AuthService {
     return this.http.post(`${this.baseUrl}/auth/login`, form);
   }
 
+  recuperarSenha(form) {
+    return this.http.post(`${this.baseUrl}/auth/forgotPassword`, form);
+  }
+
+  resetarSenha(form) {
+    return this.http.post(`${this.baseUrl}/auth/resetPassword`, form);
+  }
+
   createUser(form) {
     return this.http.post(`${this.baseUrl}/auth/register`, form);
   }
@@ -52,17 +60,21 @@ export class AuthService {
     localStorage.removeItem(TOKEN_KEY);
   }
 
+  public getUserLogado(): any {
+
+    const token = this.getToken();
+    return this.getDecodedAccessToken(token);
+
+  }
+
   public getDecodedAccessToken(token: string): any {
 
     try {
-
       return jwt_decode(token);
-
     } catch (error) {
-
       return null;
-
     }
+
   }
 
 }
