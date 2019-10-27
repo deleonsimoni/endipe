@@ -9,6 +9,7 @@ const S3Uploader = require('./aws.controller');
 const config = require('../config/config');
 const emailSender = require('../controllers/email.controller');
 const templateEmail = require('../config/templateEmails');
+const validarCpf = require('validar-cpf');
 
 
 /*const userSchema = Joi.object({
@@ -29,7 +30,8 @@ module.exports = {
   downloadFileS3,
   checkDocumentDup,
   generateNewPassword,
-  resetPassword
+  resetPassword,
+  getBoleto
 }
 
 async function insert(user) {
@@ -80,6 +82,79 @@ async function resetPassword(req, user) {
 
 }
 
+async function getBoleto(req) {
+
+  let retorno = {};
+  retorno = await validarDadosGeracaoBoleto(req.user);
+  if (retorno.temErro) {
+    return retorno;
+  } else {
+    let ultimoRef = await User.findOne({ 'boleto': { $ne: null } }, {}, { sort: { 'boleto.refTran': 1 } }).select('boleto.refTran');
+
+    if (req.user.boleto) {
+      let dateNow = new Date();
+      dateNow.setHours(0, 0, 0, 0);
+
+
+      if (dateNow.getTime() >= req.user.boleto.dtVenc.getTime()) {
+
+        let price = getPriceFullObject(req.user.payment.categoryId);
+        retorno.refTran = ultimoRef == null || ultimoRef.length == 0 ? 1 : ++ultimoRef.boleto.refTran;
+        retorno.dtVenc = price.dateEnd;
+        console.log(price);
+        retorno.valor = price.price + '00';
+        retorno.userId = req.user._id;
+        retorno.tpPagamento = "2";
+        await User.findOneAndUpdate({ _id: req.user._id }, { $set: { boleto: retorno } }, { new: true });
+
+      } else {
+        retorno = req.user.boleto;
+        retorno.tpPagamento = 21;
+
+      }
+
+    } else {
+
+      let price = getPriceFullObject(req.user.payment.categoryId);
+
+      retorno.refTran = ultimoRef == null || ultimoRef.length == 0 ? 1 : ++ultimoRef.boleto.refTran;
+      retorno.dtVenc = price.dateEnd;
+      retorno.valor = price.price + '00';
+      retorno.userId = req.user._id;
+      retorno.tpPagamento = "2";
+      await User.findOneAndUpdate({ _id: req.user._id }, { $set: { boleto: retorno } }, { new: true });
+
+    }
+
+    retorno.dtVenc = formatDate(retorno.dtVenc);
+    retorno.refTran = pad(retorno.refTran, 10);
+    return retorno;
+  }
+}
+
+async function validarDadosGeracaoBoleto(user) {
+
+  let retorno = {
+    temErro: false,
+    msgErro: ''
+  }
+
+  if (user.address.street == null || user.address.city == null || user.address.zip == null) {
+    retorno.temErro = true;
+    retorno.msgErro = "Endereço inválido, cheque seus dados no menu Perfil";
+  } else if (user.address.state.length != 2) {
+    retorno.temErro = true;
+    retorno.msgErro = "Seu estado deve conter apenas dois digitos, cheque seus dados no menu Perfil";
+  } else if (user.address.zip.length != 8) {
+    retorno.temErro = true;
+    retorno.msgErro = "CEP inválido, cheque seu CEP no menu Perfil";
+  } else if (!validarCpf(user.document)) {
+    retorno.temErro = true;
+    retorno.msgErro = "CPF inválido, cheque seu CPF no menu Perfil";
+  }
+
+  return retorno;
+}
 
 async function checkDocumentDup(cpf) {
   let userFind = await User.find({ document: cpf }).select('document');
@@ -92,10 +167,19 @@ async function update(user) {
 
 function getPrice(id) {
   let dateNow = new Date();
-  dateNow.setHours(0, 0, 0, 0)
+  dateNow.setHours(0, 0, 0, 0);
   let seasons = Prices.prices.filter(price => price.id == id)[0].seasons;
 
   return seasons.filter(season => dateNow.getTime() >= season.dateIni.getTime() && dateNow.getTime() <= season.dateEnd.getTime())[0].price;
+
+}
+
+function getPriceFullObject(id) {
+  let dateNow = new Date();
+  dateNow.setHours(0, 0, 0, 0)
+  let seasons = Prices.prices.filter(price => price.id == id)[0].seasons;
+
+  return seasons.filter(season => dateNow.getTime() >= season.dateIni.getTime() && dateNow.getTime() <= season.dateEnd.getTime())[0];
 
 }
 
@@ -378,4 +462,22 @@ async function updateUsers(users, workId) {
 
 }
 
+function formatDate(date) {
+  var d = new Date(date),
+    month = '' + (d.getMonth() + 1),
+    day = '' + d.getDate(),
+    year = d.getFullYear();
 
+  if (month.length < 2)
+    month = '0' + month;
+  if (day.length < 2)
+    day = '0' + day;
+
+  return [day, month, year].join('');
+}
+
+function pad(num, size) {
+  var s = num + "";
+  while (s.length < size) s = "0" + s;
+  return s;
+}

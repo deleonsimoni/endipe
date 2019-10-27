@@ -40,12 +40,17 @@
                         </div>
                         <div *ngIf="user.payment">
 
-                            <div class="form-row" *ngIf="!user.payment.icPaid">
-                                <h3 style="color: rgb(161, 161, 28);">Aguarde, estamos validando seu pagamento</h3>
+                            <div class="form-row" *ngIf="!user.payment.icValid">
+                                <h3 style="color: rgb(161, 161, 28);">Aguarde, estamos validando seu comprovante. Assim
+                                    que for validado você poderá emitir o boleto para pagamento nesta mesma página</h3>
                             </div>
                             <div class="form-row" *ngIf="user.payment.icPaid">
                                 <h3 style="color: green;">Pagamento processado, agora você já pode submeter seus
                                     trabalhos</h3>
+                            </div>
+                            <div class="form-row" *ngIf="user.payment && user.payment.icValid">
+                                <h3 style="color: green;">Seu comprovante foi validado por nossa equipe, agora você pode
+                                    gerar o boleto clicando no botão abaixo</h3>
                             </div>
 
                         </div>
@@ -53,22 +58,26 @@
 
                         <div class="form-row">
                             <div class="form-group">
-                                O pagamento deverá ser realizado via <strong>transferência bancária</strong> para a
-                                conta do congresso Endipe.
-                                Após pagamento, enviar comprovante via email para: xxendiperio2020@gmail.com
-                                <br />
-                                O prazo para verificação de comprovante de inscrição da categoria e realização da
-                                tranferência é de 5 dias.
-                                <br /><br />
-                                Vale lembrar que o pagamento da inscrição é condicionado para a submissão de trabalhos.
-                                <br /><br />
 
-                                Conta para transferência:
-                                <br /><strong>Banco do Brasil
-                                    <br />FUNDACAO UNIVERSITARIA JOSE BONIFACIO
-                                    <br />CNPJ: 42.429.480/0001-50
-                                    <br />Agência: 2234-9
-                                    <br />Conta: 80.555-6</strong>
+                                Esta é a página de pagamento e o processo para o Endipe funciona da seguinte maneira:
+                                <br />
+                                <br />
+                                1 - Escolha sua categoria de inscrição e, caso o sistema solicite, envie-nos o
+                                comprovante da mesma
+                                <br />
+                                2 - Após o envio do comprovante nossa equipe avaliará o documento. Estando tudo certo
+                                você poderá gerar o boleto aqui mesmo
+                                <br />
+                                3 - Por fim, assim que seu boleto for processado pelo sistema você poderá enviar seu
+                                trabalho.
+                                <br />
+                                <br />
+                                O prazo para verificação de comprovante de inscrição da categoria é de 5 dias<br />
+                                Já o prazo para validação do pagamento do boleto dependerá do dia do pagamento, portanto
+                                não perca tempo, pague o quanto antes para aproveitar os descontos.
+                                <br />
+                                <br />
+                                Contamos com sua participação no <b>XX ENDIPE RIO 2020</b>
 
                             </div>
                         </div>
@@ -77,6 +86,10 @@
                         <div *ngIf="!user.payment" class="row justify-content-center">
                             <button *ngIf="!enviando" class="btn-get-started" type="submit">Confirmar e Enviar
                                 Comprovante</button>
+                        </div>
+                        <div *ngIf="user.payment && user.payment.icValid" class="row justify-content-center">
+                            <button *ngIf="!enviando" class="btn-get-started" (click)="gerarBoleto()">Gerar
+                                Boleto</button>
                         </div>
                         <div *ngIf="enviando" class="row justify-content-center"><button><i
                                     class="fas fa-spinner fa-pulse"></i></button></div>
@@ -88,6 +101,26 @@
         </div>
     </div>
 </main>
+
+
+<form action="https://mpag.bb.com.br/site/mpag/" method="post" name="pagamento">
+    <input type="hidden" name="idConv" value="320646">
+    <input type="hidden" name="refTran" value="32004952222222222">
+    <input type="hidden" name="valor" value="300">
+    <input type="hidden" name="dtVenc" value="12122019">
+    <input type="hidden" name="tpPagamento" value="21">
+    <input type="hidden" name="cpfCnpj" value="13264170701">
+    <input type="hidden" name="indicadorPessoa" value="1">
+    <input type="hidden" name="tpDuplicata" value="DS">
+    <input type="hidden" name="urlRetorno" value="http://www.xxendiperio2020.com.br/home">
+    <input type="hidden" name="nome" value="joao teste">
+    <input type="hidden" name="endereco" value="av teste">
+    <input type="hidden" name="cidade" value="sao joao">
+    <input type="hidden" name="uf" value="rj">
+    <input type="hidden" name="cep" value="12222323">
+    <input type="hidden" name="msgLoja" value="endipe">
+    <!--<button (click)="gerarBoleto()">gerar</button>-->
+</form>
 
 
 <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>

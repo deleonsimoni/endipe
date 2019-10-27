@@ -129,4 +129,82 @@ export class PagamentoComponent implements OnInit {
   public showUpload() {
     return this.paymentForm.value.categoryId && (this.paymentForm.value.categoryId < 5);
   }
+
+
+  public gerarBoleto() {
+
+    /*let boleto = {
+      idConv: "320646",
+      refTran: "3200495" + "2222222222",
+      valor: "300",
+      dtVenc: "12122019",
+      tpPagamento: "21",//2 novo 21 segunda via
+      indicadorPessoa: "1",
+      tpDuplicata: "DM",//DS - Servico . DM - Produto
+      urlRetorno: "http://www.xxendiperio2020.com.br/home",
+      cpfCnpj: this.user.document,
+      nome: this.user.address.fullname,
+      endereco: this.user.address.street,
+      cidade: this.user.address.city,
+      uf: this.user.address.district,
+      cep: this.user.address.zip,
+      msgLoja: "Pagamento referente sua inscrição no congresso XX ENDIPE RIO 2020"
+    };*/
+
+    let boleto: any = {
+      idConv: "320646",
+      indicadorPessoa: "1",
+      tpDuplicata: "DM",//DS - Servico . DM - Produto
+      urlRetorno: "http://www.xxendiperio2020.com.br/home",
+      cpfCnpj: this.user.document,
+      nome: this.user.fullname,
+      endereco: this.user.address.street,
+      cidade: this.user.address.city,
+      uf: this.user.address.state,
+      cep: this.user.address.zip,
+      msgLoja: `Pagamento referente sua inscrição no congresso XX ENDIPE RIO 2020. 
+                ATENÇÃO: Após vencimento emitir um novo boleto via plataforma do congresso no endereço http://www.xxendiperio2020.com.br`
+    };
+
+    this.userService.getBoleto()
+      .subscribe(
+        (res: any) => {
+
+          if (res.boleto.temErro) {
+            this.toastr.error(res.boleto.msgErro, 'Atenção');
+          } else {
+
+            boleto.refTran = "3200495" + res.boleto.refTran;
+            boleto.dtVenc = res.boleto.dtVenc;
+            boleto.valor = res.boleto.valor;
+            boleto.tpPagamento = res.boleto.tpPagamento;
+
+            const mapForm = document.createElement('form');
+            mapForm.method = 'POST';
+            mapForm.action = 'https://mpag.bb.com.br/site/mpag/';
+            mapForm.target = '_blank';
+
+            Object.keys(boleto).forEach((param) => {
+              const mapInput = document.createElement('input');
+              mapInput.type = 'hidden';
+              mapInput.name = param;
+              mapInput.setAttribute('value', boleto[param]);
+              mapForm.appendChild(mapInput);
+            });
+            document.body.appendChild(mapForm);
+            mapForm.submit();
+
+          }
+
+        },
+        (err) => {
+          this.toastr.error('Erro ao gerar o boleto, tente novamente mais tarde.', 'Erro');
+        }
+      );
+
+
+
+  }
+
+
 }

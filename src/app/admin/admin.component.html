@@ -121,6 +121,27 @@
                                     </p>
                                 </div>
                                 <div class="col-sm-4">
+                                    <strong>Confirmar comprovante</strong>
+                                    <div *ngIf="user.payment" class="form-group">
+                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                            <button (click)="validarComprovante(user)"
+                                                [ngStyle]="{'background-color: green;color:white':  user.payment.icValid, 'background-color: white;color: black': user.payment.icValid}"
+                                                type="button" [ngClass]="{'btn btn-success': user.payment.icValid}"
+                                                class="btn">Sim</button>
+                                            <button (click)="invalidarComprovante(user)"
+                                                [ngStyle]="{'background-color: red;color:white':  !user.payment.icValid, 'background-color: white;color: black': user.payment.icValid}"
+                                                type="button" [ngClass]="{'btn btn-danger': !user.payment.icValid}"
+                                                class="btn">Não</button>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="user.payment && user.payment.pathS3">
+                                        <p><a [routerLink]="" (click)="download(user.payment.pathS3)">Download
+                                                comprovante</a>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
                                     <strong>Confirmar pagamento</strong>
                                     <div *ngIf="user.payment" class="form-group">
                                         <div class="btn-group" role="group" aria-label="Basic example">
@@ -134,11 +155,6 @@
                                                 class="btn">Não</button>
                                         </div>
                                     </div>
-                                </div>
-                                <div *ngIf="user.payment && user.payment.pathS3" class="col-sm-4">
-                                    <p><a [routerLink]="" (click)="download(user.payment.pathS3)">Download
-                                            comprovante</a>
-                                    </p>
                                 </div>
                             </div>
                             <div *ngIf="user.works.length > 0" class="section">

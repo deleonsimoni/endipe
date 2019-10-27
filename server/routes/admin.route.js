@@ -16,6 +16,8 @@ router.get('/getUserWorks/:id', passport.authenticate('jwt', { session: false })
 
 router.post('/validatePayment/:id', passport.authenticate('jwt', { session: false }), validatePayment);
 router.post('/invalidatePayment/:id', passport.authenticate('jwt', { session: false }), invalidatePayment);
+router.post('/validateDoc/:id', passport.authenticate('jwt', { session: false }), validateDoc);
+router.post('/invalidateDoc/:id', passport.authenticate('jwt', { session: false }), invalidateDoc);
 router.post('/rainbown/:id', passport.authenticate('jwt', { session: false }), deleteByEmail);
 
 
@@ -59,6 +61,25 @@ async function validatePayment(req, res) {
 async function invalidatePayment(req, res) {
   if (req.user.icAdmin) {
     let users = await adminCtrl.invalidatePayment(req.params.id);
+    res.json(users);
+  } else {
+    res.sendStatus(401);
+  }
+}
+
+async function validateDoc(req, res) {
+  if (req.user.icAdmin) {
+    let users = await adminCtrl.validateDoc(req.params.id);
+    emailSender.sendMail(users.email, 'Documento Aprovado', templateEmail.documentoValido);
+    res.json(users);
+  } else {
+    res.sendStatus(401);
+  }
+}
+
+async function invalidateDoc(req, res) {
+  if (req.user.icAdmin) {
+    let users = await adminCtrl.invalidateDoc(req.params.id);
     res.json(users);
   } else {
     res.sendStatus(401);

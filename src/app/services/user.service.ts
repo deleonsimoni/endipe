@@ -20,6 +20,10 @@ export class UserService {
     return this.http.get(`${this.baseUrl}/user/price/` + id);
   }
 
+  getBoleto() {
+    return this.http.get(`${this.baseUrl}/user/getBoleto`);
+  }
+
   updateData(user) {
     return this.http.put(`${this.baseUrl}/user/update`, user);
   }

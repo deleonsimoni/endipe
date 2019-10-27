@@ -94,6 +94,23 @@ export class AdminComponent implements OnInit {
     });
   }
 
+  validarComprovante(user) {
+
+    this.http.post(`${this.baseUrl}/admin/validateDoc/` + user._id, {}).subscribe((res: any) => {
+      user.payment.icValid = true;
+    }, err => {
+      console.log(err);
+    });
+  }
+
+  invalidarComprovante(user) {
+    this.http.post(`${this.baseUrl}/admin/invalidateDoc/` + user._id, {}).subscribe((res: any) => {
+      user.payment.icValid = false;
+    }, err => {
+      console.log(err);
+    });
+  }
+
   selectUser(user) {
     if (this.userSelect === user._id) {
       this.userSelect = null;

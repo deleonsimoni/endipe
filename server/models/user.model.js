@@ -66,6 +66,18 @@ const UserSchema = new mongoose.Schema({
     state: String
   },
 
+  boleto: {
+    refTran: {
+      type: Number
+    },
+    dtVenc: {
+      type: Date
+    },
+    valor: {
+      type: Number
+    }
+  },
+
   phones: {
     cellphone: String,
     telephone: String
@@ -91,7 +103,8 @@ const UserSchema = new mongoose.Schema({
     amount: Number,
     categoryId: Number,
     pathS3: String,
-    icPaid: Boolean
+    icPaid: Boolean,
+    icValid: Boolean
   },
 
   works: [{
