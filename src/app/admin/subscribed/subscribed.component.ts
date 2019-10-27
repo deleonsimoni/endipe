@@ -12,6 +12,7 @@ import { AdminService } from '../admin.service';
 })
 export class SubscribedComponent implements OnInit {
 
+  public user = {};
   public users = [];
   public works = [];
   public allUsers = [];
@@ -52,8 +53,12 @@ export class SubscribedComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // this.retrieveMetrics();
+    this.retrieveUser();
     this.retrieveAdminData();
+  }
+
+  private retrieveUser() {
+    this.user = this.authService.getDecodedAccessToken(this.authService.getToken());
   }
 
   public receiverSelectedUser(user) {
@@ -78,13 +83,15 @@ export class SubscribedComponent implements OnInit {
 
     if (userWorksId) {
       userWorksId.forEach(workId => {
-        this.http.get(`${this.baseUrl}/admin/getUserWorks/` + workId, {}).subscribe((res: any) => {
-          this.carregandoTrabalhos = false;
-          this.works.push(res);
-        }, err => {
-          this.carregandoTrabalhos = false;
-          console.log(err);
-        });
+        this.adminService.retrieveWorks(workId)
+          .subscribe((res: any) => {
+            console.log(res);
+            this.carregandoTrabalhos = false;
+            this.works.push(res);
+          }, err => {
+            this.carregandoTrabalhos = false;
+            console.log(err);
+          });
       });
     }
 

@@ -5,14 +5,6 @@
   border-top: 0px;
   padding: 12px;
 
-  .not-work h6 {
-    font-size: 18px;
-    text-transform: uppercase;
-    font-weight: 600;
-    position: relative;
-    margin: 14px 0 12px 0;
-  }
-
   .section {
     &.first h6 {
       margin-top: 6px;
@@ -50,18 +42,6 @@
 
     a {
       padding: 8px 0px;
-    }
-  }
-
-  .add {
-    background-color: #50d8af;
-    color: #fff;
-    width: 30%;
-    border: none;
-    margin: 16px 16px 0px 0px;
-    height: calc(1.5em + 0.75rem + 2px);
-    i {
-      font-size: 14px;
     }
   }
 }

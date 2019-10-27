@@ -20,6 +20,7 @@ import { SubscribersMetricsComponent } from './components/subscribers-metrics/su
 import { SubscribersCardComponent } from './components/subscribers-card/subscribers-card.component';
 import { WorkContentComponent } from './components/work-content/work-content.component';
 import { QuillModule } from 'ngx-quill';
+import { SubscribersDataComponent } from './components/subscribers-data/subscribers-data.component';
 
 @NgModule({
     declarations: [
@@ -33,7 +34,8 @@ import { QuillModule } from 'ngx-quill';
         ModalReviewerComponent,
         SubscribersMetricsComponent,
         SubscribersCardComponent,
-        WorkContentComponent
+        WorkContentComponent,
+        SubscribersDataComponent
     ],
     entryComponents: [
         AdminComponent,

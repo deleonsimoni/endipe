@@ -1,107 +1,54 @@
 <div class="work-content">
-    <div class="section first">
-        <h6>Dados pessoais</h6>
+    <div class="not-work" *ngIf="works.length < 1">
+        <h6>Nenhum trabalho foi submetido</h6>
     </div>
-    <div class="row align-items-center">
-        <div class="col-sm-4 mb-2">
-            <strong>Telefone</strong>
-            <p>{{ subscribed.phones.telephone ? subscribed.phones.telephone : '-----' }}</p>
+    <div *ngFor="let work of works; let i = index">
+        <div class="section first" *ngIf="works.length > 0">
+            <h6>Trabalho {{ i + 1}}</h6>
         </div>
-        <div class="col-sm-4 mb-2">
-            <strong>Celular</strong>
-            <p>{{ subscribed.phones.cellphone ? subscribed.phones.cellphone : '-----' }}</p>
-        </div>
-        <div class="col-sm-4 mb-2">
-            <strong>Data de inscrição</strong>
-            <p>{{ subscribed.createdAt | date: 'dd/MM/yyyy' }}</p>
-        </div>
-    </div>
-    <div class="row align-items-center">
-        <div class="col-sm-4 mb-2">
-            <strong>PCD</strong>
-            <p>{{ subscribed.isPCD ? subscribed.deficiencyType ? 'Sim - ' + subscribed.deficiencyType : 'Sim'  : 'Não' }}
-            </p>
-        </div>
-        <div class="col-sm-4 mb-2">
-            <strong>Estrangeiro</strong>
-            <p>{{ subscribed.isForeign ? 'Sim' : 'Não' }}</p>
-        </div>
-        <div class="col-sm-4 mb-2">
-            <strong>Instituição:</strong>
-            <p>{{ subscribed.institution.name ? subscribed.institution?.initials + '-' + subscribed.institution?.name : '----' }}
-            </p>
-        </div>
-    </div>
-    <div class="section">
-        <h6>Pagamento</h6>
-    </div>
-    <div class="row align-items-center">
-        <div class="col-sm-4">
-            <strong>Categoria</strong>
-            <p>{{ subscribed.payment && subscribed.payment.categoryId ? retrieveCategories(subscribed.payment.categoryId).name : '----' }}
-            </p>
-        </div>
-        <div class="col-sm-4">
-            <strong>Valor total</strong>
-            <p>{{ subscribed.payment && subscribed.payment.amount ? 'R$ ' + subscribed.payment.amount : '----' }}
-            </p>
-        </div>
-        <div class="col-sm-4">
-            <strong>Confirmar pagamento</strong>
-            <div *ngIf="subscribed.payment" class="form-group">
-                <div class="btn-group" role="group" aria-label="Basic example">
-                    <button (click)="confirmPayment(subscribed)"
-                        [ngStyle]="{'background-color: green;color:white':  subscribed.payment.icPaid, 'background-color: white;color: black': subscribed.payment.icPaid}"
-                        type="button" [ngClass]="{'btn btn-success': subscribed.payment.icPaid}"
-                        class="btn">Sim</button>
-                    <button (click)="denyPayment(subscribed)"
-                        [ngStyle]="{'background-color: red;color:white':  !subscribed.payment.icPaid, 'background-color: white;color: black': subscribed.payment.icPaid}"
-                        type="button" [ngClass]="{'btn btn-danger': !subscribed.payment.icPaid}"
-                        class="btn">Não</button>
-                </div>
-            </div>
-        </div>
-        <div *ngIf="subscribed.payment && subscribed.payment.pathS3" class="col-sm-4">
-            <p><a [routerLink]="" (click)="download(subscribed.payment.pathS3)">Download
-                    comprovante</a>
-            </p>
-        </div>
-    </div>
-    <div *ngIf="subscribed.works.length > 0" class="section">
-        <h6>Trabalhos</h6>
-    </div>
-
-    <div class="row" *ngIf="carregandoTrabalhos && subscribed.works.length > 0">
-        <i class="fas fa-spinner fa-pulse"></i>Aguarde...
-    </div>
-
-    <div *ngIf="!carregandoTrabalhos && subscribed.works.length > 0">
-        <div class="row" *ngFor="let work of works">
-
-            <div class="col-sm-4 align-self-center">
+        <div class="row align-items-center mb-2">
+            <div class="col-md-4">
                 <strong>Título</strong>
                 <p>{{ work.title }}</p>
             </div>
-            <div class="col-sm-4 align-self-center">
+            <div class="col-md-4">
+                <strong>Data de submissão</strong>
+                <p>{{ work.createdAt | date: 'dd/MM/yyyy' }}</p>
+            </div>
+            <div class="col-md-4">
+                <strong>Tipo de trabalho</strong>
+                <p>{{ work.typeWork | typeWork }}</p>
+            </div>
+        </div>
+        <div class="row align-items-center mb-2">
+            <div class="col-md-4">
                 <strong>Eixo</strong>
-                <p>{{ retrieveEixo(work.axisId).name }}</p>
+                <p>{{ work.axisId | axis }}</p>
             </div>
-            <div class="col-sm-4 align-self-center">
+            <div class="col-md-4">
                 <strong>Modalidade</strong>
-                <p>{{ retrieveModality(work.modalityId).name }}</p>
+                <p>{{ work.modalityId | modalities }}</p>
             </div>
-            <div class="col-sm-4 mt-2">
-                <strong>Autores</strong>
-                <span *ngFor="let author of work.authors">
-                    <p>{{ author.userEmail }}</p>
-                </span>
+        </div>
+        <div class="row align-items-center mb-2">
+            <div class="col-md-12">
+                <strong>{{ work.authors.length > 1 ? 'Autores' : 'Autor' }}</strong>
+                <p *ngFor="let author of work.authors">{{ author.userEmail }}</p>
             </div>
-            <div class="col-sm-4 mt-2">
-                <strong>Arquivos</strong>
-                <p><a [routerLink]="" (click)="download(work.pathS3DOC)">Download doc</a>
-                </p>
-                <p><a [routerLink]="" (click)="download(work.pathS3PDF)">Download pdf</a>
-                </p>
+        </div>
+        <div class="row align-items-center mb-2">
+            <div class="col-md-12">
+                <strong>Pareceristas</strong>
+                <!-- <p *ngIf="work.reviewers.length < 1">Ainda não foram adicionados pareceristas a este trabalho</p> -->
+                <p *ngFor="let reviewer of work.reviewers">{{ reviewer.name }}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <button class="add" (click)="addReviewer()">
+                    <i class="fas fa-plus"></i>
+                    Pareceristas
+                </button>
             </div>
         </div>
     </div>

@@ -21,7 +21,8 @@ router.post('/rainbown/:id', passport.authenticate('jwt', { session: false }), d
 
 
 async function getUsers(req, res) {
-  if (req.user.icAdmin) {
+  const user = req.user;
+  if (user.icAdmin || user.coordinator || user.reviewer) {
     let users = await adminCtrl.getUsers(req.body);
     res.json(users);
   } else {
@@ -39,7 +40,8 @@ async function deleteByEmail(req, res) {
 }
 
 async function getUserWorks(req, res) {
-  if (req.user.icAdmin) {
+  const user = req.user;
+  if (user.icAdmin || user.coordinator || user.reviewer) {
     let users = await adminCtrl.getUserWorks(req.params.id);
     res.json(users);
   } else {

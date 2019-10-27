@@ -34,11 +34,7 @@ export class AdminComponent implements OnInit {
     { name: 'COORDENADORES', path: '/admin/coordenadores' },
   ];
 
-  private coordinatorRoutes = [
-    { name: 'PARECERISTAS', path: '/admin/pareceristas' },
-  ];
-
-  private reviewerRoutes = [
+  private nonAdminRoutes = [
     { name: 'INSCRITOS', path: '/admin/inscritos' },
   ];
 
@@ -55,10 +51,8 @@ export class AdminComponent implements OnInit {
 
     if (this.user && this.user.icAdmin) {
       this.menu = this.adminRoutes;
-    } else if (this.user && this.user.coordinator) {
-      this.menu = this.coordinatorRoutes;
-    } else if (this.user && this.user.reviewer) {
-      this.menu = this.reviewerRoutes;
+    } else {
+      this.menu = this.nonAdminRoutes;
     }
   }
 }

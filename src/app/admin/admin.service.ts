@@ -48,4 +48,8 @@ export class AdminService {
   public recoverMetrics() {
     return this.http.get<any>(`${this.baseUrl}/admin/metrics`);
   }
+
+  public retrieveWorks(id) {
+    return this.http.get<any>(`${this.baseUrl}/admin/getUserWorks/${id}`);
+  }
 }

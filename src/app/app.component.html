@@ -78,7 +78,7 @@
                                     <li><a [routerLink]="['/meus-trabalhos']">Submissão</a></li>
                                     <li><a [routerLink]="['/certificados']">Certificados</a></li>
                                     <li><a [routerLink]="['/perfil']">Perfil</a></li>
-                                    <li *ngIf="user && user.icAdmin">
+                                    <li *ngIf="verifyAcess()">
                                         <a [routerLink]="['/admin']">Dashboard</a>
                                     </li>
                                     <li><a [routerLink]="" class="pointer" (click)="logout()">Sair</a></li>
@@ -185,7 +185,7 @@
                         <li><a [routerLink]="['/meus-trabalhos']" (click)="sidenav.toggle()">Submissão</a></li>
                         <li><a [routerLink]="['/certificados']" (click)="sidenav.toggle()">Certificados</a></li>
                         <li><a [routerLink]="['/perfil']" (click)="sidenav.toggle()">Perfil</a></li>
-                        <li *ngIf="user && user.icAdmin">
+                        <li *ngIf="verifyAcess()">
                             <a [routerLink]="['/admin']" (click)="sidenav.toggle()">Dashboard</a>
                         </li>
                         <li><a class="pointer" [routerLink]="" (click)="logout()" (click)="sidenav.toggle()">Sair</a>

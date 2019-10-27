@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AdminService } from '../../admin.service';
+import { MatDialog } from '@angular/material';
+import { ModalReviewerComponent } from '../../modal-reviewer/modal-reviewer.component';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -10,42 +12,42 @@ import { AdminService } from '../../admin.service';
 export class WorkContentComponent implements OnInit {
 
   @Input() subscribed: any;
-
-  public categories = [
-    { id: 1, name: 'Estudantes de curso Normal/EM' },
-    { id: 2, name: 'Estudantes de Graduação' },
-    { id: 3, name: 'Estudantes de Pós-Graduação' },
-    { id: 4, name: 'Profissionais da Educação Básica' },
-    { id: 5, name: 'Profissionais da Educação Superior' }
-  ];
+  @Input() works: [];
 
   constructor(
+    private dialog: MatDialog,
     private adminService: AdminService
   ) { }
 
   ngOnInit() {
   }
 
-  public confirmPayment(user) {
-    this.adminService.validatePayment(user._id)
-      .subscribe(() => {
-        user.payment.icPaid = true;
-      }, err => {
-        console.log(err);
-      });
+  public addReviewer() {
+    const dialogRef = this.dialog.open(ModalReviewerComponent);
+
+    dialogRef.afterClosed();
   }
 
-  public denyPayment(user) {
-    this.adminService.invalidatePayment(user._id)
-      .subscribe(() => {
-        user.payment.icPaid = false;
-      }, err => {
-        console.log(err);
-      });
-  }
+  // public confirmPayment(user) {
+  //   this.adminService.validatePayment(user._id)
+  //     .subscribe(() => {
+  //       user.payment.icPaid = true;
+  //     }, err => {
+  //       console.log(err);
+  //     });
+  // }
 
-  public retrieveCategories(id) {
-    return this.categories.filter(element => element.id === id)[0];
-  }
+  // public denyPayment(user) {
+  //   this.adminService.invalidatePayment(user._id)
+  //     .subscribe(() => {
+  //       user.payment.icPaid = false;
+  //     }, err => {
+  //       console.log(err);
+  //     });
+  // }
+
+  // public retrieveCategories(id) {
+  //   return this.categories.filter(element => element.id === id)[0];
+  // }
 
 }
