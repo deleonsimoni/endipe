@@ -21,10 +21,12 @@ router.get('/downloadFile', passport.authenticate('jwt', { session: false }), do
 router.get('/getBoleto', passport.authenticate('jwt', { session: false }), asyncHandler(getBoleto));
 
 router.post('/uploadWork/xxendiperio2020/:id', [passport.authenticate('jwt', { session: false }), fileUpload()], asyncHandler(uploadWork));
+router.post('/submeterTransferencia/xxendiperio2020/:id', [passport.authenticate('jwt', { session: false }), fileUpload()], asyncHandler(submeterTransferencia));
 router.post('/payment', passport.authenticate('jwt', { session: false }), payment);
 router.post('/gerarPagamento/xxendiperio2020/:id', passport.authenticate('jwt', { session: false }), payment);
 
 router.put('/update', passport.authenticate('jwt', { session: false }), update);
+
 router.route('/')
   .post(asyncHandler(insert));
 
@@ -61,6 +63,12 @@ async function payment(req, res) {
 async function price(req, res) {
   let price = userCtrl.getPrice(req.params.id);
   res.json({ price });
+}
+
+async function submeterTransferencia(req, res) {
+  console.log('cheguei');
+  let user = await userCtrl.submeterTransferencia(req);
+  res.json({ user });
 }
 
 async function getBoleto(req, res) {

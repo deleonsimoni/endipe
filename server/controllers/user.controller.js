@@ -31,7 +31,8 @@ module.exports = {
   checkDocumentDup,
   generateNewPassword,
   resetPassword,
-  getBoleto
+  getBoleto,
+  submeterTransferencia
 }
 
 async function insert(user) {
@@ -256,6 +257,30 @@ async function downloadFileS3(req) {
 
 async function getUserByEmail(email) {
   return await User.findOne({ email: email.toLowerCase() });
+}
+
+
+async function submeterTransferencia(req, res) {
+
+  let file = req.files.fileArray;
+  let fileName = config.PATH_S3_DEV ? config.PATH_S3_DEV + 'xxendiperio2020/' + file.name : 'xxendiperio2020/' + file.name;
+
+  await S3Uploader.uploadFile(fileName, file.data).then(fileData => {
+
+    return User.findOneAndUpdate({ _id: req.user._id }, { $set: { 'payment.pathReceiptPayment': fileName } }, function (err, doc) {
+      if (err) {
+        console.log("erro ao atualizar o usuario: ", err);
+      } else {
+        console.log("Documento de transferencia registrado com sucesso");
+      }
+    });
+
+  }).catch(err => {
+    console.log(err);
+    res.sendStatus(500);
+    return res;
+  });
+
 }
 
 

@@ -20,6 +20,13 @@ export class UploadService {
     return this.http.post(`${this.baseUrl}/user/uploadWork/xxendiperio2020/${id}`, formData);
   }
 
+  submeterTransferencia(file: File, id: string, document: string): Observable<any> {
+    const formData: FormData = new FormData();
+    formData.append('fileArray', file, `${id}/${document}_${file.name}`);
+    formData.append('formulario', '');
+    return this.http.post(`${this.baseUrl}/user/submeterTransferencia/xxendiperio2020/${id}`, formData);
+  }
+
   gerarPagamento(file: File, id: string, document: string, formulario: any): Observable<any> {
     const formData: FormData = new FormData();
     if (file) {
@@ -28,4 +35,5 @@ export class UploadService {
     formData.append('formulario', JSON.stringify(formulario));
     return this.http.post(`${this.baseUrl}/user/gerarPagamento/xxendiperio2020/${id}`, formData);
   }
+
 }

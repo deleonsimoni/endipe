@@ -36,10 +36,11 @@
                             <select class="form-control" [(ngModel)]="status" (change)="filtrarStatus()">
                                 <option value=""> </option>
                                 <option value="0">Pagamento não efetuado</option>
-                                <option value="1">Aguardando validação</option>
+                                <option value="1">Aguardando validação documentos</option>
                                 <option value="2">Pagamento válido</option>
                                 <option value="3">Deficientes</option>
                                 <option disabled="disabled">-----------------------</option>
+                                <option value="5">Documento de transferência enviado</option>
                                 <option value="4">Trabalhos Submetidos</option>
 
                             </select>
@@ -136,7 +137,13 @@
                                     </div>
                                     <div *ngIf="user.payment && user.payment.pathS3">
                                         <p><a [routerLink]="" (click)="download(user.payment.pathS3)">Download
-                                                comprovante</a>
+                                                comprovante documento</a>
+                                        </p>
+                                    </div>
+                                    <div *ngIf="user.payment && user.payment.pathReceiptPayment">
+                                        <p><a [routerLink]=""
+                                                (click)="download(user.payment.pathReceiptPayment)">Download
+                                                comprovante Transferência</a>
                                         </p>
                                     </div>
                                 </div>

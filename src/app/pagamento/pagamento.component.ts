@@ -80,6 +80,15 @@ export class PagamentoComponent implements OnInit {
     this.filesPDF = files;
   }
 
+  public getFileNamePDFTransferencia(): string {
+    const fileName = this.filesPDF ? this.filesPDF[0].name : 'Comprovante da Transferência';
+    return fileName;
+  }
+
+  public setFileNamePDFTransferencia(files: FileList): void {
+    this.filesPDF = files;
+  }
+
   public gerarPagamento() {
     if (!this.paymentForm.value.categoryId) {
       // tslint:disable-next-line: align
@@ -111,100 +120,35 @@ export class PagamentoComponent implements OnInit {
     });
   }
 
-  public pagar(): void {
+  public submeterTransferencia() {
 
-    const request = {
-      price: this.valorTotal
-    };
+    if (!this.filesPDF) {
+      this.toastr.error('É necessário selecionar o arquivo de comprovante de transferência', 'Atenção');
+      return;
+      // tslint:disable-next-line: align
+    } if (this.filesPDF[0].size > 2500 * 1027) {
+      this.toastr.error('O comprovante deve ter no máximo 2MB', 'Atenção');
+      return;
+    }
 
-    this.userService.pagar(request)
-      .subscribe((res) => {
-        console.log(res);
-      },
-        (err) => {
-          console.log(err);
-        });
+
+    this.enviando = true;
+
+    this.uploadService.submeterTransferencia(this.filesPDF ? this.filesPDF[0] : null, 'comprovantes', this.user.document)
+      .subscribe((res: any) => {
+        this.enviando = false;
+        this.user.payment.pathReceiptPayment = true;
+        this.toastr.success('Comprovante enviado', 'Sucesso');
+        this.filesPDF = null;
+      }, err => {
+        this.enviando = false;
+        this.toastr.error('Servidor momentaneamente inoperante.', 'Erro: ');
+      });
   }
+
 
   public showUpload() {
     return this.paymentForm.value.categoryId && (this.paymentForm.value.categoryId < 5);
   }
-
-
-  public gerarBoleto() {
-
-    /*let boleto = {
-      idConv: "320646",
-      refTran: "3200495" + "2222222222",
-      valor: "300",
-      dtVenc: "12122019",
-      tpPagamento: "21",//2 novo 21 segunda via
-      indicadorPessoa: "1",
-      tpDuplicata: "DM",//DS - Servico . DM - Produto
-      urlRetorno: "http://www.xxendiperio2020.com.br/home",
-      cpfCnpj: this.user.document,
-      nome: this.user.address.fullname,
-      endereco: this.user.address.street,
-      cidade: this.user.address.city,
-      uf: this.user.address.district,
-      cep: this.user.address.zip,
-      msgLoja: "Pagamento referente sua inscrição no congresso XX ENDIPE RIO 2020"
-    };*/
-
-    let boleto: any = {
-      idConv: "320646",
-      indicadorPessoa: "1",
-      tpDuplicata: "DM",//DS - Servico . DM - Produto
-      urlRetorno: "http://www.xxendiperio2020.com.br/home",
-      cpfCnpj: this.user.document,
-      nome: this.user.fullname,
-      endereco: this.user.address.street,
-      cidade: this.user.address.city,
-      uf: this.user.address.state,
-      cep: this.user.address.zip,
-      msgLoja: `Pagamento referente sua inscrição no congresso XX ENDIPE RIO 2020. 
-                ATENÇÃO: Após vencimento emitir um novo boleto via plataforma do congresso no endereço http://www.xxendiperio2020.com.br`
-    };
-
-    this.userService.getBoleto()
-      .subscribe(
-        (res: any) => {
-
-          if (res.boleto.temErro) {
-            this.toastr.error(res.boleto.msgErro, 'Atenção');
-          } else {
-
-            boleto.refTran = "3200495" + res.boleto.refTran;
-            boleto.dtVenc = res.boleto.dtVenc;
-            boleto.valor = res.boleto.valor;
-            boleto.tpPagamento = res.boleto.tpPagamento;
-
-            const mapForm = document.createElement('form');
-            mapForm.method = 'POST';
-            mapForm.action = 'https://mpag.bb.com.br/site/mpag/';
-            mapForm.target = '_blank';
-
-            Object.keys(boleto).forEach((param) => {
-              const mapInput = document.createElement('input');
-              mapInput.type = 'hidden';
-              mapInput.name = param;
-              mapInput.setAttribute('value', boleto[param]);
-              mapForm.appendChild(mapInput);
-            });
-            document.body.appendChild(mapForm);
-            mapForm.submit();
-
-          }
-
-        },
-        (err) => {
-          this.toastr.error('Erro ao gerar o boleto, tente novamente mais tarde.', 'Erro');
-        }
-      );
-
-
-
-  }
-
 
 }

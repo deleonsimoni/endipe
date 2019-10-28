@@ -103,6 +103,7 @@ const UserSchema = new mongoose.Schema({
     amount: Number,
     categoryId: Number,
     pathS3: String,
+    pathReceiptPayment: String,
     icPaid: Boolean,
     icValid: Boolean
   },

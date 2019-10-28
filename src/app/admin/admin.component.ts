@@ -199,6 +199,9 @@ export class AdminComponent implements OnInit {
       case 4:
         this.users = this.allUsers.filter(user => user.works.length > 0);
         break;
+      case 5:
+        this.users = this.allUsers.filter(user => user.payment && user.payment.pathReceiptPayment);
+        break;
 
       default:
         this.users = this.allUsers;
