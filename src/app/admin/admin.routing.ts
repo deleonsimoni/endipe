@@ -4,11 +4,12 @@ import { AdminComponent } from './admin.component';
 import { SubscribedComponent } from './subscribed/subscribed.component';
 import { NewsComponent } from './news/news.component';
 import { RegisterCoordinatorComponent } from './register-coordinator/register-coordinator.component';
-import { ReviewerComponent } from './reviewer/reviewer.component';
+import { WorksComponent } from './works/works.component';
+import { AdminGuard } from './admin.guard';
 
 const routes: Routes = [
     {
-        path: 'admin', component: AdminComponent, children: [
+        path: 'admin', component: AdminComponent, canActivateChild: [AdminGuard], children: [
             {
                 path: '', pathMatch: 'full', redirectTo: 'inscritos'
             },
@@ -22,7 +23,7 @@ const routes: Routes = [
                 path: 'coordenadores', component: RegisterCoordinatorComponent
             },
             {
-                path: 'pareceristas', component: ReviewerComponent
+                path: 'trabalhos', component: WorksComponent
             }
         ]
     }

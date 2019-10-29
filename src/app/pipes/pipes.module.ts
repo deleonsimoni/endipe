@@ -3,19 +3,22 @@ import { MaskCpfPipe } from './mask-cpf.pipe';
 import { AxisPipe } from './axis.pipe';
 import { ModalitiesPipe } from './modalities.pipe';
 import { TypeWorkPipe } from './type-work.pipe';
+import { DocPipe } from './doc.pipe';
 
 @NgModule({
     declarations: [
         MaskCpfPipe,
         AxisPipe,
         ModalitiesPipe,
-        TypeWorkPipe
+        TypeWorkPipe,
+        DocPipe
     ],
     exports: [
         MaskCpfPipe,
         AxisPipe,
         ModalitiesPipe,
-        TypeWorkPipe
+        TypeWorkPipe,
+        DocPipe
     ],
 })
 export class PipesModule { }

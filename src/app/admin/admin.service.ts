@@ -21,6 +21,10 @@ export class AdminService {
     return this.http.post(`${this.baseUrl}/admin/invalidatePayment/${id}`, {});
   }
 
+  public retrieveUsers() {
+    return this.http.get(`${this.baseUrl}/admin/usrs`);
+  }
+
   public registerCoordinator(form) {
     return this.http.post(`${this.baseUrl}/user/coordinator`, form);
   }
@@ -49,7 +53,11 @@ export class AdminService {
     return this.http.get<any>(`${this.baseUrl}/admin/metrics`);
   }
 
-  public retrieveWorks(id) {
+  public retrieveUserWorks(id) {
     return this.http.get<any>(`${this.baseUrl}/admin/getUserWorks/${id}`);
+  }
+
+  public retrieveAllWorks(id) {
+    return this.http.get<any>(`${this.baseUrl}/admin/works/${id}`);
   }
 }

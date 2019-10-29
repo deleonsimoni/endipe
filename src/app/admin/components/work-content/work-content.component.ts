@@ -12,7 +12,7 @@ import { ModalReviewerComponent } from '../../modal-reviewer/modal-reviewer.comp
 export class WorkContentComponent implements OnInit {
 
   @Input() subscribed: any;
-  @Input() works: [];
+  @Input() work: any;
 
   constructor(
     private dialog: MatDialog,

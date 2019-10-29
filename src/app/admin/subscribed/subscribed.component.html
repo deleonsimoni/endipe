@@ -1,8 +1,7 @@
 <div>
     <p>Total de {{ users.length }} inscritos</p>
-    <!-- <subscribers-metrics [metrics]="metrics"></subscribers-metrics> -->
 
-    <div class="row">
+    <div class="row" *ngIf="user && user.icAdmin">
         <div class="col-md-8">
             <input type="text" class="form-control mb-4" [(ngModel)]="search"
                 placeholder="Filtrar participante por CPF ou Nome" (keyup)="searchUser()">
@@ -14,7 +13,6 @@
                 <option value="1">Aguardando validação</option>
                 <option value="2">Pagamento válido</option>
                 <option value="3">Deficientes</option>
-
             </select>
         </div>
     </div>
@@ -27,9 +25,6 @@
         <subscribers-data [subscribed]="subscribed"
             *ngIf="user.icAdmin && (subscribed && subscribed._id == userSelect)">
         </subscribers-data>
-
-        <work-content [works]="works" *ngIf="!user.icAdmin && (subscribed && subscribed._id == userSelect)">
-        </work-content>
 
     </div>
 </div>

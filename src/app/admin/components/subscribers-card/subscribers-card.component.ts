@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -6,15 +6,12 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   templateUrl: './subscribers-card.component.html',
   styleUrls: ['./subscribers-card.component.scss']
 })
-export class SubscribersCardComponent implements OnInit {
+export class SubscribersCardComponent {
 
   @Input() subscribed: any;
   @Output() selected = new EventEmitter();
 
   constructor() { }
-
-  ngOnInit() {
-  }
 
   public selectUser(user): void {
     this.selected.emit(user);

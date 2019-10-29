@@ -1,9 +1,9 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
-import { Router } from '@angular/router';
 import { DownloadFileService } from 'src/app/services/download-file.service';
-import { HttpClient } from '@angular/common/http';
 import { AdminService } from '../admin.service';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-subscribed',
@@ -12,7 +12,7 @@ import { AdminService } from '../admin.service';
 })
 export class SubscribedComponent implements OnInit {
 
-  public user = {};
+  public user: any = {};
   public users = [];
   public works = [];
   public allUsers = [];
@@ -24,41 +24,44 @@ export class SubscribedComponent implements OnInit {
   public userSelect: number;
   public metrics: {};
 
-  public modalities = [
-    { id: 1, name: 'Convidado de sessão especial' },
-    { id: 2, name: 'Mediador de roda de conversa' },
-    { id: 3, name: 'Expositor de pôster' },
-    { id: 4, name: 'Mediador de minicurso' },
-    { id: 5, name: 'Coordenador e/ou expositor de painel' },
-    { id: 6, name: 'Simposista' },
-    { id: 7, name: 'Ouvinte' }
-  ];
-
-  public eixos = [
-    { id: 1, name: 'Formação docente' },
-    { id: 2, name: 'Currículo e avaliação' },
-    { id: 3, name: 'Direitos humanos, Interculturalidade e Religiões' },
-    { id: 4, name: 'Nova epistemologia, Diferença, Biodiversidade, Democracia e Inclusão' },
-    { id: 5, name: 'Educação, Comunicação e Técnologia' },
-    { id: 6, name: 'Infâncias, Juventudes e Vida Adulta' }
-  ];
-
   constructor(
-    @Inject('BASE_API_URL') private baseUrl: string,
     private authService: AuthService,
-    private router: Router,
     private downloadService: DownloadFileService,
-    private http: HttpClient,
     private adminService: AdminService
   ) { }
 
   ngOnInit() {
     this.retrieveUser();
-    this.retrieveAdminData();
   }
 
   private retrieveUser() {
     this.user = this.authService.getDecodedAccessToken(this.authService.getToken());
+
+    if (this.user && !this.user.icAdmin) {
+      this.retrieveWorks(this.user.coordinator || this.user.reviewer)
+        .subscribe(res => {
+          console.log(res);
+        });
+    } else {
+      this.retrieveAdminData();
+    }
+
+  }
+
+  private retrieveWorks(id): Observable<any> {
+    return this.adminService.retrieveAllWorks(id)
+      .pipe(
+        map(res => res)
+      );
+  }
+
+  private retrieveAdminData() {
+    this.adminService.retrieveUsers()
+      .subscribe((res: any[]) => {
+        console.log(res);
+        this.allUsers = res;
+        this.users = res;
+      });
   }
 
   public receiverSelectedUser(user) {
@@ -67,7 +70,7 @@ export class SubscribedComponent implements OnInit {
     } else {
       this.userSelect = user._id;
       if (user.works) {
-        this.getUserWorks(user.works);
+        this.userWorks(user.works);
       }
     }
   }
@@ -77,15 +80,14 @@ export class SubscribedComponent implements OnInit {
       .subscribe(metrics => this.metrics = metrics, err => console.log(err));
   }
 
-  public getUserWorks(userWorksId) {
+  public userWorks(userWorksId) {
     this.works = [];
     this.carregandoTrabalhos = true;
 
     if (userWorksId) {
       userWorksId.forEach(workId => {
-        this.adminService.retrieveWorks(workId)
+        this.adminService.retrieveUserWorks(workId)
           .subscribe((res: any) => {
-            console.log(res);
             this.carregandoTrabalhos = false;
             this.works.push(res);
           }, err => {
@@ -108,22 +110,6 @@ export class SubscribedComponent implements OnInit {
     }
     this.carregando = true;
     this.downloadService.getFile(nameFile, sucessoDownload, falhaDownload);
-  }
-
-  private retrieveAdminData() {
-    this.authService.adminData()
-      .subscribe((res: any[]) => {
-        this.allUsers = res;
-        this.users = res;
-      });
-  }
-
-  public retrieveModality(id) {
-    return this.modalities.filter(element => element.id === id)[0];
-  }
-
-  public retrieveEixo(id) {
-    return this.eixos.filter(element => element.id === id)[0];
   }
 
   public searchUser() {
@@ -154,10 +140,6 @@ export class SubscribedComponent implements OnInit {
         this.users = this.allUsers;
         break;
     }
-  }
-
-  irParaNoticias() {
-    this.router.navigate(['/noticias']);
   }
 
 }

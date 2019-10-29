@@ -1,0 +1,18 @@
+<div class="form">
+
+    <div *ngFor="let work of works; let i = index" [ngClass]="{'mb-3': works.length > 1}">
+        <work-card [work]="work" (selected)="receiverSelectedWork($event)"></work-card>
+        <work-content [work]="work" *ngIf="work && work._id == workSelect"></work-content>
+    </div>
+
+    <!-- <div *ngIf="!reviewers || reviewers.length < 1">
+        <div class="no-news">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h4>Não há pareceristas cadastrados</h4>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+</div>

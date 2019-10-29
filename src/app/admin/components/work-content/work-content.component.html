@@ -1,11 +1,8 @@
 <div class="work-content">
-    <div class="not-work" *ngIf="works.length < 1">
+    <div class="not-work" *ngIf="!work">
         <h6>Nenhum trabalho foi submetido</h6>
     </div>
-    <div *ngFor="let work of works; let i = index">
-        <div class="section first" *ngIf="works.length > 0">
-            <h6>Trabalho {{ i + 1}}</h6>
-        </div>
+    <div *ngIf="work">
         <div class="row align-items-center mb-2">
             <div class="col-md-4">
                 <strong>Título</strong>
@@ -17,17 +14,29 @@
             </div>
             <div class="col-md-4">
                 <strong>Tipo de trabalho</strong>
-                <p>{{ work.typeWork | typeWork }}</p>
+                <p>{{ work.typeWork ? (work.typeWork | typeWork) : '---' }}</p>
             </div>
         </div>
         <div class="row align-items-center mb-2">
+            <div class="col-md-8">
+                <strong>Modalidade</strong>
+                <p>{{ work.modalityId | modalities }}</p>
+            </div>
             <div class="col-md-4">
                 <strong>Eixo</strong>
                 <p>{{ work.axisId | axis }}</p>
             </div>
-            <div class="col-md-4">
-                <strong>Modalidade</strong>
-                <p>{{ work.modalityId | modalities }}</p>
+        </div>
+        <div class="row align-items-center mb-2">
+            <div class="col-md-12">
+                <strong>DOC</strong>
+                <p>{{ work.pathS3DOC | doc }}</p>
+            </div>
+        </div>
+        <div class="row align-items-center mb-2">
+            <div class="col-md-12">
+                <strong>PDF</strong>
+                <p>{{ work.pathS3PDF | doc }}</p>
             </div>
         </div>
         <div class="row align-items-center mb-2">
@@ -39,7 +48,8 @@
         <div class="row align-items-center mb-2">
             <div class="col-md-12">
                 <strong>Pareceristas</strong>
-                <!-- <p *ngIf="work.reviewers.length < 1">Ainda não foram adicionados pareceristas a este trabalho</p> -->
+                <p *ngIf="!work.reviewers || work.reviewers.length < 1">Ainda não foram adicionados pareceristas a este
+                    trabalho</p>
                 <p *ngFor="let reviewer of work.reviewers">{{ reviewer.name }}</p>
             </div>
         </div>

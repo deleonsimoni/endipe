@@ -35,7 +35,7 @@ export class AdminComponent implements OnInit {
   ];
 
   private nonAdminRoutes = [
-    { name: 'INSCRITOS', path: '/admin/inscritos' },
+    { name: 'TRABALHOS', path: '/admin/trabalhos' },
   ];
 
   constructor(

@@ -14,7 +14,7 @@ module.exports = {
   invalidatePayment,
   deleteByEmail,
   getUserWorks,
-  recoverMetrics
+  getWorks
 }
 
 async function getUsers() {
@@ -64,29 +64,6 @@ async function invalidatePayment(id) {
   });
 }
 
-async function recoverMetrics() {
-  // let metrics = {
-  //   subscribers: 0,
-  //   subscribersPcd: 0,
-  //   confirmPayment: 0,
-  //   denyPayment: 0,
-  //   pendingPayment: 0
-  // };
-  // let users;
-
-  // try {
-
-  //   users = await User.find({ icAdmin: false })
-  //     .select('payment isPCD')
-  //     .sort({ fullname: 1 });
-
-  //     metrics.subscribers = users.l
-  //   console.log(users);
-  //   return metrics;
-
-  // } catch (error) {
-
-
-  //   console.log(error);
-  // }
+async function getWorks(axis) {
+  return await Work.find({ axisId: axis });
 }
