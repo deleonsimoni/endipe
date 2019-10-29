@@ -37,6 +37,22 @@ async function testeBoleto(req, res) {
 
 async function uploadWork(req, res) {
   let response = await userCtrl.uploadWork(req, res);
+
+  //enviarEmailDeSucesso
+  if (!response) {
+    console.log('Notificando email submissao');
+    let formulario = JSON.parse(req.body.formulario);
+    for (let i = 0; i < formulario.authors.length; i++) {
+      if (!formulario.authors[i].email) {
+        continue;
+      } else {
+        emailSender.sendMail(formulario.authors[i].email, 'Trabalho Submetido com Sucesso', templateEmail.trabalhoSubmetido);
+      }
+    }
+
+  }
+
+
   res.json(response);
 }
 

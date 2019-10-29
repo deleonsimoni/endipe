@@ -140,7 +140,8 @@
                                                 comprovante documento</a>
                                         </p>
                                     </div>
-                                    <div *ngIf="user.payment && user.payment.pathReceiptPayment">
+                                    <div
+                                        *ngIf="user.payment && user.payment.pathReceiptPayment && user.payment.pathReceiptPayment != ''">
                                         <p><a [routerLink]=""
                                                 (click)="download(user.payment.pathReceiptPayment)">Download
                                                 comprovante Transferência</a>

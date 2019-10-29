@@ -212,6 +212,11 @@ async function generatePayment(req, res) {
       icPaid: false
     }
 
+    if (formulario.categoryId === 5) {
+      payment.pathReceiptPayment = '';
+      payment.icValid = true;
+    }
+
     req.user.payment = payment;
 
 

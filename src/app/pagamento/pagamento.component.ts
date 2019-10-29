@@ -111,6 +111,10 @@ export class PagamentoComponent implements OnInit {
     this.uploadService.gerarPagamento(this.filesPDF ? this.filesPDF[0] : null, 'comprovantes', this.user.document, this.paymentForm.value).subscribe(() => {
       this.enviando = false;
       this.user.payment = this.paymentForm.value;
+      if (this.paymentForm.value.categoryId === 5) {
+        this.user.payment.icValid = true;
+        this.user.payment.amount = this.valorTotal;
+      }
       this.toastr.success('Aguarde avaliação do pagamento', 'Sucesso');
       this.paymentForm.reset();
       this.filesPDF = null;
@@ -149,6 +153,10 @@ export class PagamentoComponent implements OnInit {
 
   public showUpload() {
     return this.paymentForm.value.categoryId && (this.paymentForm.value.categoryId < 5);
+  }
+
+  public retrieveCategories(id) {
+    return this.categorias.filter(element => element.id === id)[0];
   }
 
 }

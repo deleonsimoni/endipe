@@ -67,7 +67,6 @@ async function refresh(req, res) {
 }
 
 function login(req, res) {
-  console.log('aquiiii ' + req.user)
   let user = req.user;
   let token = authCtrl.generateToken(user);
   res.json({ token });
