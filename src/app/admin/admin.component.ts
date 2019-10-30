@@ -52,7 +52,7 @@ export class AdminComponent implements OnInit {
     if (this.user && this.user.icAdmin) {
       this.menu = this.adminRoutes;
     } else {
-      this.menu = this.nonAdminRoutes;
+      this.menu = [];
     }
   }
 }

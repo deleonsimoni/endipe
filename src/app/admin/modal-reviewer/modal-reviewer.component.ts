@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl, FormArray } from '@angular/forms';
 import { MatDialogRef } from '@angular/material';
 import { AdminService } from '../admin.service';
 import { ToastrService } from 'ngx-toastr';
@@ -11,14 +11,6 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ModalReviewerComponent implements OnInit {
 
-  public eixos = [
-    { id: 1, name: 'Eixo 1' },
-    { id: 2, name: 'Eixo 2' },
-    { id: 3, name: 'Eixo 3' },
-    { id: 4, name: 'Eixo 4' },
-    { id: 5, name: 'Eixo 5' },
-    { id: 6, name: 'Eixo 6' }
-  ];
   public reviewerForm: FormGroup;
 
   constructor(
@@ -26,17 +18,32 @@ export class ModalReviewerComponent implements OnInit {
     private dialogRef: MatDialogRef<ModalReviewerComponent>,
     private adminService: AdminService,
     private toastr: ToastrService
-  ) { }
+  ) {
 
-  ngOnInit() {
-    this.createForm();
+    this.reviewerForm = this.builder.group({
+      reviewers: this.builder.array([
+        this.createFields()
+      ])
+    });
+
   }
 
-  public createForm() {
-    this.reviewerForm = this.builder.group({
-      axis: [null, [Validators.required]],
+  ngOnInit() { }
+
+  private createFields(): FormGroup {
+    return this.builder.group({
       email: [null, [Validators.required]]
     });
+  }
+
+  public addField() {
+    const reviewers = this.reviewerForm.get('reviewers') as FormArray;
+    reviewers.push(this.createFields());
+  }
+
+  public removeField(i) {
+    const reviewers = this.reviewerForm.get('reviewers') as FormArray;
+    reviewers.removeAt(i);
   }
 
   public close() {
@@ -56,5 +63,9 @@ export class ModalReviewerComponent implements OnInit {
     } else {
       this.toastr.error('Preencha todos os campos');
     }
+  }
+
+  get reviewers() {
+    return this.reviewerForm.get('reviewers');
   }
 }

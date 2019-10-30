@@ -7,7 +7,7 @@
                         <h2>Painel Gerencial</h2>
                     </div>
 
-                    <div class="section-header">
+                    <div [ngClass]="{'section-header': menu.length > 1}">
                         <ul class="nav nav-pills">
                             <li class="nav-item" *ngFor="let item of menu">
                                 <a class="nav-link" [routerLink]="[item.path]"
