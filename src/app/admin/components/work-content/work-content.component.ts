@@ -22,8 +22,13 @@ export class WorkContentComponent implements OnInit {
   ngOnInit() {
   }
 
-  public addReviewer() {
-    const dialogRef = this.dialog.open(ModalReviewerComponent);
+  public addReviewer(axisId, workId) {
+    const dialogRef = this.dialog.open(ModalReviewerComponent, {
+      data: {
+        axis: axisId,
+        work: workId
+      }
+    });
 
     dialogRef.afterClosed();
   }

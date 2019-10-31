@@ -34,6 +34,7 @@ async function deleteByEmail(emailDelete) {
 }
 
 async function getUserWorks(workId) {
+  console.log(id);
   return await Work.findOne({ _id: workId }, function (err, doc) {
     if (err) {
       console.log("erro ao buscar trabalho: " + workId, err);

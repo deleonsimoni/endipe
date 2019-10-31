@@ -476,47 +476,75 @@ async function createReviewer(reviewer) {
   let retorno = {
     temErro: false,
     mensagem: '',
+    valids: []
   };
 
-  const user = await validateReviewer(reviewer.email, retorno);
+  console.log('work: ', reviewer.work);
+  await validateReviewer(reviewer.reviewers, retorno);
 
-  if (!retorno.temErro) {
-    await User.findOneAndUpdate({ _id: user._id }, { $set: { reviewer: { icModalityId: reviewer.axis } } });
+  if (retorno.temErro) {
+    return retorno;
+  } else {
+
+    retorno.valids.forEach(async user => {
+      console.log('user: ', user);
+      await Work.findOneAndUpdate({ _id: reviewer.work }, { $push: { reviewers: { user } } });
+      await User.findOneAndUpdate({ _id: user.userId }, { $set: { icReviewer: true } });
+
+    });
 
     retorno.mensagem = `Parecerista cadastrado com sucesso`;
     retorno.temErro = false;
+
   }
 
   return retorno;
 
 }
 
-async function validateReviewer(email, retorno) {
+async function validateReviewer(reviewers, retorno) {
 
-  const user = await getUserByEmail(email);
+  let user;
 
-  if (!user) {
+  const promise = await new Promise(function (resolve, reject) {
 
-    retorno.temErro = true;
-    retorno.mensagem = `Usuário ${email} não está cadastrado no sistema`;
+    reviewers.forEach(async (reviewer, key) => {
 
-  } else if (user.coordinator && user.coordinator.icModalityId) {
+      user = await getUserByEmail(reviewer.email);
 
-    retorno.temErro = true;
-    retorno.mensagem = `O usuário ${email} já possui cadastro como coordenador`;
+      if (!user) {
 
-  } else if (user.reviewer && user.reviewer.icModalityId) {
+        retorno.temErro = true;
+        retorno.mensagem = `Usuário ${reviewer.email} não está cadastrado no sistema`;
+        reject(retorno);
 
-    retorno.temErro = true;
-    retorno.mensagem = `O usuário ${email} já possui cadastro como parecerista`;
+      } else if (user.coordinator && user.coordinator.icModalityId) {
 
-  } else {
+        retorno.temErro = true;
+        retorno.mensagem = `O usuário ${reviewer.email} já possui cadastro como coordenador`;
+        reject(retorno);
 
-    retorno.temErro = false;
+      } else if (user.icReviewer) {
 
-  }
+        retorno.temErro = true;
+        retorno.mensagem = `O usuário ${reviewer.email} já possui cadastro como parecerista`;
+        reject(retorno);
 
-  return user;
+      } else {
+
+        retorno.temErro = false;
+        retorno.valids.push({ userId: user._id, userEmail: user.email });
+        if (reviewers.length - 1 == key) {
+          resolve(retorno);
+        }
+
+      }
+    });
+
+
+  }).then(res => res).catch(err => err);
+
+  return promise;
 }
 
 async function deleteReviewer(id) {

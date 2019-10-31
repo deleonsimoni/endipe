@@ -37,7 +37,7 @@ const WorkSchema = new mongoose.Schema({
       },
       review: {
         description: String,
-        icAllow: Boolean,
+        icAllow: Boolean
       }
     }
   ],

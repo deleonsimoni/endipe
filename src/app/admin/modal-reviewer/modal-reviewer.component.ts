@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl, FormArray } from '@angular/forms';
-import { MatDialogRef } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { AdminService } from '../admin.service';
 import { ToastrService } from 'ngx-toastr';
+import { DialogData } from 'src/app/models/dialogData';
 
 @Component({
   selector: 'app-modal-reviewer',
@@ -16,6 +17,7 @@ export class ModalReviewerComponent implements OnInit {
   constructor(
     private builder: FormBuilder,
     private dialogRef: MatDialogRef<ModalReviewerComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private adminService: AdminService,
     private toastr: ToastrService
   ) {
@@ -52,6 +54,8 @@ export class ModalReviewerComponent implements OnInit {
 
   public saveReviewer(): void {
     if (this.reviewerForm.valid) {
+      this.reviewerForm.addControl('work', new FormControl(this.data.work));
+
       this.adminService.registerReviewers(this.reviewerForm.value)
         .subscribe(({ reviewers }: any) => {
           if (reviewers.temErro) {

@@ -50,12 +50,12 @@
                 <strong>Pareceristas</strong>
                 <p *ngIf="!work.reviewers || work.reviewers.length < 1">Ainda não foram adicionados pareceristas a este
                     trabalho</p>
-                <p *ngFor="let reviewer of work.reviewers">{{ reviewer.name }}</p>
+                <p *ngFor="let reviewer of work.reviewers">{{ reviewer._id }}</p>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
-                <button class="add" (click)="addReviewer()">
+                <button class="add" (click)="addReviewer(work.axisId, work._id)">
                     <i class="fas fa-plus"></i>
                     Pareceristas
                 </button>

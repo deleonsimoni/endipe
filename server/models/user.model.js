@@ -102,9 +102,7 @@ const UserSchema = new mongoose.Schema({
     icModalityId: Number
   },
 
-  reviewer: {
-    icModalityId: Number
-  },
+  icReviewer: Boolean,
 
   roles: [{
     id: Number
