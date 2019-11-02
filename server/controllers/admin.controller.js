@@ -12,6 +12,8 @@ module.exports = {
   getUsers,
   validatePayment,
   invalidatePayment,
+  validateDoc,
+  invalidateDoc,
   deleteByEmail,
   getUserWorks,
   getWorks
@@ -67,4 +69,25 @@ async function invalidatePayment(id) {
 
 async function getWorks(axis) {
   return await Work.find({ axisId: axis });
+}
+
+async function validateDoc(id) {
+
+  return await User.findOneAndUpdate({ _id: id }, { $set: { 'payment.icValid': true } }, function (err, doc) {
+    if (err) {
+      console.log("erro ao atualizar o usuario: ", err);
+    } else {
+      console.log("update document success");
+    }
+  });
+}
+
+async function invalidateDoc(id) {
+  return await User.findOneAndUpdate({ _id: id }, { $set: { 'payment.icValid': false } }, function (err, doc) {
+    if (err) {
+      console.log("erro ao atualizar o usuario: ", err);
+    } else {
+      console.log("update document success");
+    }
+  });
 }

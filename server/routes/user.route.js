@@ -20,8 +20,10 @@ router.get('/price/:id', passport.authenticate('jwt', { session: false }), async
 router.get('/downloadFile', passport.authenticate('jwt', { session: false }), downloadFile);
 router.get('/coordinators', passport.authenticate('jwt', { session: false }), getCoordinator);
 router.get('/reviewer', passport.authenticate('jwt', { session: false }), getReviewer);
+router.get('/getBoleto', passport.authenticate('jwt', { session: false }), asyncHandler(getBoleto));
 
 router.post('/uploadWork/xxendiperio2020/:id', [passport.authenticate('jwt', { session: false }), fileUpload()], asyncHandler(uploadWork));
+router.post('/submeterTransferencia/xxendiperio2020/:id', [passport.authenticate('jwt', { session: false }), fileUpload()], asyncHandler(submeterTransferencia));
 router.post('/payment', passport.authenticate('jwt', { session: false }), payment);
 router.post('/gerarPagamento/xxendiperio2020/:id', passport.authenticate('jwt', { session: false }), payment);
 router.post('/coordinator', passport.authenticate('jwt', { session: false }), createCoordinator);
@@ -30,6 +32,7 @@ router.delete('/coordinator/:id', passport.authenticate('jwt', { session: false 
 router.delete('/reviewer/:id', passport.authenticate('jwt', { session: false }), deleteReviewer);
 
 router.put('/update', passport.authenticate('jwt', { session: false }), update);
+
 router.route('/')
   .post(asyncHandler(insert));
 
@@ -40,6 +43,22 @@ async function testeBoleto(req, res) {
 
 async function uploadWork(req, res) {
   let response = await userCtrl.uploadWork(req, res);
+
+  //enviarEmailDeSucesso
+  if (!response) {
+    console.log('Notificando email submissao');
+    let formulario = JSON.parse(req.body.formulario);
+    for (let i = 0; i < formulario.authors.length; i++) {
+      if (!formulario.authors[i].email) {
+        continue;
+      } else {
+        emailSender.sendMail(formulario.authors[i].email, 'Trabalho Submetido com Sucesso', templateEmail.trabalhoSubmetido);
+      }
+    }
+
+  }
+
+
   res.json(response);
 }
 
@@ -96,4 +115,15 @@ async function deleteCoordinator(req, res) {
 async function deleteReviewer(req, res) {
   let reviewers = await userCtrl.deleteReviewer(req.params.id);
   res.json({ reviewers });
+}
+
+async function submeterTransferencia(req, res) {
+  console.log('cheguei');
+  let user = await userCtrl.submeterTransferencia(req);
+  res.json({ user });
+}
+
+async function getBoleto(req, res) {
+  let boleto = await userCtrl.getBoleto(req);
+  res.json({ boleto });
 }
