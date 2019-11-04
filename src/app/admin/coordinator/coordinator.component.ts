@@ -1,16 +1,16 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { ModalCoordinatorComponent } from '../modal-coordinator/modal-coordinator.component';
+import { ModalCoordinatorComponent } from '../modals/modal-coordinator/modal-coordinator.component';
 import { AdminService } from '../admin.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-register-coordinator',
-  templateUrl: './register-coordinator.component.html',
-  styleUrls: ['./register-coordinator.component.scss']
+  selector: 'app-coordinator',
+  templateUrl: './coordinator.component.html',
+  styleUrls: ['./coordinator.component.scss']
 })
-export class RegisterCoordinatorComponent implements OnInit, OnDestroy {
+export class CoordinatorComponent implements OnInit, OnDestroy {
 
   public coordinators = [];
   private coordinatorsUnsub$ = new Subject();

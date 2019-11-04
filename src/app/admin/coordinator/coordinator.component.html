@@ -16,15 +16,7 @@
         </div>
     </div>
 
-    <div *ngIf="!coordinators || coordinators.length < 1">
-        <div class="no-news">
-            <div class="row">
-                <div class="col-sm-12">
-                    <h4>Não há coordenadores cadastrados</h4>
-                </div>
-            </div>
-        </div>
-    </div>
+    <not-found msg="Não há coordenadores cadastrados"></not-found>
 
     <div class="row justify-content-end">
         <button class="btn-get-started" (click)="showRegister()">CADASTRAR</button>

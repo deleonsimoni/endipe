@@ -9,41 +9,35 @@ import { AdminRoutingModule } from './admin.routing';
 
 import { SubscribedComponent } from './subscribed/subscribed.component';
 import { NewsComponent } from './news/news.component';
-import { RegisterCoordinatorComponent } from './register-coordinator/register-coordinator.component';
+import { CoordinatorComponent } from './coordinator/coordinator.component';
 import { WorksComponent } from './works/works.component';
-
-import { ModalNewsComponent } from './modal-news/modal-news.component';
-import { ModalCoordinatorComponent } from './modal-coordinator/modal-coordinator.component';
-import { ModalReviewerComponent } from './modal-reviewer/modal-reviewer.component';
 
 import { SubscribersMetricsComponent } from './components/subscribers-metrics/subscribers-metrics.component';
 import { SubscribersCardComponent } from './components/subscribers-card/subscribers-card.component';
 import { WorkContentComponent } from './components/work-content/work-content.component';
-import { QuillModule } from 'ngx-quill';
 import { SubscribersDataComponent } from './components/subscribers-data/subscribers-data.component';
 import { WorkCardComponent } from './components/work-card/work-card.component';
+import { ConferencerComponent } from './conferencer/conferencer.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { ModalModule } from './modals/modal.module';
 
 @NgModule({
     declarations: [
         AdminComponent,
         SubscribedComponent,
         NewsComponent,
-        RegisterCoordinatorComponent,
+        CoordinatorComponent,
         WorksComponent,
-        ModalNewsComponent,
-        ModalCoordinatorComponent,
-        ModalReviewerComponent,
         SubscribersMetricsComponent,
         SubscribersCardComponent,
         WorkContentComponent,
         SubscribersDataComponent,
-        WorkCardComponent
+        WorkCardComponent,
+        ConferencerComponent,
+        NotFoundComponent
     ],
     entryComponents: [
         AdminComponent,
-        ModalNewsComponent,
-        ModalCoordinatorComponent,
-        ModalReviewerComponent
     ],
     imports: [
         CommonModule,
@@ -51,8 +45,8 @@ import { WorkCardComponent } from './components/work-card/work-card.component';
         ReactiveFormsModule,
         NgxMaskModule.forRoot(),
         ToastrModule.forRoot(),
-        QuillModule.forRoot(),
         PipesModule,
+        ModalModule,
         AdminRoutingModule
     ],
     exports: [

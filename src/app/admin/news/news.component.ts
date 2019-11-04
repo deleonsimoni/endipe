@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { NoticiasService } from 'src/app/services/noticias.service';
 import { MatDialog } from '@angular/material';
-import { ModalNewsComponent } from '../modal-news/modal-news.component';
+import { ModalNewsComponent } from '../modals/modal-news/modal-news.component';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 

@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl, FormArray } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { AdminService } from '../admin.service';
+import { AdminService } from '../../admin.service';
 import { ToastrService } from 'ngx-toastr';
 import { DialogData } from 'src/app/models/dialogData';
 

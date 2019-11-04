@@ -3,9 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './admin.component';
 import { SubscribedComponent } from './subscribed/subscribed.component';
 import { NewsComponent } from './news/news.component';
-import { RegisterCoordinatorComponent } from './register-coordinator/register-coordinator.component';
+import { CoordinatorComponent } from './coordinator/coordinator.component';
 import { WorksComponent } from './works/works.component';
 import { AdminGuard } from './admin.guard';
+import { ConferencerComponent } from './conferencer/conferencer.component';
 
 const routes: Routes = [
     {
@@ -20,7 +21,10 @@ const routes: Routes = [
                 path: 'noticias', component: NewsComponent
             },
             {
-                path: 'coordenadores', component: RegisterCoordinatorComponent
+                path: 'conferencistas', component: ConferencerComponent
+            },
+            {
+                path: 'coordenadores', component: CoordinatorComponent
             },
             {
                 path: 'trabalhos', component: WorksComponent

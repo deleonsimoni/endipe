@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialogRef } from '@angular/material';
 import { ModalEixoComponent } from 'src/app/modal-eixo/modal-eixo.component';
-import { AdminService } from '../admin.service';
+import { AdminService } from '../../admin.service';
 
 @Component({
   selector: 'app-modal-coordinator',

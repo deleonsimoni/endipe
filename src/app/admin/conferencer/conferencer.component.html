@@ -1,0 +1,7 @@
+<p *ngFor="let conferencer of (conferencers$ | async)">{{ conferencer }}</p>
+
+<not-found *ngIf="!(conferencers$ | async)" msg="Não há conferencistas cadastrados"></not-found>
+
+<div class="row justify-content-end">
+    <button class="btn-get-started" (click)="addConferencer()">Cadastrar</button>
+</div>
