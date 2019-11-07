@@ -36,8 +36,10 @@
                             <select class="form-control" [(ngModel)]="status" (change)="filtrarStatus()">
                                 <option value=""> </option>
                                 <option value="0">Pagamento não efetuado</option>
-                                <option value="1">Aguardando validação documentos</option>
-                                <option value="2">Pagamento válido</option>
+                                <option value="1">Aguardando validação comprovante</option>
+                                <option value="2">Comprovante válido</option>
+                                <option value="6">Aguardando validação transferência</option>
+                                <option value="7">Transferência válida</option>
                                 <option value="3">Deficientes</option>
                                 <option disabled="disabled">-----------------------</option>
                                 <option value="5">Documento de transferência enviado</option>

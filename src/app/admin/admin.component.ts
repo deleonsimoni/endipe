@@ -187,11 +187,17 @@ export class AdminComponent implements OnInit {
       case 0:
         this.users = this.allUsers.filter(user => !user.payment);
         break;
+      case 6:
+        this.users = this.allUsers.filter(user => user.payment /*&& user.payment.pathS3*/ && user.payment.icPaid === false);
+        break;
+      case 7:
+        this.users = this.allUsers.filter(user => user.payment /*&& user.payment.pathS3 */ && user.payment.icPaid === true);
+        break;
       case 1:
-        this.users = this.allUsers.filter(user => user.payment && user.payment.icPaid === false);
+        this.users = this.allUsers.filter(user => user.payment /*&& user.payment.pathReceiptPayment*/ && user.payment.icValid === false);
         break;
       case 2:
-        this.users = this.allUsers.filter(user => user.payment && user.payment.icPaid === true);
+        this.users = this.allUsers.filter(user => user.payment/* && user.payment.pathReceiptPayment*/ && user.payment.icValid === true);
         break;
       case 3:
         this.users = this.allUsers.filter(user => user.isPCD);
