@@ -38,10 +38,19 @@ import { TrabalhosComponent } from './trabalhos/trabalhos.component';
 import { ListarTrabalhosComponent } from './listar-trabalhos/listar-trabalhos.component';
 import { AccordionModule } from 'ngx-bootstrap';
 import { PerfilComponent } from './perfil/perfil.component';
+<<<<<<< HEAD
 import { AdminNewsComponent } from './admin-news/admin-news.component';
 import { AdminModule } from './admin/admin.module';
 import { PipesModule } from './pipes/pipes.module';
 import { AdminRoutingModule } from './admin/admin.routing';
+=======
+import { AdminModule } from './admin/admin.module';
+import { PipesModule } from './pipes/pipes.module';
+import { AdminRoutingModule } from './admin/admin.routing';
+import { EsqueciSenhaComponent } from './esqueci-senha/esqueci-senha.component';
+import { QuillModule } from 'ngx-quill';
+import { ResetSenhaComponent } from './reset-senha/reset-senha.component';
+>>>>>>> origin/dev-front
 
 @NgModule({
   declarations: [
@@ -67,7 +76,12 @@ import { AdminRoutingModule } from './admin/admin.routing';
     TrabalhosComponent,
     ListarTrabalhosComponent,
     PerfilComponent,
+<<<<<<< HEAD
     AdminNewsComponent
+=======
+    EsqueciSenhaComponent,
+    ResetSenhaComponent
+>>>>>>> origin/dev-front
   ],
   imports: [
     BrowserModule,

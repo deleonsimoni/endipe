@@ -5,34 +5,42 @@ import { CommonModule } from '@angular/common';
 import { NgxMaskModule } from 'ngx-mask';
 import { ToastrModule } from 'ngx-toastr';
 import { PipesModule } from '../pipes/pipes.module';
-import { SubscribedComponent } from './subscribed/subscribed.component';
 import { AdminRoutingModule } from './admin.routing';
+
+import { SubscribedComponent } from './subscribed/subscribed.component';
 import { NewsComponent } from './news/news.component';
-import { RegisterCoordinatorComponent } from './register-coordinator/register-coordinator.component';
-import { ModalNewsComponent } from './modal-news/modal-news.component';
-import { ModalSubscribedComponent } from './modal-subscribed/modal-subscribed.component';
-import { ModalCoordinatorComponent } from './modal-coordinator/modal-coordinator.component';
-import { ReviewerComponent } from './reviewer/reviewer.component';
-import { ModalReviewerComponent } from './modal-reviewer/modal-reviewer.component';
+import { CoordinatorComponent } from './coordinator/coordinator.component';
+import { WorksComponent } from './works/works.component';
+
+import { SubscribersMetricsComponent } from './components/subscribers-metrics/subscribers-metrics.component';
+import { SubscribersCardComponent } from './components/subscribers-card/subscribers-card.component';
+import { WorkContentComponent } from './components/work-content/work-content.component';
+import { SubscribersDataComponent } from './components/subscribers-data/subscribers-data.component';
+import { WorkCardComponent } from './components/work-card/work-card.component';
+import { ConferencerComponent } from './conferencer/conferencer.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { ModalModule } from './modals/modal.module';
+import { ConferencerCardComponent } from './components/conferencer-card/conferencer-card.component';
+import { UtilNgxMaterialModule } from '../util-ngx-material/util-ngx-material.module';
 
 @NgModule({
     declarations: [
         AdminComponent,
         SubscribedComponent,
         NewsComponent,
-        RegisterCoordinatorComponent,
-        ReviewerComponent,
-        ModalNewsComponent,
-        ModalSubscribedComponent,
-        ModalCoordinatorComponent,
-        ModalReviewerComponent
+        CoordinatorComponent,
+        WorksComponent,
+        SubscribersMetricsComponent,
+        SubscribersCardComponent,
+        WorkContentComponent,
+        SubscribersDataComponent,
+        WorkCardComponent,
+        ConferencerComponent,
+        NotFoundComponent,
+        ConferencerCardComponent
     ],
     entryComponents: [
         AdminComponent,
-        ModalNewsComponent,
-        ModalSubscribedComponent,
-        ModalCoordinatorComponent,
-        ModalReviewerComponent
     ],
     imports: [
         CommonModule,
@@ -41,7 +49,9 @@ import { ModalReviewerComponent } from './modal-reviewer/modal-reviewer.componen
         NgxMaskModule.forRoot(),
         ToastrModule.forRoot(),
         PipesModule,
-        AdminRoutingModule
+        ModalModule,
+        AdminRoutingModule,
+        UtilNgxMaterialModule
     ],
     exports: [
         AdminComponent

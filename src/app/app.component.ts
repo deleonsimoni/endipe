@@ -65,6 +65,13 @@ export class AppComponent implements OnInit {
     this.rota.navigate(['/home']);
   }
 
+  public verifyAcess() {
+    if (this.user && (this.user.icAdmin || this.user.coordinator || this.user.reviewer)) {
+      return true;
+    }
+    return false;
+  }
+
   get userName(): string {
     return this.user && this.user.fullname ? this.user.fullname.split(' ')[0] : '';
   }

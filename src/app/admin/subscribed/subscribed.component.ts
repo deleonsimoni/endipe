@@ -1,8 +1,9 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
-import { Router } from '@angular/router';
 import { DownloadFileService } from 'src/app/services/download-file.service';
-import { HttpClient } from '@angular/common/http';
+import { AdminService } from '../admin.service';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-subscribed',
@@ -11,6 +12,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class SubscribedComponent implements OnInit {
 
+  public user: any = {};
   public users = [];
   public works = [];
   public allUsers = [];
@@ -20,93 +22,84 @@ export class SubscribedComponent implements OnInit {
   public status: string;
   public carregando = false;
   public userSelect: number;
-
-  public modalities = [
-    { id: 1, name: 'Convidado de sessão especial' },
-    { id: 2, name: 'Mediador de roda de conversa' },
-    { id: 3, name: 'Expositor de pôster' },
-    { id: 4, name: 'Mediador de minicurso' },
-    { id: 5, name: 'Coordenador e/ou expositor de painel' },
-    { id: 6, name: 'Simposista' },
-    { id: 7, name: 'Ouvinte' }
-  ];
-
-  public eixos = [
-    { id: 1, name: 'Formação docente' },
-    { id: 2, name: 'Currículo e avaliação' },
-    { id: 3, name: 'Direitos humanos, Interculturalidade e Religiões' },
-    { id: 4, name: 'Nova epistemologia, Diferença, Biodiversidade, Democracia e Inclusão' },
-    { id: 5, name: 'Educação, Comunicação e Técnologia' },
-    { id: 6, name: 'Infâncias, Juventudes e Vida Adulta' }
-  ];
-
-  public categories = [
-    { id: 1, name: 'Estudantes de curso Normal/EM' },
-    { id: 2, name: 'Estudantes de Graduação' },
-    { id: 3, name: 'Estudantes de Pós-Graduação' },
-    { id: 4, name: 'Profissionais da Educação Básica' },
-    { id: 5, name: 'Profissionais da Educação Superior' }
-  ];
+  public metrics: {};
 
   constructor(
     private authService: AuthService,
-    private router: Router,
     private downloadService: DownloadFileService,
-    @Inject('BASE_API_URL') private baseUrl: string,
-    private http: HttpClient
+    private adminService: AdminService
   ) { }
 
   ngOnInit() {
-    this.retrieveAdminData();
+    this.retrieveUser();
   }
 
-  validarPagamento(user) {
+  private retrieveUser() {
+    this.user = this.authService.getDecodedAccessToken(this.authService.getToken());
 
-    this.http.post(`${this.baseUrl}/admin/validatePayment/` + user._id, {}).subscribe((res: any) => {
-      user.payment.icPaid = true;
-    }, err => {
-      console.log(err);
-    });
+    if (this.user && !this.user.icAdmin) {
+      this.retrieveWorks(this.user.coordinator || this.user.reviewer)
+        .subscribe(res => {
+          console.log(res);
+        });
+    } else {
+      this.retrieveAdminData();
+    }
+
   }
 
-  invalidarPagamento(user) {
-    this.http.post(`${this.baseUrl}/admin/invalidatePayment/` + user._id, {}).subscribe((res: any) => {
-      user.payment.icPaid = false;
-    }, err => {
-      console.log(err);
-    });
+  private retrieveWorks(id): Observable<any> {
+    return this.adminService.retrieveAllWorks(id)
+      .pipe(
+        map(res => res)
+      );
   }
 
-  selectUser(user) {
+  private retrieveAdminData() {
+    this.adminService.retrieveUsers()
+      .subscribe((res: any[]) => {
+        console.log(res);
+        this.allUsers = res;
+        this.users = res;
+      });
+  }
+
+  public receiverSelectedUser(user) {
     if (this.userSelect === user._id) {
       this.userSelect = null;
     } else {
       this.userSelect = user._id;
       if (user.works) {
-        this.getUserWorks(user.works);
+        this.userWorks(user.works);
       }
     }
   }
 
-  getUserWorks(userWorksId) {
+  public retrieveMetrics() {
+    this.adminService.recoverMetrics()
+      .subscribe(metrics => this.metrics = metrics, err => console.log(err));
+  }
+
+  public userWorks(userWorksId) {
     this.works = [];
     this.carregandoTrabalhos = true;
 
     if (userWorksId) {
       userWorksId.forEach(workId => {
-        this.http.get(`${this.baseUrl}/admin/getUserWorks/` + workId, {}).subscribe((res: any) => {
-          this.carregandoTrabalhos = false;
-          this.works.push(res);
-        }, err => {
-          this.carregandoTrabalhos = false;
-          console.log(err);
-        });
+        this.adminService.retrieveUserWorks(workId)
+          .subscribe((res: any) => {
+            this.carregandoTrabalhos = false;
+            this.works.push(res);
+          }, err => {
+            this.carregandoTrabalhos = false;
+            console.log(err);
+          });
       });
     }
 
   }
 
-  download(nameFile) {
+  public download(nameFile) {
     const vm = this;
     function sucessoDownload() {
       vm.carregando = false;
@@ -117,26 +110,6 @@ export class SubscribedComponent implements OnInit {
     }
     this.carregando = true;
     this.downloadService.getFile(nameFile, sucessoDownload, falhaDownload);
-  }
-
-  private retrieveAdminData() {
-    this.authService.adminData()
-      .subscribe((res: any[]) => {
-        this.allUsers = res;
-        this.users = res;
-      });
-  }
-
-  public retrieveModality(id) {
-    return this.modalities.filter(element => element.id === id)[0];
-  }
-
-  public retrieveEixo(id) {
-    return this.eixos.filter(element => element.id === id)[0];
-  }
-
-  public retrieveCategories(id) {
-    return this.categories.filter(element => element.id === id)[0];
   }
 
   public searchUser() {
@@ -167,10 +140,6 @@ export class SubscribedComponent implements OnInit {
         this.users = this.allUsers;
         break;
     }
-  }
-
-  irParaNoticias() {
-    this.router.navigate(['/noticias']);
   }
 
 }

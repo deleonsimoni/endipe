@@ -112,6 +112,12 @@ const UserSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId
   }],
 
+  coordinator: {
+    icModalityId: Number
+  },
+
+  icReviewer: Boolean,
+
   roles: [{
     id: Number
   }]

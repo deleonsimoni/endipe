@@ -1,0 +1,24 @@
+<div class="form">
+    <div class="card-works" *ngFor="let coordinator of coordinators; let i = index"
+        [ngClass]="{'mb-3': coordinators.length > 1}">
+        <div class="row">
+            <div class="col-sm-4 border-right">
+                <small>NOME</small>
+                <h4>{{ coordinator.fullname }}</h4>
+            </div>
+            <div class="col-sm-7 border-right">
+                <small>EMAIL</small>
+                <h4>{{ coordinator.email }}</h4>
+            </div>
+            <div class="col-sm-1 text-center align-self-center pointer">
+                <i class="fa fa-trash" (click)="removeCoordinator(coordinator._id)"></i>
+            </div>
+        </div>
+    </div>
+
+    <not-found msg="Não há coordenadores cadastrados"></not-found>
+
+    <div class="row justify-content-end">
+        <button class="btn-get-started" (click)="showRegister()">CADASTRAR</button>
+    </div>
+</div>

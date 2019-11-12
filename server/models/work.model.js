@@ -27,6 +27,20 @@ const WorkSchema = new mongoose.Schema({
   mainAuthor: {
     type: String
   },
+  reviewers: [
+    {
+      userId: {
+        type: mongoose.Schema.Types.ObjectId
+      },
+      userEmail: {
+        type: String
+      },
+      review: {
+        description: String,
+        icAllow: Boolean
+      }
+    }
+  ],
   authors: [{
     userId: {
       type: mongoose.Schema.Types.ObjectId,

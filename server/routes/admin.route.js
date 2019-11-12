@@ -13,6 +13,8 @@ router.use(passport.authenticate('jwt', { session: false }))
 
 router.get('/usrs', passport.authenticate('jwt', { session: false }), getUsers);
 router.get('/getUserWorks/:id', passport.authenticate('jwt', { session: false }), asyncHandler(getUserWorks));
+router.get('/works/:id', passport.authenticate('jwt', { session: false }), getWorks);
+router.get('/metrics', passport.authenticate('jwt', { session: false }), getMetrics);
 
 router.post('/validatePayment/:id', passport.authenticate('jwt', { session: false }), validatePayment);
 router.post('/invalidatePayment/:id', passport.authenticate('jwt', { session: false }), invalidatePayment);
@@ -22,7 +24,8 @@ router.post('/rainbown/:id', passport.authenticate('jwt', { session: false }), d
 
 
 async function getUsers(req, res) {
-  if (req.user.icAdmin) {
+  const user = req.user;
+  if (user.icAdmin || user.coordinator || user.reviewer) {
     let users = await adminCtrl.getUsers(req.body);
     res.json(users);
   } else {
@@ -40,12 +43,33 @@ async function deleteByEmail(req, res) {
 }
 
 async function getUserWorks(req, res) {
-  if (req.user.icAdmin) {
+  const user = req.user;
+  if (user.icAdmin || user.coordinator || user.reviewer) {
     let users = await adminCtrl.getUserWorks(req.params.id);
     res.json(users);
   } else {
     res.sendStatus(401);
   }
+}
+
+async function getWorks(req, res) {
+  const user = req.user;
+
+  if (user.coordinator || user.reviewer) {
+
+    try {
+
+      const works = await adminCtrl.getWorks(req.params.id);
+      res.status(200).json(works);
+
+    } catch (error) {
+
+      console.log(error);
+      res.status(401).json(error);
+
+    }
+  }
+
 }
 
 async function validatePayment(req, res) {
@@ -65,6 +89,11 @@ async function invalidatePayment(req, res) {
   } else {
     res.sendStatus(401);
   }
+}
+
+async function getMetrics(req, res) {
+  let metrics = await adminCtrl.recoverMetrics();
+  res.json(metrics);
 }
 
 async function validateDoc(req, res) {

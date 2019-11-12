@@ -15,7 +15,8 @@ module.exports = {
   validateDoc,
   invalidateDoc,
   deleteByEmail,
-  getUserWorks
+  getUserWorks,
+  getWorks
 }
 
 async function getUsers() {
@@ -35,6 +36,7 @@ async function deleteByEmail(emailDelete) {
 }
 
 async function getUserWorks(workId) {
+  console.log(id);
   return await Work.findOne({ _id: workId }, function (err, doc) {
     if (err) {
       console.log("erro ao buscar trabalho: " + workId, err);
@@ -63,6 +65,10 @@ async function invalidatePayment(id) {
       console.log("update document success");
     }
   });
+}
+
+async function getWorks(axis) {
+  return await Work.find({ axisId: axis });
 }
 
 async function validateDoc(id) {
