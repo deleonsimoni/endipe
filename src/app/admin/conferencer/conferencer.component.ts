@@ -14,6 +14,14 @@ export class ConferencerComponent implements OnInit {
 
   public conferencers$: Observable<any>;
 
+  conferencers = [
+    { name: 'chico bento', institution: 'usp' },
+    { name: 'caetano veloso', institution: 'uva' },
+    { name: 'slash', institution: 'GNR' },
+    { name: 'corey taylor', institution: 'slpkn' },
+    { name: 'lula', institution: 'ufrj' }
+  ];
+
   constructor(
     private publicService: PublicService,
     private dialog: MatDialog

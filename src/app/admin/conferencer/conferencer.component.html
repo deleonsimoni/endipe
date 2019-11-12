@@ -1,7 +1,14 @@
-<p *ngFor="let conferencer of (conferencers$ | async)">{{ conferencer }}</p>
+<div>
+    <div class="row">
+        <div class="col-6 col-sm-4 col-md-4 col-lg-3 col-xg-3" *ngFor="let conferencer of conferencers; let i = index"
+            [ngClass]="{'mb-3': conferencers.length > 1}">
+            <conferencer-card [name]="conferencer.name" [institution]="conferencer.institution"></conferencer-card>
+        </div>
+    </div>
 
-<not-found *ngIf="!(conferencers$ | async)" msg="Não há conferencistas cadastrados"></not-found>
+    <not-found *ngIf="conferencers.length < 1" msg="Não há conferencistas cadastrados"></not-found>
 
-<div class="row justify-content-end">
-    <button class="btn-get-started" (click)="addConferencer()">Cadastrar</button>
+    <div class="row justify-content-end">
+        <button class="btn-get-started" (click)="addConferencer()">Cadastrar</button>
+    </div>
 </div>

@@ -20,6 +20,8 @@ import { WorkCardComponent } from './components/work-card/work-card.component';
 import { ConferencerComponent } from './conferencer/conferencer.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ModalModule } from './modals/modal.module';
+import { ConferencerCardComponent } from './components/conferencer-card/conferencer-card.component';
+import { UtilNgxMaterialModule } from '../util-ngx-material/util-ngx-material.module';
 
 @NgModule({
     declarations: [
@@ -34,7 +36,8 @@ import { ModalModule } from './modals/modal.module';
         SubscribersDataComponent,
         WorkCardComponent,
         ConferencerComponent,
-        NotFoundComponent
+        NotFoundComponent,
+        ConferencerCardComponent
     ],
     entryComponents: [
         AdminComponent,
@@ -47,7 +50,8 @@ import { ModalModule } from './modals/modal.module';
         ToastrModule.forRoot(),
         PipesModule,
         ModalModule,
-        AdminRoutingModule
+        AdminRoutingModule,
+        UtilNgxMaterialModule
     ],
     exports: [
         AdminComponent
