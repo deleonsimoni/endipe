@@ -28,12 +28,22 @@ export class HomeComponent implements OnInit {
   carregando = false;
   noticias = [];
 
+  configuracaoCarrossel = {
+    nav: true,
+    slideBy: 2,
+    margin: 14,
+    responsive: {
+      '0': { items: 1, margin: 5 },
+      '940': { items: 3, margin: 5 }
+    }
+  }
+
   instituicoes = [
     'Universidade Federal do Rio de Janeiro – UFRJ',
     'Universidade Federal do Estado do Rio de Janeiro – UNIRIO',
     'Universidade Federal Fluminense – UFF',
     'Universidade Federal Rural do Rio de Janeiro – UFRRJ',
-    'Universidade Estadual do Rio de Janeiro – UERJ',
+    'Universidade do Estado do Rio de Janeiro – UERJ',
     'Universidade Estácio de Sá – UNESA',
     'Universidade Católica de Petrópolis – UCP',
     'Pontifícia Universidade Católica do Rio de Janeiro – PUC-Rio',
@@ -275,7 +285,7 @@ export class HomeComponent implements OnInit {
   eixos = [
     {
       titulo: 'Eixo 1',
-      tema: 'Didáticas entre diálogos, insurgências e políticas: tensões e perspectivas na relação com Formação docente',
+      tema: 'Didáticas entre diálogos, insurgências e políticas: tensões e perspectivas na relação com <span class="red" id="red">Formação docente</span>',
       temaCurto: 'com Formação docente',
       descricao: `Esse eixo temático prioriza as políticas de formação docente e os desafios de sua implementação,
       permanência e consolidação; concepções de formação de professores; formação centrada na escola e espaços colaborativos de formação;
@@ -294,7 +304,7 @@ export class HomeComponent implements OnInit {
     },
     {
       titulo: 'Eixo 2',
-      tema: 'Didáticas entre diálogos, insurgências e políticas: tensões e perspectivas na relação com Currículo e Avaliação',
+      tema: 'Didáticas entre diálogos, insurgências e políticas: tensões e perspectivas na relação com <span class="red" id="red">Currículo e Avaliação</span>',
       temaCurto: 'com Currículo e Avaliação',
       descricao: `Esse eixo temático prioriza os currículos e as avaliações nos contextos históricos e contemporâneos;
       políticas curriculares, as escolas e as salas de aula; culturas, conhecimentos e currículos; aprendizagens, currículos e avaliações;
@@ -309,8 +319,8 @@ export class HomeComponent implements OnInit {
     },
     {
       titulo: 'Eixo 3',
-      tema: `Didáticas entre diálogos, insurgências e políticas: tensões e perspectivas na relação em Direitos Humanos,
-       Interculturalidade e Religiões`,
+      tema: `Didáticas entre diálogos, insurgências e políticas: tensões e perspectivas na relação em <span class="red" id="red">Direitos Humanos,
+       Interculturalidade e Religiões</span>`,
       temaCurto: `em Direitos Humanos, Interculturalidade e Religiões`,
       descricao: `Esse eixo temático prioriza as diferenças culturais que desafiam o cotidiano escolar;
       relações entre diferenças, direitos humanos e processos de ensino-aprendizagem; questões religiosas,
@@ -326,8 +336,8 @@ export class HomeComponent implements OnInit {
     },
     {
       titulo: 'Eixo 4',
-      tema: `Didáticas entre diálogos, insurgências e políticas: tensões e perspectivas na relação entre Novas epistemologias,
-       Diferença, Biodiversidade, Democracia e Inclusão`,
+      tema: `Didáticas entre diálogos, insurgências e políticas: tensões e perspectivas na relação entre <span class="red" id="red">Novas epistemologias,
+       Diferença, Biodiversidade, Democracia e Inclusão</span>`,
       temaCurto: `entre Novas epistemologias, Diferença, Biodiversidade, Democracia e Inclusão`,
       descricao: `Esse eixo temático prioriza produções que, de uma perspectiva insurgente,
       lançam mão de novas epistemologias para pensar as tensões e desafios educacionais no contexto atual;
@@ -344,8 +354,8 @@ export class HomeComponent implements OnInit {
     },
     {
       titulo: 'Eixo 5',
-      tema: `Didáticas entre diálogos, insurgências e políticas: tensões e perspectivas na relação entre Educação,
-       Comunicação e Tecnologia`,
+      tema: `Didáticas entre diálogos, insurgências e políticas: tensões e perspectivas na relação entre <span class="red" id="red">Educação,
+       Comunicação e Tecnologia</span>`,
       temaCurto: `entre Educação, Comunicação e Tecnologia`,
       descricao: `Esse eixo temático prioriza o debate sobre educar com as mídias, para as mídias e pelas mídias;
       imagens, literacias e linguagens multimodais nas práticas pedagógicas e na formação de professores;
@@ -363,8 +373,8 @@ export class HomeComponent implements OnInit {
     },
     {
       titulo: 'Eixo 6',
-      tema: `Didáticas entre diálogos, insurgências e políticas: tensões e perspectivas na relação entre Infâncias,
-      Juventudes e Vida Adulta`,
+      tema: `Didáticas entre diálogos, insurgências e políticas: tensões e perspectivas na relação entre <span class="red" id="red">Infâncias,
+      Juventudes e Vida Adulta</span>`,
       temaCurto: `entre Infâncias, Juventudes e Vida Adulta`,
       descricao: `Esse eixo temático prioriza as abordagens teóricas, metodológicas e epistemológicas sobre infâncias,
       juventudes e vida adulta e sua relação com a educação; políticas públicas de educação para bebês, crianças, jovens,

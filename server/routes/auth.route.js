@@ -12,17 +12,50 @@ const router = express.Router();
 module.exports = router;
 
 router.post('/register', asyncHandler(register), login);
+router.post('/forgotPassword', asyncHandler(forgotPassword));
+router.post('/resetPassword', asyncHandler(resetPassword));
 router.post('/login', passport.authenticate('local', { session: false }), login);
 router.get('/me', passport.authenticate('jwt', { session: false }), login);
 router.get('/refresh', passport.authenticate('jwt', { session: false }), refresh);
 
 
 async function register(req, res, next) {
-  let user = await userCtrl.insert(req.body);
-  delete user.hashedPassword;
-  emailSender.sendMail(user.email, 'Inscrição Realizada com Sucesso', templateEmail.inscricaoSucesso);
-  req.user = user;
-  next()
+  if (req.body.document && await userCtrl.checkDocumentDup(req.body.document)) {
+    return res.status(500).send({ message: "cpf duplicado" });
+  } else {
+    let user = await userCtrl.insert(req.body);
+    delete user.hashedPassword;
+    emailSender.sendMail(user.email, 'Inscrição Realizada com Sucesso', templateEmail.inscricaoSucesso);
+    req.user = user;
+    next()
+  }
+}
+
+async function forgotPassword(req, res) {
+
+  let user = await User.findOne({ email: req.body.email, document: req.body.document });
+
+  if (!user) {
+    return res.status(400).send({ message: "Usuário inválido" });
+  }
+
+  let response = await userCtrl.generateNewPassword(user);
+
+  return res.status(response.status).send({ message: response.message });
+}
+
+
+async function resetPassword(req, res) {
+
+  let user = await User.findOne({ mailCodePassword: req.body.mailCodePassword });
+
+  if (!user) {
+    return res.status(400).send({ message: "Código inválido" });
+  }
+
+  let response = await userCtrl.resetPassword(req, user);
+
+  return res.status(response.status).send({ message: response.message });
 }
 
 async function refresh(req, res) {

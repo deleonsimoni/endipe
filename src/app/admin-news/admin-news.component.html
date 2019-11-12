@@ -9,10 +9,30 @@
                 <div class="section-header">
                     <h2>Cadastrar Notícias</h2>
                 </div>
-                <div class="form-row">
+
+                <div class="form-row row">
                     <div class="form-group col-md-12">
-                        <input type="text" name="name" class="form-control" id="name" placeholder="Nome da Notícia"
-                            formControlName="name" />
+
+
+                        <!--<input type="text" name="name" class="form-control" id="name" placeholder="texto"
+                            formControlName="name" />-->
+                        <quill-editor formControlName="name" placeholder="Texto da noticia">
+                            <div quill-editor-toolbar>
+                                <span class="ql-formats">
+                                    <button class="ql-bold" [title]="'Bold'"></button>
+                                </span>
+                                <span class="ql-formats">
+                                    <select class="ql-align" [title]="'Aligment'">
+                                        <option selected></option>
+                                        <option value="center"></option>
+                                        <option value="right"></option>
+                                        <option value="justify"></option>
+                                    </select>
+                                </span>
+                            </div>
+                        </quill-editor>
+
+
                         <div *ngIf="(validate.name.errors && !validate.name.pristine)" class="alert alert-danger">
                             <div [hidden]="!validate.name.errors.required">
                                 Preencha o campo nome da notícia
@@ -21,6 +41,7 @@
                     </div>
                 </div>
 
+                <br />
                 <div class="row justify-content-center">
                     <button type="submit" class="btn-get-started">Cadastrar</button>
                 </div>
@@ -33,9 +54,9 @@
                         <div class="row">
                             <div class="col-sm-11 border-right">
                                 <small>Noticia</small>
-                                <h4>{{ noticia.name }}</h4>
+                                <h4 [innerHTML]="noticia.name"></h4>
                             </div>
-                            <div class="col-sm-1 text-center align-self-center pointer" (click)="deletar(noticia)">
+                            <div class=" col-sm-1 text-center align-self-center pointer" (click)="deletar(noticia)">
                                 <i style="color: red;" class="fa fa-trash"></i>
                             </div>
                         </div>

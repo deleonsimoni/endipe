@@ -80,6 +80,15 @@ export class PagamentoComponent implements OnInit {
     this.filesPDF = files;
   }
 
+  public getFileNamePDFTransferencia(): string {
+    const fileName = this.filesPDF ? this.filesPDF[0].name : 'Comprovante da Transferência';
+    return fileName;
+  }
+
+  public setFileNamePDFTransferencia(files: FileList): void {
+    this.filesPDF = files;
+  }
+
   public gerarPagamento() {
     if (!this.paymentForm.value.categoryId) {
       // tslint:disable-next-line: align
@@ -102,6 +111,10 @@ export class PagamentoComponent implements OnInit {
     this.uploadService.gerarPagamento(this.filesPDF ? this.filesPDF[0] : null, 'comprovantes', this.user.document, this.paymentForm.value).subscribe(() => {
       this.enviando = false;
       this.user.payment = this.paymentForm.value;
+      if (this.paymentForm.value.categoryId === 5) {
+        this.user.payment.icValid = true;
+        this.user.payment.amount = this.valorTotal;
+      }
       this.toastr.success('Aguarde avaliação do pagamento', 'Sucesso');
       this.paymentForm.reset();
       this.filesPDF = null;
@@ -111,22 +124,39 @@ export class PagamentoComponent implements OnInit {
     });
   }
 
-  public pagar(): void {
+  public submeterTransferencia() {
 
-    const request = {
-      price: this.valorTotal
-    };
+    if (!this.filesPDF) {
+      this.toastr.error('É necessário selecionar o arquivo de comprovante de transferência', 'Atenção');
+      return;
+      // tslint:disable-next-line: align
+    } if (this.filesPDF[0].size > 2500 * 1027) {
+      this.toastr.error('O comprovante deve ter no máximo 2MB', 'Atenção');
+      return;
+    }
 
-    this.userService.pagar(request)
-      .subscribe((res) => {
-        console.log(res);
-      },
-        (err) => {
-          console.log(err);
-        });
+
+    this.enviando = true;
+
+    this.uploadService.submeterTransferencia(this.filesPDF ? this.filesPDF[0] : null, 'comprovantes', this.user.document)
+      .subscribe((res: any) => {
+        this.enviando = false;
+        this.user.payment.pathReceiptPayment = true;
+        this.toastr.success('Comprovante enviado', 'Sucesso');
+        this.filesPDF = null;
+      }, err => {
+        this.enviando = false;
+        this.toastr.error('Servidor momentaneamente inoperante.', 'Erro: ');
+      });
   }
+
 
   public showUpload() {
     return this.paymentForm.value.categoryId && (this.paymentForm.value.categoryId < 5);
   }
+
+  public retrieveCategories(id) {
+    return this.categorias.filter(element => element.id === id)[0];
+  }
+
 }

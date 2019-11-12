@@ -40,6 +40,7 @@
     "express-validation": "^1.0.2",
     "file-saver": "^2.0.2",
     "formidable": "^1.2.1",
+    "gerar-boletos": "^1.2.2",
     "helmet": "^3.12.0",
     "http-errors": "^1.6.3",
     "joi": "^13.3.0",
@@ -55,6 +56,8 @@
     "ngx-dropzone-wrapper": "^8.0.0",
     "ngx-mask": "^8.0.3",
     "ngx-owl-carousel": "^2.0.7",
+    "ngx-quill": "^7.3.1",
+    "ngx-quill-editor": "^2.2.2",
     "ngx-snackbar": "^2.0.1",
     "ngx-toastr": "^10.0.4",
     "nodemailer": "^6.3.0",
@@ -68,6 +71,7 @@
     "rxjs-compat": "^6.0.0-rc.0",
     "swagger-ui-express": "^3.0.9",
     "tslib": "^1.9.0",
+    "validar-cpf": "^2.1.1",
     "webpack-dev-server": "^3.1.10"
   },
   "devDependencies": {

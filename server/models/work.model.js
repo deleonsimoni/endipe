@@ -11,16 +11,20 @@ const WorkSchema = new mongoose.Schema({
   modalityId: {
     type: Number
   },
-  typeWork: {
-    type: Number
-  },
   axisId: {
     type: Number
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
   },
   pathS3DOC: {
     type: String
   },
   pathS3PDF: {
+    type: String
+  },
+  mainAuthor: {
     type: String
   },
   authors: [{

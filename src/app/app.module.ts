@@ -80,6 +80,7 @@ import { AdminRoutingModule } from './admin/admin.routing';
     AdminRoutingModule,
     UtilNgxMaterialModule,
     HttpClientModule,
+    QuillModule.forRoot(),
     BsDatepickerModule.forRoot(),
     BsDropdownModule.forRoot(),
     NgxMaskModule.forRoot(),
