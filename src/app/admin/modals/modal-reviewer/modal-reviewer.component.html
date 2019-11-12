@@ -8,7 +8,7 @@
     <div class="row" mat-dialog-content>
         <form role="form" class="reviewer" [formGroup]="reviewerForm" (ngSubmit)="saveReviewer()">
             <div class="form-row justify-content-center" formArrayName="reviewers"
-                *ngFor="let item of reviewers.controls; let i = index">
+                *ngFor="let item of reviewers['controls']; let i = index">
                 <div class="form-group col-md-12" [formArrayName]="i">
                     <div class="row justify-content-center">
                         <div class="align-items-center" [ngClass]="{'col-md-11': i > 0, 'col-md-12': i < 1}">

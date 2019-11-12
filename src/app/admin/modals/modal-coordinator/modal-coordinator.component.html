@@ -24,7 +24,7 @@
                 </div>
                 <div class="form-row justify-content-center">
                     <div class="form-group col-md-12">
-                        <div formArrayName="authors" *ngFor="let item of authors.controls; let i = index;">
+                        <div formArrayName="authors" *ngFor="let item of authors['controls']; let i = index;">
                             <div [formArrayName]="i">
                                 <input type="text" name="autor" class="form-control" [ngClass]="{'mt-2': i >= 1}"
                                     id="autor" placeholder="Email do coordenador" formControlName="email" />
