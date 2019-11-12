@@ -127,15 +127,24 @@ export class SubscribedComponent implements OnInit {
         this.users = this.allUsers.filter(user => !user.payment);
         break;
       case 1:
-        this.users = this.allUsers.filter(user => user.payment && user.payment.icPaid === false);
+        this.users = this.allUsers.filter(user => user.payment && (user.payment.pathS3 || user.payment.pathReceiptPayment)
+          && (!user.payment.icValid || user.payment.icValid === false)
+          && user.payment.icPaid === false);
         break;
       case 2:
-        this.users = this.allUsers.filter(user => user.payment && user.payment.icPaid === true);
+        this.users = this.allUsers.filter(user => user.payment && user.payment.pathReceiptPayment
+          && user.payment.icValid === true
+          && user.payment.icPaid === false);
         break;
       case 3:
         this.users = this.allUsers.filter(user => user.isPCD);
         break;
-
+      case 4:
+        this.users = this.allUsers.filter(user => user.works.length > 0);
+        break;
+      case 5:
+        this.users = this.allUsers.filter(user => user.payment && user.payment.icPaid === true);
+        break;
       default:
         this.users = this.allUsers;
         break;
