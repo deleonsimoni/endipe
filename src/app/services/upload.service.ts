@@ -27,6 +27,13 @@ export class UploadService {
     return this.http.post(`${this.baseUrl}/user/submeterTransferencia/xxendiperio2020/${id}`, formData);
   }
 
+  submeterConferencista(file: File, formulario: any): Observable<any> {
+    const formData: FormData = new FormData();
+    formData.append('fileArray', file, `conferencista/${file.name}`);
+    formData.append('formulario', JSON.stringify(formulario));
+    return this.http.post(`${this.baseUrl}/conferencista/conferencista`, formData);
+  }
+
   gerarPagamento(file: File, id: string, document: string, formulario: any): Observable<any> {
     const formData: FormData = new FormData();
     if (file) {

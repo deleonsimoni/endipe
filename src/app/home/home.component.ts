@@ -62,7 +62,7 @@ export class HomeComponent implements OnInit {
     'Inês Barbosa de Oliveira – UNESA',
     'Maria Inês Marcondes – PUC-Rio',
     'Naiara Miranda Rust – IBC',
-    'Rosana Evangelista Dias – UERJ',
+    'Rosanne Evangelista Dias – UERJ',
     'Vera Maria Ferrão Candau – PUC-Rio',
     'Yrlla Ribeiro de Oliveira Carneiro da Silva – INES'
   ];

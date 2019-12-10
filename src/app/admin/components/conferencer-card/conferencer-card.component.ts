@@ -9,7 +9,9 @@ import { Component, Input } from '@angular/core';
 export class ConferencerCardComponent {
 
   @Input() public name: string;
-  @Input() public institution: string;
+  @Input() public imagePathS3: string;
+  @Input() public description: string;
+
 
   constructor() { }
 
