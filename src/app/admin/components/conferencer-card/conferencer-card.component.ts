@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -12,6 +12,7 @@ export class ConferencerCardComponent {
   @Input() public imagePathS3: string;
   @Input() public description: string;
 
+  @ViewChild('imageRender', { static: false }) imageRender: ElementRef;
 
   constructor() { }
 

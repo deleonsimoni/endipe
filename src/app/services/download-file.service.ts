@@ -22,4 +22,5 @@ export class DownloadFileService {
       falha(err);
     });
   }
+
 }

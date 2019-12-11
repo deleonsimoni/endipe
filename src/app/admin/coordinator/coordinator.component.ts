@@ -16,13 +16,15 @@ export class CoordinatorComponent implements OnInit, OnDestroy {
   private coordinatorsUnsub$ = new Subject();
 
   public eixos = [
-    { id: 1, name: 'Eixo 1' },
-    { id: 2, name: 'Eixo 2' },
-    { id: 3, name: 'Eixo 3' },
-    { id: 4, name: 'Eixo 4' },
-    { id: 5, name: 'Eixo 5' },
-    { id: 6, name: 'Eixo 6' }
+    { id: 1, name: 'Formação docente' },
+    { id: 2, name: 'Currículo e avaliação' },
+    { id: 3, name: 'Direitos humanos, Interculturalidade e Religiões' },
+    { id: 4, name: 'Nova epistemologia, Diferença, Biodiversidade, Democracia e Inclusão' },
+    { id: 5, name: 'Educação, Comunicação e Técnologia' },
+    { id: 6, name: 'Infâncias, Juventudes e Vida Adulta' }
   ];
+
+  public axisId;
 
   constructor(
     private dialog: MatDialog,
