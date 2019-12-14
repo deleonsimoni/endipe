@@ -25,16 +25,24 @@ export class AdminService {
     return this.http.get(`${this.baseUrl}/admin/usrs`);
   }
 
-  public registerCoordinator(form) {
-    return this.http.post(`${this.baseUrl}/user/coordinator`, form);
+  public registerCoordinator(form, axisId) {
+    return this.http.post(`${this.baseUrl}/user/coordinator/${axisId}`, form);
   }
 
-  public retrieveCoordinators() {
-    return this.http.get<any>(`${this.baseUrl}/user/coordinators`);
+  public retrieveCoordinators(axisId) {
+    return this.http.get<any>(`${this.baseUrl}/user/coordinators/${axisId}`);
   }
 
   public deleteCoordinator(id) {
     return this.http.delete(`${this.baseUrl}/user/coordinator/${id}`);
+  }
+
+  public markCoordinator(id) {
+    return this.http.post(`${this.baseUrl}/user/markCoordinator/${id}`, null);
+  }
+
+  public unmarkCoordinator(id) {
+    return this.http.post(`${this.baseUrl}/user/unmarkCoordinator/${id}`, null);
   }
 
   public registerReviewers(form) {

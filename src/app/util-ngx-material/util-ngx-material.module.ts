@@ -11,7 +11,8 @@ import {
   MatIconModule,
   MatToolbarModule,
   MatListModule,
-  MatCardModule
+  MatCardModule,
+  MatCheckboxModule
 } from '@angular/material';
 
 @NgModule({
@@ -26,7 +27,8 @@ import {
     MatIconModule,
     MatToolbarModule,
     MatListModule,
-    MatCardModule
+    MatCardModule,
+    MatCheckboxModule
   ]
 })
 export class UtilNgxMaterialModule { }

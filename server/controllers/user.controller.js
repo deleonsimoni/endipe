@@ -37,7 +37,9 @@ module.exports = {
   generateNewPassword,
   resetPassword,
   getBoleto,
-  submeterTransferencia
+  submeterTransferencia,
+  markCoordinator,
+  unmarkCoordinator
 }
 
 async function insert(user) {
@@ -497,7 +499,7 @@ async function updateUsers(users, workId) {
 
 }
 
-async function createCoordinator(coordinators) {
+async function createCoordinator(coordinators, axisId) {
 
   let retorno = {
     temErro: false,
@@ -513,10 +515,10 @@ async function createCoordinator(coordinators) {
   } else {
 
     retorno.userId.forEach(async user => {
-      await User.findOneAndUpdate({ _id: user }, { $set: { coordinator: { icModalityId: coordinators.axis } } });
+      await User.findOneAndUpdate({ _id: user }, { $set: { reviewer: { icModalityId: axisId } } });
     });
 
-    retorno.mensagem = `Coordenador cadastrado com sucesso`;
+    retorno.mensagem = `Cadastro realizado com sucesso`;
     retorno.temErro = false;
 
   }
@@ -524,7 +526,6 @@ async function createCoordinator(coordinators) {
   return retorno;
 
 }
-
 
 async function validateCoordinator(authors, retorno) {
 
@@ -540,13 +541,6 @@ async function validateCoordinator(authors, retorno) {
         retorno.userEmail.push(author.email);
         retorno.temErro = true;
         retorno.mensagem = `Usuário ${author.email} não está cadastrado no sistema`;
-        reject(retorno);
-
-      } else if (user.coordinator && user.coordinator.icModalityId) {
-
-        retorno.userEmail.push(author.email);
-        retorno.temErro = true;
-        retorno.mensagem = `O usuário ${author.email} já possui cadastro como coordenador`;
         reject(retorno);
 
       } else if (user.reviewer && user.reviewer.icModalityId) {
@@ -572,12 +566,50 @@ async function validateCoordinator(authors, retorno) {
 
 };
 
-async function getCoordinator() {
-  return await User.find({ coordinator: { $ne: null } }).sort({ fullname: 1 });
+
+async function markCoordinator(id) {
+
+  let retorno = {
+    temErro: false,
+    mensagem: '',
+    userEmail: [],
+    userId: []
+  }
+
+  await User.findOneAndUpdate({ _id: id }, { $set: { 'reviewer.icCoordinator': true } });
+
+  retorno.mensagem = `Cadastro realizado com sucesso`;
+  retorno.temErro = false;
+
+  return retorno;
+
+}
+
+async function unmarkCoordinator(id) {
+
+  let retorno = {
+    temErro: false,
+    mensagem: '',
+    userEmail: [],
+    userId: []
+  }
+
+  await User.findOneAndUpdate({ _id: id }, { $set: { 'reviewer.icCoordinator': false } });
+
+  retorno.mensagem = `Coordenador removido com sucesso`;
+  retorno.temErro = false;
+
+  return retorno;
+
+}
+
+
+async function getCoordinator(axisId) {
+  return await User.find({ 'reviewer.icModalityId': axisId }).sort({ fullname: 1 });
 }
 
 async function deleteCoordinator(id) {
-  await User.findByIdAndUpdate({ _id: id }, { $unset: { coordinator: '' } });
+  await User.findByIdAndUpdate({ _id: id }, { $unset: { reviewer: '' } });
   return null;
 }
 

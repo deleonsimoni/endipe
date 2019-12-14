@@ -1,24 +1,33 @@
 <div class="form">
 
-
-    <select class="form-control" placeholder="Eixo" id="opt" [(ngModel)]="axisId">
-        <option disabled="true" selected="true">
-            Selecione o
-            eixo</option>
+    Selecione o eixo
+    <select class="form-control" (change)="listReviewer()" placeholder="Eixo" id="opt" [(ngModel)]="axisId">
         <option *ngFor="let eixo of eixos" [value]="eixo.id">{{ eixo.name }}
         </option>
     </select>
 
 
-
+    <hr />
     <div class="card-works" *ngFor="let coordinator of coordinators; let i = index"
         [ngClass]="{'mb-3': coordinators.length > 1}">
         <div class="row">
+            <div class="col-sm-2 border-right">
+                <section class="example-section">
+                    <small>COORDENADOR?</small>
+                    <section class="example-section">
+                        <mat-checkbox #checkboxMultiple [value]="[coordinator, i]"
+                            (change)="markCoordinator(coordinator._id, $event)" type="checkbox" class="example-margin"
+                            [checked]="coordinator.reviewer.icCoordinator">
+                            Sim
+                        </mat-checkbox>
+                    </section>
+                </section>
+            </div>
             <div class="col-sm-4 border-right">
                 <small>NOME</small>
                 <h4>{{ coordinator.fullname }}</h4>
             </div>
-            <div class="col-sm-7 border-right">
+            <div class="col-sm-5 border-right">
                 <small>EMAIL</small>
                 <h4>{{ coordinator.email }}</h4>
             </div>
@@ -28,6 +37,10 @@
         </div>
     </div>
 
+
+    <div *ngIf="coordinators.length == 0">
+        <h4>Não há usuários para este eixo</h4>
+    </div>
 
     <div *ngIf="axisId" class="row justify-content-end">
         <button class="btn-get-started" (click)="showRegister()">CADASTRAR</button>
