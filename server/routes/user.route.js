@@ -19,7 +19,7 @@ router.use(passport.authenticate('jwt', { session: false }))
 router.get('/price/:id', passport.authenticate('jwt', { session: false }), asyncHandler(price));
 router.get('/downloadFile', passport.authenticate('jwt', { session: false }), downloadFile);
 router.get('/coordinators/:axisId', passport.authenticate('jwt', { session: false }), getCoordinator);
-router.get('/reviewer', passport.authenticate('jwt', { session: false }), getReviewer);
+router.get('/reviewer/:axisId', passport.authenticate('jwt', { session: false }), getReviewer);
 router.get('/getBoleto', passport.authenticate('jwt', { session: false }), asyncHandler(getBoleto));
 
 
@@ -31,6 +31,7 @@ router.post('/coordinator/:axisId', passport.authenticate('jwt', { session: fals
 router.post('/markCoordinator/:id', passport.authenticate('jwt', { session: false }), markCoordinator);
 router.post('/unmarkCoordinator/:id', passport.authenticate('jwt', { session: false }), unmarkCoordinator);
 router.post('/reviewer', passport.authenticate('jwt', { session: false }), createReviewer);
+router.post('/markReviewer/:idWork/:idReviewer/:reviewerMail', passport.authenticate('jwt', { session: false }), markReviewer);
 
 
 router.delete('/coordinator/:id', passport.authenticate('jwt', { session: false }), deleteCoordinator);
@@ -98,7 +99,7 @@ async function getCoordinator(req, res) {
 }
 
 async function getReviewer(req, res) {
-  let reviewers = await userCtrl.getReviewer();
+  let reviewers = await userCtrl.getReviewer(req.params.axisId);
   res.json({ reviewers });
 }
 
@@ -115,6 +116,11 @@ async function markCoordinator(req, res) {
 async function unmarkCoordinator(req, res) {
   let coordinators = await userCtrl.unmarkCoordinator(req.params.id);
   res.json({ coordinators });
+}
+
+async function markReviewer(req, res) {
+  let reviewer = await userCtrl.markReviewer(req.params.idWork, req.params.idReviewer, req.params.reviewerMail);
+  res.json({ reviewer });
 }
 
 async function createReviewer(req, res) {

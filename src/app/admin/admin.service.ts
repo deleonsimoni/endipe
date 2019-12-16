@@ -41,6 +41,10 @@ export class AdminService {
     return this.http.post(`${this.baseUrl}/user/markCoordinator/${id}`, null);
   }
 
+  public markReviewerWork(idWork, idReviewer, emailReviewer) {
+    return this.http.post(`${this.baseUrl}/user/markReviewerWork/${idWork}/${idReviewer}/${emailReviewer}`, null);
+  }
+
   public unmarkCoordinator(id) {
     return this.http.post(`${this.baseUrl}/user/unmarkCoordinator/${id}`, null);
   }
@@ -49,8 +53,8 @@ export class AdminService {
     return this.http.post(`${this.baseUrl}/user/reviewer`, form);
   }
 
-  public retrieveReviewers() {
-    return this.http.get<any>(`${this.baseUrl}/user/reviewer`);
+  public retrieveReviewers(id) {
+    return this.http.get<any>(`${this.baseUrl}/user/reviewer/${id}`);
   }
 
   public deleteReviewer(id) {

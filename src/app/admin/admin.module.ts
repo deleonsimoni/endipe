@@ -22,6 +22,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ModalModule } from './modals/modal.module';
 import { ConferencerCardComponent } from './components/conferencer-card/conferencer-card.component';
 import { UtilNgxMaterialModule } from '../util-ngx-material/util-ngx-material.module';
+import { VincularTrabalhosComponent } from './vincular-trabalhos/vincular-trabalhos.component';
 
 @NgModule({
     declarations: [
@@ -37,7 +38,8 @@ import { UtilNgxMaterialModule } from '../util-ngx-material/util-ngx-material.mo
         WorkCardComponent,
         ConferencerComponent,
         NotFoundComponent,
-        ConferencerCardComponent
+        ConferencerCardComponent,
+        VincularTrabalhosComponent
     ],
     entryComponents: [
         AdminComponent,

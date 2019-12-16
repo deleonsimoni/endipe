@@ -39,7 +39,8 @@ module.exports = {
   getBoleto,
   submeterTransferencia,
   markCoordinator,
-  unmarkCoordinator
+  unmarkCoordinator,
+  markReviewer,
 }
 
 async function insert(user) {
@@ -585,6 +586,30 @@ async function markCoordinator(id) {
 
 }
 
+
+async function markReviewer(idWork, idReviewer, reviewerEmail) {
+
+  let retorno = {
+    temErro: false,
+    mensagem: '',
+    userEmail: [],
+    userId: []
+  }
+
+  let work = await Work.findById({ _id: idWork });
+
+  if (!idReviewer && work.reviewers && work.reviewers[0].review && work.reviewers[0].review.icAllow) {
+    retorno.temErro = true;
+    retorno.mensagem = "O parecerista já lançou seu parecer sobre o trabalho, não pode ser desvinculado"
+  } else {
+    work.reviewers[0] = { userId: idReviewer, userEmail: reviewerEmail };
+    await work.save();
+  }
+
+  return retorno;
+
+}
+
 async function unmarkCoordinator(id) {
 
   let retorno = {
@@ -613,8 +638,10 @@ async function deleteCoordinator(id) {
   return null;
 }
 
-async function getReviewer() {
-  return await User.find({ reviewer: { $ne: null } }).sort({ fullname: 1 });
+async function getReviewer(axisId) {
+  return await User.find({ $and: [{ 'reviewer.icModalityId': axisId }, { 'reviewer.icCoordinator': { $ne: true } }] })
+    .select('_id email')
+    .sort({ fullname: 1 });
 }
 
 async function createReviewer(reviewer) {

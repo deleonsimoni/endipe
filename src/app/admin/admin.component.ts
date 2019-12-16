@@ -33,10 +33,12 @@ export class AdminComponent implements OnInit {
     { name: 'NOTICÍAS', path: '/admin/noticias' },
     { name: 'CONFERENCISTAS', path: '/admin/conferencistas' },
     { name: 'PARECERISTAS/COORDENADORES', path: '/admin/coordenadores' },
+    { name: 'VINCULAR TRABALHOS', path: '/admin/vincularTrabalhos' },
+
   ];
 
   private nonAdminRoutes = [
-    { name: 'TRABALHOS', path: '/admin/trabalhos' },
+    //{ name: 'TRABALHOS', path: '/admin/trabalhos' },
   ];
 
   constructor(
@@ -53,7 +55,7 @@ export class AdminComponent implements OnInit {
     if (this.user && this.user.icAdmin) {
       this.menu = this.adminRoutes;
     } else {
-      this.menu = [];
+      this.menu = this.nonAdminRoutes;
     }
   }
 }

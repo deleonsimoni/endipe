@@ -1,0 +1,21 @@
+<div class="form">
+
+    Selecione o eixo
+    <select class="form-control" (change)="loadData()" placeholder="Eixo" id="opt" [(ngModel)]="axisId">
+        <option *ngFor="let eixo of eixos" [value]="eixo.id">{{ eixo.name }}
+        </option>
+    </select>
+
+
+    <hr />
+
+    <div *ngFor="let work of works; let i = index" [ngClass]="{'mb-3': works.length > 1}">
+        <work-card [work]="work" [reviewers]="reviewers" (selected)="receiverSelectedWork($event)">
+        </work-card>
+    </div>
+
+    <div *ngIf="works.length == 0">
+        <h4>Não há trabalhos para este eixo</h4>
+    </div>
+
+</div>
