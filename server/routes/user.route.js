@@ -31,7 +31,7 @@ router.post('/coordinator/:axisId', passport.authenticate('jwt', { session: fals
 router.post('/markCoordinator/:id', passport.authenticate('jwt', { session: false }), markCoordinator);
 router.post('/unmarkCoordinator/:id', passport.authenticate('jwt', { session: false }), unmarkCoordinator);
 router.post('/reviewer', passport.authenticate('jwt', { session: false }), createReviewer);
-router.post('/markReviewer/:idWork/:idReviewer/:reviewerMail', passport.authenticate('jwt', { session: false }), markReviewer);
+router.post('/markReviewerWork/:idWork/:idReviewer/:reviewerMail', passport.authenticate('jwt', { session: false }), markReviewer);
 
 
 router.delete('/coordinator/:id', passport.authenticate('jwt', { session: false }), deleteCoordinator);

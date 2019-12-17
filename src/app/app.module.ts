@@ -70,7 +70,7 @@ import { ResetSenhaComponent } from './reset-senha/reset-senha.component';
     ListarTrabalhosComponent,
     PerfilComponent,
     EsqueciSenhaComponent,
-    ResetSenhaComponent
+    ResetSenhaComponent,
   ],
   imports: [
     BrowserModule,

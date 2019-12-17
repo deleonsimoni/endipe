@@ -12,6 +12,9 @@
     <div *ngFor="let work of works; let i = index" [ngClass]="{'mb-3': works.length > 1}">
         <work-card [work]="work" [reviewers]="reviewers" (selected)="receiverSelectedWork($event)">
         </work-card>
+
+        <app-work-data [work]="work"  *ngIf="user.icAdmin && (work && work._id == workSelect)">
+        </app-work-data>
     </div>
 
     <div *ngIf="works.length == 0">

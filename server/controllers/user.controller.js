@@ -607,7 +607,6 @@ async function markReviewer(idWork, idReviewer, reviewerEmail) {
   }
 
   return retorno;
-
 }
 
 async function unmarkCoordinator(id) {

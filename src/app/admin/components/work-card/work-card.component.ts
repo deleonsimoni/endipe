@@ -16,7 +16,7 @@ export class WorkCardComponent implements OnInit {
 
   @Output() selected = new EventEmitter();
 
-  public markers = [];
+  public selectReview;
 
   ngOnInit() {
 
@@ -32,23 +32,18 @@ export class WorkCardComponent implements OnInit {
     this.selected.emit(work);
   }
 
-  public selectReviewer(reviewerId, workId) {
-    this.markers.push(reviewerId, workId);
-  }
-
   public markReviewerWork(idWork): void {
-
-    let reviewer = this.markers.find(element => element._i);
-
-
-    this.adminService.markReviewerWork(idWork, reviewer._id, reviewer.email)
-      .subscribe((res: any) => {
-        if (res.temErro) {
-          this.toastr.error('Erro', res);
-        } else {
-
-          this.toastr.success('Sucesso', 'Parecerista vinculado com sucesso ao trabalho');
-        }
-      });
+    if(!this.selectReview){
+      this.toastr.error('Erro', 'É necessário selecionar um parecerista');
+    } else {
+      this.adminService.markReviewerWork(idWork, this.selectReview._id, this.selectReview.email)
+        .subscribe((res: any) => {
+          if (res.temErro) {
+            this.toastr.error('Erro', res);
+          } else {
+            this.toastr.success('Sucesso', 'Parecerista vinculado com sucesso ao trabalho');
+          }
+        });
+    }
   }
 }
