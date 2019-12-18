@@ -888,7 +888,10 @@
                             </tr>
                             <tr>
                                 <th class="text-nowrap">Submissão de Trabalhos</th>
-                                <th class="text-nowrap">16 de outubro a 18 de dezembro de 2019</th>
+                                <th class="text-nowrap">
+                                    <s>16 de outubro a 18 de dezembro de 2019</s><br />
+                                    <b style="color: red;">PRORROGADA ATÉ 31/01/2020</b>
+                                </th>
                             </tr>
                             <tr>
                                 <th class="text-nowrap">Avaliação pelo Comitê Cientifico</th>
@@ -948,26 +951,30 @@
             <div class="section-header">
                 <h2>Hospedagem</h2>
             </div>
-            <div class="row contact-info" style="text-align: left;cursor: pointer;">
+            <div class="row contact-info" style="text-align: left;">
                 <p class="box wow fadeInLeft">Informações sobre:</p><br /><br />
                 <div class="col-lg-12">
-                    <div class="box wow fadeInLeft">
+                    <div class="box wow fadeInLeft" style="cursor: pointer;" (click)="openDialogHospedagem()">
                         <h4 class="title"><a>Hospedagem</a></h4>
                     </div>
                 </div>
                 <div class="col-lg-12">
-                    <div class="box wow fadeInLeft">
-                        <h4 class="title"><a>Alimentação</a></h4>
+                    <div class="box wow fadeInLeft" style="cursor: pointer;" (click)="openDialogAlimentacao()">
+                        <h4 class=" title"><a>Alimentação</a></h4>
                     </div>
                 </div>
                 <div class="col-lg-12">
-                    <div class="box wow fadeInLeft">
-                        <h4 class="title"><a>Transporte</a></h4>
+                    <div class="box wow fadeInLeft" style="cursor: pointer;" (click)="openDialogTransporte()">
+                        <h4 class=" title"><a>Transporte</a></h4>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="box wow fadeInLeft" style="cursor: pointer;" (click)="openDialogTurismo()">
+                        <h4 class=" title"><a>Turismo</a></h4>
                     </div>
                 </div>
 
             </div>
-            <strong style="color:red">*Informações a partir de dezembro</strong>
         </div>
     </section>
     <!-- #testimonials -->

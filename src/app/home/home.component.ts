@@ -13,6 +13,10 @@ import { ModalNormasPosterComponent } from '../modal-normas/modal-expositor-post
 import { DownloadFileService } from '../services/download-file.service';
 import { ToastrService } from 'ngx-toastr';
 import { NoticiasService } from '../services/noticias.service';
+import { ModalHospedagemComponent } from '../modal-hospedagem/modal-hospedagem.component';
+import { ModalAlimentacaoComponent } from '../modal-alimentacao/modal-alimentacao.component';
+import { ModalTransporteComponent } from '../modal-transporte/modal-transporte.component';
+import { ModalTurismoComponent } from '../modal-turismo/modal-turismo.component';
 
 
 @Component({
@@ -539,6 +543,22 @@ export class HomeComponent implements OnInit {
     const dialogRef = this.dialog.open(ModalProgramacaoComponent, {
       data: { item: programacao }
     });
+  }
+
+  public openDialogHospedagem() {
+    const dialogRef = this.dialog.open(ModalHospedagemComponent);
+  }
+
+  public openDialogAlimentacao() {
+    const dialogRef = this.dialog.open(ModalAlimentacaoComponent);
+  }
+
+  public openDialogTransporte() {
+    const dialogRef = this.dialog.open(ModalTransporteComponent);
+  }
+
+  public openDialogTurismo() {
+    const dialogRef = this.dialog.open(ModalTurismoComponent);
   }
 
   public openDialogNormas() {
