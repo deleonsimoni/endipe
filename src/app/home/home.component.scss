@@ -112,6 +112,9 @@
   .section-header h2::before {
     background: #fff;
   }
+  .section-header h3::before {
+    background: #fff;
+  }
   .timetable-box-wrapper {
     text-align: center;
     background: #e8edf2;
@@ -157,6 +160,9 @@
   }
 
   .section-header h2::before {
+    background: #fff;
+  }
+  .section-header h3::before {
     background: #fff;
   }
   .timetable-box-wrapper {
@@ -256,6 +262,9 @@
   border-top: 1px solid #f2f2f2;
   padding: 50px 0;
   .section-header h2::before {
+    background: #fff;
+  }
+  .section-header h3::before {
     background: #fff;
   }
 }
@@ -393,6 +402,9 @@ mat-tab-group {
   }
 
   .section-header h2::before {
+    background: #fff;
+  }
+  .section-header h3::before {
     background: #fff;
   }
 }

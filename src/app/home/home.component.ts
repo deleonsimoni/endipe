@@ -17,6 +17,7 @@ import { ModalHospedagemComponent } from '../modal-hospedagem/modal-hospedagem.c
 import { ModalAlimentacaoComponent } from '../modal-alimentacao/modal-alimentacao.component';
 import { ModalTransporteComponent } from '../modal-transporte/modal-transporte.component';
 import { ModalTurismoComponent } from '../modal-turismo/modal-turismo.component';
+import { ModalConferencistasComponent } from '../modal-conferencistas/modal-conferencistas.component';
 
 
 @Component({
@@ -462,6 +463,10 @@ export class HomeComponent implements OnInit {
       titulo: 'Reuniões de Entidades e de Redes',
       horarios: []
     },
+    {
+      titulo: 'Conferencistas',
+      horarios: []
+    },
   ]
 
   constructor(
@@ -540,9 +545,13 @@ export class HomeComponent implements OnInit {
   }
 
   public openDialogProgramacao(programacao) {
-    const dialogRef = this.dialog.open(ModalProgramacaoComponent, {
-      data: { item: programacao }
-    });
+    if (programacao.titulo == 'Conferencistas') {
+      this.dialog.open(ModalConferencistasComponent);
+    } else {
+      const dialogRef = this.dialog.open(ModalProgramacaoComponent, {
+        data: { item: programacao }
+      });
+    }
   }
 
   public openDialogHospedagem() {
