@@ -24,6 +24,8 @@ export class VincularTrabalhosComponent implements OnInit {
   public reviewers = [];
   public user;
   public workSelect;
+  public status;
+  public allWorks = [];
 
   constructor(
     private dialog: MatDialog,
@@ -44,13 +46,33 @@ export class VincularTrabalhosComponent implements OnInit {
     }
   }
 
+  public filtrarStatus() {
+
+    switch (Number(this.status)) {
+      case 0:
+        this.works = this.allWorks;
+        break;
+      case 1:
+        this.works = this.allWorks.filter(work => !work.reviewAdmin);
+        break;
+      case 2:
+        this.works = this.allWorks.filter(work => work.reviewAdmin && work.reviewAdmin.review.icAllow == "Não");
+        break;
+      case 3:
+        this.works = this.allWorks.filter(work => work.reviewAdmin && work.reviewAdmin.review.icAllow == "Sim");
+        break;
+    }
+  }
+
   loadData() {
     this.adminService.retrieveAllWorks(this.axisId)
       .subscribe(res => {
         if (res.temErro) {
           this.toastr.error('Erro', res);
         } else {
-          this.works = res;
+
+          this.allWorks = res;
+          this.works = this.allWorks
         }
       });
 
