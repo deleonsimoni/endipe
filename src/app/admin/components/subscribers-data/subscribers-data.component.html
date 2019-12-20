@@ -62,8 +62,8 @@
                 </div>
             </div>
             <div *ngIf="subscribed.payment && subscribed.payment.pathReceiptPayment">
-                <p><a [routerLink]="" (click)="download(subscribed.payment.pathReceiptPayment)">Comprovante
-                        Transferência</a>
+                <p><a [routerLink]="" (click)="download(subscribed.payment.pathS3)">Comprovante
+                        Inscrição</a>
                 </p>
             </div>
         </div>
@@ -83,7 +83,7 @@
                 </div>
             </div>
             <div *ngIf="subscribed.payment && subscribed.payment.pathS3">
-                <p><a [routerLink]="" (click)="download(subscribed.payment.pathS3)">Comprovante
+                <p><a [routerLink]="" (click)="download(subscribed.payment.pathReceiptPayment)">Comprovante
                         Pagamento</a>
                 </p>
             </div>
