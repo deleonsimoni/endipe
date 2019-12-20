@@ -5,26 +5,25 @@
     </div>
     <div class="row">
         <div mat-dialog-content>
-            <div class="row" *ngFor="let simposio of programacao.simposios">
+            <div class="row">
                 <table class="table table-responsive table-striped">
                     <thead>
                         <tr>
-                            <th colspan="2">{{ simposio.tema }} <span class="text-danger">{{ simposio.tipo }}</span>
+                            <th colspan="2">
+                                <p>
+                                    <strong>{{ programacao.data }} - {{ programacao.horario }}</strong>
+                                </p>
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let palestra of simposio.palestras">
+                        <tr>
                             <th>
-                                <h4>{{ palestra.classificacao }}</h4>
-                                <p><strong>{{ palestra.tema }}</strong></p>
-                                <p>HORÁRIO: {{ palestra.horario }}</p>
-                                <p>LOCAL: {{ palestra.local }}</p>
+                                <p *ngFor="let palestra of programacao.sessao">{{ palestra.horario }}
+                                    {{ palestra.titulo }}</p>
                             </th>
                             <th>
-                                <p *ngFor="let coordenador of palestra.coordenadores">
-                                    {{ coordenador }}
-                                </p>
+                                <p *ngFor="let coordenador of programacao.coordenadores">{{ coordenador }}</p>
                             </th>
                         </tr>
                     </tbody>

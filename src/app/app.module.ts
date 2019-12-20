@@ -51,6 +51,8 @@ import { ModalTransporteComponent } from './modal-transporte/modal-transporte.co
 import { ModalAlimentacaoComponent } from './modal-alimentacao/modal-alimentacao.component';
 import { ModalTurismoComponent } from './modal-turismo/modal-turismo.component';
 import { ModalConferencistasComponent } from './modal-conferencistas/modal-conferencistas.component';
+import { ModalEncerramentoComponent } from './modal-encerramento/modal-encerramento.component';
+import { ModalAberturaComponent } from './modal-abertura/modal-abertura.component';
 
 @NgModule({
   declarations: [
@@ -85,6 +87,8 @@ import { ModalConferencistasComponent } from './modal-conferencistas/modal-confe
     ModalAlimentacaoComponent,
     ModalTurismoComponent,
     ModalConferencistasComponent,
+    ModalEncerramentoComponent,
+    ModalAberturaComponent,
   ],
   imports: [
     BrowserModule,
@@ -125,6 +129,7 @@ import { ModalConferencistasComponent } from './modal-conferencistas/modal-confe
     ModalTransporteComponent,
     ModalTurismoComponent,
     ModalConferencistasComponent,
+    ModalEncerramentoComponent,
     RegisterComponent
   ],
   providers: [

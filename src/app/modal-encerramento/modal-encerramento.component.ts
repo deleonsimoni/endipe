@@ -3,11 +3,11 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ModalProgramacaoComponent } from '../modal-programacao/modal-programacao.component';
 
 @Component({
-  selector: 'app-modal-simposio',
-  templateUrl: './modal-simposio.component.html',
-  styleUrls: ['./modal-simposio.component.scss']
+  selector: 'app-modal-encerramento',
+  templateUrl: './modal-encerramento.component.html',
+  styleUrls: ['./modal-encerramento.component.scss']
 })
-export class ModalSimposioComponent implements OnInit {
+export class ModalEncerramentoComponent implements OnInit {
 
   public programacao;
 
