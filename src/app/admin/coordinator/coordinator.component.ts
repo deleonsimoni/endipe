@@ -1,9 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { ModalCoordinatorComponent } from '../modals/modal-coordinator/modal-coordinator.component';
 import { AdminService } from '../admin.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-coordinator',
@@ -14,6 +15,7 @@ export class CoordinatorComponent implements OnInit, OnDestroy {
 
   public coordinators = [];
   private coordinatorsUnsub$ = new Subject();
+  @ViewChildren('checkboxMultiple') private checkboxesMultiple: QueryList<any>;
 
   public eixos = [
     { id: 1, name: 'Formação docente' },
@@ -24,15 +26,16 @@ export class CoordinatorComponent implements OnInit, OnDestroy {
     { id: 6, name: 'Infâncias, Juventudes e Vida Adulta' }
   ];
 
-  public axisId;
+  public axisId = null;
 
   constructor(
     private dialog: MatDialog,
-    private adminService: AdminService
+    private adminService: AdminService,
+    private toastr: ToastrService,
   ) { }
 
   ngOnInit() {
-    this.listCoordinators();
+
   }
 
   ngOnDestroy() {
@@ -40,26 +43,64 @@ export class CoordinatorComponent implements OnInit, OnDestroy {
     this.coordinatorsUnsub$.complete();
   }
 
-  showRegister() {
-    const dialogRef = this.dialog.open(ModalCoordinatorComponent);
-    dialogRef.afterClosed().subscribe(res => {
-      this.listCoordinators();
-    });
-  }
 
-  private listCoordinators() {
-    this.adminService.retrieveCoordinators()
+  listReviewer() {
+    this.adminService.retrieveCoordinators(this.axisId)
       .pipe(
         takeUntil(this.coordinatorsUnsub$)
       )
       .subscribe(({ coordinators }) => this.coordinators = coordinators);
   }
 
+  showRegister() {
+    const dialogRef = this.dialog.open(ModalCoordinatorComponent, { data: this.axisId });
+    dialogRef.afterClosed().subscribe(res => {
+      this.listReviewer();
+    });
+  }
+
+
+  public markCoordinator(id, event): void {
+    const index = event.source.value[1];
+    const checkboxesArray = this.checkboxesMultiple.toArray();
+    if (checkboxesArray[index].checked === false) {
+      this.adminService.unmarkCoordinator(id)
+        .subscribe(({ coordinators }: any) => {
+          if (coordinators.temErro) {
+            this.toastr.error(coordinators.mensagem);
+          } else {
+            this.toastr.success(coordinators.mensagem);
+            this.listReviewer();
+          }
+        });
+    } else {
+
+      if (this.coordinators.some(coordinator => coordinator.reviewer.icCoordinator === true)) {
+        this.toastr.error("Este eixo já possui coordenador cadastrado");
+        checkboxesArray[index].checked = false;
+      } else {
+        this.adminService.markCoordinator(id)
+          .subscribe(({ coordinators }: any) => {
+            if (coordinators.temErro) {
+              this.toastr.error(coordinators.mensagem);
+            } else {
+              this.toastr.success(coordinators.mensagem);
+              this.listReviewer();
+            }
+          });
+      }
+
+    }
+  }
+
+
   public removeCoordinator(id) {
     this.adminService.deleteCoordinator(id)
       .pipe(
         takeUntil(this.coordinatorsUnsub$)
       )
-      .subscribe(() => this.listCoordinators());
+      .subscribe(() => this.listReviewer());
   }
+
+
 }

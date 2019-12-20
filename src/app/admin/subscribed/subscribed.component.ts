@@ -40,7 +40,7 @@ export class SubscribedComponent implements OnInit {
     if (this.user && !this.user.icAdmin) {
       this.retrieveWorks(this.user.coordinator || this.user.reviewer)
         .subscribe(res => {
-          console.log(res);
+          //console.log(res);
         });
     } else {
       this.retrieveAdminData();
@@ -58,7 +58,7 @@ export class SubscribedComponent implements OnInit {
   private retrieveAdminData() {
     this.adminService.retrieveUsers()
       .subscribe((res: any[]) => {
-        console.log(res);
+        //console.log(res);
         this.allUsers = res;
         this.users = res;
       });

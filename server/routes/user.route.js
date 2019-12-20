@@ -18,16 +18,22 @@ router.use(passport.authenticate('jwt', { session: false }))
 
 router.get('/price/:id', passport.authenticate('jwt', { session: false }), asyncHandler(price));
 router.get('/downloadFile', passport.authenticate('jwt', { session: false }), downloadFile);
-router.get('/coordinators', passport.authenticate('jwt', { session: false }), getCoordinator);
-router.get('/reviewer', passport.authenticate('jwt', { session: false }), getReviewer);
+router.get('/coordinators/:axisId', passport.authenticate('jwt', { session: false }), getCoordinator);
+router.get('/reviewer/:axisId', passport.authenticate('jwt', { session: false }), getReviewer);
 router.get('/getBoleto', passport.authenticate('jwt', { session: false }), asyncHandler(getBoleto));
+
 
 router.post('/uploadWork/xxendiperio2020/:id', [passport.authenticate('jwt', { session: false }), fileUpload()], asyncHandler(uploadWork));
 router.post('/submeterTransferencia/xxendiperio2020/:id', [passport.authenticate('jwt', { session: false }), fileUpload()], asyncHandler(submeterTransferencia));
 router.post('/payment', passport.authenticate('jwt', { session: false }), payment);
 router.post('/gerarPagamento/xxendiperio2020/:id', passport.authenticate('jwt', { session: false }), payment);
-router.post('/coordinator', passport.authenticate('jwt', { session: false }), createCoordinator);
+router.post('/coordinator/:axisId', passport.authenticate('jwt', { session: false }), createCoordinator);
+router.post('/markCoordinator/:id', passport.authenticate('jwt', { session: false }), markCoordinator);
+router.post('/unmarkCoordinator/:id', passport.authenticate('jwt', { session: false }), unmarkCoordinator);
 router.post('/reviewer', passport.authenticate('jwt', { session: false }), createReviewer);
+router.post('/markReviewerWork/:idWork/:idReviewer/:reviewerMail', passport.authenticate('jwt', { session: false }), markReviewer);
+
+
 router.delete('/coordinator/:id', passport.authenticate('jwt', { session: false }), deleteCoordinator);
 router.delete('/reviewer/:id', passport.authenticate('jwt', { session: false }), deleteReviewer);
 
@@ -88,18 +94,33 @@ async function price(req, res) {
 }
 
 async function getCoordinator(req, res) {
-  let coordinators = await userCtrl.getCoordinator();
+  let coordinators = await userCtrl.getCoordinator(req.params.axisId);
   res.json({ coordinators });
 }
 
 async function getReviewer(req, res) {
-  let reviewers = await userCtrl.getReviewer();
+  let reviewers = await userCtrl.getReviewer(req.params.axisId);
   res.json({ reviewers });
 }
 
 async function createCoordinator(req, res) {
-  let coordinators = await userCtrl.createCoordinator(req.body);
+  let coordinators = await userCtrl.createCoordinator(req.body, req.params.axisId);
   res.json({ coordinators });
+}
+
+async function markCoordinator(req, res) {
+  let coordinators = await userCtrl.markCoordinator(req.params.id);
+  res.json({ coordinators });
+}
+
+async function unmarkCoordinator(req, res) {
+  let coordinators = await userCtrl.unmarkCoordinator(req.params.id);
+  res.json({ coordinators });
+}
+
+async function markReviewer(req, res) {
+  let reviewer = await userCtrl.markReviewer(req.params.idWork, req.params.idReviewer, req.params.reviewerMail);
+  res.json({ reviewer });
 }
 
 async function createReviewer(req, res) {

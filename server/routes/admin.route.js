@@ -54,22 +54,12 @@ async function getUserWorks(req, res) {
 
 async function getWorks(req, res) {
   const user = req.user;
-
-  if (user.coordinator || user.reviewer) {
-
-    try {
-
-      const works = await adminCtrl.getWorks(req.params.id);
-      res.status(200).json(works);
-
-    } catch (error) {
-
-      console.log(error);
-      res.status(401).json(error);
-
-    }
+  if (user.icAdmin || user.reviewer.icCoordinator) {
+    const works = await adminCtrl.getWorks(req.params.id);
+    res.json(works);
+  } else {
+    res.sendStatus(401);
   }
-
 }
 
 async function validatePayment(req, res) {

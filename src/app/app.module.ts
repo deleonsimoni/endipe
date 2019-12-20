@@ -46,6 +46,11 @@ import { QuillModule } from 'ngx-quill';
 import { ResetSenhaComponent } from './reset-senha/reset-senha.component';
 import { ModalSessoesEspeciaisComponent } from './modal-sessoes-especiais/modal-sessoes-especiais.component';
 import { ModalSimposioComponent } from './modal-simposio/modal-simposio.component';
+import { ModalHospedagemComponent } from './modal-hospedagem/modal-hospedagem.component';
+import { ModalTransporteComponent } from './modal-transporte/modal-transporte.component';
+import { ModalAlimentacaoComponent } from './modal-alimentacao/modal-alimentacao.component';
+import { ModalTurismoComponent } from './modal-turismo/modal-turismo.component';
+import { ModalConferencistasComponent } from './modal-conferencistas/modal-conferencistas.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +79,12 @@ import { ModalSimposioComponent } from './modal-simposio/modal-simposio.componen
     EsqueciSenhaComponent,
     ResetSenhaComponent,
     ModalSessoesEspeciaisComponent,
-    ModalSimposioComponent
+    ModalSimposioComponent,
+    ModalHospedagemComponent,
+    ModalTransporteComponent,
+    ModalAlimentacaoComponent,
+    ModalTurismoComponent,
+    ModalConferencistasComponent,
   ],
   imports: [
     BrowserModule,
@@ -109,7 +119,13 @@ import { ModalSimposioComponent } from './modal-simposio/modal-simposio.componen
     ModalCadastroSucessoComponent,
     RegisterComponent,
     ModalSessoesEspeciaisComponent,
-    ModalSimposioComponent
+    ModalSimposioComponent,
+    ModalHospedagemComponent,
+    ModalAlimentacaoComponent,
+    ModalTransporteComponent,
+    ModalTurismoComponent,
+    ModalConferencistasComponent,
+    RegisterComponent
   ],
   providers: [
     {

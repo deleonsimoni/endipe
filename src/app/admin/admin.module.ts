@@ -22,6 +22,9 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ModalModule } from './modals/modal.module';
 import { ConferencerCardComponent } from './components/conferencer-card/conferencer-card.component';
 import { UtilNgxMaterialModule } from '../util-ngx-material/util-ngx-material.module';
+import { VincularTrabalhosComponent } from './vincular-trabalhos/vincular-trabalhos.component';
+import { WorkDataComponent } from './work-data/work-data.component';
+import { ModalReviewAdminComponent } from './modals/modal-review-admin/modal-review-admin.component';
 
 @NgModule({
     declarations: [
@@ -37,10 +40,13 @@ import { UtilNgxMaterialModule } from '../util-ngx-material/util-ngx-material.mo
         WorkCardComponent,
         ConferencerComponent,
         NotFoundComponent,
-        ConferencerCardComponent
+        ConferencerCardComponent,
+        VincularTrabalhosComponent,
+        WorkDataComponent,
     ],
     entryComponents: [
         AdminComponent,
+        ModalReviewAdminComponent
     ],
     imports: [
         CommonModule,

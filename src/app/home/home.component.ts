@@ -15,6 +15,11 @@ import { ToastrService } from 'ngx-toastr';
 import { NoticiasService } from '../services/noticias.service';
 import { ModalSessoesEspeciaisComponent } from '../modal-sessoes-especiais/modal-sessoes-especiais.component';
 import { ModalSimposioComponent } from '../modal-simposio/modal-simposio.component';
+import { ModalHospedagemComponent } from '../modal-hospedagem/modal-hospedagem.component';
+import { ModalAlimentacaoComponent } from '../modal-alimentacao/modal-alimentacao.component';
+import { ModalTransporteComponent } from '../modal-transporte/modal-transporte.component';
+import { ModalTurismoComponent } from '../modal-turismo/modal-turismo.component';
+import { ModalConferencistasComponent } from '../modal-conferencistas/modal-conferencistas.component';
 
 
 @Component({
@@ -658,12 +663,32 @@ export class HomeComponent implements OnInit {
         });
         break;
 
+      case 'Conferencistas':
+        this.dialog.open(ModalConferencistasComponent);
+        break;
+
       default:
         this.dialog.open(ModalProgramacaoComponent, {
           data: { item: programacao }
         });
         break;
     }
+  }
+
+  public openDialogHospedagem() {
+    const dialogRef = this.dialog.open(ModalHospedagemComponent);
+  }
+
+  public openDialogAlimentacao() {
+    const dialogRef = this.dialog.open(ModalAlimentacaoComponent);
+  }
+
+  public openDialogTransporte() {
+    const dialogRef = this.dialog.open(ModalTransporteComponent);
+  }
+
+  public openDialogTurismo() {
+    const dialogRef = this.dialog.open(ModalTurismoComponent);
   }
 
   public openDialogNormas() {

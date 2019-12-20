@@ -36,11 +36,30 @@ const WorkSchema = new mongoose.Schema({
         type: String
       },
       review: {
-        description: String,
-        icAllow: Boolean
+        icAllow: String,
+        question1: String,
+        question2: String,
+        question3: String,
+        question4: String,
+        question5: String,
+        description: String
       }
     }
   ],
+  reviewAdmin: {
+    userId: {
+      type: mongoose.Schema.Types.ObjectId
+    },
+    userEmail: {
+      type: String
+    },
+    review: {
+      icAllow: String,
+      question1: String,
+      question2: String,
+      question3: String
+    }
+  },
   authors: [{
     userId: {
       type: mongoose.Schema.Types.ObjectId,
