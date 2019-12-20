@@ -61,7 +61,7 @@
                         class="btn">Não</button>
                 </div>
             </div>
-            <div *ngIf="subscribed.payment && subscribed.payment.pathReceiptPayment">
+            <div *ngIf="subscribed.payment && subscribed.payment.pathS3">
                 <p><a [routerLink]="" (click)="download(subscribed.payment.pathS3)">Comprovante
                         Inscrição</a>
                 </p>
@@ -82,7 +82,7 @@
                         class="btn">Não</button>
                 </div>
             </div>
-            <div *ngIf="subscribed.payment && subscribed.payment.pathS3">
+            <div *ngIf="subscribed.payment && subscribed.payment.pathReceiptPayment">
                 <p><a [routerLink]="" (click)="download(subscribed.payment.pathReceiptPayment)">Comprovante
                         Pagamento</a>
                 </p>
