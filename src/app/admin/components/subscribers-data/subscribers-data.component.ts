@@ -1,6 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Inject } from '@angular/core';
 import { AdminService } from '../../admin.service';
 import { DownloadFileService } from 'src/app/services/download-file.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -17,13 +18,33 @@ export class SubscribersDataComponent implements OnInit {
 
   constructor(
     private adminService: AdminService,
-    private downloadService: DownloadFileService
+    private downloadService: DownloadFileService,
+    @Inject('BASE_API_URL') private baseUrl: string,
+    private http: HttpClient
+
   ) { }
 
   ngOnInit() {
     if (this.subscribed.works.length > 0) {
       this.userWorks(this.subscribed.works);
     }
+  }
+
+  validarComprovante(user) {
+
+    this.http.post(`${this.baseUrl}/admin/validateDoc/` + user._id, {}).subscribe((res: any) => {
+      user.payment.icValid = true;
+    }, err => {
+      console.log(err);
+    });
+  }
+
+  invalidarComprovante(user) {
+    this.http.post(`${this.baseUrl}/admin/invalidateDoc/` + user._id, {}).subscribe((res: any) => {
+      user.payment.icValid = false;
+    }, err => {
+      console.log(err);
+    });
   }
 
   public userWorks(userWorksId) {

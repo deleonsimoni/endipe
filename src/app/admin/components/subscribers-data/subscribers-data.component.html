@@ -46,6 +46,28 @@
             <p>{{ subscribed.payment && subscribed.payment.amount ? 'R$ ' + subscribed.payment.amount : '----' }}
             </p>
         </div>
+
+        <div class="col-sm-4">
+            <strong>Confirmar comprovante</strong>
+            <div *ngIf="subscribed.payment" class="form-group">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <button (click)="validarComprovante(subscribed)"
+                        [ngStyle]="{'background-color: green;color:white':  subscribed.payment.icValid, 'background-color: white;color: black': subscribed.payment.icValid}"
+                        type="button" [ngClass]="{'btn btn-success': subscribed.payment.icValid}"
+                        class="btn">Sim</button>
+                    <button (click)="invalidarComprovante(subscribed)"
+                        [ngStyle]="{'background-color: red;color:white':  !subscribed.payment.icValid, 'background-color: white;color: black': subscribed.payment.icValid}"
+                        type="button" [ngClass]="{'btn btn-danger': !subscribed.payment.icValid}"
+                        class="btn">Não</button>
+                </div>
+            </div>
+            <div *ngIf="subscribed.payment && subscribed.payment.pathReceiptPayment">
+                <p><a [routerLink]="" (click)="download(subscribed.payment.pathReceiptPayment)">Comprovante
+                        Transferência</a>
+                </p>
+            </div>
+        </div>
+
         <div class="col-sm-4">
             <strong>Confirmar pagamento</strong>
             <div *ngIf="subscribed.payment" class="form-group">
@@ -60,11 +82,11 @@
                         class="btn">Não</button>
                 </div>
             </div>
-        </div>
-        <div *ngIf="subscribed.payment && subscribed.payment.pathS3" class="col-sm-4">
-            <p><a [routerLink]="" (click)="download(subscribed.payment.pathS3)">Download
-                    comprovante</a>
-            </p>
+            <div *ngIf="subscribed.payment && subscribed.payment.pathS3">
+                <p><a [routerLink]="" (click)="download(subscribed.payment.pathS3)">Comprovante
+                        Pagamento</a>
+                </p>
+            </div>
         </div>
     </div>
     <div *ngIf="subscribed.works.length > 0" class="section">
@@ -97,9 +119,9 @@
             </div>
             <div class="col-sm-4 mt-2">
                 <strong>Arquivos</strong>
-                <p><a [routerLink]="" (click)="download(work.pathS3DOC)">Download doc</a>
+                <p><a [routerLink]="" (click)="download(work.pathS3DOC)">Download pdf</a>
                 </p>
-                <p><a [routerLink]="" (click)="download(work.pathS3PDF)">Download pdf</a>
+                <p><a [routerLink]="" (click)="download(work.pathS3PDF)">Download doc</a>
                 </p>
             </div>
         </div>
