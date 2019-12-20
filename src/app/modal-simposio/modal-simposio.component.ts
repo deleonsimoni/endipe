@@ -1,14 +1,15 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { ModalProgramacaoComponent } from '../modal-programacao/modal-programacao.component';
 
 @Component({
-  selector: 'app-modal-programacao',
-  templateUrl: './modal-programacao.component.html',
-  styleUrls: ['./modal-programacao.component.scss']
+  selector: 'app-modal-simposio',
+  templateUrl: './modal-simposio.component.html',
+  styleUrls: ['./modal-simposio.component.scss']
 })
-export class ModalProgramacaoComponent implements OnInit {
+export class ModalSimposioComponent implements OnInit {
 
-  public programacao: any;
+  public programacao;
 
   constructor(
     public dialogRef: MatDialogRef<ModalProgramacaoComponent>,
@@ -23,4 +24,5 @@ export class ModalProgramacaoComponent implements OnInit {
   public close() {
     this.dialogRef.close();
   }
+
 }

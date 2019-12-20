@@ -44,6 +44,8 @@ import { AdminRoutingModule } from './admin/admin.routing';
 import { EsqueciSenhaComponent } from './esqueci-senha/esqueci-senha.component';
 import { QuillModule } from 'ngx-quill';
 import { ResetSenhaComponent } from './reset-senha/reset-senha.component';
+import { ModalSessoesEspeciaisComponent } from './modal-sessoes-especiais/modal-sessoes-especiais.component';
+import { ModalSimposioComponent } from './modal-simposio/modal-simposio.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +72,9 @@ import { ResetSenhaComponent } from './reset-senha/reset-senha.component';
     ListarTrabalhosComponent,
     PerfilComponent,
     EsqueciSenhaComponent,
-    ResetSenhaComponent
+    ResetSenhaComponent,
+    ModalSessoesEspeciaisComponent,
+    ModalSimposioComponent
   ],
   imports: [
     BrowserModule,
@@ -103,7 +107,9 @@ import { ResetSenhaComponent } from './reset-senha/reset-senha.component';
     ModalNormasPosterComponent,
     ModalApoiadoresComponent,
     ModalCadastroSucessoComponent,
-    RegisterComponent
+    RegisterComponent,
+    ModalSessoesEspeciaisComponent,
+    ModalSimposioComponent
   ],
   providers: [
     {

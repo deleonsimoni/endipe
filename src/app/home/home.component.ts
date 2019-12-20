@@ -13,6 +13,8 @@ import { ModalNormasPosterComponent } from '../modal-normas/modal-expositor-post
 import { DownloadFileService } from '../services/download-file.service';
 import { ToastrService } from 'ngx-toastr';
 import { NoticiasService } from '../services/noticias.service';
+import { ModalSessoesEspeciaisComponent } from '../modal-sessoes-especiais/modal-sessoes-especiais.component';
+import { ModalSimposioComponent } from '../modal-simposio/modal-simposio.component';
 
 
 @Component({
@@ -36,7 +38,7 @@ export class HomeComponent implements OnInit {
       '0': { items: 1, margin: 5 },
       '940': { items: 3, margin: 5 }
     }
-  }
+  };
 
   instituicoes = [
     'Universidade Federal do Rio de Janeiro – UFRJ',
@@ -393,32 +395,6 @@ export class HomeComponent implements OnInit {
 
   programacoes = [
     {
-      titulo: 'Visão Geral',
-      horarios: [
-        [
-          '08:30 - 10:00', '', 'Minicurso & Roda de Conversa', 'Minicurso & Roda de Conversa', 'Minicurso & Roda de Conversa'
-        ],
-        [
-          '10:15 - 12:30', '', 'Simpósios', 'Simpósios', 'Simpósios'
-        ],
-        [
-          '12:30 - 13:30', '', 'Intervalo', 'Intervalo', 'Intervalo'
-        ],
-        [
-          '13:30 - 15:30', 'Credenciamento <br/> Apresentações culturais', 'Painéis & Pôsteres', 'Painéis & Pôsteres', 'Painéis & Pôsteres'
-        ],
-        [
-          '16:00 - 18:00', 'Credenciamento <br/> Apresentações Culturais <br/> Sessão Solene de Abertura', 'Painéis & Pôsteres', 'Painéis & Pôsteres / Reuniões de Entidades e de Redes', 'Painéis & Pôsteres / Reuniões de Entidades e de Redes'
-        ],
-        [
-          '18:00 - 20:00', 'Mesa de Abertura', 'Sessões Especiais', 'Sessões Especiais', 'Sessão de Encerramento Assembleia ENDIPE'
-        ],
-        [
-          '20:00 - 22:00', 'Apresentação cultural', 'Lançamento de livros e de Redes', 'Lançamento de livros e de Redes', ''
-        ],
-      ]
-    },
-    {
       titulo: 'Abertura',
       horarios: []
     },
@@ -436,7 +412,62 @@ export class HomeComponent implements OnInit {
     },
     {
       titulo: 'Simpósios',
-      horarios: []
+      simposios: [
+        {
+          tema: 'I- DIDÁTICA(S) ENTRE DIÁLOGOS, INSURGÊNCIAS E POLÍTICAS: TENSÕES E PERSPECTIVAS NA RELAÇÃO COM ',
+          tipo: 'FORMAÇÃO DOCENTE',
+          palestras: [
+            {
+              classificacao: 'SIMPÓSIO A',
+              tema: 'Didática, Prática de Ensino e políticas de formação docente: projetos, dilemas e (re)invenções',
+              coordenadores: [
+                'Luiz Fernandes Dourado(UFG)',
+                'Dalila Andrade Oliveira(UFMG)',
+                'Carmen Teresa Gabriel(UFRJ)',
+                'Coord.Magali Silvestre(UNIFESP)'
+              ],
+              horario: '',
+              local: ''
+            },
+            {
+              classificacao: 'SIMPÓSIO B',
+              tema: 'Movimentos insurgentes na formação docente: propostas, resistências e (re)existências',
+              coordenadores: [
+                'Patricia Cristina Albieri de Almeida (FCC)',
+                'Elizeu Clementino de Souza (UNEB)',
+                'Luiz Fernandes de Oliveira (UFRRJ)',
+                'Coord. Nilson de Souza Cardoso (UECE/FORPIBID)'
+              ],
+              horario: '',
+              local: ''
+            },
+            {
+              classificacao: 'SIMPÓSIO C',
+              tema: 'Estágio, PIBID e Residência Pedagógica: convergências ou disputas por práticas de formação?',
+              coordenadores: [
+                'Flavia Medeiros Sarti (UNESP)',
+                'Isabel Maria Sabino (UECE)',
+                'Andrea Rosana Fetzner (UNIRIO)',
+                'Coord. Cristina Spolidoro Freund (CPII)'
+              ],
+              horario: '',
+              local: ''
+            },
+            {
+              classificacao: 'SIMPÓSIO D',
+              tema: 'Prática de Ensino e suas implicações para a inserção profissional docente: desafios ao desenvolvimento profissional',
+              coordenadores: [
+                'Maria do Céu Roldão (UCPorto/PT)',
+                'Marli André (PUC-SP)',
+                'Morgana Rezende (SME-Rio)',
+                'Coord. Maria das Graças Nascimento (UFRJ)'
+              ],
+              horario: '',
+              local: ''
+            }
+          ]
+        }
+      ]
     },
     {
       titulo: 'Painéis',
@@ -447,8 +478,81 @@ export class HomeComponent implements OnInit {
       horarios: []
     },
     {
-      titulo: 'Sessões Especiais',
-      horarios: []
+      titulo: 'Sessões especiais',
+      sessoes: [
+        {
+          data: '15/7',
+          horario: '18:00-20:00',
+          palestras: [
+            {
+              tema: 'A reinvenção do campo da Didática no Brasil',
+              coordenadores: [
+                'Vera Candau (PUC-Rio)',
+                'Aída Monteiro (UFPE)',
+                'Leda Sheibe (UFSC)',
+                'Mediação: Vania Leite (UERJ/FFP)'
+              ],
+              local: ''
+            },
+            {
+              tema: 'Didática, Escola e a luta democrática',
+              coordenadores: [
+                'José Carlos Libâneo(UFG)',
+                'Selma Garrido Pimenta(USP)',
+                'Lilian Anna Wachowicz / Pura Martins / Joana Romanowisk(PUC / PR)',
+                'Mediação: Silvana Mesquita(PUC - Rio)'
+              ],
+              local: ''
+            },
+            {
+              tema: 'Didática, Currículo e Formação de Professores: relações históricas e emancipadoras – Uma conversa',
+              coordenadores: [
+                'Ilma Passos Alencastro Veiga (UnB)',
+                'Nilda Alves (UERJ)',
+                'Menga Lüdke (PUC-Rio)',
+                'Mediação: Helena Fontoura (UERJ/FFP)'
+              ],
+              local: ''
+            }
+          ]
+        },
+        {
+          data: '16/7',
+          horario: '18:00-20:00',
+          palestras: [
+            {
+              tema: 'Didática, Formação e Trabalho Docente: relações com o Conhecimento',
+              coordenadores: [
+                'Maria Isabel da Cunha (UNISINOS)',
+                'Julio Diniz-Pereira / Lucíola Santos / Angela Dalben (UFMG)',
+                'Alda Marin (PUC/SP)',
+                'Mediação: Monica Vasconcellos (UFF)'
+              ],
+              local: ''
+            },
+            {
+              tema: 'Didática e Prática de Ensino: desafios políticos da atualidade',
+              coordenadores: [
+                'Maria do Socorro Lucena (UECE)',
+                'Silas Borges Monteiro (UFMT)',
+                'Cristina D’Avila (UFBA)',
+                'Mediação: Priscila Rodrigues (UFRJ)'
+              ],
+              local: ''
+            },
+            {
+              tema: 'Didática, Currículo e Formação de Professores: relações históricas e emancipadoras – Outra conversa ',
+              coordenadores: [
+                'Maria Rita Neto Sales Oliveira (CEFET/MG)',
+                'Antonio Flavio Moreira (UCP)',
+                'Bernardete Gatti (FFC)',
+                'Mediação: Isabel Alice Lelis (PUC-Rio)'
+              ],
+              local: ''
+            }
+          ]
+        }
+      ]
     },
     {
       titulo: 'Lançamentos de Livros',
@@ -458,7 +562,11 @@ export class HomeComponent implements OnInit {
       titulo: 'Reuniões de Entidades e de Redes',
       horarios: []
     },
-  ]
+    {
+      titulo: 'Conferencistas',
+      horarios: []
+    },
+  ];
 
   constructor(
     private router: Router,
@@ -536,9 +644,26 @@ export class HomeComponent implements OnInit {
   }
 
   public openDialogProgramacao(programacao) {
-    const dialogRef = this.dialog.open(ModalProgramacaoComponent, {
-      data: { item: programacao }
-    });
+    console.log(programacao.titulo);
+    switch (programacao.titulo) {
+      case 'Sessões especiais':
+        this.dialog.open(ModalSessoesEspeciaisComponent, {
+          data: { item: programacao }
+        });
+        break;
+
+      case 'Simpósios':
+        this.dialog.open(ModalSimposioComponent, {
+          data: { item: programacao }
+        });
+        break;
+
+      default:
+        this.dialog.open(ModalProgramacaoComponent, {
+          data: { item: programacao }
+        });
+        break;
+    }
   }
 
   public openDialogNormas() {

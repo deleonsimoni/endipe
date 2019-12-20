@@ -1,12 +1,13 @@
 import { Component, OnInit, Inject } from '@angular/core';
+import { ModalProgramacaoComponent } from '../modal-programacao/modal-programacao.component';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
-  selector: 'app-modal-programacao',
-  templateUrl: './modal-programacao.component.html',
-  styleUrls: ['./modal-programacao.component.scss']
+  selector: 'app-modal-sessoes-especiais',
+  templateUrl: './modal-sessoes-especiais.component.html',
+  styleUrls: ['./modal-sessoes-especiais.component.scss']
 })
-export class ModalProgramacaoComponent implements OnInit {
+export class ModalSessoesEspeciaisComponent implements OnInit {
 
   public programacao: any;
 
@@ -17,10 +18,10 @@ export class ModalProgramacaoComponent implements OnInit {
 
   ngOnInit() {
     this.programacao = this.data.item;
-    console.log(this.programacao);
   }
 
   public close() {
     this.dialogRef.close();
   }
+
 }
