@@ -27,7 +27,40 @@ export const WORK_OPTIONS = [
 export const PROGRAMACOES = [
     {
         titulo: 'Abertura',
-        horarios: []
+        data: '14/7',
+        horario: '16:00-21:00',
+        local: 'Vivo Rio',
+        endereco: 'Av. Infante Dom Henrique, 85 - Aterro do Flamengo, Rio de Janeiro – Ao lado do Museu de Arte Moderna e do Aeroporto Santos Dumont.',
+        sessao: [
+            {
+                horario: '16:00',
+                titulos: [
+                    'Chegada, acolhimento e acomodação',
+                    'Abertura Oficial'
+                ]
+            },
+            {
+                horario: '18:00',
+                titulos: [
+                    'Mesa de Abertura'
+                ],
+                tema: 'FAZERES-SABERES PEDAGÓGICOS: diálogos, insurgências e políticas',
+                coordenadores: [
+                    'Abraham Madgenzo (UAHC-Chile)',
+                    'Nilma Lino Gomes (UFMG)',
+                    'Mediadora: Vera Candau (PUC-Rio)'
+                ]
+            },
+            {
+                horario: '20:00',
+                titulos: [
+                    'Show de Abertura'
+                ],
+                coordenadores: [
+                    'Companhia Folclórica do Rio - UFRJ'
+                ]
+            }
+        ],
     },
     {
         titulo: 'Atividades Culturais',
@@ -205,6 +238,222 @@ export const PROGRAMACOES = [
                         local: ''
                     }
                 ]
+            },
+            {
+                tema: 'IV- DIDÁTICA(S) ENTRE DIÁLOGOS, INSURGÊNCIAS E POLÍTICAS: TENSÕES E PERSPECTIVAS NA RELAÇÃO ENTRE ',
+                tipo: 'NOVAS EPISTEMOLOGIAS, BIODIVERSIDADE, DIFERENÇA, DEMOCRACIA E INCLUSÃO',
+                palestras: [
+                    {
+                        classificacao: 'SIMPÓSIO A',
+                        tema: 'Educação, diferença e insurgências: práticas educativas emancipatórias',
+                        coordenadores: [
+                            'Rita (Potiguara) Gomes do Nascimento (SEDUC-CE)',
+                            'Leonardo Lemos de Souza (UNESP)',
+                            'Elizabeth Macedo (UERJ)',
+                            'Coord. Talita Vidal (UERJ)'
+                        ],
+                        horario: '',
+                        local: ''
+                    },
+                    {
+                        classificacao: 'SIMPÓSIO B',
+                        tema: 'Conhecimento e Democracia: relação emancipatória e prática participativa em contextos educacionais',
+                        coordenadores: [
+                            'Salomão Barros Ximenes (UFABC)',
+                            'Renato Noguera (UFRRJ)',
+                            'Inês Barbosa de Oliveira (UNESA)',
+                            'Coord. Laurizete Ferragut Passos (PUC/SP)'
+                        ],
+                        horario: '',
+                        local: ''
+                    },
+                    {
+                        classificacao: 'SIMPÓSIO C',
+                        tema: 'Biodiversidade em novas epistemologias: perspectivas insurgentes em educação para o/no cuidado de todas as formas de vida',
+                        coordenadores: [
+                            'Marco Antônio Leandro Barzano (UEFS)',
+                            'Cleonice Puggian (FFP/UERJ)',
+                            'Lea Tiriba (UNIRIO)',
+                            'Coord. Lia Maria Teixeira de Oliveira (UFRRJ)'
+                        ],
+                        horario: '',
+                        local: ''
+                    },
+                    {
+                        classificacao: 'SIMPÓSIO D',
+                        tema: 'Didática, Educação inclusiva e Prática de Ensino insurgente: respeito às diversidades e enfrentamento das desigualdades',
+                        coordenadores: [
+                            'Eder Pires Camargo (UNESP)',
+                            'Márcia Denise Pletsc (UFRRJ)',
+                            'Tiago Ribeiro (INES)',
+                            'Coord. Fabio Garcia Bernardo (IBC)'
+                        ],
+                        horario: '',
+                        local: ''
+                    }
+                ]
+            },
+            {
+                tema: 'V- DIDÁTICA(S) ENTRE DIÁLOGOS, INSURGÊNCIAS E POLÍTICAS: TENSÕES E PERSPECTIVAS NA RELAÇÃO ENTRE ',
+                tipo: 'EDUCAÇÃO, COMUNICAÇÃO E TECNOLOGIAS',
+                palestras: [
+                    {
+                        classificacao: 'SIMPÓSIO A',
+                        tema: 'Educação na, com a para a cibercultura',
+                        coordenadores: [
+                            'Tania Hetkowski (UNEB)',
+                            'Ivana Bentes Oliveira (UFRJ)',
+                            'Edméa Santos (UFRRJ)',
+                            'Coord. Maria José Flores (UFMG)'
+                        ],
+                        horario: '',
+                        local: ''
+                    },
+                    {
+                        classificacao: 'SIMPÓSIO B',
+                        tema: 'Didática e Culturas visuais: formação e práticas educativas',
+                        coordenadores: [
+                            'Gilka Girardello (UFSC)',
+                            'Marta Guedes (SME-Rio)',
+                            'Adriana Hoffman (UNIRIO)',
+                            'Coord. Francine de Paula Martins (UFLA)'
+                        ],
+                        horario: '',
+                        local: ''
+                    },
+                    {
+                        classificacao: 'SIMPÓSIO C',
+                        tema: 'Didática online na pedagogia universitária: saberes didáticos em mobilidade',
+                        coordenadores: [
+                            'Katia Morosov Alonso (UFMT)',
+                            'Lucila Maria Pesce de Oliveira (UNIFESP)',
+                            'Rosalia Maria Duarte (PUC-Rio)',
+                            'Coord. Rosemary dos Santos (UERJ)'
+                        ],
+                        horario: '',
+                        local: ''
+                    },
+                    {
+                        classificacao: 'SIMPÓSIO D',
+                        tema: 'Didática e conhecimento: entre o livro didático, as mídias e as fakenews',
+                        coordenadores: [
+                            'Rosa Maria Bueno Fischer (UFRS)',
+                            'Vani Kenski (USP)',
+                            'Ana Maria Monteiro (UFRJ)',
+                            'Coord. Andréa Vilella Mafra da Silva (ISERJ)'
+                        ],
+                        horario: '',
+                        local: ''
+                    }
+                ]
+            },
+            {
+                tema: 'VI- DIDÁTICA(S) ENTRE DIÁLOGOS, INSURGÊNCIAS E POLÍTICAS: TENSÕES E PERSPECTIVAS NA RELAÇÃO ENTRE ',
+                tipo: 'INFÂNCIAS, JUVENTUDES E VIDA E ADULTA',
+                palestras: [
+                    {
+                        classificacao: 'SIMPÓSIO A',
+                        tema: 'Didática e Prática de Ensino com as infâncias e suas possibilidades de insurgências',
+                        coordenadores: [
+                            'Maria Cristina Soares de Gouvea (UFMG)',
+                            'Cristiane Oliveira (CPII)',
+                            'Patricia Corsino (UFRJ)',
+                            'Coord. Paula Almeida de Castro (UEPB)'
+                        ],
+                        horario: '',
+                        local: ''
+                    },
+                    {
+                        classificacao: 'SIMPÓSIO B',
+                        tema: 'A alfabetização e seus métodos nas políticas nacionais recentes: avanços ou retrocessos?',
+                        coordenadores: [
+                            'Cecília Goulart (UFF)',
+                            'Rosaura Soligo (Instituto ABAPORU)',
+                            'Ana Paula Venâncio (ISERJ)',
+                            'Coord. Lisete Jaehn (UFF)'
+                        ],
+                        horario: '',
+                        local: ''
+                    },
+                    {
+                        classificacao: 'SIMPÓSIO C',
+                        tema: 'Didática e Prática de Ensino com as juventudes e suas possibilidades de insurgências',
+                        coordenadores: [
+                            'Marília Spósito (USP)',
+                            'Luis Antonio Groppo (UNIFAL-MG)',
+                            'Paulo Carrano (UFF)',
+                            'Coord. Luis Paulo Borges (CAp-UERJ)'
+                        ],
+                        horario: '',
+                        local: ''
+                    },
+                    {
+                        classificacao: 'SIMPÓSIO D',
+                        tema: 'Educação ao longo da vida: formas de insurgências cotidianas',
+                        coordenadores: [
+                            'Ivanilde Apoluceno de Oliveira (UEPA)',
+                            'Maria Ciavatta (UFF)',
+                            'Cyntia Kelly Menezes da Silva Burguinhão (SME-Rio- PEJA)',
+                            'Coord. Sandra Sales (UFRRJ)'
+                        ],
+                        horario: '',
+                        local: ''
+                    }
+                ]
+            },
+            {
+                tema: 'VII- SIMPÓSIOS INTEGRADORES',
+                tipo: '',
+                palestras: [
+                    {
+                        classificacao: 'SIMPÓSIO A',
+                        tema: 'Educação e Poder: Pedagogias emancipadoras e a insurgência da escola democrática',
+                        coordenadores: [
+                            'Maria Amélia Santoro Franco (UNISANTOS)',
+                            'Umberto Andrade Pinto (UNIFESP)',
+                            'Maria Inês Marcondes (PUC-Rio)',
+                            'Coord. Maria Luiza Susseking (UNIRIO)'
+                        ],
+                        horario: '',
+                        local: ''
+                    },
+                    {
+                        classificacao: 'SIMPÓSIO B',
+                        tema: 'Questões epistemológicas do campo da Didática',
+                        coordenadores: [
+                            'José Carlos Libâneo (UFG)',
+                            'Danilo Romeu Streck (UNISINOS)',
+                            'Evandro Ghedin (UFam)',
+                            'Coord. Walcea Barreto (UFF)'
+                        ],
+                        horario: '',
+                        local: ''
+                    },
+                    {
+                        classificacao: 'SIMPÓSIO C',
+                        tema: 'Artes, movimento e transgressão: insurgências formativas na escola e na universidade',
+                        coordenadores: [
+                            'Márcia Strazacappa (UNICAMP)',
+                            'Lucia Vignoli (INES)',
+                            'Monique Andries Nogueira (UFRJ)',
+                            'Coord. Maria de Fátima Abdala (UNISANTOS)'
+                        ],
+                        horario: '',
+                        local: ''
+                    },
+                    {
+                        classificacao: 'SIMPÓSIO D',
+                        tema: 'Didática e Prática de Ensino na Base Nacional Comum para a Formação Inicial e Continuada de Professores da Educação Básica',
+                        coordenadores: [
+                            'Cristina D’Ávila (ANDIPE)',
+                            'Rita Frangela (ABdC)',
+                            'Lucília Augusto Lino (ANFOPE)',
+                            'Coord. Thiago Ranniery (UFRJ)'
+                        ],
+                        horario: '',
+                        local: ''
+                    }
+                ]
             }
         ]
     },
@@ -312,21 +561,17 @@ export const PROGRAMACOES = [
         local: '',
         sessao: [
             {
-                titulo: '– Conferência de Encerramento',
-                horario: '15:30'
-            },
-            {
-                titulo: '– Apresentação cultural',
-                horario: '     '
-            },
-            {
-                titulo: '– Escolha do local de sede do XXI ENDIPE 2022',
-                horario: '     '
+                horario: '15:30',
+                titulos: [
+                    'Conferência de Encerramento',
+                    'Apresentação cultural',
+                    'Escolha do local de sede do XXI ENDIPE 2022'
+                ],
+                coordenadores: [
+                    'Antònio Nóvoa (ULisboa/PT – UFRJ)',
+                    'Mediadora: Tatiana Roque (FCC/UFF)'
+                ]
             }
         ],
-        coordenadores: [
-            'Antònio Nóvoa (ULisboa/PT – UFRJ)',
-            'Mediadora: Tatiana Roque (FCC/UFF)'
-        ]
     },
 ];

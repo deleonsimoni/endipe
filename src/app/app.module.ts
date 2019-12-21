@@ -130,6 +130,7 @@ import { ModalAberturaComponent } from './modal-abertura/modal-abertura.componen
     ModalTurismoComponent,
     ModalConferencistasComponent,
     ModalEncerramentoComponent,
+    ModalAberturaComponent,
     RegisterComponent
   ],
   providers: [

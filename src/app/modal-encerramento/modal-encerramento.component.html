@@ -6,10 +6,10 @@
     <div class="row">
         <div mat-dialog-content>
             <div class="row">
-                <table class="table table-responsive table-striped">
+                <table class="table table-responsive table-bordered">
                     <thead>
                         <tr>
-                            <th colspan="2">
+                            <th>
                                 <p>
                                     <strong>{{ programacao.data }} - {{ programacao.horario }}</strong>
                                 </p>
@@ -19,11 +19,19 @@
                     <tbody>
                         <tr>
                             <th>
-                                <p *ngFor="let palestra of programacao.sessao">{{ palestra.horario }}
-                                    {{ palestra.titulo }}</p>
-                            </th>
-                            <th>
-                                <p *ngFor="let coordenador of programacao.coordenadores">{{ coordenador }}</p>
+                                <ng-container *ngFor="let palestra of programacao.sessao">
+                                    <ng-container *ngFor="let titulo of palestra.titulos; let i = index">
+                                        <p [ngClass]="{'space-left': i > 0}">
+                                            {{ i == 0 ? palestra.horario : '' }} - {{ titulo }}
+                                        </p>
+                                        <div class="indent" *ngIf="i == 0">
+                                            <p><strong>{{ palestra?.tema }}</strong></p>
+                                            <ng-container *ngFor="let coordenador of palestra.coordenadores">
+                                                <p class="indent">{{ coordenador }}</p>
+                                            </ng-container>
+                                        </div>
+                                    </ng-container>
+                                </ng-container>
                             </th>
                         </tr>
                     </tbody>
