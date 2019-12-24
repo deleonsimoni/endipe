@@ -75,20 +75,21 @@ export class CoordinatorComponent implements OnInit, OnDestroy {
         });
     } else {
 
-      if (this.coordinators.some(coordinator => coordinator.reviewer.icCoordinator === true)) {
+      //Trava para o eixo possuir apenas um coordenador
+      /*if (this.coordinators.some(coordinator => coordinator.reviewer.icCoordinator === true)) {
         this.toastr.error("Este eixo já possui coordenador cadastrado");
         checkboxesArray[index].checked = false;
-      } else {
-        this.adminService.markCoordinator(id)
-          .subscribe(({ coordinators }: any) => {
-            if (coordinators.temErro) {
-              this.toastr.error(coordinators.mensagem);
-            } else {
-              this.toastr.success(coordinators.mensagem);
-              this.listReviewer();
-            }
-          });
-      }
+      } else {*/
+      this.adminService.markCoordinator(id)
+        .subscribe(({ coordinators }: any) => {
+          if (coordinators.temErro) {
+            this.toastr.error(coordinators.mensagem);
+          } else {
+            this.toastr.success(coordinators.mensagem);
+            this.listReviewer();
+          }
+        });
+      //}
 
     }
   }

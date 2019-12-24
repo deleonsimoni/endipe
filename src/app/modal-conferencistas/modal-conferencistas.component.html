@@ -304,6 +304,20 @@
 
 
 
+
+            </div>
+
+            <div *ngIf="conferencistas.length > 0" class="row">
+                <div class="mt-4">
+                    <div class="row align-items-center">
+
+                        <div class="col-md-2 text-center" *ngFor="let conf of conferencistas">
+                            <img [src]="_DomSanitizationService.bypassSecurityTrustUrl(conf.imagem)"
+                                title="{{conf.fullname}}">
+                        </div>
+
+                    </div>
+                </div>
             </div>
         </mat-dialog-content>
     </div>

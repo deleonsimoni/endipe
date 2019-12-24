@@ -2,8 +2,7 @@
     <div class="row">
         <div class="col-6 col-sm-4 col-md-4 col-lg-3 col-xg-3"
             *ngFor="let conferencista of conferencistas; let i = index" [ngClass]="{'mb-3': conferencistas.length > 1}">
-            <conferencer-card [name]="conferencista.fullname" [imagePathS3]="conferencista.imagePathS3"
-                [description]="conferencista.description"></conferencer-card>
+            <conferencer-card (selected)="listar()" [conferencista]="conferencista"></conferencer-card>
         </div>
     </div>
 

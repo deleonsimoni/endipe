@@ -603,6 +603,8 @@ async function markReviewer(idWork, idReviewer, reviewerEmail) {
     retorno.mensagem = "O parecerista já lançou seu parecer sobre o trabalho, não pode ser desvinculado"
   } else {
     work.reviewers[0] = { userId: idReviewer, userEmail: reviewerEmail };
+    let email = templateEmail.pareceristaVinculado;
+    emailSender.sendMail(reviewerEmail, 'Você foi selecionado como parecerista', email);
     await work.save();
   }
 

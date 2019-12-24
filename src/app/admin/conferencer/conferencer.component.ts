@@ -53,7 +53,9 @@ export class ConferencerComponent implements OnInit {
 
   public addConferencer() {
     const dialogRef = this.dialog.open(ModalConferencerComponent);
-    dialogRef.afterClosed();
+    dialogRef.afterClosed().subscribe(() => {
+      this.listar();
+    });
   }
 
 }

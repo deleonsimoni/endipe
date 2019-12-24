@@ -3,11 +3,16 @@ const pagamentoHomologado = "<h1><strong>XX ENDIPE | RIO 2020</strong></h1><p>&n
 const trabalhoSubmetido = "<h1><strong>XX ENDIPE | RIO 2020</strong>&nbsp;</h1><p>Seu trabalho foi submetido com sucesso! Obrigada por compartilhar seus fazeres-saberes conosco!</p><p>&nbsp;</p><p><strong><a title=\"\&quot;Facebook\&quot;\" href=\"\&quot;https://www.facebook.com/xxendiperio2020/\&quot;\" target=\"\&quot;_blank\&quot;\" rel=\"\&quot;noopener\&quot;\">Facebook</a> | <a title=\"\&quot;Instagram\&quot;\" href=\"\&quot;https://www.instagram.com/endipe.riodejaneiro/\&quot;\" target=\"\&quot;_blank\&quot;\" rel=\"\&quot;noopener\&quot;\">Instagram</a></strong></p><p>&nbsp;</p><p>&nbsp;</p>";
 const esqueciSenha = "<h1><strong>XX ENDIPE | RIO 2020</strong>&nbsp;</h1><p>Para recuperar sua senha siga os passos abaixo:</p><p>1 - Acesse o seguinte endereço http://www.xxendiperio2020.com.br/reset-senha</p><p>2 - Insira o seguinte código no campo \"Código do email\": #senha#</p><p>3 - Insira sua nova senha no sistema e clique em Enviar</p>";
 const documentoValido = "<h1><strong>XX ENDIPE | RIO 2020</strong>&nbsp;</h1><p>Nossa equipe avaliou seu comprovante de inscrição e está tudo de acordo.</p><p>Acesse agora mesmo o site http://www.xxendiperio2020.com.br/ e no menu Ações > Pagamento envie seu comprovante de transferência bancária. </p>";
+const pareceristaVinculado = "<h1><strong>XX ENDIPE | RIO 2020</strong>&nbsp;</h1><p> Olá! Você foi cadastrado como parecerista do XX ENDIPE Rio 2020. Para acessar a área de avaliação de trabalhos você deve acessar a aba “Dashboard” dentro do menu “ações” após logar no sistema com seu e-mail cadastrado e senha. Os trabalhos serão distribuídos para avaliação a partir de fevereiro. </p>";
+const trabalhoRecusadoReenviado = "<h1><strong>XX ENDIPE | RIO 2020</strong>&nbsp;</h1><p>Seu eixo recebeu um trabalho para nova avaliação através de recurso. Faça login no site, avalie o trabalho ou faça nova distribuição</p>";
+
 
 module.exports = {
     inscricaoSucesso,
     pagamentoHomologado,
     trabalhoSubmetido,
     esqueciSenha,
-    documentoValido
+    documentoValido,
+    pareceristaVinculado,
+    trabalhoRecusadoReenviado
 };

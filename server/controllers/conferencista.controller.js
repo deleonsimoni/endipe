@@ -10,7 +10,7 @@ module.exports = {
 
 async function getConferencistas() {
   return await Conferencista.find()
-    .sort({ createAt: -1 });
+    .sort({ fullname: 1 });
 }
 
 async function insertConferencista(req) {

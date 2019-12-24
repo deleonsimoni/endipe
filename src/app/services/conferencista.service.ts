@@ -19,8 +19,8 @@ export class ConferencistaService {
     return this.http.post(`${this.baseUrl}/conferencista/conferencista`, conferencista);
   }
 
-  deletar(conferencista) {
-    return this.http.delete(`${this.baseUrl}/conferencista/conferencista/${conferencista._id}`);
+  deletar(id) {
+    return this.http.delete(`${this.baseUrl}/conferencista/conferencista/${id}`);
   }
 
 }

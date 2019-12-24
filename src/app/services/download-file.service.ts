@@ -23,4 +23,8 @@ export class DownloadFileService {
     });
   }
 
+  getImage(fileName) {
+    return this.http.get(`${this.baseUrl}/user/downloadFile?fileName=${fileName}`)
+  }
+
 }
