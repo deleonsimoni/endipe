@@ -392,7 +392,7 @@ export const PROGRAMACOES = [
                         tema: 'Educação ao longo da vida: formas de insurgências cotidianas',
                         coordenadores: [
                             'Ivanilde Apoluceno de Oliveira (UEPA)',
-                            'Maria Ciavatta (UFF)',
+                            'Ricardo Henriques (Instituto Unibanco)',
                             'Cyntia Kelly Menezes da Silva Burguinhão (SME-Rio- PEJA)',
                             'Coord. Sandra Sales (UFRRJ)'
                         ],

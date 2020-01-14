@@ -129,13 +129,13 @@ export class SubmissaoComponent implements OnInit {
       //fileInput.value = '';
       return;
       // tslint:disable-next-line: align
-    } if (this.filesDOC[0].type.indexOf('doc') === -1
+    } /*if (this.filesDOC[0].type.indexOf('doc') === -1
       && this.filesDOC[0].type.indexOf('docx') === -1
       && this.filesDOC[0].type.indexOf('msword') === -1) {
       this.toastr.error('O arquivo Upload DOC precisa ser um DOC.', 'Atenção');
       return;
       // tslint:disable-next-line: align
-    } if (this.filesPDF[0].size > 2500 * 1027) {
+    }*/ if (this.filesPDF[0].size > 2500 * 1027) {
       this.toastr.error('O arquivo PDF deve possuir no máximo 2MB', 'Atenção');
       return;
     } if (this.filesDOC[0].size > 2500 * 1027) {

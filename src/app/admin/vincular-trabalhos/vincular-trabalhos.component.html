@@ -10,7 +10,7 @@
     <hr />
 
     <div class="row" *ngIf="allWorks.length > 0 && user && user.icAdmin">
-        Filtro de Pesquisa
+        Total de {{allWorks.length}} trabalhos - Filtro de Pesquisa
 
         <div class="col-md-4">
             <select class="form-control" [(ngModel)]="status" (change)="filtrarStatus()">
