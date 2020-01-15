@@ -21,6 +21,7 @@ router.post('/invalidatePayment/:id', passport.authenticate('jwt', { session: fa
 router.post('/validateDoc/:id', passport.authenticate('jwt', { session: false }), validateDoc);
 router.post('/invalidateDoc/:id', passport.authenticate('jwt', { session: false }), invalidateDoc);
 router.post('/rainbown/:id', passport.authenticate('jwt', { session: false }), deleteByEmail);
+router.post('/editUser', passport.authenticate('jwt', { session: false }), editUser);
 
 
 async function getUsers(req, res) {
@@ -36,6 +37,15 @@ async function getUsers(req, res) {
 async function deleteByEmail(req, res) {
   if (req.user.icAdmin) {
     let users = await adminCtrl.deleteByEmail(req.params.id);
+    res.json(users);
+  } else {
+    res.sendStatus(401);
+  }
+}
+
+async function editUser(req, res) {
+  if (req.user.icAdmin) {
+    let users = await adminCtrl.editUser(req.body);
     res.json(users);
   } else {
     res.sendStatus(401);
