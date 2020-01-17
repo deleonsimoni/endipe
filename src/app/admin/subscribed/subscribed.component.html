@@ -25,7 +25,7 @@
         <subscribers-card [subscribed]="subscribed" (selected)="receiverSelectedUser($event)">
         </subscribers-card>
 
-        <subscribers-data [subscribed]="subscribed"
+        <subscribers-data [subscribed]="subscribed" (update)="updateUser($event)"
             *ngIf="user.icAdmin && (subscribed && subscribed._id == userSelect)">
         </subscribers-data>
 

@@ -151,4 +151,10 @@ export class SubscribedComponent implements OnInit {
     }
   }
 
+  public updateUser(event) {
+    if (event === true) {
+      this.retrieveUser();
+    }
+  }
+
 }

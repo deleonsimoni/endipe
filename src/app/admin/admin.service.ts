@@ -72,4 +72,8 @@ export class AdminService {
   public retrieveAllWorks(id) {
     return this.http.get<any>(`${this.baseUrl}/admin/works/${id}`);
   }
+
+  public updateUser(form) {
+    return this.http.post(`${this.baseUrl}/admin/editUser`, form);
+  }
 }

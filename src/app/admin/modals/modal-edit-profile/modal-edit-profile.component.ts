@@ -1,6 +1,8 @@
 import { Component, AfterViewInit, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder, FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { AdminService } from '../../admin.service';
 
 @Component({
   selector: 'app-modal-edit-profile',
@@ -20,7 +22,8 @@ export class ModalEditProfileComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<ModalEditProfileComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private builder: FormBuilder
+    private builder: FormBuilder,
+    private adminService: AdminService
   ) {
 
     this.profileForm = this.builder.group({
@@ -43,10 +46,11 @@ export class ModalEditProfileComponent implements OnInit {
   }
 
   private fillForm() {
-
     console.log(this.data);
+    if (!this.profileForm.get('_id')) {
+      this.profileForm.addControl('_id', new FormControl(null));
+    }
     this.profileForm.patchValue(this.data);
-
   }
 
   public close(): void {
@@ -55,5 +59,14 @@ export class ModalEditProfileComponent implements OnInit {
 
   public get retrieveFormData() {
     return this.profileForm.getRawValue();
+  }
+
+  public updateUser() {
+    const form = this.profileForm.getRawValue();
+
+    this.adminService.updateUser(form)
+      .subscribe(_ => {
+        this.close();
+      });
   }
 }

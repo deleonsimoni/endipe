@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Inject } from '@angular/core';
+import { Component, OnInit, Input, Inject, Output, EventEmitter } from '@angular/core';
 import { AdminService } from '../../admin.service';
 import { DownloadFileService } from 'src/app/services/download-file.service';
 import { HttpClient } from '@angular/common/http';
@@ -14,6 +14,7 @@ import { ModalEditProfileComponent } from '../../modals/modal-edit-profile/modal
 export class SubscribersDataComponent implements OnInit {
 
   @Input() subscribed: any;
+  @Output() update: EventEmitter<boolean> = new EventEmitter<boolean>();
   public carregando = false;
   public carregandoTrabalhos = false;
   public works;
@@ -112,9 +113,12 @@ export class SubscribersDataComponent implements OnInit {
   }
 
   public editProfile() {
-    this.dialog.open(ModalEditProfileComponent, {
+    const dialogRef = this.dialog.open(ModalEditProfileComponent, {
       data: this.subscribed
     });
+
+    dialogRef.afterClosed()
+      .subscribe(_ => this.update.emit(true));
   }
 
   public modalities = [

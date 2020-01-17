@@ -26,8 +26,8 @@ async function getUsers() {
     .sort({ fullname: 1 });
 }
 
-async function editUser(body) {
-  return await User.findOneAndUpdate({ _id: body.user._id }, body.user);
+async function editUser(user) {
+  return await User.findOneAndUpdate({ _id: user._id }, user);
 }
 
 
