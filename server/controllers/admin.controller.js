@@ -16,7 +16,8 @@ module.exports = {
   invalidateDoc,
   deleteByEmail,
   getUserWorks,
-  getWorks
+  getWorks,
+  editUser
 }
 
 async function getUsers() {
@@ -24,6 +25,11 @@ async function getUsers() {
     .select('fullname email createdAt document phones modalityId payment works institution isPCD deficiencyType icForeign')
     .sort({ fullname: 1 });
 }
+
+async function editUser(body) {
+  return await User.findOneAndUpdate({ _id: body.user._id }, body.user);
+}
+
 
 async function deleteByEmail(emailDelete) {
   return await User.findOneAndRemove({ email: emailDelete }, function (err, doc) {
