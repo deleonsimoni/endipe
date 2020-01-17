@@ -38,7 +38,6 @@ export class ModalEditProfileComponent implements OnInit {
       modalityId: new FormArray([])
     });
 
-    this.profileForm.valueChanges.subscribe(_ => console.log(this.profileForm));
   }
 
   ngOnInit() {
@@ -46,7 +45,6 @@ export class ModalEditProfileComponent implements OnInit {
   }
 
   private fillForm() {
-    console.log(this.data);
     if (!this.profileForm.get('_id')) {
       this.profileForm.addControl('_id', new FormControl(null));
     }
