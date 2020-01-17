@@ -33,8 +33,7 @@ export class AdminComponent implements OnInit {
     { name: 'NOTICÍAS', path: '/admin/noticias' },
     { name: 'CONFERENCISTAS', path: '/admin/conferencistas' },
     { name: 'PARECERISTAS/COORDENADORES', path: '/admin/coordenadores' },
-    { name: 'PARECER', path: '/admin/vincularTrabalhos' },
-
+    { name: 'PARECER', path: '/admin/vincular-trabalho' }
   ];
 
   private nonAdminRoutes = [

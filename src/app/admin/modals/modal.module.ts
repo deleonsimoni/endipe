@@ -9,6 +9,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { QuillModule } from 'ngx-quill';
 import { ModalReviewAdminComponent } from './modal-review-admin/modal-review-admin.component';
 import { UtilNgxMaterialModule } from 'src/app/util-ngx-material/util-ngx-material.module';
+import { ModalEditProfileComponent } from './modal-edit-profile/modal-edit-profile.component';
+import { BsDatepickerModule, BsDropdownModule } from 'ngx-bootstrap';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -16,13 +19,15 @@ import { UtilNgxMaterialModule } from 'src/app/util-ngx-material/util-ngx-materi
     ModalCoordinatorComponent,
     ModalNewsComponent,
     ModalReviewerComponent,
-    ModalReviewAdminComponent
+    ModalReviewAdminComponent,
+    ModalEditProfileComponent
   ],
   entryComponents: [
     ModalConferencerComponent,
     ModalCoordinatorComponent,
     ModalNewsComponent,
-    ModalReviewerComponent
+    ModalReviewerComponent,
+    ModalEditProfileComponent
   ],
   imports: [
     CommonModule,
@@ -30,12 +35,16 @@ import { UtilNgxMaterialModule } from 'src/app/util-ngx-material/util-ngx-materi
     UtilNgxMaterialModule,
     ReactiveFormsModule,
     QuillModule.forRoot(),
+    BsDatepickerModule.forRoot(),
+    BsDropdownModule.forRoot(),
+    NgxMaskModule.forRoot(),
   ],
   exports: [
     ModalConferencerComponent,
     ModalCoordinatorComponent,
     ModalNewsComponent,
-    ModalReviewerComponent
+    ModalReviewerComponent,
+    ModalEditProfileComponent
   ]
 })
 export class ModalModule { }

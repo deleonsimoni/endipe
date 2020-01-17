@@ -28,7 +28,7 @@ const routes: Routes = [
                 path: 'coordenadores', component: CoordinatorComponent
             },
             {
-                path: 'vincularTrabalhos', component: VincularTrabalhosComponent
+                path: 'vincular-trabalho', component: VincularTrabalhosComponent
             },
         ]
     }

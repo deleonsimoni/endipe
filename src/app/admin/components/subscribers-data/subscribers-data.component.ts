@@ -2,6 +2,8 @@ import { Component, OnInit, Input, Inject } from '@angular/core';
 import { AdminService } from '../../admin.service';
 import { DownloadFileService } from 'src/app/services/download-file.service';
 import { HttpClient } from '@angular/common/http';
+import { MatDialog } from '@angular/material';
+import { ModalEditProfileComponent } from '../../modals/modal-edit-profile/modal-edit-profile.component';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -20,8 +22,8 @@ export class SubscribersDataComponent implements OnInit {
     private adminService: AdminService,
     private downloadService: DownloadFileService,
     @Inject('BASE_API_URL') private baseUrl: string,
-    private http: HttpClient
-
+    private http: HttpClient,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -107,6 +109,12 @@ export class SubscribersDataComponent implements OnInit {
 
   public retrieveCategories(id) {
     return this.categories.filter(element => element.id === id)[0];
+  }
+
+  public editProfile() {
+    this.dialog.open(ModalEditProfileComponent, {
+      data: this.subscribed
+    });
   }
 
   public modalities = [
