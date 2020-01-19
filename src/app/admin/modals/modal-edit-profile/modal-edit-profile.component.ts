@@ -12,6 +12,7 @@ import { AdminService } from '../../admin.service';
 export class ModalEditProfileComponent implements OnInit {
 
   public profileForm: FormGroup;
+  public submit = false;
   public modalidadesUsuario = [
     { id: 2, name: 'Mediador de roda de conversa' },
     { id: 3, name: 'Expositor de pôster' },
@@ -33,7 +34,7 @@ export class ModalEditProfileComponent implements OnInit {
       document: [null, [Validators.required]],
       institution: this.builder.group({
         name: [null, [Validators.required]],
-        initials: [null]
+        initials: [null, [Validators.required]]
       }),
       modalityId: new FormArray([])
     });
@@ -60,11 +61,22 @@ export class ModalEditProfileComponent implements OnInit {
   }
 
   public updateUser() {
-    const form = this.profileForm.getRawValue();
+    this.submit = true;
 
-    this.adminService.updateUser(form)
-      .subscribe(_ => {
-        this.close();
-      });
+    if (this.profileForm.valid) {
+      const form = this.profileForm.getRawValue();
+      this.adminService.updateUser(form)
+        .subscribe(_ => {
+          this.close();
+        });
+    }
+  }
+
+  public get validate() {
+    return this.profileForm.controls;
+  }
+
+  public get validateInstitution() {
+    return this.profileForm.get('institution')['controls'];
   }
 }
