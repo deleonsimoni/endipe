@@ -5,7 +5,7 @@
             <form [formGroup]="profileForm" role="form" class="contactForm" (ngSubmit)="updateUser()">
                 <div class="row justify-content-between">
                     <div class="section-header" mat-dialog-title>
-                        <h2>Meu perfil</h2>
+                        <h2>Editar Usuário</h2>
                     </div>
                     <i class="fa fa-times" (click)="close()"></i>
                 </div>
@@ -49,10 +49,10 @@
                     <br>
                     <div class="form-group col-md-6">
                         <div>
-                            <select class="form-control" id="opt" formControlName="modalityId">
-                                <option disabled="true" [selected]="!retrieveFormData.modalityId">Selecione
+                            <select class="form-control" id="opt" formControlName="categoryId">
+                                <option disabled="true" [selected]="true">Selecione
                                     a modalidade</option>
-                                <option *ngFor="let option of modalidadesUsuario" [value]="option.id">
+                                <option *ngFor="let option of categories" [value]="option.id">
                                     {{ option.name }}
                                 </option>
                             </select>

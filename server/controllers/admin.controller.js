@@ -27,7 +27,7 @@ async function getUsers() {
 }
 
 async function editUser(user) {
-  return await User.findOneAndUpdate({ _id: user._id }, user);
+  return await User.findOneAndUpdate({ _id: user._id }, user, { upsert: true });
 }
 
 

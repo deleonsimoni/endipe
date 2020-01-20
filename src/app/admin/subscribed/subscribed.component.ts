@@ -4,6 +4,7 @@ import { DownloadFileService } from 'src/app/services/download-file.service';
 import { AdminService } from '../admin.service';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { saveAs } from 'file-saver'
 
 @Component({
   selector: 'app-subscribed',
@@ -23,6 +24,7 @@ export class SubscribedComponent implements OnInit {
   public carregando = false;
   public userSelect: number;
   public metrics: {};
+  public gerandoRelatorio = false;
 
   constructor(
     private authService: AuthService,
@@ -149,6 +151,45 @@ export class SubscribedComponent implements OnInit {
         this.users = this.allUsers;
         break;
     }
+  }
+
+  public export() {
+    try {
+
+      const dataExport: any = this.users.map(user => {
+        return {
+          nome: user.fullname,
+          email: user.email,
+          documento: user.document,
+          estrangeiro: user.icForeign ? 'X' : ''
+        }
+      });
+
+
+      this.gerandoRelatorio = true;
+      const replacer = (key, value) => value === null ? '' : value; // specify how you want to handle null values here
+      const header = Object.keys(dataExport[0]);
+      let csv = dataExport.map(row => header.map(fieldName => JSON.stringify(row[fieldName], replacer)).join(';'));
+      csv.unshift(header.join(';'));
+      let csvArray = csv.join('\r\n');
+
+      var a = document.createElement('a');
+      var blob = new Blob([csvArray], { type: 'text/csv' }),
+        url = window.URL.createObjectURL(blob);
+
+      a.href = url;
+      a.download = "endipe-pagamento-valido.csv";
+      a.click();
+      window.URL.revokeObjectURL(url);
+      a.remove();
+      this.gerandoRelatorio = false;
+    } catch (error) {
+
+      this.gerandoRelatorio = false;
+
+    }
+
+
   }
 
   public updateUser(event) {

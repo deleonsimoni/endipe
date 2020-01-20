@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder, FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { AdminService } from '../../admin.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-modal-edit-profile',
@@ -13,17 +14,21 @@ export class ModalEditProfileComponent implements OnInit {
 
   public profileForm: FormGroup;
   public submit = false;
-  public modalidadesUsuario = [
-    { id: 2, name: 'Mediador de roda de conversa' },
-    { id: 3, name: 'Expositor de pôster' },
-    { id: 4, name: 'Mediador de minicurso' },
-    { id: 5, name: 'Coordenador e/ou expositor de painel' }
+  public categoryId;
+
+  public categories = [
+    { id: 1, name: 'Estudantes de curso Normal/EM' },
+    { id: 2, name: 'Estudantes de Graduação' },
+    { id: 3, name: 'Estudantes de Pós-Graduação' },
+    { id: 4, name: 'Profissionais da Educação Básica' },
+    { id: 5, name: 'Profissionais da Educação Superior' }
   ];
 
   constructor(
     public dialogRef: MatDialogRef<ModalEditProfileComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private builder: FormBuilder,
+    private toastr: ToastrService,
     private adminService: AdminService
   ) {
 
@@ -36,7 +41,7 @@ export class ModalEditProfileComponent implements OnInit {
         name: [null, [Validators.required]],
         initials: [null, [Validators.required]]
       }),
-      modalityId: new FormArray([])
+      categoryId: [null, []]
     });
 
   }
@@ -46,6 +51,7 @@ export class ModalEditProfileComponent implements OnInit {
   }
 
   private fillForm() {
+
     if (!this.profileForm.get('_id')) {
       this.profileForm.addControl('_id', new FormControl(null));
     }
@@ -64,9 +70,15 @@ export class ModalEditProfileComponent implements OnInit {
     this.submit = true;
 
     if (this.profileForm.valid) {
-      const form = this.profileForm.getRawValue();
+      let form = this.profileForm.getRawValue();
+      if (this.data.payment && form.categoryId) {
+        form.payment = this.data.payment;
+        form.payment.categoryId = parseInt(form.categoryId);
+      }
+
       this.adminService.updateUser(form)
         .subscribe(_ => {
+          this.toastr.success('Dados do usuário alterados.', 'Sucesso');
           this.close();
         });
     }
