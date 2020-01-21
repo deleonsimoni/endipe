@@ -1,7 +1,6 @@
-import { Component, AfterViewInit, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { FormBuilder, FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AdminService } from '../../admin.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -70,10 +69,10 @@ export class ModalEditProfileComponent implements OnInit {
     this.submit = true;
 
     if (this.profileForm.valid) {
-      let form = this.profileForm.getRawValue();
+      const form = this.profileForm.getRawValue();
       if (this.data.payment && form.categoryId) {
         form.payment = this.data.payment;
-        form.payment.categoryId = parseInt(form.categoryId);
+        form.payment.categoryId = Number(form.categoryId);
       }
 
       this.adminService.updateUser(form)
