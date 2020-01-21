@@ -1,0 +1,14 @@
+<div>
+    <div class="row">
+        <div class="col-6 col-sm-4 col-md-4 col-lg-3 col-xg-3" *ngFor="let schedule of schedules; let i = index"
+            [ngClass]="{'mb-3': schedules.length > 1}">
+            <conferencer-card (selected)="listar()" [conferencista]="conferencista"></conferencer-card>
+        </div>
+    </div>
+
+    <not-found *ngIf="schedules.length < 1" msg="Não há horários cadastrados"></not-found>
+
+    <div class="row justify-content-end">
+        <button class="btn-get-started" (click)="addSchedule()">Cadastrar</button>
+    </div>
+</div>

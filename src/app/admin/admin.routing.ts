@@ -8,6 +8,7 @@ import { WorksComponent } from './works/works.component';
 import { AdminGuard } from './admin.guard';
 import { ConferencerComponent } from './conferencer/conferencer.component';
 import { VincularTrabalhosComponent } from './vincular-trabalhos/vincular-trabalhos.component';
+import { SchedulesComponent } from './schedules/schedules.component';
 
 const routes: Routes = [
     {
@@ -29,6 +30,9 @@ const routes: Routes = [
             },
             {
                 path: 'vincular-trabalho', component: VincularTrabalhosComponent
+            },
+            {
+                path: 'programacao', component: SchedulesComponent
             },
         ]
     }

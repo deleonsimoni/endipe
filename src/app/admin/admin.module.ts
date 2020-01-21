@@ -25,6 +25,7 @@ import { UtilNgxMaterialModule } from '../util-ngx-material/util-ngx-material.mo
 import { VincularTrabalhosComponent } from './vincular-trabalhos/vincular-trabalhos.component';
 import { WorkDataComponent } from './work-data/work-data.component';
 import { ModalReviewAdminComponent } from './modals/modal-review-admin/modal-review-admin.component';
+import { SchedulesComponent } from './schedules/schedules.component';
 
 @NgModule({
     declarations: [
@@ -43,6 +44,7 @@ import { ModalReviewAdminComponent } from './modals/modal-review-admin/modal-rev
         ConferencerCardComponent,
         VincularTrabalhosComponent,
         WorkDataComponent,
+        SchedulesComponent,
     ],
     entryComponents: [
         AdminComponent,

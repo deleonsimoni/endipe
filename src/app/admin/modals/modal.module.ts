@@ -12,6 +12,7 @@ import { UtilNgxMaterialModule } from 'src/app/util-ngx-material/util-ngx-materi
 import { ModalEditProfileComponent } from './modal-edit-profile/modal-edit-profile.component';
 import { BsDatepickerModule, BsDropdownModule } from 'ngx-bootstrap';
 import { NgxMaskModule } from 'ngx-mask';
+import { ModalSchedulesComponent } from './modal-schedules/modal-schedules.component';
 
 @NgModule({
   declarations: [
@@ -20,14 +21,16 @@ import { NgxMaskModule } from 'ngx-mask';
     ModalNewsComponent,
     ModalReviewerComponent,
     ModalReviewAdminComponent,
-    ModalEditProfileComponent
+    ModalEditProfileComponent,
+    ModalSchedulesComponent
   ],
   entryComponents: [
     ModalConferencerComponent,
     ModalCoordinatorComponent,
     ModalNewsComponent,
     ModalReviewerComponent,
-    ModalEditProfileComponent
+    ModalEditProfileComponent,
+    ModalSchedulesComponent
   ],
   imports: [
     CommonModule,
@@ -44,7 +47,8 @@ import { NgxMaskModule } from 'ngx-mask';
     ModalCoordinatorComponent,
     ModalNewsComponent,
     ModalReviewerComponent,
-    ModalEditProfileComponent
+    ModalEditProfileComponent,
+    ModalSchedulesComponent
   ]
 })
 export class ModalModule { }
