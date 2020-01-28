@@ -248,7 +248,7 @@ export const PROGRAMACOES = [
                         tema: 'Educação, diferença e insurgências: práticas educativas emancipatórias',
                         coordenadores: [
                             'Rita (Potiguara) Gomes do Nascimento (SEDUC-CE)',
-                            'Leonardo Lemos de Souza (UNESP)',
+                            'Márcio Caetano (FURGS)',
                             'Elizabeth Macedo (UERJ)',
                             'Coord. Talita Vidal (UERJ)'
                         ],
@@ -568,8 +568,7 @@ export const PROGRAMACOES = [
                     'Escolha do local de sede do XXI ENDIPE 2022'
                 ],
                 coordenadores: [
-                    'Antònio Nóvoa (ULisboa/PT – UFRJ)',
-                    'Mediadora: Tatiana Roque (FCC/UFF)'
+                    'Antònio Nóvoa (ULisboa/PT – UFRJ)'
                 ]
             }
         ],
