@@ -14,24 +14,24 @@
                         <select class="form-control" id="axis" formControlName="axis">
                             <option disabled="true" [selected]="true">Selecione
                                 o eixo</option>
-                            <option *ngFor="let eixo of axis" [value]="eixo.id">
+                            <option *ngFor="let eixo of axisCollection" [value]="eixo.id">
                                 {{ eixo.name }}
                             </option>
                         </select>
                     </div>
                 </div>
-                <div class="form-row">
+                <div class="form-row" *ngIf="axis">
                     <div class="form-group col-md-12">
                         <select class="form-control" id="work" formControlName="work">
                             <option disabled="true" [selected]="true">Selecione
                                 o trabalho</option>
-                            <option *ngFor="let work of works" [value]="work._id">
+                            <option *ngFor="let work of works" [ngValue]="work">
                                 {{ work.title }}
                             </option>
                         </select>
                     </div>
                 </div>
-                <div class="form-row">
+                <div class="form-row" *ngIf="work">
                     <div class="form-group col-md-6">
                         <select class="form-control" id="day" formControlName="day">
                             <option disabled="true" [selected]="true">Selecione
@@ -46,14 +46,14 @@
                             formControlName="hour" />
                     </div>
                 </div>
-                <div class="form-row">
+                <div class="form-row" *ngIf="day && hour">
                     <div class="form-group col-md-12">
                         <input type="text" name="room" class="form-control" id="room" placeholder="Adicione a sala"
                             formControlName="room" />
                     </div>
                 </div>
                 <div class="row justify-content-center">
-                    <button class="btn-get-started" type="submit" [disabled]="scheduleForm.invalid">Submeter</button>
+                    <button class="btn-get-started" type="submit">Submeter</button>
                 </div>
             </form>
         </div>
