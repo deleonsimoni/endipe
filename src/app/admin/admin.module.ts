@@ -26,6 +26,7 @@ import { VincularTrabalhosComponent } from './vincular-trabalhos/vincular-trabal
 import { WorkDataComponent } from './work-data/work-data.component';
 import { ModalReviewAdminComponent } from './modals/modal-review-admin/modal-review-admin.component';
 import { SchedulesComponent } from './schedules/schedules.component';
+import { ScheduleCardComponent } from './components/schedule-card/schedule-card.component';
 
 @NgModule({
     declarations: [
@@ -45,6 +46,7 @@ import { SchedulesComponent } from './schedules/schedules.component';
         VincularTrabalhosComponent,
         WorkDataComponent,
         SchedulesComponent,
+        ScheduleCardComponent,
     ],
     entryComponents: [
         AdminComponent,

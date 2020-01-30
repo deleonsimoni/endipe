@@ -8,6 +8,8 @@ import { Observable } from 'rxjs';
 })
 export class AdminService {
 
+  private db = [];
+
   constructor(
     @Inject('BASE_API_URL') private baseUrl: string,
     private http: HttpClient
@@ -76,4 +78,22 @@ export class AdminService {
   public updateUser(form) {
     return this.http.post(`${this.baseUrl}/admin/editUser`, form);
   }
+
+  public registerSchedule(form) {
+
+    return new Observable(obs => {
+      this.db.push(form);
+      return obs.next(form);
+    });
+
+  }
+
+  public retrieveSchedules() {
+
+    return new Observable(obs => {
+      return obs.next(this.db);
+    });
+
+  }
+
 }
