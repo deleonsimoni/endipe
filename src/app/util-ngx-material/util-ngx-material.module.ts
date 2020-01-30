@@ -13,7 +13,9 @@ import {
   MatListModule,
   MatCardModule,
   MatCheckboxModule,
-  MatRadioModule
+  MatRadioModule,
+  MatTableModule,
+  MatPaginatorModule
 } from '@angular/material';
 
 @NgModule({
@@ -30,7 +32,9 @@ import {
     MatListModule,
     MatCardModule,
     MatCheckboxModule,
-    MatRadioModule
+    MatRadioModule,
+    MatTableModule,
+    MatPaginatorModule
   ]
 })
 export class UtilNgxMaterialModule { }

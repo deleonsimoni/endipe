@@ -8,6 +8,8 @@ const IncomingForm = require('formidable').IncomingForm;
 const fs = require('fs');
 const S3Uploader = require('./aws.controller');
 
+const paginate = require('jw-paginate');
+
 module.exports = {
   getUsers,
   validatePayment,
@@ -20,10 +22,32 @@ module.exports = {
   editUser
 }
 
-async function getUsers() {
-  return await User.find({ icAdmin: false })
-    .select('fullname email createdAt document phones modalityId payment works institution isPCD deficiencyType icForeign')
-    .sort({ fullname: 1 });
+async function getUsers(req) {
+
+
+  const pageSize = 5;
+  const page = req.query.page || 1;
+  let usersFound = [];
+
+  if (req.query.search) {
+
+    usersFound = await User.find({ icAdmin: false, email: req.query.search.trim() })
+      .select('fullname email createdAt document phones modalityId payment works institution isPCD deficiencyType icForeign');
+
+  } else {
+
+    usersFound = await User.find({ icAdmin: false })
+      .select('fullname email createdAt document phones modalityId payment works institution isPCD deficiencyType icForeign')
+      .sort({ fullname: 1 })
+      .skip((pageSize * page) - pageSize)
+      .limit(pageSize);
+
+    numbOfUsers = await User.count({ icAdmin: false });
+  }
+
+  const pager = paginate(numbOfUsers, page, pageSize);
+
+  return { usersFound, pager }
 }
 
 async function editUser(user) {

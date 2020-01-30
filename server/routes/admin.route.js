@@ -11,7 +11,7 @@ module.exports = router;
 
 router.use(passport.authenticate('jwt', { session: false }))
 
-router.get('/usrs', passport.authenticate('jwt', { session: false }), getUsers);
+router.get('/usrs?:page', passport.authenticate('jwt', { session: false }), getUsers);
 router.get('/getUserWorks/:id', passport.authenticate('jwt', { session: false }), asyncHandler(getUserWorks));
 router.get('/works/:id', passport.authenticate('jwt', { session: false }), getWorks);
 router.get('/metrics', passport.authenticate('jwt', { session: false }), getMetrics);
@@ -27,7 +27,7 @@ router.post('/editUser', passport.authenticate('jwt', { session: false }), editU
 async function getUsers(req, res) {
   const user = req.user;
   if (user.icAdmin || user.coordinator || user.reviewer) {
-    let users = await adminCtrl.getUsers(req.body);
+    let users = await adminCtrl.getUsers(req);
     res.json(users);
   } else {
     res.sendStatus(401);

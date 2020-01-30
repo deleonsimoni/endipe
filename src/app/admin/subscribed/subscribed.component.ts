@@ -25,6 +25,8 @@ export class SubscribedComponent implements OnInit {
   public userSelect: number;
   public metrics: {};
   public gerandoRelatorio = false;
+  public page;
+  public pager = { pages: [] };
 
   constructor(
     private authService: AuthService,
@@ -45,7 +47,7 @@ export class SubscribedComponent implements OnInit {
           //console.log(res);
         });
     } else {
-      this.retrieveAdminData();
+      this.retrieveAdminData(this.page);
     }
 
   }
@@ -57,12 +59,16 @@ export class SubscribedComponent implements OnInit {
       );
   }
 
-  private retrieveAdminData() {
-    this.adminService.retrieveUsers()
-      .subscribe((res: any[]) => {
+  private retrieveAdminData(page) {
+    this.adminService.retrieveUsers(page)
+      .subscribe((res: any) => {
         //console.log(res);
-        this.allUsers = res;
-        this.users = res;
+        this.users = res.usersFound;
+        this.pager = res.pager;
+        for (var i = 0; i < 275; ++i) {
+          this.pager.pages.push(this.pager.pages[0]);
+        }
+        //this.users = res;
       });
   }
 

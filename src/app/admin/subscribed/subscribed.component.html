@@ -1,5 +1,5 @@
 <div>
-    <div>Total de {{ users.length }} inscritos
+    <div>Total de {{ pager.totalItems }} inscritos
 
         <button *ngIf="status == '5' && !gerandoRelatorio" (click)="export()" class="btn btn-primary">
             <i class="fa fa-file-excel-o"></i> Exportar
@@ -15,7 +15,7 @@
     <div class="row" *ngIf="user && user.icAdmin">
         <div class="col-md-8">
             <input type="text" class="form-control mb-4" [(ngModel)]="search"
-                placeholder="Filtrar participante por CPF ou Nome" (keyup)="searchUser()">
+                placeholder="Filtrar participante por email" (keyup)="searchUser()">
         </div>
         <div class="col-md-4">
             <select class="form-control" [(ngModel)]="status" (change)="filtrarStatus()">
@@ -42,4 +42,34 @@
         </subscribers-data>
 
     </div>
+
+    <div class="pagination justify-content-center">
+        <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+            <li>
+                <button [ngClass]="{disabled:pager.currentPage == 1}" (click)="retrieveAdminData(1)"
+                    class="page-link">Primeira</button>
+            </li>
+            <li>
+                <button [ngClass]="{disabled:pager.currentPage == 1}" (click)="retrieveAdminData(pager.currentPage - 1)"
+                    class="page-link">Anterior</button>
+            </li>
+            <li *ngFor="let page of pager.pages">
+                <button [ngClass]="{active:pager.currentPage == page}" (click)="retrieveAdminData(page)"
+                    class=" page-link">{{page}}</button>
+            </li>
+            <li>
+                <button [ngClass]="{disabled:pager.currentPage == pager.totalPages}"
+                    (click)="retrieveAdminData(pager.currentPage + 1)" class="page-link">Próximo</button>
+            </li>
+            <li>
+                <button [ngClass]="{disabled:pager.currentPage == pager.totalPages}"
+                    (click)="retrieveAdminData(pager.totalPages)" class="page-link">Última</button>
+            </li>
+        </ul>
+
+
+        <md-paginator #paginator [length]="10" [pageIndex]="10" [pageSize]="10">
+        </md-paginator>
+    </div>
+
 </div>

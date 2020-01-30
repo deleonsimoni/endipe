@@ -21,8 +21,8 @@ export class AdminService {
     return this.http.post(`${this.baseUrl}/admin/invalidatePayment/${id}`, {});
   }
 
-  public retrieveUsers() {
-    return this.http.get(`${this.baseUrl}/admin/usrs`);
+  public retrieveUsers(page) {
+    return this.http.get(`${this.baseUrl}/admin/usrs?page=${page}`);
   }
 
   public registerCoordinator(form, axisId) {
