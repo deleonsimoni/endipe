@@ -101,20 +101,20 @@
 
             <div class="col-sm-4 align-self-center">
                 <strong>Título</strong>
-                <p>{{ work.title }}</p>
+                <p>{{ work?.title }}</p>
             </div>
             <div class="col-sm-4 align-self-center">
                 <strong>Eixo</strong>
-                <p>{{ retrieveEixo(work.axisId).name }}</p>
+                <p>{{ retrieveEixo(work?.axisId)?.name }}</p>
             </div>
             <div class="col-sm-4 align-self-center">
                 <strong>Modalidade</strong>
-                <p>{{ retrieveModality(work.modalityId).name }}</p>
+                <p>{{ retrieveModality(work?.modalityId)?.name }}</p>
             </div>
             <div class="col-sm-4 mt-2">
                 <strong>Autores</strong>
-                <span *ngFor="let author of work.authors">
-                    <p>{{ author.userEmail }}</p>
+                <span *ngFor="let author of work?.authors">
+                    <p>{{ author?.userEmail }}</p>
                 </span>
             </div>
             <div class="col-sm-4 mt-2">

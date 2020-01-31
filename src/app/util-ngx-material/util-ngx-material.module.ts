@@ -16,7 +16,6 @@ import {
   MatRadioModule,
   MatTableModule,
   MatPaginatorModule,
-  MatPaginatorIntl
 } from '@angular/material';
 
 @NgModule({
@@ -36,7 +35,6 @@ import {
     MatRadioModule,
     MatTableModule,
     MatPaginatorModule,
-    MatPaginatorIntl
   ]
 })
 export class UtilNgxMaterialModule { }

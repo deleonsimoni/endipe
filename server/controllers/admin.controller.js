@@ -28,22 +28,18 @@ async function getUsers(req) {
   const pageSize = 5;
   const page = req.query.page || 1;
   let usersFound = [];
+  let search = JSON.parse(req.query.search);
+  search.icAdmin = false;
 
-  if (req.query.search) {
+  console.log(search)
 
-    usersFound = await User.find({ icAdmin: false, email: req.query.search.trim() })
-      .select('fullname email createdAt document phones modalityId payment works institution isPCD deficiencyType icForeign');
+  usersFound = await User.find(search)
+    .select('fullname email createdAt document phones modalityId payment works institution isPCD deficiencyType icForeign')
+    .sort({ fullname: 1 })
+    .skip((pageSize * page) - pageSize)
+    .limit(pageSize);
 
-  } else {
-
-    usersFound = await User.find({ icAdmin: false })
-      .select('fullname email createdAt document phones modalityId payment works institution isPCD deficiencyType icForeign')
-      .sort({ fullname: 1 })
-      .skip((pageSize * page) - pageSize)
-      .limit(pageSize);
-
-    numbOfUsers = await User.count({ icAdmin: false });
-  }
+  numbOfUsers = await User.count(search);
 
   const pager = paginate(numbOfUsers, page, pageSize);
 

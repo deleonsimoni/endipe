@@ -1,10 +1,10 @@
 <div>
     <div>Total de {{ pager.totalItems }} inscritos
 
-        <button *ngIf="status == '5' && !gerandoRelatorio" (click)="export()" class="btn btn-primary">
+        <!-- <button *ngIf="status == '5' && !gerandoRelatorio" (click)="export()" class="btn btn-primary">
             <i class="fa fa-file-excel-o"></i> Exportar
             Excel
-        </button>
+        </button>-->
 
         <div *ngIf="gerandoRelatorio">
             <i class="fas fa-spinner fa-pulse"></i>Aguarde...
@@ -14,20 +14,28 @@
 
     <div class="row" *ngIf="user && user.icAdmin">
         <div class="col-md-8">
-            <input type="text" class="form-control mb-4" [(ngModel)]="search"
-                placeholder="Filtrar participante por email" (keyup)="searchUser()">
+            <input type="text" class="form-control mb-4" [(ngModel)]="search.email"
+                placeholder="Filtrar participante por email" (keyup)="clearStatus()">
         </div>
         <div class="col-md-4">
-            <select class="form-control" [(ngModel)]="status" (change)="filtrarStatus()">
-                <option value="">Todos </option>
+            <select class="form-control" [(ngModel)]="status" (change)="clearEmail()">
+                <option value="5">Todos </option>
                 <option value="0">Não realizaram envios</option>
                 <option value="1">Aguardando validação comprovante de categoria</option>
                 <option value="2">Aguardando validação comprovante de transferência</option>
-                <option value="5">Pagamento Válido</option>
+                <option value="6">Pagamento Válido</option>
                 <option value="3">Deficientes</option>
                 <option disabled="disabled">-----------------------</option>
                 <option value="4">Trabalhos Submetidos</option>
             </select>
+        </div>
+
+    </div>
+
+    <div class="row" style="padding-bottom: 6px;" *ngIf="user && user.icAdmin">
+
+        <div class="col-md-4">
+            <button class="btn-primary" (click)="retrieveAdminData(null)">Pesquisar</button>
         </div>
 
     </div>

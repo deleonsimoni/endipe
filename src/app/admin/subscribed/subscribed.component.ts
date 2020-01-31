@@ -21,7 +21,6 @@ export class SubscribedComponent implements OnInit {
   public allUsers = [];
   public infos = false;
   public carregandoTrabalhos = false;
-  public search: string;
   public status: string;
   public carregando = false;
   public userSelect: number;
@@ -64,8 +63,36 @@ export class SubscribedComponent implements OnInit {
   }
 
   private retrieveAdminData(event) {
-    console.log(event)
-    this.adminService.retrieveUsers(event && event.pageIndex + 1 || 1)
+
+    let user: any = {};
+
+    if (this.status) {
+      switch (Number(this.status)) {
+        case 0:
+          this.search = { 'payment': { $eq: null } };
+          break;
+        case 1:
+          this.search = { 'payment.pathReceiptPayment': { $ne: null }, 'payment.icValid': false };
+          break;
+        case 2:
+          this.search = { 'payment.pathS3': { $ne: null }, 'payment.icPaid': false };
+          break;
+        case 3:
+          this.search = { 'isPCD': true };
+          break;
+        case 4:
+          this.search = { 'works': { $ne: null } };
+          break;
+        case 6:
+          this.search = { 'payment.icPaid': true };
+          break;
+        case 5:
+          this.search = {};
+          break;
+      }
+    }
+
+    this.adminService.retrieveUsers(event && event.pageIndex + 1 || 1, JSON.stringify(this.search))
       .subscribe((res: any) => {
         //console.log(res);
         this.users = res.usersFound;
@@ -82,6 +109,16 @@ export class SubscribedComponent implements OnInit {
         this.userWorks(user.works);
       }
     }
+  }
+
+  public clearEmail() {
+    delete this.search.email;
+  }
+
+  public clearStatus() {
+    delete this.status;
+    if (!this.search.email) delete this.search.email
+
   }
 
   public retrieveMetrics() {
