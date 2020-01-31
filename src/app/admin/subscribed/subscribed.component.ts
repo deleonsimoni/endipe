@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { DownloadFileService } from 'src/app/services/download-file.service';
 import { AdminService } from '../admin.service';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { saveAs } from 'file-saver'
+import { PageEvent } from '@angular/material';
+
 
 @Component({
   selector: 'app-subscribed',
@@ -26,7 +28,9 @@ export class SubscribedComponent implements OnInit {
   public metrics: {};
   public gerandoRelatorio = false;
   public page;
-  public pager = { pages: [] };
+  public pager = {};
+  public search: any = {};
+
 
   constructor(
     private authService: AuthService,
@@ -47,7 +51,7 @@ export class SubscribedComponent implements OnInit {
           //console.log(res);
         });
     } else {
-      this.retrieveAdminData(this.page);
+      this.retrieveAdminData(null);
     }
 
   }
@@ -59,16 +63,13 @@ export class SubscribedComponent implements OnInit {
       );
   }
 
-  private retrieveAdminData(page) {
-    this.adminService.retrieveUsers(page)
+  private retrieveAdminData(event) {
+    console.log(event)
+    this.adminService.retrieveUsers(event && event.pageIndex + 1 || 1)
       .subscribe((res: any) => {
         //console.log(res);
         this.users = res.usersFound;
         this.pager = res.pager;
-        for (var i = 0; i < 275; ++i) {
-          this.pager.pages.push(this.pager.pages[0]);
-        }
-        //this.users = res;
       });
   }
 

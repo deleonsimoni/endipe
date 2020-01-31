@@ -44,32 +44,9 @@
     </div>
 
     <div class="pagination justify-content-center">
-        <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
-            <li>
-                <button [ngClass]="{disabled:pager.currentPage == 1}" (click)="retrieveAdminData(1)"
-                    class="page-link">Primeira</button>
-            </li>
-            <li>
-                <button [ngClass]="{disabled:pager.currentPage == 1}" (click)="retrieveAdminData(pager.currentPage - 1)"
-                    class="page-link">Anterior</button>
-            </li>
-            <li *ngFor="let page of pager.pages">
-                <button [ngClass]="{active:pager.currentPage == page}" (click)="retrieveAdminData(page)"
-                    class=" page-link">{{page}}</button>
-            </li>
-            <li>
-                <button [ngClass]="{disabled:pager.currentPage == pager.totalPages}"
-                    (click)="retrieveAdminData(pager.currentPage + 1)" class="page-link">Próximo</button>
-            </li>
-            <li>
-                <button [ngClass]="{disabled:pager.currentPage == pager.totalPages}"
-                    (click)="retrieveAdminData(pager.totalPages)" class="page-link">Última</button>
-            </li>
-        </ul>
 
+        <mat-paginator [length]="pager.totalItems" [pageSize]="pager.pageSize"
+            (page)="pageEvent = retrieveAdminData($event)">
+        </mat-paginator>
 
-        <md-paginator #paginator [length]="10" [pageIndex]="10" [pageSize]="10">
-        </md-paginator>
     </div>
-
-</div>
