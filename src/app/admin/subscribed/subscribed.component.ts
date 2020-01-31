@@ -27,9 +27,9 @@ export class SubscribedComponent implements OnInit {
   public metrics: {};
   public gerandoRelatorio = false;
   public page;
-  public pager = {};
+  public pager: any = {};
   public search: any = {};
-
+  public pageEvent: any;
 
   constructor(
     private authService: AuthService,
@@ -62,7 +62,7 @@ export class SubscribedComponent implements OnInit {
       );
   }
 
-  private retrieveAdminData(event) {
+  public retrieveAdminData(event) {
 
     let user: any = {};
 
@@ -72,16 +72,19 @@ export class SubscribedComponent implements OnInit {
           this.search = { 'payment': { $eq: null } };
           break;
         case 1:
-          this.search = { 'payment.pathReceiptPayment': { $ne: null }, 'payment.icValid': false };
+          this.search = {
+            'payment': { $ne: null }, 'payment.icValid': false, 'payment.icPaid': false, '$or': [{ 'payment.pathS3': { $ne: null } }, { 'payment.pathReceiptPayment': { $ne: null } }]
+          }
           break;
         case 2:
-          this.search = { 'payment.pathS3': { $ne: null }, 'payment.icPaid': false };
+          //this.search = { 'payment.pathS3': { $ne: null }, 'payment.icPaid': false };
+          this.search = { 'payment': { $ne: null }, 'payment.pathReceiptPayment': { $ne: null }, 'payment.icValid': true, 'payment.icPaid': false }
           break;
         case 3:
           this.search = { 'isPCD': true };
           break;
         case 4:
-          this.search = { 'works': { $ne: null } };
+          this.search = { 'works.0': { $exists: true } };
           break;
         case 6:
           this.search = { 'payment.icPaid': true };
@@ -92,7 +95,7 @@ export class SubscribedComponent implements OnInit {
       }
     }
 
-    this.adminService.retrieveUsers(event && event.pageIndex + 1 || 1, JSON.stringify(this.search))
+    this.adminService.retrieveUsers(event && event.pageIndex + 1 || 1, encodeURIComponent(JSON.stringify(this.search)))
       .subscribe((res: any) => {
         //console.log(res);
         this.users = res.usersFound;

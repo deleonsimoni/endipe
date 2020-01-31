@@ -28,10 +28,9 @@ async function getUsers(req) {
   const pageSize = 5;
   const page = req.query.page || 1;
   let usersFound = [];
+  console.log(req.query.search)
   let search = JSON.parse(req.query.search);
   search.icAdmin = false;
-
-  console.log(search)
 
   usersFound = await User.find(search)
     .select('fullname email createdAt document phones modalityId payment works institution isPCD deficiencyType icForeign')
