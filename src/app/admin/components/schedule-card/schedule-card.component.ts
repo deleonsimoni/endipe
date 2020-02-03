@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { AdminService } from '../../admin.service';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -6,13 +7,17 @@ import { Component, OnInit, Input } from '@angular/core';
   templateUrl: './schedule-card.component.html',
   styleUrls: ['./schedule-card.component.scss']
 })
-export class ScheduleCardComponent implements OnInit {
+export class ScheduleCardComponent {
 
   @Input() schedule: any;
+  @Output() update: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  constructor() { }
+  constructor(
+    private adminService: AdminService
+  ) { }
 
-  ngOnInit() {
+  public removeSchedule(id) {
+    this.adminService.deleteSchedule(id)
+      .subscribe(() => this.update.emit(true));
   }
-
 }

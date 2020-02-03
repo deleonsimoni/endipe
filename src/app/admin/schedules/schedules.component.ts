@@ -18,6 +18,7 @@ export class SchedulesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.listAllSchedules();
   }
 
   private listAllSchedules() {
@@ -34,5 +35,9 @@ export class SchedulesComponent implements OnInit {
     const dialogRef = this.dialog.open(ModalSchedulesComponent);
 
     dialogRef.afterClosed().subscribe(res => this.listAllSchedules());
+  }
+
+  public updateList() {
+    this.listAllSchedules();
   }
 }

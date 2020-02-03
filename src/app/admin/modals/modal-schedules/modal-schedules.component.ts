@@ -107,5 +107,4 @@ export class ModalSchedulesComponent implements OnInit {
     const { room } = this.scheduleForm.getRawValue();
     return room;
   }
-
 }

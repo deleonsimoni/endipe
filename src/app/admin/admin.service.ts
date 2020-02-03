@@ -1,14 +1,10 @@
 import { Injectable, Inject } from '@angular/core';
-
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminService {
-
-  private db = [];
 
   constructor(
     @Inject('BASE_API_URL') private baseUrl: string,
@@ -80,20 +76,15 @@ export class AdminService {
   }
 
   public registerSchedule(form) {
-
-    return new Observable(obs => {
-      this.db.push(form);
-      return obs.next(form);
-    });
-
+    return this.http.post<any>(`${this.baseUrl}/schedule/insertSchedule`, form);
   }
 
   public retrieveSchedules() {
+    return this.http.get<any>(`${this.baseUrl}/schedule/listAll`);
+  }
 
-    return new Observable(obs => {
-      return obs.next(this.db);
-    });
-
+  public deleteSchedule(id) {
+    return this.http.delete<any>(`${this.baseUrl}/schedule/deleteSchedule/${id}`);
   }
 
 }

@@ -1,6 +1,6 @@
 <div>
     <div *ngFor="let schedule of schedules; let i = index" [ngClass]="{'mb-3': schedules.length > 1}">
-        <schedule-card [schedule]="schedule"></schedule-card>
+        <schedule-card (update)="updateList($event)" [schedule]="schedule"></schedule-card>
     </div>
 
     <not-found *ngIf="schedules.length < 1" msg="Não há horários cadastrados"></not-found>
