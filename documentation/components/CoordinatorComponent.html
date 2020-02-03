@@ -1,0 +1,1095 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>endipe documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">endipe documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li>CoordinatorComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/admin/coordinator/coordinator.component.ts</code>
+</p>
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                    <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-coordinator</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./coordinator.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./coordinator.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#axisId">axisId</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#checkboxesMultiple">checkboxesMultiple</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#coordinators">coordinators</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#coordinatorsUnsub$">coordinatorsUnsub$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#eixos">eixos</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#listReviewer">listReviewer</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#markCoordinator">markCoordinator</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy">ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit">ngOnInit</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#removeCoordinator">removeCoordinator</a>
+                            </li>
+                            <li>
+                                <a href="#showRegister">showRegister</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(dialog: MatDialog, adminService: <a href="../injectables/AdminService.html">AdminService</a>, toastr: ToastrService)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/admin/coordinator/coordinator.component.ts:29</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>dialog</td>
+                                                  
+                                                        <td>
+                                                                    <code>MatDialog</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>adminService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AdminService.html" target="_self" >AdminService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>toastr</td>
+                                                  
+                                                        <td>
+                                                                    <code>ToastrService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="listReviewer"></a>
+                    <span class="name">
+                        <b>
+                            listReviewer
+                        </b>
+                        <a href="#listReviewer"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>listReviewer()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="47"
+                            class="link-to-prism">src/app/admin/coordinator/coordinator.component.ts:47</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="markCoordinator"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            markCoordinator
+                        </b>
+                        <a href="#markCoordinator"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>markCoordinator(id, event)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="63"
+                            class="link-to-prism">src/app/admin/coordinator/coordinator.component.ts:63</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>event</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <b>
+                            ngOnDestroy
+                        </b>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="41"
+                            class="link-to-prism">src/app/admin/coordinator/coordinator.component.ts:41</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <b>
+                            ngOnInit
+                        </b>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="37"
+                            class="link-to-prism">src/app/admin/coordinator/coordinator.component.ts:37</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="removeCoordinator"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            removeCoordinator
+                        </b>
+                        <a href="#removeCoordinator"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>removeCoordinator(id)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="98"
+                            class="link-to-prism">src/app/admin/coordinator/coordinator.component.ts:98</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showRegister"></a>
+                    <span class="name">
+                        <b>
+                            showRegister
+                        </b>
+                        <a href="#showRegister"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>showRegister()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="55"
+                            class="link-to-prism">src/app/admin/coordinator/coordinator.component.ts:55</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="axisId"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            axisId</b>
+                            <a href="#axisId"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>null</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>null</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/admin/coordinator/coordinator.component.ts:29</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="checkboxesMultiple"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            checkboxesMultiple</b>
+                            <a href="#checkboxesMultiple"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>QueryList&lt;any&gt;</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <b>Decorators : </b>
+                            <br />
+                            <code>
+                                @ViewChildren(&#x27;checkboxMultiple&#x27;)<br />
+                            </code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/admin/coordinator/coordinator.component.ts:18</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="coordinators"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            coordinators</b>
+                            <a href="#coordinators"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>[]</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>[]</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/admin/coordinator/coordinator.component.ts:16</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="coordinatorsUnsub$"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            coordinatorsUnsub$</b>
+                            <a href="#coordinatorsUnsub$"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>new Subject()</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/admin/coordinator/coordinator.component.ts:17</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="eixos"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            eixos</b>
+                            <a href="#eixos"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>[]</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>[
+    { id: 1, name: &#x27;Formação docente&#x27; },
+    { id: 2, name: &#x27;Currículo e avaliação&#x27; },
+    { id: 3, name: &#x27;Direitos humanos, Interculturalidade e Religiões&#x27; },
+    { id: 4, name: &#x27;Nova epistemologia, Diferença, Biodiversidade, Democracia e Inclusão&#x27; },
+    { id: 5, name: &#x27;Educação, Comunicação e Técnologia&#x27; },
+    { id: 6, name: &#x27;Infâncias, Juventudes e Vida Adulta&#x27; }
+  ]</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/admin/coordinator/coordinator.component.ts:20</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, OnDestroy, ElementRef, ViewChild, ViewChildren, QueryList } from &#x27;@angular/core&#x27;;
+import { MatDialog } from &#x27;@angular/material&#x27;;
+import { ModalCoordinatorComponent } from &#x27;../modals/modal-coordinator/modal-coordinator.component&#x27;;
+import { AdminService } from &#x27;../admin.service&#x27;;
+import { Subject } from &#x27;rxjs&#x27;;
+import { takeUntil } from &#x27;rxjs/operators&#x27;;
+import { ToastrService } from &#x27;ngx-toastr&#x27;;
+
+@Component({
+  selector: &#x27;app-coordinator&#x27;,
+  templateUrl: &#x27;./coordinator.component.html&#x27;,
+  styleUrls: [&#x27;./coordinator.component.scss&#x27;]
+})
+export class CoordinatorComponent implements OnInit, OnDestroy {
+
+  public coordinators &#x3D; [];
+  private coordinatorsUnsub$ &#x3D; new Subject();
+  @ViewChildren(&#x27;checkboxMultiple&#x27;) private checkboxesMultiple: QueryList&lt;any&gt;;
+
+  public eixos &#x3D; [
+    { id: 1, name: &#x27;Formação docente&#x27; },
+    { id: 2, name: &#x27;Currículo e avaliação&#x27; },
+    { id: 3, name: &#x27;Direitos humanos, Interculturalidade e Religiões&#x27; },
+    { id: 4, name: &#x27;Nova epistemologia, Diferença, Biodiversidade, Democracia e Inclusão&#x27; },
+    { id: 5, name: &#x27;Educação, Comunicação e Técnologia&#x27; },
+    { id: 6, name: &#x27;Infâncias, Juventudes e Vida Adulta&#x27; }
+  ];
+
+  public axisId &#x3D; null;
+
+  constructor(
+    private dialog: MatDialog,
+    private adminService: AdminService,
+    private toastr: ToastrService,
+  ) { }
+
+  ngOnInit() {
+
+  }
+
+  ngOnDestroy() {
+    this.coordinatorsUnsub$.next();
+    this.coordinatorsUnsub$.complete();
+  }
+
+
+  listReviewer() {
+    this.adminService.retrieveCoordinators(this.axisId)
+      .pipe(
+        takeUntil(this.coordinatorsUnsub$)
+      )
+      .subscribe(({ coordinators }) &#x3D;&gt; this.coordinators &#x3D; coordinators);
+  }
+
+  showRegister() {
+    const dialogRef &#x3D; this.dialog.open(ModalCoordinatorComponent, { data: this.axisId });
+    dialogRef.afterClosed().subscribe(res &#x3D;&gt; {
+      this.listReviewer();
+    });
+  }
+
+
+  public markCoordinator(id, event): void {
+    const index &#x3D; event.source.value[1];
+    const checkboxesArray &#x3D; this.checkboxesMultiple.toArray();
+    if (checkboxesArray[index].checked &#x3D;&#x3D;&#x3D; false) {
+      this.adminService.unmarkCoordinator(id)
+        .subscribe(({ coordinators }: any) &#x3D;&gt; {
+          if (coordinators.temErro) {
+            this.toastr.error(coordinators.mensagem);
+          } else {
+            this.toastr.success(coordinators.mensagem);
+            this.listReviewer();
+          }
+        });
+    } else {
+
+      //Trava para o eixo possuir apenas um coordenador
+      /*if (this.coordinators.some(coordinator &#x3D;&gt; coordinator.reviewer.icCoordinator &#x3D;&#x3D;&#x3D; true)) {
+        this.toastr.error(&quot;Este eixo já possui coordenador cadastrado&quot;);
+        checkboxesArray[index].checked &#x3D; false;
+      } else {*/
+      this.adminService.markCoordinator(id)
+        .subscribe(({ coordinators }: any) &#x3D;&gt; {
+          if (coordinators.temErro) {
+            this.toastr.error(coordinators.mensagem);
+          } else {
+            this.toastr.success(coordinators.mensagem);
+            this.listReviewer();
+          }
+        });
+      //}
+
+    }
+  }
+
+
+  public removeCoordinator(id) {
+    this.adminService.deleteCoordinator(id)
+      .pipe(
+        takeUntil(this.coordinatorsUnsub$)
+      )
+      .subscribe(() &#x3D;&gt; this.listReviewer());
+  }
+
+
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;form&quot;&gt;
+
+    &lt;label for&#x3D;&quot;&quot;&gt;Selecione o eixo&lt;/label&gt;
+    &lt;select class&#x3D;&quot;form-control mb-3&quot; (change)&#x3D;&quot;listReviewer()&quot; placeholder&#x3D;&quot;Eixo&quot; id&#x3D;&quot;opt&quot; [(ngModel)]&#x3D;&quot;axisId&quot;&gt;
+        &lt;option disabled&#x3D;&quot;true&quot; [selected]&#x3D;&quot;true&quot;&gt;Selecione o eixo&lt;/option&gt;
+        &lt;option *ngFor&#x3D;&quot;let eixo of eixos&quot; [value]&#x3D;&quot;eixo.id&quot;&gt;{{ eixo.name }}
+        &lt;/option&gt;
+    &lt;/select&gt;
+
+    &lt;div class&#x3D;&quot;card-works&quot; *ngFor&#x3D;&quot;let coordinator of coordinators; let i &#x3D; index&quot;
+        [ngClass]&#x3D;&quot;{&#x27;mb-3&#x27;: coordinators.length &gt; 1}&quot;&gt;
+        &lt;div class&#x3D;&quot;row&quot;&gt;
+            &lt;div class&#x3D;&quot;col-sm-2 border-right&quot;&gt;
+                &lt;section class&#x3D;&quot;example-section&quot;&gt;
+                    &lt;small&gt;COORDENADOR?&lt;/small&gt;
+                    &lt;section class&#x3D;&quot;example-section&quot;&gt;
+                        &lt;mat-checkbox #checkboxMultiple [value]&#x3D;&quot;[coordinator, i]&quot;
+                            (change)&#x3D;&quot;markCoordinator(coordinator._id, $event)&quot; type&#x3D;&quot;checkbox&quot; class&#x3D;&quot;example-margin&quot;
+                            [checked]&#x3D;&quot;coordinator.reviewer.icCoordinator&quot;&gt;
+                            Sim
+                        &lt;/mat-checkbox&gt;
+                    &lt;/section&gt;
+                &lt;/section&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;col-sm-4 border-right&quot;&gt;
+                &lt;small&gt;NOME&lt;/small&gt;
+                &lt;h4&gt;{{ coordinator.fullname }}&lt;/h4&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;col-sm-5 border-right&quot;&gt;
+                &lt;small&gt;EMAIL&lt;/small&gt;
+                &lt;h4&gt;{{ coordinator.email }}&lt;/h4&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;col-sm-1 text-center align-self-center pointer&quot;&gt;
+                &lt;i class&#x3D;&quot;fa fa-trash&quot; (click)&#x3D;&quot;removeCoordinator(coordinator._id)&quot;&gt;&lt;/i&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;not-found *ngIf&#x3D;&quot;coordinators.length &lt; 1&quot; msg&#x3D;&quot;Não há usuários para este eixo&quot;&gt;&lt;/not-found&gt;
+
+    &lt;!-- &lt;div *ngIf&#x3D;&quot;coordinators.length &#x3D;&#x3D; 0&quot;&gt;
+        &lt;h4&gt;Não há usuários para este eixo&lt;/h4&gt;
+    &lt;/div&gt; --&gt;
+
+    &lt;div *ngIf&#x3D;&quot;axisId&quot; class&#x3D;&quot;row justify-content-end&quot;&gt;
+        &lt;button class&#x3D;&quot;btn-get-started&quot; (click)&#x3D;&quot;showRegister()&quot;&gt;CADASTRAR&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./coordinator.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.card-works {
+  background: #50d8af;
+  color: #fff;
+  padding: 12px;
+  border-radius: 4px;
+  small {
+    font-weight: 300;
+    font-size: 12px;
+  }
+  h4 {
+    margin: 6px 0px;
+    word-break: break-word;
+    font-size: 18px;
+  }
+}
+.work-content {
+  border: 1px solid #000;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border-top: 0px;
+  padding: 12px;
+  .section {
+    &amp;.first h6 {
+      margin-top: 6px;
+    }
+    h6 {
+      font-size: 18px;
+      color: #0c2e8a;
+      text-transform: uppercase;
+      font-weight: 700;
+      position: relative;
+      margin: 22px 0 12px 0;
+      padding-bottom: 8px;
+      &amp;::before {
+        content: &quot;&quot;;
+        position: absolute;
+        display: block;
+        width: 50px;
+        height: 3px;
+        background: #50d8af;
+        bottom: 0;
+        left: 0;
+      }
+    }
+  }
+  strong {
+    font-size: 14px;
+    color: #0c2e8a;
+  }
+  p {
+    margin: 0px;
+    a {
+      padding: 8px 0px;
+    }
+  }
+}
+
+.btn-get-started {
+  background-color: #0c2e8a;
+  text-transform: uppercase;
+  border-radius: 4px;
+  color: #fff;
+  width: 30%;
+  border: none;
+  margin: 14px 16px 0px;
+  height: calc(1.5em + 0.75rem + 2px);
+  i {
+    font-size: 14px;
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="form">    <label for="">Selecione o eixo</label>    <select class="form-control mb-3" (change)="listReviewer()" placeholder="Eixo" id="opt" [(ngModel)]="axisId">        <option disabled="true" [selected]="true">Selecione o eixo</option>        <option *ngFor="let eixo of eixos" [value]="eixo.id">{{ eixo.name }}        </option>    </select>    <div class="card-works" *ngFor="let coordinator of coordinators; let i = index"        [ngClass]="{\'mb-3\': coordinators.length > 1}">        <div class="row">            <div class="col-sm-2 border-right">                <section class="example-section">                    <small>COORDENADOR?</small>                    <section class="example-section">                        <mat-checkbox #checkboxMultiple [value]="[coordinator, i]"                            (change)="markCoordinator(coordinator._id, $event)" type="checkbox" class="example-margin"                            [checked]="coordinator.reviewer.icCoordinator">                            Sim                        </mat-checkbox>                    </section>                </section>            </div>            <div class="col-sm-4 border-right">                <small>NOME</small>                <h4>{{ coordinator.fullname }}</h4>            </div>            <div class="col-sm-5 border-right">                <small>EMAIL</small>                <h4>{{ coordinator.email }}</h4>            </div>            <div class="col-sm-1 text-center align-self-center pointer">                <i class="fa fa-trash" (click)="removeCoordinator(coordinator._id)"></i>            </div>        </div>    </div>    <not-found *ngIf="coordinators.length < 1" msg="Não há usuários para este eixo"></not-found>    <!-- <div *ngIf="coordinators.length == 0">        <h4>Não há usuários para este eixo</h4>    </div> -->    <div *ngIf="axisId" class="row justify-content-end">        <button class="btn-get-started" (click)="showRegister()">CADASTRAR</button>    </div></div></div>'
+    var COMPONENTS = [{'name': 'AdminComponent', 'selector': 'app-admin'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CertificadoComponent', 'selector': 'app-certificado'},{'name': 'ConferencerCardComponent', 'selector': 'conferencer-card'},{'name': 'ConferencerComponent', 'selector': 'app-conferencer'},{'name': 'CoordinatorComponent', 'selector': 'app-coordinator'},{'name': 'EsqueciSenhaComponent', 'selector': 'app-esqueci-senha'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'ListarTrabalhosComponent', 'selector': 'app-listar-trabalhos'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModalAberturaComponent', 'selector': 'app-modal-abertura'},{'name': 'ModalAlimentacaoComponent', 'selector': 'app-modal-alimentacao'},{'name': 'ModalApoiadoresComponent', 'selector': 'app-modal-apoiadores'},{'name': 'ModalCadastroSucessoComponent', 'selector': 'app-modal-cadastro-sucesso'},{'name': 'ModalConferencerComponent', 'selector': 'app-modal-conferencer'},{'name': 'ModalConferencistasComponent', 'selector': 'app-modal-conferencistas'},{'name': 'ModalCoordinatorComponent', 'selector': 'app-modal-coordinator'},{'name': 'ModalEditProfileComponent', 'selector': 'app-modal-edit-profile'},{'name': 'ModalEixoComponent', 'selector': 'app-modal-eixo'},{'name': 'ModalEncerramentoComponent', 'selector': 'app-modal-encerramento'},{'name': 'ModalHospedagemComponent', 'selector': 'app-modal-hospedagem'},{'name': 'ModalInscricaoComponent', 'selector': 'app-modal-inscricao'},{'name': 'ModalNewsComponent', 'selector': 'app-modal-news'},{'name': 'ModalNormasComponent', 'selector': 'app-modal-normas'},{'name': 'ModalNormasMinicursoComponent', 'selector': 'app-modal-mediador-minu-curso.component'},{'name': 'ModalNormasPainelComponent', 'selector': 'app-modal-expositor-painel.component'},{'name': 'ModalNormasPosterComponent', 'selector': 'app-modal-expositor-poster.component'},{'name': 'ModalNormasRodaConversaComponent', 'selector': 'app-modal-mediador-conversa.component'},{'name': 'ModalProgramacaoComponent', 'selector': 'app-modal-programacao'},{'name': 'ModalReviewAdminComponent', 'selector': 'app-modal-review-admin'},{'name': 'ModalReviewerComponent', 'selector': 'app-modal-reviewer'},{'name': 'ModalSchedulesComponent', 'selector': 'app-modal-schedules'},{'name': 'ModalSessoesEspeciaisComponent', 'selector': 'app-modal-sessoes-especiais'},{'name': 'ModalSimposioComponent', 'selector': 'app-modal-simposio'},{'name': 'ModalTransporteComponent', 'selector': 'app-modal-transporte'},{'name': 'ModalTurismoComponent', 'selector': 'app-modal-turismo'},{'name': 'NewsComponent', 'selector': 'app-news'},{'name': 'NotFoundComponent', 'selector': 'not-found'},{'name': 'PagamentoComponent', 'selector': 'app-pagamento'},{'name': 'PerfilComponent', 'selector': 'app-perfil'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ResetSenhaComponent', 'selector': 'app-reset-senha'},{'name': 'ScheduleCardComponent', 'selector': 'schedule-card'},{'name': 'SchedulesComponent', 'selector': 'app-schedules'},{'name': 'SubmissaoComponent', 'selector': 'app-submissao'},{'name': 'SubscribedComponent', 'selector': 'app-subscribed'},{'name': 'SubscribersCardComponent', 'selector': 'subscribers-card'},{'name': 'SubscribersDataComponent', 'selector': 'subscribers-data'},{'name': 'SubscribersMetricsComponent', 'selector': 'subscribers-metrics'},{'name': 'TrabalhosComponent', 'selector': 'app-trabalhos'},{'name': 'VincularTrabalhosComponent', 'selector': 'app-vincular-trabalhos'},{'name': 'WorkCardComponent', 'selector': 'work-card'},{'name': 'WorkContentComponent', 'selector': 'work-content'},{'name': 'WorkDataComponent', 'selector': 'app-work-data'},{'name': 'WorksComponent', 'selector': 'app-works'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'CoordinatorComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'CoordinatorComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

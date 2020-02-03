@@ -1,0 +1,1737 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>endipe documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">endipe documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li>SubscribersDataComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/admin/components/subscribers-data/subscribers-data.component.ts</code>
+</p>
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>subscribers-data</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./subscribers-data.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./subscribers-data.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#carregando">carregando</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#carregandoTrabalhos">carregandoTrabalhos</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#categories">categories</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#eixos">eixos</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#modalities">modalities</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#works">works</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#confirmPayment">confirmPayment</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#denyPayment">denyPayment</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#download">download</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#editProfile">editProfile</a>
+                            </li>
+                            <li>
+                                <a href="#invalidarComprovante">invalidarComprovante</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit">ngOnInit</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#retrieveCategories">retrieveCategories</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#retrieveEixo">retrieveEixo</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#retrieveModality">retrieveModality</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#userWorks">userWorks</a>
+                            </li>
+                            <li>
+                                <a href="#validarComprovante">validarComprovante</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#subscribed">subscribed</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#update">update</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(adminService: <a href="../injectables/AdminService.html">AdminService</a>, downloadService: <a href="../injectables/DownloadFileService.html">DownloadFileService</a>, baseUrl: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, http: <a href="https://angular.io/api/common/http/HttpClient" target="_blank">HttpClient</a>, dialog: MatDialog)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/admin/components/subscribers-data/subscribers-data.component.ts:20</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>adminService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AdminService.html" target="_self" >AdminService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>downloadService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/DownloadFileService.html" target="_self" >DownloadFileService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>baseUrl</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>http</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/common/http/HttpClient" target="_blank" >HttpClient</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>dialog</td>
+                                                  
+                                                        <td>
+                                                                    <code>MatDialog</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section>
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="subscribed"></a>
+                        <b>subscribed</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/admin/components/subscribers-data/subscribers-data.component.ts:16</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+    <section>
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="update"></a>
+                        <b>update</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>EventEmitter&lt;boolean&gt;</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/admin/components/subscribers-data/subscribers-data.component.ts:17</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="confirmPayment"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            confirmPayment
+                        </b>
+                        <a href="#confirmPayment"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>confirmPayment(user)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="85"
+                            class="link-to-prism">src/app/admin/components/subscribers-data/subscribers-data.component.ts:85</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>user</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="denyPayment"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            denyPayment
+                        </b>
+                        <a href="#denyPayment"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>denyPayment(user)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="94"
+                            class="link-to-prism">src/app/admin/components/subscribers-data/subscribers-data.component.ts:94</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>user</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="download"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            download
+                        </b>
+                        <a href="#download"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>download(nameFile)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="72"
+                            class="link-to-prism">src/app/admin/components/subscribers-data/subscribers-data.component.ts:72</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>nameFile</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="editProfile"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            editProfile
+                        </b>
+                        <a href="#editProfile"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>editProfile()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="115"
+                            class="link-to-prism">src/app/admin/components/subscribers-data/subscribers-data.component.ts:115</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="invalidarComprovante"></a>
+                    <span class="name">
+                        <b>
+                            invalidarComprovante
+                        </b>
+                        <a href="#invalidarComprovante"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>invalidarComprovante(user)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="45"
+                            class="link-to-prism">src/app/admin/components/subscribers-data/subscribers-data.component.ts:45</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>user</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <b>
+                            ngOnInit
+                        </b>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="30"
+                            class="link-to-prism">src/app/admin/components/subscribers-data/subscribers-data.component.ts:30</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="retrieveCategories"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            retrieveCategories
+                        </b>
+                        <a href="#retrieveCategories"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>retrieveCategories(id)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="111"
+                            class="link-to-prism">src/app/admin/components/subscribers-data/subscribers-data.component.ts:111</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="retrieveEixo"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            retrieveEixo
+                        </b>
+                        <a href="#retrieveEixo"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>retrieveEixo(id)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="107"
+                            class="link-to-prism">src/app/admin/components/subscribers-data/subscribers-data.component.ts:107</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="retrieveModality"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            retrieveModality
+                        </b>
+                        <a href="#retrieveModality"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>retrieveModality(id)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="103"
+                            class="link-to-prism">src/app/admin/components/subscribers-data/subscribers-data.component.ts:103</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="userWorks"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            userWorks
+                        </b>
+                        <a href="#userWorks"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>userWorks(userWorksId)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="53"
+                            class="link-to-prism">src/app/admin/components/subscribers-data/subscribers-data.component.ts:53</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>userWorksId</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="validarComprovante"></a>
+                    <span class="name">
+                        <b>
+                            validarComprovante
+                        </b>
+                        <a href="#validarComprovante"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>validarComprovante(user)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="36"
+                            class="link-to-prism">src/app/admin/components/subscribers-data/subscribers-data.component.ts:36</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>user</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="carregando"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            carregando</b>
+                            <a href="#carregando"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>false</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/admin/components/subscribers-data/subscribers-data.component.ts:18</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="carregandoTrabalhos"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            carregandoTrabalhos</b>
+                            <a href="#carregandoTrabalhos"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>false</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/admin/components/subscribers-data/subscribers-data.component.ts:19</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="categories"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            categories</b>
+                            <a href="#categories"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>[]</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>[
+    { id: 1, name: &#x27;Estudantes de curso Normal/EM&#x27; },
+    { id: 2, name: &#x27;Estudantes de Graduação&#x27; },
+    { id: 3, name: &#x27;Estudantes de Pós-Graduação&#x27; },
+    { id: 4, name: &#x27;Profissionais da Educação Básica&#x27; },
+    { id: 5, name: &#x27;Profissionais da Educação Superior&#x27; }
+  ]</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="143" class="link-to-prism">src/app/admin/components/subscribers-data/subscribers-data.component.ts:143</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="eixos"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            eixos</b>
+                            <a href="#eixos"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>[]</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>[
+    { id: 1, name: &#x27;Formação docente&#x27; },
+    { id: 2, name: &#x27;Currículo e avaliação&#x27; },
+    { id: 3, name: &#x27;Direitos humanos, Interculturalidade e Religiões&#x27; },
+    { id: 4, name: &#x27;Nova epistemologia, Diferença, Biodiversidade, Democracia e Inclusão&#x27; },
+    { id: 5, name: &#x27;Educação, Comunicação e Técnologia&#x27; },
+    { id: 6, name: &#x27;Infâncias, Juventudes e Vida Adulta&#x27; }
+  ]</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="134" class="link-to-prism">src/app/admin/components/subscribers-data/subscribers-data.component.ts:134</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="modalities"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            modalities</b>
+                            <a href="#modalities"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>[]</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>[
+    { id: 1, name: &#x27;Convidado de sessão especial&#x27; },
+    { id: 2, name: &#x27;Mediador de roda de conversa&#x27; },
+    { id: 3, name: &#x27;Expositor de pôster&#x27; },
+    { id: 4, name: &#x27;Mediador de minicurso&#x27; },
+    { id: 5, name: &#x27;Coordenador e/ou expositor de painel&#x27; },
+    { id: 6, name: &#x27;Simposista&#x27; },
+    { id: 7, name: &#x27;Ouvinte&#x27; }
+  ]</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="124" class="link-to-prism">src/app/admin/components/subscribers-data/subscribers-data.component.ts:124</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="works"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            works</b>
+                            <a href="#works"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/admin/components/subscribers-data/subscribers-data.component.ts:20</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, Input, Inject, Output, EventEmitter } from &#x27;@angular/core&#x27;;
+import { AdminService } from &#x27;../../admin.service&#x27;;
+import { DownloadFileService } from &#x27;src/app/services/download-file.service&#x27;;
+import { HttpClient } from &#x27;@angular/common/http&#x27;;
+import { MatDialog } from &#x27;@angular/material&#x27;;
+import { ModalEditProfileComponent } from &#x27;../../modals/modal-edit-profile/modal-edit-profile.component&#x27;;
+
+@Component({
+  // tslint:disable-next-line: component-selector
+  selector: &#x27;subscribers-data&#x27;,
+  templateUrl: &#x27;./subscribers-data.component.html&#x27;,
+  styleUrls: [&#x27;./subscribers-data.component.scss&#x27;]
+})
+export class SubscribersDataComponent implements OnInit {
+
+  @Input() subscribed: any;
+  @Output() update: EventEmitter&lt;boolean&gt; &#x3D; new EventEmitter&lt;boolean&gt;();
+  public carregando &#x3D; false;
+  public carregandoTrabalhos &#x3D; false;
+  public works;
+
+  constructor(
+    private adminService: AdminService,
+    private downloadService: DownloadFileService,
+    @Inject(&#x27;BASE_API_URL&#x27;) private baseUrl: string,
+    private http: HttpClient,
+    private dialog: MatDialog
+  ) { }
+
+  ngOnInit() {
+    if (this.subscribed.works.length &gt; 0) {
+      this.userWorks(this.subscribed.works);
+    }
+  }
+
+  validarComprovante(user) {
+
+    this.http.post(&#x60;${this.baseUrl}/admin/validateDoc/&#x60; + user._id, {}).subscribe((res: any) &#x3D;&gt; {
+      user.payment.icValid &#x3D; true;
+    }, err &#x3D;&gt; {
+      console.log(err);
+    });
+  }
+
+  invalidarComprovante(user) {
+    this.http.post(&#x60;${this.baseUrl}/admin/invalidateDoc/&#x60; + user._id, {}).subscribe((res: any) &#x3D;&gt; {
+      user.payment.icValid &#x3D; false;
+    }, err &#x3D;&gt; {
+      console.log(err);
+    });
+  }
+
+  public userWorks(userWorksId) {
+    this.works &#x3D; [];
+    this.carregandoTrabalhos &#x3D; true;
+
+    if (userWorksId) {
+      userWorksId.forEach(workId &#x3D;&gt; {
+        this.adminService.retrieveUserWorks(workId)
+          .subscribe((res: any) &#x3D;&gt; {
+            this.carregandoTrabalhos &#x3D; false;
+            this.works.push(res);
+          }, err &#x3D;&gt; {
+            this.carregandoTrabalhos &#x3D; false;
+            console.log(err);
+          });
+      });
+    }
+
+  }
+
+  public download(nameFile) {
+    const vm &#x3D; this;
+    function sucessoDownload() {
+      vm.carregando &#x3D; false;
+    }
+    function falhaDownload(err) {
+      this.toastr.error(&#x27;Erro ao relizar download.&#x27;, &#x27;Erro: &#x27;);
+      vm.carregando &#x3D; false;
+    }
+    this.carregando &#x3D; true;
+    this.downloadService.getFile(nameFile, sucessoDownload, falhaDownload);
+  }
+
+  public confirmPayment(user) {
+    this.adminService.validatePayment(user._id)
+      .subscribe(() &#x3D;&gt; {
+        user.payment.icPaid &#x3D; true;
+      }, err &#x3D;&gt; {
+        console.log(err);
+      });
+  }
+
+  public denyPayment(user) {
+    this.adminService.invalidatePayment(user._id)
+      .subscribe(() &#x3D;&gt; {
+        user.payment.icPaid &#x3D; false;
+      }, err &#x3D;&gt; {
+        console.log(err);
+      });
+  }
+
+  public retrieveModality(id) {
+    return this.modalities.filter(element &#x3D;&gt; element.id &#x3D;&#x3D;&#x3D; id)[0];
+  }
+
+  public retrieveEixo(id) {
+    return this.eixos.filter(element &#x3D;&gt; element.id &#x3D;&#x3D;&#x3D; id)[0];
+  }
+
+  public retrieveCategories(id) {
+    return this.categories.filter(element &#x3D;&gt; element.id &#x3D;&#x3D;&#x3D; id)[0];
+  }
+
+  public editProfile() {
+    const dialogRef &#x3D; this.dialog.open(ModalEditProfileComponent, {
+      data: this.subscribed
+    });
+
+    dialogRef.afterClosed()
+      .subscribe(_ &#x3D;&gt; this.update.emit(true));
+  }
+
+  public modalities &#x3D; [
+    { id: 1, name: &#x27;Convidado de sessão especial&#x27; },
+    { id: 2, name: &#x27;Mediador de roda de conversa&#x27; },
+    { id: 3, name: &#x27;Expositor de pôster&#x27; },
+    { id: 4, name: &#x27;Mediador de minicurso&#x27; },
+    { id: 5, name: &#x27;Coordenador e/ou expositor de painel&#x27; },
+    { id: 6, name: &#x27;Simposista&#x27; },
+    { id: 7, name: &#x27;Ouvinte&#x27; }
+  ];
+
+  public eixos &#x3D; [
+    { id: 1, name: &#x27;Formação docente&#x27; },
+    { id: 2, name: &#x27;Currículo e avaliação&#x27; },
+    { id: 3, name: &#x27;Direitos humanos, Interculturalidade e Religiões&#x27; },
+    { id: 4, name: &#x27;Nova epistemologia, Diferença, Biodiversidade, Democracia e Inclusão&#x27; },
+    { id: 5, name: &#x27;Educação, Comunicação e Técnologia&#x27; },
+    { id: 6, name: &#x27;Infâncias, Juventudes e Vida Adulta&#x27; }
+  ];
+
+  public categories &#x3D; [
+    { id: 1, name: &#x27;Estudantes de curso Normal/EM&#x27; },
+    { id: 2, name: &#x27;Estudantes de Graduação&#x27; },
+    { id: 3, name: &#x27;Estudantes de Pós-Graduação&#x27; },
+    { id: 4, name: &#x27;Profissionais da Educação Básica&#x27; },
+    { id: 5, name: &#x27;Profissionais da Educação Superior&#x27; }
+  ];
+
+
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;work-content&quot;&gt;
+    &lt;div class&#x3D;&quot;section first&quot;&gt;
+        &lt;h6&gt;Dados pessoais &lt;i class&#x3D;&quot;fa fa-pencil ml-2&quot; (click)&#x3D;&quot;editProfile()&quot;&gt;&lt;/i&gt; &lt;/h6&gt;
+    &lt;/div&gt;
+    &lt;div class&#x3D;&quot;row align-items-center&quot;&gt;
+        &lt;div class&#x3D;&quot;col-sm-4 mb-2&quot;&gt;
+            &lt;strong&gt;Telefone&lt;/strong&gt;
+            &lt;p&gt;{{ subscribed.phones.telephone ? subscribed.phones.telephone : &#x27;-----&#x27; }}&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;col-sm-4 mb-2&quot;&gt;
+            &lt;strong&gt;Celular&lt;/strong&gt;
+            &lt;p&gt;{{ subscribed.phones.cellphone ? subscribed.phones.cellphone : &#x27;-----&#x27; }}&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;col-sm-4 mb-2&quot;&gt;
+            &lt;strong&gt;Data de inscrição&lt;/strong&gt;
+            &lt;p&gt;{{ subscribed.createdAt | date: &#x27;dd/MM/yyyy&#x27; }}&lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class&#x3D;&quot;row align-items-center&quot;&gt;
+        &lt;div class&#x3D;&quot;col-sm-4 mb-2&quot;&gt;
+            &lt;strong&gt;PCD&lt;/strong&gt;
+            &lt;p&gt;{{ subscribed.isPCD ? subscribed.deficiencyType ? &#x27;Sim - &#x27; + subscribed.deficiencyType : &#x27;Sim&#x27;  : &#x27;Não&#x27; }}
+            &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;col-sm-4 mb-2&quot;&gt;
+            &lt;strong&gt;Estrangeiro&lt;/strong&gt;
+            &lt;p&gt;{{ subscribed.isForeign ? &#x27;Sim&#x27; : &#x27;Não&#x27; }}&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;col-sm-4 mb-2&quot;&gt;
+            &lt;strong&gt;Instituição:&lt;/strong&gt;
+            &lt;p&gt;{{ subscribed.institution?.name ? subscribed.institution?.initials + &#x27;-&#x27; + subscribed.institution?.name : &#x27;----&#x27; }}
+            &lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class&#x3D;&quot;section&quot;&gt;
+        &lt;h6&gt;Pagamento&lt;/h6&gt;
+    &lt;/div&gt;
+    &lt;div class&#x3D;&quot;row align-items-center&quot;&gt;
+        &lt;div class&#x3D;&quot;col-sm-4&quot;&gt;
+            &lt;strong&gt;Categoria&lt;/strong&gt;
+            &lt;p&gt;{{ subscribed.payment &amp;&amp; subscribed.payment.categoryId ? retrieveCategories(subscribed.payment.categoryId).name : &#x27;----&#x27; }}
+            &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;col-sm-4&quot;&gt;
+            &lt;strong&gt;Valor total&lt;/strong&gt;
+            &lt;p&gt;{{ subscribed.payment &amp;&amp; subscribed.payment.amount ? &#x27;R$ &#x27; + subscribed.payment.amount : &#x27;----&#x27; }}
+            &lt;/p&gt;
+        &lt;/div&gt;
+
+        &lt;div class&#x3D;&quot;col-sm-4&quot;&gt;
+            &lt;strong&gt;Confirmar comprovante&lt;/strong&gt;
+            &lt;div *ngIf&#x3D;&quot;subscribed.payment&quot; class&#x3D;&quot;form-group&quot;&gt;
+                &lt;div class&#x3D;&quot;btn-group&quot; role&#x3D;&quot;group&quot; aria-label&#x3D;&quot;Basic example&quot;&gt;
+                    &lt;button (click)&#x3D;&quot;validarComprovante(subscribed)&quot;
+                        [ngStyle]&#x3D;&quot;{&#x27;background-color: green;color:white&#x27;:  subscribed.payment.icValid, &#x27;background-color: white;color: black&#x27;: subscribed.payment.icValid}&quot;
+                        type&#x3D;&quot;button&quot; [ngClass]&#x3D;&quot;{&#x27;btn btn-success&#x27;: subscribed.payment.icValid}&quot;
+                        class&#x3D;&quot;btn&quot;&gt;Sim&lt;/button&gt;
+                    &lt;button (click)&#x3D;&quot;invalidarComprovante(subscribed)&quot;
+                        [ngStyle]&#x3D;&quot;{&#x27;background-color: red;color:white&#x27;:  !subscribed.payment.icValid, &#x27;background-color: white;color: black&#x27;: subscribed.payment.icValid}&quot;
+                        type&#x3D;&quot;button&quot; [ngClass]&#x3D;&quot;{&#x27;btn btn-danger&#x27;: !subscribed.payment.icValid}&quot;
+                        class&#x3D;&quot;btn&quot;&gt;Não&lt;/button&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div *ngIf&#x3D;&quot;subscribed.payment &amp;&amp; subscribed.payment.pathS3&quot;&gt;
+                &lt;p&gt;&lt;a [routerLink]&#x3D;&quot;&quot; (click)&#x3D;&quot;download(subscribed.payment.pathS3)&quot;&gt;Comprovante
+                        Inscrição&lt;/a&gt;
+                &lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class&#x3D;&quot;col-sm-4&quot;&gt;
+            &lt;strong&gt;Confirmar pagamento&lt;/strong&gt;
+            &lt;div *ngIf&#x3D;&quot;subscribed.payment&quot; class&#x3D;&quot;form-group&quot;&gt;
+                &lt;div class&#x3D;&quot;btn-group&quot; role&#x3D;&quot;group&quot; aria-label&#x3D;&quot;Basic example&quot;&gt;
+                    &lt;button (click)&#x3D;&quot;confirmPayment(subscribed)&quot;
+                        [ngStyle]&#x3D;&quot;{&#x27;background-color: green;color:white&#x27;:  subscribed.payment.icPaid, &#x27;background-color: white;color: black&#x27;: subscribed.payment.icPaid}&quot;
+                        type&#x3D;&quot;button&quot; [ngClass]&#x3D;&quot;{&#x27;btn btn-success&#x27;: subscribed.payment.icPaid}&quot;
+                        class&#x3D;&quot;btn&quot;&gt;Sim&lt;/button&gt;
+                    &lt;button (click)&#x3D;&quot;denyPayment(subscribed)&quot;
+                        [ngStyle]&#x3D;&quot;{&#x27;background-color: red;color:white&#x27;:  !subscribed.payment.icPaid, &#x27;background-color: white;color: black&#x27;: subscribed.payment.icPaid}&quot;
+                        type&#x3D;&quot;button&quot; [ngClass]&#x3D;&quot;{&#x27;btn btn-danger&#x27;: !subscribed.payment.icPaid}&quot;
+                        class&#x3D;&quot;btn&quot;&gt;Não&lt;/button&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div *ngIf&#x3D;&quot;subscribed.payment &amp;&amp; subscribed.payment.pathReceiptPayment&quot;&gt;
+                &lt;p&gt;&lt;a [routerLink]&#x3D;&quot;&quot; (click)&#x3D;&quot;download(subscribed.payment.pathReceiptPayment)&quot;&gt;Comprovante
+                        Pagamento&lt;/a&gt;
+                &lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div *ngIf&#x3D;&quot;subscribed.works.length &gt; 0&quot; class&#x3D;&quot;section&quot;&gt;
+        &lt;h6&gt;Trabalhos&lt;/h6&gt;
+
+        &lt;div class&#x3D;&quot;row&quot; *ngIf&#x3D;&quot;carregandoTrabalhos&quot;&gt;
+            &lt;i class&#x3D;&quot;fas fa-spinner fa-pulse&quot;&gt;&lt;/i&gt;Aguarde...
+        &lt;/div&gt;
+        &lt;!-- !carregandoTrabalhos --&gt;
+
+        &lt;div class&#x3D;&quot;row&quot; *ngFor&#x3D;&quot;let work of works&quot;&gt;
+
+            &lt;div class&#x3D;&quot;col-sm-4 align-self-center&quot;&gt;
+                &lt;strong&gt;Título&lt;/strong&gt;
+                &lt;p&gt;{{ work?.title }}&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;col-sm-4 align-self-center&quot;&gt;
+                &lt;strong&gt;Eixo&lt;/strong&gt;
+                &lt;p&gt;{{ retrieveEixo(work?.axisId)?.name }}&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;col-sm-4 align-self-center&quot;&gt;
+                &lt;strong&gt;Modalidade&lt;/strong&gt;
+                &lt;p&gt;{{ retrieveModality(work?.modalityId)?.name }}&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;col-sm-4 mt-2&quot;&gt;
+                &lt;strong&gt;Autores&lt;/strong&gt;
+                &lt;span *ngFor&#x3D;&quot;let author of work?.authors&quot;&gt;
+                    &lt;p&gt;{{ author?.userEmail }}&lt;/p&gt;
+                &lt;/span&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;col-sm-4 mt-2&quot;&gt;
+                &lt;strong&gt;Arquivos&lt;/strong&gt;
+                &lt;p&gt;&lt;a [routerLink]&#x3D;&quot;&quot; (click)&#x3D;&quot;download(work.pathS3DOC)&quot;&gt;Download pdf&lt;/a&gt;
+                &lt;/p&gt;
+                &lt;p&gt;&lt;a [routerLink]&#x3D;&quot;&quot; (click)&#x3D;&quot;download(work.pathS3PDF)&quot;&gt;Download doc&lt;/a&gt;
+                &lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./subscribers-data.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.work-content {
+  border: 1px solid #000;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border-top: 0px;
+  padding: 12px;
+
+  .section {
+    &amp;.first h6 {
+      margin-top: 6px;
+    }
+
+    h6 {
+      font-size: 18px;
+      color: #0c2e8a;
+      text-transform: uppercase;
+      font-weight: 700;
+      position: relative;
+      margin: 22px 0 12px 0;
+      padding-bottom: 8px;
+
+      i {
+        cursor: pointer;
+      }
+
+      &amp;::before {
+        content: &quot;&quot;;
+        position: absolute;
+        display: block;
+        width: 50px;
+        height: 3px;
+        background: #50d8af;
+        bottom: 0;
+        left: 0;
+      }
+    }
+  }
+
+  strong {
+    font-size: 14px;
+    color: #0c2e8a;
+  }
+
+  p {
+    margin: 0px;
+
+    a {
+      padding: 8px 0px;
+    }
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="work-content">    <div class="section first">        <h6>Dados pessoais <i class="fa fa-pencil ml-2" (click)="editProfile()"></i> </h6>    </div>    <div class="row align-items-center">        <div class="col-sm-4 mb-2">            <strong>Telefone</strong>            <p>{{ subscribed.phones.telephone ? subscribed.phones.telephone : \'-----\' }}</p>        </div>        <div class="col-sm-4 mb-2">            <strong>Celular</strong>            <p>{{ subscribed.phones.cellphone ? subscribed.phones.cellphone : \'-----\' }}</p>        </div>        <div class="col-sm-4 mb-2">            <strong>Data de inscrição</strong>            <p>{{ subscribed.createdAt | date: \'dd/MM/yyyy\' }}</p>        </div>    </div>    <div class="row align-items-center">        <div class="col-sm-4 mb-2">            <strong>PCD</strong>            <p>{{ subscribed.isPCD ? subscribed.deficiencyType ? \'Sim - \' + subscribed.deficiencyType : \'Sim\'  : \'Não\' }}            </p>        </div>        <div class="col-sm-4 mb-2">            <strong>Estrangeiro</strong>            <p>{{ subscribed.isForeign ? \'Sim\' : \'Não\' }}</p>        </div>        <div class="col-sm-4 mb-2">            <strong>Instituição:</strong>            <p>{{ subscribed.institution?.name ? subscribed.institution?.initials + \'-\' + subscribed.institution?.name : \'----\' }}            </p>        </div>    </div>    <div class="section">        <h6>Pagamento</h6>    </div>    <div class="row align-items-center">        <div class="col-sm-4">            <strong>Categoria</strong>            <p>{{ subscribed.payment && subscribed.payment.categoryId ? retrieveCategories(subscribed.payment.categoryId).name : \'----\' }}            </p>        </div>        <div class="col-sm-4">            <strong>Valor total</strong>            <p>{{ subscribed.payment && subscribed.payment.amount ? \'R$ \' + subscribed.payment.amount : \'----\' }}            </p>        </div>        <div class="col-sm-4">            <strong>Confirmar comprovante</strong>            <div *ngIf="subscribed.payment" class="form-group">                <div class="btn-group" role="group" aria-label="Basic example">                    <button (click)="validarComprovante(subscribed)"                        [ngStyle]="{\'background-color: green;color:white\':  subscribed.payment.icValid, \'background-color: white;color: black\': subscribed.payment.icValid}"                        type="button" [ngClass]="{\'btn btn-success\': subscribed.payment.icValid}"                        class="btn">Sim</button>                    <button (click)="invalidarComprovante(subscribed)"                        [ngStyle]="{\'background-color: red;color:white\':  !subscribed.payment.icValid, \'background-color: white;color: black\': subscribed.payment.icValid}"                        type="button" [ngClass]="{\'btn btn-danger\': !subscribed.payment.icValid}"                        class="btn">Não</button>                </div>            </div>            <div *ngIf="subscribed.payment && subscribed.payment.pathS3">                <p><a [routerLink]="" (click)="download(subscribed.payment.pathS3)">Comprovante                        Inscrição</a>                </p>            </div>        </div>        <div class="col-sm-4">            <strong>Confirmar pagamento</strong>            <div *ngIf="subscribed.payment" class="form-group">                <div class="btn-group" role="group" aria-label="Basic example">                    <button (click)="confirmPayment(subscribed)"                        [ngStyle]="{\'background-color: green;color:white\':  subscribed.payment.icPaid, \'background-color: white;color: black\': subscribed.payment.icPaid}"                        type="button" [ngClass]="{\'btn btn-success\': subscribed.payment.icPaid}"                        class="btn">Sim</button>                    <button (click)="denyPayment(subscribed)"                        [ngStyle]="{\'background-color: red;color:white\':  !subscribed.payment.icPaid, \'background-color: white;color: black\': subscribed.payment.icPaid}"                        type="button" [ngClass]="{\'btn btn-danger\': !subscribed.payment.icPaid}"                        class="btn">Não</button>                </div>            </div>            <div *ngIf="subscribed.payment && subscribed.payment.pathReceiptPayment">                <p><a [routerLink]="" (click)="download(subscribed.payment.pathReceiptPayment)">Comprovante                        Pagamento</a>                </p>            </div>        </div>    </div>    <div *ngIf="subscribed.works.length > 0" class="section">        <h6>Trabalhos</h6>        <div class="row" *ngIf="carregandoTrabalhos">            <i class="fas fa-spinner fa-pulse"></i>Aguarde...        </div>        <!-- !carregandoTrabalhos -->        <div class="row" *ngFor="let work of works">            <div class="col-sm-4 align-self-center">                <strong>Título</strong>                <p>{{ work?.title }}</p>            </div>            <div class="col-sm-4 align-self-center">                <strong>Eixo</strong>                <p>{{ retrieveEixo(work?.axisId)?.name }}</p>            </div>            <div class="col-sm-4 align-self-center">                <strong>Modalidade</strong>                <p>{{ retrieveModality(work?.modalityId)?.name }}</p>            </div>            <div class="col-sm-4 mt-2">                <strong>Autores</strong>                <span *ngFor="let author of work?.authors">                    <p>{{ author?.userEmail }}</p>                </span>            </div>            <div class="col-sm-4 mt-2">                <strong>Arquivos</strong>                <p><a [routerLink]="" (click)="download(work.pathS3DOC)">Download pdf</a>                </p>                <p><a [routerLink]="" (click)="download(work.pathS3PDF)">Download doc</a>                </p>            </div>        </div>    </div></div></div>'
+    var COMPONENTS = [{'name': 'AdminComponent', 'selector': 'app-admin'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CertificadoComponent', 'selector': 'app-certificado'},{'name': 'ConferencerCardComponent', 'selector': 'conferencer-card'},{'name': 'ConferencerComponent', 'selector': 'app-conferencer'},{'name': 'CoordinatorComponent', 'selector': 'app-coordinator'},{'name': 'EsqueciSenhaComponent', 'selector': 'app-esqueci-senha'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'ListarTrabalhosComponent', 'selector': 'app-listar-trabalhos'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModalAberturaComponent', 'selector': 'app-modal-abertura'},{'name': 'ModalAlimentacaoComponent', 'selector': 'app-modal-alimentacao'},{'name': 'ModalApoiadoresComponent', 'selector': 'app-modal-apoiadores'},{'name': 'ModalCadastroSucessoComponent', 'selector': 'app-modal-cadastro-sucesso'},{'name': 'ModalConferencerComponent', 'selector': 'app-modal-conferencer'},{'name': 'ModalConferencistasComponent', 'selector': 'app-modal-conferencistas'},{'name': 'ModalCoordinatorComponent', 'selector': 'app-modal-coordinator'},{'name': 'ModalEditProfileComponent', 'selector': 'app-modal-edit-profile'},{'name': 'ModalEixoComponent', 'selector': 'app-modal-eixo'},{'name': 'ModalEncerramentoComponent', 'selector': 'app-modal-encerramento'},{'name': 'ModalHospedagemComponent', 'selector': 'app-modal-hospedagem'},{'name': 'ModalInscricaoComponent', 'selector': 'app-modal-inscricao'},{'name': 'ModalNewsComponent', 'selector': 'app-modal-news'},{'name': 'ModalNormasComponent', 'selector': 'app-modal-normas'},{'name': 'ModalNormasMinicursoComponent', 'selector': 'app-modal-mediador-minu-curso.component'},{'name': 'ModalNormasPainelComponent', 'selector': 'app-modal-expositor-painel.component'},{'name': 'ModalNormasPosterComponent', 'selector': 'app-modal-expositor-poster.component'},{'name': 'ModalNormasRodaConversaComponent', 'selector': 'app-modal-mediador-conversa.component'},{'name': 'ModalProgramacaoComponent', 'selector': 'app-modal-programacao'},{'name': 'ModalReviewAdminComponent', 'selector': 'app-modal-review-admin'},{'name': 'ModalReviewerComponent', 'selector': 'app-modal-reviewer'},{'name': 'ModalSchedulesComponent', 'selector': 'app-modal-schedules'},{'name': 'ModalSessoesEspeciaisComponent', 'selector': 'app-modal-sessoes-especiais'},{'name': 'ModalSimposioComponent', 'selector': 'app-modal-simposio'},{'name': 'ModalTransporteComponent', 'selector': 'app-modal-transporte'},{'name': 'ModalTurismoComponent', 'selector': 'app-modal-turismo'},{'name': 'NewsComponent', 'selector': 'app-news'},{'name': 'NotFoundComponent', 'selector': 'not-found'},{'name': 'PagamentoComponent', 'selector': 'app-pagamento'},{'name': 'PerfilComponent', 'selector': 'app-perfil'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ResetSenhaComponent', 'selector': 'app-reset-senha'},{'name': 'ScheduleCardComponent', 'selector': 'schedule-card'},{'name': 'SchedulesComponent', 'selector': 'app-schedules'},{'name': 'SubmissaoComponent', 'selector': 'app-submissao'},{'name': 'SubscribedComponent', 'selector': 'app-subscribed'},{'name': 'SubscribersCardComponent', 'selector': 'subscribers-card'},{'name': 'SubscribersDataComponent', 'selector': 'subscribers-data'},{'name': 'SubscribersMetricsComponent', 'selector': 'subscribers-metrics'},{'name': 'TrabalhosComponent', 'selector': 'app-trabalhos'},{'name': 'VincularTrabalhosComponent', 'selector': 'app-vincular-trabalhos'},{'name': 'WorkCardComponent', 'selector': 'work-card'},{'name': 'WorkContentComponent', 'selector': 'work-content'},{'name': 'WorkDataComponent', 'selector': 'app-work-data'},{'name': 'WorksComponent', 'selector': 'app-works'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'SubscribersDataComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'SubscribersDataComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
