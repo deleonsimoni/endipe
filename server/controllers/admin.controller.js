@@ -19,13 +19,17 @@ module.exports = {
   deleteByEmail,
   getUserWorks,
   getWorks,
-  editUser
+  editUser,
+  removeWork,
+  removeAuthor,
+  insertAuthorWork,
+
 }
 
 async function getUsers(req) {
 
 
-  const pageSize = 5;
+  const pageSize = 10;
   const page = req.query.page || 1;
   let usersFound = [];
   console.log(req.query.search)
@@ -115,3 +119,75 @@ async function invalidateDoc(id) {
     }
   });
 }
+
+async function removeWork(req) {
+  return await Work.findByIdAndRemove({ _id: req.params.id }, function (err, doc) {
+    if (err) {
+      console.log("erro ao remover trabalho: ", err);
+    } else {
+      for (let author of doc.authors) {
+        User.findOneAndUpdate({ _id: author.userId }, { $pull: { 'works': req.params.id } }, function (err, doc) {
+          if (err) {
+            console.log("Erro ao remover trabalho do usuario ", err);
+          } else {
+            console.log("Sucesso ao remover o trabalho: ", err);
+          }
+        });
+      }
+    }
+  });
+}
+
+async function removeAuthor(req) {
+
+  return await User.findOneAndUpdate({ _id: req.params.authorId }, { $pull: { 'works': req.params.workId } }, function (err, doc) {
+    if (err) {
+      console.log("Erro ao capturar usuario para excluir trabalho: ", err);
+    } else {
+
+      Work.findOneAndUpdate({ _id: req.params.workId }, {
+        $pull: {
+          'authors': {
+            "userId": req.params.authorId
+          }
+        }
+      }, function (err, doc) {
+        if (err) {
+          console.log("Erro ao excluir o id do usuario no trabalho: ", err);
+        } else {
+          console.log("Sucesso ao excluoir o participante do trabalho: ", err);
+        }
+      });
+    }
+  });
+}
+
+async function insertAuthorWork(req) {
+
+  return await User.findOne({ email: req.body.authorEmail }, function (err, doc) {
+    if (err) {
+      console.log("Erro ao capturar usuario para inserir o trabalho: ", err);
+    } else {
+      doc.works.push(req.body.workId);
+      doc.save().then((result) => {
+        Work.findOneAndUpdate({ _id: req.body.workId }, {
+          $push: {
+            'authors': {
+              "userId": result._id,
+              "userEmail": result.email.toLowerCase()
+            }
+          }
+        }, function (err, doc) {
+          if (err) {
+            console.log("Erro ao incluir o id do usuario no trabalho: ", err);
+          } else {
+            console.log("Sucesso ao vincular trablho e participante: ", err);
+          }
+        });
+      }).catch((err) => {
+        console.log("Erro ao capturar usuario para inserir o trabalho: ", err);
+      });
+    }
+  });
+}
+

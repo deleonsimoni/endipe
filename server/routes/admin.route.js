@@ -22,6 +22,11 @@ router.post('/validateDoc/:id', passport.authenticate('jwt', { session: false })
 router.post('/invalidateDoc/:id', passport.authenticate('jwt', { session: false }), invalidateDoc);
 router.post('/rainbown/:id', passport.authenticate('jwt', { session: false }), deleteByEmail);
 router.post('/editUser', passport.authenticate('jwt', { session: false }), editUser);
+router.post('/editUser', passport.authenticate('jwt', { session: false }), editUser);
+router.post('/insertAuthorWork', passport.authenticate('jwt', { session: false }), asyncHandler(insertAuthorWork));
+
+router.delete('/removeWork/:id', passport.authenticate('jwt', { session: false }), asyncHandler(removeWork));
+router.delete('/removeAuthor/:authorId/:workId', passport.authenticate('jwt', { session: false }), asyncHandler(removeAuthor));
 
 
 async function getUsers(req, res) {
@@ -109,6 +114,33 @@ async function validateDoc(req, res) {
 async function invalidateDoc(req, res) {
   if (req.user.icAdmin) {
     let users = await adminCtrl.invalidateDoc(req.params.id);
+    res.json(users);
+  } else {
+    res.sendStatus(401);
+  }
+}
+
+async function removeWork(req, res) {
+  if (req.user.icAdmin) {
+    let users = await adminCtrl.removeWork(req);
+    res.json(users);
+  } else {
+    res.sendStatus(401);
+  }
+}
+
+async function removeAuthor(req, res) {
+  if (req.user.icAdmin) {
+    let users = await adminCtrl.removeAuthor(req);
+    res.json(users);
+  } else {
+    res.sendStatus(401);
+  }
+}
+
+async function insertAuthorWork(req, res) {
+  if (req.user.icAdmin) {
+    let users = await adminCtrl.insertAuthorWork(req);
     res.json(users);
   } else {
     res.sendStatus(401);

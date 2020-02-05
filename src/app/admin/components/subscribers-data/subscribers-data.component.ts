@@ -2,8 +2,10 @@ import { Component, OnInit, Input, Inject, Output, EventEmitter } from '@angular
 import { AdminService } from '../../admin.service';
 import { DownloadFileService } from 'src/app/services/download-file.service';
 import { HttpClient } from '@angular/common/http';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { ModalEditProfileComponent } from '../../modals/modal-edit-profile/modal-edit-profile.component';
+import { ToastrService } from 'ngx-toastr';
+import { ConfirmationDialogComponent } from '../../modals/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -18,13 +20,17 @@ export class SubscribersDataComponent implements OnInit {
   public carregando = false;
   public carregandoTrabalhos = false;
   public works;
+  public workWait = false;
+  public newAuthor;
 
   constructor(
     private adminService: AdminService,
     private downloadService: DownloadFileService,
     @Inject('BASE_API_URL') private baseUrl: string,
     private http: HttpClient,
-    private dialog: MatDialog
+    private toastr: ToastrService,
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -97,6 +103,96 @@ export class SubscribersDataComponent implements OnInit {
         user.payment.icPaid = false;
       }, err => {
         console.log(err);
+      });
+  }
+
+
+
+
+  public confirmDeletarAutor(authorId, workId) {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: {
+        message: 'Tem certeza que deseja remover o autor deste trabalho?',
+        buttonText: {
+          ok: 'Sim',
+          cancel: 'Cancelar'
+        }
+      }
+    });
+    const snack = this.snackBar.open('Caso clique em sim, o autor será removido do trabalho');
+
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      snack.dismiss();
+      if (confirmed) {
+        this.deletarAutor(authorId, workId);
+        this.snackBar.open('Removendo autor', 'Fechar', {
+          duration: 2000,
+        });
+      }
+    });
+
+  }
+
+  public deletarAutor(authorId, workId) {
+    this.workWait = true;
+    this.adminService.removeAuthor(authorId, workId)
+      .subscribe(() => {
+        this.workWait = false;
+        this.toastr.success('Autor removido do trabalho.', 'Sucesso: ');
+        this.update.emit(true);
+      }, err => {
+        this.workWait = false;
+        this.toastr.error('Tente novamente mais tarde.', 'Erro: ');
+      });
+  }
+
+  public incluirParticipanteTrabalho(workId) {
+    this.workWait = true;
+    this.adminService.insertAuthorWork(this.newAuthor, workId)
+      .subscribe(() => {
+        this.workWait = false;
+        this.toastr.success('Autor incluído no trabalho.', 'Sucesso: ');
+        this.update.emit(true);
+      }, err => {
+        this.workWait = false;
+        this.toastr.error('Tente novamente mais tarde.', 'Erro: ');
+      });
+  }
+
+  public confirmDeletarTrabalho(workId) {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: {
+        message: 'Tem certeza que deseja deletar o trabalho?',
+        buttonText: {
+          ok: 'Sim',
+          cancel: 'Cancelar'
+        }
+      }
+    });
+    const snack = this.snackBar.open('Caso clique em sim, este trabalho será excluido do sistema');
+
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      snack.dismiss();
+      if (confirmed) {
+        this.deletarTrabalho(workId);
+        this.snackBar.open('Deletando trabalho', 'Fechar', {
+          duration: 2000,
+        });
+      }
+    });
+
+  }
+
+  public deletarTrabalho(workId) {
+    this.workWait = true;
+    this.adminService.removeWork(workId)
+      .subscribe(() => {
+        this.workWait = false;
+        this.toastr.success('Trabalho removido com sucesso.', 'Sucesso: ');
+        this.update.emit(true);
+      }, err => {
+        this.workWait = false;
+        this.toastr.error('Tente novamente mais tarde.', 'Erro: ');
       });
   }
 

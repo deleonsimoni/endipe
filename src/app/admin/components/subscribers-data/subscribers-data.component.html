@@ -101,7 +101,8 @@
 
             <div class="col-sm-4 align-self-center">
                 <strong>Título</strong>
-                <p>{{ work?.title }}</p>
+                <p>{{ work?.title }} <i class="fa fa-trash ml-2" *ngIf="!workWait" title="Excluir trabalho"
+                        style="color: red; cursor: pointer;" (click)="confirmDeletarTrabalho(work._id)"></i></p>
             </div>
             <div class="col-sm-4 align-self-center">
                 <strong>Eixo</strong>
@@ -114,8 +115,20 @@
             <div class="col-sm-4 mt-2">
                 <strong>Autores</strong>
                 <span *ngFor="let author of work?.authors">
-                    <p>{{ author?.userEmail }}</p>
+                    <p>{{ author?.userEmail }}
+                        <i class="fa fa-trash ml-2" *ngIf="!workWait" title="Excluir autor do trabalho"
+                            style="color: red; cursor: pointer;"
+                            (click)="confirmDeletarAutor(author.userId, work._id)"></i>
+                    </p>
                 </span>
+                <hr>
+                <span>
+                    <input type="email" class="form-control" name="email" id="email" placeholder="Email do Participante"
+                        [(ngModel)]="newAuthor" />
+                    <button class="btn-primary" *ngIf="!workWait" title="Incluir participante no trabalho"
+                        (click)="incluirParticipanteTrabalho(work._id)">Incluir</button>
+                </span>
+                <hr>
             </div>
             <div class="col-sm-4 mt-2">
                 <strong>Arquivos</strong>

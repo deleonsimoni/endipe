@@ -13,6 +13,7 @@ import { ModalEditProfileComponent } from './modal-edit-profile/modal-edit-profi
 import { BsDatepickerModule, BsDropdownModule } from 'ngx-bootstrap';
 import { NgxMaskModule } from 'ngx-mask';
 import { ModalSchedulesComponent } from './modal-schedules/modal-schedules.component';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ModalSchedulesComponent } from './modal-schedules/modal-schedules.compo
     ModalReviewerComponent,
     ModalReviewAdminComponent,
     ModalEditProfileComponent,
-    ModalSchedulesComponent
+    ModalSchedulesComponent,
+    ConfirmationDialogComponent
   ],
   entryComponents: [
     ModalConferencerComponent,
@@ -30,7 +32,8 @@ import { ModalSchedulesComponent } from './modal-schedules/modal-schedules.compo
     ModalNewsComponent,
     ModalReviewerComponent,
     ModalEditProfileComponent,
-    ModalSchedulesComponent
+    ModalSchedulesComponent,
+    ConfirmationDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -48,7 +51,8 @@ import { ModalSchedulesComponent } from './modal-schedules/modal-schedules.compo
     ModalNewsComponent,
     ModalReviewerComponent,
     ModalEditProfileComponent,
-    ModalSchedulesComponent
+    ModalSchedulesComponent,
+    ConfirmationDialogComponent,
   ]
 })
 export class ModalModule { }

@@ -87,4 +87,18 @@ export class AdminService {
     return this.http.delete<any>(`${this.baseUrl}/schedule/deleteSchedule/${id}`);
   }
 
+  public removeWork(id) {
+    return this.http.delete<any>(`${this.baseUrl}/admin/removeWork/${id}`);
+  }
+
+  public removeAuthor(authorId, workId) {
+    return this.http.delete<any>(`${this.baseUrl}/admin/removeAuthor/${authorId}/${workId}`);
+  }
+
+  public insertAuthorWork(authorEmail, workId) {
+    let form = { authorEmail: authorEmail, workId: workId };
+    return this.http.post<any>(`${this.baseUrl}/admin/insertAuthorWork`, form);
+  }
+
+
 }

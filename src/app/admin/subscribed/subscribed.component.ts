@@ -30,6 +30,7 @@ export class SubscribedComponent implements OnInit {
   public pager: any = {};
   public search: any = {};
   public pageEvent: any;
+  public textSearch;
 
   constructor(
     private authService: AuthService,
@@ -66,6 +67,15 @@ export class SubscribedComponent implements OnInit {
 
     let user: any = {};
 
+    if (this.textSearch && !this.textSearch.includes("@")) {
+
+      this.search = { 'document': this.textSearch.replace(/[\W_]+/g, '') };
+
+    } else if (this.textSearch) {
+      this.search = { 'email': this.textSearch.trim() };
+
+    }
+
     if (this.status) {
       switch (Number(this.status)) {
         case 0:
@@ -73,12 +83,12 @@ export class SubscribedComponent implements OnInit {
           break;
         case 1:
           this.search = {
-            'payment': { $ne: null }, 'payment.icValid': false, 'payment.icPaid': false, '$or': [{ 'payment.pathS3': { $ne: null } }, { 'payment.pathReceiptPayment': { $ne: null } }]
+            'payment': { $ne: null }, 'payment.icPaid': false, 'payment.icValid': { $eq: null }, '$or': [{ 'payment.pathS3': { $ne: null } }, { 'payment.pathReceiptPayment': { $ne: null } }]
           }
           break;
         case 2:
           //this.search = { 'payment.pathS3': { $ne: null }, 'payment.icPaid': false };
-          this.search = { 'payment': { $ne: null }, 'payment.pathReceiptPayment': { $ne: null }, 'payment.icValid': true, 'payment.icPaid': false }
+          this.search = { 'payment': { $ne: null }, 'payment.pathReceiptPayment': { $ne: '' }, 'payment.icValid': true, 'payment.icPaid': false }
           break;
         case 3:
           this.search = { 'isPCD': true };
@@ -115,12 +125,12 @@ export class SubscribedComponent implements OnInit {
   }
 
   public clearEmail() {
-    delete this.search.email;
+    delete this.textSearch;
   }
 
   public clearStatus() {
     delete this.status;
-    if (!this.search.email) delete this.search.email
+    if (!this.textSearch) delete this.textSearch
 
   }
 

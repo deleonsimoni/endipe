@@ -14,8 +14,8 @@
 
     <div class="row" *ngIf="user && user.icAdmin">
         <div class="col-md-8">
-            <input type="text" class="form-control mb-4" [(ngModel)]="search.email"
-                placeholder="Filtrar participante por email" (keyup)="clearStatus()">
+            <input type="text" class="form-control mb-4" [(ngModel)]="textSearch"
+                placeholder="Filtrar participante por email ou cpf" (keyup)="clearStatus()">
         </div>
         <div class="col-md-4">
             <select class="form-control" [(ngModel)]="status" (change)="clearEmail()">

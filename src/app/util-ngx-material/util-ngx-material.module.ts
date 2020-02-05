@@ -16,6 +16,7 @@ import {
   MatRadioModule,
   MatTableModule,
   MatPaginatorModule,
+  MatSnackBarModule,
 } from '@angular/material';
 
 @NgModule({
@@ -35,6 +36,8 @@ import {
     MatRadioModule,
     MatTableModule,
     MatPaginatorModule,
+    MatSnackBarModule,
+
   ]
 })
 export class UtilNgxMaterialModule { }
