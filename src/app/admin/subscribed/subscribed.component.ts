@@ -88,7 +88,7 @@ export class SubscribedComponent implements OnInit {
           break;
         case 2:
           //this.search = { 'payment.pathS3': { $ne: null }, 'payment.icPaid': false };
-          this.search = { 'payment': { $ne: null }, 'payment.pathReceiptPayment': { $ne: '' }, 'payment.icValid': true, 'payment.icPaid': false }
+          this.search = { 'payment': { $ne: null }, '$and': [{ 'payment.pathReceiptPayment': { $ne: '' } }, { 'payment.pathReceiptPayment': { $ne: null } }], 'payment.icValid': true, 'payment.icPaid': false }
           break;
         case 3:
           this.search = { 'isPCD': true };
