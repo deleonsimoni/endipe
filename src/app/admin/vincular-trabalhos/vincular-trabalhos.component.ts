@@ -65,6 +65,23 @@ export class VincularTrabalhosComponent implements OnInit {
   }
 
   loadData() {
+
+    this.adminService.retrieveReviewers(this.axisId)
+      .subscribe(res => {
+        if (res.temErro) {
+          this.toastr.error('Erro', res);
+        } else {
+          this.loadWorks();
+          this.reviewers = res.reviewers;
+        }
+      });
+
+
+
+
+  }
+
+  loadWorks() {
     this.adminService.retrieveAllWorks(this.axisId)
       .subscribe(res => {
         if (res.temErro) {
@@ -76,15 +93,6 @@ export class VincularTrabalhosComponent implements OnInit {
         }
       });
 
-    this.adminService.retrieveReviewers(this.axisId)
-      .subscribe(res => {
-        if (res.temErro) {
-          this.toastr.error('Erro', res);
-        } else {
-
-          this.reviewers = res.reviewers;
-        }
-      });
   }
 
   public receiverSelectedWork(work) {

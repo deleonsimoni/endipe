@@ -2,10 +2,11 @@
     <div class="row">
         <div class="col-md-10 border-right">
             <small>PARECERISTA</small>
-            <select class="form-control" [(ngModel)]="selectReview">
-                <option disabled hidden></option>
+            <select *ngIf="reviewers" class="form-control" [(ngModel)]="selectReview">
+
                 <option *ngFor="let reviewer of reviewers" [selected]="reviewer._id == work?.reviewers[0]?.userId"
-                    [ngValue]="reviewer" type="combobox">{{ reviewer.email }}
+                    [ngValue]="reviewer" type="combobox">
+                    {{ reviewer.email}}
                 </option>
             </select>
         </div>

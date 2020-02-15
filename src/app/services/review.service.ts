@@ -12,6 +12,15 @@ export class ReviewService {
   ) { }
 
   cadastrar(review) {
-    return this.http.post(`${this.baseUrl}/reviews/admin`, review);
+    return this.http.post<any>(`${this.baseUrl}/reviews/admin`, review);
   }
+
+  reviewReviewer(review) {
+    return this.http.post<any>(`${this.baseUrl}/reviews/reviewer`, review);
+  }
+
+  retrieveAllWorks() {
+    return this.http.get<any>(`${this.baseUrl}/reviews/getWorks`);
+  }
+
 }

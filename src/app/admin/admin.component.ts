@@ -33,11 +33,11 @@ export class AdminComponent implements OnInit {
     { name: 'NOTICÍAS', path: '/admin/noticias' },
     { name: 'CONFERENCISTAS', path: '/admin/conferencistas' },
     { name: 'PARECERISTAS/COORDENADORES', path: '/admin/coordenadores' },
-    { name: 'PARECER', path: '/admin/vincular-trabalho' }
+    { name: 'TRABALHOS/PARECERISTAS', path: '/admin/vincular-trabalho' }
   ];
 
   private nonAdminRoutes = [
-    //{ name: 'TRABALHOS', path: '/admin/trabalhos' },
+    { name: 'PARECERISTA', path: '/admin/review-list' },
   ];
 
   constructor(
@@ -51,10 +51,16 @@ export class AdminComponent implements OnInit {
   private retrieveUser() {
     this.user = this.auth.getDecodedAccessToken(this.auth.getToken());
 
-    if (this.user && this.user.icAdmin) {
+    if (this.user && this.user.icAdmin && this.user.reviewer) {
+      this.menu = this.adminRoutes.concat(this.nonAdminRoutes);
+    } else if (this.user.icAdmin) {
       this.menu = this.adminRoutes;
     } else {
       this.menu = this.nonAdminRoutes;
     }
+
   }
+
+
+
 }

@@ -14,6 +14,7 @@ import { BsDatepickerModule, BsDropdownModule } from 'ngx-bootstrap';
 import { NgxMaskModule } from 'ngx-mask';
 import { ModalSchedulesComponent } from './modal-schedules/modal-schedules.component';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+import { ModalReviewReviewerComponent } from './modal-review-reviewer/modal-review-reviewer.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-
     ModalReviewAdminComponent,
     ModalEditProfileComponent,
     ModalSchedulesComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    ModalReviewReviewerComponent
   ],
   entryComponents: [
     ModalConferencerComponent,

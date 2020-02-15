@@ -60,6 +60,24 @@ const WorkSchema = new mongoose.Schema({
       question3: String
     }
   },
+  reviewReviewer: {
+    userId: {
+      type: mongoose.Schema.Types.ObjectId
+    },
+    userEmail: {
+      type: String
+    },
+    review: {
+      icAllow: String,
+      question1: String,
+      question2: String,
+      question3: String,
+      question4: String,
+      question5: String,
+      justify: String
+
+    }
+  },
   authors: [{
     userId: {
       type: mongoose.Schema.Types.ObjectId,

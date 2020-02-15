@@ -92,7 +92,7 @@
                                 <a [routerLink]="['/meus-trabalhos']">Submissão</a>
                             </li>
                             <li><a [routerLink]="['/certificados']">Certificados</a></li>
-                            <li *ngIf="user && user.icAdmin">
+                            <li *ngIf="user && (user.icAdmin || user.reviewer)">
                                 <a [routerLink]="['/admin']">Dashboard</a>
                             </li>
                             <li><a style="cursor: pointer;" (click)="logout()">Sair</a></li>

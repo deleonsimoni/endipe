@@ -4,6 +4,7 @@ import { AxisPipe } from './axis.pipe';
 import { ModalitiesPipe } from './modalities.pipe';
 import { TypeWorkPipe } from './type-work.pipe';
 import { DocPipe } from './doc.pipe';
+import { ContagemModalidadePipe } from './contagem-modalidade.pipe';
 
 @NgModule({
     declarations: [
@@ -11,14 +12,16 @@ import { DocPipe } from './doc.pipe';
         AxisPipe,
         ModalitiesPipe,
         TypeWorkPipe,
-        DocPipe
+        DocPipe,
+        ContagemModalidadePipe
     ],
     exports: [
         MaskCpfPipe,
         AxisPipe,
         ModalitiesPipe,
         TypeWorkPipe,
-        DocPipe
+        DocPipe,
+        ContagemModalidadePipe
     ],
 })
 export class PipesModule { }

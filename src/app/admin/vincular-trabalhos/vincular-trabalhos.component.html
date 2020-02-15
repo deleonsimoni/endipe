@@ -10,9 +10,11 @@
     <hr />
 
     <div class="row" *ngIf="allWorks.length > 0 && user && user.icAdmin">
-        Total de {{allWorks.length}} trabalhos - Filtro de Pesquisa
+        Total de {{allWorks.length}} trabalhos
+        <br />{{allWorks | contagemModalidade}}
 
-        <div class="col-md-4">
+        <div class="col-md-12">
+            Filtro de Pesquisa
             <select class="form-control" [(ngModel)]="status" (change)="filtrarStatus()">
                 <option value="0">Todos </option>
                 <option value="1">Parecer pendente</option>

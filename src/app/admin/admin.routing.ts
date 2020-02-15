@@ -9,6 +9,7 @@ import { AdminGuard } from './admin.guard';
 import { ConferencerComponent } from './conferencer/conferencer.component';
 import { VincularTrabalhosComponent } from './vincular-trabalhos/vincular-trabalhos.component';
 import { SchedulesComponent } from './schedules/schedules.component';
+import { ReviewListWorksComponent } from './review-list-works/review-list-works.component';
 
 const routes: Routes = [
     {
@@ -30,6 +31,9 @@ const routes: Routes = [
             },
             {
                 path: 'vincular-trabalho', component: VincularTrabalhosComponent
+            },
+            {
+                path: 'review-list', component: ReviewListWorksComponent
             },
             {
                 path: 'programacao', component: SchedulesComponent

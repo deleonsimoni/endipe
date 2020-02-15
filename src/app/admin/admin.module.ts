@@ -27,6 +27,8 @@ import { WorkDataComponent } from './work-data/work-data.component';
 import { ModalReviewAdminComponent } from './modals/modal-review-admin/modal-review-admin.component';
 import { SchedulesComponent } from './schedules/schedules.component';
 import { ScheduleCardComponent } from './components/schedule-card/schedule-card.component';
+import { ReviewListWorksComponent } from './review-list-works/review-list-works.component';
+import { ModalReviewReviewerComponent } from './modals/modal-review-reviewer/modal-review-reviewer.component';
 
 @NgModule({
     declarations: [
@@ -47,10 +49,12 @@ import { ScheduleCardComponent } from './components/schedule-card/schedule-card.
         WorkDataComponent,
         SchedulesComponent,
         ScheduleCardComponent,
+        ReviewListWorksComponent,
     ],
     entryComponents: [
         AdminComponent,
-        ModalReviewAdminComponent
+        ModalReviewAdminComponent,
+        ModalReviewReviewerComponent,
     ],
     imports: [
         CommonModule,

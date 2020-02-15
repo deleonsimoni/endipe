@@ -1,5 +1,5 @@
 <div>
-    <div>Total de {{ pager.totalItems }} inscritos
+    <div *ngIf="pager.totalItems">Total de {{ pager.totalItems }} inscritos
 
         <!-- <button *ngIf="status == '5' && !gerandoRelatorio" (click)="export()" class="btn btn-primary">
             <i class="fa fa-file-excel-o"></i> Exportar
@@ -51,7 +51,7 @@
 
     </div>
 
-    <div class="pagination justify-content-center">
+    <div *ngIf="pager.totalItems" class="pagination justify-content-center">
 
         <mat-paginator [length]="pager.totalItems" [pageSize]="pager.pageSize"
             (page)="pageEvent = retrieveAdminData($event)">

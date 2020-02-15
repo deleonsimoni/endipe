@@ -20,6 +20,13 @@ export class WorkCardComponent implements OnInit {
 
   ngOnInit() {
 
+    //carregando combobox
+    this.reviewers.forEach(r => {
+      if (this.work.reviewers[0] && r._id == this.work.reviewers[0].userId) {
+        this.selectReview = r;
+      }
+    });
+
   }
 
   constructor(
@@ -33,7 +40,7 @@ export class WorkCardComponent implements OnInit {
   }
 
   public markReviewerWork(idWork): void {
-    if(!this.selectReview){
+    if (!this.selectReview) {
       this.toastr.error('Erro', 'É necessário selecionar um parecerista');
     } else {
       this.adminService.markReviewerWork(idWork, this.selectReview._id, this.selectReview.email)
@@ -46,4 +53,9 @@ export class WorkCardComponent implements OnInit {
         });
     }
   }
+
+  compararTrabalhos(w1, w2) {
+    return w1 && w2 ? (w1._id === w2._id) : w1 == w2;
+  }
+
 }
