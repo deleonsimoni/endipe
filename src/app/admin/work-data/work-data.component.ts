@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { DownloadFileService } from 'src/app/services/download-file.service';
 import { MatDialogRef, MatDialog } from '@angular/material';
 import { ModalReviewAdminComponent } from '../modals/modal-review-admin/modal-review-admin.component';
+import { ModalReviewReviewerComponent } from '../modals/modal-review-reviewer/modal-review-reviewer.component';
 
 @Component({
   selector: 'app-work-data',
@@ -39,6 +40,16 @@ export class WorkDataComponent implements OnInit {
 
     const dialogRef = this.dialog.open(ModalReviewAdminComponent, {
       data: { workId: workId }
+    });
+
+    //dialogRef.afterClosed().subscribe(() => this.listar());
+
+  }
+
+  public addReviewerCoordinator(work) {
+
+    const dialogRef = this.dialog.open(ModalReviewReviewerComponent, {
+      data: { work: work }
     });
 
     //dialogRef.afterClosed().subscribe(() => this.listar());

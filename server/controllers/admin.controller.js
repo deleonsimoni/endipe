@@ -23,6 +23,7 @@ module.exports = {
   removeWork,
   removeAuthor,
   insertAuthorWork,
+  getWorksCoordinator
 
 }
 
@@ -97,6 +98,10 @@ async function invalidatePayment(id) {
 
 async function getWorks(axis) {
   return await Work.find({ axisId: axis });
+}
+
+async function getWorksCoordinator(axis) {
+  return await Work.find({ axisId: axis, 'reviewAdmin.review.icAllow': 'Sim' });
 }
 
 async function validateDoc(id) {

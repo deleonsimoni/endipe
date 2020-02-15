@@ -37,8 +37,14 @@ export class AdminComponent implements OnInit {
   ];
 
   private nonAdminRoutes = [
-    { name: 'PARECERISTA', path: '/admin/review-list' },
+    { name: 'PARECERISTA', path: '/admin/review-list' }
   ];
+
+  private coordinatorRoutes = [
+    { name: 'TRABALHOS/PARECERISTAS', path: '/admin/vincular-trabalho' }
+  ];
+
+
 
   constructor(
     private auth: AuthService
@@ -57,6 +63,12 @@ export class AdminComponent implements OnInit {
       this.menu = this.adminRoutes;
     } else {
       this.menu = this.nonAdminRoutes;
+    }
+
+
+    if (this.user.reviewer && this.user.reviewer.icCoordinator) {
+      this.menu.concat(this.coordinatorRoutes);
+
     }
 
   }

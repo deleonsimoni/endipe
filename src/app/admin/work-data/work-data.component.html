@@ -45,7 +45,7 @@
                 <p *ngFor="let author of work.authors">{{ author.userEmail }}</p>
             </div>
         </div>
-        <div *ngIf="work.reviewAdmin || work.reviewers" class="row align-items-center mb-2">
+        <div *ngIf="user.icAdmin && (work.reviewAdmin || work.reviewers)" class="row align-items-center mb-2">
             <div class="col-md-12">
                 <strong>Pareceristas</strong>
 
@@ -76,10 +76,54 @@
                 </div>
             </div>
         </div>
+
+        <div *ngIf="work.reviewReviewer" class="row align-items-center mb-2">
+            <div class="col-md-12">
+                <strong>Parecer {{work.reviewReviewer.userEmail}}</strong>
+                <hr>
+                <div *ngIf="workwork.reviewReviewer.review">
+                    <div>
+                        <p>
+                            Adequação ao eixo e ao evento - {{work.reviewReviewer.review.question1}}
+                        </p>
+                        <p>
+                            Correção textual - {{work.reviewReviewer.review.question2}}
+                        </p>
+                        <p>
+                            Clareza na apresentação - {{work.reviewReviewer.review.question3}}
+                        </p>
+                        <p>
+                            Coerência entre objetivos/motodologia/fundamentação -
+                            {{work.reviewReviewer.review.question4}}
+                        </p>
+                        <p>
+                            Não contém identificação que configura quebra de
+                            anonimato - {{work.reviewReviewer.review.question5}}
+                        </p>
+
+                        <p>
+                            Aprovado - {{work.reviewReviewer.review.icAllow}}
+                        </p>
+
+                        <p>
+                            Justificativa - {{work.reviewReviewer.review.justify}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
         <div class="row">
             <div class="col-md-12">
-                <button class="add" (click)="addReviewer(work._id)">
+                <button *ngIf="user.icAdmin" class="add" (click)="addReviewer(work._id)">
                     <i class="fas fa-plus"></i>
+                    Parecer Admin
+                </button>
+                <button *ngIf="user?.reviewer?.icCoordinator && !work.reviewReviewer" class="add"
+                    (click)="addReviewerCoordinator(work)">
+                    <i class="fas fa-check"></i>
                     Parecer
                 </button>
             </div>

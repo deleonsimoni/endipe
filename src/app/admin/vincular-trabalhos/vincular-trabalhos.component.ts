@@ -56,7 +56,7 @@ export class VincularTrabalhosComponent implements OnInit {
         this.works = this.allWorks.filter(work => !work.reviewAdmin);
         break;
       case 2:
-        this.works = this.allWorks.filter(work => work.reviewAdmin && work.reviewAdmin.review.icAllow == "Não");
+        this.works = this.allWorks.filter(work => work.reviewAdmin && work.reviewAdmin.review.icAllow == "Nao");
         break;
       case 3:
         this.works = this.allWorks.filter(work => work.reviewAdmin && work.reviewAdmin.review.icAllow == "Sim");
@@ -75,10 +75,6 @@ export class VincularTrabalhosComponent implements OnInit {
           this.reviewers = res.reviewers;
         }
       });
-
-
-
-
   }
 
   loadWorks() {

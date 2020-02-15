@@ -69,8 +69,11 @@ async function getUserWorks(req, res) {
 
 async function getWorks(req, res) {
   const user = req.user;
-  if (user.icAdmin || user.reviewer.icCoordinator) {
+  if (user.icAdmin) {
     const works = await adminCtrl.getWorks(req.params.id);
+    res.json(works);
+  } if (user.reviewer.icCoordinator) {
+    const works = await adminCtrl.getWorksCoordinator(req.params.id);
     res.json(works);
   } else {
     res.sendStatus(401);
