@@ -13,6 +13,8 @@ export class WorkDataComponent implements OnInit {
 
   @Input() work: any;
 
+  @Input() user: any;
+
   public carregando;
 
   constructor(

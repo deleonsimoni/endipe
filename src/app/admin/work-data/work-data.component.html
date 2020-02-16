@@ -47,11 +47,13 @@
         </div>
         <div *ngIf="user.icAdmin && (work.reviewAdmin || work.reviewers)" class="row align-items-center mb-2">
             <div class="col-md-12">
-                <strong>Pareceristas</strong>
+                <strong>Parecerista Administrador
+                    <div *ngIf="work.reviewers">
+                        <p *ngFor="let reviewerCoordinator of work.reviewers">{{ reviewerCoordinator.userEmail }}</p>
+                    </div>
+                </strong>
 
-                <div *ngIf="work.reviewers">
-                    <p *ngFor="let reviewerCoordinator of work.reviewers">{{ reviewerCoordinator.userEmail }}</p>
-                </div>
+
                 <hr>
                 <div *ngIf="work.reviewAdmin">
                     <div>
@@ -78,10 +80,11 @@
         </div>
 
         <div *ngIf="work.reviewReviewer" class="row align-items-center mb-2">
+            <hr />
             <div class="col-md-12">
                 <strong>Parecer {{work.reviewReviewer.userEmail}}</strong>
-                <hr>
-                <div *ngIf="workwork.reviewReviewer.review">
+
+                <div *ngIf="work.reviewReviewer.review">
                     <div>
                         <p>
                             Adequação ao eixo e ao evento - {{work.reviewReviewer.review.question1}}
@@ -93,7 +96,7 @@
                             Clareza na apresentação - {{work.reviewReviewer.review.question3}}
                         </p>
                         <p>
-                            Coerência entre objetivos/motodologia/fundamentação -
+                            Coerência entre objetivos/metodologia/fundamentação -
                             {{work.reviewReviewer.review.question4}}
                         </p>
                         <p>

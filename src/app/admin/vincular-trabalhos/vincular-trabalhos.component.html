@@ -1,17 +1,24 @@
 <div class="form">
 
-    Selecione o eixo
-    <select class="form-control" (change)="loadData()" placeholder="Eixo" id="opt" [(ngModel)]="axisId">
-        <option *ngFor="let eixo of eixos" [value]="eixo.id">{{ eixo.name }}
-        </option>
-    </select>
 
+    <div *ngIf="user.icAdmin">
+        Selecione o eixo
+        <select class="form-control" (change)="loadData()" placeholder="Eixo" id="opt" [(ngModel)]="axisId">
+            <option *ngFor="let eixo of eixos" [value]="eixo.id">{{ eixo.name }}
+            </option>
+        </select>
+    </div>
+
+
+    <div *ngIf="!user.icAdmin">
+        Eixo <strong>{{axisId | axis}}</strong>
+    </div>
 
     <hr />
 
-    <div class="row" *ngIf="allWorks.length > 0 && user && user.icAdmin">
-        Total de {{allWorks.length}} trabalhos
-        <br />{{allWorks | contagemModalidade}}
+    <div class="row" *ngIf="allWorks.length > 0 && user">
+        Total de {{works.length}} trabalhos
+        <br />{{works | contagemModalidade}}
 
         <div class="col-md-12">
             Filtro de Pesquisa
@@ -30,7 +37,7 @@
         <work-card [work]="work" [reviewers]="reviewers" (selected)="receiverSelectedWork($event)">
         </work-card>
 
-        <app-work-data [work]="work" *ngIf="user.icAdmin && (work && work._id == workSelect)">
+        <app-work-data [work]="work" [user]="user" *ngIf="work && work._id == workSelect">
         </app-work-data>
     </div>
 

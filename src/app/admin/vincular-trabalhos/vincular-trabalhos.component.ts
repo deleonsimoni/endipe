@@ -48,6 +48,16 @@ export class VincularTrabalhosComponent implements OnInit {
 
   public filtrarStatus() {
 
+    if (this.user.icAdmin) {
+      this.filtraStatusAdmin();
+    } else {
+      this.filtraStatusCoordenador();
+    }
+
+  }
+
+  filtraStatusAdmin() {
+
     switch (Number(this.status)) {
       case 0:
         this.works = this.allWorks;
@@ -62,6 +72,26 @@ export class VincularTrabalhosComponent implements OnInit {
         this.works = this.allWorks.filter(work => work.reviewAdmin && work.reviewAdmin.review.icAllow == "Sim");
         break;
     }
+
+  }
+
+  filtraStatusCoordenador() {
+
+    switch (Number(this.status)) {
+      case 0:
+        this.works = this.allWorks;
+        break;
+      case 1:
+        this.works = this.allWorks.filter(work => !work.reviewReviewer);
+        break;
+      case 2:
+        this.works = this.allWorks.filter(work => work.reviewReviewer && work.reviewReviewer.review.icAllow == "Nao");
+        break;
+      case 3:
+        this.works = this.allWorks.filter(work => work.reviewReviewer && work.reviewReviewer.review.icAllow == "Sim");
+        break;
+    }
+
   }
 
   loadData() {

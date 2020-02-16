@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, style, state, transition, animate } from '@angular/animations';
 import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -47,7 +48,8 @@ export class AdminComponent implements OnInit {
 
 
   constructor(
-    private auth: AuthService
+    private auth: AuthService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -64,11 +66,12 @@ export class AdminComponent implements OnInit {
     } else {
       this.menu = this.nonAdminRoutes;
     }
-
-
     if (this.user.reviewer && this.user.reviewer.icCoordinator) {
-      this.menu.concat(this.coordinatorRoutes);
+      this.menu = this.menu.concat(this.coordinatorRoutes);
+    }
 
+    if (this.menu.length == 1) {
+      this.router.navigate(['/admin/review-list']);
     }
 
   }
