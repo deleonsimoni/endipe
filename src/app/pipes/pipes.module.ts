@@ -5,6 +5,7 @@ import { ModalitiesPipe } from './modalities.pipe';
 import { TypeWorkPipe } from './type-work.pipe';
 import { DocPipe } from './doc.pipe';
 import { ContagemModalidadePipe } from './contagem-modalidade.pipe';
+import { CategoryPaymentPipe } from './category-payment.pipe';
 
 @NgModule({
     declarations: [
@@ -13,7 +14,8 @@ import { ContagemModalidadePipe } from './contagem-modalidade.pipe';
         ModalitiesPipe,
         TypeWorkPipe,
         DocPipe,
-        ContagemModalidadePipe
+        ContagemModalidadePipe,
+        CategoryPaymentPipe
     ],
     exports: [
         MaskCpfPipe,
@@ -21,7 +23,8 @@ import { ContagemModalidadePipe } from './contagem-modalidade.pipe';
         ModalitiesPipe,
         TypeWorkPipe,
         DocPipe,
-        ContagemModalidadePipe
+        ContagemModalidadePipe,
+        CategoryPaymentPipe
     ],
 })
 export class PipesModule { }

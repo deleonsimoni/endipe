@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { saveAs } from 'file-saver'
 import { PageEvent } from '@angular/material';
+import { CategoryPaymentPipe } from 'src/app/pipes/category-payment.pipe';
 
 
 @Component({
@@ -31,6 +32,7 @@ export class SubscribedComponent implements OnInit {
   public search: any = {};
   public pageEvent: any;
   public textSearch;
+  public filterCategory = new CategoryPaymentPipe();
 
   constructor(
     private authService: AuthService,
@@ -210,20 +212,67 @@ export class SubscribedComponent implements OnInit {
     }
   }
 
-  public export() {
+  public gerarRelatorio() {
+    this.gerandoRelatorio = true;
+
+    this.adminService.generateReport()
+      .subscribe((res: any) => {
+
+        let fileName = '';
+
+        res = res.map(obj => ({ ...obj, categoryId: obj.payment.categoryId }))
+
+        res = res.reduce(function (rv, x) {
+          (rv[x['categoryId']] = rv[x['categoryId']] || []).push(x);
+          return rv;
+        }, {});
+
+        for (var key in res) {
+          switch (Number(key)) {
+            case 1:
+              fileName = 'Estudantes de curso Normal/EM.csv'
+              break;
+            case 2:
+              fileName = 'Estudantes de Graduação.csv'
+              break;
+            case 3:
+              fileName = 'Estudantes de Pós-Graduação.csv'
+              break;
+            case 4:
+              fileName = 'Profissionais da Educação Básica.csv'
+              break;
+            case 5:
+              fileName = 'Profissionais da Educação Superior.csv'
+              break;
+
+            default:
+              break;
+          }
+
+          this.exportUserToCSV(res[Number(key)], fileName);
+
+
+        }
+
+        this.gerandoRelatorio = false;
+
+      });
+  }
+
+  public exportUserToCSV(data, fileName) {
     try {
 
-      const dataExport: any = this.users.map(user => {
+      const dataExport: any = data.map(user => {
         return {
           nome: user.fullname,
           email: user.email,
           documento: user.document,
-          estrangeiro: user.icForeign ? 'X' : ''
+          estrangeiro: user.icForeign ? 'S' : 'N',
+          categoria: this.filterCategory.transform(user.categoryId)
         }
       });
 
 
-      this.gerandoRelatorio = true;
       const replacer = (key, value) => value === null ? '' : value; // specify how you want to handle null values here
       const header = Object.keys(dataExport[0]);
       let csv = dataExport.map(row => header.map(fieldName => JSON.stringify(row[fieldName], replacer)).join(';'));
@@ -235,7 +284,7 @@ export class SubscribedComponent implements OnInit {
         url = window.URL.createObjectURL(blob);
 
       a.href = url;
-      a.download = "endipe-pagamento-valido.csv";
+      a.download = fileName;
       a.click();
       window.URL.revokeObjectURL(url);
       a.remove();
@@ -248,6 +297,7 @@ export class SubscribedComponent implements OnInit {
 
 
   }
+
 
   public updateUser(event) {
     if (event === true) {

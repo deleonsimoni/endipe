@@ -23,10 +23,18 @@
         <div class="col-md-12">
             Filtro de Pesquisa
             <select class="form-control" [(ngModel)]="status" (change)="filtrarStatus()">
-                <option value="0">Todos </option>
+                <option value="0">Todos Pareceres</option>
                 <option value="1">Parecer pendente</option>
                 <option value="2">Parecer negativo</option>
                 <option value="3">Parecer positivo</option>
+            </select>
+            <select class="form-control" [(ngModel)]="modalidadeFilter" (change)="filtrarModalidade()">
+                <option value="0">Todas Modalidades</option>
+                <option value="3">Pôster</option>
+                <option value="5">Painel</option>
+                <option value="4">Mini Curso</option>
+                <option value="2">Roda de Conversa</option>
+
             </select>
         </div>
         <hr />

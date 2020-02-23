@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 //const Joi = require('joi');
 const User = require('../models/user.model');
 const Work = require('../models/work.model');
+const userCtrl = require('../controllers/user.controller');
 
 const Prices = require('../config/prices');
 const IncomingForm = require('formidable').IncomingForm;
@@ -23,7 +24,10 @@ module.exports = {
   removeWork,
   removeAuthor,
   insertAuthorWork,
-  getWorksCoordinator
+  getWorksCoordinator,
+  alterUserWorkFile,
+  submitWork,
+  generateReport
 
 }
 
@@ -50,6 +54,14 @@ async function getUsers(req) {
   return { usersFound, pager }
 }
 
+async function generateReport() {
+  return await User.find({ 'payment.icPaid': true })
+    .select('fullname email document payment.categoryId icForeign')
+    .sort({ fullname: 1 })
+    ;
+
+}
+
 async function editUser(user) {
   return await User.findOneAndUpdate({ _id: user._id }, user, { upsert: true });
 }
@@ -73,6 +85,62 @@ async function getUserWorks(workId) {
       console.log("arquivo recuperado com sucesso: " + workId);
     }
   });
+}
+
+
+async function submitWork(req) {
+
+  let formulario = JSON.parse(req.body.formulario);
+  console.log('Validando Usuarios' + JSON.stringify(formulario.authors));
+
+  let responseValidacao = await userCtrl.validatePaymentUsers(formulario.authors, formulario.modalityId);
+  if (responseValidacao.temErro) {
+    console.log('erro na validacao dos usuarios: ' + JSON.stringify(responseValidacao));
+    return responseValidacao;
+  }
+  console.log('validei todos com sucesso: ' + JSON.stringify(responseValidacao));
+
+  console.log('upload works');
+  let responseUpload = await userCtrl.uploadWorks(req.files.fileArray);
+  if (responseUpload.temErro) {
+    console.log('erro no upload de arquivos: ' + JSON.stringify(responseUpload));
+    return responseUpload;
+  }
+  console.log('subi todos os arquivos: ' + JSON.stringify(responseUpload));
+
+  console.log('atualizando  banco');
+  let workId = await userCtrl.createWork(responseValidacao.user, responseUpload.filesS3, formulario);
+  console.log('IDWORKJK ' + workId);
+  return await userCtrl.updateUsers(responseValidacao.user, workId);
+}
+
+async function alterUserWorkFile(req) {
+
+  console.log('upload works');
+  let filesArray = [];
+  if (req.files.fileArray.length == 2) {
+    filesArray = req.files.fileArray;
+  } else {
+    filesArray.push(req.files.fileArray);
+  }
+
+  let responseUpload = await userCtrl.uploadWorks(filesArray);
+  if (responseUpload.temErro) {
+    console.log('erro no upload de arquivos: ' + JSON.stringify(responseUpload));
+    return responseUpload;
+  }
+  console.log('subi todos os arquivos: ' + JSON.stringify(responseUpload));
+
+  console.log('atualizando  banco');
+
+  if (filesArray.length == 2) {
+    return await Work.findOneAndUpdate({ _id: req.params.idWork }, { $set: { 'pathS3DOC': responseUpload.filesS3[0], 'pathS3PDF': responseUpload.filesS3[1] } });
+  } else if (responseUpload.filesS3[0].includes(".pdf")) {
+    return await Work.findOneAndUpdate({ _id: req.params.idWork }, { $set: { 'pathS3DOC': responseUpload.filesS3[0] } });
+  } else {
+    return await Work.findOneAndUpdate({ _id: req.params.idWork }, { $set: { 'pathS3PDF': responseUpload.filesS3[0] } });
+  }
+
 }
 
 async function validatePayment(id) {

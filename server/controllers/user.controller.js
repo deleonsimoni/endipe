@@ -41,6 +41,11 @@ module.exports = {
   markCoordinator,
   unmarkCoordinator,
   markReviewer,
+  validatePaymentUsers,
+  uploadWorks,
+  createWork,
+  updateUsers,
+
 }
 
 async function insert(user) {
@@ -441,13 +446,11 @@ async function validateModalityDup(workId, modalityId) {
 }
 
 async function uploadWorks(files) {
-
   let retorno = {
     temErro: false,
     mensagem: '',
     filesS3: []
   }
-
   let fileName;
 
   for (let i = 0; i < files.length; i++) {

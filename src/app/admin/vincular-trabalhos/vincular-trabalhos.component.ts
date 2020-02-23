@@ -26,6 +26,7 @@ export class VincularTrabalhosComponent implements OnInit {
   public workSelect;
   public status;
   public allWorks = [];
+  public modalidadeFilter = 0;
 
   constructor(
     private dialog: MatDialog,
@@ -47,7 +48,7 @@ export class VincularTrabalhosComponent implements OnInit {
   }
 
   public filtrarStatus() {
-
+    this.modalidadeFilter = 0;
     if (this.user.icAdmin) {
       this.filtraStatusAdmin();
     } else {
@@ -55,6 +56,33 @@ export class VincularTrabalhosComponent implements OnInit {
     }
 
   }
+
+  filtrarModalidade() {
+
+    switch (Number(this.modalidadeFilter)) {
+      case 0:
+        if (this.status) {
+          this.works = this.works;
+        } else {
+          this.works = this.allWorks;
+        }
+        break;
+      case 2:
+        this.works = this.works.filter(work => work.modalityId == 2);
+        break;
+      case 3:
+        this.works = this.works.filter(work => work.modalityId == 3);
+        break;
+      case 4:
+        this.works = this.works.filter(work => work.modalityId == 4);
+        break;
+      case 5:
+        this.works = this.works.filter(work => work.modalityId == 5);
+        break;
+    }
+
+  }
+
 
   filtraStatusAdmin() {
 

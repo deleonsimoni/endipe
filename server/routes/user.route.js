@@ -48,9 +48,13 @@ async function testeBoleto(req, res) {
 }
 
 async function uploadWork(req, res) {
+
+  //Prazo encerrado
+  let response = { 'msg': 'Submissões Encerradas' };
+
+  /*
   let response = await userCtrl.uploadWork(req, res);
 
-  //enviarEmailDeSucesso
   if (!response) {
     console.log('Notificando email submissao');
     let formulario = JSON.parse(req.body.formulario);
@@ -63,8 +67,7 @@ async function uploadWork(req, res) {
     }
 
   }
-
-
+*/
   res.json(response);
 }
 

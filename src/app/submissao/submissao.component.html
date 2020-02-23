@@ -6,28 +6,33 @@
         <div class="row">
             <div class="offset-md-1 col-md-10">
                 <div class="box">
+
                     <div class="form">
 
-                        <form role="form" class="contactForm" [formGroup]="submissionForm" (ngSubmit)="upload()"
+
+                        <form role="form" class="contactForm" [formGroup]="submissionForm" (ngSubmit)="uploadAdmin()"
                             encType="multipart/form-data">
+
 
                             <div class="section-header">
                                 <h2>Submissão de trabalho</h2>
                             </div>
+                            <h1 style="color:red; font-family: 'Montserrat', sans-serif;">Submissões encerradas</h1>
+
                             <div *ngIf="carregando">
                                 <i class="fas fa-spinner fa-pulse"></i>Aguarde...
                             </div>
-                            <div *ngIf="!carregando">
-                                <div *ngIf="!user.payment || !user.payment.icPaid ">
+                            <div *ngIf="!carregando && user.icAdmin">
+                                <!--<div *ngIf="!user.payment || !user.payment.icPaid ">
                                     <h1 style="color:red; font-family: 'Montserrat', sans-serif;">Para realizar
                                         submissões de trabalhos você precisa ter
                                         um pagamento válido</h1>
-                                </div>
-                                <div *ngIf="user.payment && user.payment.icPaid ">
-                                    <div *ngIf="user.works && user.works.length > 0" class="form-row">
+                                </div>-->
+                                <div *ngIf="(user.payment && user.payment.icPaid) || user.icAdmin">
+                                    <!--<div *ngIf="user.works && user.works.length > 0" class="form-row">
                                         <h3>Você já submeteu {{ user.works.length }} trabalho(s)</h3>
                                         <br />
-                                    </div>
+                                    </div>-->
                                     <h5 style="color:#50d8af; font-family: 'Montserrat', sans-serif;">
                                         Certifique-se de que os dados e arquivos estão corretos, pois não será
                                         possível qualquer alteração após a finalização da submissão.</h5>
@@ -47,16 +52,7 @@
                                                 </select>
                                             </div>
 
-                                            <!--<div class="mt-2">
-                                                <select class="form-control" id="opt" formControlName="typeWork">
-                                                    <option disabled="true" [selected]="!submissionForm.value.typeWork">
-                                                        Selecione
-                                                        o tipo de trabalho</option>
-                                                    <option *ngFor="let option of workOptions" [value]="option.id">
-                                                        {{ option.name }}
-                                                    </option>
-                                                </select>
-                                            </div>-->
+
                                             <div class="mt-2">
                                                 <select class="form-control" placeholder="Eixo" id="opt"
                                                     formControlName="axisId">
@@ -98,8 +94,7 @@
                                                 *ngIf="showAdd"><i class="fas fa-plus"></i> Autores</button>
                                         </div>
                                     </div>
-                                    <div *ngIf="!user.works || user.works.length < 2"
-                                        class="row justify-content-center">
+                                    <div class="row justify-content-center">
                                         <button *ngIf="!enviando" class="btn-get-started"
                                             type="submit">Submeter</button>
 

@@ -23,6 +23,10 @@ export class AdminService {
     return this.http.get(`${this.baseUrl}/admin/usrs?page=${page}&search=${search}`);
   }
 
+  public generateReport() {
+    return this.http.get(`${this.baseUrl}/admin/generateReport`);
+  }
+
   public registerCoordinator(form, axisId) {
     return this.http.post(`${this.baseUrl}/user/coordinator/${axisId}`, form);
   }

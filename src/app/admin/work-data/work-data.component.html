@@ -30,13 +30,32 @@
         <div class="row align-items-center mb-2">
             <div class="col-md-12">
                 <strong>DOC</strong>
-                <p><a [routerLink]="" (click)="download(work.pathS3DOC)">Download DOC</a>
+                <p><a [routerLink]="" (click)="download(work.pathS3PDF)">Download DOC</a>
+                    <div class="custom-file mt-2">
+                        <input type="file" class="custom-file-input"
+                            accept="application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                            data-max-size="2048" id="customPreReadFile" (change)="setFileNameDOC($event.target.files)"
+                            #fileInput />
+                        <label class="custom-file-label" for="customPreReadFile">{{ getFileNameDOC() }}</label>
+                        <div class="col-md-4">
+                            <button class="btn-primary" (click)="alterarArquivos()">Alterar</button>
+                        </div>
+                    </div>
             </div>
         </div>
         <div class="row align-items-center mb-2">
             <div class="col-md-12">
                 <strong>PDF</strong>
                 <p><a [routerLink]="" (click)="download(work.pathS3DOC)">Download PDF</a>
+                    <div class="custom-file mt-2">
+                        <input type="file" name="arquivoPDF" class="custom-file-input" accept="application/pdf"
+                            data-max-size="2048" id="customPreReadFile" (change)="setFileNamePDF($event.target.files)"
+                            #fileInput />
+                        <label class="custom-file-label" for="customPreReadFile">{{ getFileNamePDF() }}</label>
+                        <div class="col-md-4">
+                            <button class="btn-primary" (click)="alterarArquivos()">Alterar</button>
+                        </div>
+                    </div>
             </div>
         </div>
         <div class="row align-items-center mb-2">

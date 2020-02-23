@@ -21,6 +21,13 @@
             <small>TÍTULO</small>
             <h4>{{ work.title }}</h4>
         </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10 border-right">
+            <small>Modalidade</small>
+            <h4> {{ work.modalityId | modalities }} </h4>
+        </div>
         <div style="cursor:pointer;" class="col-md-2 text-center align-self-center pointer" (click)="selectWork(work);">
             <i class="fa fa-plus"> Detalhes</i>
         </div>

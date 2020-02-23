@@ -8,6 +8,14 @@ export const MODALITIES = [
     { id: 7, name: 'Ouvinte' }
 ];
 
+export const CATEGORY_PAYMENT = [
+    { id: 1, name: 'Estudantes de curso Normal/EM' },
+    { id: 2, name: 'Estudantes de Graduação' },
+    { id: 3, name: 'Estudantes de Pós-Graduação' },
+    { id: 4, name: 'Profissionais da Educação Básica' },
+    { id: 5, name: 'Profissionais da Educação Superior' }
+]
+
 export const AXIS = [
     { id: 1, name: 'Formação docente' },
     { id: 2, name: 'Currículo e avaliação' },

@@ -5,6 +5,7 @@ const userCtrl = require('../controllers/user.controller');
 const adminCtrl = require('../controllers/admin.controller');
 const emailSender = require('../controllers/email.controller');
 const templateEmail = require('../config/templateEmails');
+const fileUpload = require('express-fileupload');
 
 const router = express.Router();
 module.exports = router;
@@ -15,6 +16,7 @@ router.get('/usrs?:page', passport.authenticate('jwt', { session: false }), getU
 router.get('/getUserWorks/:id', passport.authenticate('jwt', { session: false }), asyncHandler(getUserWorks));
 router.get('/works/:id', passport.authenticate('jwt', { session: false }), getWorks);
 router.get('/metrics', passport.authenticate('jwt', { session: false }), getMetrics);
+router.get('/generateReport', passport.authenticate('jwt', { session: false }), generateReport);
 
 router.post('/validatePayment/:id', passport.authenticate('jwt', { session: false }), validatePayment);
 router.post('/invalidatePayment/:id', passport.authenticate('jwt', { session: false }), invalidatePayment);
@@ -24,6 +26,8 @@ router.post('/rainbown/:id', passport.authenticate('jwt', { session: false }), d
 router.post('/editUser', passport.authenticate('jwt', { session: false }), editUser);
 router.post('/editUser', passport.authenticate('jwt', { session: false }), editUser);
 router.post('/insertAuthorWork', passport.authenticate('jwt', { session: false }), asyncHandler(insertAuthorWork));
+router.post('/alterUserWorkFile/xxendiperio2020/:idWork', [passport.authenticate('jwt', { session: false }), fileUpload()], asyncHandler(alterUserWorkFile));
+router.post('/uploadWork/xxendiperio2020/:id', [passport.authenticate('jwt', { session: false }), fileUpload()], asyncHandler(uploadWork));
 
 router.delete('/removeWork/:id', passport.authenticate('jwt', { session: false }), asyncHandler(removeWork));
 router.delete('/removeAuthor/:authorId/:workId', passport.authenticate('jwt', { session: false }), asyncHandler(removeAuthor));
@@ -39,9 +43,63 @@ async function getUsers(req, res) {
   }
 }
 
+async function generateReport(req, res) {
+  const user = req.user;
+  if (user.icAdmin) {
+    let users = await adminCtrl.generateReport(req);
+    res.json(users);
+  } else {
+    res.sendStatus(401);
+  }
+}
+
+async function alterUserWorkFile(req, res) {
+  if (req.user.icAdmin) {
+    let response = await adminCtrl.alterUserWorkFile(req);
+    res.json(response);
+  } else {
+    res.sendStatus(401);
+  }
+}
+
 async function deleteByEmail(req, res) {
   if (req.user.icAdmin) {
     let users = await adminCtrl.deleteByEmail(req.params.id);
+    res.json(users);
+  } else {
+    res.sendStatus(401);
+  }
+}
+
+
+async function uploadWork(req, res) {
+  if (req.user.icAdmin) {
+
+    let response = await adminCtrl.submitWork(req);
+
+    if (!response) {
+      console.log('Notificando email submissao');
+      let formulario = JSON.parse(req.body.formulario);
+      for (let i = 0; i < formulario.authors.length; i++) {
+        if (!formulario.authors[i].email) {
+          continue;
+        } else {
+          emailSender.sendMail(formulario.authors[i].email, 'Trabalho Submetido com Sucesso', templateEmail.trabalhoSubmetido);
+        }
+      }
+
+    }
+
+    res.json(response);
+  } else {
+    res.sendStatus(401);
+  }
+}
+
+async function getUsers(req, res) {
+  const user = req.user;
+  if (user.icAdmin || user.coordinator || user.reviewer) {
+    let users = await adminCtrl.getUsers(req);
     res.json(users);
   } else {
     res.sendStatus(401);
