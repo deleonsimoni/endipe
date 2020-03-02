@@ -26,9 +26,9 @@ import { VincularTrabalhosComponent } from './vincular-trabalhos/vincular-trabal
 import { WorkDataComponent } from './work-data/work-data.component';
 import { ModalReviewAdminComponent } from './modals/modal-review-admin/modal-review-admin.component';
 import { SchedulesComponent } from './schedules/schedules.component';
-import { ScheduleCardComponent } from './components/schedule-card/schedule-card.component';
 import { ReviewListWorksComponent } from './review-list-works/review-list-works.component';
 import { ModalReviewReviewerComponent } from './modals/modal-review-reviewer/modal-review-reviewer.component';
+import { GlobalComponentsModule } from '../components/global-components.module';
 
 @NgModule({
     declarations: [
@@ -48,7 +48,6 @@ import { ModalReviewReviewerComponent } from './modals/modal-review-reviewer/mod
         VincularTrabalhosComponent,
         WorkDataComponent,
         SchedulesComponent,
-        ScheduleCardComponent,
         ReviewListWorksComponent,
     ],
     entryComponents: [
@@ -65,6 +64,7 @@ import { ModalReviewReviewerComponent } from './modals/modal-review-reviewer/mod
         PipesModule,
         ModalModule,
         AdminRoutingModule,
+        GlobalComponentsModule,
         UtilNgxMaterialModule
     ],
     exports: [

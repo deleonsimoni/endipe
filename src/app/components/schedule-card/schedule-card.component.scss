@@ -1,0 +1,24 @@
+.schedule-card {
+  background: #50d8af;
+  color: #fff;
+  padding: 12px;
+  border-radius: 4px;
+
+  .hour {
+    margin: 4px 0px;
+    font-size: .85rem;
+    font-weight: 400;
+  }
+
+  .axis {
+    margin: 4px 0px;
+    font-size: .85rem;
+    font-weight: 400;
+  }
+
+  .work {
+    font-weight: 600;
+    font-size: 1rem;
+    margin: 4px 0px;
+  }
+}

@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { AdminService } from '../../admin.service';
+import { AdminService } from '../../admin/admin.service';
 
 @Component({
   // tslint:disable-next-line: component-selector
