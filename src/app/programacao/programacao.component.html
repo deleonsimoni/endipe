@@ -3,23 +3,32 @@
         <div class="section-header">
             <h2>Programação</h2>
         </div>
-        <mat-tab-group>
-            <mat-tab *ngFor="let programacao of programacoes" [label]="programacao.titulo"> {{ programacao.titulo }}
-            </mat-tab>
-        </mat-tab-group>
-        <!-- <div class="col-sm-6 col-md-6 col-lg-6" *ngFor="let programacao of programacoes">
-                <h4 class="title">
-                    {{ programacao.titulo }}
-                </h4>
-                <div class="row">
-                    <div class="col-2" *ngFor="let day of [13, 14, 15]">
-                        <button class="button-filter">{{ day }}</button>
+
+        <mat-tab-group (selectedTabChange)="currentTab($event)">
+            <mat-tab *ngFor="let programacao of programacoes" [label]="programacao.titulo">
+                <div class="container-schedule">
+                    <div class="row mb-3">
+                        <div class="col-12 col-sm-12 col-md-6">
+                            <ul class="nav nav-pills">
+                                <ng-container *ngFor="let day of ['14/07', '15/07', '16/07', '17/07']">
+                                    <li class="nav-item" (click)="daySelected = day"
+                                        [ngClass]="{'activated': daySelected == day}">
+                                        <a class="nav-link">{{ day }}</a>
+                                    </li>
+                                </ng-container>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-6 mb-3" *ngFor="let schedule of (schedules$ | async)">
+                            <schedule-card [schedule]="schedule"></schedule-card>
+                        </div>
                     </div>
                 </div>
-                <schedule-card></schedule-card>
-            </div> -->
-    
-    <!-- <div class="row contact-info" style="text-align: left;cursor: pointer;">
+            </mat-tab>
+        </mat-tab-group>
+
+        <!-- <div class="row contact-info" style="text-align: left;cursor: pointer;">
             <h4 class="title">Visão Geral</h4>
             <table class="table table-responsive table-bordered">
                 <thead>

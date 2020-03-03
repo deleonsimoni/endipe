@@ -1,9 +1,29 @@
-.button-filter {
-    width: 100%;
-    border: 1px transparent;
+.container-schedule {
+  padding: 16px 0px;
+
+  .nav-item {
     background-color: #50d8af;
     color: #fff;
     border-radius: 4px;
-    margin-bottom: 12px;
-    box-shadow: 1px 1px 1px 1px #00000073
+    cursor: pointer;
+
+    &:not(:last-child) {
+      margin-right: 10px;
+    }
+
+    &.activated {
+      background-color: #0c2e8a;
+    }
+  }
+
+  .filter {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: flex-start;
+
+    :last-child {
+      justify-self: flex-end;
+    }
+  }
 }
