@@ -87,6 +87,10 @@ export class AdminService {
     return this.http.get<any>(`${this.baseUrl}/schedule/listAll`);
   }
 
+  public retrieveByFilter(axis, day) {
+    return this.http.get<any>(`${this.baseUrl}/schedule/listByFilter/${axis}/${day.replace('/', '-')}`);
+  }
+
   public deleteSchedule(id) {
     return this.http.delete<any>(`${this.baseUrl}/schedule/deleteSchedule/${id}`);
   }
