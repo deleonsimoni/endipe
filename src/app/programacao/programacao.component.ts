@@ -17,13 +17,20 @@ export class ProgramacaoComponent implements OnInit {
   public schedules$: Observable<any[]>;
   public days = ['14/07', '15/07', '16/07', '17/07'];
   public daySelected$: BehaviorSubject<string> = new BehaviorSubject<string>('14/07');
-  private label: string;
+  public label = 'Abertura';
 
   constructor(
     private adminService: AdminService
   ) {
 
-    this.daySelected$.subscribe(res => console.log(res));
+    this.daySelected$.subscribe(day => {
+      console.log(day);
+      const modality = this.filterModality(this.label);
+
+      if (modality) {
+        this.schedules$ = this.listSchedulesFiltered(modality.id, day);
+      }
+    });
 
   }
 
@@ -39,12 +46,20 @@ export class ProgramacaoComponent implements OnInit {
   public currentTab($event) {
     this.label = $event.tab.textLabel;
 
-    const workType = this.workOptions.find(el => this.formatFilters(this.label).includes(this.formatFilters(el.name).substring(0, 4)));
+    const modality = this.filterModality(this.label);
 
-    if (workType) {
-      this.schedules$ = this.adminService.retrieveByFilter(workType.id, this.daySelected)
-        .pipe(map(res => this.orderByHour(res)));
+    if (modality) {
+      this.schedules$ = this.listSchedulesFiltered(modality.id, this.daySelected$.getValue());
     }
+  }
+
+  private listSchedulesFiltered(modality, day) {
+    return this.adminService.retrieveByFilter(modality, day)
+      .pipe(map(res => this.orderByHour(res)));
+  }
+
+  public filterModality(label) {
+    return this.workOptions.find(el => this.formatFilters(label).includes(this.formatFilters(el.name).substring(0, 4)));
   }
 
   private formatFilters(label): string {
