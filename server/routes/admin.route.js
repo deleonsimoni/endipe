@@ -130,7 +130,7 @@ async function getWorks(req, res) {
   if (user.icAdmin) {
     const works = await adminCtrl.getWorks(req.params.id);
     res.json(works);
-  } if (user.reviewer.icCoordinator) {
+  } if (user.reviewer && user.reviewer.icCoordinator) {
     const works = await adminCtrl.getWorksCoordinator(req.params.id);
     res.json(works);
   } else {

@@ -6,11 +6,20 @@ import { AuthService } from './services/auth.service';
 import { ShareDataService } from './services/share-data.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { trigger, style, animate, transition } from '@angular/animations';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  animations: [
+    trigger('fade', [
+      transition('void => *', [
+        style({ opacity: 0 }),
+        animate(3000, style({ opacity: 1 }))
+      ])
+    ])
+  ]
 })
 export class AppComponent implements OnInit {
 
@@ -47,7 +56,17 @@ export class AppComponent implements OnInit {
 
     this.user = this.auth.getDecodedAccessToken(this.auth.getToken());
     this.verifyUser();
-
+    /*
+        setTimeout(() => {
+          const splashScreen: HTMLElement = document.getElementById('custom-overlay');
+          const menu: HTMLElement = document.getElementById('menu');
+    
+          if (splashScreen) {
+            menu.removeAttribute("style");
+            splashScreen.remove();
+          }
+        }, 4000);
+    */
   }
 
   verifyUser() {

@@ -1,154 +1,152 @@
 <div class="work-content">
-    <div class="not-work" *ngIf="!work">
-        <h6>Nenhum trabalho foi submetido</h6>
+  <div class="not-work" *ngIf="!work">
+    <h6>Nenhum trabalho foi submetido</h6>
+  </div>
+  <div *ngIf="work">
+    <div class="row align-items-center mb-2">
+      <div class="col-md-4">
+        <strong>Título</strong>
+        <p>{{ work.title }}</p>
+      </div>
+      <div class="col-md-4">
+        <strong>Data de submissão</strong>
+        <p>{{ work.createdAt | date: 'dd/MM/yyyy' }}</p>
+      </div>
+      <div class="col-md-4">
+        <strong>Tipo de trabalho</strong>
+        <p>{{ work.typeWork ? (work.typeWork | typeWork) : '---' }}</p>
+      </div>
     </div>
-    <div *ngIf="work">
-        <div class="row align-items-center mb-2">
-            <div class="col-md-4">
-                <strong>Título</strong>
-                <p>{{ work.title }}</p>
-            </div>
-            <div class="col-md-4">
-                <strong>Data de submissão</strong>
-                <p>{{ work.createdAt | date: 'dd/MM/yyyy' }}</p>
-            </div>
-            <div class="col-md-4">
-                <strong>Tipo de trabalho</strong>
-                <p>{{ work.typeWork ? (work.typeWork | typeWork) : '---' }}</p>
-            </div>
-        </div>
-        <div class="row align-items-center mb-2">
-            <div class="col-md-8">
-                <strong>Modalidade</strong>
-                <p>{{ work.modalityId | modalities }}</p>
-            </div>
-            <div class="col-md-4">
-                <strong>Eixo</strong>
-                <p>{{ work.axisId | axis }}</p>
-            </div>
-        </div>
-        <div class="row align-items-center mb-2">
-            <div class="col-md-12">
-                <strong>DOC</strong>
-                <p><a [routerLink]="" (click)="download(work.pathS3PDF)">Download DOC</a>
-                    <div class="custom-file mt-2">
-                        <input type="file" class="custom-file-input"
-                            accept="application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-                            data-max-size="2048" id="customPreReadFile" (change)="setFileNameDOC($event.target.files)"
-                            #fileInput />
-                        <label class="custom-file-label" for="customPreReadFile">{{ getFileNameDOC() }}</label>
-                        <div class="col-md-4">
-                            <button class="btn-primary" (click)="alterarArquivos()">Alterar</button>
-                        </div>
-                    </div>
-            </div>
-        </div>
-        <div class="row align-items-center mb-2">
-            <div class="col-md-12">
-                <strong>PDF</strong>
-                <p><a [routerLink]="" (click)="download(work.pathS3DOC)">Download PDF</a>
-                    <div class="custom-file mt-2">
-                        <input type="file" name="arquivoPDF" class="custom-file-input" accept="application/pdf"
-                            data-max-size="2048" id="customPreReadFile" (change)="setFileNamePDF($event.target.files)"
-                            #fileInput />
-                        <label class="custom-file-label" for="customPreReadFile">{{ getFileNamePDF() }}</label>
-                        <div class="col-md-4">
-                            <button class="btn-primary" (click)="alterarArquivos()">Alterar</button>
-                        </div>
-                    </div>
-            </div>
-        </div>
-        <div class="row align-items-center mb-2">
-            <div class="col-md-12">
-                <strong>{{ work.authors.length > 1 ? 'Autores' : 'Autor' }}</strong>
-                <p *ngFor="let author of work.authors">{{ author.userEmail }}</p>
-            </div>
-        </div>
-        <div *ngIf="user.icAdmin && (work.reviewAdmin || work.reviewers)" class="row align-items-center mb-2">
-            <div class="col-md-12">
-                <strong>Parecerista Administrador
-                    <div *ngIf="work.reviewers">
-                        <p *ngFor="let reviewerCoordinator of work.reviewers">{{ reviewerCoordinator.userEmail }}</p>
-                    </div>
-                </strong>
-
-
-                <hr>
-                <div *ngIf="work.reviewAdmin">
-                    <div>
-                        Parecer: {{ work.reviewAdmin.userEmail }}
-                        <p>
-                            Cabeçalho e rodapé conforme
-                            template - {{work.reviewAdmin.review.question1}}
-                        </p>
-                        <p>
-                            Segue a formatação indicada
-                            para a modalidade - {{work.reviewAdmin.review.question2}}
-                        </p>
-                        <p>
-                            Respeita o número máximo de
-                            autores - {{work.reviewAdmin.review.question3}}
-                        </p>
-                        <p>
-                            Trabalho apto? {{work.reviewAdmin.review.icAllow}}
-                        </p>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div *ngIf="work.reviewReviewer" class="row align-items-center mb-2">
-            <hr />
-            <div class="col-md-12">
-                <strong>Parecer {{work.reviewReviewer.userEmail}}</strong>
-
-                <div *ngIf="work.reviewReviewer.review">
-                    <div>
-                        <p>
-                            Adequação ao eixo e ao evento - {{work.reviewReviewer.review.question1}}
-                        </p>
-                        <p>
-                            Correção textual - {{work.reviewReviewer.review.question2}}
-                        </p>
-                        <p>
-                            Clareza na apresentação - {{work.reviewReviewer.review.question3}}
-                        </p>
-                        <p>
-                            Coerência entre objetivos/metodologia/fundamentação -
-                            {{work.reviewReviewer.review.question4}}
-                        </p>
-                        <p>
-                            Não contém identificação que configura quebra de
-                            anonimato - {{work.reviewReviewer.review.question5}}
-                        </p>
-
-                        <p>
-                            Aprovado - {{work.reviewReviewer.review.icAllow}}
-                        </p>
-
-                        <p>
-                            Justificativa - {{work.reviewReviewer.review.justify}}
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-
-        <div class="row">
-            <div class="col-md-12">
-                <button *ngIf="user.icAdmin" class="add" (click)="addReviewer(work._id)">
-                    <i class="fas fa-plus"></i>
-                    Parecer Admin
-                </button>
-                <button *ngIf="user?.reviewer?.icCoordinator && !work.reviewReviewer" class="add"
-                    (click)="addReviewerCoordinator(work)">
-                    <i class="fas fa-check"></i>
-                    Parecer
-                </button>
-            </div>
-        </div>
+    <div class="row align-items-center mb-2">
+      <div class="col-md-8">
+        <strong>Modalidade</strong>
+        <p>{{ work.modalityId | modalities }}</p>
+      </div>
+      <div class="col-md-4">
+        <strong>Eixo</strong>
+        <p>{{ work.axisId | axis }}</p>
+      </div>
     </div>
+    <div class="row align-items-center mb-2">
+      <div class="col-md-12">
+        <strong>DOC</strong>
+        <p><a [routerLink]="" (click)="download(work.pathS3PDF)">Download DOC</a>
+          <div *ngIf="user.icAdmin" class="custom-file mt-2">
+            <input type="file" class="custom-file-input"
+              accept="application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+              data-max-size="2048" id="customPreReadFile" (change)="setFileNameDOC($event.target.files)" #fileInput />
+            <label class="custom-file-label" for="customPreReadFile">{{ getFileNameDOC() }}</label>
+            <div class="col-md-4">
+              <button class="btn-primary" (click)="alterarArquivos()">Alterar</button>
+            </div>
+          </div>
+      </div>
+    </div>
+    <div class="row align-items-center mb-2">
+      <div class="col-md-12">
+        <strong>PDF</strong>
+        <p><a [routerLink]="" (click)="download(work.pathS3DOC)">Download PDF</a>
+          <div *ngIf="user.icAdmin" class="custom-file mt-2">
+            <input type="file" name="arquivoPDF" class="custom-file-input" accept="application/pdf" data-max-size="2048"
+              id="customPreReadFile" (change)="setFileNamePDF($event.target.files)" #fileInput />
+            <label class="custom-file-label" for="customPreReadFile">{{ getFileNamePDF() }}</label>
+            <div class="col-md-4">
+              <button class="btn-primary" (click)="alterarArquivos()">Alterar</button>
+            </div>
+          </div>
+      </div>
+    </div>
+    <div class="row align-items-center mb-2">
+      <div class="col-md-12">
+        <strong>{{ work.authors.length > 1 ? 'Autores' : 'Autor' }}</strong>
+        <p *ngFor="let author of work.authors">{{ author.userEmail }}</p>
+      </div>
+    </div>
+    <div *ngIf="user.icAdmin && (work.reviewAdmin || work.reviewers)" class="row align-items-center mb-2">
+      <div class="col-md-12">
+        <strong>Parecerista Administrador
+          <div *ngIf="work.reviewers">
+            <p *ngFor="let reviewerCoordinator of work.reviewers">{{ reviewerCoordinator.userEmail }}</p>
+          </div>
+        </strong>
+
+
+        <hr>
+        <div *ngIf="work.reviewAdmin">
+          <div>
+            Parecer: {{ work.reviewAdmin.userEmail }}
+            <p>
+              Cabeçalho e rodapé conforme
+              template - {{work.reviewAdmin.review.question1}}
+            </p>
+            <p>
+              Segue a formatação indicada
+              para a modalidade - {{work.reviewAdmin.review.question2}}
+            </p>
+            <p>
+              Respeita o número máximo de
+              autores - {{work.reviewAdmin.review.question3}}
+            </p>
+            <p>
+              Trabalho apto? {{work.reviewAdmin.review.icAllow}}
+            </p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="work.reviewReviewer" class="row align-items-center mb-2">
+      <hr />
+      <div class="col-md-12">
+        <strong>Parecer {{work.reviewReviewer.userEmail}}</strong>
+
+        <div *ngIf="work.reviewReviewer.review">
+          <div>
+            <p>
+              Adequação ao eixo e ao evento - {{work.reviewReviewer.review.question1}}
+            </p>
+            <p>
+              Correção textual - {{work.reviewReviewer.review.question2}}
+            </p>
+            <p>
+              Clareza na apresentação - {{work.reviewReviewer.review.question3}}
+            </p>
+            <p>
+              Coerência entre objetivos/metodologia/fundamentação -
+              {{work.reviewReviewer.review.question4}}
+            </p>
+            <p>
+              Contém identificação que configura quebra de
+              anonimato - {{work.reviewReviewer.review.question5}}
+            </p>
+
+            <p>
+              Aprovado - {{work.reviewReviewer.review.icAllow}}
+            </p>
+
+            <p>
+              Justificativa - {{work.reviewReviewer.review.justify}}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="row">
+      <div class="col-md-12">
+        <button *ngIf="user.icAdmin" class="add" (click)="addReviewer(work._id)">
+          <i class="fas fa-plus"></i>
+          Parecer Admin
+        </button>
+        <button *ngIf="user?.reviewer?.icCoordinator && !work.reviewReviewer" class="add"
+          (click)="addReviewerCoordinator(work)">
+          <i class="fas fa-check"></i>
+          Parecer
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
