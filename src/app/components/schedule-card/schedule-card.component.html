@@ -2,8 +2,8 @@
     <div class="row">
         <div class="col-12">
             <p class="hour">{{ schedule.hour }}</p>
-            <p class="axis">{{ schedule.axis | axis }}</p>
-            <h4 class="work">{{ schedule.work.title }}</h4>
+            <p class="axis">{{ schedule.axis ? (schedule.axis | axis) : schedule.theme }}</p>
+            <h4 class="work">{{ schedule.work ? schedule.work.title : schedule.title }}</h4>
         </div>
         <!-- <div class="col-sm-1 text-center align-self-center pointer">
             <i class="fa fa-trash" (click)="removeSchedule(schedule._id)"></i>

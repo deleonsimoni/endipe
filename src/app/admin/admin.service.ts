@@ -83,12 +83,12 @@ export class AdminService {
     return this.http.post<any>(`${this.baseUrl}/schedule/insertSchedule`, form);
   }
 
-  public retrieveSchedules() {
-    return this.http.get<any>(`${this.baseUrl}/schedule/listAll`);
-  }
+  // public retrieveSchedules() {
+  //   return this.http.get<any>(`${this.baseUrl}/schedule/listAll`);
+  // }
 
-  public retrieveByFilter(axis, day) {
-    return this.http.get<any>(`${this.baseUrl}/schedule/listByFilter/${axis}/${day.replace('/', '-')}`);
+  public retrieveByFilter(axis) {
+    return this.http.get<any>(`${this.baseUrl}/schedule/listByFilter/${axis}`);
   }
 
   public deleteSchedule(id) {
