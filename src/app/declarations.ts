@@ -90,14 +90,14 @@ export const PROGRAMACOES = [
         titulo: 'Atividades Culturais',
         horarios: []
     },
-    {
-        titulo: 'Minicursos',
-        horarios: []
-    },
-    {
-        titulo: 'Rodas de Conversa',
-        horarios: []
-    },
+    // {
+    //     titulo: 'Minicursos',
+    //     horarios: []
+    // },
+    // {
+    //     titulo: 'Rodas de Conversa',
+    //     horarios: []
+    // },
     {
         titulo: 'Simpósios',
         simposios: [
@@ -481,14 +481,14 @@ export const PROGRAMACOES = [
             }
         ]
     },
-    {
-        titulo: 'Painéis',
-        horarios: []
-    },
-    {
-        titulo: 'Pôsteres',
-        horarios: []
-    },
+    // {
+    //     titulo: 'Painéis',
+    //     horarios: []
+    // },
+    // {
+    //     titulo: 'Pôsteres',
+    //     horarios: []
+    // },
     {
         titulo: 'Sessões especiais',
         sessoes: [

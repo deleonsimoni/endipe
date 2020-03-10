@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { ModalSchedulesComponent } from '../modals/modal-schedules/modal-schedules.component';
 import { AdminService } from '../admin.service';
+import { ScheduleFacade } from 'src/app/facade/schedule.facade';
 
 @Component({
   selector: 'app-schedules',
@@ -14,7 +15,8 @@ export class SchedulesComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog,
-    private adminService: AdminService
+    private scheduleFacade: ScheduleFacade
+    // private adminService: AdminService
   ) { }
 
   ngOnInit() {
@@ -23,11 +25,13 @@ export class SchedulesComponent implements OnInit {
 
   private listAllSchedules() {
 
-    this.adminService.retrieveSchedules()
-      .subscribe((res: any) => {
-        console.log(res);
-        this.schedules = res;
-      });
+    this.scheduleFacade.retrieveSchedule()
+      .subscribe(res => this.schedules = res);
+    // this.adminService.retrieveSchedules()
+    //   .subscribe((res: any) => {
+    //     console.log(res);
+    //     this.schedules = res;
+    //   });
 
   }
 
