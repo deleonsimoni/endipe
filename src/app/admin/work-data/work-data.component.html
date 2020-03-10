@@ -71,7 +71,7 @@
         </strong>
 
 
-        <hr>
+
         <div *ngIf="work.reviewAdmin">
           <div>
             Parecer: {{ work.reviewAdmin.userEmail }}
@@ -95,7 +95,7 @@
         </div>
       </div>
     </div>
-
+    <hr>
     <div *ngIf="work.reviewReviewer" class="row align-items-center mb-2">
       <hr />
       <div class="col-md-12">
@@ -137,12 +137,11 @@
 
     <div class="row">
       <div class="col-md-12">
-        <button *ngIf="user.icAdmin" class="add" (click)="addReviewer(work._id)">
+        <button *ngIf="user.icAdmin" class="add" (click)="addReviewer(work)">
           <i class="fas fa-plus"></i>
           Parecer Admin
         </button>
-        <button *ngIf="user?.reviewer?.icCoordinator && !work.reviewReviewer" class="add"
-          (click)="addReviewerCoordinator(work)">
+        <button *ngIf="user?.reviewer?.icCoordinator" class="add" (click)="addReviewerCoordinator(work)">
           <i class="fas fa-check"></i>
           Parecer
         </button>

@@ -27,25 +27,23 @@ const WorkSchema = new mongoose.Schema({
   mainAuthor: {
     type: String
   },
-  reviewers: [
-    {
-      userId: {
-        type: mongoose.Schema.Types.ObjectId
-      },
-      userEmail: {
-        type: String
-      },
-      review: {
-        icAllow: String,
-        question1: String,
-        question2: String,
-        question3: String,
-        question4: String,
-        question5: String,
-        description: String
-      }
+  reviewers: [{
+    userId: {
+      type: mongoose.Schema.Types.ObjectId
+    },
+    userEmail: {
+      type: String
+    },
+    review: {
+      icAllow: String,
+      question1: String,
+      question2: String,
+      question3: String,
+      question4: String,
+      question5: String,
+      description: String
     }
-  ],
+  }],
   reviewAdmin: {
     userId: {
       type: mongoose.Schema.Types.ObjectId
@@ -67,6 +65,11 @@ const WorkSchema = new mongoose.Schema({
     userEmail: {
       type: String
     },
+
+    isReviewOfCoordinator: {
+      type: Boolean
+    },
+
     review: {
       icAllow: String,
       question1: String,

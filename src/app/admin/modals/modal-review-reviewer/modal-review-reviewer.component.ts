@@ -41,11 +41,14 @@ export class ModalReviewReviewerComponent implements OnInit {
       if (this.reviewForm.controls['icAllow'].value == 'Nao' && !this.reviewForm.controls['justify'].value) {
         this.toastr.error("Atenção", "Preencha o campo de justificativa");
         return
+      } if (this.reviewForm.controls['icAllow'].value == 'Nao' && this.reviewForm.controls['justify'].value && this.reviewForm.controls['justify'].value.length < 250) {
+        this.toastr.error("Atenção", "Preencha a justificativa com ao menos 250 caracteres");
+        return
       } else {
         this.reviewService.reviewReviewer(this.reviewForm.value)
           .subscribe((res: any) => {
             this.toastr.success('Parecer cadastrado com sucesso', 'Sucesso');
-            this.close();
+            this.close(res);
 
           }, err => {
             this.toastr.error('Ocorreu um erro ao cadastrar', 'Atenção:');
@@ -56,6 +59,9 @@ export class ModalReviewReviewerComponent implements OnInit {
       this.toastr.error("Error", "Preencha corretamente o formulario");
     }
 
+  }
+  getLengthJustify() {
+    return this.reviewForm.controls['justify'].value ? this.reviewForm.controls['justify'].value.length : 0;
   }
 
   private createForm() {
@@ -71,8 +77,8 @@ export class ModalReviewReviewerComponent implements OnInit {
     });
   }
 
-  public close(): void {
-    this.dialogRef.close();
+  public close(work): void {
+    this.dialogRef.close(work);
   }
 
 }

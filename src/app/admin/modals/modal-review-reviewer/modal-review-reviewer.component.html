@@ -117,9 +117,10 @@
         <div class="form-group col-md-12">
           <label id="example-radio-group-label">Justificativa?</label>
 
-          <textarea maxlength="255" class="form-control" rows="3" formControlName="justify">
-
+          <textarea maxlength="2000" class="form-control" rows="5" formControlName="justify">
                     </textarea>
+          <span class="pull-right char"><em>{{ getLengthJustify() }} caracteres</em></span>
+
         </div>
       </div>
 

@@ -7,10 +7,17 @@ const router = express.Router();
 module.exports = router;
 
 
-router.post('/admin', passport.authenticate('jwt', { session: false }), asyncHandler(insertAdminReview));
-router.post('/reviewer', passport.authenticate('jwt', { session: false }), asyncHandler(insertReviewerReview));
+router.post('/admin', passport.authenticate('jwt', {
+  session: false
+}), asyncHandler(insertAdminReview));
 
-router.get('/getWorks', passport.authenticate('jwt', { session: false }), asyncHandler(getWorks));
+router.post('/reviewer', passport.authenticate('jwt', {
+  session: false
+}), asyncHandler(insertReviewerReview));
+
+router.get('/getWorks', passport.authenticate('jwt', {
+  session: false
+}), asyncHandler(getWorks));
 
 
 

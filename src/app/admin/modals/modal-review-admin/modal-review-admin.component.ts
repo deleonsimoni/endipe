@@ -25,7 +25,7 @@ export class ModalReviewAdminComponent implements OnInit {
 
   ngOnInit() {
     this.createForm();
-    this.reviewForm.get('workId').patchValue(this.data.workId);
+    this.reviewForm.get('workId').patchValue(this.data.work._id);
   }
 
   public registerReview() {
@@ -34,7 +34,7 @@ export class ModalReviewAdminComponent implements OnInit {
       this.reviewService.cadastrar(this.reviewForm.value)
         .subscribe((res: any) => {
           this.toastr.success('Parecer cadastrado com sucesso', 'Sucesso');
-          this.close();
+          this.close(res);
         }, err => {
           this.toastr.error('Ocorreu um erro ao cadastrar', 'Atenção:');
         });
@@ -53,8 +53,8 @@ export class ModalReviewAdminComponent implements OnInit {
     });
   }
 
-  public close(): void {
-    this.dialogRef.close();
+  public close(work): void {
+    this.dialogRef.close(work);
   }
 
 }

@@ -280,7 +280,7 @@ export const PROGRAMACOES = [
                         tema: 'Biodiversidade em novas epistemologias: perspectivas insurgentes em educação para o/no cuidado de todas as formas de vida',
                         coordenadores: [
                             'Marco Antônio Leandro Barzano (UEFS)',
-                            'Cleonice Puggian (FFP/UERJ)',
+                            'Cleonice Puggian (FEBF/UERJ)',
                             'Lea Tiriba (UNIRIO)',
                             'Coord. Lia Maria Teixeira de Oliveira (UFRRJ)'
                         ],

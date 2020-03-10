@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { DownloadFileService } from 'src/app/services/download-file.service';
 import { MatDialogRef, MatDialog } from '@angular/material';
 import { ModalReviewAdminComponent } from '../modals/modal-review-admin/modal-review-admin.component';
@@ -91,14 +91,15 @@ export class WorkDataComponent implements OnInit {
       });
   }
 
-  public addReviewer(workId) {
+  public addReviewer(work) {
 
     const dialogRef = this.dialog.open(ModalReviewAdminComponent, {
-      data: { workId: workId }
+      data: { work: work }
     });
 
-    //dialogRef.afterClosed().subscribe(() => this.listar());
-
+    dialogRef.afterClosed().subscribe(result => {
+      work.reviewAdmin = result.reviewAdmin;
+    });
   }
 
   public addReviewerCoordinator(work) {
@@ -107,7 +108,9 @@ export class WorkDataComponent implements OnInit {
       data: { work: work }
     });
 
-    //dialogRef.afterClosed().subscribe(() => this.listar());
+    dialogRef.afterClosed().subscribe(result => {
+      work.reviewReviewer = result.reviewReviewer;
+    });
 
   }
 }
