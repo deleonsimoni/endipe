@@ -6,6 +6,7 @@ import { TypeWorkPipe } from './type-work.pipe';
 import { DocPipe } from './doc.pipe';
 import { ContagemModalidadePipe } from './contagem-modalidade.pipe';
 import { CategoryPaymentPipe } from './category-payment.pipe';
+import { ArraySortPipe } from './array-sort.pipe';
 
 @NgModule({
     declarations: [
@@ -15,7 +16,8 @@ import { CategoryPaymentPipe } from './category-payment.pipe';
         TypeWorkPipe,
         DocPipe,
         ContagemModalidadePipe,
-        CategoryPaymentPipe
+        CategoryPaymentPipe,
+        ArraySortPipe
     ],
     exports: [
         MaskCpfPipe,
@@ -24,7 +26,8 @@ import { CategoryPaymentPipe } from './category-payment.pipe';
         TypeWorkPipe,
         DocPipe,
         ContagemModalidadePipe,
-        CategoryPaymentPipe
+        CategoryPaymentPipe,
+        ArraySortPipe
     ],
 })
 export class PipesModule { }

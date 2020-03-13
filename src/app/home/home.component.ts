@@ -436,9 +436,21 @@ export class HomeComponent implements OnInit {
     this.noticiasService.listar()
       .subscribe((res: any) => {
         this.noticias = res;
+
+        this.noticias.forEach(element => {
+          element.description = this.urlify(element.description);
+        });
+
       }, err => {
         this.toastr.error('Ocorreu um erro ao listar noticias', 'Atenção: ');
       });
+  }
+
+  urlify(text) {
+    var urlRegex = /(https?:\/\/[^\s]+)/g;
+    return text.replace(urlRegex, function (url) {
+      return '<a target="_blank" href="' + url + '">' + url + '</a>';
+    })
   }
 
   downloadTemplate(nameFile) {

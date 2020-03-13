@@ -98,7 +98,9 @@ export class WorkDataComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      work.reviewAdmin = result.reviewAdmin;
+      if (result) {
+        work.reviewAdmin = result.reviewAdmin;
+      }
     });
   }
 
@@ -109,7 +111,9 @@ export class WorkDataComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      work.reviewReviewer = result.reviewReviewer;
+      if (result) {
+        work.reviewReviewer = result.reviewReviewer;
+      }
     });
 
   }

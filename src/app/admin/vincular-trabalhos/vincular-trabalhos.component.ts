@@ -3,6 +3,8 @@ import { ToastrService } from 'ngx-toastr';
 import { AdminService } from '../admin.service';
 import { MatDialog } from '@angular/material';
 import { AuthService } from 'src/app/services/auth.service';
+import { TypeWorkPipe } from 'src/app/pipes/type-work.pipe';
+import { AxisPipe } from 'src/app/pipes/axis.pipe';
 
 @Component({
   selector: 'app-vincular-trabalhos',
@@ -27,6 +29,9 @@ export class VincularTrabalhosComponent implements OnInit {
   public status;
   public allWorks = [];
   public modalidadeFilter = 0;
+  gerandoRelatorio = false;
+  public axisPipe = new AxisPipe();
+  public typeWorkPipe = new TypeWorkPipe();
 
   constructor(
     private dialog: MatDialog,
@@ -103,6 +108,7 @@ export class VincularTrabalhosComponent implements OnInit {
 
   }
 
+
   filtraStatusCoordenador() {
 
     switch (Number(this.status)) {
@@ -155,6 +161,72 @@ export class VincularTrabalhosComponent implements OnInit {
     } else {
       this.workSelect = work._id;
     }
+  }
+
+
+  gerarRelatorio(isParecerPositivo) {
+
+    this.gerandoRelatorio = true;
+    let worksRel;
+    let filename;
+
+    if (isParecerPositivo) {
+      worksRel = this.works.filter(element => element.reviewReviewer && element.reviewReviewer.review.icAllow == 'Sim');
+      filename = this.axisPipe.transform(this.axisId) + ' - Parecer Positivo.csv';
+    } else {
+      worksRel = this.works.filter(element => element.reviewReviewer && element.reviewReviewer.review.icAllow == 'Nao');
+      filename = this.axisPipe.transform(this.axisId) + ' - Parecer Negativo.csv';
+    }
+
+
+    this.exportUserToCSV(worksRel, filename, isParecerPositivo);
+
+  }
+
+  public exportUserToCSV(data, fileName, isParecerPositivo) {
+    try {
+
+      let emails;
+
+      const dataExport: any = data.map(work => {
+        emails = [];
+        work.authors.forEach(element => {
+          emails += element.userEmail + "/";
+        });
+
+        return {
+          Eixo: this.axisPipe.transform(work.axisId),
+          Modalidade: this.typeWorkPipe.transform(work.modalityId),
+          Titulo: work.title,
+          Autores: emails,
+          ParecerPositivo: isParecerPositivo ? 'Sim' : 'Não'
+        }
+      });
+
+
+      const replacer = (key, value) => value === null ? '' : value; // specify how you want to handle null values here
+      const header = Object.keys(dataExport[0]);
+      let csv = dataExport.map(row => header.map(fieldName => JSON.stringify(row[fieldName], replacer)).join(';'));
+      csv.unshift(header.join(';'));
+      let csvArray = csv.join('\r\n');
+
+      var a = document.createElement('a');
+      var blob = new Blob(["\ufeff" + csvArray], { type: 'text/csv; charset=utf-8' }),
+        url = window.URL.createObjectURL(blob);
+
+      a.href = url;
+      a.download = fileName;
+      a.click();
+      window.URL.revokeObjectURL(url);
+      a.remove();
+      this.gerandoRelatorio = false;
+    } catch (error) {
+
+      this.gerandoRelatorio = false;
+
+    }
+
+
   }
 
 

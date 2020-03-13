@@ -1,56 +1,64 @@
 <div class="form">
 
 
-    <div *ngIf="user.icAdmin">
-        Selecione o eixo
-        <select class="form-control" (change)="loadData()" placeholder="Eixo" id="opt" [(ngModel)]="axisId">
-            <option *ngFor="let eixo of eixos" [value]="eixo.id">{{ eixo.name }}
-            </option>
-        </select>
+  <div *ngIf="user.icAdmin">
+    Selecione o eixo
+    <select class="form-control" (change)="loadData()" placeholder="Eixo" id="opt" [(ngModel)]="axisId">
+      <option *ngFor="let eixo of eixos" [value]="eixo.id">{{ eixo.name }}
+      </option>
+    </select>
+  </div>
+
+
+  <div *ngIf="!user.icAdmin">
+    Eixo <strong>{{axisId | axis}}</strong>
+  </div>
+
+  <hr />
+
+  <div class="row" *ngIf="allWorks.length > 0 && user">
+    Total de {{works.length}} trabalhos
+    <br />{{works | contagemModalidade}}
+
+    <div class="col-md-12">
+      Filtro de Pesquisa
+      <select class="form-control" [(ngModel)]="status" (change)="filtrarStatus()">
+        <option value="0">Todos Pareceres</option>
+        <option value="1">Parecer pendente</option>
+        <option value="2">Parecer negativo</option>
+        <option value="3">Parecer positivo</option>
+      </select>
+      <select class="form-control" [(ngModel)]="modalidadeFilter" (change)="filtrarModalidade()">
+        <option value="0">Todas Modalidades</option>
+        <option value="3">Pôster</option>
+        <option value="5">Painel</option>
+        <option value="4">Mini Curso</option>
+        <option value="2">Roda de Conversa</option>
+
+      </select>
     </div>
 
-
-    <div *ngIf="!user.icAdmin">
-        Eixo <strong>{{axisId | axis}}</strong>
+    <div *ngIf="user.icAdmin && modalidadeFilter == 0" style="padding-left: 30px;" class="mt-4">
+      <div class="row" *ngIf="!gerandoRelatorio">
+        <button class="col-xs-6 btn-primary mr-4" (click)="gerarRelatorio(true)">Gerar Relatório - Parecer
+          Positivo</button>
+        <button class="col-xs-6 btn-primary" (click)="gerarRelatorio(false)">Gerar Relatório - Parecer Negativo</button>
+      </div>
     </div>
-
     <hr />
+  </div>
+  <br />
 
-    <div class="row" *ngIf="allWorks.length > 0 && user">
-        Total de {{works.length}} trabalhos
-        <br />{{works | contagemModalidade}}
+  <div *ngFor="let work of works; let i = index" [ngClass]="{'mb-3': works.length > 1}">
+    <work-card [work]="work" [reviewers]="reviewers" (selected)="receiverSelectedWork($event)">
+    </work-card>
 
-        <div class="col-md-12">
-            Filtro de Pesquisa
-            <select class="form-control" [(ngModel)]="status" (change)="filtrarStatus()">
-                <option value="0">Todos Pareceres</option>
-                <option value="1">Parecer pendente</option>
-                <option value="2">Parecer negativo</option>
-                <option value="3">Parecer positivo</option>
-            </select>
-            <select class="form-control" [(ngModel)]="modalidadeFilter" (change)="filtrarModalidade()">
-                <option value="0">Todas Modalidades</option>
-                <option value="3">Pôster</option>
-                <option value="5">Painel</option>
-                <option value="4">Mini Curso</option>
-                <option value="2">Roda de Conversa</option>
+    <app-work-data [work]="work" [user]="user" *ngIf="work && work._id == workSelect">
+    </app-work-data>
+  </div>
 
-            </select>
-        </div>
-        <hr />
-    </div>
-    <br />
-
-    <div *ngFor="let work of works; let i = index" [ngClass]="{'mb-3': works.length > 1}">
-        <work-card [work]="work" [reviewers]="reviewers" (selected)="receiverSelectedWork($event)">
-        </work-card>
-
-        <app-work-data [work]="work" [user]="user" *ngIf="work && work._id == workSelect">
-        </app-work-data>
-    </div>
-
-    <div *ngIf="works.length == 0">
-        <h4>Não há trabalhos para este eixo</h4>
-    </div>
+  <div *ngIf="works.length == 0">
+    <h4>Não há trabalhos para este eixo</h4>
+  </div>
 
 </div>
