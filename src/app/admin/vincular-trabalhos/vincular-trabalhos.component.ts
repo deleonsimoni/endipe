@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material';
 import { AuthService } from 'src/app/services/auth.service';
 import { TypeWorkPipe } from 'src/app/pipes/type-work.pipe';
 import { AxisPipe } from 'src/app/pipes/axis.pipe';
+import { TypeWorkRelatorioPipe } from 'src/app/pipes/type-work-relatorio.pipe';
 
 @Component({
   selector: 'app-vincular-trabalhos',
@@ -31,7 +32,7 @@ export class VincularTrabalhosComponent implements OnInit {
   public modalidadeFilter = 0;
   gerandoRelatorio = false;
   public axisPipe = new AxisPipe();
-  public typeWorkPipe = new TypeWorkPipe();
+  public TypeWorkRelatorioPipe = new TypeWorkRelatorioPipe();
 
   constructor(
     private dialog: MatDialog,
@@ -196,7 +197,7 @@ export class VincularTrabalhosComponent implements OnInit {
 
         return {
           Eixo: this.axisPipe.transform(work.axisId),
-          Modalidade: this.typeWorkPipe.transform(work.modalityId),
+          Modalidade: this.TypeWorkRelatorioPipe.transform(work.modalityId),
           Titulo: work.title,
           Autores: emails,
           ParecerPositivo: isParecerPositivo ? 'Sim' : 'Não'
@@ -221,7 +222,7 @@ export class VincularTrabalhosComponent implements OnInit {
       a.remove();
       this.gerandoRelatorio = false;
     } catch (error) {
-
+      console.error(error);
       this.gerandoRelatorio = false;
 
     }

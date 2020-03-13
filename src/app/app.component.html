@@ -42,13 +42,23 @@
                   <li><a [routerLink]="['/home']" fragment="comiteCientifico">Comitê
                       Científico</a></li>
                   <li><a [routerLink]="['/home']" fragment="parcerias">Parcerias</a></li>
-                  <li><a [routerLink]="['/home']" fragment="Abertura">Conferencistas</a></li>
                   <li><a [routerLink]="['/home']" fragment="contact">Contato</a></li>
                 </ul>
               </li>
               <li class="menu-has-children pointer">
-                <a [routerLink]="['/home']" fragment="programacao">PROGRAMAÇÃO</a>
               </li>
+
+              <li class="menu-has-children pointer">
+                <a>PROGRAMAÇÃO <i class="fa fa-chevron-down"></i></a>
+                <ul>
+                  <a [routerLink]="['/home']" fragment="programacao">Programação</a>
+                  <li><a [routerLink]="['/home']" fragment="Abertura">Conferencistas</a></li>
+
+                </ul>
+              </li>
+
+
+
               <li class="menu-has-children pointer">
                 <a>SUBMISSÃO <i class="fa fa-chevron-down"></i></a>
                 <ul>
