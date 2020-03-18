@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { PROGRAMACOES, WORK_OPTIONS } from '../declarations';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { ScheduleFacade } from '../facade/schedule.facade';
 import { MatDialog } from '@angular/material';
 import { ModalSessoesEspeciaisComponent } from '../modal-sessoes-especiais/modal-sessoes-especiais.component';
@@ -20,7 +20,7 @@ export class ProgramacaoComponent implements OnInit {
 
   public workModalities = WORK_OPTIONS;
   public programacoes = PROGRAMACOES;
-  public schedules$: Observable<any[]>;
+  public schedules$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
   public days = ['14/07', '15/07', '16/07', '17/07'];
   public daySelected$: BehaviorSubject<string> = new BehaviorSubject<string>('14/07');
   public label = 'Pôster';
@@ -37,18 +37,16 @@ export class ProgramacaoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.schedules$ = this.scheduleFacade.retrieveSchedule();
+    this.scheduleFacade.retrieveSchedule()
+      .subscribe(data => this.schedules$.next(data));
   }
 
   public currentTab($event) {
     this.label = $event.tab.textLabel;
 
-    this.schedules$ = this.scheduleFacade.retrieveSchedule(this.label);
+    this.scheduleFacade.retrieveSchedule(this.label)
+      .subscribe(data => this.schedules$.next(data));
   }
-
-  // private listSchedulesFiltered(modality, day) {
-  //   return this.scheduleFacade.retrieveSchedule(modality, day);
-  // }
 
   public selectDay(day) {
     this.daySelected$.next(day);

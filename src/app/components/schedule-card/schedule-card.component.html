@@ -1,12 +1,14 @@
 <div class="schedule-card">
-    <div class="row">
-        <div class="col-12">
+    <div class="row align-items-center">
+        <div [ngClass]="{'col-12 col-sm-12': !delete, 'col-10 col-sm-10 border-right': delete}">
             <p class="hour">{{ schedule.hour }}</p>
             <p class="axis">{{ schedule.axis ? (schedule.axis | axis) : schedule.theme }}</p>
             <h4 class="work">{{ schedule.work ? schedule.work.title : schedule.title }}</h4>
         </div>
-        <!-- <div class="col-sm-1 text-center align-self-center pointer">
-            <i class="fa fa-trash" (click)="removeSchedule(schedule._id)"></i>
-        </div> -->
+        <ng-container *ngIf="delete">
+            <div class="col-2 col-sm-2 text-center pointer">
+                <i class="fa fa-trash" (click)="removeSchedule(schedule._id)"></i>
+            </div>
+        </ng-container>
     </div>
 </div>

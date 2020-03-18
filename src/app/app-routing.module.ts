@@ -16,7 +16,7 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'programacao'
+    redirectTo: 'admin/programacao'
   },
   {
     path: 'home',

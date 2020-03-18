@@ -100,7 +100,7 @@
         </div>
 
         <mat-tab-group (selectedTabChange)="currentTab($event)">
-            <mat-tab *ngFor="let workModality of workModalities" [label]="workModality.name">
+            <mat-tab *ngFor="let workModality of programacoes" [label]="workModality.name">
                 <div class="container-schedule">
                     <div class="row mb-3">
                         <div class="col-12 col-sm-12 col-md-6">
@@ -115,16 +115,19 @@
                         </div>
                     </div>
                     <div class="row">
-                        <ng-container *ngIf="(schedules$ | async).length > 0">
+                        <div class="col-12 col-sm-12 col-md-6 mb-3">
+                            <opening-schedule-card [programation]="workModality"></opening-schedule-card>
+                        </div>
+                        <!-- <ng-container *ngIf="(schedules$ | async)?.length > 0">
                             <div class="col-12 col-sm-12 col-md-6 mb-3" *ngFor="let schedule of (schedules$ | async)">
-                                <schedule-card [schedule]="schedule"></schedule-card>
+                                <schedule-card [schedule]="schedule" [delete]="false"></schedule-card>
                             </div>
                         </ng-container>
-                        <ng-container *ngIf="(schedules$ | async).length < 1">
+                        <ng-container *ngIf="(schedules$ | async)?.length < 1">
                             <div class="not-schedule">
                                 Não há programação para esse dia
                             </div>
-                        </ng-container>
+                        </ng-container> -->
                     </div>
                 </div>
             </mat-tab>

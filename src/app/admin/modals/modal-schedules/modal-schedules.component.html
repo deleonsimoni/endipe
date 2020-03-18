@@ -14,6 +14,19 @@
                         <select class="form-control" id="axis" formControlName="axis">
                             <option disabled="true" [selected]="true">Selecione
                                 o eixo</option>
+                            <option *ngFor="let item of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]" [value]="item">lorem
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <ng-container *ngIf="axis == 1">
+                    <generic-form></generic-form>
+                </ng-container>
+                <!-- <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <select class="form-control" id="axis" formControlName="axis">
+                            <option disabled="true" [selected]="true">Selecione
+                                o eixo</option>
                             <option *ngFor="let eixo of axisCollection" [value]="eixo.id">
                                 {{ eixo.name }}
                             </option>
@@ -42,16 +55,22 @@
                         </select>
                     </div>
                     <div class="form-group col-md-6">
-                        <input type="text" class="form-control" name="time" id="time" placeholder="Adicione o horário"
-                            formControlName="hour" />
+                        <input type="time" min="08:00" max="21:00" class="form-control" name="hour" id="hour"
+                            placeholder="Adicione o horário" formControlName="hour" />
                     </div>
                 </div>
-                <div class="form-row" *ngIf="day && hour">
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <input type="text" name="address" class="form-control" id="address"
+                            placeholder="Adicione o endereço" formControlName="address" />
+                    </div>
+                </div>
+                <div class="form-row" *ngIf="(day && hour && address)">
                     <div class="form-group col-md-12">
                         <input type="text" name="room" class="form-control" id="room" placeholder="Adicione a sala"
                             formControlName="room" />
                     </div>
-                </div>
+                </div> -->
                 <div class="row justify-content-center">
                     <button class="btn-get-started" type="submit">Submeter</button>
                 </div>

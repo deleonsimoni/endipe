@@ -1,0 +1,50 @@
+<div [formGroup]="form">
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <label for="theme">Tema</label>
+            <input type="text" class="form-control" formControlName="theme" name="theme">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <label for="titles">Título(s)</label>
+            <div formArrayName="titles" *ngFor="let item of titles; let i = index">
+                <input type="text" class="form-control" [formControlName]="i">
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="startTime">Horário início</label>
+            <input type="time" class="form-control" formControlName="startTime" name="startTime">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="endTime">Horário fim</label>
+            <input type="time" class="form-control" formControlName="endTime" name="endTime">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="date">Data</label>
+            <input type="text" class="form-control" formControlName="date" name="date">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <label for="place">Local</label>
+            <input type="text" class="form-control" formControlName="place" name="place">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <label for="address">Endereço</label>
+            <input type="text" class="form-control" formControlName="address" name="address">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <label for="titles">Coordenadores(s)</label>
+            <div formArrayName="coordinators" *ngFor="let item of coordinators; let i = index">
+                <input type="text" class="form-control" [formControlName]="i">
+            </div>
+        </div>
+    </div>
+</div>

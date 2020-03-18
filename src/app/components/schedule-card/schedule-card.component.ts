@@ -10,11 +10,16 @@ import { AdminService } from '../../admin/admin.service';
 export class ScheduleCardComponent {
 
   @Input() schedule: any;
+  @Input() delete: boolean;
   @Output() update: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(
     private adminService: AdminService
-  ) { }
+  ) {
+
+    console.log(this.schedule);
+
+  }
 
   public removeSchedule(id) {
     this.adminService.deleteSchedule(id)

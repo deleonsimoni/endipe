@@ -53,8 +53,8 @@ import { ModalTurismoComponent } from './modal-turismo/modal-turismo.component';
 import { ModalConferencistasComponent } from './modal-conferencistas/modal-conferencistas.component';
 import { ModalEncerramentoComponent } from './modal-encerramento/modal-encerramento.component';
 import { ModalAberturaComponent } from './modal-abertura/modal-abertura.component';
-import { ProgramacaoComponent } from './programacao/programacao.component';
 import { GlobalComponentsModule } from './components/global-components.module';
+import { ProgramacaoModule } from './programacao/programacao.module';
 
 @NgModule({
   declarations: [
@@ -90,8 +90,7 @@ import { GlobalComponentsModule } from './components/global-components.module';
     ModalTurismoComponent,
     ModalConferencistasComponent,
     ModalEncerramentoComponent,
-    ModalAberturaComponent,
-    ProgramacaoComponent,
+    ModalAberturaComponent
   ],
   imports: [
     BrowserModule,
@@ -111,6 +110,7 @@ import { GlobalComponentsModule } from './components/global-components.module';
     ToastrModule.forRoot(),
     AccordionModule.forRoot(),
     AdminModule,
+    ProgramacaoModule,
     GlobalComponentsModule,
     PipesModule
   ],

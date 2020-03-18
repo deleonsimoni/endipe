@@ -13,7 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 export class ModalSchedulesComponent implements OnInit {
 
   public days = [
-    '14', '15', '16', '17'
+    '14/07', '15/07', '16/07', '17/07'
   ];
   public axisCollection = AXIS;
   public works = [];
@@ -31,6 +31,7 @@ export class ModalSchedulesComponent implements OnInit {
       work: [null, Validators.required],
       day: [null, Validators.required],
       hour: [null, Validators.required],
+      address: [null, Validators.required],
       room: [null, Validators.required]
     });
 
@@ -75,7 +76,6 @@ export class ModalSchedulesComponent implements OnInit {
 
   private removeValues(item) {
     this.scheduleForm.get('work').setValue({ title: item.title, modalityId: item.modalityId });
-    console.log(this.scheduleForm.controls);
     return false;
   }
 
@@ -101,6 +101,11 @@ export class ModalSchedulesComponent implements OnInit {
   public get hour() {
     const { hour } = this.scheduleForm.getRawValue();
     return hour;
+  }
+
+  public get address() {
+    const { address } = this.scheduleForm.getRawValue();
+    return address;
   }
 
   public get room() {

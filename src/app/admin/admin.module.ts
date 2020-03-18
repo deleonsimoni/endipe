@@ -29,6 +29,7 @@ import { SchedulesComponent } from './schedules/schedules.component';
 import { ReviewListWorksComponent } from './review-list-works/review-list-works.component';
 import { ModalReviewReviewerComponent } from './modals/modal-review-reviewer/modal-review-reviewer.component';
 import { GlobalComponentsModule } from '../components/global-components.module';
+import { ModalSchedulesModule } from './modals/modal-schedules/modal-schedules.module';
 
 @NgModule({
     declarations: [
@@ -63,6 +64,7 @@ import { GlobalComponentsModule } from '../components/global-components.module';
         ToastrModule.forRoot(),
         PipesModule,
         ModalModule,
+        ModalSchedulesModule,
         AdminRoutingModule,
         GlobalComponentsModule,
         UtilNgxMaterialModule
