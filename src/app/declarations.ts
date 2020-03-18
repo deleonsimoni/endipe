@@ -32,6 +32,22 @@ export const WORK_OPTIONS = [
     { id: 4, name: 'Roda de conversa' }
 ];
 
+export const SCHEDULE_TYPE = [
+    { id: 1, name: 'Abertura' },
+    { id: 2, name: 'Minicursos' },
+    { id: 3, name: 'Simpósios' },
+    { id: 4, name: 'Pôsteres' },
+    { id: 5, name: 'Lançamento de Livros' },
+    { id: 6, name: 'Conferencistas' },
+    { id: 7, name: 'Atividade Culturais' },
+    { id: 8, name: 'Rodas de Conversa' },
+    { id: 9, name: 'Painéis' },
+    { id: 10, name: 'Sessões Especiais' },
+    { id: 11, name: 'Roda Reuniões de Entidades e de Redes' },
+    { id: 12, name: 'Encerramento' }
+
+];
+
 export const PROGRAMACOES = [
     {
         titulo: 'Abertura',
@@ -45,7 +61,7 @@ export const PROGRAMACOES = [
                 titulos: [
                     'Chegada, acolhimento e acomodação',
                     'Abertura Oficial'
-                ]
+                ],
             },
             {
                 horario: '18:00',
@@ -488,7 +504,8 @@ export const PROGRAMACOES = [
                             'Leda Sheibe (UFSC)',
                             'Mediação: Vania Leite (UERJ/FFP)'
                         ],
-                        local: ''
+                        local: '',
+
                     },
                     {
                         tema: 'Didática, Escola e a luta democrática',
