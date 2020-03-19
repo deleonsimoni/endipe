@@ -4,6 +4,7 @@ import { AXIS, SCHEDULE_TYPE } from '../../../declarations';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { AdminService } from '../../admin.service';
 import { ToastrService } from 'ngx-toastr';
+import { ScheduleService } from 'src/app/services/schedule.service';
 
 @Component({
   selector: 'app-modal-schedules',
@@ -26,7 +27,8 @@ export class ModalSchedulesComponent implements OnInit {
     private dialog: MatDialogRef<ModalSchedulesComponent>,
     private builder: FormBuilder,
     private adminService: AdminService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private scheduleService: ScheduleService
   ) {
 
     // this.scheduleForm = this.builder.group({
@@ -53,16 +55,16 @@ export class ModalSchedulesComponent implements OnInit {
 
   ngOnInit() { }
 
-  private listAllWorks(axis) {
-    this.adminService.retrieveAllWorks(axis)
-      .subscribe(works => {
-        if (works.temErro) {
-          this.toastr.error('Erro', works);
-        } else {
-          this.works = works;
-        }
-      });
-  }
+  // private listAllWorks(axis) {
+  //   this.adminService.retrieveAllWorks(axis)
+  //     .subscribe(works => {
+  //       if (works.temErro) {
+  //         this.toastr.error('Erro', works);
+  //       } else {
+  //         this.works = works;
+  //       }
+  //     });
+  // }
 
   // public registerSchedule() {
 
@@ -103,6 +105,15 @@ export class ModalSchedulesComponent implements OnInit {
     }
 
     return false;
+  }
+
+  public sendSchedule(event) {
+    console.log(event);
+
+    this.scheduleService.registerSchedule(this.axis.value, event.data)
+      .subscribe(res => {
+        console.log(res)
+      });
   }
 
   // public get axis() {

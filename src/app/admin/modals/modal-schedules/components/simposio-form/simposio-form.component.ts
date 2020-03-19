@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { ScheduleService } from 'src/app/services/schedule.service';
 
@@ -9,12 +9,13 @@ import { ScheduleService } from 'src/app/services/schedule.service';
 })
 export class SimposioFormComponent {
 
-    public form: FormGroup;
     @Input() type: number;
+    @Output() submitForm: EventEmitter<any> = new EventEmitter<any>();
+
+    public form: FormGroup;
 
     constructor(
-        private builder: FormBuilder,
-        private scheduleService: ScheduleService
+        private builder: FormBuilder
     ) {
         this.createForm();
     }
@@ -57,9 +58,7 @@ export class SimposioFormComponent {
     }
 
     public submitSchedule() {
-        console.log(this.form.value);
-        this.scheduleService.registerSchedule(this.type, this.form.getRawValue())
-            .subscribe(res => console.log(res));
+        this.submitForm.emit({ data: this.form.getRawValue() });
     }
 
 }

@@ -1,50 +1,81 @@
-<div [formGroup]="form">
+<div [formGroup]="form" class="form">
     <div class="form-row">
         <div class="form-group col-md-12">
-            <label for="theme">Tema</label>
+            <label for="theme" class="label">Tema</label>
             <input type="text" class="form-control" formControlName="theme" name="theme">
         </div>
     </div>
     <div class="form-row">
         <div class="form-group col-md-12">
-            <label for="titles">Título(s)</label>
+            <label for="titles" class="label">Título(s)</label>
             <div formArrayName="titles" *ngFor="let item of titles; let i = index">
-                <input type="text" class="form-control" [formControlName]="i">
+                <div class="row justify-content-center mb-1">
+                    <div class="align-items-center" [ngClass]="{'col-md-11': i > 0, 'col-md-12': i < 1}">
+                        <input type="text" class="form-control" [formControlName]="i">
+                    </div>
+                    <div class="col-md-1 align-items-center icon" *ngIf="i > 0">
+                        <button type="button" (click)="removeTitles(i)">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
+        <button type="button" class="add-titles" (click)="addTitles()">
+            <i class="fa fa-plus"></i>
+            Títulos
+        </button>
     </div>
     <div class="form-row">
         <div class="form-group col-md-4">
-            <label for="startTime">Horário início</label>
+            <label for="startTime" class="label">Horário início</label>
             <input type="time" class="form-control" formControlName="startTime" name="startTime">
         </div>
         <div class="form-group col-md-4">
-            <label for="endTime">Horário fim</label>
+            <label for="endTime" class="label">Horário fim</label>
             <input type="time" class="form-control" formControlName="endTime" name="endTime">
         </div>
         <div class="form-group col-md-4">
-            <label for="date">Data</label>
+            <label for="date" class="label">Data</label>
             <input type="text" class="form-control" formControlName="date" name="date">
         </div>
     </div>
     <div class="form-row">
         <div class="form-group col-md-12">
-            <label for="place">Local</label>
+            <label for="place" class="label">Local</label>
             <input type="text" class="form-control" formControlName="place" name="place">
         </div>
     </div>
     <div class="form-row">
         <div class="form-group col-md-12">
-            <label for="address">Endereço</label>
+            <label for="address" class="label">Endereço</label>
             <input type="text" class="form-control" formControlName="address" name="address">
         </div>
     </div>
     <div class="form-row">
         <div class="form-group col-md-12">
-            <label for="titles">Coordenadores(s)</label>
-            <div formArrayName="coordinators" *ngFor="let item of coordinators; let i = index">
-                <input type="text" class="form-control" [formControlName]="i">
+            <label for="coordinators" class="label">Coordenadores(s)</label>
+            <div class="mb-2" formArrayName="coordinators" *ngFor="let item of coordinators; let i = index">
+                <div class="row justify-content-center">
+                    <div class="align-items-center" [ngClass]="{'col-md-11': i > 0, 'col-md-12': i < 1}">
+                        <input type="text" class="form-control" [formControlName]="i">
+                    </div>
+                    <div class="col-md-1 align-items-center icon" *ngIf="i > 0">
+                        <button type="button" (click)="removeCoordinator(i)">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
             </div>
+        </div>
+        <button type="button" class="add-coordinator" (click)="addCoordinator()">
+            <i class="fa fa-plus"></i>
+            Coordenadores
+        </button>
+    </div>
+    <div class="form-row">
+        <div class="col-md-12">
+            <button class="btn-get-started" type="button" (click)="submitSchedule()">SUBMETER PROGRAMAÇÃO</button>
         </div>
     </div>
 </div>
