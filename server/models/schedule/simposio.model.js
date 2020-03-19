@@ -28,10 +28,10 @@ const ScheduleSchema = new mongoose.Schema({
   address: {
     type: String,
   },
-  theme: {
-    type: Number,
+  themeSpeeches: {
+    type: String,
   },
-  themeType: {
+  theme: {
     type: Number,
   },
   date: {
