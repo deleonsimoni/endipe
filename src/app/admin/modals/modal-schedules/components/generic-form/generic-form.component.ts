@@ -1,5 +1,5 @@
-import { Component, AfterViewInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
     // tslint:disable-next-line: component-selector
@@ -7,7 +7,7 @@ import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
     templateUrl: './generic-form.component.html',
     styleUrls: ['./generic-form.component.scss']
 })
-export class GenericFormComponent implements AfterViewInit {
+export class GenericFormComponent {
 
     public form: FormGroup;
 
@@ -15,10 +15,6 @@ export class GenericFormComponent implements AfterViewInit {
         private builder: FormBuilder
     ) {
         this.createForm();
-    }
-
-    ngAfterViewInit() {
-        this.form.valueChanges.subscribe(res => console.log(res));
     }
 
     private createForm() {

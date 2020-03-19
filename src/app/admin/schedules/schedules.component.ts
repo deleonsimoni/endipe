@@ -36,7 +36,9 @@ export class SchedulesComponent implements OnInit {
   }
 
   public addSchedule() {
-    const dialogRef = this.dialog.open(ModalSchedulesComponent);
+    const dialogRef = this.dialog.open(ModalSchedulesComponent, {
+      maxHeight: '100vh'
+    });
 
     dialogRef.afterClosed().subscribe(res => this.listAllSchedules());
   }

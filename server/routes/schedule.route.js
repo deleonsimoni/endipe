@@ -88,7 +88,7 @@ async function listSchedule(req, res) {
 
 async function insertSchedule(req, res) {
 
-  if (!user.icAdmin) {
+  if (!req.user.icAdmin) {
     res.sendStatus(401);
   } else {
     req.body.user = req.user._id;
@@ -145,7 +145,7 @@ async function insertSchedule(req, res) {
 
 async function updateSchedule(req, res) {
 
-  if (!user.icAdmin) {
+  if (!req.user.icAdmin) {
     res.sendStatus(401);
   } else {
     req.body.user = req.user._id;
@@ -202,7 +202,7 @@ async function updateSchedule(req, res) {
 
 async function deleteSchedule(req, res) {
 
-  if (!user.icAdmin) {
+  if (!req.user.icAdmin) {
     res.sendStatus(401);
   } else {
     let schedules;

@@ -3,11 +3,13 @@ import { GenericFormComponent } from './components/generic-form/generic-form.com
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalSchedulesComponent } from './modal-schedules.component';
+import { SimposioFormComponent } from './components/simposio-form/simposio-form.component';
 
 @NgModule({
     declarations: [
         ModalSchedulesComponent,
-        GenericFormComponent
+        GenericFormComponent,
+        SimposioFormComponent
     ],
     entryComponents: [
         ModalSchedulesComponent
@@ -19,7 +21,8 @@ import { ModalSchedulesComponent } from './modal-schedules.component';
     ],
     exports: [
         ModalSchedulesComponent,
-        GenericFormComponent
+        GenericFormComponent,
+        SimposioFormComponent
     ]
 })
 export class ModalSchedulesModule { }

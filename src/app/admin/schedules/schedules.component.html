@@ -1,6 +1,5 @@
 <div>
     <div *ngFor="let schedule of schedules; let i = index" [ngClass]="{'mb-3': schedules.length > 1}">
-        {{ schedule | json }}
         <schedule-card (update)="updateList($event)" [schedule]="schedule" [delete]="true"></schedule-card>
     </div>
 
