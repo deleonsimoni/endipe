@@ -4,12 +4,16 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalSchedulesComponent } from './modal-schedules.component';
 import { SimposioFormComponent } from './components/simposio-form/simposio-form.component';
+import { UtilNgxMaterialModule } from 'src/app/util-ngx-material/util-ngx-material.module';
+import { BsDatepickerModule } from 'ngx-bootstrap';
+import { WorkScheduleFormComponent } from './components/work-schedule-form/work-schedule-form.component';
 
 @NgModule({
     declarations: [
         ModalSchedulesComponent,
         GenericFormComponent,
-        SimposioFormComponent
+        SimposioFormComponent,
+        WorkScheduleFormComponent
     ],
     entryComponents: [
         ModalSchedulesComponent
@@ -17,12 +21,14 @@ import { SimposioFormComponent } from './components/simposio-form/simposio-form.
     imports: [
         CommonModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        BsDatepickerModule.forRoot()
     ],
     exports: [
         ModalSchedulesComponent,
         GenericFormComponent,
-        SimposioFormComponent
+        SimposioFormComponent,
+        WorkScheduleFormComponent
     ]
 })
 export class ModalSchedulesModule { }

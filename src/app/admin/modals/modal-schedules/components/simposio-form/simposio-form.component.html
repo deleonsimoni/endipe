@@ -2,18 +2,8 @@
     <div class="form-row">
         <div class="form-group col-md-12">
             <label for="theme" class="label">Tema</label>
-            <select class="form-control" name="theme" id="theme" formControlName="themeSpeeches">
-                <option value="x">lorem ispum</option>
-                <option value="x">lorem ispum</option>
-            </select>
-        </div>
-    </div>
-    <div class="form-row">
-        <div class="form-group col-md-12">
-            <label for="type" class="label">Tipo</label>
-            <select class="form-control" name="type" id="type" formControlName="type">
-                <option value="x">lorem ispum</option>
-                <option value="x">lorem ispum</option>
+            <select class="form-control" name="theme" id="theme" formControlName="theme">
+                <option *ngFor="let item of themes" [value]="item.id">{{ item.name }}</option>
             </select>
         </div>
     </div>
@@ -28,7 +18,8 @@
         </div>
         <div class="form-group col-md-4">
             <label for="date" class="label">Data</label>
-            <input type="text" class="form-control" formControlName="date" name="date">
+            <input type="text" class="form-control" formControlName="date" name="date" bsDatepicker
+                [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD/MM/YYYY' }" autocomplete="false">
         </div>
     </div>
     <div class="form-row">
@@ -52,7 +43,7 @@
     <div class="form-row">
         <div class="form-group col-md-12">
             <label for="theme" class="label">Tema da palestra</label>
-            <input type="text" class="form-control" formControlName="theme" name="theme">
+            <input type="text" class="form-control" formControlName="themeSpeeches" name="theme">
         </div>
     </div>
     <div class="form-row">

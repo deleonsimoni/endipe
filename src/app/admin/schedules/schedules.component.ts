@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material';
 import { ModalSchedulesComponent } from '../modals/modal-schedules/modal-schedules.component';
 import { AdminService } from '../admin.service';
 import { ScheduleFacade } from 'src/app/facade/schedule.facade';
+import { ScheduleService } from 'src/app/services/schedule.service';
 
 @Component({
   selector: 'app-schedules',
@@ -15,23 +16,20 @@ export class SchedulesComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog,
-    private scheduleFacade: ScheduleFacade
-    // private adminService: AdminService
+    private scheduleService: ScheduleService
   ) { }
 
   ngOnInit() {
+    const date = new Date(2020, 0, 10).toISOString();
     this.listAllSchedules();
   }
 
   private listAllSchedules() {
 
-    this.scheduleFacade.retrieveSchedule()
-      .subscribe(res => this.schedules = res);
-    // this.adminService.retrieveSchedules()
-    //   .subscribe((res: any) => {
-    //     console.log(res);
-    //     this.schedules = res;
-    //   });
+    this.scheduleService.retrieveSchedules(3, new Date(2001, 11, 2).toISOString())
+      .subscribe(res => {
+        console.log(res);
+      })
 
   }
 

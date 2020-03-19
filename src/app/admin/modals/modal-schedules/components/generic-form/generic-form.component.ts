@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 
 @Component({
@@ -9,7 +9,6 @@ import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 })
 export class GenericFormComponent {
 
-    @Input() type: any;
     @Output() submitForm: EventEmitter<any> = new EventEmitter<any>();
 
     public form: FormGroup;
