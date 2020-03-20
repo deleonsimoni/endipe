@@ -34,8 +34,9 @@
         </div>
         <div class="form-group col-md-4">
             <label for="date" class="label">Data</label>
-            <input type="text" class="form-control" formControlName="date" name="date" bsDatepicker
-                [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD/MM/YYYY' }" autocomplete="false">
+            <select class="form-control" name="date" id="date" formControlName="date">
+                <option *ngFor="let day of days" [value]="day">{{ day }}</option>
+            </select>
         </div>
     </div>
     <div class="form-row" *ngIf="type == '2'">
