@@ -27,7 +27,7 @@ const ScheduleSchema = new mongoose.Schema({
     type: String,
   },
   date: {
-    type: Date
+    type: String
   },
   createAt: {
     type: Date,
