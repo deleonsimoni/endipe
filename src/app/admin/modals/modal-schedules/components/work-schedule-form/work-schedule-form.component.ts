@@ -19,6 +19,8 @@ export class WorkScheduleFormComponent {
     public axisCollection = AXIS;
     public works = [];
     public days = ['14/07', '15/07', '16/07', '17/07'];
+    public selectedWork;
+    modelConfig = { standalone: true };
 
     constructor(
         private builder: FormBuilder,
@@ -27,6 +29,7 @@ export class WorkScheduleFormComponent {
     ) {
         this.form = this.builder.group({
             work: [null],
+            workTitle: [null],
             startTime: [null],
             endTime: [null],
             place: [null],
@@ -37,8 +40,22 @@ export class WorkScheduleFormComponent {
 
         this.form.valueChanges.subscribe(res => console.log(res));
 
+        // const workControl = this.form.get('work');
+        // workControl.valueChanges
+        //     .subscribe(id => {
+        //         console.log(id);
+        //         const work = this.works.find(el => el._id == id);
+        //         this.form.get('workTitle').patchValue(work.title);
+        //     });
+
         this.axis.valueChanges
             .subscribe(val => this.listAllWorks(val));
+    }
+
+    public setWorkForm(workForm) {
+        console.log(workForm);
+        this.form.get('work').patchValue(workForm._id);
+        this.form.get('workTitle').patchValue(workForm.title);
     }
 
     ngOnChanges(changes: SimpleChanges) {

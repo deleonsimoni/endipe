@@ -9,8 +9,8 @@ module.exports = {
 
 async function listSchedule(date) {
   return await Minicurso.find({
-      date: date
-    })
+    date: date
+  })
     .sort({
       date: -1
     });

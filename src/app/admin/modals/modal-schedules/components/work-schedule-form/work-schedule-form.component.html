@@ -12,10 +12,11 @@
     </div>
     <div class="form-row">
         <div class="form-group col-md-12">
-            <select class="form-control" id="work" formControlName="work">
+            <select class="form-control" id="work" [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedWork"
+                (ngModelChange)="setWorkForm($event)">
                 <option disabled="true" [selected]="true">Selecione
                     o trabalho</option>
-                <option *ngFor="let work of works" [value]="work._id">
+                <option *ngFor="let work of works" [ngValue]="work">
                     {{ work.title }}
                 </option>
             </select>

@@ -1,12 +1,48 @@
-<div>
+<mat-tab-group (selectedTabChange)="currentTab($event)">
+    <mat-tab *ngFor="let workModality of programacoes" [label]="workModality.name">
+        <div class="container-schedule">
+            <div class="row mb-3">
+                <div class="col-12 col-sm-12 col-md-6">
+                    <ul class="nav nav-pills">
+                        <ng-container *ngFor="let day of days">
+                            <li class="nav-item" (click)="selectDay(day)"
+                                [ngClass]="{'activated': (daySelected$ | async) == day}">
+                                <a class="nav-link">{{ day }}</a>
+                            </li>
+                        </ng-container>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <ng-container *ngIf="(schedules$ | async)?.length > 0">
+                    <div class="col-12 col-sm-12 col-md-6 mb-3" *ngFor="let schedule of (schedules$ | async)">
+                        <ng-container *ngIf="showGenericCard()">
+                            <schedule-card [schedule]="schedule" [delete]="true"></schedule-card>
+                        </ng-container>
+                        {{ schedule | json }}
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="(schedules$ | async)?.length < 1">
+                    <div class="not-schedule">
+                        Não há programação para esse dia
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </mat-tab>
+</mat-tab-group>
+
+<div class="row justify-content-end">
+    <button class="btn-get-started" (click)="addSchedule()">Cadastrar</button>
+</div>
+<!-- <div>
     <div *ngFor="let schedule of schedules; let i = index" [ngClass]="{'mb-3': schedules.length > 1}">
+        {{ schedule }}
         <schedule-card (update)="updateList($event)" [schedule]="schedule" [delete]="true"></schedule-card>
     </div>
-
-    <not-found *ngIf="schedules.length < 1" msg="Não há horários cadastrados"></not-found>
 
 
     <div class="row justify-content-end">
         <button class="btn-get-started" (click)="addSchedule()">Cadastrar</button>
     </div>
-</div>
+</div> -->

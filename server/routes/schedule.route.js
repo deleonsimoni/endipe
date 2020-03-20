@@ -18,7 +18,7 @@ const router = express.Router();
 
 module.exports = router;
 
-router.get('/:idType?date=:data', listSchedule);
+router.get('/:idType/:data', listSchedule);
 
 router.post('/:idType', passport.authenticate('jwt', {
   session: false
@@ -34,52 +34,54 @@ router.put('/:idType?id=:id', passport.authenticate('jwt', {
 
 
 async function listSchedule(req, res) {
-
+  console.log(req.params);
   let schedules;
+  let data = req.params.data.replace('-', '/');
+  console.log(data);
 
   switch (Number(req.params.idType)) {
     case 1:
-      schedules = await aberturaCtrl.listSchedule(req.query.data);
+      schedules = await aberturaCtrl.listSchedule(data);
       res.json(schedules);
       break;
     case 2:
-      schedules = await minicursoCtrl.listSchedule(req.query.data);
+      schedules = await minicursoCtrl.listSchedule(data);
       res.json(schedules);
       break;
     case 3:
-      schedules = await simposioCtrl.listSchedule(req.query.data);
+      schedules = await simposioCtrl.listSchedule(data);
       res.json(schedules);
       break;
     case 4:
-      schedules = await posterCtrl.listSchedule(req.query.data);
+      schedules = await posterCtrl.listSchedule(data);
       res.json(schedules);
       break;
     case 5:
-      schedules = await lancamentoDeLivrosCtrl.listSchedule(req.query.data);
+      schedules = await lancamentoDeLivrosCtrl.listSchedule(data);
       res.json(schedules);
       break;
     case 7:
-      schedules = await atividadeCulturalCtrl.listSchedule(req.query.data);
+      schedules = await atividadeCulturalCtrl.listSchedule(data);
       res.json(schedules);
       break;
     case 8:
-      schedules = await rodasDeConversaCtrl.listSchedule(req.query.data);
+      schedules = await rodasDeConversaCtrl.listSchedule(data);
       res.json(schedules);
       break;
     case 9:
-      schedules = await painelCtrl.listSchedule(req.query.data);
+      schedules = await painelCtrl.listSchedule(data);
       res.json(schedules);
       break;
     case 10:
-      schedules = await sessoesEspeciaisCtrl.listSchedule(req.query.data);
+      schedules = await sessoesEspeciaisCtrl.listSchedule(data);
       res.json(schedules);
       break;
     case 11:
-      schedules = await rodaReunioesEntidadesRedesCtrl.listSchedule(req.query.data);
+      schedules = await rodaReunioesEntidadesRedesCtrl.listSchedule(data);
       res.json(schedules);
       break;
     case 12:
-      schedules = await encerramentoCtrl.listSchedule(req.query.data);
+      schedules = await encerramentoCtrl.listSchedule(data);
       res.json(schedules);
       break;
   }

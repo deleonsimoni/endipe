@@ -16,7 +16,7 @@ export class ScheduleService {
   }
 
   public retrieveSchedules(type, date) {
-    return this.http.get<any>(`${this.baseUrl}/schedule/${type}?data=${date}`);
+    return this.http.get<any>(`${this.baseUrl}/schedule/${type}/${date}`);
   }
 
   public updateSchedule(form) {
