@@ -19,6 +19,7 @@ export class SchedulesComponent implements OnInit {
   public days = ['14/07', '15/07', '16/07', '17/07'];
   public daySelected$: BehaviorSubject<string> = new BehaviorSubject<string>('14/07');
   public label = 'Abertura';
+  public typeId: any;
 
   constructor(
     private dialog: MatDialog,
@@ -36,12 +37,17 @@ export class SchedulesComponent implements OnInit {
   }
 
   private listAllSchedules() {
-    const type = this.programacoes.find(el => el.name == this.label);
+    this.typeId = this.getType();
     const date = this.daySelected$.getValue().replace('/', '-');
 
-    this.scheduleService.retrieveSchedules(type.id, date)
+    this.scheduleService.retrieveSchedules(this.typeId, date)
       .subscribe(data => this.schedules$.next(data));
 
+  }
+
+  private getType() {
+    const type = this.programacoes.find(el => el.name == this.label);
+    return type.id
   }
 
   public addSchedule() {
@@ -67,13 +73,27 @@ export class SchedulesComponent implements OnInit {
   }
 
   public showGenericCard() {
-    const type = this.programacoes.find(el => el.name == this.label);
-
-    if (type) {
-      return (type.id == 1 || type.id == 5 || type.id == 7 || type.id == 10 || type.id == 11 || type.id == 12);
+    if (this.typeId) {
+      return (this.typeId == 1 || this.typeId == 5 || this.typeId == 7 || this.typeId == 10 || this.typeId == 11 || this.typeId == 12);
     }
 
     return false;
-
   }
+
+  public showSimposioCard() {
+    if (this.typeId) {
+      return this.typeId == 3;
+    }
+
+    return false;
+  }
+
+  public showWorkCard() {
+    if (this.typeId) {
+      return (this.typeId == 2 || this.typeId == 4 || this.typeId == 8 || this.typeId == 9);
+    }
+
+    return false;
+  }
+
 }

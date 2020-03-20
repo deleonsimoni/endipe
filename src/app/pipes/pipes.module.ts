@@ -9,6 +9,7 @@ import { DocPipe } from './doc.pipe';
 import { ContagemModalidadePipe } from './contagem-modalidade.pipe';
 import { CategoryPaymentPipe } from './category-payment.pipe';
 import { ArraySortPipe } from './array-sort.pipe';
+import { ThemePipe } from './theme.pipe';
 
 @NgModule({
     declarations: [
@@ -20,7 +21,8 @@ import { ArraySortPipe } from './array-sort.pipe';
         ContagemModalidadePipe,
         CategoryPaymentPipe,
         ArraySortPipe,
-        TypeWorkRelatorioPipe
+        TypeWorkRelatorioPipe,
+        ThemePipe
     ],
     exports: [
         MaskCpfPipe,
@@ -31,7 +33,8 @@ import { ArraySortPipe } from './array-sort.pipe';
         ContagemModalidadePipe,
         CategoryPaymentPipe,
         ArraySortPipe,
-        TypeWorkRelatorioPipe
+        TypeWorkRelatorioPipe,
+        ThemePipe
     ],
 })
 export class PipesModule { }

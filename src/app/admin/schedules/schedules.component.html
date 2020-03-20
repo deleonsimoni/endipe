@@ -15,11 +15,19 @@
             </div>
             <div class="row">
                 <ng-container *ngIf="(schedules$ | async)?.length > 0">
-                    <div class="col-12 col-sm-12 col-md-6 mb-3" *ngFor="let schedule of (schedules$ | async)">
+                    <div class="col-12 col-sm-12 col-md-12 mb-3" *ngFor="let schedule of (schedules$ | async)">
                         <ng-container *ngIf="showGenericCard()">
-                            <schedule-card [schedule]="schedule" [delete]="true"></schedule-card>
+                            <generic-card [schedule]="schedule" [delete]="true" [type]="typeId" (update)="updateList()">
+                            </generic-card>
                         </ng-container>
-                        {{ schedule | json }}
+                        <ng-container *ngIf="showSimposioCard()">
+                            <simposio-card [schedule]="schedule" [delete]="true" [type]="typeId"
+                                (update)="updateList()"></simposio-card>
+                        </ng-container>
+                        <ng-container *ngIf="showWorkCard()">
+                            <work-schedule-card [schedule]="schedule" [delete]="true" [type]="typeId"
+                                (update)="updateList()"></work-schedule-card>
+                        </ng-container>
                     </div>
                 </ng-container>
                 <ng-container *ngIf="(schedules$ | async)?.length < 1">

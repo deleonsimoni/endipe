@@ -23,4 +23,8 @@ export class ScheduleService {
     return this.http.post<any>(`${this.baseUrl}`, form);
   }
 
+  public deleteSchedule(type, id) {
+    return this.http.delete(`${this.baseUrl}/schedule/${type}/${id}`);
+  }
+
 }

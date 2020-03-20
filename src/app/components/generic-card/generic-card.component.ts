@@ -1,20 +1,21 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { AdminService } from '../../admin/admin.service';
+import { ScheduleService } from 'src/app/services/schedule.service';
 
 @Component({
   // tslint:disable-next-line: component-selector
-  selector: 'schedule-card',
-  templateUrl: './schedule-card.component.html',
-  styleUrls: ['./schedule-card.component.scss']
+  selector: 'generic-card',
+  templateUrl: './generic-card.component.html',
+  styleUrls: ['./generic-card.component.scss']
 })
-export class ScheduleCardComponent {
+export class GenericCardComponent {
 
   @Input() schedule: any;
   @Input() delete: boolean;
+  @Input() type: any;
   @Output() update: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(
-    private adminService: AdminService
+    private scheduleService: ScheduleService
   ) {
 
     console.log(this.schedule);
@@ -22,7 +23,7 @@ export class ScheduleCardComponent {
   }
 
   public removeSchedule(id) {
-    this.adminService.deleteSchedule(id)
+    this.scheduleService.deleteSchedule(this.type, id)
       .subscribe(() => this.update.emit(true));
   }
 }

@@ -40,14 +40,6 @@ export class WorkScheduleFormComponent {
 
         this.form.valueChanges.subscribe(res => console.log(res));
 
-        // const workControl = this.form.get('work');
-        // workControl.valueChanges
-        //     .subscribe(id => {
-        //         console.log(id);
-        //         const work = this.works.find(el => el._id == id);
-        //         this.form.get('workTitle').patchValue(work.title);
-        //     });
-
         this.axis.valueChanges
             .subscribe(val => this.listAllWorks(val));
     }

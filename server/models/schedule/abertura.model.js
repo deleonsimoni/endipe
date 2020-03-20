@@ -13,9 +13,6 @@ const ScheduleSchema = new mongoose.Schema({
   startTime: {
     type: String,
   },
-  startTime: {
-    type: String,
-  },
   endTime: {
     type: String,
   },
@@ -36,6 +33,5 @@ const ScheduleSchema = new mongoose.Schema({
     default: Date.now
   }
 });
-
 
 module.exports = mongoose.model('Abertura', ScheduleSchema);

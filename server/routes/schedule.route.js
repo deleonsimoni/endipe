@@ -28,16 +28,15 @@ router.put('/:idType/:id', passport.authenticate('jwt', {
   session: false
 }), updateSchedule);
 
-router.put('/:idType?id=:id', passport.authenticate('jwt', {
+router.delete('/:idType/:id', passport.authenticate('jwt', {
   session: false
 }), deleteSchedule);
 
 
 async function listSchedule(req, res) {
-  console.log(req.params);
+
   let schedules;
   let data = req.params.data.replace('-', '/');
-  console.log(data);
 
   switch (Number(req.params.idType)) {
     case 1:
@@ -204,6 +203,7 @@ async function updateSchedule(req, res) {
 
 async function deleteSchedule(req, res) {
 
+  console.log(req.params);
   if (!req.user.icAdmin) {
     res.sendStatus(401);
   } else {
@@ -211,47 +211,47 @@ async function deleteSchedule(req, res) {
 
     switch (Number(req.params.idType)) {
       case 1:
-        schedules = await aberturaCtrl.deleteSchedule(req.query.id);
+        schedules = await aberturaCtrl.deleteSchedule(req.params.id);
         res.json(schedules);
         break;
       case 2:
-        schedules = await minicursoCtrl.deleteSchedule(req.query.id);
+        schedules = await minicursoCtrl.deleteSchedule(req.params.id);
         res.json(schedules);
         break;
       case 3:
-        schedules = await simposioCtrl.deleteSchedule(req.query.id);
+        schedules = await simposioCtrl.deleteSchedule(req.params.id);
         res.json(schedules);
         break;
       case 4:
-        schedules = await posterCtrl.deleteSchedule(req.query.id);
+        schedules = await posterCtrl.deleteSchedule(req.params.id);
         res.json(schedules);
         break;
       case 5:
-        schedules = await lancamentoDeLivrosCtrl.deleteSchedule(req.query.id);
+        schedules = await lancamentoDeLivrosCtrl.deleteSchedule(req.params.id);
         res.json(schedules);
         break;
       case 7:
-        schedules = await atividadeCulturalCtrl.deleteSchedule(req.query.id);
+        schedules = await atividadeCulturalCtrl.deleteSchedule(req.params.id);
         res.json(schedules);
         break;
       case 8:
-        schedules = await rodasDeConversaCtrl.deleteSchedule(req.query.id);
+        schedules = await rodasDeConversaCtrl.deleteSchedule(req.params.id);
         res.json(schedules);
         break;
       case 9:
-        schedules = await painelCtrl.deleteSchedule(req.query.id);
+        schedules = await painelCtrl.deleteSchedule(req.params.id);
         res.json(schedules);
         break;
       case 10:
-        schedules = await sessoesEspeciaisCtrl.deleteSchedule(req.query.id);
+        schedules = await sessoesEspeciaisCtrl.deleteSchedule(req.params.id);
         res.json(schedules);
         break;
       case 11:
-        schedules = await rodaReunioesEntidadesRedesCtrl.deleteSchedule(req.query.id);
+        schedules = await rodaReunioesEntidadesRedesCtrl.deleteSchedule(req.params.id);
         res.json(schedules);
         break;
       case 12:
-        schedules = await encerramentoCtrl.deleteSchedule(req.query.id);
+        schedules = await encerramentoCtrl.deleteSchedule(req.params.id);
         res.json(schedules);
         break;
     }

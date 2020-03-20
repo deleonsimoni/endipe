@@ -1,0 +1,33 @@
+<div class="card-content">
+    <div class="card">
+        <div class="flex">
+            <div class="group">
+                <p class="label">Horário</p>
+                <p class="hour">{{ schedule.startTime }} - {{ schedule.endTime }}</p>
+            </div>
+            <div class="expand" (click)="removeSchedule(schedule._id)">
+                <i class="fas fa-trash"></i>
+            </div>
+        </div>
+        <div class="group">
+            <p class="label">Tema</p>
+            <p class="title"> {{ schedule.theme | theme }} </p>
+        </div>
+        <div class="group">
+            <p class="label">Palestra</p>
+            <p class="title"> {{ schedule.themeSpeeches }} </p>
+        </div>
+        <div class="group">
+            <p class="label">Classificação</p>
+            <p class="title"> {{ schedule.classification }} </p>
+        </div>
+        <div class="group">
+            <p class="label">Local</p>
+            <p class="hour">{{ schedule.place }}</p>
+        </div>
+        <div class="group">
+            <p class="label">Endereço</p>
+            <p class="hour">{{ schedule.address }}</p>
+        </div>
+    </div>
+</div>
