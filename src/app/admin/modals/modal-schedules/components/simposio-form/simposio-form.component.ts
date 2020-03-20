@@ -13,6 +13,7 @@ export class SimposioFormComponent {
 
     public form: FormGroup;
     public themes = THEME_SIMPOSIO;
+    public days = ['14/07', '15/07', '16/07', '17/07'];
 
     constructor(
         private builder: FormBuilder

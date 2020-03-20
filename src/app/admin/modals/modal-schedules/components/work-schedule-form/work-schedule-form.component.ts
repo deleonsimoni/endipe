@@ -18,6 +18,7 @@ export class WorkScheduleFormComponent {
     public axis = new FormControl();
     public axisCollection = AXIS;
     public works = [];
+    public days = ['14/07', '15/07', '16/07', '17/07'];
 
     constructor(
         private builder: FormBuilder,
