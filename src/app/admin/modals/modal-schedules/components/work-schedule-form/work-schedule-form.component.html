@@ -1,0 +1,65 @@
+<form [formGroup]="form" class="form">
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <select class="form-control" id="axis" [formControl]="axis">
+                <option disabled="true" [selected]="true">Selecione
+                    o eixo</option>
+                <option *ngFor="let eixo of axisCollection" [value]="eixo.id">
+                    {{ eixo.name }}
+                </option>
+            </select>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <select class="form-control" id="work" formControlName="work">
+                <option disabled="true" [selected]="true">Selecione
+                    o trabalho</option>
+                <option *ngFor="let work of works" [value]="work._id">
+                    {{ work.title }}
+                </option>
+            </select>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="startTime" class="label">Hora início</label>
+            <input type="time" min="08:00" max="21:00" class="form-control" name="startTime" id="startTime"
+                formControlName="startTime" />
+        </div>
+        <div class="form-group col-md-4">
+            <label for="endTime" class="label">Hora fim</label>
+            <input type="time" min="08:00" max="21:00" class="form-control" name="endTime" id="endTime"
+                formControlName="endTime" />
+        </div>
+        <div class="form-group col-md-4">
+            <label for="date" class="label">Data</label>
+            <input type="text" class="form-control" formControlName="date" name="date" bsDatepicker
+                [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD/MM/YYYY' }" autocomplete="false">
+        </div>
+    </div>
+    <div class="form-row" *ngIf="type == '2'">
+        <div class="form-group col-md-12">
+            <label for="qtdSubscribers" class="label">Quantidade de inscritos</label>
+            <input type="text" name="qtdSubscribers" class="form-control" id="qtdSubscribers"
+                formControlName="qtdSubscribers" />
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <label for="address" class="label">Endereço</label>
+            <input type="text" name="address" class="form-control" id="address" formControlName="address" />
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <label for="place" class="label">Local</label>
+            <input type="text" name="place" class="form-control" id="place" formControlName="place" />
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-12">
+            <button class="btn-get-started" type="button" (click)="submitSchedule()">SUBMETER PROGRAMAÇÃO</button>
+        </div>
+    </div>
+</form>

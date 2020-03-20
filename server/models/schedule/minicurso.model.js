@@ -10,10 +10,6 @@ const ScheduleSchema = new mongoose.Schema({
   work: {
     type: mongoose.Schema.Types.ObjectId
   },
-
-  startTime: {
-    type: String,
-  },
   startTime: {
     type: String,
   },

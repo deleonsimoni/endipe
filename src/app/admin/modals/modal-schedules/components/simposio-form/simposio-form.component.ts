@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
-import { ScheduleService } from 'src/app/services/schedule.service';
+import { THEME_SIMPOSIO } from 'src/app/declarations';
 
 @Component({
     selector: 'simposio-form',
@@ -9,12 +9,13 @@ import { ScheduleService } from 'src/app/services/schedule.service';
 })
 export class SimposioFormComponent {
 
+    @Output() submitForm: EventEmitter<any> = new EventEmitter<any>();
+
     public form: FormGroup;
-    @Input() type: number;
+    public themes = THEME_SIMPOSIO;
 
     constructor(
-        private builder: FormBuilder,
-        private scheduleService: ScheduleService
+        private builder: FormBuilder
     ) {
         this.createForm();
     }
@@ -23,7 +24,6 @@ export class SimposioFormComponent {
 
         this.form = this.builder.group({
             theme: [null],
-            type: [null],
             startTime: [null],
             date: [null],
             endTime: [null],
@@ -57,9 +57,7 @@ export class SimposioFormComponent {
     }
 
     public submitSchedule() {
-        console.log(this.form.value);
-        this.scheduleService.registerSchedule(this.type, this.form.getRawValue())
-            .subscribe(res => console.log(res));
+        this.submitForm.emit({ data: this.form.getRawValue() });
     }
 
 }
