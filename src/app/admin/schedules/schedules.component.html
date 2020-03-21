@@ -17,12 +17,13 @@
                 <ng-container *ngIf="(schedules$ | async)?.length > 0">
                     <div class="col-12 col-sm-12 col-md-12 mb-3" *ngFor="let schedule of (schedules$ | async)">
                         <ng-container *ngIf="showGenericCard()">
-                            <generic-card [schedule]="schedule" [delete]="true" [type]="typeId" (update)="updateList()">
+                            <generic-card [schedule]="schedule" [admin]="true" [type]="typeId" (update)="updateList()"
+                                (edit)="editSchedule($event)">
                             </generic-card>
                         </ng-container>
                         <ng-container *ngIf="showSimposioCard()">
-                            <simposio-card [schedule]="schedule" [delete]="true" [type]="typeId"
-                                (update)="updateList()"></simposio-card>
+                            <simposio-card [schedule]="schedule" [admin]="true" [type]="typeId" (update)="updateList()"
+                                (edit)="editSchedule($event)"></simposio-card>
                         </ng-container>
                         <ng-container *ngIf="showWorkCard()">
                             <work-schedule-card [schedule]="schedule" [admin]="true" [type]="typeId"
@@ -43,14 +44,3 @@
 <div class="row justify-content-end">
     <button class="btn-get-started" (click)="addSchedule()">Cadastrar</button>
 </div>
-<!-- <div>
-    <div *ngFor="let schedule of schedules; let i = index" [ngClass]="{'mb-3': schedules.length > 1}">
-        {{ schedule }}
-        <schedule-card (update)="updateList($event)" [schedule]="schedule" [delete]="true"></schedule-card>
-    </div>
-
-
-    <div class="row justify-content-end">
-        <button class="btn-get-started" (click)="addSchedule()">Cadastrar</button>
-    </div>
-</div> -->

@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, SimpleChanges, Input } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 
 @Component({
@@ -9,6 +9,8 @@ import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 })
 export class GenericFormComponent {
 
+    @Input() type: any;
+    @Input() data: any;
     @Output() submitForm: EventEmitter<any> = new EventEmitter<any>();
 
     public form: FormGroup;
@@ -37,6 +39,36 @@ export class GenericFormComponent {
             ])
         });
 
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        if (changes.data && changes.data.currentValue) {
+            this.fillForm(changes.data.currentValue);
+        }
+    }
+
+    private fillForm(data) {
+        for (const key in this.form.controls) {
+            if (data.hasOwnProperty(key)) {
+                console.log(key)
+                if (key == 'titles' || key == 'coordinators') {
+                    this.fillArray(data.coordinators, key);
+                } else {
+                    this.form.get(key).patchValue(data[key]);
+                }
+            }
+        }
+    }
+
+    private fillArray(data, key) {
+        const form = this.form.get(key) as FormArray;
+        data.forEach((el, key) => {
+            if (key == 0) {
+                form.controls[0].patchValue(el);
+            } else {
+                form.push(this.builder.control(el));
+            }
+        });
     }
 
     public createField() {
@@ -72,6 +104,6 @@ export class GenericFormComponent {
     }
 
     public submitSchedule() {
-        this.submitForm.emit({ data: this.form.getRawValue() });
+        this.submitForm.emit({ id: this.data ? this.data._id : null, data: this.form.getRawValue() });
     }
 }

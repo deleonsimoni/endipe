@@ -18,10 +18,12 @@
                 </div>
             </div>
             <ng-container *ngIf="showGenericForm">
-                <generic-form (submitForm)="sendSchedule($event)"></generic-form>
+                <generic-form (submitForm)="sendSchedule($event)" [type]="axis.value" [data]="form ? form.data : null">
+                </generic-form>
             </ng-container>
             <ng-container *ngIf="showSimposioForm">
-                <simposio-form (submitForm)="sendSchedule($event)"></simposio-form>
+                <simposio-form (submitForm)="sendSchedule($event)" [type]="axis.value" [data]="form ? form.data : null">
+                </simposio-form>
             </ng-container>
             <ng-container *ngIf="showWorkScheduleForm">
                 <work-schedule-form (submitForm)="sendSchedule($event)" [type]="axis.value"

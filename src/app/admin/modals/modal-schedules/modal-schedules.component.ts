@@ -61,7 +61,7 @@ export class ModalSchedulesComponent {
   }
 
   public sendSchedule(event) {
-    console.log(this.axis.value)
+    console.log(event.data)
     if (event.id) {
       this.scheduleService.updateSchedule(this.axis.value, event.id, event.data)
         .subscribe(_ => {

@@ -23,7 +23,7 @@ async function insertSchedule(schedule) {
 }
 
 async function updateSchedule(id, schedule) {
-  return await RodasDeConversa.findAndUpdate(id, schedule);
+  return await RodasDeConversa.findOneAndUpdate(id, schedule);
 }
 
 async function deleteSchedule(id) {

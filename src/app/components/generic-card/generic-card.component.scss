@@ -27,6 +27,18 @@
       }
     }
 
+    .menu {
+      color: #fff;
+      background: #0d235f;
+      box-shadow: 0px 0px 5px #000000bd;
+      cursor: pointer;
+      border-radius: 8px;
+      padding: 8px 10px;
+      margin: 0px 16px 0px 0px;
+      text-align: center;
+      border: unset;
+    }
+
     .group {
       flex-flow: column nowrap;
       align-items: start;
@@ -79,4 +91,8 @@
     left: 16px;
     display: none;
   }
+}
+
+.pointer {
+  cursor: pointer;
 }

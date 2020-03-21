@@ -1,7 +1,6 @@
 import { Component, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
 import { ScheduleService } from 'src/app/services/schedule.service';
 import { AuthService } from 'src/app/services/auth.service';
-import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
     selector: 'work-schedule-card',
@@ -24,7 +23,6 @@ export class WorkScheduleCardComponent {
     ) { }
 
     ngAfterViewInit() {
-        console.log(this.schedule)
         if (!this.userId) {
             this.authService.refresh()
                 .subscribe(({ user }: any) => {
@@ -51,7 +49,6 @@ export class WorkScheduleCardComponent {
     }
 
     public signUp() {
-        console.log(this.schedule);
         this.scheduleService.enrollSchedule(this.schedule._id)
             .subscribe(res => {
                 this.schedule = res;

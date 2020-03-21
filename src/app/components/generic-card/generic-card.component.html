@@ -1,12 +1,25 @@
 <div class="card-content">
     <div class="card">
-        <div class="flex">
-            <div class="group">
-                <p class="label">Horário</p>
-                <p class="hour">{{ schedule.startTime }} - {{ schedule.endTime }}</p>
+        <div class="row">
+            <div class="col-6">
+                <div class="group">
+                    <p class="label">Horário</p>
+                    <p class="hour">{{ schedule.startTime }} - {{ schedule.endTime }}</p>
+                </div>
             </div>
-            <div class="expand" (click)="removeSchedule(schedule._id)" *ngIf="delete">
-                <i class="fas fa-trash"></i>
+            <div class="col-6">
+                <div class="row justify-content-end">
+                    <div class="dropdown show" *ngIf="admin">
+                        <a class="btn btn-secondary dropdown-toggle menu" href="#" role="button" id="dropdownMenuLink"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-cogs"></i>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item pointer" (click)="editSchedule()">Editar</a>
+                            <a class="dropdown-item pointer" (click)="removeSchedule(schedule._id)">Excluir</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="group">

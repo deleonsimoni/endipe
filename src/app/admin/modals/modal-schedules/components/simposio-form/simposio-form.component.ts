@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, SimpleChanges, Input } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { THEME_SIMPOSIO } from 'src/app/declarations';
 
@@ -9,6 +9,8 @@ import { THEME_SIMPOSIO } from 'src/app/declarations';
 })
 export class SimposioFormComponent {
 
+    @Input() type: any;
+    @Input() data: any;
     @Output() submitForm: EventEmitter<any> = new EventEmitter<any>();
 
     public form: FormGroup;
@@ -36,7 +38,35 @@ export class SimposioFormComponent {
                 this.createField()
             ])
         });
+    }
 
+    ngOnChanges(changes: SimpleChanges) {
+        if (changes.data && changes.data.currentValue) {
+            this.fillForm(changes.data.currentValue);
+        }
+    }
+
+    private fillForm(data) {
+        for (const key in this.form.controls) {
+            if (data.hasOwnProperty(key)) {
+                if (key == 'coordinators') {
+                    this.fillArray(data.coordinators);
+                } else {
+                    this.form.get(key).patchValue(data[key]);
+                }
+            }
+        }
+    }
+
+    private fillArray(data) {
+        const form = this.form.get('coordinators') as FormArray;
+        data.forEach((el, key) => {
+            if (key == 0) {
+                form.controls[0].patchValue(el);
+            } else {
+                form.push(this.builder.control(el));
+            }
+        });
     }
 
     private createField() {
@@ -58,7 +88,7 @@ export class SimposioFormComponent {
     }
 
     public submitSchedule() {
-        this.submitForm.emit({ data: this.form.getRawValue() });
+        this.submitForm.emit({ id: this.data ? this.data._id : null, data: this.form.getRawValue() });
     }
 
 }

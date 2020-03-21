@@ -9,8 +9,8 @@ module.exports = {
 
 async function listSchedule(date) {
   return await Abertura.find({
-      date: date
-    })
+    date: date
+  })
     .sort({
       startTime: 1
     });
@@ -21,7 +21,7 @@ async function insertSchedule(schedule) {
 }
 
 async function updateSchedule(id, schedule) {
-  return await Abertura.findAndUpdate(id, schedule);
+  return await Abertura.findOneAndUpdate(id, schedule);
 }
 
 async function deleteSchedule(id) {
