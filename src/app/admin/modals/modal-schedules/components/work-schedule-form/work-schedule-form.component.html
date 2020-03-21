@@ -1,7 +1,7 @@
 <form [formGroup]="form" class="form">
     <div class="form-row">
         <div class="form-group col-md-12">
-            <select class="form-control" id="axis" [formControl]="axis">
+            <select class="form-control" id="axis" formControlName="axis">
                 <option disabled="true" [selected]="true">Selecione
                     o eixo</option>
                 <option *ngFor="let eixo of axisCollection" [value]="eixo.id">

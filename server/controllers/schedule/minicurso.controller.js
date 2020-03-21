@@ -11,8 +11,8 @@ module.exports = {
 
 async function listSchedule(date) {
   return await Minicurso.find({
-      date: date
-    })
+    date: date
+  })
     .sort({
       startTime: 1
     });
@@ -37,9 +37,11 @@ async function unsubscribeMinicurso(workId, userId) {
   return Minicurso.findOneAndUpdate({
     _id: workId
   }, {
-    $push: {
-      'subscribers.userId': userId
+    $pull: {
+      subscribers: { userId: userId }
     }
+  }, {
+    new: true
   });
 }
 
@@ -48,11 +50,18 @@ async function subscribeMinicurso(workId, userId, email) {
     userId: userId,
     userEmail: email
   }
+
+  console.log(workId);
+  console.log(userInsert);
   return Minicurso.findOneAndUpdate({
     _id: workId
   }, {
-    $pull: {
+    $addToSet: {
       'subscribers': userInsert
+    }
+  }, function (error, success) {
+    if (error) {
+      console.log(error);
     }
   });
 }

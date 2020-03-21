@@ -69,9 +69,6 @@
             <p *ngFor="let reviewerCoordinator of work.reviewers">{{ reviewerCoordinator.userEmail }}</p>
           </div>
         </strong>
-
-
-
         <div *ngIf="work.reviewAdmin">
           <div>
             Parecer: {{ work.reviewAdmin.userEmail }}

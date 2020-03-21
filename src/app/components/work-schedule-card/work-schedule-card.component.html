@@ -1,13 +1,59 @@
 <div class="card-content">
     <div class="card">
-        <div class="flex">
-            <div class="group">
-                <p class="label">Horário</p>
-                <p class="hour">{{ schedule.startTime }} - {{ schedule.endTime }}</p>
+        <!-- <div class="flex"> -->
+        <div class="row">
+            <div class="col-6">
+                <div class="group">
+                    <p class="label">Horário</p>
+                    <p class="hour">{{ schedule.startTime }} - {{ schedule.endTime }}</p>
+                </div>
             </div>
-            <div class="expand" (click)="removeSchedule(schedule._id)" *ngIf="delete">
-                <i class="fas fa-trash"></i>
+            <div class="col-6">
+                <div class="row justify-content-end">
+                    <div class="dropdown show">
+                        <a class="btn btn-secondary dropdown-toggle menu" href="#" role="button" id="dropdownMenuLink"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-cogs"></i>
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" *ngIf="!isSubscribe()" (click)="signUp()">Inscrever-se</a>
+                            <a class="dropdown-item" *ngIf="isSubscribe()" (click)="cancelSignUp()">Cancelar
+                                inscrição</a>
+                            <a class="dropdown-item" (click)="editSchedule()">Editar</a>
+                            <a class="dropdown-item" (click)="removeSchedule(schedule._id)" *ngIf="delete">Excluir</a>
+                        </div>
+                    </div>
+                    <!-- <div class="menu">
+                        <div class="expand"><i class="fas fa-cogs"></i></div>
+                    </div>
+                    <ng-container *ngIf="isSubscribe()">
+
+                        <div class="col-12 col-md-4 no-padding ">
+                            <div class="expand" (click)="signUp()">Inscrever-se</div>
+                        </div>
+                        <div class="col-6 col-md-2 no-padding">
+                            <div class="expand" (click)="removeSchedule(schedule._id)" *ngIf="delete">
+                                <i class="fas fa-trash"></i>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-2 no-padding">
+                            <div class="expand" (click)="removeSchedule(schedule._id)" *ngIf="delete">
+                                <i class="fas fa-trash"></i>
+                            </div>
+                        </div>
+                    </ng-container> -->
+                </div>
             </div>
+        </div>
+    </div>
+</div>
+<!-- <ng-container *ngIf="isSubscribe()">
+                <button class="subscribe" (click)="cancelSignUp()">Cancelar inscrição</button>
+                <div class="expand" (click)="removeSchedule(schedule._id)" *ngIf="delete">
+                    <i class="fas fa-trash"></i>
+                </div>
+            </ng-container>
         </div>
         <div class="group">
             <p class="label">Título</p>
@@ -30,4 +76,4 @@
             <p class="hour">{{ schedule.address }}</p>
         </div>
     </div>
-</div>
+</div> -->
