@@ -549,7 +549,7 @@ export const PROGRAMACOES = [
                             'Maria Isabel da Cunha (UNISINOS)',
                             'Julio Diniz-Pereira / Lucíola Santos / Angela Dalben (UFMG)',
                             'Alda Marin (PUC/SP)',
-                            'Mediação: Monica Vasconcellos (UFF)'
+                            'Mediação: Mônica Vasconcellos (UFF)'
                         ],
                         local: ''
                     },
