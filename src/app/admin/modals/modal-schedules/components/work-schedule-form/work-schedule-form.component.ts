@@ -90,7 +90,7 @@ export class WorkScheduleFormComponent {
     }
 
     public submitSchedule() {
-        this.submitForm.emit({ data: this.form.getRawValue() });
+        this.submitForm.emit({ id: this.data ? this.data._id : null, data: this.form.getRawValue() });
     }
 
 }

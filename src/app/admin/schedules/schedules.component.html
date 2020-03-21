@@ -25,7 +25,7 @@
                                 (update)="updateList()"></simposio-card>
                         </ng-container>
                         <ng-container *ngIf="showWorkCard()">
-                            <work-schedule-card [schedule]="schedule" [delete]="true" [type]="typeId"
+                            <work-schedule-card [schedule]="schedule" [admin]="true" [type]="typeId"
                                 (update)="updateList()" (edit)="editSchedule($event)"></work-schedule-card>
                         </ng-container>
                     </div>

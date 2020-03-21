@@ -23,7 +23,7 @@ async function insertSchedule(schedule) {
 }
 
 async function updateSchedule(id, schedule) {
-  return await Minicurso.findAndUpdate(id, schedule);
+  return await Minicurso.findOneAndUpdate(id, schedule);
 }
 
 async function deleteSchedule(id) {
@@ -51,17 +51,11 @@ async function subscribeMinicurso(workId, userId, email) {
     userEmail: email
   }
 
-  console.log(workId);
-  console.log(userInsert);
   return Minicurso.findOneAndUpdate({
     _id: workId
   }, {
     $addToSet: {
       'subscribers': userInsert
-    }
-  }, function (error, success) {
-    if (error) {
-      console.log(error);
     }
   });
 }

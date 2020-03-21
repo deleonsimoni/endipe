@@ -11,8 +11,8 @@ module.exports = {
 
 async function listSchedule(date) {
   return await RodasDeConversa.find({
-      date: date
-    })
+    date: date
+  })
     .sort({
       startTime: 1
     });
@@ -37,9 +37,11 @@ async function unsubscribeMinicurso(workId, userId) {
   return RodasDeConversa.findOneAndUpdate({
     _id: workId
   }, {
-    $push: {
-      'subscribers.userId': userId
+    $pull: {
+      subscribers: { userId: userId }
     }
+  }, {
+    new: true
   });
 }
 
@@ -48,10 +50,11 @@ async function subscribeMinicurso(workId, userId, email) {
     userId: userId,
     userEmail: email
   }
+
   return RodasDeConversa.findOneAndUpdate({
     _id: workId
   }, {
-    $pull: {
+    $addToSet: {
       'subscribers': userInsert
     }
   });
