@@ -41,7 +41,7 @@ router.post('/subscribeRodadeConversa/:workId', passport.authenticate('jwt', {
 }), subscribeRodadeConversa);
 
 
-router.put('/:idType/:id', passport.authenticate('jwt', {
+router.put('/:id', passport.authenticate('jwt', {
   session: false
 }), updateSchedule);
 
