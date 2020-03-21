@@ -35,4 +35,12 @@ export class ScheduleService {
     return this.http.post(`${this.baseUrl}/schedule/unsubscribeMinicurso/${id}`, {});
   }
 
+  public enrollScheduleRodaDeConversa(id) {
+    return this.http.post(`${this.baseUrl}/schedule/subscribeRodadeConversa/${id}`, {});
+  }
+
+  public cancelEnrollScheduleRodaDeConversa(id) {
+    return this.http.post(`${this.baseUrl}/schedule/unsubscribeRodadeConversa/${id}`, {});
+  }
+
 }

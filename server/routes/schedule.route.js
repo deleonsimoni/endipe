@@ -60,12 +60,12 @@ async function subscribeMinicurso(req, res) {
 }
 
 async function unsubscribeRodadeConversa(req, res) {
-  let users = await minicursoCtrl.unsubscribeRodadeConversa(req.params.workId, req.user._id);
+  let users = await rodasDeConversaCtrl.unsubscribeRodadeConversa(req.params.workId, req.user._id);
   res.json(users);
 }
 
 async function subscribeRodadeConversa(req, res) {
-  let users = await minicursoCtrl.subscribeRodadeConversa(req.params.workId, req.user._id, req.user.email);
+  let users = await rodasDeConversaCtrl.subscribeRodadeConversa(req.params.workId, req.user._id, req.user.email);
   res.json(users);
 }
 

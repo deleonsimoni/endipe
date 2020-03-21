@@ -50,19 +50,32 @@ export class WorkScheduleCardComponent {
         return false;
     }
 
-    public signUp() {
-        console.log(this.schedule);
-        this.scheduleService.enrollSchedule(this.schedule._id)
-            .subscribe(res => {
-                this.schedule = res;
-            });
+    public signUp(type) {
+        if (type == 2) {
+            this.scheduleService.enrollSchedule(this.schedule._id)
+                .subscribe(res => {
+                    this.schedule = res;
+                });
+        } else {
+            this.scheduleService.enrollScheduleRodaDeConversa(this.schedule._id)
+                .subscribe(res => {
+                    this.schedule = res;
+                });
+        }
     }
 
-    public cancelSignUp() {
-        this.scheduleService.cancelEnrollSchedule(this.schedule._id)
-            .subscribe(res => {
-                this.schedule = res;
-            });
+    public cancelSignUp(type) {
+        if (type == 2) {
+            this.scheduleService.cancelEnrollSchedule(this.schedule._id)
+                .subscribe(res => {
+                    this.schedule = res;
+                });
+        } else {
+            this.scheduleService.cancelEnrollScheduleRodaDeConversa(this.schedule._id)
+                .subscribe(res => {
+                    this.schedule = res;
+                });
+        }
     }
 
     public editSchedule() {
