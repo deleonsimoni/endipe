@@ -9,7 +9,7 @@ import { ScheduleService } from 'src/app/services/schedule.service';
 export class WorkScheduleCardComponent {
 
     @Input() schedule: any;
-    @Input() delete: boolean;
+    @Input() delete = false;
     @Input() type: any;
     @Output() update: EventEmitter<boolean> = new EventEmitter<boolean>();
 

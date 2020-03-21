@@ -90,14 +90,14 @@
                 </mat-card>
             </div>
         </div>
-        <p class="mt-2 mb-2 information">Clique para ver os horários de cada sessão abaixo:</p>
+        <!-- <p class="mt-2 mb-2 information">Clique para ver os horários de cada sessão abaixo:</p>
         <div class="row mb-4">
             <div class="col-sm-6 col-md-6 col-lg-4" *ngFor="let programacao of programacoes">
                 <h4 class="card-navigate" (click)="openDialogProgramacao(programacao)">
                     <a>{{ programacao.titulo }}</a>
                 </h4>
             </div>
-        </div>
+        </div> -->
 
         <mat-tab-group (selectedTabChange)="currentTab($event)">
             <mat-tab *ngFor="let workModality of programacoes" [label]="workModality.name">
@@ -115,19 +115,27 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-12 col-sm-12 col-md-6 mb-3">
-                            <opening-schedule-card [programation]="workModality"></opening-schedule-card>
-                        </div>
-                        <!-- <ng-container *ngIf="(schedules$ | async)?.length > 0">
-                            <div class="col-12 col-sm-12 col-md-6 mb-3" *ngFor="let schedule of (schedules$ | async)">
-                                <schedule-card [schedule]="schedule" [delete]="false"></schedule-card>
+                        <ng-container *ngIf="(schedules$ | async)?.length > 0">
+                            <div class="col-12 col-sm-12 col-md-12 mb-3" *ngFor="let schedule of (schedules$ | async)">
+                                <ng-container *ngIf="showGenericCard()">
+                                    <generic-card [schedule]="schedule" [type]="typeId" (update)="updateList()">
+                                    </generic-card>
+                                </ng-container>
+                                <ng-container *ngIf="showSimposioCard()">
+                                    <simposio-card [schedule]="schedule" [type]="typeId" (update)="updateList()">
+                                    </simposio-card>
+                                </ng-container>
+                                <ng-container *ngIf="showWorkCard()">
+                                    <work-schedule-card [schedule]="schedule" [type]="typeId" (update)="updateList()">
+                                    </work-schedule-card>
+                                </ng-container>
                             </div>
                         </ng-container>
                         <ng-container *ngIf="(schedules$ | async)?.length < 1">
                             <div class="not-schedule">
                                 Não há programação para esse dia
                             </div>
-                        </ng-container> -->
+                        </ng-container>
                     </div>
                 </div>
             </mat-tab>

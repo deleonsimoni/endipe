@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { PROGRAMACOES, WORK_OPTIONS } from '../declarations';
+import { SCHEDULE_TYPE, WORK_OPTIONS } from '../declarations';
 import { BehaviorSubject } from 'rxjs';
-import { ScheduleFacade } from '../facade/schedule.facade';
 import { MatDialog } from '@angular/material';
 import { ModalSessoesEspeciaisComponent } from '../modal-sessoes-especiais/modal-sessoes-especiais.component';
 import { ModalSimposioComponent } from '../modal-simposio/modal-simposio.component';
@@ -10,6 +9,7 @@ import { ModalConferencistasComponent } from '../modal-conferencistas/modal-conf
 import { ModalEncerramentoComponent } from '../modal-encerramento/modal-encerramento.component';
 import { ModalAberturaComponent } from '../modal-abertura/modal-abertura.component';
 import { ModalProgramacaoComponent } from '../modal-programacao/modal-programacao.component';
+import { ScheduleService } from '../services/schedule.service';
 
 @Component({
   selector: 'app-programacao',
@@ -19,74 +19,72 @@ import { ModalProgramacaoComponent } from '../modal-programacao/modal-programaca
 export class ProgramacaoComponent implements OnInit {
 
   public workModalities = WORK_OPTIONS;
-  public programacoes = PROGRAMACOES;
+  public programacoes = SCHEDULE_TYPE;
   public schedules$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
   public days = ['14/07', '15/07', '16/07', '17/07'];
   public daySelected$: BehaviorSubject<string> = new BehaviorSubject<string>('14/07');
-  public label = 'Pôster';
+  public label = 'Abertura';
+  public typeId: any;
 
   constructor(
     private dialog: MatDialog,
-    private scheduleFacade: ScheduleFacade
+    private scheduleService: ScheduleService
   ) {
 
-    this.daySelected$.subscribe(day => {
-      console.log(day);
+    this.daySelected$.subscribe(_ => {
+      this.listAllSchedules();
     });
 
   }
 
   ngOnInit() {
-    this.scheduleFacade.retrieveSchedule()
+    this.listAllSchedules();
+  }
+
+  private listAllSchedules() {
+    this.typeId = this.getType();
+    const date = this.daySelected$.getValue().replace('/', '-');
+
+    this.scheduleService.retrieveSchedules(this.typeId, date)
       .subscribe(data => this.schedules$.next(data));
+  }
+
+  private getType() {
+    const type = this.programacoes.find(el => el.name == this.label);
+    return type.id
   }
 
   public currentTab($event) {
     this.label = $event.tab.textLabel;
 
-    this.scheduleFacade.retrieveSchedule(this.label)
-      .subscribe(data => this.schedules$.next(data));
+    this.listAllSchedules();
   }
 
   public selectDay(day) {
     this.daySelected$.next(day);
   }
 
-  public openDialogProgramacao(programacao) {
-    switch (programacao.titulo) {
-      case 'Sessões especiais':
-        this.dialog.open(ModalSessoesEspeciaisComponent, {
-          data: { item: programacao }
-        });
-        break;
-
-      case 'Simpósios':
-        this.dialog.open(ModalSimposioComponent, {
-          data: { item: programacao }
-        });
-        break;
-
-      case 'Conferencistas':
-        this.dialog.open(ModalConferencistasComponent);
-        break;
-
-      case 'Encerramento':
-        this.dialog.open(ModalEncerramentoComponent, {
-          data: { item: programacao }
-        });
-        break;
-
-      case 'Abertura':
-        this.dialog.open(ModalAberturaComponent, {
-          data: { item: programacao }
-        });
-        break;
-
-      default:
-        this.dialog.open(ModalProgramacaoComponent, {
-          data: { item: programacao }
-        });
-        break;
+  public showGenericCard() {
+    if (this.typeId) {
+      return (this.typeId == 1 || this.typeId == 5 || this.typeId == 7 || this.typeId == 10 || this.typeId == 11 || this.typeId == 12);
     }
+
+    return false;
+  }
+
+  public showSimposioCard() {
+    if (this.typeId) {
+      return this.typeId == 3;
+    }
+
+    return false;
+  }
+
+  public showWorkCard() {
+    if (this.typeId) {
+      return (this.typeId == 2 || this.typeId == 4 || this.typeId == 8 || this.typeId == 9);
+    }
+
+    return false;
   }
 }

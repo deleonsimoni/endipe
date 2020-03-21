@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { ModalSchedulesComponent } from '../modals/modal-schedules/modal-schedules.component';
-import { AdminService } from '../admin.service';
-import { ScheduleFacade } from 'src/app/facade/schedule.facade';
 import { ScheduleService } from 'src/app/services/schedule.service';
 import { SCHEDULE_TYPE } from 'src/app/declarations';
 import { BehaviorSubject } from 'rxjs';
@@ -26,7 +24,7 @@ export class SchedulesComponent implements OnInit {
     private scheduleService: ScheduleService
   ) {
 
-    this.daySelected$.subscribe(day => {
+    this.daySelected$.subscribe(_ => {
       this.listAllSchedules();
     });
 
@@ -42,7 +40,6 @@ export class SchedulesComponent implements OnInit {
 
     this.scheduleService.retrieveSchedules(this.typeId, date)
       .subscribe(data => this.schedules$.next(data));
-
   }
 
   private getType() {

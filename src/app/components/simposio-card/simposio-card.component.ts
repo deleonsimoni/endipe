@@ -10,17 +10,13 @@ import { ScheduleService } from 'src/app/services/schedule.service';
 export class SimposioCardComponent {
 
     @Input() schedule: any;
-    @Input() delete: boolean;
+    @Input() delete = false;
     @Input() type: any;
     @Output() update: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     constructor(
         private scheduleService: ScheduleService
     ) { }
-
-    ngOnChanges(changes: SimpleChanges) {
-        console.log(changes.schedule.currentValue);
-    }
 
     public removeSchedule(id) {
         this.scheduleService.deleteSchedule(this.type, id)

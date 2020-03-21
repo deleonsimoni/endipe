@@ -8,7 +8,8 @@ export class ThemePipe implements PipeTransform {
 
   transform(value: any, ...args: any[]): any {
 
-    return THEME_SIMPOSIO.filter(el => el.id == value)[0].name;
+    const theme = THEME_SIMPOSIO.find(el => el.id == value);
+    return theme ? theme.name : null;
 
   }
 
