@@ -26,7 +26,7 @@
                         </ng-container>
                         <ng-container *ngIf="showWorkCard()">
                             <work-schedule-card [schedule]="schedule" [delete]="true" [type]="typeId"
-                                (update)="updateList()"></work-schedule-card>
+                                (update)="updateList()" (edit)="editSchedule($event)"></work-schedule-card>
                         </ng-container>
                     </div>
                 </ng-container>

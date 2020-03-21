@@ -12,10 +12,10 @@ import { ToastrService } from 'ngx-toastr';
 export class WorkScheduleFormComponent {
 
     @Input() type: any;
+    @Input() data: any;
     @Output() submitForm: EventEmitter<any> = new EventEmitter<any>();
 
     public form: FormGroup;
-    public axis = new FormControl();
     public axisCollection = AXIS;
     public works = [];
     public days = ['14/07', '15/07', '16/07', '17/07'];
@@ -29,32 +29,45 @@ export class WorkScheduleFormComponent {
     ) {
         this.form = this.builder.group({
             work: [null],
-            workTitle: [null],
+            axis: [null],
             startTime: [null],
             endTime: [null],
             place: [null],
             address: [null],
+            workTitle: [null],
             qtdSubscribers: [null],
             date: [null]
         });
 
         this.form.valueChanges.subscribe(res => console.log(res));
 
-        this.axis.valueChanges
+        this.form.get('axis').valueChanges
             .subscribe(val => this.listAllWorks(val));
     }
 
     public setWorkForm(workForm) {
-        console.log(workForm);
         this.form.get('work').patchValue(workForm._id);
         this.form.get('workTitle').patchValue(workForm.title);
     }
 
     ngOnChanges(changes: SimpleChanges) {
+        console.log(changes);
         if (changes.type.currentValue == '2') {
             this.form.addControl('qtdSubscribers', new FormControl(null));
         } else {
             this.form.removeControl('qtdSubscribers');
+        }
+
+        if (changes.data && changes.data.currentValue) {
+            this.fillForm(changes.data.currentValue);
+        }
+    }
+
+    private fillForm(data) {
+        for (const key in this.form.controls) {
+            if (data.hasOwnProperty(key)) {
+                this.form.get(key).patchValue(data[key]);
+            }
         }
     }
 

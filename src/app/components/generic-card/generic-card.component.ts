@@ -15,30 +15,12 @@ export class GenericCardComponent {
   @Input() type: any;
   @Output() update: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  public user: string;
-
   constructor(
-    private scheduleService: ScheduleService,
-    private authService: AuthService
+    private scheduleService: ScheduleService
   ) { }
-
-  ngAfterViewInit() {
-    this.authService.refresh()
-      .subscribe(({ user }: any) => {
-        this.user = user._id
-      });
-  }
 
   public removeSchedule(id) {
     this.scheduleService.deleteSchedule(this.type, id)
       .subscribe(() => this.update.emit(true));
-  }
-
-  public isSubscribe() {
-    if (this.user) {
-      return this.schedule.subscribers.some(el => el == this.user);
-    }
-
-    return false;
   }
 }

@@ -17,14 +17,16 @@
                     </select>
                 </div>
             </div>
-            <ng-container *ngIf="showGenericForm()">
+            <ng-container *ngIf="showGenericForm">
                 <generic-form (submitForm)="sendSchedule($event)"></generic-form>
             </ng-container>
-            <ng-container *ngIf="showSimposioForm()">
+            <ng-container *ngIf="showSimposioForm">
                 <simposio-form (submitForm)="sendSchedule($event)"></simposio-form>
             </ng-container>
-            <ng-container *ngIf="showWorkScheduleForm()">
-                <work-schedule-form (submitForm)="sendSchedule($event)" [type]="axis.value"></work-schedule-form>
+            <ng-container *ngIf="showWorkScheduleForm">
+                <work-schedule-form (submitForm)="sendSchedule($event)" [type]="axis.value"
+                    [data]="form ? form.data : null">
+                </work-schedule-form>
             </ng-container>
         </div>
     </div>

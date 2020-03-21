@@ -9,18 +9,40 @@
 
     .flex {
       display: flex;
-      flex-flow: row nowrap;
+      flex-flow: row wrap;
     }
 
-    .expand {
+    .group-buttons {
       display: flex;
-      flex-grow: 1;
+      flex-grow: 2;
+      justify-content: flex-end;
+    }
+
+    .no-padding {
+      padding: 0px 0px;
+    }
+
+    .menu {
       color: #fff;
       background: #0d235f;
       box-shadow: 0px 0px 5px #000000bd;
       cursor: pointer;
       border-radius: 8px;
-      margin: 0px 0px 28px 0px;
+      padding: 8px 10px;
+      margin: 0px 16px 0px 0px;
+      text-align: center;
+      border: unset;
+    }
+
+    .expand {
+      color: #fff;
+      background: #0d235f;
+      box-shadow: 0px 0px 5px #000000bd;
+      cursor: pointer;
+      border-radius: 8px;
+      padding: 8px 10px;
+      margin: 0px 16px 0px 0px;
+      text-align: center;
 
       .fa-trash {
         margin: auto;
@@ -28,10 +50,10 @@
     }
 
     .group {
-      flex-flow: column nowrap;
-      align-items: start;
+      // flex-flow: column nowrap;
+      // align-items: start;
       margin-bottom: 8px;
-      flex-grow: 11;
+      // flex-grow: 10;
 
       .label {
         color: #fff;
@@ -78,5 +100,24 @@
     top: 70px;
     left: 16px;
     display: none;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .card-content {
+    .card {
+      .menu {
+        display: none;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .card-content {
+    .card {
+      .menu {
+        display: block;
+      }
+    }
   }
 }

@@ -47,9 +47,10 @@ export class SchedulesComponent implements OnInit {
     return type.id
   }
 
-  public addSchedule() {
+  public addSchedule(type?: number, data?: {}) {
     const dialogRef = this.dialog.open(ModalSchedulesComponent, {
-      maxHeight: '100vh'
+      maxHeight: '100vh',
+      data: data ? { type: type, data: data } : null
     });
 
     dialogRef.afterClosed().subscribe(res => this.listAllSchedules());
@@ -91,6 +92,10 @@ export class SchedulesComponent implements OnInit {
     }
 
     return false;
+  }
+
+  public editSchedule(data) {
+    this.addSchedule(this.getType(), data);
   }
 
 }

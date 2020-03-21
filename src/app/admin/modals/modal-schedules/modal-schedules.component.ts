@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { MatDialogRef } from '@angular/material';
+import { Component, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { SCHEDULE_TYPE } from '../../../declarations';
 import { FormControl } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
@@ -18,14 +18,21 @@ export class ModalSchedulesComponent {
   constructor(
     private dialog: MatDialogRef<ModalSchedulesComponent>,
     private toastr: ToastrService,
-    private scheduleService: ScheduleService
+    private scheduleService: ScheduleService,
+    @Inject(MAT_DIALOG_DATA) public form: any
   ) { }
+
+  ngAfterViewInit() {
+    if (this.form) {
+      this.axis.patchValue(this.form.type);
+    }
+  }
 
   public close() {
     this.dialog.close();
   }
 
-  public showGenericForm() {
+  public get showGenericForm() {
     if (this.axis.value) {
       const axis = Number(this.axis.value);
       return (axis == 1 || axis == 5 || axis == 7 || axis == 10 || axis == 11 || axis == 12);
@@ -34,7 +41,7 @@ export class ModalSchedulesComponent {
     return false;
   }
 
-  public showSimposioForm() {
+  public get showSimposioForm() {
     if (this.axis.value) {
       const axis = Number(this.axis.value);
 
@@ -44,7 +51,7 @@ export class ModalSchedulesComponent {
     return false;
   }
 
-  public showWorkScheduleForm() {
+  public get showWorkScheduleForm() {
     if (this.axis.value) {
       const axis = Number(this.axis.value);
       return (axis == 2 || axis == 4 || axis == 8 || axis == 9);

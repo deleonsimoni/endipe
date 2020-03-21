@@ -27,4 +27,12 @@ export class ScheduleService {
     return this.http.delete(`${this.baseUrl}/schedule/${type}/${id}`);
   }
 
+  public enrollSchedule(id) {
+    return this.http.post(`${this.baseUrl}/schedule/subscribeMinicurso/${id}`, {});
+  }
+
+  public cancelEnrollSchedule(id) {
+    return this.http.post(`${this.baseUrl}/schedule/unsubscribeMinicurso/${id}`, {});
+  }
+
 }

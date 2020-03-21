@@ -5,9 +5,6 @@
                 <p class="label">Horário</p>
                 <p class="hour">{{ schedule.startTime }} - {{ schedule.endTime }}</p>
             </div>
-            <ng-container (click)="isSubscribe()">
-                inscrito
-            </ng-container>
             <div class="expand" (click)="removeSchedule(schedule._id)" *ngIf="delete">
                 <i class="fas fa-trash"></i>
             </div>
