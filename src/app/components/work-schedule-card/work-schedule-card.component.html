@@ -10,8 +10,13 @@
       <div class="col-6">
         <div class="row justify-content-end">
           <div class="dropdown show" *ngIf="admin">
-            <a class="btn btn-secondary dropdown-toggle menu" href="#" role="button" id="dropdownMenuLink"
-              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+            <div class="row" *ngIf="carregando">
+              <i class="fas fa-spinner fa-pulse"></i>
+            </div>
+
+            <a *ngIf="!carregando" class="btn btn-secondary dropdown-toggle menu" href="#" role="button"
+              id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <i class="fas fa-cogs"></i>
             </a>
 

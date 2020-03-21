@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, SimpleChanges } from '@angular/
 import { ScheduleService } from 'src/app/services/schedule.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'work-schedule-card',
@@ -15,22 +16,19 @@ export class WorkScheduleCardComponent {
     @Input() type: any;
     @Output() update: EventEmitter<boolean> = new EventEmitter<boolean>();
     @Output() edit: EventEmitter<boolean> = new EventEmitter<boolean>();
+    @Input() user: any;
 
-    public userId: string;
+    public carregando = false;
 
+    public userId: String;
     constructor(
         private scheduleService: ScheduleService,
-        private authService: AuthService
+        private toastr: ToastrService,
+
     ) { }
 
     ngAfterViewInit() {
-        console.log(this.schedule)
-        if (!this.userId) {
-            this.authService.refresh()
-                .subscribe(({ user }: any) => {
-                    this.userId = user._id
-                });
-        }
+        this.userId = this.user._id
     }
 
     ngOnDestroy() {
@@ -38,6 +36,7 @@ export class WorkScheduleCardComponent {
     }
 
     public removeSchedule(id) {
+
         this.scheduleService.deleteSchedule(this.type, id)
             .subscribe(() => this.update.emit(true));
     }
@@ -51,29 +50,51 @@ export class WorkScheduleCardComponent {
     }
 
     public signUp(type) {
+        this.carregando = true;
         if (type == 2) {
             this.scheduleService.enrollSchedule(this.schedule._id)
                 .subscribe(res => {
                     this.schedule = res;
+                    this.toastr.success('Inscrição realizada com sucesso', 'Sucesso');
+                    this.carregando = false;
+                }, err => {
+                    this.toastr.success('Servidor momentaneamente inoperante', 'Erro');
+                    this.carregando = false;
                 });
         } else {
             this.scheduleService.enrollScheduleRodaDeConversa(this.schedule._id)
                 .subscribe(res => {
                     this.schedule = res;
+                    this.toastr.success('Inscrição realizada com sucesso', 'Sucesso');
+                    this.carregando = false;
+                }, err => {
+                    this.toastr.success('Servidor momentaneamente inoperante', 'Erro');
+                    this.carregando = false;
                 });
         }
     }
 
     public cancelSignUp(type) {
+        this.carregando = true;
         if (type == 2) {
             this.scheduleService.cancelEnrollSchedule(this.schedule._id)
                 .subscribe(res => {
                     this.schedule = res;
+                    this.toastr.success('Cancelamento de inscrição realizada com sucesso', 'Sucesso');
+                    this.carregando = false;
+                }, err => {
+                    this.toastr.success('Servidor momentaneamente inoperante', 'Erro');
+                    this.carregando = false;
                 });
         } else {
             this.scheduleService.cancelEnrollScheduleRodaDeConversa(this.schedule._id)
                 .subscribe(res => {
                     this.schedule = res;
+                    this.toastr.success('Cancelamento de inscrição realizada com sucesso', 'Sucesso');
+                    this.carregando = false;
+                }, err => {
+                    this.toastr.success('Servidor momentaneamente inoperante', 'Erro');
+                    this.carregando = false;
                 });
         }
     }
