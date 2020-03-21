@@ -4,7 +4,9 @@ module.exports = {
   listSchedule,
   insertSchedule,
   updateSchedule,
-  deleteSchedule
+  deleteSchedule,
+  unsubscribeMinicurso,
+  subscribeMinicurso
 }
 
 async function listSchedule(date) {
@@ -12,7 +14,7 @@ async function listSchedule(date) {
       date: date
     })
     .sort({
-      date: -1
+      startTime: 1
     });
 }
 
@@ -29,4 +31,28 @@ async function deleteSchedule(id) {
     _id: id
   });
 
+}
+
+async function unsubscribeMinicurso(workId, userId) {
+  return RodasDeConversa.findOneAndUpdate({
+    _id: workId
+  }, {
+    $push: {
+      'subscribers.userId': userId
+    }
+  });
+}
+
+async function subscribeMinicurso(workId, userId, email) {
+  let userInsert = {
+    userId: userId,
+    userEmail: email
+  }
+  return RodasDeConversa.findOneAndUpdate({
+    _id: workId
+  }, {
+    $pull: {
+      'subscribers': userInsert
+    }
+  });
 }

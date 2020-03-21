@@ -133,9 +133,6 @@ export class ModalConferencistasComponent implements OnInit {
       fullname: 'Lucíola Santos (UFMG)',
       imagemLocal: '../../assets/img/conferencistas/Lucíola Santos (UFMG).jpg'
     }, {
-      fullname: 'Luiz Carlos de Freitas (UNICAMP)',
-      imagemLocal: '../../assets/img/conferencistas/Luiz Carlos de Freitas (UNICAMP).jpg'
-    }, {
       fullname: 'Luiz Fernandes de Oliveira (UFRRJ)',
       imagemLocal: '../../assets/img/conferencistas/Luiz Fernandes de Oliveira (UFRRJ).jpg'
     }, {

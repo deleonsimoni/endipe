@@ -13,6 +13,9 @@ const ScheduleSchema = new mongoose.Schema({
   workTitle: {
     type: String,
   },
+  axis: {
+    type: String
+  },
   startTime: {
     type: String,
   },

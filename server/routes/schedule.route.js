@@ -32,6 +32,14 @@ router.post('/subscribeMinicurso/:workId', passport.authenticate('jwt', {
   session: false
 }), subscribeMinicurso);
 
+router.post('/unsubscribeRodadeConversa/:workId', passport.authenticate('jwt', {
+  session: false
+}), unsubscribeRodadeConversa);
+
+router.post('/subscribeRodadeConversa/:workId', passport.authenticate('jwt', {
+  session: false
+}), subscribeRodadeConversa);
+
 
 router.put('/:idType/:id', passport.authenticate('jwt', {
   session: false

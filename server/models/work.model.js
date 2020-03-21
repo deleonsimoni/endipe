@@ -81,6 +81,10 @@ const WorkSchema = new mongoose.Schema({
 
     }
   },
+  recurso: {
+    justify: String,
+    icAllow: String
+  },
   authors: [{
     userId: {
       type: mongoose.Schema.Types.ObjectId,

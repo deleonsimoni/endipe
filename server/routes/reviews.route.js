@@ -11,6 +11,18 @@ router.post('/admin', passport.authenticate('jwt', {
   session: false
 }), asyncHandler(insertAdminReview));
 
+router.post('/pedirRecurso/:workId', passport.authenticate('jwt', {
+  session: false
+}), asyncHandler(pedirRecurso));
+
+router.post('/negarRecurso/:workId', passport.authenticate('jwt', {
+  session: false
+}), asyncHandler(negarRecurso));
+
+router.post('/aceitarRecurso/:workId', passport.authenticate('jwt', {
+  session: false
+}), asyncHandler(aceitarRecurso));
+
 router.post('/reviewer', passport.authenticate('jwt', {
   session: false
 }), asyncHandler(insertReviewerReview));
@@ -21,6 +33,21 @@ router.get('/getWorks', passport.authenticate('jwt', {
 
 
 
+async function pedirRecurso(req, res) {
+
+  let reviews = await reviewCtrl.pedirRecurso(req.params.workId, req.body.justificativaRecurso);
+  res.json(reviews);
+}
+
+async function negarRecurso(req, res) {
+  let reviews = await reviewCtrl.negarRecurso(req.params.workId);
+  res.json(reviews);
+}
+
+async function aceitarRecurso(req, res) {
+  let reviews = await reviewCtrl.aceitarRecurso(req.params.workId);
+  res.json(reviews);
+}
 
 async function insertAdminReview(req, res) {
   if (req.user.icAdmin) {

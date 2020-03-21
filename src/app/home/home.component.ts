@@ -104,7 +104,7 @@ export class HomeComponent implements OnInit {
   ];
 
   comites = [
-    'Andrea Vilella Mafra da Silva – ISERJ',
+    'Andrea Villela Mafra da Silva – ISERJ',
     'Antonio Flavio Barbosa Moreira – UCP',
     'Claudia de Oliveira Fernandes – UNIRIO',
     'Claudia Miranda – UNIRIO',
@@ -115,7 +115,7 @@ export class HomeComponent implements OnInit {
     'Luis Paulo Cruz Borges – EB/CAp-UERJ',
     'Maria das Graças Nascimento – UFRJ',
     'Maria Inês Marcondes – PUC-Rio',
-    'Monica Vasconcellos – UFF',
+    'Mônica Vasconcellos – UFF',
     'Naiara Miranda Rust – IBC',
     'Patricia Bastos de Azevedo – UFRRJ',
     'Sandra Maciel – UFF',
@@ -250,7 +250,7 @@ export class HomeComponent implements OnInit {
         'Elana Cristiana Costa – EB/FME-Niterói',
         'Marcella da Silva Estevez Pacheco Guedes – FEBF/UERJ',
         'Marize Peixoto da Silva Figueiredo – FEBF/UERJ',
-        'Monica dos Santos Toledo – EB/COLUNI/UFF',
+        'Mônica dos Santos Toledo – EB/COLUNI/UFF',
         'Patricia Coelho da Costa – PUC-Rio',
         'Rejany dos Santos Dominick – UFF',
         'Veronica Borges de Oliveira – UERJ'
@@ -269,7 +269,7 @@ export class HomeComponent implements OnInit {
     {
       nome: 'Serviço de som, filmagem, imagem, transmissão e tecnologia',
       equipe: [
-        'Monica Vasconcellos – UFF (coord.)',
+        'Mônica Vasconcellos – UFF (coord.)',
         'Edna Regina Aguiar – EB/COLUNI/UFF',
         'Helen Pereira Ferreira – UFF',
         'Marcia Maria e Silva – UFF',
@@ -305,7 +305,7 @@ export class HomeComponent implements OnInit {
       coordenacao: [
         'Alexandra Garcia Ferreira Lima – FFP/UERJ',
         'Graça Regina Reis – CAp UFRJ',
-        'Monica Vasconcellos – UFF',
+        'Mônica Vasconcellos – UFF',
         'Naiara Miranda Rust – IBC',
         'Victor Giraldo – UFRJ'
       ],
