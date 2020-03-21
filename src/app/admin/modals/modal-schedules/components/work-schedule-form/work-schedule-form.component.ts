@@ -39,10 +39,10 @@ export class WorkScheduleFormComponent {
             date: [null]
         });
 
-        this.form.valueChanges.subscribe(res => console.log(res));
-
         this.form.get('axis').valueChanges
-            .subscribe(val => this.listAllWorks(val));
+            .subscribe(val => {
+                this.listAllWorks(Number(val));
+            });
     }
 
     public setWorkForm(workForm) {
@@ -66,6 +66,9 @@ export class WorkScheduleFormComponent {
     private fillForm(data) {
         for (const key in this.form.controls) {
             if (data.hasOwnProperty(key)) {
+                if (key == 'axis') {
+                    this.form.get(key).patchValue(Number(data[key]));
+                }
                 this.form.get(key).patchValue(data[key]);
             }
         }
@@ -80,6 +83,10 @@ export class WorkScheduleFormComponent {
                     this.works = works;
                 }
             });
+    }
+
+    public get axis() {
+        return this.form.get('axis').value;
     }
 
     public submitSchedule() {

@@ -19,8 +19,8 @@ export class ScheduleService {
     return this.http.get<any>(`${this.baseUrl}/schedule/${type}/${date}`);
   }
 
-  public updateSchedule(form) {
-    return this.http.post<any>(`${this.baseUrl}`, form);
+  public updateSchedule(id, form) {
+    return this.http.post<any>(`${this.baseUrl}/schedule/${id}`, form);
   }
 
   public deleteSchedule(type, id) {

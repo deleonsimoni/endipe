@@ -59,6 +59,16 @@ async function subscribeMinicurso(req, res) {
   res.json(users);
 }
 
+async function unsubscribeRodadeConversa(req, res) {
+  let users = await minicursoCtrl.unsubscribeRodadeConversa(req.params.workId, req.user._id);
+  res.json(users);
+}
+
+async function subscribeRodadeConversa(req, res) {
+  let users = await minicursoCtrl.subscribeRodadeConversa(req.params.workId, req.user._id, req.user.email);
+  res.json(users);
+}
+
 async function listSchedule(req, res) {
 
   let schedules;

@@ -61,10 +61,18 @@ export class ModalSchedulesComponent {
   }
 
   public sendSchedule(event) {
-    this.scheduleService.registerSchedule(this.axis.value, event.data)
-      .subscribe(_ => {
-        this.toastr.success('Programação cadastrada com sucesso');
-        this.dialog.close(true);
-      });
+    if (event.data._id) {
+      this.scheduleService.updateSchedule(event.data._id, event.data)
+        .subscribe(_ => {
+          this.toastr.success('Programação cadastrada com sucesso');
+          this.dialog.close(true);
+        });
+    } else {
+      this.scheduleService.registerSchedule(this.axis.value, event.data)
+        .subscribe(_ => {
+          this.toastr.success('Programação cadastrada com sucesso');
+          this.dialog.close(true);
+        });
+    }
   }
 }
