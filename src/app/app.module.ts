@@ -90,7 +90,8 @@ import { ProgramacaoModule } from './programacao/programacao.module';
     ModalTurismoComponent,
     ModalConferencistasComponent,
     ModalEncerramentoComponent,
-    ModalAberturaComponent
+    ModalAberturaComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -135,7 +136,8 @@ import { ProgramacaoModule } from './programacao/programacao.module';
     ModalConferencistasComponent,
     ModalEncerramentoComponent,
     ModalAberturaComponent,
-    RegisterComponent
+    RegisterComponent,
+
   ],
   providers: [
     {

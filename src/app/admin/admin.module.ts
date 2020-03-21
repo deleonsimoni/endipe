@@ -16,21 +16,18 @@ import { SubscribersMetricsComponent } from './components/subscribers-metrics/su
 import { SubscribersCardComponent } from './components/subscribers-card/subscribers-card.component';
 import { WorkContentComponent } from './components/work-content/work-content.component';
 import { SubscribersDataComponent } from './components/subscribers-data/subscribers-data.component';
-import { WorkCardComponent } from './components/work-card/work-card.component';
 import { ConferencerComponent } from './conferencer/conferencer.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ModalModule } from './modals/modal.module';
 import { ConferencerCardComponent } from './components/conferencer-card/conferencer-card.component';
 import { UtilNgxMaterialModule } from '../util-ngx-material/util-ngx-material.module';
 import { VincularTrabalhosComponent } from './vincular-trabalhos/vincular-trabalhos.component';
-import { WorkDataComponent } from './work-data/work-data.component';
 import { ModalReviewAdminComponent } from './modals/modal-review-admin/modal-review-admin.component';
 import { SchedulesComponent } from './schedules/schedules.component';
 import { ReviewListWorksComponent } from './review-list-works/review-list-works.component';
 import { ModalReviewReviewerComponent } from './modals/modal-review-reviewer/modal-review-reviewer.component';
 import { GlobalComponentsModule } from '../components/global-components.module';
 import { ModalSchedulesModule } from './modals/modal-schedules/modal-schedules.module';
-
 @NgModule({
     declarations: [
         AdminComponent,
@@ -42,12 +39,10 @@ import { ModalSchedulesModule } from './modals/modal-schedules/modal-schedules.m
         SubscribersCardComponent,
         WorkContentComponent,
         SubscribersDataComponent,
-        WorkCardComponent,
         ConferencerComponent,
         NotFoundComponent,
         ConferencerCardComponent,
         VincularTrabalhosComponent,
-        WorkDataComponent,
         SchedulesComponent,
         ReviewListWorksComponent,
     ],
