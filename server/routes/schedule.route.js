@@ -24,6 +24,15 @@ router.post('/:idType', passport.authenticate('jwt', {
   session: false
 }), insertSchedule);
 
+router.post('/unsubscribeMinicurso/:workId', passport.authenticate('jwt', {
+  session: false
+}), unsubscribeMinicurso);
+
+router.post('/subscribeMinicurso/:workId', passport.authenticate('jwt', {
+  session: false
+}), subscribeMinicurso);
+
+
 router.put('/:idType/:id', passport.authenticate('jwt', {
   session: false
 }), updateSchedule);
@@ -32,6 +41,15 @@ router.delete('/:idType/:id', passport.authenticate('jwt', {
   session: false
 }), deleteSchedule);
 
+async function unsubscribeMinicurso(req, res) {
+  let users = await minicursoCtrl.unsubscribeMinicurso(req.params.workId, req.user._id);
+  res.json(users);
+}
+
+async function subscribeMinicurso(req, res) {
+  let users = await minicursoCtrl.subscribeMinicurso(req.params.workId, req.user._id);
+  res.json(users);
+}
 
 async function listSchedule(req, res) {
 

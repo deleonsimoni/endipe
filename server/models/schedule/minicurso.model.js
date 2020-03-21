@@ -28,6 +28,10 @@ const ScheduleSchema = new mongoose.Schema({
   qtdSubscribers: {
     type: String,
   },
+  subscribers: [{
+    type: mongoose.Schema.Types.ObjectId
+  }],
+
   date: {
     type: String
   },

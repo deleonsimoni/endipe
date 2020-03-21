@@ -1,7 +1,7 @@
 import { Component, Input, EventEmitter, Output, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
-import { AdminService } from '../../admin.service';
+import { AdminService } from '../../admin/admin.service';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -13,6 +13,7 @@ export class WorkCardComponent implements OnInit {
 
   @Input() work: any;
   @Input() reviewers: any;
+  @Input() user: any;
 
   @Output() selected = new EventEmitter();
 

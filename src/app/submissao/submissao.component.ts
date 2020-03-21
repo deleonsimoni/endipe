@@ -5,6 +5,9 @@ import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../services/auth.service';
 import { EventEmitter } from 'events';
 import { Observable, Subject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Injectable, Inject } from '@angular/core';
+
 @Component({
   selector: 'app-submissao',
   templateUrl: './submissao.component.html',
@@ -19,6 +22,9 @@ export class SubmissaoComponent implements OnInit {
   public carregando = true;
   public enviando = false;
   public sub: Subject<any>;
+  public reviewers = [];
+  public works = [];
+  public workSelect;
   public submissionForm: FormGroup;
   public authors = new Array();
   public showAdd = true;
@@ -51,39 +57,52 @@ export class SubmissaoComponent implements OnInit {
     private builder: FormBuilder,
     private uploadService: UploadService,
     private toastr: ToastrService,
-    private authService: AuthService
+    private authService: AuthService,
+    @Inject('BASE_API_URL') private baseUrl: string,
+    private http: HttpClient
 
   ) {
     this.receberDados.subscribe();
   }
 
   ngOnInit() {
-    this.createForm();
+    //this.createForm();
+
     const vm = this;
     this.authService.refresh().subscribe((res: any) => {
       this.user = res.user;
       this.modalidadesUsuario = this.modalidades;
-      /* if (this.user.modalityId) {
-         this.user.modalityId.forEach(function (value) {
-           vm.modalidadesUsuario.push(vm.modalidades.find(item => item.id == value));
-         });
-       }*/
+
       this.carregando = false;
     });
 
+    /*
+        this.submissionForm.get('modalityId').valueChanges.subscribe(res => {
+          this.showAdd = true;
+          const control = this.submissionForm.get('authors') as FormArray;
+          for (let i = control.length - 1; i >= 0; i--) {
+            if (i === 0) {
+              (this.submissionForm.get('authors') as FormArray).at(0).patchValue({ email: '' });
+            } else {
+              control.removeAt(i);
+            }
+          }
+        });
+    */
+    this.carregarTrabalhosUsuario()
 
-    this.submissionForm.get('modalityId').valueChanges.subscribe(res => {
-      this.showAdd = true;
-      const control = this.submissionForm.get('authors') as FormArray;
-      for (let i = control.length - 1; i >= 0; i--) {
-        if (i === 0) {
-          (this.submissionForm.get('authors') as FormArray).at(0).patchValue({ email: '' });
-        } else {
-          control.removeAt(i);
-        }
-      }
+  }
+
+
+  private carregarTrabalhosUsuario() {
+    this.carregando = true;
+    this.http.get(`${this.baseUrl}/user/worksReviewer/`).subscribe((res: any) => {
+      this.works = res.works;
+      this.carregando = false;
+    }, err => {
+      console.log(err);
+      this.carregando = false;
     });
-
   }
 
   private createForm(): void {
@@ -303,6 +322,14 @@ export class SubmissaoComponent implements OnInit {
     }
   }
 
+
+  public receiverSelectedWork(work) {
+    if (this.workSelect === work._id) {
+      this.workSelect = null;
+    } else {
+      this.workSelect = work._id;
+    }
+  }
 
 
 }

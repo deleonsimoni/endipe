@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { DownloadFileService } from 'src/app/services/download-file.service';
 import { MatDialogRef, MatDialog } from '@angular/material';
-import { ModalReviewAdminComponent } from '../modals/modal-review-admin/modal-review-admin.component';
-import { ModalReviewReviewerComponent } from '../modals/modal-review-reviewer/modal-review-reviewer.component';
+import { ModalReviewAdminComponent } from '../../admin/modals/modal-review-admin/modal-review-admin.component';
+import { ModalReviewReviewerComponent } from '../../admin/modals/modal-review-reviewer/modal-review-reviewer.component';
 import { ToastrService } from 'ngx-toastr';
 import { UploadService } from 'src/app/services/upload.service';
 
