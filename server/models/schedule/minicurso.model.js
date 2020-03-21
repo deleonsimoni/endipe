@@ -29,7 +29,12 @@ const ScheduleSchema = new mongoose.Schema({
     type: String,
   },
   subscribers: [{
-    type: mongoose.Schema.Types.ObjectId
+    userId: {
+      type: mongoose.Schema.Types.ObjectId
+    },
+    userEmail: {
+      type: String
+    },
   }],
 
   date: {

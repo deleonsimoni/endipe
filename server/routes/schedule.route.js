@@ -47,7 +47,7 @@ async function unsubscribeMinicurso(req, res) {
 }
 
 async function subscribeMinicurso(req, res) {
-  let users = await minicursoCtrl.subscribeMinicurso(req.params.workId, req.user._id);
+  let users = await minicursoCtrl.subscribeMinicurso(req.params.workId, req.user._id, req.user.email);
   res.json(users);
 }
 

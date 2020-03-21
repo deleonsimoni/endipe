@@ -38,17 +38,21 @@ async function unsubscribeMinicurso(workId, userId) {
     _id: workId
   }, {
     $push: {
-      'subscribers': userId
+      'subscribers.userId': userId
     }
   });
 }
 
-async function subscribeMinicurso(workId, userId) {
+async function subscribeMinicurso(workId, userId, email) {
+  let userInsert = {
+    userId: userId,
+    userEmail: email
+  }
   return Minicurso.findOneAndUpdate({
     _id: workId
   }, {
     $pull: {
-      'subscribers': userId
+      'subscribers': userInsert
     }
   });
 }
