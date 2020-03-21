@@ -59,7 +59,7 @@ export class WorkScheduleFormComponent {
     }
 
     private listAllWorks(axis) {
-        this.adminService.retrieveAllWorks(axis)
+        this.adminService.retrieveAllWorksValids(axis)
             .subscribe(works => {
                 if (works.temErro) {
                     this.toastr.error('Erro', works);

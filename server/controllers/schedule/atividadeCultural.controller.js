@@ -12,7 +12,7 @@ async function listSchedule(date) {
       date: date
     })
     .sort({
-      date: -1
+      startTime: 1
     });
 }
 

@@ -99,7 +99,7 @@
     <div *ngIf="work.reviewReviewer" class="row align-items-center mb-2">
       <hr />
       <div class="col-md-12">
-        <strong>Parecer {{work.reviewReviewer.userEmail}}</strong>
+        <strong>Parecer de {{work.reviewReviewer.userEmail}}</strong>
 
         <div *ngIf="work.reviewReviewer.review">
           <div>
@@ -130,6 +130,82 @@
             </p>
           </div>
         </div>
+      </div>
+    </div>
+
+    <div *ngIf="work.reviewReviewer.review.icAllow == 'Nao' && !user.icAdmin && !user?.reviewer?.icCoordinator"
+      class="row align-items-center mb-2" style="border: crimson; margin: 1px; border-style: dotted;">
+      <div class="col-md-12">
+        <h3 style="color:red;">Entrar com recurso</h3>
+
+        <div>
+
+          <div class="form-row justify-content-center">
+            <div class="form-group col-md-12">
+              <label id="example-radio-group-label">Justificativa</label>
+
+              <textarea *ngIf="!work.recurso?.icAllow" maxlength="2000" class="form-control" rows="5"
+                [(ngModel)]="justificativaRecurso">
+                        </textarea>
+              <span *ngIf="work.recurso?.icAllow">
+                <hr />
+                {{work.recurso?.justify}}
+              </span>
+
+              <div *ngIf="work.recurso?.icAllow == 'Sim'" class="row justify-content-end">
+                <b style="color: green">Recurso aceito</b>
+              </div>
+
+              <div *ngIf="work.recurso?.icAllow == 'Nao'" class="row justify-content-end">
+                <b style="color: red">Recurso recusado</b>
+              </div>
+
+              <div *ngIf="!work.recurso?.icAllow" class="row justify-content-end">
+                <button class="btn-get-started" (click)="aplicarRecurso()">Enviar Recurso</button>
+              </div>
+
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+
+    <div *ngIf="work.recurso?.justify && (user.icAdmin && !user?.reviewer?.icCoordinator)"
+      class="row align-items-center mb-2" style="border: crimson; margin: 1px; border-style: dotted;">
+      <hr />
+      <div class="col-md-12">
+        <h3 style="color:red;">Avaliar recurso</h3>
+
+
+        <div class="form-row justify-content-center">
+          <div class="form-group col-md-12">
+            <label id="example-radio-group-label">Justificativa</label>
+            <br />
+            {{work.recurso?.justify}}
+            <br />
+          </div>
+        </div>
+        <div class="form-row justify-content-center">
+          <div class="form-group col-md-12">
+            <div class="form-group">
+              Aceitar Recurso?
+              <br />
+              <div class="btn-group" role="group" aria-label="Basic example">
+                <button (click)="aceitarRecurso()"
+                  [ngStyle]="{'background-color: green;color:white':  work.recurso?.icAllow == 'Sim', 'background-color: white;color: black': work.recurso?.icAllow=='Nao'}"
+                  type="button" [ngClass]="{'btn btn-success': work.recurso?.icAllow=='Sim'}" class="btn">Sim</button>
+                <button (click)="negarRecurso()"
+                  [ngStyle]="{'background-color: red;color:white':  work.recurso?.icAllow=='Sim', 'background-color: white;color: black': work.recurso?.icAllow=='Nao'}"
+                  type="button" [ngClass]="{'btn btn-danger': work.recurso?.icAllow=='Nao'}" class="btn">Não</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
       </div>
     </div>
 

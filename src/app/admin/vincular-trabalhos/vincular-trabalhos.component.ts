@@ -105,6 +105,12 @@ export class VincularTrabalhosComponent implements OnInit {
       case 3:
         this.works = this.allWorks.filter(work => work.reviewAdmin && work.reviewAdmin.review.icAllow == "Sim");
         break;
+      case 4:
+        this.works = this.allWorks.filter(work => work.recurso && work.recurso.icAllow == "Sim");
+        break;
+      case 5:
+        this.works = this.allWorks.filter(work => work.recurso && work.recurso.justify && !work.recurso.icAllow);
+        break;
     }
 
   }
@@ -124,6 +130,12 @@ export class VincularTrabalhosComponent implements OnInit {
         break;
       case 3:
         this.works = this.allWorks.filter(work => work.reviewReviewer && work.reviewReviewer.review.icAllow == "Sim");
+        break;
+      case 4:
+        this.works = this.allWorks.filter(work => work.recurso && work.recurso.icAllow == "Sim");
+        break;
+      case 5:
+        this.works = this.allWorks.filter(work => work.recurso && work.recurso.justify && !work.recurso.icAllow);
         break;
     }
 

@@ -27,7 +27,8 @@ module.exports = {
   getWorksCoordinator,
   alterUserWorkFile,
   submitWork,
-  generateReport
+  generateReport,
+  getWorksValids
 
 }
 
@@ -43,7 +44,9 @@ async function getUsers(req) {
 
   usersFound = await User.find(search)
     .select('fullname email createdAt document phones modalityId payment works institution isPCD deficiencyType icForeign')
-    .sort({ fullname: 1 })
+    .sort({
+      fullname: 1
+    })
     .skip((pageSize * page) - pageSize)
     .limit(pageSize);
 
@@ -51,24 +54,36 @@ async function getUsers(req) {
 
   const pager = paginate(numbOfUsers, page, pageSize);
 
-  return { usersFound, pager }
+  return {
+    usersFound,
+    pager
+  }
 }
 
 async function generateReport() {
-  return await User.find({ 'payment.icPaid': true })
+  return await User.find({
+      'payment.icPaid': true
+    })
     .select('fullname email document payment.categoryId icForeign')
-    .sort({ fullname: 1 })
-    ;
+    .sort({
+      fullname: 1
+    });
 
 }
 
 async function editUser(user) {
-  return await User.findOneAndUpdate({ _id: user._id }, user, { upsert: true });
+  return await User.findOneAndUpdate({
+    _id: user._id
+  }, user, {
+    upsert: true
+  });
 }
 
 
 async function deleteByEmail(emailDelete) {
-  return await User.findOneAndRemove({ email: emailDelete }, function (err, doc) {
+  return await User.findOneAndRemove({
+    email: emailDelete
+  }, function (err, doc) {
     if (err) {
       console.log("erro ao deletar o usuario: " + emailDelete, err);
     } else {
@@ -78,7 +93,9 @@ async function deleteByEmail(emailDelete) {
 }
 
 async function getUserWorks(workId) {
-  return await Work.findOne({ _id: workId }, function (err, doc) {
+  return await Work.findOne({
+    _id: workId
+  }, function (err, doc) {
     if (err) {
       console.log("erro ao buscar trabalho: " + workId, err);
     } else {
@@ -134,18 +151,43 @@ async function alterUserWorkFile(req) {
   console.log('atualizando  banco');
 
   if (filesArray.length == 2) {
-    return await Work.findOneAndUpdate({ _id: req.params.idWork }, { $set: { 'pathS3DOC': responseUpload.filesS3[0], 'pathS3PDF': responseUpload.filesS3[1] } });
+    return await Work.findOneAndUpdate({
+      _id: req.params.idWork
+    }, {
+      $set: {
+        'pathS3DOC': responseUpload.filesS3[0],
+        'pathS3PDF': responseUpload.filesS3[1]
+      }
+    });
   } else if (responseUpload.filesS3[0].includes(".pdf")) {
-    return await Work.findOneAndUpdate({ _id: req.params.idWork }, { $set: { 'pathS3DOC': responseUpload.filesS3[0] } });
+    return await Work.findOneAndUpdate({
+      _id: req.params.idWork
+    }, {
+      $set: {
+        'pathS3DOC': responseUpload.filesS3[0]
+      }
+    });
   } else {
-    return await Work.findOneAndUpdate({ _id: req.params.idWork }, { $set: { 'pathS3PDF': responseUpload.filesS3[0] } });
+    return await Work.findOneAndUpdate({
+      _id: req.params.idWork
+    }, {
+      $set: {
+        'pathS3PDF': responseUpload.filesS3[0]
+      }
+    });
   }
 
 }
 
 async function validatePayment(id) {
 
-  return await User.findOneAndUpdate({ _id: id }, { $set: { 'payment.icPaid': true } }, function (err, doc) {
+  return await User.findOneAndUpdate({
+    _id: id
+  }, {
+    $set: {
+      'payment.icPaid': true
+    }
+  }, function (err, doc) {
     if (err) {
       console.log("erro ao atualizar o usuario: ", err);
     } else {
@@ -155,7 +197,13 @@ async function validatePayment(id) {
 }
 
 async function invalidatePayment(id) {
-  return await User.findOneAndUpdate({ _id: id }, { $set: { 'payment.icPaid': false } }, function (err, doc) {
+  return await User.findOneAndUpdate({
+    _id: id
+  }, {
+    $set: {
+      'payment.icPaid': false
+    }
+  }, function (err, doc) {
     if (err) {
       console.log("erro ao atualizar o usuario: ", err);
     } else {
@@ -165,16 +213,42 @@ async function invalidatePayment(id) {
 }
 
 async function getWorks(axis) {
-  return await Work.find({ axisId: axis });
+  return await Work.find({
+    axisId: axis
+  });
+}
+
+async function getWorksValids(axis) {
+  return await Work.find({
+    axisId: axis,
+    $or: [{
+      'reviewAdmin.review.icAllow': 'Sim',
+      'reviewReviewer.review.icAllow': 'Sim'
+    }, {
+      'recurso.icAllow': 'Sim'
+    }]
+
+  }).sort({
+    title: 1
+  });
 }
 
 async function getWorksCoordinator(axis) {
-  return await Work.find({ axisId: axis, 'reviewAdmin.review.icAllow': 'Sim' });
+  return await Work.find({
+    axisId: axis,
+    'reviewAdmin.review.icAllow': 'Sim'
+  });
 }
 
 async function validateDoc(id) {
 
-  return await User.findOneAndUpdate({ _id: id }, { $set: { 'payment.icValid': true } }, function (err, doc) {
+  return await User.findOneAndUpdate({
+    _id: id
+  }, {
+    $set: {
+      'payment.icValid': true
+    }
+  }, function (err, doc) {
     if (err) {
       console.log("erro ao atualizar o usuario: ", err);
     } else {
@@ -184,7 +258,13 @@ async function validateDoc(id) {
 }
 
 async function invalidateDoc(id) {
-  return await User.findOneAndUpdate({ _id: id }, { $set: { 'payment.icValid': false } }, function (err, doc) {
+  return await User.findOneAndUpdate({
+    _id: id
+  }, {
+    $set: {
+      'payment.icValid': false
+    }
+  }, function (err, doc) {
     if (err) {
       console.log("erro ao atualizar o usuario: ", err);
     } else {
@@ -194,12 +274,20 @@ async function invalidateDoc(id) {
 }
 
 async function removeWork(req) {
-  return await Work.findByIdAndRemove({ _id: req.params.id }, function (err, doc) {
+  return await Work.findByIdAndRemove({
+    _id: req.params.id
+  }, function (err, doc) {
     if (err) {
       console.log("erro ao remover trabalho: ", err);
     } else {
       for (let author of doc.authors) {
-        User.findOneAndUpdate({ _id: author.userId }, { $pull: { 'works': req.params.id } }, function (err, doc) {
+        User.findOneAndUpdate({
+          _id: author.userId
+        }, {
+          $pull: {
+            'works': req.params.id
+          }
+        }, function (err, doc) {
           if (err) {
             console.log("Erro ao remover trabalho do usuario ", err);
           } else {
@@ -213,12 +301,20 @@ async function removeWork(req) {
 
 async function removeAuthor(req) {
 
-  return await User.findOneAndUpdate({ _id: req.params.authorId }, { $pull: { 'works': req.params.workId } }, function (err, doc) {
+  return await User.findOneAndUpdate({
+    _id: req.params.authorId
+  }, {
+    $pull: {
+      'works': req.params.workId
+    }
+  }, function (err, doc) {
     if (err) {
       console.log("Erro ao capturar usuario para excluir trabalho: ", err);
     } else {
 
-      Work.findOneAndUpdate({ _id: req.params.workId }, {
+      Work.findOneAndUpdate({
+        _id: req.params.workId
+      }, {
         $pull: {
           'authors': {
             "userId": req.params.authorId
@@ -237,13 +333,17 @@ async function removeAuthor(req) {
 
 async function insertAuthorWork(req) {
 
-  return await User.findOne({ email: req.body.authorEmail }, function (err, doc) {
+  return await User.findOne({
+    email: req.body.authorEmail
+  }, function (err, doc) {
     if (err) {
       console.log("Erro ao capturar usuario para inserir o trabalho: ", err);
     } else {
       doc.works.push(req.body.workId);
       doc.save().then((result) => {
-        Work.findOneAndUpdate({ _id: req.body.workId }, {
+        Work.findOneAndUpdate({
+          _id: req.body.workId
+        }, {
           $push: {
             'authors': {
               "userId": result._id,
@@ -263,4 +363,3 @@ async function insertAuthorWork(req) {
     }
   });
 }
-
