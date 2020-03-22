@@ -14,7 +14,7 @@ export class WorkScheduleCardComponent {
     @Input() type: any;
     @Output() update: EventEmitter<boolean> = new EventEmitter<boolean>();
     @Output() edit: EventEmitter<boolean> = new EventEmitter<boolean>();
-    @Input() user: any;
+    @Input() user?: any;
 
     public carregando = false;
 
@@ -100,4 +100,5 @@ export class WorkScheduleCardComponent {
     public editSchedule() {
         this.edit.emit(this.schedule);
     }
+
 }

@@ -10,6 +10,7 @@ import { ModalEncerramentoComponent } from '../modal-encerramento/modal-encerram
 import { ModalAberturaComponent } from '../modal-abertura/modal-abertura.component';
 import { ModalProgramacaoComponent } from '../modal-programacao/modal-programacao.component';
 import { ScheduleService } from '../services/schedule.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-programacao',
@@ -25,10 +26,11 @@ export class ProgramacaoComponent implements OnInit {
   public daySelected$: BehaviorSubject<string> = new BehaviorSubject<string>('14/07');
   public label = 'Abertura';
   public typeId: any;
+  public user: any;
 
   constructor(
-    private dialog: MatDialog,
-    private scheduleService: ScheduleService
+    private scheduleService: ScheduleService,
+    private authService: AuthService
   ) {
 
     this.daySelected$.subscribe(_ => {
@@ -39,6 +41,10 @@ export class ProgramacaoComponent implements OnInit {
 
   ngOnInit() {
     this.listAllSchedules();
+
+    this.authService.refresh().subscribe((res: any) => {
+      this.user = res.user;
+    });
   }
 
   private listAllSchedules() {

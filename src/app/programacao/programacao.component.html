@@ -126,7 +126,8 @@
                                     </simposio-card>
                                 </ng-container>
                                 <ng-container *ngIf="showWorkCard()">
-                                    <work-schedule-card [schedule]="schedule" [type]="typeId" (update)="updateList()">
+                                    <work-schedule-card [schedule]="schedule" [type]="typeId" (update)="updateList()"
+                                        [user]="user">
                                     </work-schedule-card>
                                 </ng-container>
                             </div>

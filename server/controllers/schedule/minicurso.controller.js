@@ -57,5 +57,7 @@ async function subscribeMinicurso(workId, userId, email) {
     $addToSet: {
       'subscribers': userInsert
     }
+  }, {
+    new: true
   });
 }
