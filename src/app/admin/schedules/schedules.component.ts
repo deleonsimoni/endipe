@@ -4,6 +4,7 @@ import { ModalSchedulesComponent } from '../modals/modal-schedules/modal-schedul
 import { ScheduleService } from 'src/app/services/schedule.service';
 import { SCHEDULE_TYPE } from 'src/app/declarations';
 import { BehaviorSubject } from 'rxjs';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-schedules',
@@ -18,10 +19,13 @@ export class SchedulesComponent implements OnInit {
   public daySelected$: BehaviorSubject<string> = new BehaviorSubject<string>('14/07');
   public label = 'Abertura';
   public typeId: any;
+  public user: any;
 
   constructor(
     private dialog: MatDialog,
-    private scheduleService: ScheduleService
+    private scheduleService: ScheduleService,
+    private authService: AuthService,
+
   ) {
 
     this.daySelected$.subscribe(_ => {
@@ -32,6 +36,11 @@ export class SchedulesComponent implements OnInit {
 
   ngOnInit() {
     this.listAllSchedules();
+
+    this.authService.refresh().subscribe((res: any) => {
+      this.user = res.user;
+    });
+
   }
 
   private listAllSchedules() {

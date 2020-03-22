@@ -1,46 +1,70 @@
 <mat-tab-group (selectedTabChange)="currentTab($event)">
-    <mat-tab *ngFor="let workModality of programacoes" [label]="workModality.name">
-        <div class="container-schedule">
-            <div class="row mb-3">
-                <div class="col-12 col-sm-12 col-md-6">
-                    <ul class="nav nav-pills">
-                        <ng-container *ngFor="let day of days">
-                            <li class="nav-item" (click)="selectDay(day)"
-                                [ngClass]="{'activated': (daySelected$ | async) == day}">
-                                <a class="nav-link">{{ day }}</a>
-                            </li>
-                        </ng-container>
-                    </ul>
-                </div>
-            </div>
-            <div class="row">
-                <ng-container *ngIf="(schedules$ | async)?.length > 0">
-                    <div class="col-12 col-sm-12 col-md-12 mb-3" *ngFor="let schedule of (schedules$ | async)">
-                        <ng-container *ngIf="showGenericCard()">
-                            <generic-card [schedule]="schedule" [admin]="true" [type]="typeId" (update)="updateList()"
-                                (edit)="editSchedule($event)">
-                            </generic-card>
-                        </ng-container>
-                        <ng-container *ngIf="showSimposioCard()">
-                            <simposio-card [schedule]="schedule" [admin]="true" [type]="typeId" (update)="updateList()"
-                                (edit)="editSchedule($event)"></simposio-card>
-                        </ng-container>
-                        <ng-container *ngIf="showWorkCard()">
-                            <work-schedule-card [schedule]="schedule" [admin]="true" [type]="typeId"
-                                (update)="updateList()" (edit)="editSchedule($event)"></work-schedule-card>
-                        </ng-container>
-                    </div>
-                </ng-container>
-                <ng-container *ngIf="(schedules$ | async)?.length < 1">
-                    <div class="not-schedule">
-                        Não há programação para esse dia
-                    </div>
-                </ng-container>
-            </div>
+  <mat-tab *ngFor="let workModality of programacoes" [label]="workModality.name">
+    <div class="container-schedule">
+      <div class="row mb-3">
+        <div class="col-12 col-sm-12 col-md-6">
+          <ul class="nav nav-pills">
+            <ng-container *ngFor="let day of days">
+              <li class="nav-item" (click)="selectDay(day)" [ngClass]="{'activated': (daySelected$ | async) == day}">
+                <a class="nav-link">{{ day }}</a>
+              </li>
+            </ng-container>
+          </ul>
         </div>
-    </mat-tab>
+      </div>
+      <div class="row">
+        <ng-container *ngIf="(schedules$ | async)?.length > 0">
+          <div class="col-12 col-sm-12 col-md-12 mb-3" *ngFor="let schedule of (schedules$ | async)">
+            <ng-container *ngIf="showGenericCard()">
+              <generic-card [schedule]="schedule" [admin]="true" [type]="typeId" (update)="updateList()"
+                (edit)="editSchedule($event)">
+              </generic-card>
+            </ng-container>
+            <ng-container *ngIf="showSimposioCard()">
+              <simposio-card [schedule]="schedule" [admin]="true" [type]="typeId" (update)="updateList()"
+                (edit)="editSchedule($event)"></simposio-card>
+            </ng-container>
+            <ng-container *ngIf="showWorkCard()">
+              <work-schedule-card [schedule]="schedule" [admin]="true" [type]="typeId" (update)="updateList()"
+                [user]="user" (edit)="editSchedule($event)"></work-schedule-card>
+            </ng-container>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="(schedules$ | async)?.length < 1">
+          <div class="not-schedule">
+            Não há programação para esse dia
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    </div>
+    <div class="row">
+      <ng-container *ngIf="(schedules$ | async)?.length > 0">
+        <div class="col-12 col-sm-12 col-md-12 mb-3" *ngFor="let schedule of (schedules$ | async)">
+          <ng-container *ngIf="showGenericCard()">
+            <generic-card [schedule]="schedule" [delete]="true" [type]="typeId" (update)="updateList()">
+            </generic-card>
+          </ng-container>
+          <ng-container *ngIf="showSimposioCard()">
+            <simposio-card [schedule]="schedule" [delete]="true" [type]="typeId" (update)="updateList()">
+            </simposio-card>
+          </ng-container>
+          <ng-container *ngIf="showWorkCard()">
+            <work-schedule-card [schedule]="schedule" [user]="user" [admin]="true" [type]="typeId"
+              (update)="updateList()" (edit)="editSchedule($event)"></work-schedule-card>
+          </ng-container>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="(schedules$ | async)?.length < 1">
+        <div class="not-schedule">
+          Não há programação para esse dia
+        </div>
+      </ng-container>
+    </div>
+    </div>
+  </mat-tab>
 </mat-tab-group>
 
 <div class="row justify-content-end">
-    <button class="btn-get-started" (click)="addSchedule()">Cadastrar</button>
+  <button class="btn-get-started" (click)="addSchedule()">Cadastrar</button>
 </div>

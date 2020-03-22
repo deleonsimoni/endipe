@@ -14,6 +14,7 @@ export class ModalSchedulesComponent {
 
   public types = SCHEDULE_TYPE;
   public axis = new FormControl();
+  public carregando = false;
 
   constructor(
     private dialog: MatDialogRef<ModalSchedulesComponent>,
@@ -61,18 +62,31 @@ export class ModalSchedulesComponent {
   }
 
   public sendSchedule(event) {
-    console.log(event.data)
+    this.carregando = true;
     if (event.id) {
       this.scheduleService.updateSchedule(this.axis.value, event.id, event.data)
         .subscribe(_ => {
           this.toastr.success('Programação alterada com sucesso');
+          this.carregando = false;
           this.dialog.close(true);
+        }, err => {
+          this.toastr.success('Servidor momentaneamente inoperante', 'Erro');
+          this.carregando = false;
+          this.dialog.close(true);
+
         });
     } else {
+      this.carregando = true;
       this.scheduleService.registerSchedule(this.axis.value, event.data)
         .subscribe(_ => {
           this.toastr.success('Programação cadastrada com sucesso');
+          this.carregando = false;
           this.dialog.close(true);
+        }, err => {
+          this.toastr.success('Servidor momentaneamente inoperante', 'Erro');
+          this.carregando = false;
+          this.dialog.close(true);
+
         });
     }
   }
