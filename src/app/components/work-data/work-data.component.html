@@ -62,9 +62,9 @@
         <p *ngFor="let author of work.authors">{{ author.userEmail }}</p>
       </div>
     </div>
-    <div *ngIf="user.icAdmin && (work.reviewAdmin || work.reviewers)" class="row align-items-center mb-2">
+    <div *ngIf="work.reviewAdmin || work.reviewers" class="row align-items-center mb-2">
       <div class="col-md-12">
-        <strong>Parecerista Administrador
+        <strong>Parecerista Secretaria
           <!-- <div *ngIf="work.reviewers">
             <p *ngFor="let reviewerCoordinator of work.reviewers">{{ reviewerCoordinator.userEmail }}</p>
           </div>-->
@@ -131,7 +131,7 @@
     </div>
 
     <div
-      *ngIf="work.reviewReviewer && work.reviewReviewer.review.icAllow == 'Nao' && !user.icAdmin && !user?.reviewer?.icCoordinator"
+      *ngIf="(work.reviewAdmin?.review && work.reviewAdmin.review.icAllow == 'Nao') || (work.reviewReviewer && work.reviewReviewer.review.icAllow == 'Nao' && !user.icAdmin && !user?.reviewer?.icCoordinator)"
       class="row align-items-center mb-2" style="border: crimson; margin: 1px; border-style: dotted;">
       <div class="col-md-12">
         <h3 style="color:red;">Entrar com recurso</h3>
