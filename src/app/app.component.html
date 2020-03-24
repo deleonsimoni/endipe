@@ -51,9 +51,8 @@
               <li class="menu-has-children pointer">
                 <a>PROGRAMAÇÃO <i class="fa fa-chevron-down"></i></a>
                 <ul>
-                  <a [routerLink]="['/programacao']">Programação</a>
-                  <li><a [routerLink]="['/home']" fragment="Abertura">Conferencistas</a></li>
-
+                  <li><a [routerLink]="['/programacao']">Programação</a></li>
+                  <li><a (click)="openConferencistasModal()">Conferencistas</a></li>
                 </ul>
               </li>
 
@@ -144,11 +143,14 @@
           </ul>
         </accordion-group>
 
-        <ul class="child-list">
-          <li>
-            <a accordion-heading [routerLink]="['/programacao']" (click)="sidenav.toggle()">PROGRAMAÇÃO</a>
-          </li>
-        </ul>
+
+        <accordion-group>
+          <a accordion-heading>PROGRAMAÇÃO <i class="fa fa-chevron-down"></i></a>
+          <ul class="child-list">
+            <li> <a accordion-heading [routerLink]="['/programacao']" (click)="sidenav.toggle()">PROGRAMAÇÃO</a></li>
+            <li> <a accordion-heading (click)="openConferencistasModal()">CONFERENCISTA</a></li>
+          </ul>
+        </accordion-group>
 
         <accordion-group>
           <a accordion-heading>SUBMISSÃO <i class="fa fa-chevron-down"></i></a>

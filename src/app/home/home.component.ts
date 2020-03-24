@@ -489,6 +489,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
+
   public openDialogProgramacao(programacao) {
     switch (programacao.titulo) {
       case 'Sessões especiais':

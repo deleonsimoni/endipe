@@ -10,7 +10,7 @@
         </option>
       </select>
     </div>
-    <div *ngIf="reviewers.length == 0" class="col-md-10 border-right">
+    <div *ngIf="work.reviewReviewer && reviewers.length == 0" class="col-md-10 border-right">
       <small>Aprovado?</small>
       <h4>{{ work.reviewReviewer.review.icAllow }}</h4>
     </div>

@@ -65,9 +65,9 @@
     <div *ngIf="user.icAdmin && (work.reviewAdmin || work.reviewers)" class="row align-items-center mb-2">
       <div class="col-md-12">
         <strong>Parecerista Administrador
-          <div *ngIf="work.reviewers">
+          <!-- <div *ngIf="work.reviewers">
             <p *ngFor="let reviewerCoordinator of work.reviewers">{{ reviewerCoordinator.userEmail }}</p>
-          </div>
+          </div>-->
         </strong>
         <div *ngIf="work.reviewAdmin">
           <div>
@@ -130,7 +130,8 @@
       </div>
     </div>
 
-    <div *ngIf="work.reviewReviewer.review.icAllow == 'Nao' && !user.icAdmin && !user?.reviewer?.icCoordinator"
+    <div
+      *ngIf="work.reviewReviewer && work.reviewReviewer.review.icAllow == 'Nao' && !user.icAdmin && !user?.reviewer?.icCoordinator"
       class="row align-items-center mb-2" style="border: crimson; margin: 1px; border-style: dotted;">
       <div class="col-md-12">
         <h3 style="color:red;">Entrar com recurso</h3>
@@ -141,10 +142,10 @@
             <div class="form-group col-md-12">
               <label id="example-radio-group-label">Justificativa</label>
 
-              <textarea *ngIf="!work.recurso?.icAllow" maxlength="2000" class="form-control" rows="5"
-                [(ngModel)]="justificativaRecurso">
+              <textarea *ngIf="!work.recurso?.icAllow && !work.recurso?.justify" maxlength="2000" class="form-control"
+                rows="5" [(ngModel)]="justificativaRecurso">
                         </textarea>
-              <span *ngIf="work.recurso?.icAllow">
+              <span>
                 <hr />
                 {{work.recurso?.justify}}
               </span>
@@ -157,7 +158,7 @@
                 <b style="color: red">Recurso recusado</b>
               </div>
 
-              <div *ngIf="!work.recurso?.icAllow" class="row justify-content-end">
+              <div *ngIf="!work.recurso?.icAllow && !work.recurso?.justify" class="row justify-content-end">
                 <button class="btn-get-started" (click)="aplicarRecurso()">Enviar Recurso</button>
               </div>
 
@@ -170,7 +171,7 @@
     </div>
 
 
-    <div *ngIf="work.recurso?.justify && (user.icAdmin && !user?.reviewer?.icCoordinator)"
+    <div *ngIf="work.recurso?.justify && (user.icAdmin || user?.reviewer?.icCoordinator)"
       class="row align-items-center mb-2" style="border: crimson; margin: 1px; border-style: dotted;">
       <hr />
       <div class="col-md-12">

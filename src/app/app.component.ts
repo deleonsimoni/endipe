@@ -7,6 +7,8 @@ import { ShareDataService } from './services/share-data.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { trigger, style, animate, transition } from '@angular/animations';
+import { ModalConferencistasComponent } from './modal-conferencistas/modal-conferencistas.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-root',
@@ -36,7 +38,9 @@ export class AppComponent implements OnInit {
     private share: ShareDataService,
     private toastr: ToastrService,
     private rota: Router,
-    private auth: AuthService
+    private auth: AuthService,
+    private dialog: MatDialog,
+
   ) {
 
     this.breakpointObserver.observe(['(max-width: 992px)']).subscribe(res => {
@@ -75,6 +79,10 @@ export class AppComponent implements OnInit {
         this.isAuth = true;
       }
     });
+  }
+
+  public openConferencistasModal() {
+    this.dialog.open(ModalConferencistasComponent);
   }
 
   logout() {
