@@ -889,9 +889,18 @@ function pad(num, size) {
 
 async function getWorksReviewer(userId) {
   let works = await Work.find({
-    reviewReviewer: {
-      $ne: {}
-    },
+
+    $or: [{
+        reviewReviewer: {
+          $ne: {}
+        }
+      },
+      {
+        reviewAdmin: {
+          $ne: {}
+        }
+      }
+    ],
     'authors.userId': userId
   });
   return works;
