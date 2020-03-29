@@ -47,7 +47,7 @@
                         <div class="col-md-1 align-items-center">
                             <div class="form-group form-check">
                                 <input type="checkbox" class="form-check-input" id="exampleCheck1"
-                                    formControlName="icCoordinator">
+                                    formControlName="isCoordinator">
                             </div>
                         </div>
                         <div class="align-items-center" [ngClass]="{'col-md-10': i > 0, 'col-md-11': i < 1}">
@@ -64,7 +64,7 @@
         </div>
         <button type="button" class="add-coordinator" (click)="addCoordinator()">
             <i class="fa fa-plus"></i>
-            Coordenadores
+            Conferencista(s)
         </button>
     </div>
     <div class="form-row">

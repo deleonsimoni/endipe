@@ -1,3 +1,4 @@
+
 import { Component, Output, EventEmitter, SimpleChanges, Input } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 
@@ -35,7 +36,7 @@ export class GenericFormComponent {
             address: [null],
             theme: [null],
             coordinators: this.builder.array([
-                this.createField()
+                this.createCoordinatorsField()
             ])
         });
 
@@ -50,7 +51,6 @@ export class GenericFormComponent {
     private fillForm(data) {
         for (const key in this.form.controls) {
             if (data.hasOwnProperty(key)) {
-                console.log(key)
                 if (key == 'titles' || key == 'coordinators') {
                     this.fillArray(data.coordinators, key);
                 } else {
@@ -66,7 +66,11 @@ export class GenericFormComponent {
             if (key == 0) {
                 form.controls[0].patchValue(el);
             } else {
-                form.push(this.builder.control(el));
+                if (key == 'coordinators') {
+                    form.push(this.builder.group(el));
+                } else {
+                    form.push(this.builder.control(el));
+                }
             }
         });
     }
@@ -75,12 +79,19 @@ export class GenericFormComponent {
         return this.builder.control(null);
     }
 
+    private createCoordinatorsField() {
+        return this.builder.group({
+            name: [null],
+            isCoordinator: [false]
+        });
+    }
+
     get titles() {
-        return this.form.get('titles')['controls'];
+        return this.form.get('titles');
     }
 
     get coordinators() {
-        return this.form.get('coordinators')['controls'];
+        return this.form.get('coordinators');
     }
 
     public addTitles() {
@@ -95,7 +106,7 @@ export class GenericFormComponent {
 
     public addCoordinator() {
         const coordinatorCtrl = this.form.get('coordinators') as FormArray;
-        coordinatorCtrl.push(this.createField());
+        coordinatorCtrl.push(this.createCoordinatorsField());
     }
 
     public removeCoordinator(pos) {
@@ -108,14 +119,18 @@ export class GenericFormComponent {
     }
 
     get title() {
-        if (this.type == '11') {
-            return 'Associação/Rede/Fórum e sigla'
-        }
+        switch (this.type) {
+            case '5':
+                return 'Títulos e autores';
 
-        if (this.type == '7') {
-            return 'Artista(s)';
-        }
+            case '7':
+                return 'Artista(s)';
 
-        return 'Título(s)';
+            case '11':
+                return 'Associação/Rede/Fórum e sigla'
+
+            default:
+                return 'Título(s)';
+        }
     }
 }

@@ -21,7 +21,6 @@ export class SimposioFormComponent {
         private builder: FormBuilder
     ) {
         this.createForm();
-        this.form.valueChanges.subscribe(console.log)
     }
 
     private createForm() {
@@ -73,7 +72,7 @@ export class SimposioFormComponent {
     private createField() {
         return this.builder.group({
             name: [null],
-            icCoordinator: [false]
+            isCoordinator: [false]
         });
     }
 

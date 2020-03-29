@@ -29,9 +29,9 @@
             </p>
         </div>
         <div class="group" *ngIf="type != '5' && type != '7' && type != '11'">
-            <p class="label">Coordenadore(s)</p>
+            <p class="label">Conferencista(s)</p>
             <p class="title" *ngFor="let coordinator of schedule.coordinators">
-                {{ coordinator }}
+                {{ coordinator.name }}
             </p>
         </div>
         <div class="group">

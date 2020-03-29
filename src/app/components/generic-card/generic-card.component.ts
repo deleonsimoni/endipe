@@ -35,14 +35,18 @@ export class GenericCardComponent {
   }
 
   get title() {
-    if (this.type == '11') {
-      return 'Associação/Rede/Fórum e sigla'
-    }
+    switch (this.type) {
+      case '5':
+        return 'Títulos e autores';
 
-    if (this.type == '7') {
-      return 'Artista(s)';
-    }
+      case '7':
+        return 'Artista(s)';
 
-    return 'Título(s)';
+      case '11':
+        return 'Associação/Rede/Fórum e sigla'
+
+      default:
+        return 'Título(s)';
+    }
   }
 }
