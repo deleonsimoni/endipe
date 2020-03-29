@@ -48,7 +48,7 @@
             {{ schedule.workTitle }}
           </p>
         </div>
-        <div class="group" *ngIf="type == '2'">
+        <div class="group" *ngIf="type == '2' || type == '8'">
           <p class="label">Vagas</p>
           <p class="hour">
             {{ schedule.qtdSubscribers - (schedule.subscribers ? schedule.subscribers.length : 0) }}
@@ -58,7 +58,7 @@
           <p class="label">Local</p>
           <p class="hour">{{ schedule.place }}</p>
         </div>
-        <div class="group">
+        <div class="group" *ngIf="type == '4' || type == '9'">
           <p class="label">Endereço</p>
           <p class="hour">{{ schedule.address }}</p>
         </div>

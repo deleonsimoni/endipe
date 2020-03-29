@@ -38,9 +38,9 @@
             </select>
         </div>
     </div>
-    <div class="form-row" *ngIf="type == '2'">
+    <div class="form-row" *ngIf="type == '2' || type == '8'">
         <div class="form-group col-md-12">
-            <label for="qtdSubscribers" class="label">Quantidade de inscritos</label>
+            <label for="qtdSubscribers" class="label">Vagas</label>
             <input type="text" name="qtdSubscribers" class="form-control" id="qtdSubscribers"
                 formControlName="qtdSubscribers" />
         </div>

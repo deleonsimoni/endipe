@@ -33,4 +33,16 @@ export class GenericCardComponent {
   public editSchedule() {
     this.edit.emit(this.schedule);
   }
+
+  get title() {
+    if (this.type == '11') {
+      return 'Associação/Rede/Fórum e sigla'
+    }
+
+    if (this.type == '7') {
+      return 'Artista(s)';
+    }
+
+    return 'Título(s)';
+  }
 }

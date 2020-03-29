@@ -106,4 +106,16 @@ export class GenericFormComponent {
     public submitSchedule() {
         this.submitForm.emit({ id: this.data ? this.data._id : null, data: this.form.getRawValue() });
     }
+
+    get title() {
+        if (this.type == '11') {
+            return 'Associação/Rede/Fórum e sigla'
+        }
+
+        if (this.type == '7') {
+            return 'Artista(s)';
+        }
+
+        return 'Título(s)';
+    }
 }

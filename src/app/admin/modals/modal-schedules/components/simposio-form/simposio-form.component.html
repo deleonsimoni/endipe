@@ -1,7 +1,7 @@
 <div [formGroup]="form" class="form">
     <div class="form-row">
         <div class="form-group col-md-12">
-            <label for="theme" class="label">Tema</label>
+            <label for="theme" class="label">Eixo</label>
             <select class="form-control" name="theme" id="theme" formControlName="theme">
                 <option *ngFor="let item of themes" [value]="item.id">{{ item.name }}</option>
             </select>
@@ -31,34 +31,33 @@
     </div>
     <div class="form-row">
         <div class="form-group col-md-12">
-            <label for="address" class="label">Endereço</label>
-            <input type="text" class="form-control" formControlName="address" name="address">
-        </div>
-    </div>
-    <div class="form-row">
-        <div class="form-group col-md-12">
-            <label for="classification" class="label">Classificação</label>
-            <input type="text" class="form-control" formControlName="classification" name="classification">
-        </div>
-    </div>
-    <div class="form-row">
-        <div class="form-group col-md-12">
             <label for="theme" class="label">Tema da palestra</label>
             <input type="text" class="form-control" formControlName="themeSpeeches" name="theme">
         </div>
     </div>
     <div class="form-row">
         <div class="form-group col-md-12">
-            <label for="titles" class="label">Coordenadores(s)</label>
-            <div class="mb-2" formArrayName="coordinators" *ngFor="let item of coordinators; let i = index">
-                <div class="row justify-content-center">
-                    <div class="align-items-center" [ngClass]="{'col-md-11': i > 0, 'col-md-12': i < 1}">
-                        <input type="text" class="form-control" [formControlName]="i">
-                    </div>
-                    <div class="col-md-1 align-items-center icon" *ngIf="i > 0">
-                        <button type="button" (click)="removeCoordinator(i)">
-                            <i class="fas fa-trash"></i>
-                        </button>
+            <label for="titles" class="label">Conferencista(s)</label>
+            <br>
+            <small>**Caso o conferencista seja um coordenador, assinale no campo à esquerda.</small>
+            <br>
+            <div class="mb-2" formArrayName="coordinators" *ngFor="let item of coordinators['controls']; let i = index">
+                <div [formArrayName]="i">
+                    <div class="row justify-content-center">
+                        <div class="col-md-1 align-items-center">
+                            <div class="form-group form-check">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1"
+                                    formControlName="icCoordinator">
+                            </div>
+                        </div>
+                        <div class="align-items-center" [ngClass]="{'col-md-10': i > 0, 'col-md-11': i < 1}">
+                            <input type="text" class="form-control" formControlName="name">
+                        </div>
+                        <div class="col-md-1 align-items-center icon" *ngIf="i > 0">
+                            <button type="button" (click)="removeCoordinator(i)">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

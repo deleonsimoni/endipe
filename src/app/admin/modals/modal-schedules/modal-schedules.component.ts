@@ -70,7 +70,7 @@ export class ModalSchedulesComponent {
           this.carregando = false;
           this.dialog.close(true);
         }, err => {
-          this.toastr.success('Servidor momentaneamente inoperante', 'Erro');
+          this.toastr.error('Servidor momentaneamente inoperante', 'Erro');
           this.carregando = false;
           this.dialog.close(true);
 

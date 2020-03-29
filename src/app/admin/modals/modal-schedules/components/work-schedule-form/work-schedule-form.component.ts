@@ -51,12 +51,12 @@ export class WorkScheduleFormComponent {
     }
 
     ngOnChanges(changes: SimpleChanges) {
-        console.log(changes);
-        if (changes.type.currentValue == '2') {
-            this.form.addControl('qtdSubscribers', new FormControl(null));
-        } else {
-            this.form.removeControl('qtdSubscribers');
-        }
+        // console.log(changes);
+        // if (changes.type.currentValue == '2') {
+        //     this.form.addControl('qtdSubscribers', new FormControl(null));
+        // } else {
+        //     this.form.removeControl('qtdSubscribers');
+        // }
 
         if (changes.data && changes.data.currentValue) {
             this.fillForm(changes.data.currentValue);

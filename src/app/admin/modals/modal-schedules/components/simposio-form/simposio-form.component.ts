@@ -21,6 +21,7 @@ export class SimposioFormComponent {
         private builder: FormBuilder
     ) {
         this.createForm();
+        this.form.valueChanges.subscribe(console.log)
     }
 
     private createForm() {
@@ -64,17 +65,20 @@ export class SimposioFormComponent {
             if (key == 0) {
                 form.controls[0].patchValue(el);
             } else {
-                form.push(this.builder.control(el));
+                form.push(this.builder.group(el));
             }
         });
     }
 
     private createField() {
-        return this.builder.control(null);
+        return this.builder.group({
+            name: [null],
+            icCoordinator: [false]
+        });
     }
 
     get coordinators() {
-        return this.form.get('coordinators')['controls'];
+        return this.form.get('coordinators');
     }
 
     public addCoordinator() {
