@@ -33,9 +33,12 @@ export class WorkScheduleFormComponent {
             startTime: [null],
             endTime: [null],
             place: [null],
+            authors: [null],
             address: [null],
+            pdf: [null],
             workTitle: [null],
             qtdSubscribers: [null],
+            resumePropose: [null],
             date: [null]
         });
 
@@ -51,13 +54,6 @@ export class WorkScheduleFormComponent {
     }
 
     ngOnChanges(changes: SimpleChanges) {
-        // console.log(changes);
-        // if (changes.type.currentValue == '2') {
-        //     this.form.addControl('qtdSubscribers', new FormControl(null));
-        // } else {
-        //     this.form.removeControl('qtdSubscribers');
-        // }
-
         if (changes.data && changes.data.currentValue) {
             this.fillForm(changes.data.currentValue);
         }

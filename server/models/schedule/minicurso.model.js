@@ -39,6 +39,12 @@ const ScheduleSchema = new mongoose.Schema({
       type: String
     },
   }],
+  authors: {
+    type: String
+  },
+  resumePropose: {
+    type: String
+  },
 
   date: {
     type: String

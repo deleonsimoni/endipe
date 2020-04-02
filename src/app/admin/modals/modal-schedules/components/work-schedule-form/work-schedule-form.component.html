@@ -20,6 +20,22 @@
             </select>
         </div>
     </div>
+    <div class="form-row" *ngIf="type == '2' || type == '8'">
+        <div class="form-group col-md-12">
+            <label for="authors" class="label">Autores</label>
+            <br>
+            <small>*** Adicione os autores separando-os por vírgula.</small>
+            <textarea name="authors" class="form-control" id="authors" cols="30" rows="5"
+                formControlName="authors"></textarea>
+        </div>
+    </div>
+    <div class="form-row" *ngIf="type == '2' || type == '8'">
+        <div class="form-group col-md-12">
+            <label for="resumePropose" class="label">Resumo da proposta</label>
+            <textarea name="resumePropose" class="form-control" id="resumePropose" cols="30" rows="5"
+                formControlName="resumePropose"></textarea>
+        </div>
+    </div>
     <div class="form-row">
         <div class="form-group col-md-4">
             <label for="startTime" class="label">Hora início</label>
@@ -55,6 +71,12 @@
         <div class="form-group col-md-12">
             <label for="place" class="label">Local</label>
             <input type="text" name="place" class="form-control" id="place" formControlName="place" />
+        </div>
+    </div>
+    <div class="form-row" *ngIf="type == '4' || type == '9'">
+        <div class="form-group col-md-12">
+            <label for="pdf" class="label">Url do arquivo</label>
+            <input type="text" name="pdf" class="form-control" id="place" formControlName="pdf" />
         </div>
     </div>
     <div class="form-row">

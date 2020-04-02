@@ -48,6 +48,27 @@
             {{ schedule.workTitle }}
           </p>
         </div>
+        <div *ngIf="type == '4' || type == '9'">
+          <div class="group">
+            <p class="label">Programação dos trabalhos</p>
+            <a [href]="schedule.pdf" target="_blank">{{ schedule.pdf }}</a>
+            <!-- <p class="title">
+              {{ schedule.workTitle }}
+            </p> -->
+          </div>
+        </div>
+        <div class="group" *ngIf="type == '2' || type == '8'">
+          <p class="label">Resumo da proposta</p>
+          <p class="title not-dash">
+            {{ schedule.resumePropose }}
+          </p>
+        </div>
+        <div class="group" *ngIf="type == '2' || type == '8'">
+          <p class="label">Autores</p>
+          <p class="title not-dash">
+            {{ schedule.authors }}
+          </p>
+        </div>
         <div class="group" *ngIf="type == '2' || type == '8'">
           <p class="label">Vagas</p>
           <p class="hour">

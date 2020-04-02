@@ -66,8 +66,10 @@
         letter-spacing: 0.1rem;
         margin: 0px 0px 4px 12px;
 
-        &:before {
-          content: "-";
+        &:not(.not-dash) {
+          &:before {
+            content: "-";
+          }
         }
       }
 

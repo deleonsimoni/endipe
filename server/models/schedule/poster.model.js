@@ -31,6 +31,9 @@ const ScheduleSchema = new mongoose.Schema({
   address: {
     type: String,
   },
+  pdf: {
+    type: String
+  },
   date: {
     type: String
   },
