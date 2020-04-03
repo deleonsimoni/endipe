@@ -23,6 +23,18 @@ router.post('/aceitarRecurso/:workId', passport.authenticate('jwt', {
   session: false
 }), asyncHandler(aceitarRecurso));
 
+router.post('/pedirRecursoAdmin/:workId', passport.authenticate('jwt', {
+  session: false
+}), asyncHandler(pedirRecursoAdmin));
+
+router.post('/negarRecursoAdmin/:workId', passport.authenticate('jwt', {
+  session: false
+}), asyncHandler(negarRecursoAdmin));
+
+router.post('/aceitarRecursoAdmin/:workId', passport.authenticate('jwt', {
+  session: false
+}), asyncHandler(aceitarRecursoAdmin));
+
 router.post('/reviewer', passport.authenticate('jwt', {
   session: false
 }), asyncHandler(insertReviewerReview));
@@ -47,6 +59,29 @@ async function negarRecurso(req, res) {
 async function aceitarRecurso(req, res) {
   let reviews = await reviewCtrl.aceitarRecurso(req.params.workId);
   res.json(reviews);
+}
+
+async function pedirRecursoAdmin(req, res) {
+  let reviews = await reviewCtrl.pedirRecursoAdmin(req.params.workId, req.body.justificativaRecurso);
+  res.json(reviews);
+}
+
+async function negarRecursoAdmin(req, res) {
+  if (req.user.icAdmin) {
+    let reviews = await reviewCtrl.negarRecursoAdmin(req.params.workId);
+    res.json(reviews);
+  } else {
+    res.sendStatus(401);
+  }
+}
+
+async function aceitarRecursoAdmin(req, res) {
+  if (req.user.icAdmin) {
+    let reviews = await reviewCtrl.aceitarRecursoAdmin(req.params.workId);
+    res.json(reviews);
+  } else {
+    res.sendStatus(401);
+  }
 }
 
 async function insertAdminReview(req, res) {
