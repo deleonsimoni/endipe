@@ -26,7 +26,7 @@ export class WorkDataComponent implements OnInit {
   private filesPDFRecurso: FileList;
 
   private justificativaRecurso;
-
+  public justificativaRecursoAdmin;
   constructor(
     private downloadService: DownloadFileService,
     private dialog: MatDialog,
@@ -198,7 +198,7 @@ export class WorkDataComponent implements OnInit {
 
     this.carregando = true;
 
-    this.reviewService.negarRecursoAdmin(this.work._id)
+    this.reviewService.negarRecursoAdmin(this.work._id, this.justificativaRecursoAdmin)
       .subscribe((res: any) => {
         this.carregando = false;
         this.work = res;
@@ -214,7 +214,7 @@ export class WorkDataComponent implements OnInit {
   public aceitarRecursoAdmin() {
     this.carregando = true;
 
-    this.reviewService.aceitarRecursoAdmin(this.work._id)
+    this.reviewService.aceitarRecursoAdmin(this.work._id, this.justificativaRecursoAdmin)
       .subscribe((res: any) => {
         this.carregando = false;
         this.work = res;

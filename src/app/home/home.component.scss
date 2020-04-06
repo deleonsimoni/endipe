@@ -3,11 +3,13 @@
     h2 {
       font-size: 32px;
     }
+
     h2.child {
       font-size: 28px;
       font-weight: 500;
     }
   }
+
   .agenda {
     background: rgb(247, 247, 247);
     box-shadow: 10px 10px 15px rgba(73, 78, 92, 0.1);
@@ -19,6 +21,7 @@
     padding: 26px 20px;
     border-color: red;
     border-style: dashed;
+
     .agenda-titulo h2 {
       font-family: "Raleway", sans-serif;
       color: #0c2e8a;
@@ -26,16 +29,19 @@
       font-size: 36px;
       text-align: center;
     }
+
     .agenda-items {
       padding: 8px 22px;
       text-align: left;
       font-size: 14px;
       height: 300px;
       overflow-y: auto;
+
       ul {
         list-style: none;
         padding: 0;
         margin: 0;
+
         li {
           list-style: none;
           padding: 10px 0;
@@ -50,6 +56,7 @@
   h4 {
     margin-left: 0px;
   }
+
   p {
     margin-left: 0px;
   }
@@ -64,6 +71,7 @@
   position: relative;
   border-top: 1px solid #f2f2f2;
   padding: 50px 0;
+
   .timetable-box-wrapper {
     text-align: center;
     background: #e8edf2;
@@ -76,13 +84,16 @@
     border-radius: 16px;
     -moz-border-radius: 16px;
     -webkit-border-radius: 16px;
+
     .timetable-content {
       text-align: center;
       font-size: 14px;
+
       ul {
         list-style: none;
         padding: 0;
         margin: 0;
+
         li {
           list-style: none;
           padding: 8px 0 8px 0;
@@ -98,13 +109,16 @@
   position: relative;
   border-top: 1px solid #f2f2f2;
   padding: 50px 0;
+
   p {
     color: white;
   }
+
   h4 {
     color: white;
     font-weight: bold;
   }
+
   .tabelaCronograma {
     background-color: #fff;
   }
@@ -112,9 +126,11 @@
   .section-header h2::before {
     background: #fff;
   }
+
   .section-header h3::before {
     background: #fff;
   }
+
   .timetable-box-wrapper {
     text-align: center;
     background: #e8edf2;
@@ -127,13 +143,16 @@
     border-radius: 16px;
     -moz-border-radius: 16px;
     -webkit-border-radius: 16px;
+
     .timetable-content {
       text-align: center;
       font-size: 14px;
+
       ul {
         list-style: none;
         padding: 0;
         margin: 0;
+
         li {
           list-style: none;
           padding: 8px 0 8px 0;
@@ -143,18 +162,22 @@
     }
   }
 }
+
 #hospedagem {
   background: #50d8af;
   position: relative;
   border-top: 1px solid #f2f2f2;
   padding: 50px 0;
+
   p {
     color: white;
   }
+
   h4 {
     color: white;
     font-weight: bold;
   }
+
   .tabelaCronograma {
     background-color: #fff;
   }
@@ -162,9 +185,11 @@
   .section-header h2::before {
     background: #fff;
   }
+
   .section-header h3::before {
     background: #fff;
   }
+
   .timetable-box-wrapper {
     text-align: center;
     background: #e8edf2;
@@ -177,13 +202,16 @@
     border-radius: 16px;
     -moz-border-radius: 16px;
     -webkit-border-radius: 16px;
+
     .timetable-content {
       text-align: center;
       font-size: 14px;
+
       ul {
         list-style: none;
         padding: 0;
         margin: 0;
+
         li {
           list-style: none;
           padding: 8px 0 8px 0;
@@ -198,6 +226,7 @@
   position: relative;
   border-top: 1px solid #f2f2f2;
   padding: 50px 0;
+
   .timetable-box-wrapper {
     text-align: center;
     background: #e8edf2;
@@ -210,13 +239,16 @@
     border-radius: 16px;
     -moz-border-radius: 16px;
     -webkit-border-radius: 16px;
+
     .timetable-content {
       text-align: center;
       font-size: 14px;
+
       ul {
         list-style: none;
         padding: 0;
         margin: 0;
+
         li {
           list-style: none;
           padding: 8px 0 8px 0;
@@ -229,6 +261,7 @@
 
 #team .member {
   text-align: left;
+
   .pic img {
     max-width: 100%;
     border-radius: 50%;
@@ -237,6 +270,7 @@
     -webkit-box-shadow: 0 5px 5px 0 #adb5bd;
     box-shadow: 0 5px 5px 0 #adb5bd;
   }
+
   // h3 {
   //   font-size: 18px;
   //   font-weight: bold;
@@ -261,9 +295,11 @@
   background: #50d8af;
   border-top: 1px solid #f2f2f2;
   padding: 50px 0;
+
   .section-header h2::before {
     background: #fff;
   }
+
   .section-header h3::before {
     background: #fff;
   }
@@ -286,16 +322,19 @@
   border-radius: 16px;
   -moz-border-radius: 16px;
   -webkit-border-radius: 16px;
+
   .pricing-heading {
     text-align: center;
     display: block;
     border-top-left-radius: 16px;
     border-top-right-radius: 16px;
+
     h3 {
       color: #000;
       font-size: 26px;
       font-weight: 300;
       letter-spacing: -1px;
+
       strong {
         font-size: 32px;
         font-weight: 700;
@@ -303,16 +342,19 @@
       }
     }
   }
+
   .pricing-terms {
     text-align: center;
     display: block;
     overflow: hidden;
     padding: 0px 0 20px;
+
     h6 {
       margin-top: 10px;
       color: #000;
       font-size: 36px;
       font-weight: 400;
+
       small {
         font-size: 50%;
         font-weight: 200;
@@ -320,13 +362,16 @@
       }
     }
   }
+
   .pricing-content {
     text-align: center;
     font-size: 14px;
+
     ul {
       list-style: none;
       padding: 0;
       margin: 0;
+
       li {
         list-style: none;
         padding: 8px 0 8px 0;
@@ -334,12 +379,14 @@
       }
     }
   }
+
   .pricing-action {
     margin: 0;
     text-align: center;
     padding: 30px 0 0 0;
     border-bottom-left-radius: 16px;
     border-bottom-right-radius: 16px;
+
     a.btn.btn-theme,
     .btn.btn-theme {
       color: #fff;
@@ -351,6 +398,7 @@
   border: 1px solid #081e5b;
   background: #081e5b;
 }
+
 .btn-medium {
   padding: 12px 20px;
   font-size: 16px;
@@ -359,42 +407,9 @@
   border-radius: 6px;
 }
 
-mat-tab-group {
-  width: 100%;
-  .mat-tab-header {
-    border-bottom: none;
-    div.mat-tab-header-pagination-chevron {
-      border-color: #fff;
-    }
-  }
-  .mat-tab-body {
-    padding-top: 20px;
-  }
-  .mat-tab-body-content {
-    overflow: hidden;
-  }
-  .mat-tab-label {
-    width: auto;
-    .mat-tab-label-content {
-      width: 300px;
-      white-space: normal;
-      font-size: 16px;
-      color: #fff;
-      text-transform: uppercase;
-      font-weight: 700;
-    }
-  }
-}
 
-.mat-tab-labels .mat-ripple.mat-tab-label-active {
-  opacity: 1;
-}
 
-.mat-tab-group.mat-primary .mat-ink-bar,
-.mat-tab-nav-bar.mat-primary .mat-ink-bar {
-  background: #fff;
-  height: 2px;
-}
+
 //CSS CRONOGRAMA
 #historico {
   .tabelaCronograma {
@@ -404,6 +419,7 @@ mat-tab-group {
   .section-header h2::before {
     background: #fff;
   }
+
   .section-header h3::before {
     background: #fff;
   }
@@ -411,6 +427,7 @@ mat-tab-group {
 
 #normas {
   padding: 50px 0;
+
   .cta-btn {
     font-family: "Montserrat", sans-serif;
     font-weight: 700;
@@ -443,6 +460,7 @@ mat-tab-group {
 
 #programacao {
   padding: 50px 0;
+
   .contact-info {
     margin-bottom: 20px;
     text-align: center;
@@ -601,6 +619,7 @@ mat-tab-group {
   background: #0c2e8a;
   color: #fff;
 }
+
 @media (max-width: 768px) {
   .back-to-top {
     bottom: 15px;

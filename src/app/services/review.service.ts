@@ -43,13 +43,13 @@ export class ReviewService {
 
   }
 
-  negarRecursoAdmin(workId) {
-    return this.http.post<any>(`${this.baseUrl}/reviews/negarRecursoAdmin/` + workId, {});
+  negarRecursoAdmin(workId, justificativaAdmin) {
+    return this.http.post<any>(`${this.baseUrl}/reviews/negarRecursoAdmin/` + workId, justificativaAdmin);
 
   }
 
-  aceitarRecursoAdmin(workId) {
-    return this.http.post<any>(`${this.baseUrl}/reviews/aceitarRecursoAdmin/` + workId, {});
+  aceitarRecursoAdmin(workId, justificativaAdmin) {
+    return this.http.post<any>(`${this.baseUrl}/reviews/aceitarRecursoAdmin/` + workId, justificativaAdmin);
 
   }
 

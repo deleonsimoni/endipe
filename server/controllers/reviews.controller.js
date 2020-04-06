@@ -28,13 +28,14 @@ async function pedirRecursoAdmin(workId, justificativa) {
 
 }
 
-async function negarRecursoAdmin(workId) {
+async function negarRecursoAdmin(workId, justificativa) {
   return await Work.findOneAndUpdate({
     _id: workId
   }, {
     $set: {
       'recursoAdmin.icAllow': 'Nao',
-      'reviewAdmin.review.icAllow': 'Nao'
+      'reviewAdmin.review.icAllow': 'Nao',
+      'reviewAdmin.review.justifyAdmin': justificativa
     }
   }, {
     new: true
@@ -42,13 +43,14 @@ async function negarRecursoAdmin(workId) {
 
 }
 
-async function aceitarRecursoAdmin(workId) {
+async function aceitarRecursoAdmin(workId, justificativa) {
   return await Work.findOneAndUpdate({
     _id: workId
   }, {
     $set: {
       'recursoAdmin.icAllow': 'Sim',
-      'reviewAdmin.review.icAllow': 'Sim'
+      'reviewAdmin.review.icAllow': 'Sim',
+      'reviewAdmin.review.justifyAdmin': justificativa
     }
   }, {
     new: true

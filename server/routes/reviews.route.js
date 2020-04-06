@@ -68,7 +68,7 @@ async function pedirRecursoAdmin(req, res) {
 
 async function negarRecursoAdmin(req, res) {
   if (req.user.icAdmin) {
-    let reviews = await reviewCtrl.negarRecursoAdmin(req.params.workId);
+    let reviews = await reviewCtrl.negarRecursoAdmin(req.params.workId, req.body.justificativaRecurso);
     res.json(reviews);
   } else {
     res.sendStatus(401);
@@ -77,7 +77,7 @@ async function negarRecursoAdmin(req, res) {
 
 async function aceitarRecursoAdmin(req, res) {
   if (req.user.icAdmin) {
-    let reviews = await reviewCtrl.aceitarRecursoAdmin(req.params.workId);
+    let reviews = await reviewCtrl.aceitarRecursoAdmin(req.params.workId, req.body.justificativaRecurso);
     res.json(reviews);
   } else {
     res.sendStatus(401);
