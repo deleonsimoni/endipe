@@ -6,7 +6,56 @@ module.exports = {
   insertReviewerReview,
   pedirRecurso,
   negarRecurso,
-  aceitarRecurso
+  aceitarRecurso,
+  pedirRecursoAdmin,
+  negarRecursoAdmin,
+  aceitarRecursoAdmin
+}
+
+async function pedirRecursoAdmin(workId, justificativa) {
+
+  return await Work.findOneAndUpdate({
+    _id: workId
+  }, {
+    $set: {
+      recursoAdmin: {
+        justify: justificativa
+      }
+    }
+  }, {
+    new: true
+  });
+
+}
+
+async function negarRecursoAdmin(workId, justificativa) {
+  return await Work.findOneAndUpdate({
+    _id: workId
+  }, {
+    $set: {
+      'recursoAdmin.icAllow': 'Nao',
+      'reviewAdmin.review.icAllow': 'Nao',
+      'reviewAdmin.review.justifyAdmin': justificativa
+    }
+  }, {
+    new: true
+  });
+
+}
+
+async function aceitarRecursoAdmin(workId, justificativa) {
+  return await Work.findOneAndUpdate({
+    _id: workId
+  }, {
+    $set: {
+      'recursoAdmin.icAllow': 'Sim',
+      'reviewAdmin.review.icAllow': 'Sim',
+      'reviewAdmin.review.justifyAdmin': justificativa
+    }
+  }, {
+    new: true
+  });
+
 }
 
 async function pedirRecurso(workId, justificativa) {

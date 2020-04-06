@@ -130,8 +130,55 @@
       </div>
     </div>
 
+
+
+
+
     <div
-      *ngIf="(work.reviewAdmin?.review && work.reviewAdmin.review.icAllow == 'Nao') || (work.reviewReviewer && work.reviewReviewer.review.icAllow == 'Nao' && !user.icAdmin && !user?.reviewer?.icCoordinator)"
+      *ngIf="work.reviewAdmin?.review && work.reviewAdmin.review.icAllow == 'Nao' && !work.reviewReviewer && !user.icAdmin && !user?.reviewer?.icCoordinator"
+      class="row align-items-center mb-2" style="border: crimson; margin: 1px; border-style: dotted;">
+      <div class="col-md-12">
+        <h3 style="color:red;">Entrar com recurso secretaria</h3>
+
+        <div>
+
+          <div class="form-row justify-content-center">
+            <div class="form-group col-md-12">
+              <label id="example-radio-group-label">Justificativa</label>
+
+              <textarea *ngIf="!work.recursoAdmin?.icAllow && !work.recursoAdmin?.justify" maxlength="2000"
+                class="form-control" rows="5" [(ngModel)]="justificativaRecurso">
+                        </textarea>
+              <span>
+                <hr />
+                {{work.recursoAdmin?.justify}}
+              </span>
+
+              <div *ngIf="work.recursoAdmin?.icAllow == 'Sim'" class="row justify-content-end">
+                <b style="color: green">Recurso aceito</b>
+              </div>
+
+              <div *ngIf="work.recursoAdmin?.icAllow == 'Nao'" class="row justify-content-end">
+                <b style="color: red">Recurso recusado</b>
+              </div>
+
+              <div *ngIf="!work.recursoAdmin?.icAllow && !work.recursoAdmin?.justify" class="row justify-content-end">
+                <button class="btn-get-started" (click)="aplicarRecursoAdmin()">Enviar Recurso</button>
+              </div>
+
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <div
+      *ngIf="work.reviewReviewer && work.reviewReviewer.review.icAllow == 'Nao' && !user.icAdmin && !user?.reviewer?.icCoordinator"
       class="row align-items-center mb-2" style="border: crimson; margin: 1px; border-style: dotted;">
       <div class="col-md-12">
         <h3 style="color:red;">Entrar com recurso</h3>
@@ -198,6 +245,55 @@
                 <button (click)="negarRecurso()"
                   [ngStyle]="{'background-color: red;color:white':  work.recurso?.icAllow=='Sim', 'background-color: white;color: black': work.recurso?.icAllow=='Nao'}"
                   type="button" [ngClass]="{'btn btn-danger': work.recurso?.icAllow=='Nao'}" class="btn">Não</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+    <div *ngIf="work.recursoAdmin?.justify && user.icAdmin" class="row align-items-center mb-2"
+      style="border: crimson; margin: 1px; border-style: dotted;">
+      <hr />
+      <div class="col-md-12">
+        <h3 style="color:red;">Avaliar recurso secretaria</h3>
+
+
+        <div class="form-row justify-content-center">
+          <div class="form-group col-md-12">
+            <label id="example-radio-group-label">Justificativa Congressista</label>
+            <br />
+            {{work.recursoAdmin?.justify}}
+            <br />
+          </div>
+          <div class="form-group col-md-12">
+            <label id="example-radio-group-label">Justificativa Secretaria</label>
+            <br />
+            <textarea *ngIf="!work.recursoAdmin?.justifyAdmin" maxlength="2000" class="form-control" rows="5"
+              [(ngModel)]="justificativaRecursoAdmin">
+                    </textarea>
+            <span>
+              <hr />
+              {{work.recursoAdmin?.justifyAdmin}}
+            </span>
+          </div>
+        </div>
+        <div class="form-row justify-content-center">
+          <div class="form-group col-md-12">
+            <div class="form-group">
+              Aceitar Recurso?
+              <br />
+              <div class="btn-group" role="group" aria-label="Basic example">
+                <button (click)="aceitarRecursoAdmin()"
+                  [ngStyle]="{'background-color: green;color:white':  work.recursoAdmin?.icAllow == 'Sim', 'background-color: white;color: black': work.recursoAdmin?.icAllow=='Nao'}"
+                  type="button" [ngClass]="{'btn btn-success': work.recursoAdmin?.icAllow=='Sim'}"
+                  class="btn">Sim</button>
+                <button (click)="negarRecursoAdmin()"
+                  [ngStyle]="{'background-color: red;color:white':  work.recursoAdmin?.icAllow=='Sim', 'background-color: white;color: black': work.recursoAdmin?.icAllow=='Nao'}"
+                  type="button" [ngClass]="{'btn btn-danger': work.recursoAdmin?.icAllow=='Nao'}"
+                  class="btn">Não</button>
               </div>
             </div>
           </div>

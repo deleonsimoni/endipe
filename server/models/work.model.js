@@ -81,6 +81,11 @@ const WorkSchema = new mongoose.Schema({
 
     }
   },
+  recursoAdmin: {
+    justify: String,
+    justifyAdmin: String,
+    icAllow: String
+  },
   recurso: {
     justify: String,
     icAllow: String

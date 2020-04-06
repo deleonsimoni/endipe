@@ -38,4 +38,20 @@ export class ReviewService {
 
   }
 
+  aplicarRecursoAdmin(justificativa, workId) {
+    return this.http.post<any>(`${this.baseUrl}/reviews/pedirRecursoAdmin/` + workId, justificativa);
+
+  }
+
+  negarRecursoAdmin(workId, justificativaAdmin) {
+    return this.http.post<any>(`${this.baseUrl}/reviews/negarRecursoAdmin/` + workId, justificativaAdmin);
+
+  }
+
+  aceitarRecursoAdmin(workId, justificativaAdmin) {
+    return this.http.post<any>(`${this.baseUrl}/reviews/aceitarRecursoAdmin/` + workId, justificativaAdmin);
+
+  }
+
+
 }

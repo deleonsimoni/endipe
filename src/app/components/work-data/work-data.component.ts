@@ -26,7 +26,7 @@ export class WorkDataComponent implements OnInit {
   private filesPDFRecurso: FileList;
 
   private justificativaRecurso;
-
+  public justificativaRecursoAdmin = "";
   constructor(
     private downloadService: DownloadFileService,
     private dialog: MatDialog,
@@ -159,6 +159,62 @@ export class WorkDataComponent implements OnInit {
     this.carregando = true;
 
     this.reviewService.aceitarRecurso(this.work._id)
+      .subscribe((res: any) => {
+        this.carregando = false;
+        this.work = res;
+        this.toastr.success('Recurso aceito com sucesso', 'Sucesso');
+      }, err => {
+        this.carregando = false;
+        this.toastr.error('Ocorreu um erro ao aceitar o recurso', 'Atenção:');
+      });
+
+  }
+
+
+
+  public aplicarRecursoAdmin() {
+
+    if (!this.justificativaRecurso) {
+      this.toastr.error('Para solicitar o recurso indique a justificativa.', 'Atenção: ');
+      return;
+    }
+
+    this.carregando = true;
+
+    this.reviewService.aplicarRecursoAdmin({ 'justificativaRecurso': this.justificativaRecurso }, this.work._id)
+      .subscribe((res: any) => {
+        this.carregando = false;
+        this.work = res;
+        this.toastr.success('Recurso enviado com sucesso', 'Sucesso');
+      }, err => {
+        this.carregando = false;
+        this.toastr.error('Ocorreu um erro enviar o recurso', 'Atenção:');
+      });
+
+  }
+
+
+  public negarRecursoAdmin() {
+
+    this.carregando = true;
+
+    this.reviewService.negarRecursoAdmin(this.work._id, this.justificativaRecursoAdmin)
+      .subscribe((res: any) => {
+        this.carregando = false;
+        this.work = res;
+        this.toastr.success('Recurso negado com sucesso', 'Sucesso');
+      }, err => {
+        this.carregando = false;
+        this.toastr.error('Ocorreu um erro ao negar o recurso', 'Atenção:');
+      });
+
+  }
+
+
+  public aceitarRecursoAdmin() {
+    this.carregando = true;
+
+    this.reviewService.aceitarRecursoAdmin(this.work._id, this.justificativaRecursoAdmin)
       .subscribe((res: any) => {
         this.carregando = false;
         this.work = res;
