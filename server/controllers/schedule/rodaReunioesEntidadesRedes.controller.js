@@ -9,8 +9,8 @@ module.exports = {
 
 async function listSchedule(date) {
   return await RodaReunioesEnidadesRedes.find({
-    date: date
-  })
+      date: date
+    })
     .sort({
       startTime: 1
     });
@@ -21,7 +21,9 @@ async function insertSchedule(schedule) {
 }
 
 async function updateSchedule(id, schedule) {
-  return await RodaReunioesEnidadesRedes.findOneAndUpdate(id, schedule);
+  return await RodaReunioesEnidadesRedes.findOneAndUpdate(id, schedule, {
+    upsert: true
+  });
 }
 
 async function deleteSchedule(id) {

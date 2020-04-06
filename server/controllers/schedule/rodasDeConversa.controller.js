@@ -23,7 +23,9 @@ async function insertSchedule(schedule) {
 }
 
 async function updateSchedule(id, schedule) {
-  return await RodasDeConversa.findOneAndUpdate(id, schedule);
+  return await RodasDeConversa.findOneAndUpdate(id, schedule, {
+    upsert: true
+  });
 }
 
 async function deleteSchedule(id) {
