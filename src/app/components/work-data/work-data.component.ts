@@ -26,7 +26,7 @@ export class WorkDataComponent implements OnInit {
   private filesPDFRecurso: FileList;
 
   private justificativaRecurso;
-  public justificativaRecursoAdmin;
+  public justificativaRecursoAdmin = "";
   constructor(
     private downloadService: DownloadFileService,
     private dialog: MatDialog,
