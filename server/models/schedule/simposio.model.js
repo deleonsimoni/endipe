@@ -9,7 +9,7 @@ const ScheduleSchema = new mongoose.Schema({
   },
   coordinators: [{
     name: String,
-    icCoordinator: {
+    isCoordinator: {
       type: Boolean,
       default: false
     }

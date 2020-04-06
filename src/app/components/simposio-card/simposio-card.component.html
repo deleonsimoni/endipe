@@ -31,6 +31,12 @@
             <p class="title"> {{ schedule.themeSpeeches }} </p>
         </div>
         <div class="group">
+            <p class="label">Conferencista(s)</p>
+            <p class="title" *ngFor="let coordinator of schedule.coordinators">
+                {{ coordinator.name }} {{ coordinator.isCoordinator ? '(coordenador)' : '' }}
+            </p>
+        </div>
+        <div class="group">
             <p class="label">Local</p>
             <p class="hour">{{ schedule.place }}</p>
         </div>
