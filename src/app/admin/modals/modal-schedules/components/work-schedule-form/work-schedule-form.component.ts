@@ -85,6 +85,10 @@ export class WorkScheduleFormComponent {
         return this.form.get('axis').value;
     }
 
+    public diffTypeP() {
+        return this.type != '4' && this.type != '9';
+    }
+
     public submitSchedule() {
         this.submitForm.emit({ id: this.data ? this.data._id : null, data: this.form.getRawValue() });
     }

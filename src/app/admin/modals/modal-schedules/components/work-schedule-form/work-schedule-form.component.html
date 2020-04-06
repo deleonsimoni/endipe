@@ -8,7 +8,7 @@
             </select>
         </div>
     </div>
-    <div class="form-row">
+    <div class="form-row" *ngIf="type != '4' && type != '9'">
         <div class="form-group col-md-12">
             <select class="form-control" id="work" [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedWork"
                 (ngModelChange)="setWorkForm($event)">
@@ -20,8 +20,9 @@
             </select>
         </div>
     </div>
-    <div class="form-row" *ngIf="type == '2' || type == '8'">
+    <div class="form-row" *ngIf="type != '4' && type != '9'">
         <div class="form-group col-md-12">
+            {{ type }}
             <label for="authors" class="label">Autores</label>
             <br>
             <small>*** Adicione os autores separando-os por vírgula.</small>
@@ -29,7 +30,7 @@
                 formControlName="authors"></textarea>
         </div>
     </div>
-    <div class="form-row" *ngIf="type == '2' || type == '8'">
+    <div class="form-row" *ngIf="type != '4' && type != '9'">
         <div class="form-group col-md-12">
             <label for="resumePropose" class="label">Resumo da proposta</label>
             <textarea name="resumePropose" class="form-control" id="resumePropose" cols="30" rows="5"
@@ -37,37 +38,39 @@
         </div>
     </div>
     <div class="form-row">
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-4" *ngIf="type != '4' && type != '9'">
             <label for="startTime" class="label">Hora início</label>
             <input type="time" min="08:00" max="21:00" class="form-control" name="startTime" id="startTime"
                 formControlName="startTime" />
         </div>
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-4" *ngIf="type != '4' && type != '9'">
             <label for="endTime" class="label">Hora fim</label>
             <input type="time" min="08:00" max="21:00" class="form-control" name="endTime" id="endTime"
                 formControlName="endTime" />
         </div>
-        <div class="form-group col-md-4">
+        {{ 'diff: ' +  diffTypeP() }}
+        {{ 'equal: ' +  equalTypeP() }}
+        <div class="form-group" [ngClass]="{'col-md-4': diffTypeP(), 'col-md-12': !diffTypeP()}">
             <label for="date" class="label">Data</label>
             <select class="form-control" name="date" id="date" formControlName="date">
                 <option *ngFor="let day of days" [value]="day">{{ day }}</option>
             </select>
         </div>
     </div>
-    <div class="form-row" *ngIf="type == '2' || type == '8'">
+    <div class="form-row" *ngIf="type != '4' && type != '9'">
         <div class="form-group col-md-12">
             <label for="qtdSubscribers" class="label">Vagas</label>
             <input type="text" name="qtdSubscribers" class="form-control" id="qtdSubscribers"
                 formControlName="qtdSubscribers" />
         </div>
     </div>
-    <div class="form-row">
+    <!-- <div class="form-row" *ngIf="type == '4' || type == '9'">
         <div class="form-group col-md-12">
             <label for="address" class="label">Endereço</label>
             <input type="text" name="address" class="form-control" id="address" formControlName="address" />
         </div>
-    </div>
-    <div class="form-row">
+    </div> -->
+    <div class="form-row" *ngIf="type != '4' && type != '9'">
         <div class="form-group col-md-12">
             <label for="place" class="label">Local</label>
             <input type="text" name="place" class="form-control" id="place" formControlName="place" />
