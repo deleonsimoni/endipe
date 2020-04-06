@@ -48,8 +48,6 @@
             <input type="time" min="08:00" max="21:00" class="form-control" name="endTime" id="endTime"
                 formControlName="endTime" />
         </div>
-        {{ 'diff: ' +  diffTypeP() }}
-        {{ 'equal: ' +  equalTypeP() }}
         <div class="form-group" [ngClass]="{'col-md-4': diffTypeP(), 'col-md-12': !diffTypeP()}">
             <label for="date" class="label">Data</label>
             <select class="form-control" name="date" id="date" formControlName="date">
