@@ -18,7 +18,7 @@ export class WorkScheduleFormComponent {
     public form: FormGroup;
     public axisCollection = AXIS;
     public works = [];
-    public days = ['14/07', '15/07', '16/07', '17/07'];
+    public days = ['29/10', '30/10', '31/10', '01/11'];
     public selectedWork;
     public modelConfig = { standalone: true };
 
