@@ -21,6 +21,7 @@ import { WorkScheduleFormComponent } from './components/work-schedule-form/work-
     imports: [
         CommonModule,
         FormsModule,
+        UtilNgxMaterialModule,
         ReactiveFormsModule,
         BsDatepickerModule.forRoot()
     ],

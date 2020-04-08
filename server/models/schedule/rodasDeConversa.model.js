@@ -31,6 +31,9 @@ const ScheduleSchema = new mongoose.Schema({
   axis: {
     type: String
   },
+  qtdDias: {
+    type: String
+  },
   qtdSubscribers: {
     type: String,
   },

@@ -1,4 +1,5 @@
 const RodasDeConversa = require('../../models/schedule/rodasDeConversa.model');
+const User = require('../../models/user.model');
 
 module.exports = {
   listSchedule,
@@ -36,6 +37,21 @@ async function deleteSchedule(id) {
 }
 
 async function unsubscribeRodadeConversa(workId, userId) {
+
+  await User.findOneAndUpdate({
+    _id: userId
+  }, {
+    $pull: {
+      'cursosInscritos': workId
+    }
+  }, function (err, doc) {
+    if (err) {
+      console.log("Erro ao remover inscricao do trabalho ", err);
+    } else {
+      console.log("Sucesso ao remover inscricao do trabalho: ", err);
+    }
+  });
+
   return RodasDeConversa.findOneAndUpdate({
     _id: workId
   }, {
@@ -54,6 +70,20 @@ async function subscribeRodadeConversa(workId, userId, email) {
     userId: userId,
     userEmail: email
   }
+
+  await User.findOneAndUpdate({
+    _id: userId
+  }, {
+    $push: {
+      cursosInscritos: workId
+    }
+  }, {
+    new: true
+  }, (err, doc) => {
+    if (err) {
+      console.log("Erro ao atualizar o usuario subscribeMinicurso -> " + err);
+    }
+  });
 
   return RodasDeConversa.findOneAndUpdate({
     _id: workId

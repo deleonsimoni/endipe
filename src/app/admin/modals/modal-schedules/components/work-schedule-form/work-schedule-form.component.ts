@@ -38,6 +38,7 @@ export class WorkScheduleFormComponent {
             pdf: [null],
             workTitle: [null],
             qtdSubscribers: [null],
+            qtdDias: [null],
             resumePropose: [null],
             date: [null]
         });

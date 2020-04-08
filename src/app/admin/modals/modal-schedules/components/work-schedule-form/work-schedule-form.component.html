@@ -60,6 +60,26 @@
       <input type="text" name="qtdSubscribers" class="form-control" id="qtdSubscribers"
         formControlName="qtdSubscribers" />
     </div>
+    <div class="form-group col-md-12">
+      <label id="example-radio-group-label">Quantidade de dias</label>
+      <br>
+      <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
+        formControlName="qtdDias">
+        <mat-radio-button class="example-radio-button mr-2" value="1">
+          1 dia
+        </mat-radio-button>
+        <mat-radio-button class="example-radio-button mr-2" value="2">
+          2 dias
+        </mat-radio-button>
+        <mat-radio-button class="example-radio-button mr-2" value="3">
+          3 dias
+        </mat-radio-button>
+        <mat-radio-button class="example-radio-button mr-2" value="4">
+          4 dias
+        </mat-radio-button>
+
+      </mat-radio-group>
+    </div>
   </div>
   <!-- <div class="form-row" *ngIf="type == '4' || type == '9'">
         <div class="form-group col-md-12">

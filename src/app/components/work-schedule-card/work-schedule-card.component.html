@@ -82,6 +82,12 @@
           </p>
         </div>
         <div class="group" *ngIf="type != '4' && type != '9'">
+          <p class="label">Duração</p>
+          <p class="hour">
+            {{ schedule.qtdDias }} Dia(s)
+          </p>
+        </div>
+        <div class="group" *ngIf="type != '4' && type != '9'">
           <p class="label">Local</p>
           <p class="hour">{{ schedule.place }}</p>
         </div>

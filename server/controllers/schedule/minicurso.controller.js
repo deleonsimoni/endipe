@@ -1,4 +1,5 @@
 const Minicurso = require('../../models/schedule/minicurso.model');
+const User = require('../../models/user.model');
 
 module.exports = {
   listSchedule,
@@ -36,7 +37,22 @@ async function deleteSchedule(id) {
 }
 
 async function unsubscribeMinicurso(workId, userId) {
-  return Minicurso.findOneAndUpdate({
+
+  await User.findOneAndUpdate({
+    _id: userId
+  }, {
+    $pull: {
+      'cursosInscritos': workId
+    }
+  }, function (err, doc) {
+    if (err) {
+      console.log("Erro ao remover inscricao do trabalho ", err);
+    } else {
+      console.log("Sucesso ao remover inscricao do trabalho: ", err);
+    }
+  });
+
+  return await Minicurso.findOneAndUpdate({
     _id: workId
   }, {
     $pull: {
@@ -55,7 +71,22 @@ async function subscribeMinicurso(workId, userId, email) {
     userEmail: email
   }
 
-  return Minicurso.findOneAndUpdate({
+  await User.findOneAndUpdate({
+    _id: userId
+  }, {
+    $addToSet: {
+      cursosInscritos: workId
+    }
+  }, {
+    new: true
+  }, (err, doc) => {
+    if (err) {
+      console.log("Erro ao atualizar o usuario subscribeMinicurso -> " + err);
+    }
+  });
+
+
+  return await Minicurso.findOneAndUpdate({
     _id: workId
   }, {
     $addToSet: {
