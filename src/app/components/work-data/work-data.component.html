@@ -71,7 +71,9 @@
         </strong>
         <div *ngIf="work.reviewAdmin">
           <div>
-            Parecer: {{ work.reviewAdmin.userEmail }}
+            <p *ngIf="user.icAdmin || user?.reviewer?.icCoordinator">
+              Parecer: {{ work.reviewAdmin.userEmail }}
+            </p>
             <p>
               Cabeçalho e rodapé conforme
               template - {{work.reviewAdmin.review.question1}}
@@ -96,7 +98,8 @@
     <div *ngIf="work.reviewReviewer" class="row align-items-center mb-2">
       <hr />
       <div class="col-md-12">
-        <strong>Parecer de {{work.reviewReviewer.userEmail}}</strong>
+        <strong *ngIf="user.icAdmin || user?.reviewer?.icCoordinator">Parecer de
+          {{work.reviewReviewer.userEmail}}</strong>
 
         <div *ngIf="work.reviewReviewer.review">
           <div>
