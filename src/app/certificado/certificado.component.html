@@ -6,16 +6,32 @@
           <div class="section-header">
             <h2>Certificados</h2>
           </div>
-          <!--<h5>Certificados ainda não disponíveis.</h5>-->
+          <h5>Certificados ainda não disponíveis.</h5>
+
+          <!--
+          <div class="form-row">
+            <div class="form-group col-md-6">
+
+              <div class="mt-2">
+                <select class="form-control" (change)="preencherTemplate($event)" placeholder="Eixo" id="opt">
+                  <option disabled="true" [selected]="true">
+                    Selecione o modelo</option>
+                  <option *ngFor="let template of templates">{{ template.name }}
+                  </option>
+                </select>
+              </div>
+
+              <input type="text" name="Nome do participante" class="form-control mt-2" id="title"
+                placeholder="Nome do participante" [(ngModel)]="nome" />
+
+            </div>
+          </div>
+
 
           <div id="certificado" class="certified">
             <div *ngIf="!carregando" class="certified-details">
               <h4>
-                Certificamos que <strong>{{user.fullname}}</strong> participou do XX Encontro
-                Nacional de
-                Didática e Prática de Ensino – XX ENDIPE – RIO 2020 – uma promoção interinstitucional
-                coordenada pela Universidade Federal do Rio de Janeiro, realizado no Rio de Janeiro, no
-                período de 29/10, 30/10, 31/10 e 01/11 de 2020.
+                Certificamos que <strong>{{nome}}</strong> {{textoTemplate}}
               </h4>
             </div>
           </div>
@@ -27,7 +43,7 @@
             <button class="btn-get-started"><i class="fas fa-spinner fa-pulse"></i>
             </button>
           </div>
-
+-->
         </div>
       </div>
     </div>
