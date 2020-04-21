@@ -29,22 +29,20 @@ export class SchedulesComponent implements OnInit {
     private router: Router,
 
   ) {
-    this.router.navigate(["/home"]);
 
-    /*
-        this.daySelected$.subscribe(_ => {
-          this.listAllSchedules();
-        });
-    */
+    this.daySelected$.subscribe(_ => {
+      this.listAllSchedules();
+    });
+
   }
 
   ngOnInit() {
-    /*this.listAllSchedules();
+    this.listAllSchedules();
 
     this.authService.refresh().subscribe((res: any) => {
       this.user = res.user;
     });
-*/
+
   }
 
   private listAllSchedules() {
