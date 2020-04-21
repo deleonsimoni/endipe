@@ -1,9 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AnaisService } from 'src/app/services/anais.service';
 import { MatDialog } from '@angular/material';
-import { ModalNewsComponent } from '../modals/modal-news/modal-news.component';
+import { ModalAnaisComponent } from '../modals/modal-anais/modal-anais.component';
 
 @Component({
   selector: 'app-anais',
@@ -53,14 +53,8 @@ export class AnaisComponent implements OnInit {
       });
   }
 
-  public register() {
-    const dialogRef = this.dialog.open(ModalNewsComponent);
-
-    dialogRef.afterClosed().subscribe(() => this.listar());
-  }
-
-  public update(anal) {
-    const dialogRef = this.dialog.open(ModalNewsComponent, {
+  public register(anal) {
+    const dialogRef = this.dialog.open(ModalAnaisComponent, {
       data: {
         anal: anal
       }

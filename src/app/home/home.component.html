@@ -830,7 +830,12 @@
         <h2>Anais</h2>
       </div>
       <!-- <div class="row"> -->
-      <p>Anais não disponíveis.</p>
+      <p *ngIf="anais.length == 0">Anais não disponíveis.</p>
+      <p *ngIf="anais.length > 0">Confira os anais abaixo:</p>
+
+      <ul style="list-style-type: circle;" *ngFor="let anal of anais">
+        <li><a href="{{anal.link}}" target="blank"><u>{{anal.name}}</u></a></li>
+      </ul>
       <!-- </div> -->
     </div>
   </section>

@@ -16,7 +16,7 @@ async function getAnais() {
 
 async function insertAnais(anais, idUser) {
   anais.user = idUser;
-  return await new Anais(news).save();
+  return await new Anais(anais).save();
 }
 
 async function updateAnais(anais, idUser) {
@@ -31,7 +31,7 @@ async function updateAnais(anais, idUser) {
       if (err) return res.send(500, {
         error: err
       });
-      return res.send(200, doc);
+      return doc;
     });
 }
 

@@ -1,9 +1,8 @@
-import { Component, OnInit, OnDestroy, inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NoticiasService } from 'src/app/services/noticias.service';
-import { Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -22,7 +21,7 @@ export class ModalNewsComponent implements OnInit, OnDestroy {
     public dialogRef: MatDialogRef<ModalNewsComponent>,
     private noticiasService: NoticiasService,
     private toastr: ToastrService,
-    @inject(MAT_DIALOG_DATA) public data: any,
+    @Inject(MAT_DIALOG_DATA) public data: any,
 
   ) { }
 
@@ -37,9 +36,14 @@ export class ModalNewsComponent implements OnInit, OnDestroy {
 
   private createForm() {
     this.newsForm = this.builder.group({
+      _id: [],
       name: [null, [Validators.required]],
       description: [null, [Validators.required]]
     });
+
+    if (this.data.news) {
+      this.newsForm.patchValue(this.data.news);
+    }
   }
 
   public close(): void {
@@ -50,7 +54,7 @@ export class ModalNewsComponent implements OnInit, OnDestroy {
     this.submit = true;
     if (this.newsForm.valid) {
 
-      if (this.data.notice) {
+      if (this.data.news) {
 
         this.noticiasService.atualizar(this.newsForm.value)
           .subscribe((res: any) => {

@@ -28,7 +28,7 @@ async function getNews(req, res) {
 
 async function updateNews(req, res) {
   if (req.user.icAdmin) {
-    let news = await anaisCtrl.updateNews(req.body, req.user._id);
+    let news = await newsCtrl.updateNews(req.body, req.user._id);
     res.json(news);
   } else {
     res.sendStatus(401);

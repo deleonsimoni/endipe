@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NoticiasService } from 'src/app/services/noticias.service';
@@ -22,7 +22,7 @@ export class ModalAnaisComponent implements OnInit {
     public dialogRef: MatDialogRef<ModalAnaisComponent>,
     private anaisService: AnaisService,
     private toastr: ToastrService,
-    @inject(MAT_DIALOG_DATA) public data: any,
+    @Inject(MAT_DIALOG_DATA) public data: any,
 
   ) { }
 

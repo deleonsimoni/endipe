@@ -32,6 +32,7 @@ import { ModalAnaisComponent } from './modal-anais/modal-anais.component';
     ModalConferencerComponent,
     ModalCoordinatorComponent,
     ModalNewsComponent,
+    ModalAnaisComponent,
     ModalReviewerComponent,
     ModalEditProfileComponent,
     ConfirmationDialogComponent,

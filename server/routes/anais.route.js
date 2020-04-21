@@ -47,7 +47,7 @@ async function updateAnais(req, res) {
 async function deleteAnais(req, res) {
   if (req.user.icAdmin) {
     let anais = await anaisCtrl.deleteAnais(req.params.id);
-    res.json(Anais);
+    res.json(anais);
   } else {
     res.sendStatus(401);
   }

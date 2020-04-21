@@ -23,6 +23,7 @@ import { ModalConferencistasComponent } from '../modal-conferencistas/modal-conf
 import { PROGRAMACOES } from '../declarations';
 import { ModalEncerramentoComponent } from '../modal-encerramento/modal-encerramento.component';
 import { ModalAberturaComponent } from '../modal-abertura/modal-abertura.component';
+import { AnaisService } from '../services/anais.service';
 
 @Component({
   selector: 'app-home',
@@ -36,6 +37,7 @@ export class HomeComponent implements OnInit {
   subscriptionValue: number;
   carregando = false;
   noticias = [];
+  anais = [];
 
   configuracaoCarrossel = {
     nav: true,
@@ -442,6 +444,7 @@ export class HomeComponent implements OnInit {
     private dialog: MatDialog,
     private download: DownloadFileService,
     private noticiasService: NoticiasService,
+    private anaisService: AnaisService,
     private toastr: ToastrService,
 
   ) {
@@ -478,6 +481,13 @@ export class HomeComponent implements OnInit {
 
       }, err => {
         this.toastr.error('Ocorreu um erro ao listar noticias', 'Atenção: ');
+      });
+
+    this.anaisService.listar()
+      .subscribe((res: any) => {
+        this.anais = res;
+      }, err => {
+        this.toastr.error('Ocorreu um erro ao listar anais', 'Atenção: ');
       });
   }
 
