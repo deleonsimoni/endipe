@@ -5,6 +5,7 @@ import { ScheduleService } from 'src/app/services/schedule.service';
 import { SCHEDULE_TYPE } from 'src/app/declarations';
 import { BehaviorSubject } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-schedules',
@@ -25,22 +26,25 @@ export class SchedulesComponent implements OnInit {
     private dialog: MatDialog,
     private scheduleService: ScheduleService,
     private authService: AuthService,
+    private router: Router,
 
   ) {
+    this.router.navigate(["/home"]);
 
-    this.daySelected$.subscribe(_ => {
-      this.listAllSchedules();
-    });
-
+    /*
+        this.daySelected$.subscribe(_ => {
+          this.listAllSchedules();
+        });
+    */
   }
 
   ngOnInit() {
-    this.listAllSchedules();
+    /*this.listAllSchedules();
 
     this.authService.refresh().subscribe((res: any) => {
       this.user = res.user;
     });
-
+*/
   }
 
   private listAllSchedules() {

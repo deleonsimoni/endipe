@@ -78,17 +78,17 @@
           </div>
           <div class="row">
             <div class="agenda-items">
-              O RIO DE JANEIRO ESPERA POR VOCÊ!<br />
-              Aproveite os descontos e faça logo a sua inscrição para o maior evento da área de
-              Educação<br /><br />
-              <hr />
-
               <div *ngFor="let noticia of noticias">
+                <div class="pull-right">{{noticia.createAt | date: 'dd/MM/yyyy' }}</div>
                 <div [innerHTML]="noticia.name"></div>
                 <div [innerHTML]="noticia.description"></div>
 
                 <hr />
               </div>
+              O RIO DE JANEIRO ESPERA POR VOCÊ!<br />
+              Aproveite os descontos e faça logo a sua inscrição para o maior evento da área de
+              Educação<br /><br />
+              <hr />
             </div>
           </div>
         </div>
@@ -782,8 +782,8 @@
               <tr>
                 <th class="text-nowrap">Recursos</th>
                 <th class="text-nowrap">
-                  <s>04-08 de maio de 2020</s><br />
-                  <b style="color: red;">20-27 de abril de 2020</b>
+                  <s>20-27 de abril de 2020</s><br />
+                  <b style="color: red;">04-08 de maio de 2020</b>
                 </th>
               </tr>
               <tr>

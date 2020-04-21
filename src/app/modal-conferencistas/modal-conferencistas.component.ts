@@ -118,9 +118,6 @@ export class ModalConferencistasComponent implements OnInit {
       fullname: 'Isabel Maria Sabino (UECE)',
       imagemLocal: '../../assets/img/conferencistas/Isabel Maria Sabino (UECE).jpg'
     }, {
-      fullname: 'Joana Romanowisk (PUC PR)',
-      imagemLocal: '../../assets/img/conferencistas/Joana Romanowisk (PUC PR).jpg'
-    }, {
       fullname: 'José Carlos Libâneo (UFG)',
       imagemLocal: '../../assets/img/conferencistas/José Carlos Libâneo (UFG).jpg'
     }, {
@@ -180,9 +177,6 @@ export class ModalConferencistasComponent implements OnInit {
     }, {
       fullname: 'Patricia Cristina Albieri de Almeida (FCC)',
       imagemLocal: '../../assets/img/conferencistas/Patricia Cristina Albieri de Almeida (FCC).jpg'
-    }, {
-      fullname: 'Pura Martins (PUC PR)',
-      imagemLocal: '../../assets/img/conferencistas/Pura Martins (PUC PR).jpg'
     }, {
       fullname: 'Sandra Regina Soares (UNEB)',
       imagemLocal: '../../assets/img/conferencistas/Sandra Regina Soares (UNEB).jpg'
