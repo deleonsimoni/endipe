@@ -71,8 +71,12 @@ export class NewsComponent implements OnInit, OnDestroy {
       });
   }
 
-  public register() {
-    const dialogRef = this.dialog.open(ModalNewsComponent);
+  public register(news) {
+    const dialogRef = this.dialog.open(ModalNewsComponent, {
+      data: {
+        news: news
+      }
+    });
 
     dialogRef.afterClosed().subscribe(() => this.listar());
   }

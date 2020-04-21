@@ -28,6 +28,7 @@ import { ReviewListWorksComponent } from './review-list-works/review-list-works.
 import { ModalReviewReviewerComponent } from './modals/modal-review-reviewer/modal-review-reviewer.component';
 import { GlobalComponentsModule } from '../components/global-components.module';
 import { ModalSchedulesModule } from './modals/modal-schedules/modal-schedules.module';
+import { AnaisComponent } from './anais/anais.component';
 @NgModule({
     declarations: [
         AdminComponent,
@@ -45,6 +46,7 @@ import { ModalSchedulesModule } from './modals/modal-schedules/modal-schedules.m
         VincularTrabalhosComponent,
         SchedulesComponent,
         ReviewListWorksComponent,
+        AnaisComponent,
     ],
     entryComponents: [
         AdminComponent,
