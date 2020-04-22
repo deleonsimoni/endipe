@@ -46,6 +46,7 @@ module.exports = {
   createWork,
   updateUsers,
   getWorksReviewer,
+  getWorkInscricoes,
 
 }
 
@@ -807,6 +808,19 @@ async function createReviewer(reviewer) {
   return retorno;
 
 }
+
+async function getWorkInscricoes(inscricoes) {
+
+  let works = [];
+
+  for (let i = 0; i < inscricoes.length; i++) {
+    let work = await Work.findById(inscricoes[i]).select('_id title modalityId');
+    works.push(work);
+  }
+
+  return works;
+}
+
 
 async function validateReviewer(reviewers, retorno) {
 

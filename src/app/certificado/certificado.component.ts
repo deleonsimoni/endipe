@@ -28,6 +28,11 @@ export class CertificadoComponent implements OnInit {
   gt: any;
   textoTemplate: any;
   works: any;
+  inscricoes: any;
+  coringa = '';
+  exibirGT = false;
+  certificados = [];
+
 
   ngOnInit() {
     this.carregando = true;
@@ -36,26 +41,80 @@ export class CertificadoComponent implements OnInit {
 
       this.nome = this.user.fullname;
 
-      if (this.user.works && this.user.works.length > 0) {
-        this.carregarTrabalhosUsuario();
-
+      if (!this.user.icAdmin) {
+        if (this.user.payment && this.user.payment.icPaid) {
+          this.preencherTemplate('PARTICIPAÇÃO GERAL', null, null);
+        }
+        if (this.user.works && this.user.works.length > 0) {
+          this.carregarTrabalhosUsuario();
+        }
+        if (this.user.cursosInscritos && this.user.works.length > 0) {
+          this.carregarInscricoes();
+        }
       }
 
-      /*if (this.user.payment && this.user.payment.icPaid) {
-        this.templateSelecionado = this.templates.filter(element => element.name == 'PARTICIPAÇÃO GERAL')[0]
-      }
-*/
-
-      this.carregando = false;
     });
 
+  }
 
+
+  private gerarCertificadosTrabalhos() {
+    this.works.forEach(work => {
+      //MiniCurso
+      if (work.modalityId == 4 && work.reviewAdmin.review.icAllow == 'Sim' &&
+        work.reviewReviewer &&
+        work.reviewReviewer.review &&
+        work.reviewReviewer.review.icAllow == 'Sim') {
+        this.preencherTemplate('MEDIAÇÃO DE MINICURSO', work.title, 'xx');
+      }
+
+      if (work.modalityId == 2 && work.reviewAdmin.review.icAllow == 'Sim' &&
+        work.reviewReviewer &&
+        work.reviewReviewer.review &&
+        work.reviewReviewer.review.icAllow == 'Sim') {
+        this.preencherTemplate('MEDIAÇÃO DE RODA DE CONVERSA', work.title, null);
+      }
+
+      if (work.modalityId == 5 && work.reviewAdmin.review.icAllow == 'Sim' &&
+        work.reviewReviewer &&
+        work.reviewReviewer.review &&
+        work.reviewReviewer.review.icAllow == 'Sim') {
+        this.preencherTemplate('PAINEL', work.title, null);
+      }
+
+      if (work.modalityId == 3 && work.reviewAdmin.review.icAllow == 'Sim' &&
+        work.reviewReviewer &&
+        work.reviewReviewer.review &&
+        work.reviewReviewer.review.icAllow == 'Sim') {
+        this.preencherTemplate('PÔSTER', work.title, null);
+      }
+    });
+  }
+
+  private gerarCertificadosInscricoes() {
+    this.inscricoes.forEach(work => {
+      if (work.modalityId == 4 && work.reviewAdmin.review.icAllow == 'Sim' &&
+        work.reviewReviewer &&
+        work.reviewReviewer.review &&
+        work.reviewReviewer.review.icAllow == 'Sim') {
+        this.preencherTemplate('PARTICIPAÇÃO DE MINICURSO', work.title, 'xx');
+      }
+
+      if (work.modalityId == 2 && work.reviewAdmin.review.icAllow == 'Sim' &&
+        work.reviewReviewer &&
+        work.reviewReviewer.review &&
+        work.reviewReviewer.review.icAllow == 'Sim') {
+        this.preencherTemplate('PARTICIPAÇÃO DE RODA DE CONVERSA', work.title, null);
+      }
+
+    });
   }
 
   private carregarTrabalhosUsuario() {
     this.carregando = true;
     this.http.get(`${this.baseUrl}/user/worksReviewer/`).subscribe((res: any) => {
       this.works = res.works;
+      this.gerarCertificadosTrabalhos();
       this.carregando = false;
     }, err => {
       console.log(err);
@@ -63,10 +122,22 @@ export class CertificadoComponent implements OnInit {
     });
   }
 
-  public captureScreen() {
+  private carregarInscricoes() {
+    this.carregando = true;
+    this.http.get(`${this.baseUrl}/user/getWorksIncricoes/`).subscribe((res: any) => {
+      this.inscricoes = res.works;
+      this.gerarCertificadosInscricoes();
+      this.carregando = false;
+    }, err => {
+      console.log(err);
+      this.carregando = false;
+    });
+  }
+
+  public captureScreen(index) {
     this.carregando = true;
 
-    let data = document.getElementById('certificado');
+    let data = document.getElementById('certificado' + index);
 
     html2canvas(data).then(canvas => {
       let imgWidth = 300;
@@ -82,9 +153,61 @@ export class CertificadoComponent implements OnInit {
 
   }
 
-  preencherTemplate(templateSelecionado) {
+  preencherTemplate(templateSelecionado, complementoUm, complementoDois) {
+
+    if (this.user.icAdmin) {
+      this.certificados = [];
+    }
+    this.exibirGT = false;
+    this.coringa = '';
     this.textoTemplate = this.templates.filter(element => element.name == templateSelecionado.target.value)[0].value;
+    if (templateSelecionado.target.value == 'GT') {
+      this.coringa = " participou do GT ";
+      this.exibirGT = true;
+    } else if (templateSelecionado.target.value == 'PRESTAÇÃO DE SERVIÇO') {
+      this.coringa = " atuou como prestadora de serviço na área de ";
+      this.exibirGT = true;
+    } else if (templateSelecionado.target.value == 'COORDENAÇÃO DE ATIVIDADE') {
+      this.coringa = "coordenou ";
+      this.exibirGT = true;
+    } else if (templateSelecionado.target.value == 'SESSÃO ESPECIAL') {
+      this.coringa = " integrou a Sessão Especial " + complementoUm || '______________' + " com a palestra " + complementoDois || '_______ ';
+      this.exibirGT = true;
+    } else if (templateSelecionado.target.value == 'ATIVIDADE CULTURAL') {
+      this.coringa = " realizou a apresentação cultural ";
+      this.exibirGT = true;
+    } else if (templateSelecionado.target.value == 'MEDIAÇÃO DE MINICURSO') {
+      if (this.user.icAdmin) {
+        this.coringa = " desenvolveu o Minicurso " + complementoUm || '______________' + " com carga horária de " + complementoDois || '_______ ';
+      } else {
+        this.coringa = " desenvolveu o Minicurso " + complementoUm;
+      }
+      this.exibirGT = true;
+    } else if (templateSelecionado.target.value == 'PARTICIPAÇÃO DE MINICURSO') {
+      if (this.user.icAdmin) {
+        this.coringa = " participou do Minicurso " + complementoUm || '______________' + " com carga horária de " + complementoDois || '_______ ';
+      } else {
+        this.coringa = " participou do Minicurso " + complementoUm;
+      }
+      this.exibirGT = true;
+    } else if (templateSelecionado.target.value == 'MEDIAÇÃO DE RODA DE CONVERSA') {
+      this.coringa = " fez a mediação da Roda de Conversa ";
+      this.exibirGT = true;
+    } else if (templateSelecionado.target.value == 'PARTICIPAÇÃO DE RODA DE CONVERSA') {
+      this.coringa = " participou da Roda de Conversa " + complementoUm || '______________' + " ";
+      this.exibirGT = true;
+    } else if (templateSelecionado.target.value == 'PAINEL') {
+      this.coringa = " apresentou o Painel intitulado ";
+      this.exibirGT = true;
+    } else if (templateSelecionado.target.value == 'PÔSTER') {
+      this.coringa = " apresentou o trabalho ";
+      this.exibirGT = true;
+    }
+
+    this.certificados.push({ nome: this.nome, coringa: this.coringa, textoTemplate: this.textoTemplate })
+
   }
+
 
   templates = [
     {

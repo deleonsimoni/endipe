@@ -36,6 +36,9 @@ router.get('/getBoleto', passport.authenticate('jwt', {
 router.get('/worksReviewer', passport.authenticate('jwt', {
   session: false
 }), asyncHandler(getWorksReviewer));
+router.get('/getWorksIncricoes', passport.authenticate('jwt', {
+  session: false
+}), asyncHandler(getWorksIncricoes));
 
 
 router.post('/uploadWork/xxendiperio2020/:id', [passport.authenticate('jwt', {
@@ -221,6 +224,13 @@ async function getBoleto(req, res) {
 
 async function getWorksReviewer(req, res) {
   let works = await userCtrl.getWorksReviewer(req.user._id);
+  res.json({
+    works
+  });
+}
+
+async function getWorksInscricoes(req, res) {
+  let works = await userCtrl.getWorksInscricoes(req.inscricoes);
   res.json({
     works
   });
