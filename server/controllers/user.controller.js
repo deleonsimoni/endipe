@@ -820,9 +820,9 @@ async function getWorksInscricoes(inscricoes) {
 
     let work;
     if (inscricoes[i].icModalityId == 4) {
-      work = await MiniCurso.findById(inscricoes[i].idSchedule).select('_id workTitle');
+      work = await MiniCurso.findById(inscricoes[i].idSchedule).select('_id workTitle qtdDias');
     } else {
-      work = await RodaDeConversa.findById(inscricoes[i].idSchedule).select('_id workTitle');
+      work = await RodaDeConversa.findById(inscricoes[i].idSchedule).select('_id workTitle qtdDias');
     }
     works.push(work);
   }

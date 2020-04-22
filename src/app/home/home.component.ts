@@ -138,23 +138,11 @@ export class HomeComponent implements OnInit {
       nome: 'Apoio aos preletores',
       equipe: [
         'Patricia Bastos de Azevedo – UFRRJ (coord.)',
-        'Andreia Gomes da Cruz - UFRRJ',
+        'Andreia Gomes da Cruz – UFRRJ',
         'Felipe da Silva Ferreira – EB/CEFET-RJ',
         'Pedro Pinheiro Teixeira – PUC-Rio',
         'Priscila Monteiro Corrêa – FEBF/UERJ'
 
-      ]
-    },
-    {
-      nome: 'Arte e comunicação',
-      equipe: [
-        'Edméa Oliveira Santos – UFRRJ (coord.)',
-        'Silvana Mesquita – PUC-Rio (coord.)',
-        'Daniele Grazinolli – UFRJ',
-        'Felipe da Silva Ferreira – EB/CEFET-RJ',
-        'Fernanda Lahtermaher Oliveira – EB/CAp UFRJ',
-        'Rosemary dos Santos Oliveira – FEBF/UERJ',
-        'Bosco Mesquita (design gráfico)'
       ]
     },
     {
@@ -193,7 +181,7 @@ export class HomeComponent implements OnInit {
       ]
     },
     {
-      nome: 'Hospedagem, transporte e alimentação',
+      nome: 'Hospedagem, transporte & alimentação',
       equipe: [
         'Talita Vidal – FEBF/UERJ (coord.)',
         'Dinah Terra – UFF',
@@ -202,7 +190,7 @@ export class HomeComponent implements OnInit {
       ]
     },
     {
-      nome: 'Inclusão e acessibilidade',
+      nome: 'Inclusão & acessibilidade',
       equipe: [
         'Bianca Della Libera – IBC (coord.)',
         'Yrlla Ribeiro de Oliveira Carneiro da Silva – INES (coord)',
@@ -215,7 +203,7 @@ export class HomeComponent implements OnInit {
       ]
     },
     {
-      nome: 'Local e infraestrutura',
+      nome: 'Local & infraestrutura',
       equipe: [
         'Claudia de Oliveira Fernandes – UNIRIO (coord.)',
         'Andrea Villela Mafra da Silva – ISERJ (coord.)',
@@ -285,7 +273,7 @@ export class HomeComponent implements OnInit {
       ]
     },
     {
-      nome: 'Imagem, Comunicação e Tecnologia',
+      nome: 'Imagem, Comunicação & Tecnologia',
       equipe: [
         'Mônica Vasconcellos – UFF (coord.)',
         'Edméa Oliveira Santos – UFRRJ (coord.)',
