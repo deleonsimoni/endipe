@@ -111,7 +111,10 @@ const UserSchema = new mongoose.Schema({
   }],
 
   cursosInscritos: [{
-    type: mongoose.Schema.Types.ObjectId
+    idSchedule: {
+      type: mongoose.Schema.Types.ObjectId
+    },
+    icModalityId: Number
   }],
 
   reviewer: {

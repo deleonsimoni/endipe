@@ -32,7 +32,7 @@ export class CertificadoComponent implements OnInit {
   coringa = '';
   exibirGT = false;
   certificados = [];
-
+  templateAutomatico = { target: { value: '' } };
 
   ngOnInit() {
     this.carregando = true;
@@ -43,14 +43,17 @@ export class CertificadoComponent implements OnInit {
 
       if (!this.user.icAdmin) {
         if (this.user.payment && this.user.payment.icPaid) {
-          this.preencherTemplate('PARTICIPAÇÃO GERAL', null, null);
+          this.templateAutomatico.target.value = 'PARTICIPAÇÃO GERAL';
+          this.preencherTemplate(this.templateAutomatico, null, null);
         }
         if (this.user.works && this.user.works.length > 0) {
           this.carregarTrabalhosUsuario();
         }
-        if (this.user.cursosInscritos && this.user.works.length > 0) {
+        if (this.user.cursosInscritos && this.user.cursosInscritos.length > 0) {
           this.carregarInscricoes();
         }
+      } else {
+        this.carregando = false;
       }
 
     });
@@ -61,52 +64,59 @@ export class CertificadoComponent implements OnInit {
   private gerarCertificadosTrabalhos() {
     this.works.forEach(work => {
       //MiniCurso
-      if (work.modalityId == 4 && work.reviewAdmin.review.icAllow == 'Sim' &&
-        work.reviewReviewer &&
-        work.reviewReviewer.review &&
-        work.reviewReviewer.review.icAllow == 'Sim') {
-        this.preencherTemplate('MEDIAÇÃO DE MINICURSO', work.title, 'xx');
+      if (work.modalityId == 4 && work.reviewAdmin && work.reviewAdmin.review.icAllow == 'Sim' ||
+        (work.reviewReviewer &&
+          work.reviewReviewer.review &&
+          work.reviewReviewer.review.icAllow != 'Não')) {
+
+        this.templateAutomatico.target.value = 'MEDIAÇÃO DE MINICURSO';
+        this.preencherTemplate(this.templateAutomatico, work.title, 'xx');
+
       }
 
-      if (work.modalityId == 2 && work.reviewAdmin.review.icAllow == 'Sim' &&
-        work.reviewReviewer &&
-        work.reviewReviewer.review &&
-        work.reviewReviewer.review.icAllow == 'Sim') {
-        this.preencherTemplate('MEDIAÇÃO DE RODA DE CONVERSA', work.title, null);
+      if (work.modalityId == 2 && work.reviewAdmin && work.reviewAdmin.review.icAllow == 'Sim' ||
+        (work.reviewReviewer &&
+          work.reviewReviewer.review &&
+          work.reviewReviewer.review.icAllow != 'Não')) {
+
+        this.templateAutomatico.target.value = 'MEDIAÇÃO DE RODA DE CONVERSA';
+        this.preencherTemplate(this.templateAutomatico, work.title, null);
+
       }
 
-      if (work.modalityId == 5 && work.reviewAdmin.review.icAllow == 'Sim' &&
-        work.reviewReviewer &&
-        work.reviewReviewer.review &&
-        work.reviewReviewer.review.icAllow == 'Sim') {
-        this.preencherTemplate('PAINEL', work.title, null);
+      if (work.modalityId == 5 && work.reviewAdmin && work.reviewAdmin.review.icAllow == 'Sim' ||
+        (work.reviewReviewer &&
+          work.reviewReviewer.review &&
+          work.reviewReviewer.review.icAllow != 'Não')) {
+
+        this.templateAutomatico.target.value = 'PAINEL';
+        this.preencherTemplate(this.templateAutomatico, work.title, null);
+
       }
 
-      if (work.modalityId == 3 && work.reviewAdmin.review.icAllow == 'Sim' &&
-        work.reviewReviewer &&
-        work.reviewReviewer.review &&
-        work.reviewReviewer.review.icAllow == 'Sim') {
-        this.preencherTemplate('PÔSTER', work.title, null);
+      if (work.modalityId == 3 && work.reviewAdmin && work.reviewAdmin.review.icAllow == 'Sim' ||
+        (work.reviewReviewer &&
+          work.reviewReviewer.review &&
+          work.reviewReviewer.review.icAllow != 'Não')) {
+
+        this.templateAutomatico.target.value = 'PÔSTER';
+        this.preencherTemplate(this.templateAutomatico, work.title, null);
+
       }
     });
   }
 
   private gerarCertificadosInscricoes() {
+    let control = 0;
     this.inscricoes.forEach(work => {
-      if (work.modalityId == 4 && work.reviewAdmin.review.icAllow == 'Sim' &&
-        work.reviewReviewer &&
-        work.reviewReviewer.review &&
-        work.reviewReviewer.review.icAllow == 'Sim') {
-        this.preencherTemplate('PARTICIPAÇÃO DE MINICURSO', work.title, 'xx');
+      if (this.user.cursosInscritos[control].icModalityId == 4) {
+        this.templateAutomatico.target.value = 'PARTICIPAÇÃO DE MINICURSO';
+        this.preencherTemplate(this.templateAutomatico, work.workTitle, 'xx');
+      } else if (this.user.cursosInscritos[control].icModalityId == 2) {
+        this.templateAutomatico.target.value = 'PARTICIPAÇÃO DE RODA DE CONVERSA';
+        this.preencherTemplate(this.templateAutomatico, work.workTitle, null);
       }
-
-      if (work.modalityId == 2 && work.reviewAdmin.review.icAllow == 'Sim' &&
-        work.reviewReviewer &&
-        work.reviewReviewer.review &&
-        work.reviewReviewer.review.icAllow == 'Sim') {
-        this.preencherTemplate('PARTICIPAÇÃO DE RODA DE CONVERSA', work.title, null);
-      }
-
+      control++;
     });
   }
 
@@ -124,7 +134,7 @@ export class CertificadoComponent implements OnInit {
 
   private carregarInscricoes() {
     this.carregando = true;
-    this.http.get(`${this.baseUrl}/user/getWorksIncricoes/`).subscribe((res: any) => {
+    this.http.get(`${this.baseUrl}/user/getWorksIncricoes?inscricoes=` + JSON.stringify(this.user.cursosInscritos)).subscribe((res: any) => {
       this.inscricoes = res.works;
       this.gerarCertificadosInscricoes();
       this.carregando = false;
@@ -171,36 +181,36 @@ export class CertificadoComponent implements OnInit {
       this.coringa = "coordenou ";
       this.exibirGT = true;
     } else if (templateSelecionado.target.value == 'SESSÃO ESPECIAL') {
-      this.coringa = " integrou a Sessão Especial " + complementoUm || '______________' + " com a palestra " + complementoDois || '_______ ';
+      this.coringa = " integrou a Sessão Especial " + (complementoUm || '______________') + " com a palestra " + (complementoDois || '_______ ');
       this.exibirGT = true;
     } else if (templateSelecionado.target.value == 'ATIVIDADE CULTURAL') {
       this.coringa = " realizou a apresentação cultural ";
       this.exibirGT = true;
     } else if (templateSelecionado.target.value == 'MEDIAÇÃO DE MINICURSO') {
       if (this.user.icAdmin) {
-        this.coringa = " desenvolveu o Minicurso " + complementoUm || '______________' + " com carga horária de " + complementoDois || '_______ ';
+        this.coringa = " desenvolveu o Minicurso " + (complementoUm || '______________') + " com carga horária de " + (complementoDois || '_______ ') + ' horas';
       } else {
         this.coringa = " desenvolveu o Minicurso " + complementoUm;
       }
       this.exibirGT = true;
     } else if (templateSelecionado.target.value == 'PARTICIPAÇÃO DE MINICURSO') {
       if (this.user.icAdmin) {
-        this.coringa = " participou do Minicurso " + complementoUm || '______________' + " com carga horária de " + complementoDois || '_______ ';
+        this.coringa = " participou do Minicurso " + (complementoUm || '______________') + " com carga horária de " + (complementoDois || '_______ ') + ' horas';
       } else {
         this.coringa = " participou do Minicurso " + complementoUm;
       }
       this.exibirGT = true;
     } else if (templateSelecionado.target.value == 'MEDIAÇÃO DE RODA DE CONVERSA') {
-      this.coringa = " fez a mediação da Roda de Conversa ";
+      this.coringa = " fez a mediação da Roda de Conversa " + (complementoUm || '______________');
       this.exibirGT = true;
     } else if (templateSelecionado.target.value == 'PARTICIPAÇÃO DE RODA DE CONVERSA') {
       this.coringa = " participou da Roda de Conversa " + complementoUm || '______________' + " ";
       this.exibirGT = true;
     } else if (templateSelecionado.target.value == 'PAINEL') {
-      this.coringa = " apresentou o Painel intitulado ";
+      this.coringa = " apresentou o Painel intitulado " + (complementoUm || '______________');
       this.exibirGT = true;
     } else if (templateSelecionado.target.value == 'PÔSTER') {
-      this.coringa = " apresentou o trabalho ";
+      this.coringa = " apresentou o trabalho " + (complementoUm || '______________');
       this.exibirGT = true;
     }
 
@@ -256,11 +266,11 @@ export class CertificadoComponent implements OnInit {
     },
     {
       name: 'MEDIAÇÃO DE MINICURSO',
-      value: "horas, no XX Encontro Nacional de Didática e Prática de Ensino – XX ENDIPE – RIO 2020 – uma promoção interinstitucional coordenada pela Universidade Federal do Rio de Janeiro, no período 29 de outubro a 01 de novembro de 2020."
+      value: "no XX Encontro Nacional de Didática e Prática de Ensino – XX ENDIPE – RIO 2020 – uma promoção interinstitucional coordenada pela Universidade Federal do Rio de Janeiro, no período 29 de outubro a 01 de novembro de 2020."
     },
     {
       name: 'PARTICIPAÇÃO DE MINICURSO',
-      value: "horas, no XX Encontro Nacional de Didática e Prática de Ensino – XX ENDIPE – RIO 2020 – uma promoção interinstitucional coordenada pela Universidade Federal do Rio de Janeiro, no período 29 de outubro a 01 de novembro de 2020."
+      value: "no XX Encontro Nacional de Didática e Prática de Ensino – XX ENDIPE – RIO 2020 – uma promoção interinstitucional coordenada pela Universidade Federal do Rio de Janeiro, no período 29 de outubro a 01 de novembro de 2020."
     },
     {
       name: 'MEDIAÇÃO DE RODA DE CONVERSA',

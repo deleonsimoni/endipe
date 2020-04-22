@@ -2,6 +2,9 @@ const bcrypt = require('bcrypt');
 //const Joi = require('joi');
 const User = require('../models/user.model');
 const Work = require('../models/work.model');
+const RodaDeConversa = require('../models/schedule/rodasDeConversa.model');
+const MiniCurso = require('../models/schedule/minicurso.model');
+
 const Prices = require('../config/prices');
 const IncomingForm = require('formidable').IncomingForm;
 const fs = require('fs');
@@ -46,7 +49,7 @@ module.exports = {
   createWork,
   updateUsers,
   getWorksReviewer,
-  getWorkInscricoes,
+  getWorksInscricoes,
 
 }
 
@@ -809,14 +812,21 @@ async function createReviewer(reviewer) {
 
 }
 
-async function getWorkInscricoes(inscricoes) {
+async function getWorksInscricoes(inscricoes) {
 
   let works = [];
 
   for (let i = 0; i < inscricoes.length; i++) {
-    let work = await Work.findById(inscricoes[i]).select('_id title modalityId');
+
+    let work;
+    if (inscricoes[i].icModalityId == 4) {
+      work = await MiniCurso.findById(inscricoes[i].idSchedule).select('_id workTitle');
+    } else {
+      work = await RodaDeConversa.findById(inscricoes[i].idSchedule).select('_id workTitle');
+    }
     works.push(work);
   }
+
 
   return works;
 }

@@ -74,10 +74,14 @@ async function subscribeRodadeConversa(workId, userId, email) {
   await User.findOneAndUpdate({
     _id: userId
   }, {
-    $push: {
-      cursosInscritos: workId
+    $addToSet: {
+      'cursosInscritos': {
+        idSchedule: workId,
+        icModalityId: 2
+      }
     }
   }, {
+    upsert: true,
     new: true
   }, (err, doc) => {
     if (err) {

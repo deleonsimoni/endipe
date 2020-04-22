@@ -75,10 +75,11 @@ async function subscribeMinicurso(workId, userId, email) {
     _id: userId
   }, {
     $addToSet: {
-      cursosInscritos: workId
+      cursosInscritos: {
+        idSchedule: workId,
+        icModalityId: 4
+      }
     }
-  }, {
-    new: true
   }, (err, doc) => {
     if (err) {
       console.log("Erro ao atualizar o usuario subscribeMinicurso -> " + err);

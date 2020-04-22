@@ -229,8 +229,9 @@ async function getWorksReviewer(req, res) {
   });
 }
 
-async function getWorksInscricoes(req, res) {
-  let works = await userCtrl.getWorksInscricoes(req.inscricoes);
+async function getWorksIncricoes(req, res) {
+  let inscricoes = JSON.parse(req.query.inscricoes.split(','));
+  let works = await userCtrl.getWorksInscricoes(inscricoes);
   res.json({
     works
   });
