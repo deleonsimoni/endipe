@@ -237,7 +237,6 @@ export class HomeComponent implements OnInit {
         'Luiza Alves de Oliveira – UFRRJ'
       ]
     },
-    ,
     {
       nome: 'Publicações',
       equipe: [
@@ -289,7 +288,6 @@ export class HomeComponent implements OnInit {
 
       ]
     },
-
     {
       nome: 'Secretaria Executiva',
       equipe: [
