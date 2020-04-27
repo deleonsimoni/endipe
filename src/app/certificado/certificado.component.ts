@@ -173,6 +173,7 @@ export class CertificadoComponent implements OnInit {
     if (this.user.icAdmin) {
       this.certificados = [];
     }
+    
     this.exibirGT = false;
     this.coringa = '';
     this.textoTemplate = this.templates.filter(element => element.name == templateSelecionado.target.value)[0].value;
@@ -193,7 +194,7 @@ export class CertificadoComponent implements OnInit {
       this.exibirGT = true;
     } else if (templateSelecionado.target.value == 'ATIVIDADE CULTURAL') {
       this.coringa = " realizou a apresentação cultural ";
-      this.exibirGT = true;
+      this.exibirGT = true; 
     } else if (templateSelecionado.target.value == 'MEDIAÇÃO DE MINICURSO') {
       this.coringa = " desenvolveu o Minicurso " + (complementoUm || '______________') + " com carga horária de " + (complementoDois || '_______ ') + ' horas';
       this.exibirGT = true;
