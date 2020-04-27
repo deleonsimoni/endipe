@@ -54,6 +54,9 @@ export class AnaisComponent implements OnInit {
   }
 
   public register(anal) {
+    if(anal == 0) {
+      anal = null;
+    }
     const dialogRef = this.dialog.open(ModalAnaisComponent, {
       data: {
         anal: anal

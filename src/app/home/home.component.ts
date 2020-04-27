@@ -300,18 +300,6 @@ export class HomeComponent implements OnInit {
         'Leticia Oliveira (Apoio Técnico)'
       ]
     },
-    {
-      nome: 'Sistema de inscrição e secretaria',
-      equipe: [
-        'Silvana Mesquita – PUC-Rio (coord.)',
-        'Helena Amaral Fontoura – FFP/UERJ (coord.)',
-        'Talita da Silva Campelo – EB/SME-Caxias',
-        'Débora Barreiros – UERJ',
-        'Rita de Cássia Prazeres Frangella – UERJ',
-        'Rita Vilanova Prata – UFRJ',
-        'Rosalva Drummond – EB/CAp-ISERJ'
-      ]
-    }
   ];
 
   eixos = [

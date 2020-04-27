@@ -181,8 +181,11 @@ export class CertificadoComponent implements OnInit {
       this.exibirGT = true;
     } else if (templateSelecionado.target.value == 'PRESTAÇÃO DE SERVIÇO') {
       this.coringa = " atuou como prestadora de serviço na área de ";
+      this.exibirGT = true; 
+    } else if (templateSelecionado.target.value == 'MONITORIA') {
+      this.coringa = " atuou como monitora, perfazendo um total de ______ horas de trabalho de pré-produção, produção e pós produção ";
       this.exibirGT = true;
-    } else if (templateSelecionado.target.value == 'COORDENAÇÃO DE ATIVIDADE') {
+    }else if (templateSelecionado.target.value == 'COORDENAÇÃO DE ATIVIDADE') {
       this.coringa = "coordenou ";
       this.exibirGT = true;
     } else if (templateSelecionado.target.value == 'SESSÃO ESPECIAL') {
@@ -243,7 +246,7 @@ export class CertificadoComponent implements OnInit {
     },
     {
       name: 'MONITORIA',
-      value: "atuou como monitora no XX Encontro Nacional de Didática e Prática de Ensino – XX ENDIPE – RIO 2020 – uma promoção interinstitucional coordenada pela Universidade Federal do Rio de Janeiro, no período 29 de outubro a 01 de novembro de 2020."
+      value: "no XX Encontro Nacional de Didática e Prática de Ensino – XX ENDIPE – RIO 2020 – uma promoção interinstitucional coordenada pela Universidade Federal do Rio de Janeiro, no período 29 de outubro a 01 de novembro de 2020."
     },
     {
       name: 'COORDENAÇÃO DE ATIVIDADE',
@@ -255,7 +258,7 @@ export class CertificadoComponent implements OnInit {
     },
     {
       name: 'ATIVIDADE CULTURAL',
-      value: " no XX Encontro Nacional de Didática e Prática de Ensino – XX ENDIPE – RIO 2020 – uma promoção interinstitucional coordenada pela Universidade Federal do Rio de Janeiro, realizado no Rio de Janeiro, , no período 29 de outubro a 01 de novembro de 2020, com carga horária total de 48 horas."
+      value: "no XX Encontro Nacional de Didática e Prática de Ensino – XX ENDIPE – RIO 2020 – uma promoção interinstitucional coordenada pela Universidade Federal do Rio de Janeiro, realizado no Rio de Janeiro, , no período 29 de outubro a 01 de novembro de 2020, com carga horária total de 48 horas."
     },
     {
       name: 'PARTICIPAÇÃO GERAL',
