@@ -6,37 +6,48 @@
     <div class="row">
       <div class="offset-md-1 col-md-10">
         <div class="box">
-
           <div class="form">
-
-
             <!--<form role="form" class="contactForm" [formGroup]="submissionForm" (ngSubmit)="uploadAdmin()"
               encType="multipart/form-data">-->
             <form role="form" class="contactForm" encType="multipart/form-data">
-
               <div class="section-header">
                 <h2>Submissão de trabalho</h2>
               </div>
 
-              <!--<h1 style="color:green; font-family: 'Montserrat', sans-serif;">Trabalhos em análise</h1>-->
+              <!--<h1 style="color: green; font-family: 'Montserrat', sans-serif;">
+                Trabalhos em análise
+              </h1>-->
 
-
+              <!--FORM PARA REENVIAR REPLICA-->
               <div *ngIf="carregando">
                 <i class="fas fa-spinner fa-pulse"></i>Aguarde...
               </div>
 
-              <div *ngFor="let work of works; let i = index" [ngClass]="{'mb-3': works.length > 1}">
-                <work-card [work]="work" [user]="user" [reviewers]="reviewers"
-                  (selected)="receiverSelectedWork($event)">
+              <div
+                *ngFor="let work of works; let i = index"
+                [ngClass]="{ 'mb-3': works.length > 1 }"
+              >
+                <work-card
+                  [work]="work"
+                  [user]="user"
+                  [reviewers]="reviewers"
+                  (selected)="receiverSelectedWork($event)"
+                >
                 </work-card>
 
-                <app-work-data [work]="work" [user]="user" *ngIf="work && work._id == workSelect">
+                <app-work-data
+                  [work]="work"
+                  [user]="user"
+                  *ngIf="work && work._id == workSelect"
+                >
                 </app-work-data>
               </div>
 
               <div *ngIf="works.length == 0">
-                <h4>Seus trabalhos estão sendo avaliados...</h4>
+                <h4>Você não possui trabalhos avaliados</h4>
               </div>
+
+              <!--FORM PARA SUBIR TRABALHO-->
 
               <!--<div *ngIf="!carregando && user.icAdmin">
                <div *ngIf="!user.payment || !user.payment.icPaid ">
