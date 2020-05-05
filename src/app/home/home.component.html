@@ -33,7 +33,7 @@
                         id est laborum.</h3> -->
           <ul>
             <li>
-              <strong>Dias: 14 a 17 de julho de 2020</strong>
+              <strong>Dias: 29/10, 30/10, 31/10 e 01/11 de 2020</strong>
             </li>
             <li>
               <strong>Locais</strong>
@@ -78,17 +78,17 @@
           </div>
           <div class="row">
             <div class="agenda-items">
-              O RIO DE JANEIRO ESPERA POR VOCÊ!<br />
-              Aproveite os descontos e faça logo a sua inscrição para o maior evento da área de
-              Educação<br /><br />
-              <hr />
-
               <div *ngFor="let noticia of noticias">
+                <div class="pull-right">{{noticia.createAt | date: 'dd/MM/yyyy' }}</div>
                 <div [innerHTML]="noticia.name"></div>
                 <div [innerHTML]="noticia.description"></div>
 
                 <hr />
               </div>
+              O RIO DE JANEIRO ESPERA POR VOCÊ!<br />
+              Aproveite os descontos e faça logo a sua inscrição para o maior evento da área de
+              Educação<br /><br />
+              <hr />
             </div>
           </div>
         </div>
@@ -466,111 +466,6 @@
     </div>
   </section><!-- #cronograma -->
 
-
-  <!--==========================
-      Cronograma Section
-    ============================-->
-
-  <section id="programacao" class="wow fadeInUp">
-    <div class="container">
-      <div class="section-header">
-        <h2>Programação</h2>
-      </div>
-      <div class="row contact-info" style="text-align: left;cursor: pointer;">
-        <h4 class="title">Visão Geral</h4>
-        <table class="table table-responsive table-bordered">
-          <thead>
-            <tr>
-              <th scope="col">Horário</th>
-              <th scope="col">14/07/2020</th>
-              <th scope="col">15/07/2020</th>
-              <th scope="col">16/07/2020</th>
-              <th scope="col">17/07/2020</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>08:30 - 10:00</td>
-              <td rowspan="4"></td>
-              <td>Minicursos & Rodas de Conversa</td>
-              <td>Minicursos & Rodas de Conversa</td>
-              <td>Minicursos & Rodas de Conversa</td>
-            </tr>
-            <tr>
-              <td>10:00 - 12:00</td>
-              <td>Simpósios</td>
-              <td>Simpósios</td>
-              <td>Simpósios</td>
-            </tr>
-            <tr>
-              <td>12:00 - 13:00</td>
-              <td>Intervalo</td>
-              <td>Intervalo</td>
-              <td>Intervalo</td>
-            </tr>
-            <tr>
-              <td>13:00 - 15:00</td>
-              <td>Painéis & Pôsteres</td>
-              <td>Painéis & Pôsteres</td>
-              <td>Painéis & Pôsteres</td>
-            </tr>
-            <tr>
-              <td>15:15 - 17:15</td>
-              <td rowspan="4">
-                <span>Abertura oficial:</span>
-                <span class="sub">1. Sessão de Abertura</span>
-                <span class="sub">2. Mesa de Abertura</span>
-                <span class="sub">3. Show de Abertura</span>
-              </td>
-              <td>
-                <span>Painéis & Pôsteres</span>
-                <span>Reuniões de Associações,</span>
-                <span>Entidades e Redes</span>
-              </td>
-              <td>
-                <span>Painéis & Pôsteres</span>
-                <span>Reuniões de Associações,</span>
-                <span>Entidades e Redes</span>
-              </td>
-              <td rowspan="4">
-                <span>Encerramento oficial: </span>
-                <span class="sub">1. Conferência de Encerramento</span>
-                <span class="sub">2. Apresentação cultural</span>
-                <span class="sub">3. Sessão de Encerramento-Escolha do local de sede do XXI ENDIPE
-                  2022</span>
-              </td>
-            </tr>
-            <tr>
-              <td>17:30 - 18:00</td>
-              <td>Apresentações Culturais</td>
-              <td>Apresentações Culturais</td>
-            </tr>
-            <tr>
-              <td>18:00 - 20:00</td>
-              <td>Sessões Especiais</td>
-              <td>Sessões Especiais</td>
-            </tr>
-            <tr>
-              <td>20:00 - 21:00</td>
-              <td>Lançamento de Livros e de Redes de Pesquisa</td>
-              <td>Lançamento de Livros e de Redes de Pesquisa</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="mt-2 mb-2">Clique para ver os horários de cada sessão abaixo:</p>
-      <div class="row">
-        <div class="col-sm-6 col-md-6 col-lg-6" *ngFor="let programacao of programacoes" id="{{programacao.titulo}}">
-          <h4 class="title">
-            <a (click)="openDialogProgramacao(programacao)">{{ programacao.titulo }}</a>
-          </h4>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- #cronograma -->
-
   <!--==========================
       modalidades Section
     ============================-->
@@ -870,27 +765,51 @@
               </tr>
               <tr>
                 <th class="text-nowrap">Avaliação pelo Comitê Cientifico</th>
-                <th class="text-nowrap">Até 13 de abril de 2020</th>
+                <th class="text-nowrap">
+                  <s>Até 13 de abril de 2020</s><br />
+                  <b style="color: red;">Até 29 de abril de 2020</b>
+                </th>
               </tr>
               <tr>
                 <th class="text-nowrap">Divulgação dos trabalhos aprovados</th>
-                <th class="text-nowrap">14-20 de abril de 2020</th>
+                <th class="text-nowrap">
+
+                  <s>14-20 de abril de 2020</s><br />
+                  <b style="color: red;">30 de abril de 2020</b>
+
+                </th>
               </tr>
               <tr>
                 <th class="text-nowrap">Recursos</th>
-                <th class="text-nowrap">20-27 de abril de 2020</th>
+                <th class="text-nowrap">
+                  <s>20-27 de abril de 2020</s><br />
+                  <b style="color: red;">04-08 de maio de 2020</b>
+                </th>
               </tr>
               <tr>
                 <th class="text-nowrap">Resposta aos recursos</th>
-                <th class="text-nowrap">Até 15 de maio de 2020</th>
+                <th class="text-nowrap">
+
+                  <s>Até 15 de maio de 2020</s><br />
+                  <b style="color: red;">Até 29 de maio de 2020</b>
+                </th>
               </tr>
               <tr>
                 <th class="text-nowrap">Divulgação da programação completa</th>
-                <th class="text-nowrap">Até 30 de maio de 2020</th>
+                <th class="text-nowrap">
+                  <s>Até 30 de maio de 2020</s><br />
+                  <b style="color: red;">Até 31 de julho de 2020</b>
+
+                </th>
               </tr>
               <tr>
                 <th class="text-nowrap">Inscrição nos Minicursos e nas Rodas de Conversa</th>
-                <th class="text-nowrap">01-20 de junho de 2020</th>
+                <th class="text-nowrap">
+
+                  <s>01-20 de junho de 2020</s><br />
+                  <b style="color: red;">01 a 31 de julho de 2020</b>
+
+                </th>
               </tr>
 
 
@@ -911,7 +830,12 @@
         <h2>Anais</h2>
       </div>
       <!-- <div class="row"> -->
-      <p>Anais não disponíveis.</p>
+      <p *ngIf="anais.length == 0">Anais não disponíveis.</p>
+      <p *ngIf="anais.length > 0">Confira os anais abaixo:</p>
+
+      <ul style="list-style-type: circle;" *ngFor="let anal of anais">
+        <li><a href="{{anal.link}}" target="blank"><u>{{anal.name}}</u></a></li>
+      </ul>
       <!-- </div> -->
     </div>
   </section>

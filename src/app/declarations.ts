@@ -38,14 +38,23 @@ export const SCHEDULE_TYPE = [
     { id: 3, name: 'Simpósios' },
     { id: 4, name: 'Pôsteres' },
     { id: 5, name: 'Lançamento de Livros' },
-    { id: 6, name: 'Conferencistas' },
     { id: 7, name: 'Atividade Culturais' },
     { id: 8, name: 'Rodas de Conversa' },
     { id: 9, name: 'Painéis' },
     { id: 10, name: 'Sessões Especiais' },
-    { id: 11, name: 'Roda Reuniões de Entidades e de Redes' },
+    { id: 11, name: 'Reunião de associações, redes e fóruns' },
     { id: 12, name: 'Encerramento' }
 
+];
+
+export const THEME_SIMPOSIO = [
+    { id: 1, name: 'I - DIDÁTICA(S) ENTRE DIÁLOGOS, INSURGÊNCIAS E POLÍTICAS: TENSÕES E PERSPECTIVAS NA RELAÇÃO COM FORMAÇÃO DOCENTE' },
+    { id: 2, name: 'II - DIDÁTICA(S) ENTRE DIÁLOGOS, INSURGÊNCIAS E POLÍTICAS: TENSÕES E PERSPECTIVAS NA RELAÇÃO COM CURRICULO E AVALIAÇÃO' },
+    { id: 3, name: 'III - DIDÁTICA(S) ENTRE DIÁLOGOS, INSURGÊNCIAS E POLÍTICAS: TENSÕES E PERSPECTIVAS NA RELAÇÃO EM DIREITOS HUMANOS, INTRERCULTURALIDADE E RELIGIÕES' },
+    { id: 4, name: 'IV - DIDÁTICA(S) ENTRE DIÁLOGOS, INSURGÊNCIAS E POLÍTICAS: TENSÕES E PERSPECTIVAS NA RELAÇÃO ENTRE NOVAS EPISTEMOLOGIAS, BIODIVERSIDADE, DIFERENÇA, DEMOCRACIA E INCLUSÃO' },
+    { id: 5, name: 'V - DIDÁTICA(S) ENTRE DIÁLOGOS, INSURGÊNCIAS E POLÍTICAS: TENSÕES E PERSPECTIVAS NA RELAÇÃO ENTRE EDUCAÇÃO, COMUNICAÇÃO E TECNOLOGIAS' },
+    { id: 6, name: 'VI- DIDÁTICA(S) ENTRE DIÁLOGOS, INSURGÊNCIAS E POLÍTICAS: TENSÕES E PERSPECTIVAS NA RELAÇÃO ENTRE INFÂNCIAS, JUVENTUDES E VIDA E ADULTA' },
+    { id: 7, name: 'VII- SIMPÓSIOS INTEGRADORES' }
 ];
 
 export const PROGRAMACOES = [
@@ -90,14 +99,14 @@ export const PROGRAMACOES = [
         titulo: 'Atividades Culturais',
         horarios: []
     },
-    {
-        titulo: 'Minicursos',
-        horarios: []
-    },
-    {
-        titulo: 'Rodas de Conversa',
-        horarios: []
-    },
+    // {
+    //     titulo: 'Minicursos',
+    //     horarios: []
+    // },
+    // {
+    //     titulo: 'Rodas de Conversa',
+    //     horarios: []
+    // },
     {
         titulo: 'Simpósios',
         simposios: [
@@ -481,14 +490,14 @@ export const PROGRAMACOES = [
             }
         ]
     },
-    {
-        titulo: 'Painéis',
-        horarios: []
-    },
-    {
-        titulo: 'Pôsteres',
-        horarios: []
-    },
+    // {
+    //     titulo: 'Painéis',
+    //     horarios: []
+    // },
+    // {
+    //     titulo: 'Pôsteres',
+    //     horarios: []
+    // },
     {
         titulo: 'Sessões especiais',
         sessoes: [
@@ -539,7 +548,7 @@ export const PROGRAMACOES = [
                             'Maria Isabel da Cunha (UNISINOS)',
                             'Julio Diniz-Pereira / Lucíola Santos / Angela Dalben (UFMG)',
                             'Alda Marin (PUC/SP)',
-                            'Mediação: Monica Vasconcellos (UFF)'
+                            'Mediação: Mônica Vasconcellos (UFF)'
                         ],
                         local: ''
                     },

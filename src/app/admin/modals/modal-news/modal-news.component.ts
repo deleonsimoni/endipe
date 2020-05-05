@@ -1,9 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { MatDialogRef } from '@angular/material';
+import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NoticiasService } from 'src/app/services/noticias.service';
-import { Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -21,7 +20,9 @@ export class ModalNewsComponent implements OnInit, OnDestroy {
     private builder: FormBuilder,
     public dialogRef: MatDialogRef<ModalNewsComponent>,
     private noticiasService: NoticiasService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+
   ) { }
 
   ngOnInit() {
@@ -35,9 +36,14 @@ export class ModalNewsComponent implements OnInit, OnDestroy {
 
   private createForm() {
     this.newsForm = this.builder.group({
+      _id: [],
       name: [null, [Validators.required]],
       description: [null, [Validators.required]]
     });
+
+    if (this.data.news) {
+      this.newsForm.patchValue(this.data.news);
+    }
   }
 
   public close(): void {
@@ -47,14 +53,27 @@ export class ModalNewsComponent implements OnInit, OnDestroy {
   public registerNotice() {
     this.submit = true;
     if (this.newsForm.valid) {
-      this.noticiasService.cadastrar(this.newsForm.value)
-        .pipe(takeUntil(this.noticiasUnsub$))
-        .subscribe((res: any) => {
-          this.toastr.success('Noticia cadastrada com sucesso', 'Sucesso');
-          this.close();
-        }, err => {
-          this.toastr.error('Ocorreu um erro ao cadastrar', 'Atenção: ');
-        });
+
+      if (this.data.news) {
+
+        this.noticiasService.atualizar(this.newsForm.value)
+          .subscribe((res: any) => {
+            this.toastr.success('Noticia alterada com sucesso', 'Sucesso');
+            this.close();
+          }, err => {
+            this.toastr.error('Ocorreu um erro ao atualizar', 'Atenção: ');
+          });
+
+      } else {
+        this.noticiasService.cadastrar(this.newsForm.value)
+          .subscribe((res: any) => {
+            this.toastr.success('Anais cadastrado com sucesso', 'Sucesso');
+            this.close();
+          }, err => {
+            this.toastr.error('Ocorreu um erro ao cadastrar', 'Atenção: ');
+          });
+      }
+
     }
   }
 

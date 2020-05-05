@@ -9,10 +9,13 @@ const ScheduleSchema = new mongoose.Schema({
   },
 
   titles: [],
-  coordinator: [],
-  startTime: {
-    type: String,
-  },
+  coordinators: [{
+    name: String,
+    isCoordinator: {
+      type: Boolean,
+      default: false
+    }
+  }],
   startTime: {
     type: String,
   },
@@ -29,13 +32,12 @@ const ScheduleSchema = new mongoose.Schema({
     type: String,
   },
   date: {
-    type: Date
+    type: String
   },
   createAt: {
     type: Date,
     default: Date.now
   }
 });
-
 
 module.exports = mongoose.model('Abertura', ScheduleSchema);

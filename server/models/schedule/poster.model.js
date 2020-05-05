@@ -10,7 +10,12 @@ const ScheduleSchema = new mongoose.Schema({
   work: {
     type: mongoose.Schema.Types.ObjectId
   },
-
+  workTitle: {
+    type: String,
+  },
+  axis: {
+    type: String
+  },
   startTime: {
     type: String,
   },
@@ -26,8 +31,11 @@ const ScheduleSchema = new mongoose.Schema({
   address: {
     type: String,
   },
+  pdf: {
+    type: String
+  },
   date: {
-    type: Date
+    type: String
   },
   createAt: {
     type: Date,

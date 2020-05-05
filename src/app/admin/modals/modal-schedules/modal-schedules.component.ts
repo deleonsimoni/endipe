@@ -1,110 +1,93 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material';
-import { AXIS } from '../../../declarations';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AdminService } from '../../admin.service';
+import { Component, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { SCHEDULE_TYPE } from '../../../declarations';
+import { FormControl } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { ScheduleService } from 'src/app/services/schedule.service';
 
 @Component({
   selector: 'app-modal-schedules',
   templateUrl: './modal-schedules.component.html',
   styleUrls: ['./modal-schedules.component.scss']
 })
-export class ModalSchedulesComponent implements OnInit {
+export class ModalSchedulesComponent {
 
-  public days = [
-    '14', '15', '16', '17'
-  ];
-  public axisCollection = AXIS;
-  public works = [];
-  public scheduleForm: FormGroup;
+  public types = SCHEDULE_TYPE;
+  public axis = new FormControl();
+  public carregando = false;
 
   constructor(
     private dialog: MatDialogRef<ModalSchedulesComponent>,
-    private builder: FormBuilder,
-    private adminService: AdminService,
-    private toastr: ToastrService
-  ) {
+    private toastr: ToastrService,
+    private scheduleService: ScheduleService,
+    @Inject(MAT_DIALOG_DATA) public form: any
+  ) { }
 
-    this.scheduleForm = this.builder.group({
-      axis: [null, Validators.required],
-      work: [null, Validators.required],
-      day: [null, Validators.required],
-      hour: [null, Validators.required],
-      room: [null, Validators.required]
-    });
-
-    this.scheduleForm.get('axis')
-      .valueChanges
-      .subscribe(axis => this.listAllWorks(axis));
-
-    this.scheduleForm.get('work')
-      .valueChanges
-      .subscribe(res => {
-        if (Object.keys(res).length > 2) {
-          this.removeValues(res);
-        }
-      });
-  }
-
-  ngOnInit() { }
-
-  private listAllWorks(axis) {
-    this.adminService.retrieveAllWorks(axis)
-      .subscribe(works => {
-        if (works.temErro) {
-          this.toastr.error('Erro', works);
-        } else {
-          this.works = works;
-        }
-      });
-  }
-
-  public registerSchedule() {
-
-    if (this.scheduleForm.valid) {
-
-      this.adminService.registerSchedule(this.scheduleForm.getRawValue())
-        .subscribe(_ => this.close());
-
-    } else {
-      this.toastr.warning('Preencha todos os campos', 'Atenção:');
+  ngAfterViewInit() {
+    if (this.form) {
+      this.axis.patchValue(this.form.type);
     }
-
-  }
-
-  private removeValues(item) {
-    this.scheduleForm.get('work').setValue({ title: item.title, modalityId: item.modalityId });
-    console.log(this.scheduleForm.controls);
-    return false;
   }
 
   public close() {
     this.dialog.close();
   }
 
-  public get axis() {
-    const { axis } = this.scheduleForm.getRawValue();
-    return axis;
+  public get showGenericForm() {
+    if (this.axis.value) {
+      const axis = Number(this.axis.value);
+      return (axis == 1 || axis == 5 || axis == 7 || axis == 10 || axis == 11 || axis == 12);
+    }
+
+    return false;
   }
 
-  public get work() {
-    const { work } = this.scheduleForm.getRawValue();
-    return work;
+  public get showSimposioForm() {
+    if (this.axis.value) {
+      const axis = Number(this.axis.value);
+
+      return axis == 3;
+    }
+
+    return false;
   }
 
-  public get day() {
-    const { day } = this.scheduleForm.getRawValue();
-    return day;
+  public get showWorkScheduleForm() {
+    if (this.axis.value) {
+      const axis = Number(this.axis.value);
+      return (axis == 2 || axis == 4 || axis == 8 || axis == 9);
+    }
+
+    return false;
   }
 
-  public get hour() {
-    const { hour } = this.scheduleForm.getRawValue();
-    return hour;
-  }
+  public sendSchedule(event) {
+    this.carregando = true;
+    if (event.id) {
+      this.scheduleService.updateSchedule(this.axis.value, event.id, event.data)
+        .subscribe(_ => {
+          this.toastr.success('Programação alterada com sucesso');
+          this.carregando = false;
+          this.dialog.close(true);
+        }, err => {
+          this.toastr.error('Servidor momentaneamente inoperante', 'Erro');
+          this.carregando = false;
+          this.dialog.close(true);
 
-  public get room() {
-    const { room } = this.scheduleForm.getRawValue();
-    return room;
+        });
+    } else {
+      this.carregando = true;
+      this.scheduleService.registerSchedule(this.axis.value, event.data)
+        .subscribe(_ => {
+          this.toastr.success('Programação cadastrada com sucesso');
+          this.carregando = false;
+          this.dialog.close(true);
+        }, err => {
+          this.toastr.success('Servidor momentaneamente inoperante', 'Erro');
+          this.carregando = false;
+          this.dialog.close(true);
+
+        });
+    }
   }
 }

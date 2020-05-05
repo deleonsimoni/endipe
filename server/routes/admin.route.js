@@ -10,27 +10,67 @@ const fileUpload = require('express-fileupload');
 const router = express.Router();
 module.exports = router;
 
-router.use(passport.authenticate('jwt', { session: false }))
+router.use(passport.authenticate('jwt', {
+  session: false
+}))
 
-router.get('/usrs?:page', passport.authenticate('jwt', { session: false }), getUsers);
-router.get('/getUserWorks/:id', passport.authenticate('jwt', { session: false }), asyncHandler(getUserWorks));
-router.get('/works/:id', passport.authenticate('jwt', { session: false }), getWorks);
-router.get('/metrics', passport.authenticate('jwt', { session: false }), getMetrics);
-router.get('/generateReport', passport.authenticate('jwt', { session: false }), generateReport);
+router.get('/usrs?:page', passport.authenticate('jwt', {
+  session: false
+}), getUsers);
+router.get('/getUserWorks/:id', passport.authenticate('jwt', {
+  session: false
+}), asyncHandler(getUserWorks));
+router.get('/works/:id', passport.authenticate('jwt', {
+  session: false
+}), getWorks);
+router.get('/worksValids/:id', passport.authenticate('jwt', {
+  session: false
+}), getWorksValids);
 
-router.post('/validatePayment/:id', passport.authenticate('jwt', { session: false }), validatePayment);
-router.post('/invalidatePayment/:id', passport.authenticate('jwt', { session: false }), invalidatePayment);
-router.post('/validateDoc/:id', passport.authenticate('jwt', { session: false }), validateDoc);
-router.post('/invalidateDoc/:id', passport.authenticate('jwt', { session: false }), invalidateDoc);
-router.post('/rainbown/:id', passport.authenticate('jwt', { session: false }), deleteByEmail);
-router.post('/editUser', passport.authenticate('jwt', { session: false }), editUser);
-router.post('/editUser', passport.authenticate('jwt', { session: false }), editUser);
-router.post('/insertAuthorWork', passport.authenticate('jwt', { session: false }), asyncHandler(insertAuthorWork));
-router.post('/alterUserWorkFile/xxendiperio2020/:idWork', [passport.authenticate('jwt', { session: false }), fileUpload()], asyncHandler(alterUserWorkFile));
-router.post('/uploadWork/xxendiperio2020/:id', [passport.authenticate('jwt', { session: false }), fileUpload()], asyncHandler(uploadWork));
+router.get('/metrics', passport.authenticate('jwt', {
+  session: false
+}), getMetrics);
+router.get('/generateReport', passport.authenticate('jwt', {
+  session: false
+}), generateReport);
 
-router.delete('/removeWork/:id', passport.authenticate('jwt', { session: false }), asyncHandler(removeWork));
-router.delete('/removeAuthor/:authorId/:workId', passport.authenticate('jwt', { session: false }), asyncHandler(removeAuthor));
+router.post('/validatePayment/:id', passport.authenticate('jwt', {
+  session: false
+}), validatePayment);
+router.post('/invalidatePayment/:id', passport.authenticate('jwt', {
+  session: false
+}), invalidatePayment);
+router.post('/validateDoc/:id', passport.authenticate('jwt', {
+  session: false
+}), validateDoc);
+router.post('/invalidateDoc/:id', passport.authenticate('jwt', {
+  session: false
+}), invalidateDoc);
+router.post('/rainbown/:id', passport.authenticate('jwt', {
+  session: false
+}), deleteByEmail);
+router.post('/editUser', passport.authenticate('jwt', {
+  session: false
+}), editUser);
+router.post('/editUser', passport.authenticate('jwt', {
+  session: false
+}), editUser);
+router.post('/insertAuthorWork', passport.authenticate('jwt', {
+  session: false
+}), asyncHandler(insertAuthorWork));
+router.post('/alterUserWorkFile/xxendiperio2020/:idWork', [passport.authenticate('jwt', {
+  session: false
+}), fileUpload()], asyncHandler(alterUserWorkFile));
+router.post('/uploadWork/xxendiperio2020/:id', [passport.authenticate('jwt', {
+  session: false
+}), fileUpload()], asyncHandler(uploadWork));
+
+router.delete('/removeWork/:id', passport.authenticate('jwt', {
+  session: false
+}), asyncHandler(removeWork));
+router.delete('/removeAuthor/:authorId/:workId', passport.authenticate('jwt', {
+  session: false
+}), asyncHandler(removeAuthor));
 
 
 async function getUsers(req, res) {
@@ -130,7 +170,22 @@ async function getWorks(req, res) {
   if (user.icAdmin) {
     const works = await adminCtrl.getWorks(req.params.id);
     res.json(works);
-  } if (user.reviewer && user.reviewer.icCoordinator) {
+  }
+  if (user.reviewer && user.reviewer.icCoordinator) {
+    const works = await adminCtrl.getWorksCoordinator(req.params.id);
+    res.json(works);
+  } else {
+    res.sendStatus(401);
+  }
+}
+
+async function getWorksValids(req, res) {
+  const user = req.user;
+  if (user.icAdmin) {
+    const works = await adminCtrl.getWorksValids(req.params.id);
+    res.json(works);
+  }
+  if (user.reviewer && user.reviewer.icCoordinator) {
     const works = await adminCtrl.getWorksCoordinator(req.params.id);
     res.json(works);
   } else {

@@ -12,9 +12,9 @@ import { UtilNgxMaterialModule } from 'src/app/util-ngx-material/util-ngx-materi
 import { ModalEditProfileComponent } from './modal-edit-profile/modal-edit-profile.component';
 import { BsDatepickerModule, BsDropdownModule } from 'ngx-bootstrap';
 import { NgxMaskModule } from 'ngx-mask';
-import { ModalSchedulesComponent } from './modal-schedules/modal-schedules.component';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { ModalReviewReviewerComponent } from './modal-review-reviewer/modal-review-reviewer.component';
+import { ModalAnaisComponent } from './modal-anais/modal-anais.component';
 
 @NgModule({
   declarations: [
@@ -24,17 +24,17 @@ import { ModalReviewReviewerComponent } from './modal-review-reviewer/modal-revi
     ModalReviewerComponent,
     ModalReviewAdminComponent,
     ModalEditProfileComponent,
-    ModalSchedulesComponent,
     ConfirmationDialogComponent,
-    ModalReviewReviewerComponent
+    ModalReviewReviewerComponent,
+    ModalAnaisComponent
   ],
   entryComponents: [
     ModalConferencerComponent,
     ModalCoordinatorComponent,
     ModalNewsComponent,
+    ModalAnaisComponent,
     ModalReviewerComponent,
     ModalEditProfileComponent,
-    ModalSchedulesComponent,
     ConfirmationDialogComponent,
   ],
   imports: [
@@ -53,7 +53,6 @@ import { ModalReviewReviewerComponent } from './modal-review-reviewer/modal-revi
     ModalNewsComponent,
     ModalReviewerComponent,
     ModalEditProfileComponent,
-    ModalSchedulesComponent,
     ConfirmationDialogComponent,
   ]
 })

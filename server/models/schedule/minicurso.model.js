@@ -10,8 +10,7 @@ const ScheduleSchema = new mongoose.Schema({
   work: {
     type: mongoose.Schema.Types.ObjectId
   },
-
-  startTime: {
+  workTitle: {
     type: String,
   },
   startTime: {
@@ -26,11 +25,32 @@ const ScheduleSchema = new mongoose.Schema({
   address: {
     type: String,
   },
+  axis: {
+    type: String
+  },
+  qtdDias: {
+    type: String
+  },
   qtdSubscribers: {
     type: String,
   },
+  subscribers: [{
+    userId: {
+      type: mongoose.Schema.Types.ObjectId
+    },
+    userEmail: {
+      type: String
+    },
+  }],
+  authors: {
+    type: String
+  },
+  resumePropose: {
+    type: String
+  },
+
   date: {
-    type: Date
+    type: String
   },
   createAt: {
     type: Date,

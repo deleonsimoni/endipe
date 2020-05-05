@@ -18,68 +18,105 @@ const router = express.Router();
 
 module.exports = router;
 
-router.get('/:idType?date=:data', listSchedule);
+router.get('/:idType/:data', listSchedule);
 
 router.post('/:idType', passport.authenticate('jwt', {
   session: false
 }), insertSchedule);
 
+router.post('/unsubscribeMinicurso/:workId', passport.authenticate('jwt', {
+  session: false
+}), unsubscribeMinicurso);
+
+router.post('/subscribeMinicurso/:workId', passport.authenticate('jwt', {
+  session: false
+}), subscribeMinicurso);
+
+router.post('/unsubscribeRodadeConversa/:workId', passport.authenticate('jwt', {
+  session: false
+}), unsubscribeRodadeConversa);
+
+router.post('/subscribeRodadeConversa/:workId', passport.authenticate('jwt', {
+  session: false
+}), subscribeRodadeConversa);
+
+
 router.put('/:idType/:id', passport.authenticate('jwt', {
   session: false
 }), updateSchedule);
 
-router.put('/:idType?id=:id', passport.authenticate('jwt', {
+router.delete('/:idType/:id', passport.authenticate('jwt', {
   session: false
 }), deleteSchedule);
 
+async function unsubscribeMinicurso(req, res) {
+  let users = await minicursoCtrl.unsubscribeMinicurso(req.params.workId, req.user._id);
+  res.json(users);
+}
+
+async function subscribeMinicurso(req, res) {
+  let users = await minicursoCtrl.subscribeMinicurso(req.params.workId, req.user._id, req.user.email);
+  res.json(users);
+}
+
+async function unsubscribeRodadeConversa(req, res) {
+  let users = await rodasDeConversaCtrl.unsubscribeRodadeConversa(req.params.workId, req.user._id);
+  res.json(users);
+}
+
+async function subscribeRodadeConversa(req, res) {
+  let users = await rodasDeConversaCtrl.subscribeRodadeConversa(req.params.workId, req.user._id, req.user.email);
+  res.json(users);
+}
 
 async function listSchedule(req, res) {
 
   let schedules;
+  let data = req.params.data.replace('-', '/');
 
   switch (Number(req.params.idType)) {
     case 1:
-      schedules = await aberturaCtrl.listSchedule(req.query.data);
+      schedules = await aberturaCtrl.listSchedule(data);
       res.json(schedules);
       break;
     case 2:
-      schedules = await minicursoCtrl.listSchedule(req.query.data);
+      schedules = await minicursoCtrl.listSchedule(data);
       res.json(schedules);
       break;
     case 3:
-      schedules = await simposioCtrl.listSchedule(req.query.data);
+      schedules = await simposioCtrl.listSchedule(data);
       res.json(schedules);
       break;
     case 4:
-      schedules = await posterCtrl.listSchedule(req.query.data);
+      schedules = await posterCtrl.listSchedule(data);
       res.json(schedules);
       break;
     case 5:
-      schedules = await lancamentoDeLivrosCtrl.listSchedule(req.query.data);
+      schedules = await lancamentoDeLivrosCtrl.listSchedule(data);
       res.json(schedules);
       break;
     case 7:
-      schedules = await atividadeCulturalCtrl.listSchedule(req.query.data);
+      schedules = await atividadeCulturalCtrl.listSchedule(data);
       res.json(schedules);
       break;
     case 8:
-      schedules = await rodasDeConversaCtrl.listSchedule(req.query.data);
+      schedules = await rodasDeConversaCtrl.listSchedule(data);
       res.json(schedules);
       break;
     case 9:
-      schedules = await painelCtrl.listSchedule(req.query.data);
+      schedules = await painelCtrl.listSchedule(data);
       res.json(schedules);
       break;
     case 10:
-      schedules = await sessoesEspeciaisCtrl.listSchedule(req.query.data);
+      schedules = await sessoesEspeciaisCtrl.listSchedule(data);
       res.json(schedules);
       break;
     case 11:
-      schedules = await rodaReunioesEntidadesRedesCtrl.listSchedule(req.query.data);
+      schedules = await rodaReunioesEntidadesRedesCtrl.listSchedule(data);
       res.json(schedules);
       break;
     case 12:
-      schedules = await encerramentoCtrl.listSchedule(req.query.data);
+      schedules = await encerramentoCtrl.listSchedule(data);
       res.json(schedules);
       break;
   }
@@ -88,7 +125,7 @@ async function listSchedule(req, res) {
 
 async function insertSchedule(req, res) {
 
-  if (!user.icAdmin) {
+  if (!req.user.icAdmin) {
     res.sendStatus(401);
   } else {
     req.body.user = req.user._id;
@@ -145,7 +182,7 @@ async function insertSchedule(req, res) {
 
 async function updateSchedule(req, res) {
 
-  if (!user.icAdmin) {
+  if (!req.user.icAdmin) {
     res.sendStatus(401);
   } else {
     req.body.user = req.user._id;
@@ -202,54 +239,55 @@ async function updateSchedule(req, res) {
 
 async function deleteSchedule(req, res) {
 
-  if (!user.icAdmin) {
+  console.log(req.params);
+  if (!req.user.icAdmin) {
     res.sendStatus(401);
   } else {
     let schedules;
 
     switch (Number(req.params.idType)) {
       case 1:
-        schedules = await aberturaCtrl.deleteSchedule(req.query.id);
+        schedules = await aberturaCtrl.deleteSchedule(req.params.id);
         res.json(schedules);
         break;
       case 2:
-        schedules = await minicursoCtrl.deleteSchedule(req.query.id);
+        schedules = await minicursoCtrl.deleteSchedule(req.params.id);
         res.json(schedules);
         break;
       case 3:
-        schedules = await simposioCtrl.deleteSchedule(req.query.id);
+        schedules = await simposioCtrl.deleteSchedule(req.params.id);
         res.json(schedules);
         break;
       case 4:
-        schedules = await posterCtrl.deleteSchedule(req.query.id);
+        schedules = await posterCtrl.deleteSchedule(req.params.id);
         res.json(schedules);
         break;
       case 5:
-        schedules = await lancamentoDeLivrosCtrl.deleteSchedule(req.query.id);
+        schedules = await lancamentoDeLivrosCtrl.deleteSchedule(req.params.id);
         res.json(schedules);
         break;
       case 7:
-        schedules = await atividadeCulturalCtrl.deleteSchedule(req.query.id);
+        schedules = await atividadeCulturalCtrl.deleteSchedule(req.params.id);
         res.json(schedules);
         break;
       case 8:
-        schedules = await rodasDeConversaCtrl.deleteSchedule(req.query.id);
+        schedules = await rodasDeConversaCtrl.deleteSchedule(req.params.id);
         res.json(schedules);
         break;
       case 9:
-        schedules = await painelCtrl.deleteSchedule(req.query.id);
+        schedules = await painelCtrl.deleteSchedule(req.params.id);
         res.json(schedules);
         break;
       case 10:
-        schedules = await sessoesEspeciaisCtrl.deleteSchedule(req.query.id);
+        schedules = await sessoesEspeciaisCtrl.deleteSchedule(req.params.id);
         res.json(schedules);
         break;
       case 11:
-        schedules = await rodaReunioesEntidadesRedesCtrl.deleteSchedule(req.query.id);
+        schedules = await rodaReunioesEntidadesRedesCtrl.deleteSchedule(req.params.id);
         res.json(schedules);
         break;
       case 12:
-        schedules = await encerramentoCtrl.deleteSchedule(req.query.id);
+        schedules = await encerramentoCtrl.deleteSchedule(req.params.id);
         res.json(schedules);
         break;
     }

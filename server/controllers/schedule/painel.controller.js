@@ -12,7 +12,7 @@ async function listSchedule(date) {
       date: date
     })
     .sort({
-      date: -1
+      startTime: 1
     });
 }
 
@@ -21,7 +21,9 @@ async function insertSchedule(schedule) {
 }
 
 async function updateSchedule(id, schedule) {
-  return await Painel.findAndUpdate(id, schedule);
+  return await Painel.findOneAndUpdate(id, schedule, {
+    upsert: true
+  });
 }
 
 async function deleteSchedule(id) {

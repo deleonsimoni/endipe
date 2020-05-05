@@ -10,6 +10,7 @@ import { CertificadoComponent } from './certificado/certificado.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { EsqueciSenhaComponent } from './esqueci-senha/esqueci-senha.component';
 import { ResetSenhaComponent } from './reset-senha/reset-senha.component';
+import { ProgramacaoComponent } from './programacao/programacao.component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,10 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'programacao',
+    component: ProgramacaoComponent
   },
   {
     path: 'register',

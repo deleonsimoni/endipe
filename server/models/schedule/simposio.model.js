@@ -7,9 +7,13 @@ const ScheduleSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     required: true
   },
-
-  titles: [],
-  coordinator: [],
+  coordinators: [{
+    name: String,
+    isCoordinator: {
+      type: Boolean,
+      default: false
+    }
+  }],
   startTime: {
     type: String,
   },
@@ -28,14 +32,14 @@ const ScheduleSchema = new mongoose.Schema({
   address: {
     type: String,
   },
+  themeSpeeches: {
+    type: String,
+  },
   theme: {
     type: Number,
   },
-  themeType: {
-    type: Number,
-  },
   date: {
-    type: Date
+    type: String
   },
   createAt: {
     type: Date,

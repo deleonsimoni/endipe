@@ -23,6 +23,7 @@ import { ModalConferencistasComponent } from '../modal-conferencistas/modal-conf
 import { PROGRAMACOES } from '../declarations';
 import { ModalEncerramentoComponent } from '../modal-encerramento/modal-encerramento.component';
 import { ModalAberturaComponent } from '../modal-abertura/modal-abertura.component';
+import { AnaisService } from '../services/anais.service';
 
 @Component({
   selector: 'app-home',
@@ -36,6 +37,7 @@ export class HomeComponent implements OnInit {
   subscriptionValue: number;
   carregando = false;
   noticias = [];
+  anais = [];
 
   configuracaoCarrossel = {
     nav: true,
@@ -104,7 +106,7 @@ export class HomeComponent implements OnInit {
   ];
 
   comites = [
-    'Andrea Vilella Mafra da Silva – ISERJ',
+    'Andrea Villela Mafra da Silva – ISERJ',
     'Antonio Flavio Barbosa Moreira – UCP',
     'Claudia de Oliveira Fernandes – UNIRIO',
     'Claudia Miranda – UNIRIO',
@@ -115,7 +117,7 @@ export class HomeComponent implements OnInit {
     'Luis Paulo Cruz Borges – EB/CAp-UERJ',
     'Maria das Graças Nascimento – UFRJ',
     'Maria Inês Marcondes – PUC-Rio',
-    'Monica Vasconcellos – UFF',
+    'Mônica Vasconcellos – UFF',
     'Naiara Miranda Rust – IBC',
     'Patricia Bastos de Azevedo – UFRRJ',
     'Sandra Maciel – UFF',
@@ -136,23 +138,11 @@ export class HomeComponent implements OnInit {
       nome: 'Apoio aos preletores',
       equipe: [
         'Patricia Bastos de Azevedo – UFRRJ (coord.)',
-        'Pâmella Esteves – FFP/UERJ',
-        'Pedro Pinheiro Teixeira – PUC-Rio',
-        'Priscila Monteiro Corrêa – FEBF/UERJ',
-        'Talita da Silva Campelo – EB/SME-Caxias',
-        'Viviane Lontra – EB/CAp-UFRJ'
-      ]
-    },
-    {
-      nome: 'Arte e comunicação',
-      equipe: [
-        'Edméa Oliveira Santos – UFRRJ (coord.)',
-        'Silvana Mesquita – PUC-Rio (coord.)',
-        'Daniele Grazinolli – UFRJ',
+        'Andreia Gomes da Cruz – UFRRJ',
         'Felipe da Silva Ferreira – EB/CEFET-RJ',
-        'Fernanda Lahtermaher Oliveira – EB/CAp UFRJ',
-        'Rosemary dos Santos Oliveira – FEBF/UERJ',
-        'Bosco Mesquita (design gráfico)'
+        'Pedro Pinheiro Teixeira – PUC-Rio',
+        'Priscila Monteiro Corrêa – FEBF/UERJ'
+
       ]
     },
     {
@@ -173,6 +163,15 @@ export class HomeComponent implements OnInit {
       ]
     },
     {
+      nome: 'Feira de Livros',
+      equipe: [
+        'Adriana Patricio Delgado – UFRJ (coord.)',
+        'Elana Cristiana Costa – EB/FME-Niterói',
+        'Rita de Cassia de Oliveira e Silva - UFRJ'
+
+      ]
+    },
+    {
       nome: 'Gestão financeira',
       equipe: [
         'Giseli Barreto da Cruz – UFRJ (coord.)',
@@ -182,33 +181,33 @@ export class HomeComponent implements OnInit {
       ]
     },
     {
-      nome: 'Hospedagem, transporte e alimentação',
+      nome: 'Hospedagem, transporte & alimentação',
       equipe: [
         'Talita Vidal – FEBF/UERJ (coord.)',
+        'Dinah Terra – UFF',
+        'Fernanda Lahtermaher Oliveira – EB/CApU-UFRJ',
         'Rafaela Vilela – EB/EEI-UFRJ'
       ]
     },
     {
-      nome: 'Inclusão e acessibilidade',
+      nome: 'Inclusão & acessibilidade',
       equipe: [
         'Bianca Della Libera – IBC (coord.)',
         'Yrlla Ribeiro de Oliveira Carneiro da Silva – INES (coord)',
         'Adriana do Carmo Corrêa Gonçalves – FEBF/UERJ',
         'Érika Souza Leme – UFF',
         'Flavia Faissal de Souza – FEBF/UERJ',
+        'Glauber de Souza Lemos - INES',
         'Helenice Maia – UNESA',
-        'Heloisa Carrero – FFP/UERJ',
-        'Luciana Pires Alves – FEBF/UERJ',
-        'Patricia Santos – FFP/UERJ',
-        'Rejane Maria de Almeida – UFRJ',
-        'Thania Nhary – FFP/UERJ'
+        'Karine Vieira da Rocha – INES'
       ]
     },
     {
-      nome: 'Local e infraestrutura',
+      nome: 'Local & infraestrutura',
       equipe: [
         'Claudia de Oliveira Fernandes – UNIRIO (coord.)',
         'Andrea Villela Mafra da Silva – ISERJ (coord.)',
+        'Alessandra do Nascimento dos Santos Moraes – EB/CAp-UFRJ',
         'Ana Teresa de Carvalho Corrêa de Oliveira – UFRJ',
         'Crizan Sasson Oliveira – EB/CAp-UERJ',
         'Luis Paulo Braga – IBC',
@@ -223,8 +222,6 @@ export class HomeComponent implements OnInit {
         'Alice Akemi Yamasaki – UFF',
         'Cristina Spolidoro Freund – EB/CPII',
         'Dinah Terra – UFF',
-        'Giselle Martins dos Santos Ferreira – PUC-Rio',
-        'Guilherme Augusto Rezende Lemos – UERJ'
       ]
     },
     {
@@ -235,10 +232,20 @@ export class HomeComponent implements OnInit {
         'Bonier Axer – EB/CAp-UERJ',
         'Daniela Frida Drelich Valentim – UERJ',
         'Isabel Martins – UFRJ',
-        'Jacqueline Moraes – FFP/UERJ',
         'Lea Tiriba – UNIRIO',
         'Ludmila Thomé de Andrade – UFRJ',
         'Luiza Alves de Oliveira – UFRRJ'
+      ]
+    },
+    {
+      nome: 'Publicações',
+      equipe: [
+        'Claudia de Oliveira Fernandes (UNIRIO)',
+        'Giseli Barreto da Cruz (UFRJ)',
+        'Helena Fontoura (FFP UERJ)',
+        'Luís Paulo Cruz Borges (EB)',
+        'Silvana Mesquita (PUC-Rio)',
+        'Vera Maria Ferrão Candau (PUC-Rio)',
       ]
     },
     {
@@ -250,10 +257,9 @@ export class HomeComponent implements OnInit {
         'Elana Cristiana Costa – EB/FME-Niterói',
         'Marcella da Silva Estevez Pacheco Guedes – FEBF/UERJ',
         'Marize Peixoto da Silva Figueiredo – FEBF/UERJ',
-        'Monica dos Santos Toledo – EB/COLUNI/UFF',
+        'Mônica dos Santos Toledo – EB/COLUNI/UFF',
         'Patricia Coelho da Costa – PUC-Rio',
         'Rejany dos Santos Dominick – UFF',
-        'Veronica Borges de Oliveira – UERJ'
       ]
     },
     {
@@ -262,33 +268,38 @@ export class HomeComponent implements OnInit {
         'Cecília Silvano Batalha – EB/FME-Niterói (coord.)',
         'Aline Crispin – EB/EEI-UFRJ',
         'Daniela de Oliveira Guimarães – UFRJ',
-        'Erika Souza Leme – UFF',
-        'Magda Piscolleta – PUC-Rio'
+        'Erika Souza Leme – UFF'
       ]
     },
     {
-      nome: 'Serviço de som, filmagem, imagem, transmissão e tecnologia',
+      nome: 'Imagem, Comunicação & Tecnologia',
       equipe: [
-        'Monica Vasconcellos – UFF (coord.)',
+        'Mônica Vasconcellos – UFF (coord.)',
+        'Edméa Oliveira Santos – UFRRJ (coord.)',
+        'Silvana Mesquita – PUC-Rio (coord.)',
+        'Bosco Mesquita (design gráfico)',
         'Edna Regina Aguiar – EB/COLUNI/UFF',
+        'Felipe da Silva Ferreira – EB/CEFET-RJ',
+        'Fernanda Lahtermaher Oliveira – EB/CAp-UFRJ',
         'Helen Pereira Ferreira – UFF',
         'Marcia Maria e Silva – UFF',
         'Priscila Andrade Rodrigues – UFRJ',
-        'Sonia Mendes – UNESA'
+        'Talita da Silva Campelo – EB/SME-Caxias'
+
       ]
     },
     {
-      nome: 'Sistema de inscrição e secretaria',
+      nome: 'Secretaria Executiva',
       equipe: [
         'Silvana Mesquita – PUC-Rio (coord.)',
         'Helena Amaral Fontoura – FFP/UERJ (coord.)',
         'Talita da Silva Campelo – EB/SME-Caxias',
-        'Débora Barreiros – UERJ',
-        'Rita de Cássia Prazeres Frangella – UERJ',
-        'Rita Vilanova Prata – UFRJ',
-        'Rosalva Drummond – EB/CAp-ISERJ'
+        'Alessandra do Nascimento dos Santos Moraes – EB/CAp-UFRJ (Apoio Técnico)',
+        'Cristina Lucia Lima Alves (Apoio Técnico)',
+        'Leticia Mesquita (Apoio Técnico)',
+        'Leticia Oliveira (Apoio Técnico)'
       ]
-    }
+    },
   ];
 
   eixos = [
@@ -305,7 +316,7 @@ export class HomeComponent implements OnInit {
       coordenacao: [
         'Alexandra Garcia Ferreira Lima – FFP/UERJ',
         'Graça Regina Reis – CAp UFRJ',
-        'Monica Vasconcellos – UFF',
+        'Maria das Graças Chagas de Arruda Nascimento - UFRJ',
         'Naiara Miranda Rust – IBC',
         'Victor Giraldo – UFRJ'
       ],
@@ -407,6 +418,7 @@ export class HomeComponent implements OnInit {
     private dialog: MatDialog,
     private download: DownloadFileService,
     private noticiasService: NoticiasService,
+    private anaisService: AnaisService,
     private toastr: ToastrService,
 
   ) {
@@ -443,6 +455,13 @@ export class HomeComponent implements OnInit {
 
       }, err => {
         this.toastr.error('Ocorreu um erro ao listar noticias', 'Atenção: ');
+      });
+
+    this.anaisService.listar()
+      .subscribe((res: any) => {
+        this.anais = res;
+      }, err => {
+        this.toastr.error('Ocorreu um erro ao listar anais', 'Atenção: ');
       });
   }
 
@@ -488,6 +507,7 @@ export class HomeComponent implements OnInit {
       data: { item: eixo }
     });
   }
+
 
   public openDialogProgramacao(programacao) {
     switch (programacao.titulo) {

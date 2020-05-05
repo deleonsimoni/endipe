@@ -83,11 +83,9 @@ const UserSchema = new mongoose.Schema({
     telephone: String
   },
 
-  modalityId: [
-    {
-      type: Number
-    }
-  ],
+  modalityId: [{
+    type: Number
+  }],
 
   institution: {
     name: String,
@@ -110,6 +108,13 @@ const UserSchema = new mongoose.Schema({
 
   works: [{
     type: mongoose.Schema.Types.ObjectId
+  }],
+
+  cursosInscritos: [{
+    idSchedule: {
+      type: mongoose.Schema.Types.ObjectId
+    },
+    icModalityId: Number
   }],
 
   reviewer: {

@@ -3,9 +3,102 @@ const Work = require('../models/work.model');
 module.exports = {
   insertReviews,
   getWorks,
-  insertReviewerReview
+  insertReviewerReview,
+  pedirRecurso,
+  negarRecurso,
+  aceitarRecurso,
+  pedirRecursoAdmin,
+  negarRecursoAdmin,
+  aceitarRecursoAdmin
 }
 
+async function pedirRecursoAdmin(workId, justificativa) {
+
+  return await Work.findOneAndUpdate({
+    _id: workId
+  }, {
+    $set: {
+      recursoAdmin: {
+        justify: justificativa
+      }
+    }
+  }, {
+    new: true
+  });
+
+}
+
+async function negarRecursoAdmin(workId, justificativa) {
+  return await Work.findOneAndUpdate({
+    _id: workId
+  }, {
+    $set: {
+      'recursoAdmin.icAllow': 'Nao',
+      'reviewAdmin.review.icAllow': 'Nao',
+      'reviewAdmin.review.justifyAdmin': justificativa
+    }
+  }, {
+    new: true
+  });
+
+}
+
+async function aceitarRecursoAdmin(workId, justificativa) {
+  return await Work.findOneAndUpdate({
+    _id: workId
+  }, {
+    $set: {
+      'recursoAdmin.icAllow': 'Sim',
+      'reviewAdmin.review.icAllow': 'Sim',
+      'reviewAdmin.review.justifyAdmin': justificativa
+    }
+  }, {
+    new: true
+  });
+
+}
+
+async function pedirRecurso(workId, justificativa) {
+
+  return await Work.findOneAndUpdate({
+    _id: workId
+  }, {
+    $set: {
+      recurso: {
+        justify: justificativa
+      }
+    }
+  }, {
+    new: true
+  });
+
+}
+
+async function negarRecurso(workId) {
+  return await Work.findOneAndUpdate({
+    _id: workId
+  }, {
+    $set: {
+      'recurso.icAllow': 'Nao'
+    }
+  }, {
+    new: true
+  });
+
+}
+
+async function aceitarRecurso(workId) {
+  return await Work.findOneAndUpdate({
+    _id: workId
+  }, {
+    $set: {
+      'recurso.icAllow': 'Sim'
+    }
+  }, {
+    new: true
+  });
+
+}
 
 async function insertReviews(reviews, user) {
 

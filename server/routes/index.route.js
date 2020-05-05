@@ -4,7 +4,7 @@ const authRoutes = require('./auth.route');
 const adminRoutes = require('./admin.route');
 const newsRoutes = require('./news.route');
 const reviewRoutes = require('./reviews.route');
-
+const anaisRoutes = require('./anais.route');
 const conferencistaRoutes = require('./conferencista.route');
 const scheduleRoutes = require('./schedule.route');
 
@@ -17,10 +17,11 @@ router.get('/health-check', (req, res) =>
 
 router.use('/auth', authRoutes);
 router.use('/user', userRoutes);
-router.use('/admin', adminRoutes);//passar o middleware
+router.use('/admin', adminRoutes); //passar o middleware
 router.use('/news', newsRoutes);
 router.use('/reviews', reviewRoutes);
 router.use('/conferencista', conferencistaRoutes);
 router.use('/schedule', scheduleRoutes);
+router.use('/anais', anaisRoutes);
 
 module.exports = router;

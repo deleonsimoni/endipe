@@ -53,6 +53,8 @@ import { ModalTurismoComponent } from './modal-turismo/modal-turismo.component';
 import { ModalConferencistasComponent } from './modal-conferencistas/modal-conferencistas.component';
 import { ModalEncerramentoComponent } from './modal-encerramento/modal-encerramento.component';
 import { ModalAberturaComponent } from './modal-abertura/modal-abertura.component';
+import { GlobalComponentsModule } from './components/global-components.module';
+import { ProgramacaoModule } from './programacao/programacao.module';
 
 @NgModule({
   declarations: [
@@ -89,6 +91,7 @@ import { ModalAberturaComponent } from './modal-abertura/modal-abertura.componen
     ModalConferencistasComponent,
     ModalEncerramentoComponent,
     ModalAberturaComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -108,6 +111,8 @@ import { ModalAberturaComponent } from './modal-abertura/modal-abertura.componen
     ToastrModule.forRoot(),
     AccordionModule.forRoot(),
     AdminModule,
+    ProgramacaoModule,
+    GlobalComponentsModule,
     PipesModule
   ],
   entryComponents: [
@@ -131,7 +136,8 @@ import { ModalAberturaComponent } from './modal-abertura/modal-abertura.componen
     ModalConferencistasComponent,
     ModalEncerramentoComponent,
     ModalAberturaComponent,
-    RegisterComponent
+    RegisterComponent,
+
   ],
   providers: [
     {

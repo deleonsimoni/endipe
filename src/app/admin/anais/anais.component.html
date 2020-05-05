@@ -1,0 +1,26 @@
+<div class="form">
+  <div *ngFor="let anal of anais; let i = index" [ngClass]="{'mb-3': anais.length > 1}">
+    <div class="card-news">
+      <!-- [ngClass]="{'no-radius-bottom': infos == true}" -->
+      <div class="row">
+        <div class="col-sm-10 border-right">
+          <span>{{ anal.name }}</span>
+          <br />
+          <span>{{ anal.link }}</span>
+        </div>
+        <div class="col-sm-1 text-center align-self-center pointer" (click)="deletar(anal)">
+          <i class="fa fa-trash"></i>
+        </div>
+        <div class="col-sm-1 text-center align-self-center pointer" (click)="register(anal)">
+          <i class="fa fa-edit"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <not-found *ngIf="anais.length < 1" msg="Não há anais cadastrados"></not-found>
+
+  <div class="row justify-content-end">
+    <button class="btn-get-started" (click)="register(0)">Cadastrar</button>
+  </div>
+</div>

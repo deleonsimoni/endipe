@@ -10,6 +10,7 @@ import { ConferencerComponent } from './conferencer/conferencer.component';
 import { VincularTrabalhosComponent } from './vincular-trabalhos/vincular-trabalhos.component';
 import { SchedulesComponent } from './schedules/schedules.component';
 import { ReviewListWorksComponent } from './review-list-works/review-list-works.component';
+import { AnaisComponent } from './anais/anais.component';
 
 const routes: Routes = [
     {
@@ -22,6 +23,9 @@ const routes: Routes = [
             },
             {
                 path: 'noticias', component: NewsComponent
+            },
+            {
+                path: 'anais', component: AnaisComponent
             },
             {
                 path: 'conferencistas', component: ConferencerComponent

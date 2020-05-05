@@ -23,4 +23,35 @@ export class ReviewService {
     return this.http.get<any>(`${this.baseUrl}/reviews/getWorks`);
   }
 
+  aplicarRecurso(justificativa, workId) {
+    return this.http.post<any>(`${this.baseUrl}/reviews/pedirRecurso/` + workId, justificativa);
+
+  }
+
+  negarRecurso(workId) {
+    return this.http.post<any>(`${this.baseUrl}/reviews/negarRecurso/` + workId, {});
+
+  }
+
+  aceitarRecurso(workId) {
+    return this.http.post<any>(`${this.baseUrl}/reviews/aceitarRecurso/` + workId, {});
+
+  }
+
+  aplicarRecursoAdmin(justificativa, workId) {
+    return this.http.post<any>(`${this.baseUrl}/reviews/pedirRecursoAdmin/` + workId, justificativa);
+
+  }
+
+  negarRecursoAdmin(workId, justificativaAdmin) {
+    return this.http.post<any>(`${this.baseUrl}/reviews/negarRecursoAdmin/` + workId, justificativaAdmin);
+
+  }
+
+  aceitarRecursoAdmin(workId, justificativaAdmin) {
+    return this.http.post<any>(`${this.baseUrl}/reviews/aceitarRecursoAdmin/` + workId, justificativaAdmin);
+
+  }
+
+
 }

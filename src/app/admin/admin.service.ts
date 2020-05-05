@@ -75,6 +75,10 @@ export class AdminService {
     return this.http.get<any>(`${this.baseUrl}/admin/works/${id}`);
   }
 
+  public retrieveAllWorksValids(id) {
+    return this.http.get<any>(`${this.baseUrl}/admin/worksValids/${id}`);
+  }
+
   public updateUser(form) {
     return this.http.post(`${this.baseUrl}/admin/editUser`, form);
   }
@@ -83,8 +87,12 @@ export class AdminService {
     return this.http.post<any>(`${this.baseUrl}/schedule/insertSchedule`, form);
   }
 
-  public retrieveSchedules() {
-    return this.http.get<any>(`${this.baseUrl}/schedule/listAll`);
+  // public retrieveSchedules() {
+  //   return this.http.get<any>(`${this.baseUrl}/schedule/listAll`);
+  // }
+
+  public retrieveByFilter(axis) {
+    return this.http.get<any>(`${this.baseUrl}/schedule/listByFilter/${axis}`);
   }
 
   public deleteSchedule(id) {
