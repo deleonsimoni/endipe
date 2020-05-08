@@ -1,15 +1,14 @@
-import { Injectable, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Injectable, Inject } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class ReviewService {
-
   constructor(
-    @Inject('BASE_API_URL') private baseUrl: string,
+    @Inject("BASE_API_URL") private baseUrl: string,
     private http: HttpClient
-  ) { }
+  ) {}
 
   cadastrar(review) {
     return this.http.post<any>(`${this.baseUrl}/reviews/admin`, review);
@@ -24,34 +23,44 @@ export class ReviewService {
   }
 
   aplicarRecurso(justificativa, workId) {
-    return this.http.post<any>(`${this.baseUrl}/reviews/pedirRecurso/` + workId, justificativa);
-
+    return this.http.post<any>(
+      `${this.baseUrl}/reviews/pedirRecurso/` + workId,
+      justificativa
+    );
   }
 
-  negarRecurso(workId) {
-    return this.http.post<any>(`${this.baseUrl}/reviews/negarRecurso/` + workId, {});
-
+  negarRecurso(workId, reply) {
+    return this.http.post<any>(
+      `${this.baseUrl}/reviews/negarRecurso/` + workId,
+      { reply }
+    );
   }
 
-  aceitarRecurso(workId) {
-    return this.http.post<any>(`${this.baseUrl}/reviews/aceitarRecurso/` + workId, {});
-
+  aceitarRecurso(workId, reply) {
+    return this.http.post<any>(
+      `${this.baseUrl}/reviews/aceitarRecurso/` + workId,
+      { reply }
+    );
   }
 
   aplicarRecursoAdmin(justificativa, workId) {
-    return this.http.post<any>(`${this.baseUrl}/reviews/pedirRecursoAdmin/` + workId, justificativa);
-
+    return this.http.post<any>(
+      `${this.baseUrl}/reviews/pedirRecursoAdmin/` + workId,
+      justificativa
+    );
   }
 
-  negarRecursoAdmin(workId, justificativaAdmin) {
-    return this.http.post<any>(`${this.baseUrl}/reviews/negarRecursoAdmin/` + workId, justificativaAdmin);
-
+  negarRecursoAdmin(workId, reply) {
+    return this.http.post<any>(
+      `${this.baseUrl}/reviews/negarRecursoAdmin/` + workId,
+      { reply }
+    );
   }
 
-  aceitarRecursoAdmin(workId, justificativaAdmin) {
-    return this.http.post<any>(`${this.baseUrl}/reviews/aceitarRecursoAdmin/` + workId, justificativaAdmin);
-
+  aceitarRecursoAdmin(workId, reply) {
+    return this.http.post<any>(
+      `${this.baseUrl}/reviews/aceitarRecursoAdmin/` + workId,
+      { reply }
+    );
   }
-
-
 }

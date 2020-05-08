@@ -162,7 +162,9 @@
     <div
       *ngIf="
         work.reviewAdmin?.review &&
-        work.reviewAdmin.review.icAllow == 'Nao' &&
+        (work.reviewAdmin.review.icAllow == 'Nao' ||
+          work?.recurso?.justify ||
+          work?.recursoAdmin?.justify) &&
         !work.reviewReviewer &&
         !user.icAdmin &&
         !user?.reviewer?.icCoordinator
@@ -189,8 +191,15 @@
               >
               </textarea>
               <span>
-                <hr />
+                <br /><br />
                 {{ work.recursoAdmin?.justify }}
+              </span>
+
+              <span *ngIf="work?.recursoAdmin?.reply">
+                <hr />
+                Resposta secretaria
+                <br /><br />
+                {{ work.recursoAdmin?.reply }}
               </span>
 
               <div
@@ -226,7 +235,9 @@
     <div
       *ngIf="
         work.reviewReviewer &&
-        work.reviewReviewer.review.icAllow == 'Nao' &&
+        (work.reviewAdmin.review.icAllow == 'Nao' ||
+          work?.recurso?.justify ||
+          work?.recursoAdmin?.justify) &&
         !user.icAdmin &&
         !user?.reviewer?.icCoordinator
       "
@@ -252,6 +263,13 @@
               <span>
                 <hr />
                 {{ work.recurso?.justify }}
+              </span>
+
+              <span *ngIf="work?.recurso?.reply">
+                <hr />
+                Resposta
+                <br /><br />
+                {{ work.recurso?.reply }}
               </span>
 
               <div
@@ -305,7 +323,23 @@
           <div class="form-group col-md-12">
             <div class="form-group">
               Aceitar Recurso?
-              <br />
+              <hr />
+
+              <div class="form-group col-md-12">
+                <label id="example-radio-group-label">Réplica</label>
+
+                <textarea
+                  maxlength="2000"
+                  class="form-control"
+                  rows="5"
+                  [(ngModel)]="work.recurso.reply"
+                >
+                </textarea>
+                <span class="pull-right char"
+                  ><em>{{ getLengthJustify() }} caracteres</em></span
+                >
+              </div>
+
               <div class="btn-group" role="group" aria-label="Basic example">
                 <button
                   (click)="aceitarRecurso()"
@@ -353,7 +387,7 @@
     >
       <hr />
       <div class="col-md-12">
-        <h3 style="color: red;">Avaliar recurso</h3>
+        <h3 style="color: red;">Avaliar recurso por forma</h3>
 
         <div class="form-row justify-content-center">
           <div class="form-group col-md-12">
@@ -368,17 +402,12 @@
             <label id="example-radio-group-label">Justificativa</label>
             <br />
             <textarea
-              *ngIf="!work.recursoAdmin?.justifyAdmin"
               maxlength="2000"
               class="form-control"
               rows="5"
-              [(ngModel)]="justificativaRecursoAdmin"
+              [(ngModel)]="work.recursoAdmin.reply"
             >
             </textarea>
-            <span>
-              <hr />
-              {{ work.recursoAdmin?.justifyAdmin }}
-            </span>
           </div>
         </div>
         <div class="form-row justify-content-center">

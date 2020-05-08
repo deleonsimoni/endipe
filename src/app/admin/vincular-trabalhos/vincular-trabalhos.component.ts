@@ -123,6 +123,13 @@ export class VincularTrabalhosComponent implements OnInit {
         );
 
         break;
+      case 6:
+        //this.works = this.allWorks.filter(work => work.recurso && (work.recurso.justify || work.recursoAdmin?.justify) && !work.recurso.icAllow);
+        this.works = this.allWorks.filter(
+          (work) => work.recursoAdmin && work.recursoAdmin.justify
+        );
+
+        break;
     }
   }
 
@@ -157,12 +164,21 @@ export class VincularTrabalhosComponent implements OnInit {
             work.recurso && work.recurso.justify && !work.recurso.icAllow
         );
         break;
+      case 6:
+        this.works = this.allWorks.filter(
+          (work) =>
+            work.recursoAdmin &&
+            work.recursoAdmin.justify &&
+            !work.recursoAdmin.icAllow
+        );
+        break;
     }
   }
 
   loadData() {
     this.loadWorks();
-    /*
+
+    /* LISTAR PARECERISTAS
     this.adminService.retrieveReviewers(this.axisId).subscribe((res) => {
       if (res.temErro) {
         this.toastr.error("Erro", res);
