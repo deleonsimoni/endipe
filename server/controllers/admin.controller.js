@@ -29,13 +29,13 @@ module.exports = {
   submitWork,
   generateReport,
   getWorksValids,
+  getWorksPaginated,
 };
 
 async function getUsers(req) {
   const pageSize = 10;
   const page = req.query.page || 1;
   let usersFound = [];
-  console.log(req.query.search);
   let search = JSON.parse(req.query.search);
   search.icAdmin = false;
 
@@ -55,6 +55,84 @@ async function getUsers(req) {
 
   return {
     usersFound,
+    pager,
+  };
+}
+
+async function getWorksPaginated(req) {
+  const pageSize = 5;
+  const page = req.query.page || 1;
+  let worksFound = [];
+  let search = {};
+
+  if (req.query.axis != "undefined") search.axisId = req.query.axis;
+
+  if (req.query.nameWork != "" && req.query.nameWork != "undefined") {
+    search.title = { $regex: ".*" + req.query.nameWork + ".*" };
+  } else {
+    if (req.query.modality != "undefined" && req.query.modality != 0)
+      search.modalityId = req.query.modality;
+
+    if (req.query.situation != "undefined" && req.query.situation != 0) {
+      switch (Number(req.query.situation)) {
+        case 1:
+          search.reviewAdmin = { $eq: null };
+          break;
+        case 2:
+          search["reviewAdmin.review.icAllow"] = "Nao";
+          break;
+        case 3:
+          search["reviewAdmin.review.icAllow"] = "Sim";
+          break;
+        case 4:
+          search.reviewReviewer = { $eq: null };
+          break;
+        case 5:
+          search["reviewReviewer.review.icAllow"] = "Nao";
+
+          break;
+        case 6:
+          search["reviewReviewer.review.icAllow"] = "Sim";
+          break;
+        case 7:
+          search["recursoAdmin.justify"] = { $ne: null };
+          search["recursoAdmin.icAllow"] = { $eq: null };
+          break;
+        case 8:
+          search["recursoAdmin.icAllow"] = "Sim";
+          break;
+        case 9:
+          search["recursoAdmin.icAllow"] = "Nao";
+          break;
+        case 10:
+          search["recurso.justify"] = { $ne: null };
+          search["recurso.icAllow"] = { $eq: null };
+          break;
+        case 11:
+          search["recurso.icAllow"] = "Sim";
+          break;
+        case 12:
+          search["recurso.icAllow"] = "Nao";
+          break;
+      }
+    }
+  }
+
+  console.log("pagina: " + page);
+  console.log(search);
+  worksFound = await Work.find(search)
+    .sort({
+      title: 1,
+    })
+    .skip(pageSize * page - pageSize)
+    .limit(pageSize);
+
+  numbOfUsers = await Work.count(search);
+
+  const pager = paginate(numbOfUsers, page, pageSize);
+
+  return {
+    worksFound,
     pager,
   };
 }

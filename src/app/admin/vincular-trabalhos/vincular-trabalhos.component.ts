@@ -30,10 +30,13 @@ export class VincularTrabalhosComponent implements OnInit {
   public reviewers = [];
   public user;
   public workSelect;
+  public nameWork;
   public status;
   public carregando = false;
   public allWorks = [];
   public modalidadeFilter = 0;
+  public pager: any = {};
+
   gerandoRelatorio = false;
   public axisPipe = new AxisPipe();
   public TypeWorkRelatorioPipe = new TypeWorkRelatorioPipe();
@@ -176,7 +179,7 @@ export class VincularTrabalhosComponent implements OnInit {
   }
 
   loadData() {
-    this.loadWorks();
+    this.loadWorksPaginate(1);
 
     /* LISTAR PARECERISTAS
     this.adminService.retrieveReviewers(this.axisId).subscribe((res) => {
@@ -187,6 +190,31 @@ export class VincularTrabalhosComponent implements OnInit {
         this.reviewers = res.reviewers;
       }
     });*/
+  }
+
+  loadWorksPaginate(event) {
+    this.carregando = true;
+    this.adminService
+      .retrieveAllWorksPaginated(
+        this.axisId,
+        this.modalidadeFilter,
+        this.status,
+        this.nameWork,
+        (event && event.pageIndex + 1) || 1
+      )
+      .subscribe((res) => {
+        if (!res.worksFound) {
+          this.carregando = false;
+          this.toastr.error(
+            "Atenção",
+            "Nenhum trabalho encontrado com estes filtros"
+          );
+        } else {
+          this.works = res.worksFound;
+          this.pager = res.pager;
+          this.carregando = false;
+        }
+      });
   }
 
   loadWorks() {

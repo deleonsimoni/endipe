@@ -1,15 +1,14 @@
-import { Injectable, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Injectable, Inject } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class AdminService {
-
   constructor(
-    @Inject('BASE_API_URL') private baseUrl: string,
+    @Inject("BASE_API_URL") private baseUrl: string,
     private http: HttpClient
-  ) { }
+  ) {}
 
   public validatePayment(id) {
     return this.http.post(`${this.baseUrl}/admin/validatePayment/${id}`, {});
@@ -20,7 +19,15 @@ export class AdminService {
   }
 
   public retrieveUsers(page, search) {
-    return this.http.get(`${this.baseUrl}/admin/usrs?page=${page}&search=${search}`);
+    return this.http.get(
+      `${this.baseUrl}/admin/usrs?page=${page}&search=${search}`
+    );
+  }
+
+  public retrieveAllWorksPaginated(axis, modality, situation, nameWork, page) {
+    return this.http.get<any>(
+      `${this.baseUrl}/admin/worksPaginated?axis=${axis}&modality=${modality}&situation=${situation}&nameWork=${nameWork}&page=${page}`
+    );
   }
 
   public generateReport() {
@@ -44,7 +51,10 @@ export class AdminService {
   }
 
   public markReviewerWork(idWork, idReviewer, emailReviewer) {
-    return this.http.post(`${this.baseUrl}/user/markReviewerWork/${idWork}/${idReviewer}/${emailReviewer}`, null);
+    return this.http.post(
+      `${this.baseUrl}/user/markReviewerWork/${idWork}/${idReviewer}/${emailReviewer}`,
+      null
+    );
   }
 
   public unmarkCoordinator(id) {
@@ -96,7 +106,9 @@ export class AdminService {
   }
 
   public deleteSchedule(id) {
-    return this.http.delete<any>(`${this.baseUrl}/schedule/deleteSchedule/${id}`);
+    return this.http.delete<any>(
+      `${this.baseUrl}/schedule/deleteSchedule/${id}`
+    );
   }
 
   public removeWork(id) {
@@ -104,13 +116,13 @@ export class AdminService {
   }
 
   public removeAuthor(authorId, workId) {
-    return this.http.delete<any>(`${this.baseUrl}/admin/removeAuthor/${authorId}/${workId}`);
+    return this.http.delete<any>(
+      `${this.baseUrl}/admin/removeAuthor/${authorId}/${workId}`
+    );
   }
 
   public insertAuthorWork(authorEmail, workId) {
     let form = { authorEmail: authorEmail, workId: workId };
     return this.http.post<any>(`${this.baseUrl}/admin/insertAuthorWork`, form);
   }
-
-
 }
