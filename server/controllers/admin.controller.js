@@ -70,8 +70,7 @@ async function getWorksPaginated(req) {
   if (req.query.nameWork != "" && req.query.nameWork != "undefined") {
     search.title = { $regex: ".*" + req.query.nameWork + ".*" };
   } else {
-    if (req.query.modality != "undefined" && req.query.modality != 0)
-      search.modalityId = req.query.modality;
+    if (req.query.modality != "undefined" && req.query.modality != 0) search.modalityId = req.query.modality;
 
     if (req.query.situation != "undefined" && req.query.situation != 0) {
       switch (Number(req.query.situation)) {
@@ -193,36 +192,23 @@ async function submitWork(req) {
   let formulario = JSON.parse(req.body.formulario);
   console.log("Validando Usuarios" + JSON.stringify(formulario.authors));
 
-  let responseValidacao = await userCtrl.validatePaymentUsers(
-    formulario.authors,
-    formulario.modalityId
-  );
+  let responseValidacao = await userCtrl.validatePaymentUsers(formulario.authors, formulario.modalityId);
   if (responseValidacao.temErro) {
-    console.log(
-      "erro na validacao dos usuarios: " + JSON.stringify(responseValidacao)
-    );
+    console.log("erro na validacao dos usuarios: " + JSON.stringify(responseValidacao));
     return responseValidacao;
   }
-  console.log(
-    "validei todos com sucesso: " + JSON.stringify(responseValidacao)
-  );
+  console.log("validei todos com sucesso: " + JSON.stringify(responseValidacao));
 
   console.log("upload works");
   let responseUpload = await userCtrl.uploadWorks(req.files.fileArray);
   if (responseUpload.temErro) {
-    console.log(
-      "erro no upload de arquivos: " + JSON.stringify(responseUpload)
-    );
+    console.log("erro no upload de arquivos: " + JSON.stringify(responseUpload));
     return responseUpload;
   }
   console.log("subi todos os arquivos: " + JSON.stringify(responseUpload));
 
   console.log("atualizando  banco");
-  let workId = await userCtrl.createWork(
-    responseValidacao.user,
-    responseUpload.filesS3,
-    formulario
-  );
+  let workId = await userCtrl.createWork(responseValidacao.user, responseUpload.filesS3, formulario);
   console.log("IDWORKJK " + workId);
   return await userCtrl.updateUsers(responseValidacao.user, workId);
 }
@@ -238,9 +224,7 @@ async function alterUserWorkFile(req) {
 
   let responseUpload = await userCtrl.uploadWorks(filesArray);
   if (responseUpload.temErro) {
-    console.log(
-      "erro no upload de arquivos: " + JSON.stringify(responseUpload)
-    );
+    console.log("erro no upload de arquivos: " + JSON.stringify(responseUpload));
     return responseUpload;
   }
   console.log("subi todos os arquivos: " + JSON.stringify(responseUpload));
@@ -349,9 +333,11 @@ async function getWorksValids(axis) {
         "reviewReviewer.review.icAllow": null,
       },
     ],
-  }).sort({
-    title: 1,
-  });
+  })
+    .select("_id title")
+    .sort({
+      title: 1,
+    });
 }
 
 async function getWorksCoordinator(axis) {
@@ -463,10 +449,7 @@ async function removeAuthor(req) {
             if (err) {
               console.log("Erro ao excluir o id do usuario no trabalho: ", err);
             } else {
-              console.log(
-                "Sucesso ao excluoir o participante do trabalho: ",
-                err
-              );
+              console.log("Sucesso ao excluoir o participante do trabalho: ", err);
             }
           }
         );
@@ -502,24 +485,15 @@ async function insertAuthorWork(req) {
               },
               function (err, doc) {
                 if (err) {
-                  console.log(
-                    "Erro ao incluir o id do usuario no trabalho: ",
-                    err
-                  );
+                  console.log("Erro ao incluir o id do usuario no trabalho: ", err);
                 } else {
-                  console.log(
-                    "Sucesso ao vincular trablho e participante: ",
-                    err
-                  );
+                  console.log("Sucesso ao vincular trablho e participante: ", err);
                 }
               }
             );
           })
           .catch((err) => {
-            console.log(
-              "Erro ao capturar usuario para inserir o trabalho: ",
-              err
-            );
+            console.log("Erro ao capturar usuario para inserir o trabalho: ", err);
           });
       }
     }

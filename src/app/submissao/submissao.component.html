@@ -14,20 +14,17 @@
                 <h2>Submissão de trabalho</h2>
               </div>
 
+              <!--
               <h1 style="color: green; font-family: 'Montserrat', sans-serif;">
                 Aguarde, estamos em etapa de avaliação de recursos. Em breve a
                 programação estará disponível.
               </h1>
+-->
 
-              <!--FORM PARA REENVIAR REPLICA
-              <div *ngIf="carregando">
-                <i class="fas fa-spinner fa-pulse"></i>Aguarde...
-              </div>
+              <!--FORM PARA REENVIAR REPLICA-->
+              <div *ngIf="carregando"><i class="fas fa-spinner fa-pulse"></i>Aguarde...</div>
 
-              <div
-                *ngFor="let work of works; let i = index"
-                [ngClass]="{ 'mb-3': works.length > 1 }"
-              >
+              <div *ngFor="let work of works; let i = index" [ngClass]="{ 'mb-3': works.length > 1 }">
                 <work-card
                   [work]="work"
                   [user]="user"
@@ -36,18 +33,13 @@
                 >
                 </work-card>
 
-                <app-work-data
-                  [work]="work"
-                  [user]="user"
-                  *ngIf="work && work._id == workSelect"
-                >
-                </app-work-data>
+                <app-work-data [work]="work" [user]="user" *ngIf="work && work._id == workSelect"> </app-work-data>
               </div>
 
               <div *ngIf="works.length == 0">
-                <h4>Você não possui trabalhos avaliados</h4>
+                <h4>Você não possui trabalhos</h4>
               </div>
-            -->
+
               <!--FORM PARA SUBIR TRABALHO-->
 
               <!--<div *ngIf="!carregando && user.icAdmin">

@@ -27,7 +27,7 @@
         <p>{{ work.axisId | axis }}</p>
       </div>
     </div>
-    <div class="row align-items-center mb-2">
+    <div *ngIf="user.icAdmin" class="row align-items-center mb-2">
       <div class="col-md-12">
         <strong>DOC</strong>
         <p>
@@ -43,9 +43,7 @@
             (change)="setFileNameDOC($event.target.files)"
             #fileInput
           />
-          <label class="custom-file-label" for="customPreReadFile">{{
-            getFileNameDOC()
-          }}</label>
+          <label class="custom-file-label" for="customPreReadFile">{{ getFileNameDOC() }}</label>
           <div class="col-md-4">
             <button class="btn-primary" (click)="alterarArquivos()">
               Alterar
@@ -54,7 +52,7 @@
         </div>
       </div>
     </div>
-    <div class="row align-items-center mb-2">
+    <div *ngIf="user.icAdmin" class="row align-items-center mb-2">
       <div class="col-md-12">
         <strong>PDF</strong>
         <p>
@@ -71,9 +69,7 @@
             (change)="setFileNamePDF($event.target.files)"
             #fileInput
           />
-          <label class="custom-file-label" for="customPreReadFile">{{
-            getFileNamePDF()
-          }}</label>
+          <label class="custom-file-label" for="customPreReadFile">{{ getFileNamePDF() }}</label>
           <div class="col-md-4">
             <button class="btn-primary" (click)="alterarArquivos()">
               Alterar
@@ -88,10 +84,7 @@
         <p *ngFor="let author of work.authors">{{ author.userEmail }}</p>
       </div>
     </div>
-    <div
-      *ngIf="work.reviewAdmin || work.reviewers"
-      class="row align-items-center mb-2"
-    >
+    <div *ngIf="work.reviewAdmin || work.reviewers" class="row align-items-center mb-2">
       <div class="col-md-12">
         <strong
           >Parecerista
@@ -116,7 +109,7 @@
               Respeita o número máximo de autores -
               {{ work.reviewAdmin.review.question3 }}
             </p>
-            <p>Trabalho apto? {{ work.reviewAdmin.review.icAllow }}</p>
+            <p *ngIf="!work.reviewReviewer">Trabalho apto? {{ work.reviewAdmin.review.icAllow }}</p>
           </div>
         </div>
       </div>
@@ -160,36 +153,18 @@
     <!-- RECURSOS -->
 
     <div
-      *ngIf="
-        work.reviewAdmin?.review &&
-        (work.reviewAdmin.review.icAllow == 'Nao' ||
-          work?.recurso?.justify ||
-          work?.recursoAdmin?.justify) &&
-        !work.reviewReviewer &&
-        !user.icAdmin &&
-        !user?.reviewer?.icCoordinator
-      "
+      *ngIf="work.reviewAdmin?.review && work?.recursoAdmin?.justify && !user.icAdmin && !user?.reviewer?.icCoordinator"
       class="row align-items-center mb-2"
       style="border: crimson; margin: 1px; border-style: dotted;"
     >
       <div class="col-md-12">
-        <h3 style="color: red;">Entrar com recurso</h3>
+        <h3 style="color: red;">Recurso</h3>
 
         <div>
           <div class="form-row justify-content-center">
             <div class="form-group col-md-12">
               <label id="example-radio-group-label">Justificativa</label>
 
-              <textarea
-                *ngIf="
-                  !work.recursoAdmin?.icAllow && !work.recursoAdmin?.justify
-                "
-                maxlength="2000"
-                class="form-control"
-                rows="5"
-                [(ngModel)]="justificativaRecurso"
-              >
-              </textarea>
               <span>
                 <br /><br />
                 {{ work.recursoAdmin?.justify }}
@@ -202,29 +177,12 @@
                 {{ work.recursoAdmin?.reply }}
               </span>
 
-              <div
-                *ngIf="work.recursoAdmin?.icAllow == 'Sim'"
-                class="row justify-content-end"
-              >
+              <div *ngIf="work.recursoAdmin?.icAllow == 'Sim'" class="row justify-content-end">
                 <b style="color: green;">Recurso aceito</b>
               </div>
 
-              <div
-                *ngIf="work.recursoAdmin?.icAllow == 'Nao'"
-                class="row justify-content-end"
-              >
+              <div *ngIf="work.recursoAdmin?.icAllow == 'Nao'" class="row justify-content-end">
                 <b style="color: red;">Recurso recusado</b>
-              </div>
-
-              <div
-                *ngIf="
-                  !work.recursoAdmin?.icAllow && !work.recursoAdmin?.justify
-                "
-                class="row justify-content-end"
-              >
-                <button class="btn-get-started" (click)="aplicarRecursoAdmin()">
-                  Enviar Recurso
-                </button>
               </div>
             </div>
           </div>
@@ -233,33 +191,18 @@
     </div>
 
     <div
-      *ngIf="
-        work.reviewReviewer &&
-        (work.reviewAdmin.review.icAllow == 'Nao' ||
-          work?.recurso?.justify ||
-          work?.recursoAdmin?.justify) &&
-        !user.icAdmin &&
-        !user?.reviewer?.icCoordinator
-      "
+      *ngIf="work.reviewReviewer && work?.recurso?.justify && !user.icAdmin && !user?.reviewer?.icCoordinator"
       class="row align-items-center mb-2"
       style="border: crimson; margin: 1px; border-style: dotted;"
     >
       <div class="col-md-12">
-        <h3 style="color: red;">Entrar com recurso</h3>
+        <h3 style="color: red;">Recurso</h3>
 
         <div>
           <div class="form-row justify-content-center">
             <div class="form-group col-md-12">
-              <label id="example-radio-group-label">Justificativa</label>
+              <label id="example-radio-group-label">Justificativaaa</label>
 
-              <textarea
-                *ngIf="!work.recurso?.icAllow && !work.recurso?.justify"
-                maxlength="2000"
-                class="form-control"
-                rows="5"
-                [(ngModel)]="justificativaRecurso"
-              >
-              </textarea>
               <span>
                 <hr />
                 {{ work.recurso?.justify }}
@@ -272,27 +215,12 @@
                 {{ work.recurso?.reply }}
               </span>
 
-              <div
-                *ngIf="work.recurso?.icAllow == 'Sim'"
-                class="row justify-content-end"
-              >
+              <div *ngIf="work.recurso?.icAllow == 'Sim'" class="row justify-content-end">
                 <b style="color: green;">Recurso aceito</b>
               </div>
 
-              <div
-                *ngIf="work.recurso?.icAllow == 'Nao'"
-                class="row justify-content-end"
-              >
+              <div *ngIf="work.recurso?.icAllow == 'Nao'" class="row justify-content-end">
                 <b style="color: red;">Recurso recusado</b>
-              </div>
-
-              <div
-                *ngIf="!work.recurso?.icAllow && !work.recurso?.justify"
-                class="row justify-content-end"
-              >
-                <button class="btn-get-started" (click)="aplicarRecurso()">
-                  Enviar Recurso
-                </button>
               </div>
             </div>
           </div>
@@ -301,9 +229,7 @@
     </div>
 
     <div
-      *ngIf="
-        work.recurso?.justify && (user.icAdmin || user?.reviewer?.icCoordinator)
-      "
+      *ngIf="work.recurso?.justify && (user.icAdmin || user?.reviewer?.icCoordinator)"
       class="row align-items-center mb-2"
       style="border: crimson; margin: 1px; border-style: dotted;"
     >
@@ -328,13 +254,7 @@
               <div class="form-group col-md-12">
                 <label id="example-radio-group-label">Réplica</label>
 
-                <textarea
-                  maxlength="2000"
-                  class="form-control"
-                  rows="5"
-                  [(ngModel)]="work.recurso.reply"
-                >
-                </textarea>
+                <textarea maxlength="2000" class="form-control" rows="5" [(ngModel)]="work.recurso.reply"> </textarea>
                 <span class="pull-right char"
                   ><em>{{ getLengthJustify() }} caracteres</em></span
                 >
@@ -344,10 +264,8 @@
                 <button
                   (click)="aceitarRecurso()"
                   [ngStyle]="{
-                    'background-color: green;color:white':
-                      work.recurso?.icAllow == 'Sim',
-                    'background-color: white;color: black':
-                      work.recurso?.icAllow == 'Nao'
+                    'background-color: green;color:white': work.recurso?.icAllow == 'Sim',
+                    'background-color: white;color: black': work.recurso?.icAllow == 'Nao'
                   }"
                   type="button"
                   [ngClass]="{
@@ -360,10 +278,8 @@
                 <button
                   (click)="negarRecurso()"
                   [ngStyle]="{
-                    'background-color: red;color:white':
-                      work.recurso?.icAllow == 'Sim',
-                    'background-color: white;color: black':
-                      work.recurso?.icAllow == 'Nao'
+                    'background-color: red;color:white': work.recurso?.icAllow == 'Sim',
+                    'background-color: white;color: black': work.recurso?.icAllow == 'Nao'
                   }"
                   type="button"
                   [ngClass]="{
@@ -391,9 +307,7 @@
 
         <div class="form-row justify-content-center">
           <div class="form-group col-md-12">
-            <label id="example-radio-group-label"
-              >Justificativa Congressista</label
-            >
+            <label id="example-radio-group-label">Justificativa Congressista</label>
             <br />
             {{ work.recursoAdmin?.justify }}
             <br />
@@ -401,13 +315,7 @@
           <div class="form-group col-md-12">
             <label id="example-radio-group-label">Justificativa</label>
             <br />
-            <textarea
-              maxlength="2000"
-              class="form-control"
-              rows="5"
-              [(ngModel)]="work.recursoAdmin.reply"
-            >
-            </textarea>
+            <textarea maxlength="2000" class="form-control" rows="5" [(ngModel)]="work.recursoAdmin.reply"> </textarea>
           </div>
         </div>
         <div class="form-row justify-content-center">
@@ -419,10 +327,8 @@
                 <button
                   (click)="aceitarRecursoAdmin()"
                   [ngStyle]="{
-                    'background-color: green;color:white':
-                      work.recursoAdmin?.icAllow == 'Sim',
-                    'background-color: white;color: black':
-                      work.recursoAdmin?.icAllow == 'Nao'
+                    'background-color: green;color:white': work.recursoAdmin?.icAllow == 'Sim',
+                    'background-color: white;color: black': work.recursoAdmin?.icAllow == 'Nao'
                   }"
                   type="button"
                   [ngClass]="{
@@ -435,10 +341,8 @@
                 <button
                   (click)="negarRecursoAdmin()"
                   [ngStyle]="{
-                    'background-color: red;color:white':
-                      work.recursoAdmin?.icAllow == 'Sim',
-                    'background-color: white;color: black':
-                      work.recursoAdmin?.icAllow == 'Nao'
+                    'background-color: red;color:white': work.recursoAdmin?.icAllow == 'Sim',
+                    'background-color: white;color: black': work.recursoAdmin?.icAllow == 'Nao'
                   }"
                   type="button"
                   [ngClass]="{
@@ -461,11 +365,7 @@
           <i class="fas fa-plus"></i>
           Parecer Admin
         </button>
-        <button
-          *ngIf="user?.reviewer?.icCoordinator"
-          class="add"
-          (click)="addReviewerCoordinator(work)"
-        >
+        <button *ngIf="user?.reviewer?.icCoordinator" class="add" (click)="addReviewerCoordinator(work)">
           <i class="fas fa-check"></i>
           Parecer
         </button>
