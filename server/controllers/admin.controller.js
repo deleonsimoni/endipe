@@ -314,9 +314,10 @@ async function getWorks(axis) {
   });
 }
 
-async function getWorksValids(axis) {
+async function getWorksValids(axis, modality) {
   return await Work.find({
     axisId: axis,
+    modalityId: modality,
     $or: [
       {
         "reviewAdmin.review.icAllow": "Sim",

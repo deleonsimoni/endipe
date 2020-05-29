@@ -5,10 +5,7 @@ import { HttpClient } from "@angular/common/http";
   providedIn: "root",
 })
 export class AdminService {
-  constructor(
-    @Inject("BASE_API_URL") private baseUrl: string,
-    private http: HttpClient
-  ) {}
+  constructor(@Inject("BASE_API_URL") private baseUrl: string, private http: HttpClient) {}
 
   public validatePayment(id) {
     return this.http.post(`${this.baseUrl}/admin/validatePayment/${id}`, {});
@@ -19,9 +16,7 @@ export class AdminService {
   }
 
   public retrieveUsers(page, search) {
-    return this.http.get(
-      `${this.baseUrl}/admin/usrs?page=${page}&search=${search}`
-    );
+    return this.http.get(`${this.baseUrl}/admin/usrs?page=${page}&search=${search}`);
   }
 
   public retrieveAllWorksPaginated(axis, modality, situation, nameWork, page) {
@@ -51,10 +46,7 @@ export class AdminService {
   }
 
   public markReviewerWork(idWork, idReviewer, emailReviewer) {
-    return this.http.post(
-      `${this.baseUrl}/user/markReviewerWork/${idWork}/${idReviewer}/${emailReviewer}`,
-      null
-    );
+    return this.http.post(`${this.baseUrl}/user/markReviewerWork/${idWork}/${idReviewer}/${emailReviewer}`, null);
   }
 
   public unmarkCoordinator(id) {
@@ -85,8 +77,8 @@ export class AdminService {
     return this.http.get<any>(`${this.baseUrl}/admin/works/${id}`);
   }
 
-  public retrieveAllWorksValids(id) {
-    return this.http.get<any>(`${this.baseUrl}/admin/worksValids/${id}`);
+  public retrieveAllWorksValids(id, modality) {
+    return this.http.get<any>(`${this.baseUrl}/admin/worksValids/${id}/${modality}`);
   }
 
   public updateUser(form) {
@@ -106,9 +98,7 @@ export class AdminService {
   }
 
   public deleteSchedule(id) {
-    return this.http.delete<any>(
-      `${this.baseUrl}/schedule/deleteSchedule/${id}`
-    );
+    return this.http.delete<any>(`${this.baseUrl}/schedule/deleteSchedule/${id}`);
   }
 
   public removeWork(id) {
@@ -116,9 +106,7 @@ export class AdminService {
   }
 
   public removeAuthor(authorId, workId) {
-    return this.http.delete<any>(
-      `${this.baseUrl}/admin/removeAuthor/${authorId}/${workId}`
-    );
+    return this.http.delete<any>(`${this.baseUrl}/admin/removeAuthor/${authorId}/${workId}`);
   }
 
   public insertAuthorWork(authorEmail, workId) {

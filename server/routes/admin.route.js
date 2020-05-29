@@ -47,7 +47,7 @@ router.get(
   getWorks
 );
 router.get(
-  "/worksValids/:id",
+  "/worksValids/:id/:modality",
   passport.authenticate("jwt", {
     session: false,
   }),
@@ -281,7 +281,7 @@ async function getWorks(req, res) {
 async function getWorksValids(req, res) {
   const user = req.user;
   if (user.icAdmin) {
-    const works = await adminCtrl.getWorksValids(req.params.id);
+    const works = await adminCtrl.getWorksValids(req.params.id, req.params.modality);
     res.json(works);
   }
   if (user.reviewer && user.reviewer.icCoordinator) {
