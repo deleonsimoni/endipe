@@ -113,12 +113,29 @@ async function getWorksPaginated(req) {
         case 12:
           search["recurso.icAllow"] = "Nao";
           break;
+        case 13:
+          search["$or"] = [
+            {
+              "reviewAdmin.review.icAllow": "Sim",
+              "reviewReviewer.review.icAllow": "Sim"
+            },
+            {
+              "recurso.icAllow": "Sim"
+            },
+            {
+              "recursoAdmin.icAllow": "Sim"
+            },
+            {
+              "reviewAdmin.review.icAllow": "Sim",
+              "reviewReviewer.review.icAllow": null
+            }
+        ];
+        break;
+
       }
     }
   }
 
-  console.log("pagina: " + page);
-  console.log(search);
   worksFound = await Work.find(search)
     .sort({
       title: 1,

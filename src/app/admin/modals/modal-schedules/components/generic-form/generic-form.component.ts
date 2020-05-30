@@ -41,7 +41,9 @@ export class GenericFormComponent {
   private fillForm(data) {
     for (const key in this.form.controls) {
       if (data.hasOwnProperty(key)) {
-        if (key == "titles" || key == "coordinators") {
+        if (key == "titles") {
+          this.fillArray(data.titles, key);
+        } else if (key == "coordinators") {
           this.fillArray(data.coordinators, key);
         } else {
           this.form.get(key).patchValue(data[key]);
@@ -50,13 +52,13 @@ export class GenericFormComponent {
     }
   }
 
-  private fillArray(data, key) {
-    const form = this.form.get(key) as FormArray;
+  private fillArray(data, keyForm) {
+    const form = this.form.get(keyForm) as FormArray;
     data.forEach((el, key) => {
       if (key == 0) {
         form.controls[0].patchValue(el);
       } else {
-        if (key == "coordinators") {
+        if (keyForm == "coordinators") {
           form.push(this.builder.group(el));
         } else {
           form.push(this.builder.control(el));

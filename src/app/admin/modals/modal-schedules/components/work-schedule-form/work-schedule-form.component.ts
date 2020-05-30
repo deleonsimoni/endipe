@@ -66,13 +66,15 @@ export class WorkScheduleFormComponent {
   }
 
   private listAllWorks(axis, modality) {
-    this.adminService.retrieveAllWorksValids(axis, modality).subscribe((works) => {
-      if (works.temErro) {
-        this.toastr.error("Erro", works);
-      } else {
-        this.works = works;
-      }
-    });
+    if (this.type != "3" && this.type != "5") {
+      this.adminService.retrieveAllWorksValids(axis, modality).subscribe((works) => {
+        if (works.temErro) {
+          this.toastr.error("Erro", works);
+        } else {
+          this.works = works;
+        }
+      });
+    }
   }
 
   public get axis() {

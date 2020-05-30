@@ -2,7 +2,7 @@
   <div class="card">
     <div class="row">
       <div class="col-6">
-        <div class="group" *ngIf="type != '4' && type != '9'">
+        <div class="group" *ngIf="type != '3' && type != '5'">
           <p class="label">Horário</p>
           <p class="hour">{{ schedule.startTime }} - {{ schedule.endTime }}</p>
         </div>
@@ -28,7 +28,7 @@
                 *ngIf="
                   !isSubscribe() &&
                   schedule.qtdSubscribers - (schedule.subscribers ? schedule.subscribers.length : 0) > 0 &&
-                  (type == '2' || type == '8')
+                  (type == '2' || type == '4')
                 "
                 (click)="signUp(type)"
                 >Inscrever-se</a
@@ -39,13 +39,13 @@
                 *ngIf="
                   !isSubscribe() &&
                   schedule.qtdSubscribers - (schedule.subscribers ? schedule.subscribers.length : 0) == 0 &&
-                  (type == '2' || type == '8')
+                  (type == '2' || type == '4')
                 "
                 >Vagas Encerradas
               </a>
               <a
                 class="dropdown-item pointer"
-                *ngIf="isSubscribe() && (type == '2' || type == '8')"
+                *ngIf="isSubscribe() && (type == '2' || type == '4')"
                 (click)="cancelSignUp(type)"
                 >Cancelar inscrição</a
               >
@@ -58,7 +58,7 @@
               *ngIf="
                 !isSubscribe() &&
                 schedule.qtdSubscribers - (schedule.subscribers ? schedule.subscribers.length : 0) > 0 &&
-                (type == '2' || type == '8')
+                (type == '2' || type == '4')
               "
             >
               <div class="col-12">
@@ -69,14 +69,14 @@
               *ngIf="
                 !isSubscribe() &&
                 schedule.qtdSubscribers - (schedule.subscribers ? schedule.subscribers.length : 0) == 0 &&
-                (type == '2' || type == '8')
+                (type == '2' || type == '4')
               "
             >
               <div class="col-12">
                 <div class="expand" style="background: #bb4949;">Vagas Encerradas</div>
               </div>
             </ng-container>
-            <ng-container *ngIf="isSubscribe() && (type == '2' || type == '8')">
+            <ng-container *ngIf="isSubscribe() && (type == '2' || type == '4')">
               <div class="col-12">
                 <div class="expand" (click)="cancelSignUp(type)">Cancelar inscrição</div>
               </div>
@@ -87,19 +87,19 @@
     </div>
     <div class="row">
       <div class="col-12">
-        <div class="group" *ngIf="type != '4' && type != '9'">
+        <div class="group" *ngIf="type != '3' && type != '5'">
           <p class="label">Título</p>
           <p class="title">
             {{ schedule.workTitle }}
           </p>
         </div>
-        <div class="group" *ngIf="type == '4' || type == '9'">
+        <div class="group" *ngIf="type == '3' || type == '5'">
           <p class="label">Eixo</p>
           <p class="title">
             {{ schedule.axis | axis }}
           </p>
         </div>
-        <div *ngIf="type == '4' || type == '9'">
+        <div *ngIf="type == '3' || type == '5'">
           <div class="group">
             <p class="label">Programação dos trabalhos</p>
             <a [href]="schedule.pdf" target="_blank">{{ schedule.pdf }}</a>
@@ -108,29 +108,29 @@
             </p> -->
           </div>
         </div>
-        <div class="group" *ngIf="type != '4' && type != '9'">
+        <div class="group" *ngIf="type != '3' && type != '5'">
           <p class="label">Resumo da proposta</p>
           <p class="title not-dash">
             {{ schedule.resumePropose }}
           </p>
         </div>
-        <div class="group" *ngIf="type != '4' && type != '9'">
+        <div class="group" *ngIf="type != '3' && type != '5'">
           <p class="label">Autores</p>
           <p class="title not-dash">
             {{ schedule.authors }}
           </p>
         </div>
-        <div class="group" *ngIf="type != '4' && type != '9'">
+        <div class="group" *ngIf="type != '3' && type != '5'">
           <p class="label">Vagas</p>
           <p class="hour">
             {{ schedule.qtdSubscribers - (schedule.subscribers ? schedule.subscribers.length : 0) }}
           </p>
         </div>
-        <div class="group" *ngIf="type != '4' && type != '9'">
+        <div class="group" *ngIf="type != '3' && type != '5'">
           <p class="label">Duração</p>
           <p class="hour">{{ schedule.qtdDias }} Dia(s)</p>
         </div>
-        <div class="group" *ngIf="type != '4' && type != '9'">
+        <div class="group" *ngIf="type != '3' && type != '5'">
           <p class="label">Local</p>
           <p class="hour">{{ schedule.place }}</p>
         </div>

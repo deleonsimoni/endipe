@@ -80,19 +80,19 @@ async function listSchedule(req, res) {
       res.json(schedules);
       break;
     case 2:
-      schedules = await minicursoCtrl.listSchedule(data);
+      schedules = await rodasDeConversaCtrl.listSchedule(data); 
       res.json(schedules);
       break;
     case 3:
-      schedules = await simposioCtrl.listSchedule(data);
+      schedules = await posterCtrl.listSchedule(data); simposioCtrl
       res.json(schedules);
       break;
     case 4:
-      schedules = await posterCtrl.listSchedule(data);
+      schedules = await minicursoCtrl.listSchedule(data);
       res.json(schedules);
       break;
     case 5:
-      schedules = await lancamentoDeLivrosCtrl.listSchedule(data);
+      schedules = await painelCtrl.listSchedule(data); 
       res.json(schedules);
       break;
     case 7:
@@ -100,11 +100,11 @@ async function listSchedule(req, res) {
       res.json(schedules);
       break;
     case 8:
-      schedules = await rodasDeConversaCtrl.listSchedule(data);
+      schedules = await simposioCtrl.listSchedule(data); 
       res.json(schedules);
       break;
     case 9:
-      schedules = await painelCtrl.listSchedule(data);
+      schedules = await lancamentoDeLivrosCtrl.listSchedule(data);
       res.json(schedules);
       break;
     case 10:
@@ -136,19 +136,19 @@ async function insertSchedule(req, res) {
         res.json(schedules);
         break;
       case 2:
-        schedules = await minicursoCtrl.insertSchedule(req.body);
+        schedules = await rodasDeConversaCtrl.insertSchedule(req.body);
         res.json(schedules);
         break;
       case 3:
-        schedules = await simposioCtrl.insertSchedule(req.body);
-        res.json(schedules);
-        break;
-      case 4:
         schedules = await posterCtrl.insertSchedule(req.body);
         res.json(schedules);
         break;
+      case 4:
+        schedules = await minicursoCtrl.insertSchedule(req.body);
+        res.json(schedules);
+        break;
       case 5:
-        schedules = await lancamentoDeLivrosCtrl.insertSchedule(req.body);
+        schedules = await painelCtrl.insertSchedule(req.body);
         res.json(schedules);
         break;
       case 7:
@@ -156,11 +156,11 @@ async function insertSchedule(req, res) {
         res.json(schedules);
         break;
       case 8:
-        schedules = await rodasDeConversaCtrl.insertSchedule(req.body);
+        schedules = await simposioCtrl.insertSchedule(req.body);
         res.json(schedules);
         break;
       case 9:
-        schedules = await painelCtrl.insertSchedule(req.body);
+        schedules = await lancamentoDeLivrosCtrl.insertSchedule(req.body);
         res.json(schedules);
         break;
       case 10:
@@ -193,19 +193,19 @@ async function updateSchedule(req, res) {
         res.json(schedules);
         break;
       case 2:
-        schedules = await minicursoCtrl.updateSchedule(req.params.id, req.body);
+        schedules = await rodasDeConversaCtrl.updateSchedule(req.params.id, req.body);
         res.json(schedules);
         break;
       case 3:
-        schedules = await simposioCtrl.updateSchedule(req.params.id, req.body);
-        res.json(schedules);
-        break;
-      case 4:
         schedules = await posterCtrl.updateSchedule(req.params.id, req.body);
         res.json(schedules);
         break;
+      case 4:
+        schedules = await minicursoCtrl.updateSchedule(req.params.id, req.body);
+        res.json(schedules);
+        break;
       case 5:
-        schedules = await lancamentoDeLivrosCtrl.updateSchedule(req.params.id, req.body);
+        schedules = await painelCtrl.updateSchedule(req.params.id, req.body);
         res.json(schedules);
         break;
       case 7:
@@ -213,11 +213,11 @@ async function updateSchedule(req, res) {
         res.json(schedules);
         break;
       case 8:
-        schedules = await rodasDeConversaCtrl.updateSchedule(req.params.id, req.body);
+        schedules = await simposioCtrl.updateSchedule(req.params.id, req.body);
         res.json(schedules);
         break;
       case 9:
-        schedules = await painelCtrl.updateSchedule(req.params.id, req.body);
+        schedules = await lancamentoDeLivrosCtrl.updateSchedule(req.params.id, req.body);
         res.json(schedules);
         break;
       case 10:
@@ -251,19 +251,19 @@ async function deleteSchedule(req, res) {
         res.json(schedules);
         break;
       case 2:
-        schedules = await minicursoCtrl.deleteSchedule(req.params.id);
+        schedules = await rodasDeConversaCtrl.deleteSchedule(req.params.id);
         res.json(schedules);
         break;
       case 3:
-        schedules = await simposioCtrl.deleteSchedule(req.params.id);
-        res.json(schedules);
-        break;
-      case 4:
         schedules = await posterCtrl.deleteSchedule(req.params.id);
         res.json(schedules);
         break;
+      case 4:
+        schedules = await minicursoCtrl.deleteSchedule(req.params.id);
+        res.json(schedules);
+        break;
       case 5:
-        schedules = await lancamentoDeLivrosCtrl.deleteSchedule(req.params.id);
+        schedules = await painelCtrl.deleteSchedule(req.params.id);
         res.json(schedules);
         break;
       case 7:
@@ -271,11 +271,11 @@ async function deleteSchedule(req, res) {
         res.json(schedules);
         break;
       case 8:
-        schedules = await rodasDeConversaCtrl.deleteSchedule(req.params.id);
+        schedules = await simposioCtrl.deleteSchedule(req.params.id);
         res.json(schedules);
         break;
       case 9:
-        schedules = await painelCtrl.deleteSchedule(req.params.id);
+        schedules = await lancamentoDeLivrosCtrl.deleteSchedule(req.params.id);
         res.json(schedules);
         break;
       case 10:
