@@ -16,6 +16,33 @@
             <p>{{ subscribed.createdAt | date: 'dd/MM/yyyy' }}</p>
         </div>
     </div>
+    <div  class="row align-items-center">
+        <div class="col-12">
+            <strong>Código Postal</strong>
+            <p>{{ subscribed.address.zip | cep }}</p>
+        </div>
+        <div class="col-12">
+            <strong>Rua</strong>
+            <p>{{ subscribed?.address?.street ? subscribed.address.street : '-----' }} - {{ subscribed?.address?.num ? subscribed.address.num : '-----' }}</p>
+        </div>
+        <div class="col-6">
+            <strong>Bairro</strong>
+            <p>{{ subscribed?.address?.district ? subscribed.address.district : '-----' }}</p>
+        </div>
+        <div class="col-6">
+            <strong>Cidade</strong>
+            <p>{{ subscribed?.address?.city ? subscribed.address.city : '-----' }}</p>
+        </div>
+        <div class="col-6">
+            <strong>Estado</strong>
+            <p>{{ subscribed?.address?.state ? subscribed.address.state : '-----' }}</p>
+        </div>
+        <div class="col-6">
+            <strong>País</strong>
+            <p>{{ subscribed?.address?.country ? subscribed.address.country : '-----' }}</p>
+        </div>
+
+    </div>
     <div class="row align-items-center">
         <div class="col-sm-4 mb-2">
             <strong>PCD</strong>

@@ -10,6 +10,7 @@ import { ContagemModalidadePipe } from './contagem-modalidade.pipe';
 import { CategoryPaymentPipe } from './category-payment.pipe';
 import { ArraySortPipe } from './array-sort.pipe';
 import { ThemePipe } from './theme.pipe';
+import { CepPipe } from './cep.pipe';
 
 @NgModule({
     declarations: [
@@ -22,12 +23,14 @@ import { ThemePipe } from './theme.pipe';
         CategoryPaymentPipe,
         ArraySortPipe,
         TypeWorkRelatorioPipe,
-        ThemePipe
+        ThemePipe,
+        CepPipe
     ],
     exports: [
         MaskCpfPipe,
         AxisPipe,
         ModalitiesPipe,
+        CepPipe,
         TypeWorkPipe,
         DocPipe,
         ContagemModalidadePipe,

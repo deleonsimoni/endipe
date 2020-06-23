@@ -41,7 +41,7 @@ async function getUsers(req) {
 
   usersFound = await User.find(search)
     .select(
-      "fullname email createdAt document phones modalityId payment works institution isPCD deficiencyType icForeign"
+      "fullname address email createdAt document phones modalityId payment works institution isPCD deficiencyType icForeign"
     )
     .sort({
       fullname: 1,
