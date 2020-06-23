@@ -19,7 +19,7 @@
     <div  class="row align-items-center">
         <div class="col-12">
             <strong>Código Postal</strong>
-            <p>{{ subscribed.address.zip | cep }}</p>
+            <p *ngIf="subscribed.address">{{ subscribed?.address?.zip | cep }}</p>
         </div>
         <div class="col-12">
             <strong>Rua</strong>
