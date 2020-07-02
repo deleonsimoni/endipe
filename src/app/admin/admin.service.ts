@@ -89,6 +89,15 @@ export class AdminService {
     return this.http.post<any>(`${this.baseUrl}/schedule/insertSchedule`, form);
   }
 
+  public sendEmail(form) {
+    const formData: FormData = new FormData();
+    if(form.files){
+      formData.append('fileArray', <File>form.files[0], form.files[0].name);
+    }
+    formData.append('formulario', JSON.stringify({groupId: form.groupId, description: form.description, title: form.title}));
+    return this.http.post<any>(`${this.baseUrl}/admin/sendEmail`, formData);
+  }
+
   // public retrieveSchedules() {
   //   return this.http.get<any>(`${this.baseUrl}/schedule/listAll`);
   // }

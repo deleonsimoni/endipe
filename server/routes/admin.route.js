@@ -146,6 +146,18 @@ router.post(
   asyncHandler(uploadWork)
 );
 
+router.post(
+  "/sendEmail",
+  [
+    passport.authenticate("jwt", {
+      session: false,
+    }),
+    fileUpload(),
+  ],
+  asyncHandler(sendEmail)
+);
+
+
 router.delete(
   "/removeWork/:id",
   passport.authenticate("jwt", {
@@ -153,6 +165,7 @@ router.delete(
   }),
   asyncHandler(removeWork)
 );
+
 router.delete(
   "/removeAuthor/:authorId/:workId",
   passport.authenticate("jwt", {
@@ -212,6 +225,32 @@ async function deleteByEmail(req, res) {
 async function uploadWork(req, res) {
   if (req.user.icAdmin) {
     let response = await adminCtrl.submitWork(req);
+
+    if (!response) {
+      console.log("Notificando email submissao");
+      let formulario = JSON.parse(req.body.formulario);
+      for (let i = 0; i < formulario.authors.length; i++) {
+        if (!formulario.authors[i].email) {
+          continue;
+        } else {
+          emailSender.sendMail(
+            formulario.authors[i].email,
+            "Trabalho Submetido com Sucesso",
+            templateEmail.trabalhoSubmetido
+          );
+        }
+      }
+    }
+
+    res.json(response);
+  } else {
+    res.sendStatus(401);
+  }
+}
+
+async function sendEmail(req, res) {
+  if (req.user.icAdmin) {
+    let response = await adminCtrl.sendEmail(req);
 
     if (!response) {
       console.log("Notificando email submissao");

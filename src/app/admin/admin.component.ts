@@ -36,7 +36,9 @@ export class AdminComponent implements OnInit {
     { name: 'CONFERENCISTAS', path: '/admin/conferencistas' },
     { name: 'PARECERISTAS/COORDENADORES', path: '/admin/coordenadores' },
     { name: 'TRABALHOS/PARECERISTAS', path: '/admin/vincular-trabalho' },
-    { name: 'PROGRAMAÇÃO', path: '/admin/programacao' }
+    { name: 'PROGRAMAÇÃO', path: '/admin/programacao' },
+    { name: 'EMAIL', path: '/admin/email' }
+
   ];
 
   private nonAdminRoutes = [

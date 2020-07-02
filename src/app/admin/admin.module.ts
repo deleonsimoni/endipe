@@ -29,6 +29,8 @@ import { ModalReviewReviewerComponent } from './modals/modal-review-reviewer/mod
 import { GlobalComponentsModule } from '../components/global-components.module';
 import { ModalSchedulesModule } from './modals/modal-schedules/modal-schedules.module';
 import { AnaisComponent } from './anais/anais.component';
+import { EmailComponent } from './email/email.component';
+import { QuillModule } from 'ngx-quill';
 @NgModule({
     declarations: [
         AdminComponent,
@@ -47,6 +49,7 @@ import { AnaisComponent } from './anais/anais.component';
         SchedulesComponent,
         ReviewListWorksComponent,
         AnaisComponent,
+        EmailComponent,
     ],
     entryComponents: [
         AdminComponent,
@@ -55,6 +58,7 @@ import { AnaisComponent } from './anais/anais.component';
     ],
     imports: [
         CommonModule,
+        QuillModule.forRoot(),
         FormsModule,
         ReactiveFormsModule,
         NgxMaskModule.forRoot(),

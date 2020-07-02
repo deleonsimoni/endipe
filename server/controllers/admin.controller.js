@@ -9,6 +9,10 @@ const IncomingForm = require("formidable").IncomingForm;
 const fs = require("fs");
 const S3Uploader = require("./aws.controller");
 
+const emailSender = require("./email.controller");
+var CONSTANTS = require('../utils/contants');
+
+
 const paginate = require("jw-paginate");
 
 module.exports = {
@@ -30,6 +34,8 @@ module.exports = {
   generateReport,
   getWorksValids,
   getWorksPaginated,
+  sendEmail, 
+
 };
 
 async function getUsers(req) {
@@ -229,6 +235,7 @@ async function submitWork(req) {
   console.log("IDWORKJK " + workId);
   return await userCtrl.updateUsers(responseValidacao.user, workId);
 }
+
 
 async function alterUserWorkFile(req) {
   console.log("upload works");
@@ -516,4 +523,30 @@ async function insertAuthorWork(req) {
       }
     }
   );
+}
+
+async function sendEmail(req) {
+
+  let emailsSend;
+  let attachment = {};
+
+  let formulario = JSON.parse(req.body.formulario);
+
+
+  if(formulario.groupId == 1){
+    emailsSend = CONSTANTS.EMAILS_GROUP_1
+  }
+  
+  attachment.fileName = req.files.fileArray.name;
+  attachment.file = req.files.fileArray.data;
+
+  emailSender.sendMail(
+    emailsSend,
+    formulario.title,
+    formulario.description,
+    attachment
+  );
+
+  return true;
+
 }

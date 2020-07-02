@@ -80,9 +80,9 @@
               <li><a [routerLink]="['/home']" fragment="hospedagem">Clima</a></li>
             </ul>
           </li>
-          <li class="pointer">
+          <!--<li class="pointer">
             <a class="text-danger" *ngIf="!isAuth" [routerLink]="['/register']" fragment="">INSCRIÇÃO</a>
-          </li>
+          </li>-->
           <li class="pointer" *ngIf="!isAuth"><a [routerLink]="['/login']">LOGIN</a></li>
           <li *ngIf="isAuth" class="menu-has-children pointer">
             <a [routerLink]="">AÇÕES <i class="fa fa-chevron-down"></i></a>

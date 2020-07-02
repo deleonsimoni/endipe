@@ -11,6 +11,7 @@ import { VincularTrabalhosComponent } from './vincular-trabalhos/vincular-trabal
 import { SchedulesComponent } from './schedules/schedules.component';
 import { ReviewListWorksComponent } from './review-list-works/review-list-works.component';
 import { AnaisComponent } from './anais/anais.component';
+import { EmailComponent } from './email/email.component';
 
 const routes: Routes = [
     {
@@ -41,6 +42,9 @@ const routes: Routes = [
             },
             {
                 path: 'programacao', component: SchedulesComponent
+            },
+            {
+                path: 'email', component: EmailComponent
             },
         ]
     }
