@@ -11,6 +11,8 @@ module.exports = {
 
 function sendMail(to, subject, text, attachment) {
 
+    console.log(to)
+
     var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {

@@ -10,7 +10,9 @@ const fs = require("fs");
 const S3Uploader = require("./aws.controller");
 
 const emailSender = require("./email.controller");
-var CONSTANTS = require('../utils/contants');
+const EMAILS_GROUP_1 = require('../utils/emailsGroup1');
+const EMAILS_GROUP_2 = require('../utils/emailsGroup2');
+const EMAILS_GROUP_3 = require('../utils/emailsGroup3');
 
 
 const paginate = require("jw-paginate");
@@ -532,10 +534,25 @@ async function sendEmail(req) {
 
   let formulario = JSON.parse(req.body.formulario);
 
-
-  if(formulario.groupId == 1){
-    emailsSend = CONSTANTS.EMAILS_GROUP_1
+  switch (Number(formulario.groupId)) {
+    case 1:
+      emailsSend = EMAILS_GROUP_1.EMAILS_GROUP_1
+    break;
+    case 2:
+      //emailsSend = EMAILS_GROUP_2.EMAILS_GROUP_2
+    break;
+    case 3:
+      //emailsSend = EMAILS_GROUP_3.EMAILS_GROUP_3
+    break;
+    case 4:
+      //emailsSend = CONSTANTS.EMAILS_GROUP_1
+    break;
+    case 5:
+      //emailsSend = CONSTANTS.EMAILS_GROUP_1
+    break;
+  
   }
+
   
   attachment.fileName = req.files.fileArray.name;
   attachment.file = req.files.fileArray.data;

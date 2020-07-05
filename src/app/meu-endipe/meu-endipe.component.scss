@@ -1,0 +1,23 @@
+
+  #team .member {
+    text-align: left;
+      p {
+      padding: 0;
+      margin: 0 0 4px 0;
+      font-weight: 400;
+      font-size: 14px;
+    }
+  }
+  
+  .middle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  
+  hr {
+    margin: auto;
+    width: 40%;
+  }

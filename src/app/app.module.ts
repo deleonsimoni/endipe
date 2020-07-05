@@ -55,6 +55,8 @@ import { ModalEncerramentoComponent } from './modal-encerramento/modal-encerrame
 import { ModalAberturaComponent } from './modal-abertura/modal-abertura.component';
 import { GlobalComponentsModule } from './components/global-components.module';
 import { ProgramacaoModule } from './programacao/programacao.module';
+import { HomeVirtualComponent } from './endipe-virtual/home-virtual/home-virtual.component';
+import { MeuEndipeComponent } from './meu-endipe/meu-endipe.component';
 
 @NgModule({
   declarations: [
@@ -91,6 +93,8 @@ import { ProgramacaoModule } from './programacao/programacao.module';
     ModalConferencistasComponent,
     ModalEncerramentoComponent,
     ModalAberturaComponent,
+    HomeVirtualComponent,
+    MeuEndipeComponent,
 
   ],
   imports: [

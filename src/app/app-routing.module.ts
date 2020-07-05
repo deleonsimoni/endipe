@@ -11,12 +11,18 @@ import { PerfilComponent } from './perfil/perfil.component';
 import { EsqueciSenhaComponent } from './esqueci-senha/esqueci-senha.component';
 import { ResetSenhaComponent } from './reset-senha/reset-senha.component';
 import { ProgramacaoComponent } from './programacao/programacao.component';
+import { HomeVirtualComponent } from './endipe-virtual/home-virtual/home-virtual.component';
+import { MeuEndipeComponent } from './meu-endipe/meu-endipe.component';
 
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
     redirectTo: 'home'
+  },
+  {
+    path: 'endipe-virtual',
+    component: HomeVirtualComponent
   },
   {
     path: 'home',
@@ -49,6 +55,10 @@ const routes: Routes = [
   {
     path: 'certificados',
     component: CertificadoComponent
+  },
+  {
+    path: 'meu-endipe',
+    component: MeuEndipeComponent
   },
   {
     path: 'meus-trabalhos',
