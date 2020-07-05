@@ -36,7 +36,7 @@ module.exports = {
   generateReport,
   getWorksValids,
   getWorksPaginated,
-  sendEmail, 
+  sendEmail,
 
 };
 
@@ -137,8 +137,8 @@ async function getWorksPaginated(req) {
               "reviewAdmin.review.icAllow": "Sim",
               "reviewReviewer.review.icAllow": null
             }
-        ];
-        break;
+          ];
+          break;
 
       }
     }
@@ -537,23 +537,23 @@ async function sendEmail(req) {
   switch (Number(formulario.groupId)) {
     case 1:
       emailsSend = EMAILS_GROUP_1.EMAILS_GROUP_1
-    break;
+      break;
     case 2:
       //emailsSend = EMAILS_GROUP_2.EMAILS_GROUP_2
-    break;
+      break;
     case 3:
       //emailsSend = EMAILS_GROUP_3.EMAILS_GROUP_3
-    break;
+      break;
     case 4:
       //emailsSend = CONSTANTS.EMAILS_GROUP_1
-    break;
+      break;
     case 5:
       //emailsSend = CONSTANTS.EMAILS_GROUP_1
-    break;
-  
+      break;
+
   }
 
-  
+
   attachment.fileName = req.files.fileArray.name;
   attachment.file = req.files.fileArray.data;
 

@@ -20,7 +20,7 @@ export class EmailComponent implements OnInit {
     { id: 1, name: "Secretaria" },
     { id: 2, name: "Todos participantes com inscrição paga" },
     { id: 3, name: "Todos autores de trabalho aceitos" },
-    { id: 4, name: "Todos inscritos em minucurso" },
+    { id: 4, name: "Todos inscritos em minicurso" },
     { id: 5, name: "Todos inscritos em roda de conversa" },
   ]
 
@@ -34,8 +34,8 @@ export class EmailComponent implements OnInit {
   ngOnInit() {
   }
 
-  sendEmail(){
-    if(this.description && this.groupId && this.title){
+  sendEmail() {
+    if (this.description && this.groupId && this.title) {
 
       this.carregando = true;
       this.adminService.sendEmail({ groupId: this.groupId, description: this.description, files: this.files, title: this.title }).subscribe((res) => {
@@ -47,7 +47,7 @@ export class EmailComponent implements OnInit {
         }
       }, (err) => {
         this.carregando = false;
-        if(err.status == 413){
+        if (err.status == 413) {
           this.toastr.error("Limite de email excedido", 'Atenção');
         } else {
           this.toastr.error("Servidor momentaneamente inoperante", 'Atenção');
@@ -65,7 +65,7 @@ export class EmailComponent implements OnInit {
   }
 
   public changeGroup(): void {
-    
+
   }
 
   public getFileName(): string {
