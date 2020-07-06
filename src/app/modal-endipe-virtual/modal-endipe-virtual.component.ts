@@ -15,4 +15,9 @@ export class ModalEndipeVirtualComponent implements OnInit {
   ngOnInit() {
   }
 
+  public close() {
+    this.dialogRef.close();
+  }
+
+
 }

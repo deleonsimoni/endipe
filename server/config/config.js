@@ -30,6 +30,10 @@ const envVarsSchema = Joi.object({
     .description('Secret Main'),
   PATH_S3_DEV: Joi.string().allow('')
     .description('Path Developer AWS S3'),
+    AWS_SES_ID: Joi.string().allow('')
+  .description('Path Developer AWS S3'),
+  AWS_SES_KEY: Joi.string().allow('')
+  .description('Path Developer AWS S3'),
   MONGO_PORT: Joi.number()
     .default(27017)
 }).unknown()
@@ -54,7 +58,10 @@ const config = {
   MAIL_SECRET: envVars.MAIL_SECRET,
   AWS_ACCESS_KEY: envVars.AWS_ACCESS_KEY,
   AWS_SECRET_ACCESS_KEY: envVars.AWS_SECRET_ACCESS_KEY,
-  PATH_S3_DEV: envVars.PATH_S3_DEV
+  PATH_S3_DEV: envVars.PATH_S3_DEV,
+  AWS_SES_ID: envVars.AWS_SES_ID,
+  AWS_SES_KEY: envVars.AWS_SES_KEY
+
 };
 
 module.exports = config;

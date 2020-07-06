@@ -553,11 +553,13 @@ async function sendEmail(req) {
 
   }
 
+  if(req.files){
+    attachment.fileName = req.files.fileArray.name;
+    attachment.file = req.files.fileArray.data;
+  }
 
-  attachment.fileName = req.files.fileArray.name;
-  attachment.file = req.files.fileArray.data;
-
-  emailSender.sendMail(
+  emailsSend = ['deleon.simoni@gmail.com', 'jonathan.schenker@hotmail.com', 'deleon.simoni@gmail.com', 'jonathan.schenker@hotmail.com']
+  emailSender.sendMailAWS(
     emailsSend,
     formulario.title,
     formulario.description,
