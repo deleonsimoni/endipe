@@ -55,7 +55,7 @@ function sendMail(to, subject, text, attachment) {
 
 
 function sendMailAWS(to, subject, text, attachment) {
-  console.log('de: ' + config.MAIL_FROM)
+
   const configAWS= {
     apiVersion: '2010-12-01',
     accessKeyId: config.AWS_SES_ID,
@@ -75,7 +75,7 @@ function sendMailAWS(to, subject, text, attachment) {
       subject: subject,
       html: text,
     };
-
+    
     if(attachment){
         
       mailOptions['attachments'] = 

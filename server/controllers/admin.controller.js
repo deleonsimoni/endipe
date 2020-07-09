@@ -530,9 +530,11 @@ async function insertAuthorWork(req) {
 async function sendEmail(req) {
 
   let emailsSend;
-  let attachment = {};
+  let attachment;
 
   let formulario = JSON.parse(req.body.formulario);
+
+  console.log(`########## ENVIANDO EMAILS PARA GRUPO ${req.body.formulario.groupId} ##########`);
 
   switch (Number(formulario.groupId)) {
     case 1:
@@ -554,6 +556,7 @@ async function sendEmail(req) {
   }
 
   if(req.files){
+    attachment = {};
     attachment.fileName = req.files.fileArray.name;
     attachment.file = req.files.fileArray.data;
   }
@@ -562,25 +565,30 @@ async function sendEmail(req) {
   let chunk = 12;
   let auxFor = 0;
 
-  setInterval(function(){
-
+  const idInterval = setInterval(function(){
+    
     if(auxFor <= emailsSend.length) {
 
       emailDestinationAux = emailsSend.slice(auxFor, auxFor+chunk);
-      //console.log(emailDestinationAux);
       if(emailDestinationAux.length){
+        
         emailSender.sendMailAWS(
-          emailDestinationAux,
+          emailDestinationAux, 
           formulario.title,
           formulario.description,
           attachment
         );
+        
       }
+
+    } else {
+      console.log(`########## FIM DO ENVIO DE EMAILS PARA O GRUPO ##########`);
+      clearInterval(idInterval);
     }
 
     auxFor += chunk;
     
-  },1500);
+  },1800);
 
   
 
