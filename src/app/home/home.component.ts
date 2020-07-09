@@ -65,7 +65,7 @@ export class HomeComponent implements OnInit {
   ];
 
   coordenacoesGerais = [
-    'Andrea Fetzner – UNIRIO',
+    'Andréa Rosana Fetzner – UNIRIO',
     'Antonio Flavio Barbosa Moreira – UCP',
     'Carmen Teresa Gabriel – UFRJ',
     'Claudia de Oliveira Fernandes – UNIRIO',
@@ -350,7 +350,7 @@ export class HomeComponent implements OnInit {
       seus saberes e práticas; metodologias e práticas curriculares em Direitos Humanos, Interculturalidade e Religiões.`,
       coordenacao: [
         'Ana Ivenicki – UFRJ',
-        'Andrea Rosana Fetzener – UNIRIO',
+        'Andréa Rosana Fetzner – UNIRIO',
         'Vera Maria Ferrão Candau – PUC-Rio'
       ],
       pareceristas: []

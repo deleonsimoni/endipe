@@ -539,16 +539,16 @@ async function sendEmail(req) {
       emailsSend = EMAILS_GROUP_1.EMAILS_GROUP_1
       break;
     case 2:
-      //emailsSend = EMAILS_GROUP_2.EMAILS_GROUP_2
+      emailsSend = EMAILS_GROUP_2.EMAILS_GROUP_2
       break;
     case 3:
-      //emailsSend = EMAILS_GROUP_3.EMAILS_GROUP_3
+      emailsSend = EMAILS_GROUP_3.EMAILS_GROUP_3
       break;
     case 4:
-      //emailsSend = CONSTANTS.EMAILS_GROUP_1
+      emailsSend = CONSTANTS.EMAILS_GROUP_1
       break;
     case 5:
-      //emailsSend = CONSTANTS.EMAILS_GROUP_1
+      emailsSend = CONSTANTS.EMAILS_GROUP_1
       break;
 
   }
@@ -558,13 +558,31 @@ async function sendEmail(req) {
     attachment.file = req.files.fileArray.data;
   }
 
-  emailsSend = ['deleon.simoni@gmail.com', 'jonathan.schenker@hotmail.com', 'deleon.simoni@gmail.com', 'jonathan.schenker@hotmail.com']
-  emailSender.sendMailAWS(
-    emailsSend,
-    formulario.title,
-    formulario.description,
-    attachment
-  );
+  let emailDestinationAux = [];
+  let chunk = 12;
+  let auxFor = 0;
+
+  setInterval(function(){
+
+    if(auxFor <= emailsSend.length) {
+
+      emailDestinationAux = emailsSend.slice(auxFor, auxFor+chunk);
+      //console.log(emailDestinationAux);
+      if(emailDestinationAux.length){
+        emailSender.sendMailAWS(
+          emailDestinationAux,
+          formulario.title,
+          formulario.description,
+          attachment
+        );
+      }
+    }
+
+    auxFor += chunk;
+    
+  },1500);
+
+  
 
   return true;
 

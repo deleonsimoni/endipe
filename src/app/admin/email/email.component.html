@@ -8,7 +8,7 @@
         id="opt"
         [(ngModel)]="groupId"
         >
-        <option *ngFor="let group of groups" [value]="group.id" [disabled]="group.id != 1"
+        <option *ngFor="let group of groups" [value]="group.id" [disabled]="group.id == 4 || group.id == 5"
             >{{ group.name }}
         </option>
         </select>
