@@ -582,7 +582,7 @@ async function sendEmail(req) {
       }
 
     } else {
-      console.log(`########## FIM DO ENVIO DE EMAILS PARA O GRUPO ##########`);
+      console.log(`########## FIM DO ENVIO DE EMAILS PARA O GRUPO ${formulario.groupId} ##########`);
       clearInterval(idInterval);
     }
 
