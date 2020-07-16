@@ -30,7 +30,7 @@ export class SimposioFormComponent {
             date: [null],
             endTime: [null],
             place: [null],
-            linkYoutube: [null],
+            virtual: this.builder.group({ linkYoutube: [null] }),
             address: [null],
             classification: [null],
             themeSpeeches: [null],

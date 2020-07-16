@@ -26,7 +26,7 @@ export class GenericFormComponent {
       startTime: [null],
       endTime: [null],
       place: [null],
-      linkYoutube: [null],
+      virtual: this.builder.group({ linkYoutube: [null] }),
       address: [null],
       theme: [null],
       coordinators: this.builder.array([this.createCoordinatorsField()]),
