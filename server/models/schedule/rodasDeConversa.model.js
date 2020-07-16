@@ -25,6 +25,27 @@ const ScheduleSchema = new mongoose.Schema({
   address: {
     type: String,
   },
+  virtual: {
+    monitors: [{
+      email: String,
+      icAnfitriao: {
+        type: Boolean,
+        default: false
+      }
+    }],
+    linkLive: {
+      type: String
+    },
+    linkPpt: {
+      type: String
+    },
+    linkAudio: {
+      type: String
+    },
+    linkLibras: {
+      type: String
+    }
+  },
   date: {
     type: String
   },

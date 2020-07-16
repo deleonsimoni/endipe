@@ -31,6 +31,17 @@ const ScheduleSchema = new mongoose.Schema({
   address: {
     type: String,
   },
+  virtual: {
+    linkYoutube: {
+      type: String
+    },
+    linkAudio: {
+      type: String
+    },
+    linkLibras: {
+      type: String
+    }
+  },
   theme: {
     type: String,
   },

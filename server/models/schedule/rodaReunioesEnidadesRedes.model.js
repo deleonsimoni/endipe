@@ -28,6 +28,17 @@ const ScheduleSchema = new mongoose.Schema({
   theme: {
     type: String,
   },
+  virtual: {
+    linkYoutube: {
+      type: String
+    },
+    linkAudio: {
+      type: String
+    },
+    linkLibras: {
+      type: String
+    }
+  },
   date: {
     type: String
   },

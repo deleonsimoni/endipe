@@ -34,6 +34,17 @@ const ScheduleSchema = new mongoose.Schema({
   date: {
     type: String
   },
+  virtual: {
+    linkYoutube: {
+      type: String
+    },
+    linkAudio: {
+      type: String
+    },
+    linkLibras: {
+      type: String
+    }
+  },
   createAt: {
     type: Date,
     default: Date.now
