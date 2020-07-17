@@ -20,9 +20,6 @@ const ScheduleSchema = new mongoose.Schema({
   classification: {
     type: String,
   },
-  startTime: {
-    type: String,
-  },
   endTime: {
     type: String,
   },

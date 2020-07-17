@@ -13,7 +13,7 @@ export class GenericFormComponent {
   @Output() submitForm: EventEmitter<any> = new EventEmitter<any>();
 
   public form: FormGroup;
-  public days = ["29/10", "30/10", "31/10", "01/11", "02/11", "03/11", "04/11", "05/11", "06/11", "07/11", "08/11", "09/11", "10/11", "11/11", "12/11", "13/11"];
+  public days = ["29/10", "30/10", "31/10", "01/11", "02/11", "03/11", "04/11", "05/11", "06/11", "07/11", "08/11", "09/11", "10/11", "11/11", "12/11"];
 
   constructor(private builder: FormBuilder) {
     this.createForm();
