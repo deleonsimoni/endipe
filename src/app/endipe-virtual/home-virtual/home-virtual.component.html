@@ -67,3 +67,36 @@
       </div>
     </div>
 </section>-->
+
+
+<section id="forum" class="wow fadeInUp">
+
+    <div>
+        <ul>
+          <li *ngFor="let comment of comments">
+              
+            <header>
+              <h1 [ngClass]="{ 'author': isAuthor(comment.author.email) }">
+                  <a *ngIf="comment.author.website.length == 0">
+                    {{ comment.author.name }}
+                  </a>
+                  <a *ngIf="comment.author.website.length > 0" href="{{ comment.author.website }}">{{ comment.author.name }}</a>
+             </h1>
+               
+              <div>
+                <button (click)="love(comment.id)" [ngClass]="{ 'loved': comment.loved }"></button>
+                <button (click)="reply(comment.author.name)"></button>
+              </div>
+            </header>
+            <p [innerHTML]="parseContent(comment.content)"></p>
+
+          </li>
+        </ul>
+        <form name="form" (ngSubmit)="addNewComment()" novalidate>
+          <textarea placeholder="Comment" [ngModelOptions]="{standalone: true}" [(ngModel)]="newComment.content" required></textarea>
+          <button type="submit">Add comment</button>
+        </form>
+      </div>
+
+
+</section>
