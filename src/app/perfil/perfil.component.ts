@@ -80,6 +80,7 @@ export class PerfilComponent implements OnInit {
         return;
       }
 
+      this.userForm.value.dateBirth = moment(this.userForm.value.dateBirth).format('L')
 
       this.carregando = true;
 
