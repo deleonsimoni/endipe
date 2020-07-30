@@ -17,6 +17,7 @@ export class ModalProgramacaoComponent implements OnInit {
 
   ngOnInit() {
     this.programacao = this.data.item;
+    console.log(this.programacao);
   }
 
   public close() {

@@ -3,7 +3,14 @@ import { MaskCpfPipe } from './mask-cpf.pipe';
 import { AxisPipe } from './axis.pipe';
 import { ModalitiesPipe } from './modalities.pipe';
 import { TypeWorkPipe } from './type-work.pipe';
+import { TypeWorkRelatorioPipe } from './type-work-relatorio.pipe';
+
 import { DocPipe } from './doc.pipe';
+import { ContagemModalidadePipe } from './contagem-modalidade.pipe';
+import { CategoryPaymentPipe } from './category-payment.pipe';
+import { ArraySortPipe } from './array-sort.pipe';
+import { ThemePipe } from './theme.pipe';
+import { CepPipe } from './cep.pipe';
 
 @NgModule({
     declarations: [
@@ -11,14 +18,26 @@ import { DocPipe } from './doc.pipe';
         AxisPipe,
         ModalitiesPipe,
         TypeWorkPipe,
-        DocPipe
+        DocPipe,
+        ContagemModalidadePipe,
+        CategoryPaymentPipe,
+        ArraySortPipe,
+        TypeWorkRelatorioPipe,
+        ThemePipe,
+        CepPipe
     ],
     exports: [
         MaskCpfPipe,
         AxisPipe,
         ModalitiesPipe,
+        CepPipe,
         TypeWorkPipe,
-        DocPipe
+        DocPipe,
+        ContagemModalidadePipe,
+        CategoryPaymentPipe,
+        ArraySortPipe,
+        TypeWorkRelatorioPipe,
+        ThemePipe
     ],
 })
 export class PipesModule { }

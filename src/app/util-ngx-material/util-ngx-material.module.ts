@@ -10,7 +10,14 @@ import {
   MatSidenavModule,
   MatIconModule,
   MatToolbarModule,
-  MatListModule
+  MatListModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatRadioModule,
+  MatTableModule,
+  MatPaginatorModule,
+  MatSnackBarModule,
+  MatExpansionModule
 } from '@angular/material';
 
 @NgModule({
@@ -24,7 +31,15 @@ import {
     MatSidenavModule,
     MatIconModule,
     MatToolbarModule,
-    MatListModule
+    MatListModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatRadioModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSnackBarModule,
+    MatExpansionModule,
+
   ]
 })
 export class UtilNgxMaterialModule { }

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AdminService } from '../../admin.service';
 import { MatDialog } from '@angular/material';
-import { ModalReviewerComponent } from '../../modal-reviewer/modal-reviewer.component';
+import { ModalReviewerComponent } from '../../modals/modal-reviewer/modal-reviewer.component';
 
 @Component({
   // tslint:disable-next-line: component-selector

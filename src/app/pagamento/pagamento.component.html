@@ -7,9 +7,9 @@
             <div class="col-md-12">
                 <div class="box">
                     <div class="section-header">
-                        <h2>Pagamento</h2>
+                        <h2>Pagamento Encerrado</h2>
                     </div>
-
+                    <!--
                     <div *ngIf="carregando">
                         <i class="fas fa-spinner fa-pulse"></i>Aguarde...
                     </div>
@@ -49,31 +49,12 @@
                             </div>
                             <div class="form-row"
                                 *ngIf="user.payment && user.payment.icValid && !user.payment.pathReceiptPayment">
-
-                                <h3 *ngIf="user.payment.categoryId == 5" style="color: rgb(161, 161, 28);">Após realizar
-                                    a
-                                    transferência nos envie o comprovante no botão abaixo</h3>
-                                <h3 *ngIf="user.payment.categoryId != 5" style="color: rgb(161, 161, 28);">Seu
-                                    comprovante foi validado por nossa equipe,
+                                <h3 style="color: rgb(161, 161, 28);">Seu comprovante foi validado por nossa equipe,
                                     após realizar a
                                     transferência nos envie o comprovante no botão abaixo</h3>
 
                                 <div class="form-row">
-
-                                    <div class="col-md-12">
-                                        <div class="col-md-6">
-                                            <strong>Categoria</strong>
-                                            {{retrieveCategories(user.payment.categoryId).name}}
-                                        </div>
-                                        <div class="col-md-6">
-                                            <strong>Valor total</strong>
-                                            {{'R$ ' + user.payment.amount + ',00'}}
-                                        </div>
-                                        <hr>
-                                    </div>
-
                                     <div class="custom-file col-md-12">
-
                                         <input type="file" class="custom-file-input" data-max-size="2048"
                                             id="customPreReadFile"
                                             (change)="setFileNamePDFTransferencia($event.target.files)" #fileInput />
@@ -82,7 +63,6 @@
                                     </div>
 
                                     <div class="col-md-12">
-
                                         <button *ngIf="!enviando" class="btn-get-started"
                                             (click)="submeterTransferencia()">Enviar
                                             Comprovante de Transferência</button>
@@ -95,12 +75,11 @@
                                 *ngIf="user.payment && user.payment.icValid && user.payment.pathReceiptPayment && !user.payment.icPaid">
                                 <h3 style="color: rgb(161, 161, 28);">Comprovante de transferência enviado com sucesso.
                                     Nossa equipe
-                                    irá validar para que você possa submeter seu trabalho</h3>
+                                    irá validar os dados</h3>
                             </div>
 
                             <div class="form-row" *ngIf="user.payment.icPaid">
-                                <h3 style="color: green;">Pagamento validado, agora você já pode submeter seus
-                                    trabalhos no menu Submissão</h3>
+                                <h3 style="color: green;">Pagamento validado, esperamos você no XX ENDIPE RIO 2020</h3>
                             </div>
 
                         </div>
@@ -109,7 +88,7 @@
                         <div class="form-row">
                             <div class="form-group">
                                 O pagamento deverá ser realizado via transferência bancária para a conta do congresso
-                                Endipe. Após pagamento, enviar comprovante via email para: xxendiperio2020@gmail.com<br>
+                                Endipe.<br>
                                 O prazo para verificação de comprovante de inscrição da categoria e realização da
                                 tranferência é de 5 dias.
                                 <br><br>
@@ -135,8 +114,7 @@
                         <div *ngIf="enviando" class="row justify-content-center"><button><i
                                     class="fas fa-spinner fa-pulse"></i></button></div>
 
-                        <!--<div class="text-center pt-5"><button type="submit">Realizar Pagamento</button></div>-->
-                    </form>
+                    </form>-->
                 </div>
             </div>
         </div>

@@ -3,9 +3,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './admin.component';
 import { SubscribedComponent } from './subscribed/subscribed.component';
 import { NewsComponent } from './news/news.component';
-import { RegisterCoordinatorComponent } from './register-coordinator/register-coordinator.component';
+import { CoordinatorComponent } from './coordinator/coordinator.component';
 import { WorksComponent } from './works/works.component';
 import { AdminGuard } from './admin.guard';
+import { ConferencerComponent } from './conferencer/conferencer.component';
+import { VincularTrabalhosComponent } from './vincular-trabalhos/vincular-trabalhos.component';
+import { SchedulesComponent } from './schedules/schedules.component';
+import { ReviewListWorksComponent } from './review-list-works/review-list-works.component';
+import { AnaisComponent } from './anais/anais.component';
+import { EmailComponent } from './email/email.component';
 
 const routes: Routes = [
     {
@@ -20,11 +26,26 @@ const routes: Routes = [
                 path: 'noticias', component: NewsComponent
             },
             {
-                path: 'coordenadores', component: RegisterCoordinatorComponent
+                path: 'anais', component: AnaisComponent
             },
             {
-                path: 'trabalhos', component: WorksComponent
-            }
+                path: 'conferencistas', component: ConferencerComponent
+            },
+            {
+                path: 'coordenadores', component: CoordinatorComponent
+            },
+            {
+                path: 'vincular-trabalho', component: VincularTrabalhosComponent
+            },
+            {
+                path: 'review-list', component: ReviewListWorksComponent
+            },
+            {
+                path: 'programacao', component: SchedulesComponent
+            },
+            {
+                path: 'email', component: EmailComponent
+            },
         ]
     }
 ];

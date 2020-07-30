@@ -1,0 +1,144 @@
+<form [formGroup]="form" class="form">
+  <div class="form-row">
+    <div class="form-group col-md-12">
+      <select class="form-control" id="axis" formControlName="axis">
+        <option *ngFor="let eixo of axisCollection" [selected]="eixo.id == axis" [value]="eixo.id">
+          {{ eixo.name }}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="form-row" *ngIf="type != '3' && type != '5'">
+    <div class="form-group col-md-12">
+      <select
+        class="form-control"
+        id="work"
+        [ngModelOptions]="{ standalone: true }"
+        [(ngModel)]="selectedWork"
+        (ngModelChange)="setWorkForm($event)"
+      >
+        <option disabled="true" [selected]="true">Selecione o trabalho</option>
+        <option *ngFor="let work of works" [ngValue]="work">
+          {{ work.title }}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="form-row" *ngIf="type != '3' && type != '5'">
+    <div class="form-group col-md-12">
+      <label for="authors" class="label">Autores</label>
+      <br />
+      <small>*** Adicione os autores separando-os por vírgula.</small>
+      <textarea
+        name="authors"
+        class="form-control"
+        id="authors"
+        cols="30"
+        rows="5"
+        formControlName="authors"
+      ></textarea>
+    </div>
+  </div>
+  <div class="form-row" *ngIf="type != '3' && type != '5'">
+    <div class="form-group col-md-12">
+      <label for="resumePropose" class="label">Resumo da proposta</label>
+      <textarea
+        name="resumePropose"
+        class="form-control"
+        id="resumePropose"
+        cols="30"
+        rows="5"
+        formControlName="resumePropose"
+      ></textarea>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-4" *ngIf="type != '3' && type != '5'">
+      <label for="startTime" class="label">Hora início</label>
+      <input
+        type="time"
+        min="08:00"
+        max="21:00"
+        class="form-control"
+        name="startTime"
+        id="startTime"
+        formControlName="startTime"
+      />
+    </div>
+    <div class="form-group col-md-4" *ngIf="type != '3' && type != '5'">
+      <label for="endTime" class="label">Hora fim</label>
+      <input
+        type="time"
+        min="08:00"
+        max="21:00"
+        class="form-control"
+        name="endTime"
+        id="endTime"
+        formControlName="endTime"
+      />
+    </div>
+    <div class="form-group" [ngClass]="{ 'col-md-4': diffTypeP(), 'col-md-12': !diffTypeP() }">
+      <label for="date" class="label">Data</label>
+      <select class="form-control" name="date" id="date" formControlName="date">
+        <option *ngFor="let day of days" [value]="day">{{ day }}</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-row" *ngIf="type != '3' && type != '5'">
+    <div class="form-group col-md-12">
+      <label for="qtdSubscribers" class="label">Vagas</label>
+      <input
+        type="text"
+        name="qtdSubscribers"
+        class="form-control"
+        id="qtdSubscribers"
+        formControlName="qtdSubscribers"
+      />
+    </div>
+    <div class="form-group col-md-12">
+      <label id="example-radio-group-label">Quantidade de dias</label>
+      <br />
+      <mat-radio-group
+        aria-labelledby="example-radio-group-label"
+        class="example-radio-group"
+        formControlName="qtdDias"
+      >
+        <mat-radio-button class="example-radio-button mr-2" value="1">
+          1 dia
+        </mat-radio-button>
+        <mat-radio-button class="example-radio-button mr-2" value="2">
+          2 dias
+        </mat-radio-button>
+        <mat-radio-button class="example-radio-button mr-2" value="3">
+          3 dias
+        </mat-radio-button>
+        <mat-radio-button class="example-radio-button mr-2" value="4">
+          4 dias
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+  </div>
+  <!-- <div class="form-row" *ngIf="type == '4' || type == '9'">
+        <div class="form-group col-md-12">
+            <label for="address" class="label">Endereço</label>
+            <input type="text" name="address" class="form-control" id="address" formControlName="address" />
+        </div>
+    </div> -->
+  <div class="form-row" *ngIf="type != '3' && type != '5'">
+    <div class="form-group col-md-12">
+      <label for="place" class="label">Local</label>
+      <input type="text" name="place" class="form-control" id="place" formControlName="place" />
+    </div>
+  </div>
+  <div class="form-row" *ngIf="type == '3' || type == '5'">
+    <div class="form-group col-md-12">
+      <label for="pdf" class="label">Url do arquivo</label>
+      <input type="text" name="pdf" class="form-control" id="place" formControlName="pdf" />
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col-md-12">
+      <button class="btn-get-started" type="button" (click)="submitSchedule()">SUBMETER PROGRAMAÇÃO</button>
+    </div>
+  </div>
+</form>

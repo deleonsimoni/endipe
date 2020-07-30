@@ -1,27 +1,13 @@
 <i class="fa fa-times pointer" (click)="close()"></i>
 <div class="container">
-    <div class="scroll">
-        <div class="row">
-            <div class="col-md-6" *ngFor="let grupos of apoiadores; let i = index">
-                <h4 [ngClass]="{'mt-4': i > 1}"><strong>{{ grupos.nome }}</strong></h4>
-                <!-- <ul style="list-style: none;">
-        <li *ngFor="let pessoas of grupos.equipe">
-            {{pessoas}}
-        </li>
-    </ul> -->
-                <p *ngFor="let pessoas of grupos.equipe">{{ pessoas }}</p>
-            </div>
-            <!-- <ul style="list-style: none;">
+  <div class="scroll">
+    <div class="row">
+      <div class="col-md-6" *ngFor="let grupos of apoiadores; let i = index">
+        <h4 [ngClass]="{'mt-4': i > 1}"><strong>{{ grupos.nome }}</strong></h4>
 
-        <li *ngFor="let grupos of apoiadores">
-            <strong>{{grupos.nome}}</strong><br />
-            <ul style="list-style: none;">
-                <li *ngFor="let pessoas of grupos.equipe">
-                    {{pessoas}}
-                </li>
-            </ul>
-        </li>
-    </ul> -->
-        </div>
+        <p *ngFor="let pessoas of grupos.equipe">{{ pessoas }}</p>
+      </div>
+
     </div>
+  </div>
 </div>

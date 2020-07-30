@@ -44,6 +44,20 @@ import { AdminRoutingModule } from './admin/admin.routing';
 import { EsqueciSenhaComponent } from './esqueci-senha/esqueci-senha.component';
 import { QuillModule } from 'ngx-quill';
 import { ResetSenhaComponent } from './reset-senha/reset-senha.component';
+import { ModalSessoesEspeciaisComponent } from './modal-sessoes-especiais/modal-sessoes-especiais.component';
+import { ModalSimposioComponent } from './modal-simposio/modal-simposio.component';
+import { ModalHospedagemComponent } from './modal-hospedagem/modal-hospedagem.component';
+import { ModalTransporteComponent } from './modal-transporte/modal-transporte.component';
+import { ModalAlimentacaoComponent } from './modal-alimentacao/modal-alimentacao.component';
+import { ModalTurismoComponent } from './modal-turismo/modal-turismo.component';
+import { ModalConferencistasComponent } from './modal-conferencistas/modal-conferencistas.component';
+import { ModalEncerramentoComponent } from './modal-encerramento/modal-encerramento.component';
+import { ModalAberturaComponent } from './modal-abertura/modal-abertura.component';
+import { GlobalComponentsModule } from './components/global-components.module';
+import { ProgramacaoModule } from './programacao/programacao.module';
+import { HomeVirtualComponent } from './endipe-virtual/home-virtual/home-virtual.component';
+import { MeuEndipeComponent } from './meu-endipe/meu-endipe.component';
+import { ModalEndipeVirtualComponent } from './modal-endipe-virtual/modal-endipe-virtual.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +84,20 @@ import { ResetSenhaComponent } from './reset-senha/reset-senha.component';
     ListarTrabalhosComponent,
     PerfilComponent,
     EsqueciSenhaComponent,
-    ResetSenhaComponent
+    ResetSenhaComponent,
+    ModalSessoesEspeciaisComponent,
+    ModalSimposioComponent,
+    ModalHospedagemComponent,
+    ModalTransporteComponent,
+    ModalAlimentacaoComponent,
+    ModalTurismoComponent,
+    ModalConferencistasComponent,
+    ModalEncerramentoComponent,
+    ModalAberturaComponent,
+    HomeVirtualComponent,
+    MeuEndipeComponent,
+    ModalEndipeVirtualComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -90,6 +117,8 @@ import { ResetSenhaComponent } from './reset-senha/reset-senha.component';
     ToastrModule.forRoot(),
     AccordionModule.forRoot(),
     AdminModule,
+    ProgramacaoModule,
+    GlobalComponentsModule,
     PipesModule
   ],
   entryComponents: [
@@ -103,7 +132,19 @@ import { ResetSenhaComponent } from './reset-senha/reset-senha.component';
     ModalNormasPosterComponent,
     ModalApoiadoresComponent,
     ModalCadastroSucessoComponent,
-    RegisterComponent
+    RegisterComponent,
+    ModalSessoesEspeciaisComponent,
+    ModalSimposioComponent,
+    ModalHospedagemComponent,
+    ModalAlimentacaoComponent,
+    ModalTransporteComponent,
+    ModalTurismoComponent,
+    ModalConferencistasComponent,
+    ModalEncerramentoComponent,
+    ModalAberturaComponent,
+    RegisterComponent,
+    ModalEndipeVirtualComponent,
+
   ],
   providers: [
     {

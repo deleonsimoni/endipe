@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { NoticiasService } from 'src/app/services/noticias.service';
 import { MatDialog } from '@angular/material';
-import { ModalNewsComponent } from '../modal-news/modal-news.component';
+import { ModalNewsComponent } from '../modals/modal-news/modal-news.component';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -71,8 +71,15 @@ export class NewsComponent implements OnInit, OnDestroy {
       });
   }
 
-  public register() {
-    const dialogRef = this.dialog.open(ModalNewsComponent);
+  public register(news) {
+    if(news == 0) {
+      news = null;
+    }
+    const dialogRef = this.dialog.open(ModalNewsComponent, {
+      data: {
+        news: news
+      }
+    });
 
     dialogRef.afterClosed().subscribe(() => this.listar());
   }

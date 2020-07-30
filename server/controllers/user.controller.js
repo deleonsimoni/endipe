@@ -2,6 +2,9 @@ const bcrypt = require('bcrypt');
 //const Joi = require('joi');
 const User = require('../models/user.model');
 const Work = require('../models/work.model');
+const RodaDeConversa = require('../models/schedule/rodasDeConversa.model');
+const MiniCurso = require('../models/schedule/minicurso.model');
+
 const Prices = require('../config/prices');
 const IncomingForm = require('formidable').IncomingForm;
 const fs = require('fs');
@@ -37,7 +40,17 @@ module.exports = {
   generateNewPassword,
   resetPassword,
   getBoleto,
-  submeterTransferencia
+  submeterTransferencia,
+  markCoordinator,
+  unmarkCoordinator,
+  markReviewer,
+  validatePaymentUsers,
+  uploadWorks,
+  createWork,
+  updateUsers,
+  getWorksReviewer,
+  getWorksInscricoes,
+
 }
 
 async function insert(user) {
@@ -51,7 +64,8 @@ async function generateNewPassword(user) {
   const randomstring = Math.random().toString(36).slice(-8);
 
   let response = {
-    status: 200, message: `Seu código para troca de senha foi enviado para seu email.`
+    status: 200,
+    message: `Seu código para troca de senha foi enviado para seu email.`
   };
 
   await User.findByIdAndUpdate(user._id, {
@@ -59,7 +73,10 @@ async function generateNewPassword(user) {
       mailCodePassword: randomstring
     }
   }, function (err, doc) {
-    if (err) response = { status: 500, message: err };
+    if (err) response = {
+      status: 500,
+      message: err
+    };
     let email = templateEmail.esqueciSenha.replace("#senha#", randomstring);
     emailSender.sendMail(user.email, 'Recuperação de Senha', email);
   })
@@ -72,7 +89,8 @@ async function resetPassword(req, user) {
   const hashString = bcrypt.hashSync(req.body.password, 10);
 
   let response = {
-    status: 200, message: `Senha alterada com sucesso.`
+    status: 200,
+    message: `Senha alterada com sucesso.`
   };
 
   await User.findByIdAndUpdate(user._id, {
@@ -81,7 +99,10 @@ async function resetPassword(req, user) {
       hashedPassword: hashString
     }
   }, function (err, doc) {
-    if (err) response = { status: 500, message: err };
+    if (err) response = {
+      status: 500,
+      message: err
+    };
   })
 
   return response;
@@ -95,7 +116,15 @@ async function getBoleto(req) {
   if (retorno.temErro) {
     return retorno;
   } else {
-    let ultimoRef = await User.findOne({ 'boleto': { $ne: null } }, {}, { sort: { 'boleto.refTran': 1 } }).select('boleto.refTran');
+    let ultimoRef = await User.findOne({
+      'boleto': {
+        $ne: null
+      }
+    }, {}, {
+      sort: {
+        'boleto.refTran': 1
+      }
+    }).select('boleto.refTran');
 
     if (req.user.boleto) {
       let dateNow = new Date();
@@ -111,7 +140,15 @@ async function getBoleto(req) {
         retorno.valor = price.price + '00';
         retorno.userId = req.user._id;
         retorno.tpPagamento = "2";
-        await User.findOneAndUpdate({ _id: req.user._id }, { $set: { boleto: retorno } }, { new: true });
+        await User.findOneAndUpdate({
+          _id: req.user._id
+        }, {
+          $set: {
+            boleto: retorno
+          }
+        }, {
+          new: true
+        });
 
       } else {
         retorno = req.user.boleto;
@@ -128,7 +165,15 @@ async function getBoleto(req) {
       retorno.valor = price.price + '00';
       retorno.userId = req.user._id;
       retorno.tpPagamento = "2";
-      await User.findOneAndUpdate({ _id: req.user._id }, { $set: { boleto: retorno } }, { new: true });
+      await User.findOneAndUpdate({
+        _id: req.user._id
+      }, {
+        $set: {
+          boleto: retorno
+        }
+      }, {
+        new: true
+      });
 
     }
 
@@ -163,12 +208,18 @@ async function validarDadosGeracaoBoleto(user) {
 }
 
 async function checkDocumentDup(cpf) {
-  let userFind = await User.find({ document: cpf }).select('document');
+  let userFind = await User.find({
+    document: cpf
+  }).select('document');
   return userFind.length > 0 ? true : false;
 }
 
 async function update(user) {
-  return await User.findOneAndUpdate({ _id: user._id }, user, { new: true });
+  return await User.findOneAndUpdate({
+    _id: user._id
+  }, user, {
+    new: true
+  });
 }
 
 function getPrice(id) {
@@ -230,7 +281,13 @@ async function generatePayment(req, res) {
 
         req.user.payment.pathS3 = fileName;
 
-        User.findOneAndUpdate({ _id: req.user._id }, { $set: { payment: req.user.payment } }, function (err, doc) {
+        User.findOneAndUpdate({
+          _id: req.user._id
+        }, {
+          $set: {
+            payment: req.user.payment
+          }
+        }, function (err, doc) {
           if (err) {
             console.log("erro ao atualizar o usuario: ", err);
           } else {
@@ -245,7 +302,13 @@ async function generatePayment(req, res) {
 
     } else {
 
-      User.findOneAndUpdate({ _id: req.user._id }, { $set: { payment: req.user.payment } }, function (err, doc) {
+      User.findOneAndUpdate({
+        _id: req.user._id
+      }, {
+        $set: {
+          payment: req.user.payment
+        }
+      }, function (err, doc) {
         if (err) {
           console.log("erro ao atualizar o usuario: ", err);
         } else {
@@ -266,7 +329,9 @@ async function downloadFileS3(req) {
 }
 
 async function getUserByEmail(email) {
-  return await User.findOne({ email: email.toLowerCase() });
+  return await User.findOne({
+    email: email.toLowerCase()
+  });
 }
 
 
@@ -277,7 +342,13 @@ async function submeterTransferencia(req, res) {
 
   await S3Uploader.uploadFile(fileName, file.data).then(fileData => {
 
-    return User.findOneAndUpdate({ _id: req.user._id }, { $set: { 'payment.pathReceiptPayment': fileName } }, function (err, doc) {
+    return User.findOneAndUpdate({
+      _id: req.user._id
+    }, {
+      $set: {
+        'payment.pathReceiptPayment': fileName
+      }
+    }, function (err, doc) {
       if (err) {
         console.log("erro ao atualizar o usuario: ", err);
       } else {
@@ -414,7 +485,10 @@ async function validatePaymentUsers(users, modalityId) {
         retorno.mensagem = `O usuário ${users[i].email} já possui trabalho submetido para esta modalidade`
         break;
       } else {
-        retorno.user.push({ userId: userFind._id, userEmail: users[i].email });
+        retorno.user.push({
+          userId: userFind._id,
+          userEmail: users[i].email
+        });
       }
     } else {
       retorno.temErro = true;
@@ -438,13 +512,11 @@ async function validateModalityDup(workId, modalityId) {
 }
 
 async function uploadWorks(files) {
-
   let retorno = {
     temErro: false,
     mensagem: '',
     filesS3: []
   }
-
   let fileName;
 
   for (let i = 0; i < files.length; i++) {
@@ -488,7 +560,15 @@ async function createWork(users, filesName, formulario) {
 async function updateUsers(users, workId) {
 
   users.forEach(element => {
-    User.findOneAndUpdate({ _id: element.userId }, { $push: { works: workId } }, { new: true }, (err, doc) => {
+    User.findOneAndUpdate({
+      _id: element.userId
+    }, {
+      $push: {
+        works: workId
+      }
+    }, {
+      new: true
+    }, (err, doc) => {
       if (err) {
         console.log("Erro ao atualizar o usuario -> " + err);
       }
@@ -497,7 +577,7 @@ async function updateUsers(users, workId) {
 
 }
 
-async function createCoordinator(coordinators) {
+async function createCoordinator(coordinators, axisId) {
 
   let retorno = {
     temErro: false,
@@ -513,10 +593,18 @@ async function createCoordinator(coordinators) {
   } else {
 
     retorno.userId.forEach(async user => {
-      await User.findOneAndUpdate({ _id: user }, { $set: { coordinator: { icModalityId: coordinators.axis } } });
+      await User.findOneAndUpdate({
+        _id: user
+      }, {
+        $set: {
+          reviewer: {
+            icModalityId: axisId
+          }
+        }
+      });
     });
 
-    retorno.mensagem = `Coordenador cadastrado com sucesso`;
+    retorno.mensagem = `Cadastro realizado com sucesso`;
     retorno.temErro = false;
 
   }
@@ -524,7 +612,6 @@ async function createCoordinator(coordinators) {
   return retorno;
 
 }
-
 
 async function validateCoordinator(authors, retorno) {
 
@@ -540,13 +627,6 @@ async function validateCoordinator(authors, retorno) {
         retorno.userEmail.push(author.email);
         retorno.temErro = true;
         retorno.mensagem = `Usuário ${author.email} não está cadastrado no sistema`;
-        reject(retorno);
-
-      } else if (user.coordinator && user.coordinator.icModalityId) {
-
-        retorno.userEmail.push(author.email);
-        retorno.temErro = true;
-        retorno.mensagem = `O usuário ${author.email} já possui cadastro como coordenador`;
         reject(retorno);
 
       } else if (user.reviewer && user.reviewer.icModalityId) {
@@ -572,17 +652,119 @@ async function validateCoordinator(authors, retorno) {
 
 };
 
-async function getCoordinator() {
-  return await User.find({ coordinator: { $ne: null } }).sort({ fullname: 1 });
+
+async function markCoordinator(id) {
+
+  let retorno = {
+    temErro: false,
+    mensagem: '',
+    userEmail: [],
+    userId: []
+  }
+
+  await User.findOneAndUpdate({
+    _id: id
+  }, {
+    $set: {
+      'reviewer.icCoordinator': true
+    }
+  });
+
+  retorno.mensagem = `Cadastro realizado com sucesso`;
+  retorno.temErro = false;
+
+  return retorno;
+
+}
+
+
+async function markReviewer(idWork, idReviewer, reviewerEmail) {
+
+  let retorno = {
+    temErro: false,
+    mensagem: '',
+    userEmail: [],
+    userId: []
+  }
+
+  let work = await Work.findById({
+    _id: idWork
+  });
+
+  if (!idReviewer && work.reviewers && work.reviewers[0].review && work.reviewers[0].review.icAllow) {
+    retorno.temErro = true;
+    retorno.mensagem = "O parecerista já lançou seu parecer sobre o trabalho, não pode ser desvinculado"
+  } else {
+    work.reviewers[0] = {
+      userId: idReviewer,
+      userEmail: reviewerEmail
+    };
+    let email = templateEmail.pareceristaVinculado;
+    emailSender.sendMail(reviewerEmail, 'Você foi selecionado como parecerista', email);
+    await work.save();
+  }
+
+  return retorno;
+}
+
+async function unmarkCoordinator(id) {
+
+  let retorno = {
+    temErro: false,
+    mensagem: '',
+    userEmail: [],
+    userId: []
+  }
+
+  await User.findOneAndUpdate({
+    _id: id
+  }, {
+    $set: {
+      'reviewer.icCoordinator': false
+    }
+  });
+
+  retorno.mensagem = `Coordenador removido com sucesso`;
+  retorno.temErro = false;
+
+  return retorno;
+
+}
+
+
+async function getCoordinator(axisId) {
+  return await User.find({
+    'reviewer.icModalityId': axisId
+  }).sort({
+    fullname: 1
+  });
 }
 
 async function deleteCoordinator(id) {
-  await User.findByIdAndUpdate({ _id: id }, { $unset: { coordinator: '' } });
+  await User.findByIdAndUpdate({
+    _id: id
+  }, {
+    $unset: {
+      reviewer: ''
+    }
+  });
   return null;
 }
 
-async function getReviewer() {
-  return await User.find({ reviewer: { $ne: null } }).sort({ fullname: 1 });
+async function getReviewer(axisId) {
+  return await User.find({
+      $and: [{
+        'reviewer.icModalityId': axisId
+      }, {
+        'reviewer.icCoordinator': {
+          $ne: true
+        }
+      }]
+    })
+    .select('_id email')
+    .sort({
+      fullname: 1
+    });
 }
 
 async function createReviewer(reviewer) {
@@ -602,8 +784,22 @@ async function createReviewer(reviewer) {
 
     retorno.valids.forEach(async user => {
       console.log('user: ', user);
-      await Work.findOneAndUpdate({ _id: reviewer.work }, { $push: { reviewers: { user } } });
-      await User.findOneAndUpdate({ _id: user.userId }, { $set: { icReviewer: true } });
+      await Work.findOneAndUpdate({
+        _id: reviewer.work
+      }, {
+        $push: {
+          reviewers: {
+            user
+          }
+        }
+      });
+      await User.findOneAndUpdate({
+        _id: user.userId
+      }, {
+        $set: {
+          icReviewer: true
+        }
+      });
 
     });
 
@@ -615,6 +811,26 @@ async function createReviewer(reviewer) {
   return retorno;
 
 }
+
+async function getWorksInscricoes(inscricoes) {
+
+  let works = [];
+
+  for (let i = 0; i < inscricoes.length; i++) {
+
+    let work;
+    if (inscricoes[i].icModalityId == 4) {
+      work = await MiniCurso.findById(inscricoes[i].idSchedule).select('_id workTitle qtdDias');
+    } else {
+      work = await RodaDeConversa.findById(inscricoes[i].idSchedule).select('_id workTitle qtdDias');
+    }
+    works.push(work);
+  }
+
+
+  return works;
+}
+
 
 async function validateReviewer(reviewers, retorno) {
 
@@ -647,7 +863,10 @@ async function validateReviewer(reviewers, retorno) {
       } else {
 
         retorno.temErro = false;
-        retorno.valids.push({ userId: user._id, userEmail: user.email });
+        retorno.valids.push({
+          userId: user._id,
+          userEmail: user.email
+        });
         if (reviewers.length - 1 == key) {
           resolve(retorno);
         }
@@ -662,7 +881,13 @@ async function validateReviewer(reviewers, retorno) {
 }
 
 async function deleteReviewer(id) {
-  await User.findByIdAndUpdate({ _id: id }, { $unset: { reviewer: '' } });
+  await User.findByIdAndUpdate({
+    _id: id
+  }, {
+    $unset: {
+      reviewer: ''
+    }
+  });
   return null;
 }
 
@@ -684,4 +909,23 @@ function pad(num, size) {
   var s = num + "";
   while (s.length < size) s = "0" + s;
   return s;
+}
+
+async function getWorksReviewer(userId) {
+  let works = await Work.find({
+
+    $or: [{
+        reviewReviewer: {
+          $ne: {}
+        }
+      },
+      {
+        reviewAdmin: {
+          $ne: {}
+        }
+      }
+    ],
+    'authors.userId': userId
+  });
+  return works;
 }

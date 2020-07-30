@@ -13,7 +13,18 @@ import { ModalNormasPosterComponent } from '../modal-normas/modal-expositor-post
 import { DownloadFileService } from '../services/download-file.service';
 import { ToastrService } from 'ngx-toastr';
 import { NoticiasService } from '../services/noticias.service';
-
+import { ModalSessoesEspeciaisComponent } from '../modal-sessoes-especiais/modal-sessoes-especiais.component';
+import { ModalSimposioComponent } from '../modal-simposio/modal-simposio.component';
+import { ModalHospedagemComponent } from '../modal-hospedagem/modal-hospedagem.component';
+import { ModalAlimentacaoComponent } from '../modal-alimentacao/modal-alimentacao.component';
+import { ModalTransporteComponent } from '../modal-transporte/modal-transporte.component';
+import { ModalTurismoComponent } from '../modal-turismo/modal-turismo.component';
+import { ModalConferencistasComponent } from '../modal-conferencistas/modal-conferencistas.component';
+import { PROGRAMACOES } from '../declarations';
+import { ModalEncerramentoComponent } from '../modal-encerramento/modal-encerramento.component';
+import { ModalAberturaComponent } from '../modal-abertura/modal-abertura.component';
+import { AnaisService } from '../services/anais.service';
+import { ModalEndipeVirtualComponent } from '../modal-endipe-virtual/modal-endipe-virtual.component';
 
 @Component({
   selector: 'app-home',
@@ -27,6 +38,7 @@ export class HomeComponent implements OnInit {
   subscriptionValue: number;
   carregando = false;
   noticias = [];
+  anais = [];
 
   configuracaoCarrossel = {
     nav: true,
@@ -36,14 +48,14 @@ export class HomeComponent implements OnInit {
       '0': { items: 1, margin: 5 },
       '940': { items: 3, margin: 5 }
     }
-  }
+  };
 
   instituicoes = [
     'Universidade Federal do Rio de Janeiro – UFRJ',
     'Universidade Federal do Estado do Rio de Janeiro – UNIRIO',
     'Universidade Federal Fluminense – UFF',
     'Universidade Federal Rural do Rio de Janeiro – UFRRJ',
-    'Universidade Estadual do Rio de Janeiro – UERJ',
+    'Universidade do Estado do Rio de Janeiro – UERJ',
     'Universidade Estácio de Sá – UNESA',
     'Universidade Católica de Petrópolis – UCP',
     'Pontifícia Universidade Católica do Rio de Janeiro – PUC-Rio',
@@ -53,7 +65,7 @@ export class HomeComponent implements OnInit {
   ];
 
   coordenacoesGerais = [
-    'Andrea Fetzner – UNIRIO',
+    'Andréa Rosana Fetzner – UNIRIO',
     'Antonio Flavio Barbosa Moreira – UCP',
     'Carmen Teresa Gabriel – UFRJ',
     'Claudia de Oliveira Fernandes – UNIRIO',
@@ -62,7 +74,7 @@ export class HomeComponent implements OnInit {
     'Inês Barbosa de Oliveira – UNESA',
     'Maria Inês Marcondes – PUC-Rio',
     'Naiara Miranda Rust – IBC',
-    'Rosana Evangelista Dias – UERJ',
+    'Rosanne Evangelista Dias – UERJ',
     'Vera Maria Ferrão Candau – PUC-Rio',
     'Yrlla Ribeiro de Oliveira Carneiro da Silva – INES'
   ];
@@ -95,7 +107,7 @@ export class HomeComponent implements OnInit {
   ];
 
   comites = [
-    'Andrea Vilella Mafra da Silva – ISERJ',
+    'Andrea Villela Mafra da Silva – ISERJ',
     'Antonio Flavio Barbosa Moreira – UCP',
     'Claudia de Oliveira Fernandes – UNIRIO',
     'Claudia Miranda – UNIRIO',
@@ -106,7 +118,7 @@ export class HomeComponent implements OnInit {
     'Luis Paulo Cruz Borges – EB/CAp-UERJ',
     'Maria das Graças Nascimento – UFRJ',
     'Maria Inês Marcondes – PUC-Rio',
-    'Monica Vasconcellos – UFF',
+    'Mônica Vasconcellos – UFF',
     'Naiara Miranda Rust – IBC',
     'Patricia Bastos de Azevedo – UFRRJ',
     'Sandra Maciel – UFF',
@@ -127,23 +139,11 @@ export class HomeComponent implements OnInit {
       nome: 'Apoio aos preletores',
       equipe: [
         'Patricia Bastos de Azevedo – UFRRJ (coord.)',
-        'Pâmella Esteves – FFP/UERJ',
-        'Pedro Pinheiro Teixeira – PUC-Rio',
-        'Priscila Monteiro Corrêa – FEBF/UERJ',
-        'Talita da Silva Campelo – EB/SME-Caxias',
-        'Viviane Lontra – EB/CAp-UFRJ'
-      ]
-    },
-    {
-      nome: 'Arte e comunicação',
-      equipe: [
-        'Edméa Oliveira Santos – UFRRJ (coord.)',
-        'Silvana Mesquita – PUC-Rio (coord.)',
-        'Daniele Grazinolli – UFRJ',
+        'Andreia Gomes da Cruz – UFRRJ',
         'Felipe da Silva Ferreira – EB/CEFET-RJ',
-        'Fernanda Lahtermaher Oliveira – EB/CAp UFRJ',
-        'Rosemary dos Santos Oliveira – FEBF/UERJ',
-        'Bosco Mesquita (design gráfico)'
+        'Pedro Pinheiro Teixeira – PUC-Rio',
+        'Priscila Monteiro Corrêa – FEBF/UERJ'
+
       ]
     },
     {
@@ -164,6 +164,15 @@ export class HomeComponent implements OnInit {
       ]
     },
     {
+      nome: 'Feira de Livros',
+      equipe: [
+        'Adriana Patricio Delgado – UFRJ (coord.)',
+        'Elana Cristiana Costa – EB/FME-Niterói',
+        'Rita de Cassia de Oliveira e Silva - UFRJ'
+
+      ]
+    },
+    {
       nome: 'Gestão financeira',
       equipe: [
         'Giseli Barreto da Cruz – UFRJ (coord.)',
@@ -173,33 +182,33 @@ export class HomeComponent implements OnInit {
       ]
     },
     {
-      nome: 'Hospedagem, transporte e alimentação',
+      nome: 'Hospedagem, transporte & alimentação',
       equipe: [
         'Talita Vidal – FEBF/UERJ (coord.)',
+        'Dinah Terra – UFF',
+        'Fernanda Lahtermaher Oliveira – EB/CApU-UFRJ',
         'Rafaela Vilela – EB/EEI-UFRJ'
       ]
     },
     {
-      nome: 'Inclusão e acessibilidade',
+      nome: 'Inclusão & acessibilidade',
       equipe: [
         'Bianca Della Libera – IBC (coord.)',
         'Yrlla Ribeiro de Oliveira Carneiro da Silva – INES (coord)',
         'Adriana do Carmo Corrêa Gonçalves – FEBF/UERJ',
         'Érika Souza Leme – UFF',
         'Flavia Faissal de Souza – FEBF/UERJ',
+        'Glauber de Souza Lemos - INES',
         'Helenice Maia – UNESA',
-        'Heloisa Carrero – FFP/UERJ',
-        'Luciana Pires Alves – FEBF/UERJ',
-        'Patricia Santos – FFP/UERJ',
-        'Rejane Maria de Almeida – UFRJ',
-        'Thania Nhary – FFP/UERJ'
+        'Karine Vieira da Rocha – INES'
       ]
     },
     {
-      nome: 'Local e infraestrutura',
+      nome: 'Local & infraestrutura',
       equipe: [
         'Claudia de Oliveira Fernandes – UNIRIO (coord.)',
         'Andrea Villela Mafra da Silva – ISERJ (coord.)',
+        'Alessandra do Nascimento dos Santos Moraes – EB/CAp-UFRJ',
         'Ana Teresa de Carvalho Corrêa de Oliveira – UFRJ',
         'Crizan Sasson Oliveira – EB/CAp-UERJ',
         'Luis Paulo Braga – IBC',
@@ -214,8 +223,6 @@ export class HomeComponent implements OnInit {
         'Alice Akemi Yamasaki – UFF',
         'Cristina Spolidoro Freund – EB/CPII',
         'Dinah Terra – UFF',
-        'Giselle Martins dos Santos Ferreira – PUC-Rio',
-        'Guilherme Augusto Rezende Lemos – UERJ'
       ]
     },
     {
@@ -226,10 +233,20 @@ export class HomeComponent implements OnInit {
         'Bonier Axer – EB/CAp-UERJ',
         'Daniela Frida Drelich Valentim – UERJ',
         'Isabel Martins – UFRJ',
-        'Jacqueline Moraes – FFP/UERJ',
         'Lea Tiriba – UNIRIO',
         'Ludmila Thomé de Andrade – UFRJ',
         'Luiza Alves de Oliveira – UFRRJ'
+      ]
+    },
+    {
+      nome: 'Publicações',
+      equipe: [
+        'Claudia de Oliveira Fernandes (UNIRIO)',
+        'Giseli Barreto da Cruz (UFRJ)',
+        'Helena Fontoura (FFP UERJ)',
+        'Luís Paulo Cruz Borges (EB)',
+        'Silvana Mesquita (PUC-Rio)',
+        'Vera Maria Ferrão Candau (PUC-Rio)',
       ]
     },
     {
@@ -241,10 +258,9 @@ export class HomeComponent implements OnInit {
         'Elana Cristiana Costa – EB/FME-Niterói',
         'Marcella da Silva Estevez Pacheco Guedes – FEBF/UERJ',
         'Marize Peixoto da Silva Figueiredo – FEBF/UERJ',
-        'Monica dos Santos Toledo – EB/COLUNI/UFF',
+        'Mônica dos Santos Toledo – EB/COLUNI/UFF',
         'Patricia Coelho da Costa – PUC-Rio',
         'Rejany dos Santos Dominick – UFF',
-        'Veronica Borges de Oliveira – UERJ'
       ]
     },
     {
@@ -253,39 +269,44 @@ export class HomeComponent implements OnInit {
         'Cecília Silvano Batalha – EB/FME-Niterói (coord.)',
         'Aline Crispin – EB/EEI-UFRJ',
         'Daniela de Oliveira Guimarães – UFRJ',
-        'Erika Souza Leme – UFF',
-        'Magda Piscolleta – PUC-Rio'
+        'Erika Souza Leme – UFF'
       ]
     },
     {
-      nome: 'Serviço de som, filmagem, imagem, transmissão e tecnologia',
+      nome: 'Imagem, Comunicação & Tecnologia',
       equipe: [
-        'Monica Vasconcellos – UFF (coord.)',
+        'Mônica Vasconcellos – UFF (coord.)',
+        'Edméa Oliveira Santos – UFRRJ (coord.)',
+        'Silvana Mesquita – PUC-Rio (coord.)',
+        'Bosco Mesquita (design gráfico)',
         'Edna Regina Aguiar – EB/COLUNI/UFF',
+        'Felipe da Silva Ferreira – EB/CEFET-RJ',
+        'Fernanda Lahtermaher Oliveira – EB/CAp-UFRJ',
         'Helen Pereira Ferreira – UFF',
         'Marcia Maria e Silva – UFF',
         'Priscila Andrade Rodrigues – UFRJ',
-        'Sonia Mendes – UNESA'
+        'Talita da Silva Campelo – EB/SME-Caxias'
+
       ]
     },
     {
-      nome: 'Sistema de inscrição e secretaria',
+      nome: 'Secretaria Executiva',
       equipe: [
         'Silvana Mesquita – PUC-Rio (coord.)',
         'Helena Amaral Fontoura – FFP/UERJ (coord.)',
         'Talita da Silva Campelo – EB/SME-Caxias',
-        'Débora Barreiros – UERJ',
-        'Rita de Cássia Prazeres Frangella – UERJ',
-        'Rita Vilanova Prata – UFRJ',
-        'Rosalva Drummond – EB/CAp-ISERJ'
+        'Alessandra do Nascimento dos Santos Moraes – EB/CAp-UFRJ (Apoio Técnico)',
+        'Cristina Lucia Lima Alves (Apoio Técnico)',
+        'Leticia Mesquita (Apoio Técnico)',
+        'Leticia Oliveira (Apoio Técnico)'
       ]
-    }
+    },
   ];
 
   eixos = [
     {
       titulo: 'Eixo 1',
-      tema: 'Didáticas entre diálogos, insurgências e políticas: tensões e perspectivas na relação com Formação docente',
+      tema: 'Didática(s) entre diálogos, insurgências e políticas: tensões e perspectivas na relação com <span class="red" id="red">Formação docente</span>',
       temaCurto: 'com Formação docente',
       descricao: `Esse eixo temático prioriza as políticas de formação docente e os desafios de sua implementação,
       permanência e consolidação; concepções de formação de professores; formação centrada na escola e espaços colaborativos de formação;
@@ -296,7 +317,7 @@ export class HomeComponent implements OnInit {
       coordenacao: [
         'Alexandra Garcia Ferreira Lima – FFP/UERJ',
         'Graça Regina Reis – CAp UFRJ',
-        'Monica Vasconcellos – UFF',
+        'Maria das Graças Chagas de Arruda Nascimento - UFRJ',
         'Naiara Miranda Rust – IBC',
         'Victor Giraldo – UFRJ'
       ],
@@ -304,7 +325,7 @@ export class HomeComponent implements OnInit {
     },
     {
       titulo: 'Eixo 2',
-      tema: 'Didáticas entre diálogos, insurgências e políticas: tensões e perspectivas na relação com Currículo e Avaliação',
+      tema: 'Didática(s) entre diálogos, insurgências e políticas: tensões e perspectivas na relação com <span class="red" id="red">Currículo e Avaliação</span>',
       temaCurto: 'com Currículo e Avaliação',
       descricao: `Esse eixo temático prioriza os currículos e as avaliações nos contextos históricos e contemporâneos;
       políticas curriculares, as escolas e as salas de aula; culturas, conhecimentos e currículos; aprendizagens, currículos e avaliações;
@@ -319,8 +340,8 @@ export class HomeComponent implements OnInit {
     },
     {
       titulo: 'Eixo 3',
-      tema: `Didáticas entre diálogos, insurgências e políticas: tensões e perspectivas na relação em Direitos Humanos,
-       Interculturalidade e Religiões`,
+      tema: `Didática(s) entre diálogos, insurgências e políticas: tensões e perspectivas na relação em <span class="red" id="red">Direitos Humanos,
+       Interculturalidade e Religiões</span>`,
       temaCurto: `em Direitos Humanos, Interculturalidade e Religiões`,
       descricao: `Esse eixo temático prioriza as diferenças culturais que desafiam o cotidiano escolar;
       relações entre diferenças, direitos humanos e processos de ensino-aprendizagem; questões religiosas,
@@ -329,15 +350,15 @@ export class HomeComponent implements OnInit {
       seus saberes e práticas; metodologias e práticas curriculares em Direitos Humanos, Interculturalidade e Religiões.`,
       coordenacao: [
         'Ana Ivenicki – UFRJ',
-        'Andrea Rosana Fetzener – UNIRIO',
+        'Andréa Rosana Fetzner – UNIRIO',
         'Vera Maria Ferrão Candau – PUC-Rio'
       ],
       pareceristas: []
     },
     {
       titulo: 'Eixo 4',
-      tema: `Didáticas entre diálogos, insurgências e políticas: tensões e perspectivas na relação entre Novas epistemologias,
-       Diferença, Biodiversidade, Democracia e Inclusão`,
+      tema: `Didática(s) entre diálogos, insurgências e políticas: tensões e perspectivas na relação entre <span class="red" id="red">Novas epistemologias,
+       Diferença, Biodiversidade, Democracia e Inclusão</span>`,
       temaCurto: `entre Novas epistemologias, Diferença, Biodiversidade, Democracia e Inclusão`,
       descricao: `Esse eixo temático prioriza produções que, de uma perspectiva insurgente,
       lançam mão de novas epistemologias para pensar as tensões e desafios educacionais no contexto atual;
@@ -354,8 +375,8 @@ export class HomeComponent implements OnInit {
     },
     {
       titulo: 'Eixo 5',
-      tema: `Didáticas entre diálogos, insurgências e políticas: tensões e perspectivas na relação entre Educação,
-       Comunicação e Tecnologia`,
+      tema: `Didática(s) entre diálogos, insurgências e políticas: tensões e perspectivas na relação entre <span class="red" id="red">Educação,
+       Comunicação e Tecnologia</span>`,
       temaCurto: `entre Educação, Comunicação e Tecnologia`,
       descricao: `Esse eixo temático prioriza o debate sobre educar com as mídias, para as mídias e pelas mídias;
       imagens, literacias e linguagens multimodais nas práticas pedagógicas e na formação de professores;
@@ -373,8 +394,8 @@ export class HomeComponent implements OnInit {
     },
     {
       titulo: 'Eixo 6',
-      tema: `Didáticas entre diálogos, insurgências e políticas: tensões e perspectivas na relação entre Infâncias,
-      Juventudes e Vida Adulta`,
+      tema: `Didática(s) entre diálogos, insurgências e políticas: tensões e perspectivas na relação entre <span class="red" id="red">Infâncias,
+      Juventudes e Vida Adulta</span>`,
       temaCurto: `entre Infâncias, Juventudes e Vida Adulta`,
       descricao: `Esse eixo temático prioriza as abordagens teóricas, metodológicas e epistemológicas sobre infâncias,
       juventudes e vida adulta e sua relação com a educação; políticas públicas de educação para bebês, crianças, jovens,
@@ -391,80 +412,14 @@ export class HomeComponent implements OnInit {
     }
   ];
 
-  programacoes = [
-    {
-      titulo: 'Visão Geral',
-      horarios: [
-        [
-          '08:30 - 10:00', '', 'Minicurso & Roda de Conversa', 'Minicurso & Roda de Conversa', 'Minicurso & Roda de Conversa'
-        ],
-        [
-          '10:15 - 12:30', '', 'Simpósios', 'Simpósios', 'Simpósios'
-        ],
-        [
-          '12:30 - 13:30', '', 'Intervalo', 'Intervalo', 'Intervalo'
-        ],
-        [
-          '13:30 - 15:30', 'Credenciamento <br/> Apresentações culturais', 'Painéis & Pôsteres', 'Painéis & Pôsteres', 'Painéis & Pôsteres'
-        ],
-        [
-          '16:00 - 18:00', 'Credenciamento <br/> Apresentações Culturais <br/> Sessão Solene de Abertura', 'Painéis & Pôsteres', 'Painéis & Pôsteres / Reuniões de Entidades e de Redes', 'Painéis & Pôsteres / Reuniões de Entidades e de Redes'
-        ],
-        [
-          '18:00 - 20:00', 'Mesa de Abertura', 'Sessões Especiais', 'Sessões Especiais', 'Sessão de Encerramento Assembleia ENDIPE'
-        ],
-        [
-          '20:00 - 22:00', 'Apresentação cultural', 'Lançamento de livros e de Redes', 'Lançamento de livros e de Redes', ''
-        ],
-      ]
-    },
-    {
-      titulo: 'Abertura',
-      horarios: []
-    },
-    {
-      titulo: 'Atividades Culturais',
-      horarios: []
-    },
-    {
-      titulo: 'Minicursos',
-      horarios: []
-    },
-    {
-      titulo: 'Rodas de Conversa',
-      horarios: []
-    },
-    {
-      titulo: 'Simpósios',
-      horarios: []
-    },
-    {
-      titulo: 'Painéis',
-      horarios: []
-    },
-    {
-      titulo: 'Pôsteres',
-      horarios: []
-    },
-    {
-      titulo: 'Sessões Especiais',
-      horarios: []
-    },
-    {
-      titulo: 'Lançamentos de Livros',
-      horarios: []
-    },
-    {
-      titulo: 'Reuniões de Entidades e de Redes',
-      horarios: []
-    },
-  ]
+  programacoes = PROGRAMACOES;
 
   constructor(
     private router: Router,
     private dialog: MatDialog,
     private download: DownloadFileService,
     private noticiasService: NoticiasService,
+    private anaisService: AnaisService,
     private toastr: ToastrService,
 
   ) {
@@ -485,6 +440,11 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
 
+    const dialogRef = this.dialog.open(ModalEndipeVirtualComponent, {
+      data: {},
+      height: '550vh'
+    });
+
     this.listarNoticias();
 
   }
@@ -494,9 +454,28 @@ export class HomeComponent implements OnInit {
     this.noticiasService.listar()
       .subscribe((res: any) => {
         this.noticias = res;
+
+        this.noticias.forEach(element => {
+          element.description = this.urlify(element.description);
+        });
+
       }, err => {
         this.toastr.error('Ocorreu um erro ao listar noticias', 'Atenção: ');
       });
+
+    this.anaisService.listar()
+      .subscribe((res: any) => {
+        this.anais = res;
+      }, err => {
+        this.toastr.error('Ocorreu um erro ao listar anais', 'Atenção: ');
+      });
+  }
+
+  urlify(text) {
+    var urlRegex = /(https?:\/\/[^\s]+)/g;
+    return text.replace(urlRegex, function (url) {
+      return '<a target="_blank" href="' + url + '">' + url + '</a>';
+    })
   }
 
   downloadTemplate(nameFile) {
@@ -535,10 +514,59 @@ export class HomeComponent implements OnInit {
     });
   }
 
+
   public openDialogProgramacao(programacao) {
-    const dialogRef = this.dialog.open(ModalProgramacaoComponent, {
-      data: { item: programacao }
-    });
+    switch (programacao.titulo) {
+      case 'Sessões especiais':
+        this.dialog.open(ModalSessoesEspeciaisComponent, {
+          data: { item: programacao }
+        });
+        break;
+
+      case 'Simpósios':
+        this.dialog.open(ModalSimposioComponent, {
+          data: { item: programacao }
+        });
+        break;
+
+      case 'Conferencistas':
+        this.dialog.open(ModalConferencistasComponent);
+        break;
+
+      case 'Encerramento':
+        this.dialog.open(ModalEncerramentoComponent, {
+          data: { item: programacao }
+        });
+        break;
+
+      case 'Abertura':
+        this.dialog.open(ModalAberturaComponent, {
+          data: { item: programacao }
+        });
+        break;
+
+      default:
+        this.dialog.open(ModalProgramacaoComponent, {
+          data: { item: programacao }
+        });
+        break;
+    }
+  }
+
+  public openDialogHospedagem() {
+    const dialogRef = this.dialog.open(ModalHospedagemComponent);
+  }
+
+  public openDialogAlimentacao() {
+    const dialogRef = this.dialog.open(ModalAlimentacaoComponent);
+  }
+
+  public openDialogTransporte() {
+    const dialogRef = this.dialog.open(ModalTransporteComponent);
+  }
+
+  public openDialogTurismo() {
+    const dialogRef = this.dialog.open(ModalTurismoComponent);
   }
 
   public openDialogNormas() {
@@ -579,6 +607,13 @@ export class HomeComponent implements OnInit {
   public openDialogApoiadores(apoiadores, imagens) {
     const dialogRef = this.dialog.open(ModalApoiadoresComponent, {
       data: { item: apoiadores, imagensApoiadores: imagens },
+      height: '550vh'
+    });
+  }
+
+  public openDialogEndipeVirtual() {
+    const dialogRef = this.dialog.open(ModalEndipeVirtualComponent, {
+      data: {},
       height: '550vh'
     });
   }

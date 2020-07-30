@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, style, state, transition, animate } from '@angular/animations';
 import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -31,15 +32,28 @@ export class AdminComponent implements OnInit {
   private adminRoutes = [
     { name: 'INSCRITOS', path: '/admin/inscritos' },
     { name: 'NOTICÍAS', path: '/admin/noticias' },
-    { name: 'COORDENADORES', path: '/admin/coordenadores' },
+    { name: 'ANAIS', path: '/admin/anais' },
+    { name: 'CONFERENCISTAS', path: '/admin/conferencistas' },
+    { name: 'PARECERISTAS/COORDENADORES', path: '/admin/coordenadores' },
+    { name: 'TRABALHOS/PARECERISTAS', path: '/admin/vincular-trabalho' },
+    { name: 'PROGRAMAÇÃO', path: '/admin/programacao' },
+    { name: 'EMAIL', path: '/admin/email' }
+
   ];
 
   private nonAdminRoutes = [
-    { name: 'TRABALHOS', path: '/admin/trabalhos' },
+    { name: 'PARECERISTA', path: '/admin/review-list' }
   ];
 
+  private coordinatorRoutes = [
+    { name: 'TRABALHOS/PARECERISTAS', path: '/admin/vincular-trabalho' }
+  ];
+
+
+
   constructor(
-    private auth: AuthService
+    private auth: AuthService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -49,10 +63,23 @@ export class AdminComponent implements OnInit {
   private retrieveUser() {
     this.user = this.auth.getDecodedAccessToken(this.auth.getToken());
 
-    if (this.user && this.user.icAdmin) {
+    if (this.user && this.user.icAdmin && this.user.reviewer) {
+      this.menu = this.adminRoutes.concat(this.nonAdminRoutes);
+    } else if (this.user.icAdmin) {
       this.menu = this.adminRoutes;
     } else {
-      this.menu = [];
+      this.menu = this.nonAdminRoutes;
     }
+    if (this.user.reviewer && this.user.reviewer.icCoordinator) {
+      this.menu = this.menu.concat(this.coordinatorRoutes);
+    }
+
+    if (this.menu.length == 1) {
+      this.router.navigate(['/admin/review-list']);
+    }
+
   }
+
+
+
 }

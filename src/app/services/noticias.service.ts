@@ -23,4 +23,8 @@ export class NoticiasService {
     return this.http.delete(`${this.baseUrl}/news/news/${news._id}`);
   }
 
+  atualizar(news) {
+    return this.http.put(`${this.baseUrl}/news/news/`, news);
+  }
+
 }

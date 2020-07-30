@@ -1,0 +1,40 @@
+<mat-tab-group (selectedTabChange)="currentTab($event)">
+  <mat-tab *ngFor="let workModality of programacoes" [label]="workModality.name">
+    <div class="container-schedule">
+
+      <div class="btn-group" role="group" aria-label="Exemplo básico">
+        <button type="button" (click)="selectDay(day)" *ngFor="let day of days" class="btn btn-primary">{{day}}</button>
+      </div>
+
+
+      <div class="row">
+        <ng-container *ngIf="(schedules$ | async)?.length > 0">
+          <div class="col-12 col-sm-12 col-md-12 mb-3" *ngFor="let schedule of (schedules$ | async)">
+            <ng-container *ngIf="showGenericCard()">
+              <generic-card [schedule]="schedule" [admin]="true" [type]="typeId" (update)="updateList()"
+                (edit)="editSchedule($event)">
+              </generic-card>
+            </ng-container>
+            <ng-container *ngIf="showSimposioCard()">
+              <simposio-card [schedule]="schedule" [admin]="true" [type]="typeId" (update)="updateList()"
+                (edit)="editSchedule($event)"></simposio-card>
+            </ng-container>
+            <ng-container *ngIf="showWorkCard()">
+              <work-schedule-card [schedule]="schedule" [user]="user" [admin]="true" [type]="typeId"
+                (update)="updateList()" [user]="user" (edit)="editSchedule($event)"></work-schedule-card>
+            </ng-container>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="(schedules$ | async)?.length < 1">
+          <div class="not-schedule">
+            Não há programação para esse dia
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </mat-tab>
+</mat-tab-group>
+
+<div class="row justify-content-end">
+  <button class="btn-get-started" (click)="addSchedule()">Cadastrar</button>
+</div>

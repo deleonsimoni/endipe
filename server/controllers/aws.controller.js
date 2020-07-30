@@ -3,7 +3,8 @@ const config = require('../config/config');
 
 module.exports = {
     uploadFile,
-    downloadFile
+    downloadFile,
+    sendEmailAWS,
 }
 
 function uploadFile(key, file) {
@@ -51,4 +52,61 @@ async function downloadFile(key) {
       resolve({sucess: true, data: resp});
     })
   })
+};
+
+async function sendEmailAWS(cc, to, subject, message, attachment) {
+
+  console.log(config.AWS_SES_ID, config.AWS_SECRET_ACCESS_KEY)
+
+  const configAWS= {
+    apiVersion: '2010-12-01',
+    accessKeyId: config.AWS_SES_ID,
+    secretAccessKey: config.AWS_SES_KEY,
+    region: 'sa-east-1'
+  }
+  
+// Create sendEmail params 
+var params = {
+  Destination: { /* required */
+    
+    BccAddresses: [
+      'infinitybit.ti@gmail.com',
+      'jonathan.schenker@hotmail.com'
+      /* more items */
+    ],
+    ToAddresses: [
+      'deleon.simoni@gmail.com' 
+    ],
+  },
+  Message: { /* required */
+    Body: { /* required */
+      Html: {
+       Charset: "UTF-8",
+       Data: message
+      },
+     },
+     Subject: {
+      Charset: 'UTF-8',
+      Data: 'Test email'
+     }
+    },
+    
+  Source: 'deleon.simoni@gmail.com', /* required */
+  ReplyToAddresses: [
+     'jonathan.schenker@hotmail.com',
+    /* more items */
+  ],
+};
+
+// Create the promise and SES service object
+var sendPromise = new AWS.SES(configAWS).sendEmail(params).promise();
+
+// Handle promise's fulfilled/rejected states
+sendPromise.then(
+  function(data) {
+    console.log(data.MessageId);
+  }).catch(
+    function(err) {
+    console.error(err, err.stack);
+  });
 };
