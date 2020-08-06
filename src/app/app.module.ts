@@ -57,7 +57,6 @@ import { GlobalComponentsModule } from './components/global-components.module';
 import { ProgramacaoModule } from './programacao/programacao.module';
 import { HomeVirtualComponent } from './endipe-virtual/home-virtual/home-virtual.component';
 import { MeuEndipeComponent } from './meu-endipe/meu-endipe.component';
-import { ModalEndipeVirtualComponent } from './modal-endipe-virtual/modal-endipe-virtual.component';
 
 @NgModule({
   declarations: [
@@ -96,7 +95,6 @@ import { ModalEndipeVirtualComponent } from './modal-endipe-virtual/modal-endipe
     ModalAberturaComponent,
     HomeVirtualComponent,
     MeuEndipeComponent,
-    ModalEndipeVirtualComponent,
 
   ],
   imports: [
@@ -143,7 +141,6 @@ import { ModalEndipeVirtualComponent } from './modal-endipe-virtual/modal-endipe
     ModalEncerramentoComponent,
     ModalAberturaComponent,
     RegisterComponent,
-    ModalEndipeVirtualComponent,
 
   ],
   providers: [
