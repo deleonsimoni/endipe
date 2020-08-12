@@ -26,17 +26,13 @@ const ScheduleSchema = new mongoose.Schema({
     type: String,
   },
   virtual: {
-    monitors: [{
-      email: String,
-      icAnfitriao: {
-        type: Boolean,
-        default: false
-      }
-    }],
-    linkLive: {
-      type: String
+    monitor: {
+      email: String
     },
-    linkPpt: {
+    mediator: {
+      email: String
+    },
+    linkZoom: {
       type: String
     },
     linkAudio: {

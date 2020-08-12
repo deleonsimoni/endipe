@@ -17,7 +17,7 @@ export class WorkScheduleFormComponent {
   public form: FormGroup;
   public axisCollection = AXIS;
   public works = [];
-  public days = ["29/10", "30/10", "31/10", "01/11"];
+  public days = ["29/10", "30/10", "31/10", "01/11", "02/11", "03/11", "04/11", "05/11", "06/11", "07/11", "08/11", "09/11", "10/11", "11/11", "12/11"];
   public selectedWork;
   public modelConfig = { standalone: true };
 
@@ -30,7 +30,8 @@ export class WorkScheduleFormComponent {
       place: [null],
       authors: [null],
       address: [null],
-      pdf: [null],
+      virtual: this.builder.group({ linkZoom: [null], monitor: [null], mediator: [null] }),
+      pdf: [null],  
       workTitle: [null],
       qtdSubscribers: [null],
       qtdDias: [null],
@@ -66,7 +67,7 @@ export class WorkScheduleFormComponent {
   }
 
   private listAllWorks(axis, modality) {
-    if (this.type != "3" && this.type != "5") {
+    if (this.type != "3") {
       this.adminService.retrieveAllWorksValids(axis, modality).subscribe((works) => {
         if (works.temErro) {
           this.toastr.error("Erro", works);
@@ -82,7 +83,7 @@ export class WorkScheduleFormComponent {
   }
 
   public diffTypeP() {
-    return this.type != "3" && this.type != "5";
+    return this.type != "3";
   }
 
   public submitSchedule() {
