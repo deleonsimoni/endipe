@@ -11,11 +11,9 @@
             <h1 style="color: #0C2E8A;">Aguarde</h1>
             <hr>
             <p style="font-size:30px">Estamos preparando um formato virtual do congresso</p>
-            <!--<p style="font-size:30px">{{days + 'd ' + hours + 'h ' + minutes + 'm ' + seconds + 's'}}</p>-->
+            <p *ngIf="days" style="font-size:30px">{{days + ' dias ' + hours + ' horas ' + minutes + ' minutos ' + seconds + ' segundos'}}</p>
         </div>
-        <!-- <div class="bottomleft">
-            <p>{{days}}</p>
-        </div>-->
+       
 
         <!--
         <div id="faq" class="section-header">
@@ -54,7 +52,40 @@
 <!-- #coordenação -->
 
 
+<!--
 
+<section id="forum" class="wow fadeInUp">
+
+    <div>
+        <ul>
+          <li *ngFor="let comment of comments">
+              
+            <header>
+              <h1 [ngClass]="{ 'author': isAuthor(comment.author.email) }">
+                  <a *ngIf="comment.author.website.length == 0">
+                    {{ comment.author.name }}
+                  </a>
+                  <a *ngIf="comment.author.website.length > 0" href="{{ comment.author.website }}">{{ comment.author.name }}</a>
+             </h1>
+               
+              <div>
+                <button (click)="love(comment.id)" [ngClass]="{ 'loved': comment.loved }"></button>
+                <button (click)="reply(comment.author.name)"></button>
+              </div>
+            </header>
+            <p [innerHTML]="parseContent(comment.content)"></p>
+
+          </li>
+        </ul>
+        <form name="form" (ngSubmit)="addNewComment()" novalidate>
+          <textarea placeholder="Comment" [ngModelOptions]="{standalone: true}" [(ngModel)]="newComment.content" required></textarea>
+          <button type="submit">Add comment</button>
+        </form>
+      </div>
+
+
+</section>
+-->
 
 
 <!--<section id="intro">

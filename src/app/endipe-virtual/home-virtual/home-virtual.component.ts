@@ -130,7 +130,7 @@ export class HomeVirtualComponent implements OnInit {
   constructor(private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
-    this.countDownDate = new Date("Jan 5, 2021 15:37:25").getTime();
+    this.countDownDate = new Date("Oct 29, 2020 00:00:00").getTime();
 
     setInterval(() => {
 
