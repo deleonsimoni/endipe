@@ -21,9 +21,7 @@ async function insertSchedule(schedule) {
 }
 
 async function updateSchedule(id, schedule) {
-  return await AtividadeCultural.findOneAndUpdate(id, schedule, {
-    upsert: true
-  });
+  return await AtividadeCultural.findOneAndUpdate({ _id: id }, schedule);
 }
 
 async function deleteSchedule(id) {
