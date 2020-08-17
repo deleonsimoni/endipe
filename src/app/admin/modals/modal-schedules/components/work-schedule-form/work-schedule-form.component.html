@@ -103,10 +103,13 @@
 
             <div class="form-group col-md-12">
               <label class="label">Pôster</label>
-              <select class="form-control" [ngModelOptions]="{ standalone: true }" [(ngModel)]="selectedWork"
-                (ngModelChange)="setWorkFormPoster($event, i)">
-                <option disabled="true" [selected]="true">Selecione o trabalho</option>
-                <option *ngFor="let work of works" [ngValue]="work">
+              <select class="form-control" [ngModelOptions]="{ standalone: true }" [(ngModel)]="selectedWorkPoster[i]"
+              (ngModelChange)="setWorkFormPoster($event, i)">
+                <option 
+                  *ngFor="let work of works" 
+                  [ngValue]="work" 
+                  [selected]="work._id == selectedWorkPoster[i].work"
+                  type="combobox">
                   {{ work.title }}
                 </option>
               </select>
@@ -126,7 +129,7 @@
         </div>
       </div>
     </div>
-    <button type="button" class="add-coordinator" (click)="addWorkPoster()">
+    <button *ngIf="type == '3'" type="button" class="add-coordinator" (click)="addWorkPoster()">
       <i class="fa fa-plus"></i>
       Mais Trabalhos
     </button>

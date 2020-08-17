@@ -19,6 +19,8 @@ export class WorkScheduleFormComponent {
   public works = [];
   public days = ["29/10", "30/10", "31/10", "01/11", "02/11", "03/11", "04/11", "05/11", "06/11", "07/11", "08/11", "09/11", "10/11", "11/11", "12/11"];
   public selectedWork;
+  public selectedWorkPoster = [];
+
   public modelConfig = { standalone: true };
 
   constructor(private builder: FormBuilder, private toastr: ToastrService, private adminService: AdminService) {
@@ -61,10 +63,27 @@ export class WorkScheduleFormComponent {
       if (data.hasOwnProperty(key)) {
         if (key == "axis") {
           this.form.get(key).patchValue(Number(data[key]));
+        }else if (key == "dates") {
+          this.fillArray(data.dates, key);
+        }else if (key == "worksPoster") {
+          this.selectedWorkPoster = data.worksPoster;
+          this.fillArray(data.worksPoster, key);
+        } else {
+          this.form.get(key).patchValue(data[key]);
         }
-        this.form.get(key).patchValue(data[key]);
       }
     }
+  }
+
+  private fillArray(data, keyForm) {
+    const form = this.form.get(keyForm) as FormArray;
+    data.forEach((el, key) => {
+      if (key == 0) {
+        form.controls[0].patchValue(el);
+      } else {
+          form.push(this.builder.group(el));
+      }
+    });
   }
 
   private listAllWorks(axis, modality) {
