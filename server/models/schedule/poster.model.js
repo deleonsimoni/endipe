@@ -44,6 +44,9 @@ const ScheduleSchema = new mongoose.Schema({
     linkZoom: {
       type: String
     },
+    ppt: {
+      type: String
+    },
     linkAudio: {
       type: String
     },

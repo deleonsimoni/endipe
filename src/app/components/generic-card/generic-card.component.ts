@@ -36,14 +36,14 @@ export class GenericCardComponent {
 
   get title() {
     switch (this.type) {
-      case '5':
-        return 'Títulos e autores';
+      // case '5':
+      //   return 'Títulos e autores';
 
       case '7':
         return 'Artista(s)';
 
-      case '11':
-        return 'Associação/Rede/Fórum e sigla'
+      //case '11':
+      //  return 'Associação/Rede/Fórum e sigla'
 
       default:
         return 'Título(s)';

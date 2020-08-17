@@ -59,7 +59,7 @@
       <input type="text" name="qtdSubscribers" class="form-control" id="qtdSubscribers"
         formControlName="qtdSubscribers" />
     </div>
-    <div class="form-group col-md-12">
+    <div class="form-group col-md-12" *ngIf="type != '5'">
       <label id="example-radio-group-label">Quantidade de dias</label>
       <br />
       <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
@@ -106,13 +106,27 @@
     </div>
   </div>
 
+  <div class="form-row" formGroupName="virtual" *ngIf="type == '3'">
+    <div class="form-group col-md-12">
+      <label for="mediator" class="label">E-mail do Mediador</label>
+      <input type="text" class="form-control" formControlName="mediator" name="mediator" />
+    </div>
+  </div>
+
+  <div class="form-row" formGroupName="virtual" *ngIf="type == '3'">
+    <div class="form-group col-md-12">
+      <label for="ppt" class="label">Link da apresentação</label>
+      <input type="text" class="form-control" formControlName="ppt" name="ppt" />
+    </div>
+  </div>
+
   <!--<div class="form-row" *ngIf="type == '3' || type == '5'">-->
-  <div class="form-row" *ngIf="type == '3'">
+  <!--<div class="form-row" *ngIf="type == '3'">
     <div class=" form-group col-md-12">
       <label for="pdf" class="label">Url do arquivo</label>
       <input type="text" name="pdf" class="form-control" id="place" formControlName="pdf" />
     </div>
-  </div>
+  </div>-->
   <div class="form-row">
     <div class="col-md-12">
       <button class="btn-get-started" type="button" (click)="submitSchedule()">SUBMETER PROGRAMAÇÃO</button>

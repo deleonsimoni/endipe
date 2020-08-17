@@ -43,4 +43,11 @@ export class ScheduleService {
     return this.http.post(`${this.baseUrl}/schedule/unsubscribeRodadeConversa/${id}`, {});
   }
 
+  public enrollSchedulePainel(id) {
+    return this.http.post(`${this.baseUrl}/schedule/subscribePainel/${id}`, {});
+  }
+
+  public cancelEnrollSchedulePainel(id) {
+    return this.http.post(`${this.baseUrl}/schedule/unsubscribePainel/${id}`, {});
+  }
 }

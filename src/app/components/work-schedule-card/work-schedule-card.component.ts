@@ -49,7 +49,7 @@ export class WorkScheduleCardComponent {
 
     public signUp(type) {
         this.carregando = true;
-        if (type == 2) {
+        if (type == 4) {
             this.scheduleService.enrollSchedule(this.schedule._id)
                 .subscribe(res => {
                     this.schedule = res;
@@ -59,7 +59,18 @@ export class WorkScheduleCardComponent {
                     this.toastr.success('Servidor momentaneamente inoperante', 'Erro');
                     this.carregando = false;
                 });
-        } else {
+        } else if (type == 5) {
+            this.scheduleService.enrollSchedulePainel(this.schedule._id)
+                .subscribe(res => {
+                    this.schedule = res;
+                    this.toastr.success('Inscrição realizada com sucesso', 'Sucesso');
+                    this.carregando = false;
+                }, err => {
+                    this.toastr.success('Servidor momentaneamente inoperante', 'Erro');
+                    this.carregando = false;
+                });
+        }
+        else {
             this.scheduleService.enrollScheduleRodaDeConversa(this.schedule._id)
                 .subscribe(res => {
                     this.schedule = res;
@@ -74,7 +85,7 @@ export class WorkScheduleCardComponent {
 
     public cancelSignUp(type) {
         this.carregando = true;
-        if (type == 2) {
+        if (type == 4) {
             this.scheduleService.cancelEnrollSchedule(this.schedule._id)
                 .subscribe(res => {
                     this.schedule = res;
@@ -84,6 +95,18 @@ export class WorkScheduleCardComponent {
                     this.toastr.success('Servidor momentaneamente inoperante', 'Erro');
                     this.carregando = false;
                 });
+
+        } else if (type == 5) {
+            this.scheduleService.cancelEnrollSchedulePainel(this.schedule._id)
+                .subscribe(res => {
+                    this.schedule = res;
+                    this.toastr.success('Cancelamento de inscrição realizada com sucesso', 'Sucesso');
+                    this.carregando = false;
+                }, err => {
+                    this.toastr.success('Servidor momentaneamente inoperante', 'Erro');
+                    this.carregando = false;
+                });
+
         } else {
             this.scheduleService.cancelEnrollScheduleRodaDeConversa(this.schedule._id)
                 .subscribe(res => {
