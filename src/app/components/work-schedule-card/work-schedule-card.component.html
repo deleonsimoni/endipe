@@ -2,9 +2,12 @@
   <div class="card">
     <div class="row">
       <div class="col-6">
-        <div class="group">
-          <p class="label">Horário</p>
-          <p class="hour">{{ schedule.startTime }} - {{ schedule.endTime }}</p>
+        <span class="title" style="color: white;">Dia(s)</span>
+        <div class="group" *ngFor="let item of schedule.dates">
+          <p class="title">{{ item.date }} </p>
+          <p class="title not-dash" style="margin: 0px 0px 4px 24px !important;">{{ item.startTime }} - {{ item.endTime }} </p>
+          <p class="title not-dash" style="margin: 0px 0px 4px 24px !important;">Link do Zoom: {{  item.linkZoom  }} </p>
+
         </div>
       </div>
       <div class="col-6">
@@ -33,6 +36,7 @@
               <a class="dropdown-item pointer" (click)="removeSchedule(schedule._id)">Excluir</a>
             </div>
           </div>
+
           <div *ngIf="!admin">
             <ng-container *ngIf="
                 !isSubscribe() &&
@@ -61,14 +65,34 @@
         </div>
       </div>
     </div>
+    <br/>
     <div class="row">
-      <div class="col-12">
-        <div class="group">
+      <div class="col-12" >
+        <div class="group" *ngIf="type != '3'">
           <p class="label">Título</p>
           <p class="title">
             {{ schedule.workTitle }}
           </p>
         </div>
+
+
+        <!-- EXIBICAO WORK POSTER-->
+
+        <div class="group" *ngIf="type == '3'">
+          <p class="label">Pôsteres</p>
+          <div *ngFor="let work of schedule.worksPoster">
+            <p class="title">
+              {{ work.workTitle }}
+            </p>
+            <p class="title not-dash" style="margin: 0px 0px 4px 24px !important;">
+              Link da apresentação: {{ work.linkPPT }}
+            </p>
+          </div>
+        </div>
+
+        <!-- FIM WORK POSTER-->
+
+
         <div class="group">
           <p class="label">Eixo</p>
           <p class="title">
@@ -84,13 +108,13 @@
             </p> 
           </div>
         </div> -->
-        <div class="group">
+        <div class="group" *ngIf="type != '3'">
           <p class="label">Resumo da proposta</p>
           <p class="title not-dash">
             {{ schedule.resumePropose }}
           </p>
         </div>
-        <div class="group">
+        <div class="group" *ngIf="type != '3'">
           <p class="label">Autores</p>
           <p class="title not-dash">
             {{ schedule.authors }}
@@ -102,30 +126,19 @@
             {{ schedule.qtdSubscribers - (schedule.subscribers ? schedule.subscribers.length : 0) }}
           </p>
         </div>
-        <div class="group" *ngIf="type != '3' && type != '5'">
-          <p class="label">Duração</p>
-          <p class="hour">{{ schedule.qtdDias }} Dia(s)</p>
-        </div>
         <!--<div class="group" *ngIf="type != '3'">
           <p class="label">Local</p>
           <p class="hour">{{ schedule.place }}</p>
         </div>-->
         <div class="group">
-          <p class="label">Link do Zoom</p>
-          <p class="hour">{{ schedule.virtual.linkZoom }}</p>
-        </div>
-        <div class="group">
           <p class="label">E-mail do monitor</p>
-          <p class="hour">{{ schedule.virtual.monitor }}</p>
+          <p class="hour">{{ schedule.monitor }}</p>
         </div>
         <div class="group" *ngIf="type == '3'">
           <p class="label">E-mail do mediador</p>
-          <p class="hour">{{ schedule.virtual.mediator }}</p>
+          <p class="hour">{{ schedule.mediator }}</p>
         </div>
-        <div class="group" *ngIf="type == '3'">
-          <p class="label">Link da apresentação</p>
-          <p class="hour">{{ schedule.virtual.ppt }}</p>
-        </div>
+
         <!-- <div class="group" *ngIf="type == '4' || type == '9'">
           <p class="label">Endereço</p>
           <p class="hour">{{ schedule.address }}</p>

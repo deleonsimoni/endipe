@@ -13,24 +13,24 @@ const ScheduleSchema = new mongoose.Schema({
   workTitle: {
     type: String,
   },
-  startTime: {
-    type: String,
-  },
-  endTime: {
-    type: String,
-  },
+
   place: {
     type: String,
   },
   address: {
     type: String,
   },
-  virtual: {
-    monitor: {
-      email: String
+
+  dates: [{
+
+    startTime: {
+      type: String,
     },
-    mediator: {
-      email: String
+    endTime: {
+      type: String,
+    },
+    date: {
+      type: String
     },
     linkZoom: {
       type: String
@@ -41,10 +41,13 @@ const ScheduleSchema = new mongoose.Schema({
     linkLibras: {
       type: String
     }
-  },
-  date: {
+
+  }],
+
+  monitor: {
     type: String
   },
+
   axis: {
     type: String
   },

@@ -305,8 +305,7 @@ async function getWorksValids(req, res) {
   if (user.icAdmin) {
     const works = await adminCtrl.getWorksValids(req.params.id, req.params.modality);
     res.json(works);
-  }
-  if (user.reviewer && user.reviewer.icCoordinator) {
+  }else if (user.reviewer && user.reviewer.icCoordinator) {
     const works = await adminCtrl.getWorksCoordinator(req.params.id);
     res.json(works);
   } else {

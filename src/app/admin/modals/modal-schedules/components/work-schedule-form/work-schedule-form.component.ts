@@ -1,5 +1,5 @@
 import { Component, Input, SimpleChanges, EventEmitter, Output } from "@angular/core";
-import { FormGroup, FormBuilder, FormControl } from "@angular/forms";
+import { FormGroup, FormBuilder, FormControl, FormArray } from "@angular/forms";
 import { AXIS } from "src/app/declarations";
 import { AdminService } from "src/app/admin/admin.service";
 import { ToastrService } from "ngx-toastr";
@@ -22,21 +22,22 @@ export class WorkScheduleFormComponent {
   public modelConfig = { standalone: true };
 
   constructor(private builder: FormBuilder, private toastr: ToastrService, private adminService: AdminService) {
+    
     this.form = this.builder.group({
       work: [null],
       axis: [null],
-      startTime: [null],
-      endTime: [null],
       place: [null],
       authors: [null],
       address: [null],
+      monitor: [null],
+      mediator: [null],
+      worksPoster: this.builder.array([this.builder.group({ work: [null], workTitle: [null], linkPPT: [null] })]),
+      dates: this.builder.array([this.builder.group({ startTime: [null], endTime: [null], date: [null], linkZoom: [null] })]),
       virtual: this.builder.group({ linkZoom: [null], monitor: [null], mediator: [null], ppt: [null] }),
-      pdf: [null],
       workTitle: [null],
       qtdSubscribers: [null],
       qtdDias: [null],
       resumePropose: [null],
-      date: [null],
     });
 
     this.form.get("axis").valueChanges.subscribe((val) => {
@@ -67,7 +68,6 @@ export class WorkScheduleFormComponent {
   }
 
   private listAllWorks(axis, modality) {
-    if (this.type != "3") {
       this.adminService.retrieveAllWorksValids(axis, modality).subscribe((works) => {
         if (works.temErro) {
           this.toastr.error("Erro", works);
@@ -75,7 +75,40 @@ export class WorkScheduleFormComponent {
           this.works = works;
         }
       });
-    }
+  }
+
+  get dates() {
+    return this.form.get("dates");
+  }
+
+  public addDate() {
+    const dataCtrel = this.form.get("dates") as FormArray;
+    dataCtrel.push(this.builder.group({ startTime: [null], endTime: [null], date: [null], linkZoom: [null] }));
+  }
+
+  public removeDate(pos) {
+    const dataCtrel = this.form.get("dates") as FormArray;
+    dataCtrel.removeAt(pos);
+  }
+
+  get worksPoster() {
+    return this.form.get("worksPoster");
+  }
+
+  public addWorkPoster() {
+    const dataCtrel = this.form.get("worksPoster") as FormArray;
+    dataCtrel.push(this.builder.group({ work: [null], workTitle: [null], linkPPT: [null] }));
+  }
+
+  public setWorkFormPoster(workForm, i) {
+    const dataCtrel = this.form.get("worksPoster") as FormArray;
+    dataCtrel.at(i).patchValue({"work": workForm._id, "workTitle": workForm.title});
+    //{ "work": workForm._id, "workTitle": workForm.title}
+  }
+
+  public removeWorkPoster(pos) {
+    const dataCtrel = this.form.get("worksPoster") as FormArray;
+    dataCtrel.removeAt(pos);
   }
 
   public get axis() {

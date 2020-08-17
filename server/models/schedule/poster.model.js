@@ -7,44 +7,42 @@ const ScheduleSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     required: true
   },
-  work: {
-    type: mongoose.Schema.Types.ObjectId
-  },
-  workTitle: {
-    type: String,
-  },
+  
   axis: {
     type: String
   },
-  startTime: {
-    type: String,
-  },
-  startTime: {
-    type: String,
-  },
-  endTime: {
-    type: String,
-  },
-  place: {
-    type: String,
-  },
-  address: {
-    type: String,
-  },
-  pdf: {
+
+  monitor: {
     type: String
   },
-  virtual: {
-    monitor: {
-      email: String
+
+  mediator: {
+    type: String
+  },
+
+  worksPoster: [{
+    work: {
+      type: mongoose.Schema.Types.ObjectId
     },
-    mediator: {
-      email: String
+    workTitle: {
+      type: String,
     },
-    linkZoom: {
+    linkPPT:{
+      type: String,
+    }
+  }],
+
+  dates: [{
+    startTime: {
+      type: String,
+    },
+    endTime: {
+      type: String,
+    },
+    date: {
       type: String
     },
-    ppt: {
+    linkZoom: {
       type: String
     },
     linkAudio: {
@@ -53,10 +51,8 @@ const ScheduleSchema = new mongoose.Schema({
     linkLibras: {
       type: String
     }
-  },
-  date: {
-    type: String
-  },
+  }],
+
   createAt: {
     type: Date,
     default: Date.now
