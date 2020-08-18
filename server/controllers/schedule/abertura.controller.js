@@ -17,14 +17,10 @@ async function listSchedule(date) {
 }
 
 async function insertSchedule(schedule) {
-  console.log(schedule)
   return await new Abertura(schedule).save();
 }
 
 async function updateSchedule(id, schedule) {
-  console.log(schedule)
-  console.log(id);
-
   return await Abertura.findOneAndUpdate({ _id: id }, schedule);
 }
 

@@ -106,9 +106,9 @@
               <select class="form-control" [ngModelOptions]="{ standalone: true }" [(ngModel)]="selectedWorkPoster[i]"
               (ngModelChange)="setWorkFormPoster($event, i)">
                 <option 
-                  *ngFor="let work of works" 
+                  *ngFor="let work of works"
+                  [selected]="work._id == selectedWorkPoster[i]?.work"
                   [ngValue]="work" 
-                  [selected]="work._id == selectedWorkPoster[i].work"
                   type="combobox">
                   {{ work.title }}
                 </option>
