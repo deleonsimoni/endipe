@@ -34,6 +34,17 @@
                 {{ coordinator.name }} {{ coordinator.isCoordinator ? '(coordenador)' : '' }}
             </p>
         </div>
+        <div class="group" *ngIf="type == '11'">
+            <p class="label">Entrevistado(s)</p>
+            <p class="title" *ngFor="let entrevistados of schedule.entrevistados">
+                {{ entrevistados.name }} </p>
+        </div>
+        <div class="group" *ngIf="type == '11'">
+            <p class="label">Entrevistador(es)</p>
+            <p class="title" *ngFor="let entrevistadores of schedule.entrevistadores">
+                {{ entrevistadores.name }}
+            </p>
+        </div>
         <div class="group">
             <p class="label">Link do Youtube</p>
             <p class="hour">{{ schedule.virtual.linkYoutube }}</p>

@@ -73,6 +73,54 @@
       Conferencista(s)
     </button>
   </div>
+  <div class="form-row" *ngIf="type == '11'">
+    <div class="form-group col-md-12">
+      <label for="entrevistado" class="label">Entrevistado(s)</label>
+      <br />
+      <div class="mb-2" formArrayName="entrevistados" *ngFor="let item of entrevistados['controls']; let i = index">
+        <div [formArrayName]="i">
+          <div class="row justify-content-center">
+            <div class="align-items-center" [ngClass]="{ 'col-md-10': i > 0, 'col-md-11': i < 1 }">
+              <input type="text" class="form-control" formControlName="name" />
+            </div>
+            <div class="col-md-1 align-items-center icon" *ngIf="i > 0">
+              <button type="button" (click)="removeEntrevistado(i)">
+                <i class="fas fa-trash"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button type="button" class="add-entrevistado" (click)="addEntrevistado()">
+      <i class="fa fa-plus"></i>
+      Entrevistado(s)
+    </button>
+  </div>
+  <div class="form-row" *ngIf="type == '11'">
+    <div class="form-group col-md-12">
+      <label for="entrevistador" class="label">Entrevistador(es)</label>
+      <br />
+      <div class="mb-2" formArrayName="entrevistadores" *ngFor="let item of entrevistadores['controls']; let i = index">
+        <div [formArrayName]="i">
+          <div class="row justify-content-center">
+            <div class="align-items-center" [ngClass]="{ 'col-md-10': i > 0, 'col-md-11': i < 1 }">
+              <input type="text" class="form-control" formControlName="name" />
+            </div>
+            <div class="col-md-1 align-items-center icon" *ngIf="i > 0">
+              <button type="button" (click)="removeEntrevistador(i)">
+                <i class="fas fa-trash"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button type="button" class="add-entrevistador" (click)="addEntrevistador()">
+      <i class="fa fa-plus"></i>
+      Entrevistador(es)
+    </button>
+  </div>
   <div class="form-row">
     <div class="col-md-12">
       <button class="btn-get-started" type="button" (click)="submitSchedule()">SUBMETER PROGRAMAÇÃO</button>

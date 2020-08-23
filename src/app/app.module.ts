@@ -36,7 +36,7 @@ import { OwlModule } from 'ngx-owl-carousel';
 import { ToastrModule } from 'ngx-toastr';
 import { TrabalhosComponent } from './trabalhos/trabalhos.component';
 import { ListarTrabalhosComponent } from './listar-trabalhos/listar-trabalhos.component';
-import { AccordionModule } from 'ngx-bootstrap';
+import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { PerfilComponent } from './perfil/perfil.component';
 import { AdminModule } from './admin/admin.module';
 import { PipesModule } from './pipes/pipes.module';

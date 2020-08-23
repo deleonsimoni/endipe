@@ -30,6 +30,8 @@ export class GenericFormComponent {
       address: [null],
       theme: [null],
       coordinators: this.builder.array([this.createCoordinatorsField()]),
+      entrevistados: this.builder.array([this.createEntrevistadosField()]),
+      entrevistadores: this.builder.array([this.createEntrevistadoresField()])
     });
   }
 
@@ -46,7 +48,12 @@ export class GenericFormComponent {
           this.fillArray(data.titles, key);
         } else if (key == "coordinators") {
           this.fillArray(data.coordinators, key);
-        } else {
+        } else if (key == "entrevistados") {
+          this.fillArray(data.entrevistados, key);
+        } else if (key == "entrevistadores") {
+          this.fillArray(data.entrevistadores, key);
+        }
+        else {
           this.form.get(key).patchValue(data[key]);
         }
       }
@@ -59,7 +66,7 @@ export class GenericFormComponent {
       if (key == 0) {
         form.controls[0].patchValue(el);
       } else {
-        if (keyForm == "coordinators") {
+        if (keyForm == "coordinators" || keyForm == "entrevistados" || keyForm == "entrevistadores") {
           form.push(this.builder.group(el));
         } else {
           form.push(this.builder.control(el));
@@ -79,12 +86,33 @@ export class GenericFormComponent {
     });
   }
 
+  private createEntrevistadosField() {
+    return this.builder.group({
+      name: [null]
+    });
+  }
+
+
+  private createEntrevistadoresField() {
+    return this.builder.group({
+      name: [null]
+    });
+  }
+
   get titles() {
     return this.form.get("titles");
   }
 
   get coordinators() {
     return this.form.get("coordinators");
+  }
+
+  get entrevistados() {
+    return this.form.get("entrevistados");
+  }
+
+  get entrevistadores() {
+    return this.form.get("entrevistadores");
   }
 
   public addTitles() {
@@ -102,9 +130,30 @@ export class GenericFormComponent {
     coordinatorCtrl.push(this.createCoordinatorsField());
   }
 
+  public addEntrevistado() {
+    const entrevistadoCtrl = this.form.get("entrevistados") as FormArray;
+    entrevistadoCtrl.push(this.createEntrevistadosField());
+  }
+
+  public addEntrevistador() {
+    const entrevistadorCtrl = this.form.get("entrevistadores") as FormArray;
+    entrevistadorCtrl.push(this.createEntrevistadoresField());
+  }
+
   public removeCoordinator(pos) {
     const coordinatorCtrl = this.form.get("coordinators") as FormArray;
     coordinatorCtrl.removeAt(pos);
+  }
+
+
+  public removeEntrevistado(pos) {
+    const entrevistadoCtrl = this.form.get("entrevistados") as FormArray;
+    entrevistadoCtrl.removeAt(pos);
+  }
+
+  public removeEntrevistador(pos) {
+    const entrevistadorCtrl = this.form.get("entrevistadores") as FormArray;
+    entrevistadorCtrl.removeAt(pos);
   }
 
   public submitSchedule() {
@@ -119,8 +168,8 @@ export class GenericFormComponent {
       case "7":
         return "Artista(s)";
 
-      case "11":
-        return "Associação/Rede/Fórum e sigla";
+      //    case "11":
+      //      return "Conexão Entrevista";
 
       default:
         return "Título(s)";

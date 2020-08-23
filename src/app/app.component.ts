@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import $ from "jquery";
 import { BreakpointObserver } from "@angular/cdk/layout";
-import { AccordionComponent, AccordionPanelComponent } from "ngx-bootstrap";
+import { AccordionComponent } from "ngx-bootstrap/accordion";
+import { AccordionPanelComponent } from "ngx-bootstrap/accordion";
 import { AuthService } from "./services/auth.service";
 import { ShareDataService } from "./services/share-data.service";
 import { ToastrService } from "ngx-toastr";

@@ -35,7 +35,7 @@ export class ModalSchedulesComponent {
   public get showGenericForm() {
     if (this.axis.value) {
       const axis = Number(this.axis.value);
-      return axis == 1 || axis == 9 || axis == 7 || axis == 10 || axis == 12;
+      return axis == 1 || axis == 9 || axis == 7 || axis == 10 || axis == 11 || axis == 12;
     }
 
     return false;
