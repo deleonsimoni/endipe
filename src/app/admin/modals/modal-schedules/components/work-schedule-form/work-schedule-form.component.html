@@ -103,12 +103,12 @@
 
             <div class="form-group col-md-12">
               <label class="label">Pôster</label>
-              <select class="form-control" [ngModelOptions]="{ standalone: true }" [(ngModel)]="selectedWorkPoster[i]"
+              <select class="form-control" id="com{{i}}" [ngModelOptions]="{ standalone: true }" [(ngModel)]="selectedWorkPoster[i]"
               (ngModelChange)="setWorkFormPoster($event, i)">
                 <option 
-                  *ngFor="let work of works"
-                  [selected]="work._id == selectedWorkPoster[i]?.work"
-                  [ngValue]="work" 
+                  *ngFor="let work of works; let j = index"
+                  id="d{{i}}{{j}}"
+                  [ngValue]="work"
                   type="combobox">
                   {{ work.title }}
                 </option>

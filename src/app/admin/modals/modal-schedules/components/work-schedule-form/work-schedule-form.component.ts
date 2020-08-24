@@ -47,6 +47,7 @@ export class WorkScheduleFormComponent {
     });
   }
 
+
   public setWorkForm(workForm) {
     this.form.get("work").patchValue(workForm._id);
     this.form.get("workTitle").patchValue(workForm.title);
@@ -75,6 +76,7 @@ export class WorkScheduleFormComponent {
     }
   }
 
+
   private fillArray(data, keyForm) {
     const form = this.form.get(keyForm) as FormArray;
     data.forEach((el, key) => {
@@ -92,6 +94,15 @@ export class WorkScheduleFormComponent {
           this.toastr.error("Erro", works);
         } else {
           this.works = works;
+
+          let workFor = this.selectedWorkPoster;
+
+          for (let index = 0; index < workFor.length; index++) {
+            this.selectedWorkPoster[index] = this.works.filter(e => {
+             return workFor[index].work == e._id 
+            })[0];
+          }
+
         }
       });
   }
