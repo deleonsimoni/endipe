@@ -13,6 +13,8 @@ router.get('/:date', listVirtual);
 
 async function listVirtual(req, res) {
 
-  let virtual = await virtualCtrl.listVirtual();
+  let date = req.params.date;
+  let virtual = await virtualCtrl.listVirtual(date);
+
   res.json(virtual);
 }

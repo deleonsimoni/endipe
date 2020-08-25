@@ -5,9 +5,12 @@
         <span class="title" style="color: white;">Dia(s)</span>
         <div class="group" *ngFor="let item of schedule.dates">
           <p class="title">{{ item.date }} </p>
-          <p class="title not-dash" style="margin: 0px 0px 4px 24px !important;">{{ item.startTime }} - {{ item.endTime }} </p>
-          <p class="title not-dash" style="margin: 0px 0px 4px 24px !important;">Link do Zoom: {{  item.linkZoom  }} </p>
-
+          <p class="title not-dash" style="margin: 0px 0px 4px 24px !important;">{{ item.startTime }} -
+            {{ item.endTime }} </p>
+          <!---   <p class="title not-dash" style="margin: 0px 0px 4px 24px !important;">Link do Zoom: {{  item.linkZoom  }} </p>-->
+          <p class="label">Link do Zoom</p>
+          <p class="title not-dash" style="margin: 0px 0px 4px 24px !important;"><a href="{{  item.linkZoom  }}"
+              target="_blank">{{ item.linkZoom }}</a></p>
         </div>
       </div>
       <div class="col-6">
@@ -65,9 +68,9 @@
         </div>
       </div>
     </div>
-    <br/>
+    <br />
     <div class="row">
-      <div class="col-12" >
+      <div class="col-12">
         <div class="group" *ngIf="type != '3'">
           <p class="label">Título</p>
           <p class="title">

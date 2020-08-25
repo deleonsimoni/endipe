@@ -16,13 +16,18 @@ async function listVirtual(date) {
 
 
   let virtual = {};
-  virtual.abertura = await aberturaCtrl.listSchedule(date);
-  virtual.atividadeCultural = await atividadeCulturalCtrl.listSchedule(date);
-  virtual.encerramento = await encerramentoCtrl.listSchedule(date);
-  virtual.lancamentoDeLivros = await lancamentoDeLivrosCtrl.listSchedule(date);
-  virtual.rodaReunioesEntidadesRedes = await rodaReunioesEntidadesRedesCtrl.listSchedule(date);
-  virtual.sessoesEspeciais = await sessoesEspeciaisCtrl.listSchedule(date);
-  virtual.simposio = await simposioCtrl.listSchedule(date);
-
-  return virtual;
+  if (date == "29/10") {
+    virtual.abertura = await aberturaCtrl.listSchedule(date);
+  }
+  if (date == "12/11") {
+    virtual.encerramento = await encerramentoCtrl.listSchedule(date);
+  }
+  else {
+    virtual.atividadeCultural = await atividadeCulturalCtrl.listSchedule(date);
+    virtual.lancamentoDeLivros = await lancamentoDeLivrosCtrl.listSchedule(date);
+    virtual.rodaReunioesEntidadesRedes = await rodaReunioesEntidadesRedesCtrl.listSchedule(date);
+    virtual.sessoesEspeciais = await sessoesEspeciaisCtrl.listSchedule(date);
+    virtual.simposio = await simposioCtrl.listSchedule(date);
+  }
+  return await virtual;
 }
