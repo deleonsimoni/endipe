@@ -64,10 +64,16 @@ export class ModalSchedulesComponent {
     this.carregando = true;
     if (event.id) {
       this.scheduleService.updateSchedule(this.axis.value, event.id, event.data).subscribe(
-        (_) => {
-          this.toastr.success("Programação alterada com sucesso");
-          this.carregando = false;
-          this.dialog.close(true);
+        (data) => {
+          if(data.temErro){
+            this.toastr.error("Servidor momentaneamente inoperante", "Erro");
+            this.carregando = false;
+          } else {
+            this.toastr.success("Programação alterada com sucesso");
+            this.carregando = false;
+            this.dialog.close(true);
+          }
+
         },
         (err) => {
           this.toastr.error("Servidor momentaneamente inoperante", "Erro");
@@ -78,10 +84,16 @@ export class ModalSchedulesComponent {
     } else {
       this.carregando = true;
       this.scheduleService.registerSchedule(this.axis.value, event.data).subscribe(
-        (_) => {
-          this.toastr.success("Programação cadastrada com sucesso");
-          this.carregando = false;
-          this.dialog.close(true);
+        (data) => {
+          if(data.temErro){
+            this.toastr.error("Servidor momentaneamente inoperante", "Erro");
+            this.carregando = false;
+          } else {
+            this.toastr.success("Programação cadastrada com sucesso");
+            this.carregando = false;
+            this.dialog.close(true);
+          }
+
         },
         (err) => {
           this.toastr.success("Servidor momentaneamente inoperante", "Erro");

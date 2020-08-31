@@ -57,6 +57,7 @@ import { GlobalComponentsModule } from './components/global-components.module';
 import { ProgramacaoModule } from './programacao/programacao.module';
 import { HomeVirtualComponent } from './endipe-virtual/home-virtual/home-virtual.component';
 import { MeuEndipeComponent } from './meu-endipe/meu-endipe.component';
+import {NgxImageCompressService} from 'ngx-image-compress';
 
 @NgModule({
   declarations: [
@@ -144,9 +145,10 @@ import { MeuEndipeComponent } from './meu-endipe/meu-endipe.component';
 
   ],
   providers: [
+    NgxImageCompressService,
     {
       provide: 'BASE_API_URL',
-      useValue: environment.host
+      useValue: environment.host,
     },
     {
       provide: HTTP_INTERCEPTORS,

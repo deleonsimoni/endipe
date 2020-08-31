@@ -47,13 +47,13 @@
         </div>
         <div class="group" *ngIf="type != '9'">
             <p class="label">Link do Youtube</p>
-            <p class="hour"><a href="{{ schedule.virtual.linkYoutube }}"
-                    target="_blank">{{ schedule.virtual.linkYoutube }}</a></p>
+            <p class="hour"><a href="{{ schedule?.virtual?.linkYoutube }}" target="_blank">{{ schedule?.virtual?.linkYoutube }}</a></p>
+
         </div>
         <div class="group" *ngIf="type == '9'">
             <p class="label">Link do Zoom</p>
-            <p class="hour"><a href="{{ schedule.virtual.linkZoom }}"
-                    target="_blank">{{ schedule.virtual.linkZoom }}</a></p>
+            <p class="hour"><a href="{{ schedule?.virtual?.linkZoom }}" target="_blank">{{ schedule?.virtual?.linkZoom }}</a></p>
+
         </div>
         <!-- EXIBICAO WORK POSTER-->
 

@@ -21,7 +21,7 @@ const ScheduleSchema = new mongoose.Schema({
     linkSale: {
       type: String,
     },
-    miniature: {
+    nameMiniature: {
       type: String,
     }
 

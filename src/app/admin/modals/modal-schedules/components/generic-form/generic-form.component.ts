@@ -1,5 +1,6 @@
 import { Component, Output, EventEmitter, SimpleChanges, Input, ElementRef, ViewChild } from "@angular/core";
 import { FormBuilder, FormGroup, FormArray } from "@angular/forms";
+import { NgxImageCompressService } from 'ngx-image-compress';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -17,7 +18,9 @@ export class GenericFormComponent {
   public form: FormGroup;
   public days = ["29/10", "30/10", "31/10", "01/11", "02/11", "03/11", "04/11", "05/11", "06/11", "07/11", "08/11", "09/11", "10/11", "11/11", "12/11"];
 
-  constructor(private builder: FormBuilder) {
+  constructor(private builder: FormBuilder,
+              private imageCompress: NgxImageCompressService) 
+  {
     this.createForm();
   }
 
@@ -29,7 +32,7 @@ export class GenericFormComponent {
       endTime: [null],
       place: [null],
       virtual: this.builder.group({ linkYoutube: [null], linkZoom: [null] }),
-      books: this.builder.array([this.builder.group({ title: [null], author: [null], resume: [null], linkSale: [null], miniature: [null] })]),
+      books: this.builder.array([this.builder.group({ title: [null], author: [null], resume: [null], linkSale: [null], miniature: [null], nameMiniature: [null], isChangeImage: false })]),
       address: [null],
       theme: [null],
       coordinators: this.builder.array([this.createCoordinatorsField()]),
@@ -104,15 +107,6 @@ export class GenericFormComponent {
     });
   }
 
-  private createBooksField() {
-    return this.builder.group({
-      title: [null],
-      author: [null],
-      resume: [null],
-      linkSale: [null],
-      miniature: [null]
-    });
-  }
   get titles() {
     return this.form.get("titles");
   }
@@ -185,7 +179,7 @@ export class GenericFormComponent {
 
   public addBook() {
     const dataCtrel = this.form.get("books") as FormArray;
-    dataCtrel.push(this.builder.group({ title: [null], author: [null], resume: [null], linkSale: [null], miniature: [null] }));
+    dataCtrel.push(this.builder.group({ title: [null], author: [null], resume: [null], linkSale: [null], miniature: [null], nameMiniature: [null], isChangeImage: false }));
   }
 
 
@@ -206,13 +200,41 @@ export class GenericFormComponent {
     reader.readAsDataURL(this.miniature[0]); // Read file as data url
     reader.onloadend = (e) => { // function call once readAsDataUrl is completed
 
-      (document.getElementById('imageRender' + indexArray) as HTMLImageElement).src = e.target['result'].toString();
-      // this.imageRender.nativeElement.src = e.target['result']; // Set image in element
-      const dataCtrel = this.form.get("books") as FormArray;
-      dataCtrel.at(indexArray).patchValue({ "miniature": e.target['result'].toString() });
+      var orientation = -1;
+      this.imageCompress.compressFile(e.target['result'], orientation, 50, 50).then(
+      result => {
+          
+          // create file from byte
+          const imageName = this.miniature[0].name;
+          // call method that creates a blob from dataUri
+          //const imageBlob = this.dataURItoBlob(result.split(',')[1]);
+          //imageFile created below is the new compressed file which can be send to API in form data
+          //const img =  new File([result], imageName, { type: 'image/jpeg' });
+    
+          (document.getElementById('imageRender' + indexArray) as HTMLImageElement).src = result;
+          // this.imageRender.nativeElement.src = e.target['result']; // Set image in element
+          const dataCtrel = this.form.get("books") as FormArray;
+          dataCtrel.at(indexArray).patchValue({ "miniature": result, "nameMiniature": imageName, "isChangeImage": true });
+        });
+
+
+      
     };
   }
 
+
+  dataURItoBlob(dataURI) {
+
+    const byteString = window.atob(dataURI);
+    const arrayBuffer = new ArrayBuffer(byteString.length);
+    const int8Array = new Uint8Array(arrayBuffer);
+    for (let i = 0; i < byteString.length; i++) {
+    int8Array[i] = byteString.charCodeAt(i);
+    }
+    const blob = new Blob([int8Array], { type: 'image/jpeg' });
+    return blob;
+
+  }
 
   get title() {
     switch (this.type) {

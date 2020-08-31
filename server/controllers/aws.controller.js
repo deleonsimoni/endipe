@@ -5,6 +5,7 @@ module.exports = {
     uploadFile,
     downloadFile,
     sendEmailAWS,
+    uploadBase64,
 }
 
 function uploadFile(key, file) {
@@ -18,6 +19,34 @@ function uploadFile(key, file) {
     Bucket: 'endiperio2020',
     Key: key,
     Body: file
+  };
+
+  return new Promise((resolve, reject) => {
+    s3.putObject(s3Config, (err, resp) => {
+      if (err) {
+        console.log('Erro AWS', err);
+        reject({success: false, data: err});
+      }
+      resolve({sucess: true, data: resp});
+    })
+  });
+}
+
+function uploadBase64(key, file) {
+  
+  //let buf = Buffer.from(books[i].miniature.replace(/^data:image\/\w+;base64,/, ""),'base64')
+  
+  const s3 = new AWS.S3({
+    accessKeyId: config.AWS_ACCESS_KEY,
+    secretAccessKey: config.AWS_SECRET_ACCESS_KEY
+  });
+
+  var s3Config = {
+    Bucket: 'endiperio2020',
+    Key: key,
+    Body: file,
+    ContentEncoding: 'base64',
+    ContentType: 'image/jpeg'
   };
 
   return new Promise((resolve, reject) => {
