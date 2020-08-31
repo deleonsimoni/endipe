@@ -22,13 +22,13 @@
                 </div>
             </div>
         </div>
-        <div class="group">
+        <div class="group" *ngIf="type != '9'">
             <p class="label">{{ title }}</p>
             <p class="title" *ngFor="let titulo of schedule.titles">
                 {{ titulo }}
             </p>
         </div>
-        <div class="group" *ngIf="type != '7' && type != '11'">
+        <div class="group" *ngIf="type != '7' && type != '11' && type != '9'">
             <p class="label">Conferencista(s)</p>
             <p class="title" *ngFor="let coordinator of schedule.coordinators">
                 {{ coordinator.name }} {{ coordinator.isCoordinator ? '(coordenador)' : '' }}
@@ -45,9 +45,40 @@
                 {{ entrevistadores.name }}
             </p>
         </div>
-        <div class="group">
+        <div class="group" *ngIf="type != '9'">
             <p class="label">Link do Youtube</p>
-            <p class="hour"><a href="{{ schedule.virtual.linkYoutube }}" target="_blank">{{ schedule.virtual.linkYoutube }}</a></p>
+            <p class="hour"><a href="{{ schedule.virtual.linkYoutube }}"
+                    target="_blank">{{ schedule.virtual.linkYoutube }}</a></p>
         </div>
+        <div class="group" *ngIf="type == '9'">
+            <p class="label">Link do Zoom</p>
+            <p class="hour"><a href="{{ schedule.virtual.linkZoom }}"
+                    target="_blank">{{ schedule.virtual.linkZoom }}</a></p>
+        </div>
+        <!-- EXIBICAO WORK POSTER-->
+
+        <div class="group" *ngIf="type == '9'">
+            <p class="label">Obra(s)</p>
+            <div *ngFor="let books of schedule.books">
+                <p class="title">
+                    {{ books.title }}
+                </p>
+                <p class="title not-dash" style="margin: 0px 0px 4px 24px !important;">
+                    Autor(es): {{ books.author }}
+                </p>
+                <p class="title not-dash" style="margin: 0px 0px 4px 24px !important;">
+                    Resumo: {{ books.resume }}
+                </p>
+                <p class="title not-dash" style="margin: 0px 0px 4px 24px !important;">
+                    Link do livro: {{ books.linkSale }}
+                </p>
+                <p class="title not-dash" style="margin: 0px 0px 4px 24px !important;">
+                    Miniatura: {{ books.miniature }}
+                </p>
+            </div>
+        </div>
+
+        <!-- FIM WORK POSTER-->
+
     </div>
 </div>

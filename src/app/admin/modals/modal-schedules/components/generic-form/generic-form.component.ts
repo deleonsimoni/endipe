@@ -26,7 +26,8 @@ export class GenericFormComponent {
       startTime: [null],
       endTime: [null],
       place: [null],
-      virtual: this.builder.group({ linkYoutube: [null] }),
+      virtual: this.builder.group({ linkYoutube: [null], linkZoom: [null] }),
+      books: this.builder.array([this.builder.group({ book: [null], title: [null], resume: [null], linkSale: [null], miniature: [null] })]),
       address: [null],
       theme: [null],
       coordinators: this.builder.array([this.createCoordinatorsField()]),
@@ -52,6 +53,8 @@ export class GenericFormComponent {
           this.fillArray(data.entrevistados, key);
         } else if (key == "entrevistadores") {
           this.fillArray(data.entrevistadores, key);
+        } else if (key == "books") {
+          this.fillArray(data.books, key);
         }
         else {
           this.form.get(key).patchValue(data[key]);
@@ -66,7 +69,7 @@ export class GenericFormComponent {
       if (key == 0) {
         form.controls[0].patchValue(el);
       } else {
-        if (keyForm == "coordinators" || keyForm == "entrevistados" || keyForm == "entrevistadores") {
+        if (keyForm == "coordinators" || keyForm == "entrevistados" || keyForm == "entrevistadores" || keyForm == "books") {
           form.push(this.builder.group(el));
         } else {
           form.push(this.builder.control(el));
@@ -99,6 +102,15 @@ export class GenericFormComponent {
     });
   }
 
+  private createBooksField() {
+    return this.builder.group({
+      title: [null],
+      author: [null],
+      resume: [null],
+      linkSale: [null],
+      miniature: [null]
+    });
+  }
   get titles() {
     return this.form.get("titles");
   }
@@ -115,6 +127,9 @@ export class GenericFormComponent {
     return this.form.get("entrevistadores");
   }
 
+  get books() {
+    return this.form.get("books");
+  }
   public addTitles() {
     const titlesCtrl = this.form.get("titles") as FormArray;
     titlesCtrl.push(this.createField());
@@ -160,6 +175,24 @@ export class GenericFormComponent {
     this.submitForm.emit({ id: this.data ? this.data._id : null, data: this.form.getRawValue() });
   }
 
+  //  public setBookForm(books, i) {
+  //   const dataCtrel = this.form.get("books") as FormArray;
+  //   dataCtrel.at(i).patchValue({ "title": books.title, "author": books.author, "resume": books.resume, "linkSale": books.linkSale, "miniature": books.miniature });
+  //{ "work": workForm._id, "workTitle": workForm.title}
+  //}
+
+  public addBook() {
+    const dataCtrel = this.form.get("books") as FormArray;
+    dataCtrel.push(this.builder.group({ title: [null], author: [null], resume: [null], linkSale: [null], miniature: [null] }));
+  }
+
+
+  public removeBook(pos) {
+    const dataCtrel = this.form.get("books") as FormArray;
+    dataCtrel.removeAt(pos);
+  }
+
+
   get title() {
     switch (this.type) {
       case "5":
@@ -171,7 +204,13 @@ export class GenericFormComponent {
       //    case "11":
       //      return "Conexão Entrevista";
 
-      default:
+      case "1":
+        return "Título(s)";
+      case "10":
+        return "Título(s)";
+      case "11":
+        return "Título(s)";
+      case "12":
         return "Título(s)";
     }
   }
