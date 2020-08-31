@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, SimpleChanges, Input } from "@angular/core";
+import { Component, Output, EventEmitter, SimpleChanges, Input, ElementRef, ViewChild } from "@angular/core";
 import { FormBuilder, FormGroup, FormArray } from "@angular/forms";
 
 @Component({
@@ -11,6 +11,8 @@ export class GenericFormComponent {
   @Input() type: any;
   @Input() data: any;
   @Output() submitForm: EventEmitter<any> = new EventEmitter<any>();
+  private miniature: FileList;
+  @ViewChild('imageRender', { static: false }) imageRender: ElementRef;
 
   public form: FormGroup;
   public days = ["29/10", "30/10", "31/10", "01/11", "02/11", "03/11", "04/11", "05/11", "06/11", "07/11", "08/11", "09/11", "10/11", "11/11", "12/11"];
@@ -27,7 +29,7 @@ export class GenericFormComponent {
       endTime: [null],
       place: [null],
       virtual: this.builder.group({ linkYoutube: [null], linkZoom: [null] }),
-      books: this.builder.array([this.builder.group({ book: [null], title: [null], resume: [null], linkSale: [null], miniature: [null] })]),
+      books: this.builder.array([this.builder.group({ title: [null], author: [null], resume: [null], linkSale: [null], miniature: [null] })]),
       address: [null],
       theme: [null],
       coordinators: this.builder.array([this.createCoordinatorsField()]),
@@ -190,6 +192,25 @@ export class GenericFormComponent {
   public removeBook(pos) {
     const dataCtrel = this.form.get("books") as FormArray;
     dataCtrel.removeAt(pos);
+  }
+
+  public loadImage(indexArray) {
+    let element: HTMLElement = document.getElementById('miniature' + indexArray) as HTMLElement;
+    element.click();
+  }
+
+  public setMiniature(files: FileList, indexArray): void {
+    this.miniature = files;
+
+    const reader = new FileReader();
+    reader.readAsDataURL(this.miniature[0]); // Read file as data url
+    reader.onloadend = (e) => { // function call once readAsDataUrl is completed
+
+      (document.getElementById('imageRender' + indexArray) as HTMLImageElement).src = e.target['result'].toString();
+      // this.imageRender.nativeElement.src = e.target['result']; // Set image in element
+      const dataCtrel = this.form.get("books") as FormArray;
+      dataCtrel.at(indexArray).patchValue({ "miniature": e.target['result'].toString() });
+    };
   }
 
 

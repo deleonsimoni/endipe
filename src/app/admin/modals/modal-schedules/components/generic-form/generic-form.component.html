@@ -131,7 +131,7 @@
   <div class="form-group col-md-12" *ngIf="type == '9'">
     <label for="books" class="label">Obras</label>
     <br />
-    <div class="mb-2" formArrayName="books" *ngFor="let item of books['controls']; let i = index">
+    <div class="mb-2 miniature" formArrayName="books" *ngFor="let item of books['controls']; let i = index">
       <div [formArrayName]="i">
         <div class="row justify-content-center">
           <div class="form-group col-md-12">
@@ -155,11 +155,17 @@
             <input type="text" class="form-control" formControlName="linkSale" />
           </div>
 
-          <div class="form-group col-md-12">
+          <!--      <div class="form-group col-md-12">
             <label for="miniature" class="label">Miniatura</label>
             <input type="text" class="form-control" formControlName="miniature" />
+          </div> -->
+          <!--novo miniatura-->
+          <div class="miniature-img">
+            <img id="imageRender{{i}}" src="../../assets/img/user.png" alt="" #imageRender>
+            <button (click)="loadImage(i)"><i class="fas fa-camera"></i></button>
           </div>
-
+          <!--parou-->
+          <br />
           <div class="col-md-1 align-items-center icon" *ngIf="i > 0">
             <button type="button" (click)="removeBook(i)">
               <i class="fas fa-trash"></i>
@@ -167,12 +173,16 @@
           </div>
         </div>
       </div>
+      <input type="file" class="custom-file-input" style="display:none" accept="image/*" data-max-size="5048"
+        id="miniature{{i}}" (change)="setMiniature($event.target.files, i)" #fileInput />
     </div>
   </div>
   <button *ngIf="type == '9'" type="button" class="add-book" (click)="addBook()">
     <i class="fa fa-plus"></i>
     Mais Obras
   </button>
+
+
   <!-- FIM LANCAMENTO DE LIVROS -->
 
 
