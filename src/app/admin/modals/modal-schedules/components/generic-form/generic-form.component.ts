@@ -1,6 +1,7 @@
-import { Component, Output, EventEmitter, SimpleChanges, Input, ElementRef, ViewChild } from "@angular/core";
+import { Component, Output, EventEmitter, SimpleChanges, Input, ElementRef, ViewChild, OnInit, ViewChildren, QueryList } from "@angular/core";
 import { FormBuilder, FormGroup, FormArray } from "@angular/forms";
 import { NgxImageCompressService } from 'ngx-image-compress';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -14,12 +15,14 @@ export class GenericFormComponent {
   @Output() submitForm: EventEmitter<any> = new EventEmitter<any>();
   private miniature: FileList;
   @ViewChild('imageRender', { static: false }) imageRender: ElementRef;
+  @ViewChildren('images') elements: QueryList<any>;
 
   public form: FormGroup;
   public days = ["29/10", "30/10", "31/10", "01/11", "02/11", "03/11", "04/11", "05/11", "06/11", "07/11", "08/11", "09/11", "10/11", "11/11", "12/11"];
 
   constructor(private builder: FormBuilder,
-              private imageCompress: NgxImageCompressService) 
+              private imageCompress: NgxImageCompressService,
+              private _sanitizer: DomSanitizer) 
   {
     this.createForm();
   }
@@ -60,8 +63,7 @@ export class GenericFormComponent {
           this.fillArray(data.entrevistadores, key);
         } else if (key == "books") {
           this.fillArray(data.books, key);
-        }
-        else {
+        } else {
           this.form.get(key).patchValue(data[key]);
         }
       }
@@ -74,7 +76,9 @@ export class GenericFormComponent {
       if (key == 0) {
         form.controls[0].patchValue(el);
       } else {
-        if (keyForm == "coordinators" || keyForm == "entrevistados" || keyForm == "entrevistadores" || keyForm == "books") {
+         if (keyForm == "coordinators" || keyForm == "entrevistados" || keyForm == "entrevistadores") {
+          form.push(this.builder.group(el));
+        } else if (keyForm == "books") {
           form.push(this.builder.group(el));
         } else {
           form.push(this.builder.control(el));
@@ -222,6 +226,25 @@ export class GenericFormComponent {
     };
   }
 
+
+  ngAfterViewInit() {
+    const dataCtrel = this.form.get("books") as FormArray;
+    let indexArray = 0;
+    dataCtrel.value.forEach(element => {
+
+      if(dataCtrel.at(indexArray).value) {
+        let file = dataCtrel.at(indexArray).value.miniature.data;
+
+        const base64 = btoa(new Uint8Array(file).reduce((data, byte) => data + String.fromCharCode(byte), ''));
+
+        (document.getElementById('imageRender' + indexArray) as HTMLImageElement).src = 'data:image/jpg;base64,' + base64;
+      }
+
+      indexArray++;
+      
+    }); 
+  
+  }
 
   dataURItoBlob(dataURI) {
 

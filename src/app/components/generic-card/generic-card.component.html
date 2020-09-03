@@ -59,7 +59,7 @@
 
         <div class="group" *ngIf="type == '9'">
             <p class="label">Obra(s)</p>
-            <div *ngFor="let books of schedule.books">
+            <div *ngFor="let books of schedule.books; let i = index">
                 <p class="title">
                     {{ books.title }}
                 </p>
@@ -73,7 +73,7 @@
                     Link do livro: {{ books.linkSale }}
                 </p>
                 <p class="title not-dash" style="margin: 0px 0px 4px 24px !important;">
-                    Miniatura: {{ books.miniature }}
+                    <img width="100px" height="150px" id="imageRenderCard{{i}}">
                 </p>
             </div>
         </div>

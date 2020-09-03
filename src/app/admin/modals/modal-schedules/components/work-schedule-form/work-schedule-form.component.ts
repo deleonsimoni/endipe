@@ -95,13 +95,21 @@ export class WorkScheduleFormComponent {
         } else {
           this.works = works;
 
-          let workFor = this.selectedWorkPoster;
+          //caso seja poster - tratar os trabalhos para combobox
+          if(this.type == 3){
+            let workFor = this.selectedWorkPoster;
 
-          for (let index = 0; index < workFor.length; index++) {
-            this.selectedWorkPoster[index] = this.works.filter(e => {
-             return workFor[index].work == e._id 
-            })[0];
+            for (let index = 0; index < workFor.length; index++) {
+              this.selectedWorkPoster[index] = this.works.filter(e => {
+              return workFor[index].work == e._id 
+              })[0];
+            }
+          } else {
+            this.selectedWork = this.works.filter(e => {
+              return this.form.get("work").value == e._id 
+              })[0];
           }
+
 
         }
       });

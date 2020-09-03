@@ -20,6 +20,8 @@ export class SchedulesComponent implements OnInit {
   public label = "Abertura";
   public typeId: any;
   public user: any;
+  public loading = false;
+
 
   constructor(
     private dialog: MatDialog,
@@ -41,10 +43,15 @@ export class SchedulesComponent implements OnInit {
   }
 
   private listAllSchedules() {
+    this.loading = true;
     this.typeId = this.getType();
     const date = this.daySelected$.getValue().replace("/", "-");
 
-    this.scheduleService.retrieveSchedules(this.typeId, date).subscribe((data) => this.schedules$.next(data));
+    this.scheduleService.retrieveSchedules(this.typeId, date).subscribe((data) => {
+      this.loading = false;
+      this.schedules$.next(data);
+    });
+  
   }
 
   private getType() {

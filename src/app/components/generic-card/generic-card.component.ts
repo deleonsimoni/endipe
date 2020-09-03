@@ -49,4 +49,23 @@ export class GenericCardComponent {
         return 'Título(s)';
     }
   }
+
+  ngAfterViewInit() {
+    //renderizar capa dos livros
+    if(this.type == 9){
+
+      let indexArray = 0;
+      this.schedule.books.forEach(element => {
+
+        if((document.getElementById('imageRenderCard' + indexArray) as HTMLImageElement)){
+          let file = element.miniature.data;
+          const base64 = btoa(new Uint8Array(file).reduce((data, byte) => data + String.fromCharCode(byte), ''));
+          (document.getElementById('imageRenderCard' + indexArray) as HTMLImageElement).src = 'data:image/jpg;base64,' + base64;
+          indexArray++;  
+        }
+       
+      }); 
+    }
+  }
+
 }

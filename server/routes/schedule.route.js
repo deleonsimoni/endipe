@@ -20,7 +20,7 @@ const router = express.Router();
 
 module.exports = router;
 
-router.get('/:idType/:data', listSchedule);
+router.get('/:idType/:data', asyncHandler(listSchedule));
 
 router.post('/:idType', [passport.authenticate('jwt', {
   session: false
