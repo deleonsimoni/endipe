@@ -232,7 +232,7 @@ export class GenericFormComponent {
     let indexArray = 0;
     dataCtrel.value.forEach(element => {
 
-      if(dataCtrel.at(indexArray).value) {
+      if(dataCtrel.at(indexArray).value.miniature) {
         let file = dataCtrel.at(indexArray).value.miniature.data;
 
         const base64 = btoa(new Uint8Array(file).reduce((data, byte) => data + String.fromCharCode(byte), ''));

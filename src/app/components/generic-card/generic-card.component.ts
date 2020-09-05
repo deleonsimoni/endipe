@@ -39,7 +39,7 @@ export class GenericCardComponent {
       // case '5':
       //   return 'Títulos e autores';
 
-      case '7':
+      case 7:
         return 'Artista(s)';
 
       //case '11':
