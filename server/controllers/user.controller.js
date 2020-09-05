@@ -4,6 +4,7 @@ const User = require('../models/user.model');
 const Work = require('../models/work.model');
 const RodaDeConversa = require('../models/schedule/rodasDeConversa.model');
 const MiniCurso = require('../models/schedule/minicurso.model');
+const Painel = require('../models/schedule/painel.model');
 
 const Prices = require('../config/prices');
 const IncomingForm = require('formidable').IncomingForm;
@@ -753,14 +754,14 @@ async function deleteCoordinator(id) {
 
 async function getReviewer(axisId) {
   return await User.find({
-      $and: [{
-        'reviewer.icModalityId': axisId
-      }, {
-        'reviewer.icCoordinator': {
-          $ne: true
-        }
-      }]
-    })
+    $and: [{
+      'reviewer.icModalityId': axisId
+    }, {
+      'reviewer.icCoordinator': {
+        $ne: true
+      }
+    }]
+  })
     .select('_id email')
     .sort({
       fullname: 1
@@ -821,7 +822,11 @@ async function getWorksInscricoes(inscricoes) {
     let work;
     if (inscricoes[i].icModalityId == 4) {
       work = await MiniCurso.findById(inscricoes[i].idSchedule).select('_id workTitle qtdDias');
-    } else {
+    }
+    else if (inscricoes[i].icModalityId == 5) {
+      work = await Painel.findById(inscricoes[i].idSchedule).select('_id workTitle');
+    }
+    else {
       work = await RodaDeConversa.findById(inscricoes[i].idSchedule).select('_id workTitle qtdDias');
     }
     works.push(work);
@@ -915,15 +920,15 @@ async function getWorksReviewer(userId) {
   let works = await Work.find({
 
     $or: [{
-        reviewReviewer: {
-          $ne: {}
-        }
-      },
-      {
-        reviewAdmin: {
-          $ne: {}
-        }
+      reviewReviewer: {
+        $ne: {}
       }
+    },
+    {
+      reviewAdmin: {
+        $ne: {}
+      }
+    }
     ],
     'authors.userId': userId
   });

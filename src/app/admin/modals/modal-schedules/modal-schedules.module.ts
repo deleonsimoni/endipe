@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalSchedulesComponent } from './modal-schedules.component';
 import { SimposioFormComponent } from './components/simposio-form/simposio-form.component';
 import { UtilNgxMaterialModule } from 'src/app/util-ngx-material/util-ngx-material.module';
-import { BsDatepickerModule } from 'ngx-bootstrap';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { WorkScheduleFormComponent } from './components/work-schedule-form/work-schedule-form.component';
 
 @NgModule({

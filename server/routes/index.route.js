@@ -7,6 +7,8 @@ const reviewRoutes = require('./reviews.route');
 const anaisRoutes = require('./anais.route');
 const conferencistaRoutes = require('./conferencista.route');
 const scheduleRoutes = require('./schedule.route');
+const liveRoutes = require('./virtual/live.route');
+const chatAdminRoutes = require('./virtual/chat-admin.route');
 
 const router = express.Router(); // eslint-disable-line new-cap
 
@@ -23,5 +25,8 @@ router.use('/reviews', reviewRoutes);
 router.use('/conferencista', conferencistaRoutes);
 router.use('/schedule', scheduleRoutes);
 router.use('/anais', anaisRoutes);
+router.use('/live', liveRoutes);
+router.use('/chat-admin', chatAdminRoutes);
+
 
 module.exports = router;

@@ -15,11 +15,13 @@ import { Router } from "@angular/router";
 export class SchedulesComponent implements OnInit {
   public schedules$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
   public programacoes = SCHEDULE_TYPE;
-  public days = ["29/10", "30/10", "31/10", "01/11", "02/11", "03/11", "04/11", "05/11", "06/11", "07/11", "08/11", "09/11", "10/11", "11/11", "12/11", "13/11"];
+  public days = ["29/10", "30/10", "31/10", "01/11", "02/11", "03/11", "04/11", "05/11", "06/11", "07/11", "08/11", "09/11", "10/11", "11/11", "12/11"];
   public daySelected$: BehaviorSubject<string> = new BehaviorSubject<string>("29/10");
   public label = "Abertura";
   public typeId: any;
   public user: any;
+  public loading = false;
+
 
   constructor(
     private dialog: MatDialog,
@@ -41,10 +43,15 @@ export class SchedulesComponent implements OnInit {
   }
 
   private listAllSchedules() {
+    this.loading = true;
     this.typeId = this.getType();
     const date = this.daySelected$.getValue().replace("/", "-");
 
-    this.scheduleService.retrieveSchedules(this.typeId, date).subscribe((data) => this.schedules$.next(data));
+    this.scheduleService.retrieveSchedules(this.typeId, date).subscribe((data) => {
+      this.loading = false;
+      this.schedules$.next(data);
+    });
+  
   }
 
   private getType() {

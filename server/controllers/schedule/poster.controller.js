@@ -9,7 +9,7 @@ module.exports = {
 
 async function listSchedule(date) {
   return await Poster.find({
-      date: date
+      'dates.date': { $in: date }
     })
     .sort({
       startTime: 1
@@ -21,9 +21,7 @@ async function insertSchedule(schedule) {
 }
 
 async function updateSchedule(id, schedule) {
-  return await Poster.findOneAndUpdate(id, schedule, {
-    upsert: true
-  });
+  return await Poster.findOneAndUpdate({ _id: id }, schedule);
 }
 
 async function deleteSchedule(id) {

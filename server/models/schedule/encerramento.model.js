@@ -11,7 +11,7 @@ const ScheduleSchema = new mongoose.Schema({
   titles: [],
   coordinators: [{
     name: String,
-    icCoordinator: {
+    isCoordinator: {
       type: Boolean,
       default: false
     }

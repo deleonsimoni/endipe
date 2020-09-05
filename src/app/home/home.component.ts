@@ -24,7 +24,6 @@ import { PROGRAMACOES } from '../declarations';
 import { ModalEncerramentoComponent } from '../modal-encerramento/modal-encerramento.component';
 import { ModalAberturaComponent } from '../modal-abertura/modal-abertura.component';
 import { AnaisService } from '../services/anais.service';
-import { ModalEndipeVirtualComponent } from '../modal-endipe-virtual/modal-endipe-virtual.component';
 
 @Component({
   selector: 'app-home',
@@ -440,11 +439,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
 
-    const dialogRef = this.dialog.open(ModalEndipeVirtualComponent, {
-      data: {},
-      height: '550vh'
-    });
-
     this.listarNoticias();
 
   }
@@ -607,13 +601,6 @@ export class HomeComponent implements OnInit {
   public openDialogApoiadores(apoiadores, imagens) {
     const dialogRef = this.dialog.open(ModalApoiadoresComponent, {
       data: { item: apoiadores, imagensApoiadores: imagens },
-      height: '550vh'
-    });
-  }
-
-  public openDialogEndipeVirtual() {
-    const dialogRef = this.dialog.open(ModalEndipeVirtualComponent, {
-      data: {},
       height: '550vh'
     });
   }

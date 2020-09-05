@@ -13,30 +13,26 @@ const ScheduleSchema = new mongoose.Schema({
   workTitle: {
     type: String,
   },
-  startTime: {
-    type: String,
-  },
-  endTime: {
-    type: String,
-  },
+
   place: {
     type: String,
   },
   address: {
     type: String,
   },
-  virtual: {
-    monitors: [{
-      email: String,
-      icAnfitriao: {
-        type: Boolean,
-        default: false
-      }
-    }],
-    linkLive: {
+
+  dates: [{
+
+    startTime: {
+      type: String,
+    },
+    endTime: {
+      type: String,
+    },
+    date: {
       type: String
     },
-    linkPpt: {
+    linkZoom: {
       type: String
     },
     linkAudio: {
@@ -45,10 +41,13 @@ const ScheduleSchema = new mongoose.Schema({
     linkLibras: {
       type: String
     }
-  },
-  date: {
+
+  }],
+
+  monitor: {
     type: String
   },
+
   axis: {
     type: String
   },

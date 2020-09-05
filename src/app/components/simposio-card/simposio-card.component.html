@@ -38,7 +38,9 @@
         </div>
         <div class="group">
             <p class="label">Link do Youtube</p>
-            <p class="hour">{{ schedule.virtual.linkYoutube }}</p>
+            <!--   <p class="hour">{{ schedule.virtual.linkYoutube }}</p>-->
+            <p class="hour"><a href="{{ schedule?.virtual?.linkYoutube }}"
+                    target="_blank">{{ schedule?.virtual?.linkYoutube }}</a></p>
         </div>
     </div>
 </div>

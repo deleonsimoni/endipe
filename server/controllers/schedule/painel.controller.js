@@ -9,7 +9,7 @@ module.exports = {
 
 async function listSchedule(date) {
   return await Painel.find({
-      date: date
+      'dates.date': { $in: date }
     })
     .sort({
       startTime: 1
@@ -21,9 +21,7 @@ async function insertSchedule(schedule) {
 }
 
 async function updateSchedule(id, schedule) {
-  return await Painel.findOneAndUpdate(id, schedule, {
-    upsert: true
-  });
+  return await Painel.findOneAndUpdate({ _id: id }, schedule);
 }
 
 async function deleteSchedule(id) {

@@ -16,33 +16,19 @@ const ScheduleSchema = new mongoose.Schema({
   axis: {
     type: String
   },
-  startTime: {
-    type: String,
-  },
-  startTime: {
-    type: String,
-  },
-  endTime: {
-    type: String,
-  },
-  place: {
-    type: String,
-  },
-  address: {
-    type: String,
-  },
-  virtual: {
-    monitors: [{
-      email: String,
-      icAnfitriao: {
-        type: Boolean,
-        default: false
-      }
-    }],
-    linkLive: {
+
+  dates: [{
+
+    startTime: {
+      type: String,
+    },
+    endTime: {
+      type: String,
+    },
+    date: {
       type: String
     },
-    linkPpt: {
+    linkZoom: {
       type: String
     },
     linkAudio: {
@@ -51,8 +37,38 @@ const ScheduleSchema = new mongoose.Schema({
     linkLibras: {
       type: String
     }
+
+  }],
+
+  monitor: {
+    type: String
   },
+
+  place: {
+    type: String,
+  },
+  address: {
+    type: String,
+  },
+
   pdf: {
+    type: String
+  },
+  qtdSubscribers: {
+    type: String,
+  },
+  subscribers: [{
+    userId: {
+      type: mongoose.Schema.Types.ObjectId
+    },
+    userEmail: {
+      type: String
+    },
+  }],
+  authors: {
+    type: String
+  },
+  resumePropose: {
     type: String
   },
   date: {

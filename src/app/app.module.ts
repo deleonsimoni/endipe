@@ -36,7 +36,7 @@ import { OwlModule } from 'ngx-owl-carousel';
 import { ToastrModule } from 'ngx-toastr';
 import { TrabalhosComponent } from './trabalhos/trabalhos.component';
 import { ListarTrabalhosComponent } from './listar-trabalhos/listar-trabalhos.component';
-import { AccordionModule } from 'ngx-bootstrap';
+import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { PerfilComponent } from './perfil/perfil.component';
 import { AdminModule } from './admin/admin.module';
 import { PipesModule } from './pipes/pipes.module';
@@ -57,7 +57,11 @@ import { GlobalComponentsModule } from './components/global-components.module';
 import { ProgramacaoModule } from './programacao/programacao.module';
 import { HomeVirtualComponent } from './endipe-virtual/home-virtual/home-virtual.component';
 import { MeuEndipeComponent } from './meu-endipe/meu-endipe.component';
-import { ModalEndipeVirtualComponent } from './modal-endipe-virtual/modal-endipe-virtual.component';
+import {NgxImageCompressService} from 'ngx-image-compress';
+import { SecretariaVirtualComponent } from './endipe-virtual/secretaria-virtual/secretaria-virtual.component';
+import { LiveVirtualComponent } from './endipe-virtual/live-virtual/live-virtual.component';
+import { TimeLineVirtualComponent } from './endipe-virtual/time-line-virtual/time-line-virtual.component';
+import { ChatVirtualComponent } from './endipe-virtual/chat-admin-virtual/chat-admin-virtual.component';
 
 @NgModule({
   declarations: [
@@ -96,7 +100,10 @@ import { ModalEndipeVirtualComponent } from './modal-endipe-virtual/modal-endipe
     ModalAberturaComponent,
     HomeVirtualComponent,
     MeuEndipeComponent,
-    ModalEndipeVirtualComponent,
+    SecretariaVirtualComponent,
+    LiveVirtualComponent,
+    TimeLineVirtualComponent,
+    ChatVirtualComponent,
 
   ],
   imports: [
@@ -143,13 +150,13 @@ import { ModalEndipeVirtualComponent } from './modal-endipe-virtual/modal-endipe
     ModalEncerramentoComponent,
     ModalAberturaComponent,
     RegisterComponent,
-    ModalEndipeVirtualComponent,
 
   ],
   providers: [
+    NgxImageCompressService,
     {
       provide: 'BASE_API_URL',
-      useValue: environment.host
+      useValue: environment.host,
     },
     {
       provide: HTTP_INTERCEPTORS,

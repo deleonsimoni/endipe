@@ -80,6 +80,9 @@ export class PerfilComponent implements OnInit {
         return;
       }
 
+      if(!(this.userData.dateBirth instanceof Date)){
+        this.userData.dateBirth = moment(this.userData.dateBirth, 'DD/MM/YYYY');
+      }
 
       this.carregando = true;
 

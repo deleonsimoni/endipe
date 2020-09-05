@@ -12,7 +12,7 @@ module.exports = {
 
 async function listSchedule(date) {
   return await Minicurso.find({
-      date: date
+      'dates.date': { $in: date }
     })
     .sort({
       startTime: 1
@@ -24,9 +24,7 @@ async function insertSchedule(schedule) {
 }
 
 async function updateSchedule(id, schedule) {
-  return await Minicurso.findOneAndUpdate(id, schedule, {
-    upsert: true
-  });
+  return await Minicurso.findOneAndUpdate({ _id: id }, schedule);
 }
 
 async function deleteSchedule(id) {

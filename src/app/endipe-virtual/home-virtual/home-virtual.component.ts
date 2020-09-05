@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { HttpClient } from '@angular/common/http';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-home-virtual',
@@ -12,13 +15,22 @@ export class HomeVirtualComponent implements OnInit {
   hours;
   minutes;
   seconds;
-  panelOpenState = false;
-  panelOpenState2 = false;
+  carregando = false;
+  user;
+  comments;
 
-  constructor() { }
+  constructor(    
+    private toastr: ToastrService,
+    @Inject('BASE_API_URL') private baseUrl: string,
+    private http: HttpClient,
+    private authService: AuthService) { }
 
   ngOnInit() {
-    this.countDownDate = new Date("Jan 5, 2021 15:37:25").getTime();
+
+    this.retrieveUser();
+
+
+    this.countDownDate = new Date("Oct 29, 2020 00:00:00").getTime();
 
     setInterval(() => {
 
@@ -38,6 +50,12 @@ export class HomeVirtualComponent implements OnInit {
           document.getElementById("demo").innerHTML = "EXPIRED";
         }*/
       }, 1000);
+
+  }
+
+  private retrieveUser() {
+
+    this.user = this.authService.getDecodedAccessToken(this.authService.getToken());
 
   }
 

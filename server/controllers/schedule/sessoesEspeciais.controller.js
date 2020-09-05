@@ -21,9 +21,7 @@ async function insertSchedule(schedule) {
 }
 
 async function updateSchedule(id, schedule) {
-  return await SessoesEspeciais.findOneAndUpdate(id, schedule, {
-    upsert: true
-  });
+  return await SessoesEspeciais.findOneAndUpdate({ _id: id }, schedule);
 }
 
 async function deleteSchedule(id) {

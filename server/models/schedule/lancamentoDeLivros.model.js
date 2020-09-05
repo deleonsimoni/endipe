@@ -8,11 +8,24 @@ const ScheduleSchema = new mongoose.Schema({
     required: true
   },
 
-  titles: [],
-  coordinator: [],
-  startTime: {
-    type: String,
-  },
+  books: [{
+    title: {
+      type: String,
+    },
+    author: {
+      type: String,
+    },
+    resume: {
+      type: String,
+    },
+    linkSale: {
+      type: String,
+    },
+    nameMiniature: {
+      type: String,
+    }
+
+  }],
   startTime: {
     type: String,
   },
@@ -25,8 +38,11 @@ const ScheduleSchema = new mongoose.Schema({
   address: {
     type: String,
   },
+  theme: {
+    type: String,
+  },
   virtual: {
-    linkYoutube: {
+    linkZoom: {
       type: String
     },
     linkAudio: {
@@ -35,9 +51,6 @@ const ScheduleSchema = new mongoose.Schema({
     linkLibras: {
       type: String
     }
-  },
-  theme: {
-    type: String,
   },
   date: {
     type: String

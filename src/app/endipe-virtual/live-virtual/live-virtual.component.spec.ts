@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ModalEndipeVirtualComponent } from './modal-endipe-virtual.component';
+import { LiveVirtualComponent } from './live-virtual.component';
 
-describe('ModalEndipeVirtualComponent', () => {
-  let component: ModalEndipeVirtualComponent;
-  let fixture: ComponentFixture<ModalEndipeVirtualComponent>;
+describe('LiveVirtualComponent', () => {
+  let component: LiveVirtualComponent;
+  let fixture: ComponentFixture<LiveVirtualComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ModalEndipeVirtualComponent ]
+      declarations: [ LiveVirtualComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ModalEndipeVirtualComponent);
+    fixture = TestBed.createComponent(LiveVirtualComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -36,17 +36,36 @@ export class GenericCardComponent {
 
   get title() {
     switch (this.type) {
-      case '5':
-        return 'Títulos e autores';
+      // case '5':
+      //   return 'Títulos e autores';
 
-      case '7':
+      case 7:
         return 'Artista(s)';
 
-      case '11':
-        return 'Associação/Rede/Fórum e sigla'
+      //case '11':
+      //  return 'Associação/Rede/Fórum e sigla'
 
       default:
         return 'Título(s)';
     }
   }
+
+  ngAfterViewInit() {
+    //renderizar capa dos livros
+    if(this.type == 9){
+
+      let indexArray = 0;
+      this.schedule.books.forEach(element => {
+
+        if((document.getElementById('imageRenderCard' + indexArray) as HTMLImageElement)){
+          let file = element.miniature.data;
+          const base64 = btoa(new Uint8Array(file).reduce((data, byte) => data + String.fromCharCode(byte), ''));
+          (document.getElementById('imageRenderCard' + indexArray) as HTMLImageElement).src = 'data:image/jpg;base64,' + base64;
+          indexArray++;  
+        }
+       
+      }); 
+    }
+  }
+
 }

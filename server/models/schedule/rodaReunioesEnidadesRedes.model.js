@@ -9,10 +9,12 @@ const ScheduleSchema = new mongoose.Schema({
   },
 
   titles: [],
-  coordinator: [],
-  startTime: {
-    type: String,
-  },
+  entrevistados: [{
+    name: String
+  }],
+  entrevistadores: [{
+    name: String
+  }],
   startTime: {
     type: String,
   },

@@ -12,42 +12,44 @@ const painelCtrl = require('../controllers/schedule/painel.controller');
 const sessoesEspeciaisCtrl = require('../controllers/schedule/sessoesEspeciais.controller');
 const rodaReunioesEntidadesRedesCtrl = require('../controllers/schedule/rodaReunioesEntidadesRedes.controller');
 const encerramentoCtrl = require('../controllers/schedule/encerramento.controller');
+const asyncHandler = require('express-async-handler');
+const fileUpload = require('express-fileupload');
 
 
 const router = express.Router();
 
 module.exports = router;
 
-router.get('/:idType/:data', listSchedule);
+router.get('/:idType/:data', asyncHandler(listSchedule));
 
-router.post('/:idType', passport.authenticate('jwt', {
+router.post('/:idType', [passport.authenticate('jwt', {
   session: false
-}), insertSchedule);
+}), fileUpload()], asyncHandler(insertSchedule));
 
 router.post('/unsubscribeMinicurso/:workId', passport.authenticate('jwt', {
   session: false
-}), unsubscribeMinicurso);
+}), asyncHandler(unsubscribeMinicurso));
 
 router.post('/subscribeMinicurso/:workId', passport.authenticate('jwt', {
   session: false
-}), subscribeMinicurso);
+}), asyncHandler(subscribeMinicurso));
 
 router.post('/unsubscribeRodadeConversa/:workId', passport.authenticate('jwt', {
   session: false
-}), unsubscribeRodadeConversa);
+}), asyncHandler(unsubscribeRodadeConversa));
 
 router.post('/subscribeRodadeConversa/:workId', passport.authenticate('jwt', {
   session: false
-}), subscribeRodadeConversa);
+}), asyncHandler(subscribeRodadeConversa));
 
 
 router.put('/:idType/:id', passport.authenticate('jwt', {
   session: false
-}), updateSchedule);
+}), asyncHandler(updateSchedule));
 
 router.delete('/:idType/:id', passport.authenticate('jwt', {
   session: false
-}), deleteSchedule);
+}), asyncHandler(deleteSchedule));
 
 async function unsubscribeMinicurso(req, res) {
   let users = await minicursoCtrl.unsubscribeMinicurso(req.params.workId, req.user._id);
