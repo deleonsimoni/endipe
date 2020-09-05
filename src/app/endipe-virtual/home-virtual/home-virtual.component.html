@@ -19,30 +19,30 @@
 <!-- ENDIPE VIRTUAL 
 <section id="schedule" class="wow fadeInUp mt-2">
   <mat-tab-group  mat-align-tabs="center" animationDuration="1500ms">
-    <mat-tab >
-      <ng-template mat-tab-label>
-        <span class="header-tab pulse header-tab-live" style="cursor: pointer;">AO VIVO</span>
+    <mat-tab label="AO VIVO">
+      <ng-template matTabContent>
+        <div class="container-schedule">
+          <app-live-virtual></app-live-virtual>
+        </div>
       </ng-template>
-      <div class="container-schedule">
-        <app-live-virtual></app-live-virtual>
-      </div>
+      
     </mat-tab>
-    <mat-tab>
-      <ng-template mat-tab-label>
-        <span class="header-tab" style="cursor: pointer;">Timeline</span>
+    <mat-tab label="Timeline">
+      <ng-template matTabContent>
+        <div class="container-schedule">
+          <app-time-line-virtual></app-time-line-virtual>
+        </div>
       </ng-template>
-      <div class="container-schedule">
-        <app-time-line-virtual></app-time-line-virtual>
-      </div>
+     
     </mat-tab>
-    <mat-tab>
-      <ng-template mat-tab-label>
-        <span class="header-tab" style="cursor: pointer;">Tá com dúvidas?</span>
+    <mat-tab label="Dúvidas?">
+      <ng-template matTabContent>
+        <div class="container-schedule">
+          <app-secretaria-virtual [user]="user"></app-secretaria-virtual>
+        </div>
       </ng-template>
-      <div class="container-schedule">
-        <app-secretaria-virtual [user]="user"></app-secretaria-virtual>
-      </div>
+      
     </mat-tab>
   </mat-tab-group>
-</section>-->
-
+</section>
+-->

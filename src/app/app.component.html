@@ -28,39 +28,39 @@
               <li class="pointer">
                 <a tabindex="0" class="menu-has-children aoVivo pulse" [routerLink]="['/endipe-virtual']" >ENDIPE VIRTUAL</a>
               </li>
-              <li tabindex="0" (keydown)="expandMenu($event)" class="menu-has-children pointer">
-                <a tabindex="0" >SOBRE <i class="fa fa-chevron-down"></i></a>
-                <ul>
-                  <li><a tabindex="0" [routerLink]="['/home']" fragment="about">Tema</a></li>
-                  <li><a tabindex="0" [routerLink]="['/home']" fragment="clients">Apresentação</a></li>
-                  <li><a tabindex="0" [routerLink]="['/home']" fragment="services">Eixos</a></li>
-                  <li><a tabindex="0" [routerLink]="['/home']" fragment="historico">Histórico</a></li>
+              <li class="menu-has-children pointer">
+                <a tabindex="0" (keydown)="expandMenu($event, 'sobre')" >SOBREaax <i class="fa fa-chevron-down"></i></a>
+                <ul class="sobre">
+                  <li><a [routerLink]="['/home']" alt="Tema" fragment="about">Tema</a></li>
+                  <li><a [routerLink]="['/home']" alt="Apresentação" fragment="clients">Apresentação</a></li>
+                  <li><a [routerLink]="['/home']" alt="Eixos" fragment="services">Eixos</a></li>
+                  <li><a [routerLink]="['/home']" alt="Histórico" fragment="historico">Histórico</a></li>
                 </ul>
               </li>
-              <li tabindex="0" class="menu-has-children pointer">
-                <a tabindex="0">ORGANIZAÇÃO <i class="fa fa-chevron-down"></i></a>
-                <ul>
-                  <li><a tabindex="0" [routerLink]="['/home']" fragment="team">Coordenação</a></li>
-                  <li><a tabindex="0" [routerLink]="['/home']" fragment="team">Comitê Organizador</a></li>
-                  <li><a tabindex="0" [routerLink]="['/home']" fragment="comiteCientifico">Comitê
+              <li class="menu-has-children pointer">
+                <a tabindex="0" (keydown)="expandMenu($event, 'organizacao')">ORGANIZAÇÃO <i class="fa fa-chevron-down"></i></a>
+                <ul class="organizacao">
+                  <li><a tabindex="0" [routerLink]="['/home']" alt="coordenação" fragment="team">Coordenação</a></li>
+                  <li><a tabindex="0" [routerLink]="['/home']" alt="Comitê Organizador" fragment="team">Comitê Organizador</a></li>
+                  <li><a tabindex="0" [routerLink]="['/home']" alt="Comitê Científico" fragment="comiteCientifico">Comitê
                       Científico</a></li>
-                  <li><a tabindex="0" [routerLink]="['/home']" fragment="parcerias">Parcerias</a></li>
-                  <li><a tabindex="0" [routerLink]="['/home']" fragment="contact">Contato</a></li>
+                  <li><a tabindex="0" [routerLink]="['/home']" alt="Parcerias" fragment="parcerias">Parcerias</a></li>
+                  <li><a tabindex="0" [routerLink]="['/home']" alt="Contato" fragment="contact">Contato</a></li>
                 </ul>
               </li>
               <li class="menu-has-children pointer">
               </li>
 
-              <li tabindex="0" class="menu-has-children pointer">
-                <a tabindex="0">PROGRAMAÇÃO <i class="fa fa-chevron-down"></i></a>
-                <ul>
-                  <li><a tabindex="0" [routerLink]="['/programacao']">Programação</a></li>
-                  <li><a tabindex="0" (click)="openConferencistasModal()">Conferencistas</a></li>
+              <li class="menu-has-children pointer">
+                <a tabindex="0" (keydown)="expandMenu($event, 'programacao')">PROGRAMAÇÃO <i class="fa fa-chevron-down"></i></a>
+                <ul class="programacao">
+                  <li><a tabindex="0" alt="Programação" [routerLink]="['/programacao']">Programação</a></li>
+                  <li><a tabindex="0" alt="Conferencistas" (click)="openConferencistasModal()">Conferencistas</a></li>
                 </ul>
               </li>
 
 
-
+              <!--
               <li tabindex="0" class="menu-has-children pointer">
                 <a tabindex="0">SUBMISSÃO <i class="fa fa-chevron-down"></i></a>
                 <ul>
@@ -70,32 +70,37 @@
                   <li><a tabindex="0" [routerLink]="['/home']" fragment="anais">Anais</a></li>
                 </ul>
               </li>
-              <li tabindex="0" class="menu-has-children pointer">
-                <a tabindex="0">RIO DE JANEIRO <i class="fa fa-chevron-down"></i></a>
-                <ul>
-                  <li><a tabindex="0" [routerLink]="['/home']" fragment="hospedagem">Hospedagem</a></li>
-                  <li><a tabindex="0" [routerLink]="['/home']" fragment="hospedagem">Transporte</a></li>
-                  <li><a tabindex="0" [routerLink]="['/home']" fragment="hospedagem">Alimentação</a></li>
-                  <li><a tabindex="0" [routerLink]="['/home']" fragment="hospedagem">Turismo</a></li>
-                  <li><a tabindex="0" [routerLink]="['/home']" fragment="hospedagem">Clima</a></li>
+              -->
+
+              <li class="menu-has-children pointer">
+                <a tabindex="0" (keydown)="expandMenu($event, 'dicas')">RIO DE JANEIRO <i class="fa fa-chevron-down"></i></a>
+                <ul class="dicas">
+                  <li><a tabindex="0" alt="hospedagem" [routerLink]="['/home']" fragment="Hospedagem">Hospedagem</a></li>
+                  <li><a tabindex="0" alt="transporte" [routerLink]="['/home']" fragment="Transporte">Transporte</a></li>
+                  <li><a tabindex="0" alt="alimentação" [routerLink]="['/home']" fragment="Alimentação">Alimentação</a></li>
+                  <li><a tabindex="0" alt="turismo" [routerLink]="['/home']" fragment="Turismo">Turismo</a></li>
+                  <li><a tabindex="0" alt="clima" [routerLink]="['/home']" fragment="Clima">Clima</a></li>
                 </ul>
               </li>
               <!--<li class="pointer">
                 <a tabindex="0" class="text-danger" *ngIf="!isAuth" [routerLink]="['/register']" fragment="">INSCRIÇÃO</a>
               </li>-->
               <li tabindex="0" class="pointer" *ngIf="!isAuth"><a tabindex="0" [routerLink]="['/login']">LOGIN</a></li>
-              <li tabindex="0" *ngIf="isAuth" class="menu-has-children pointer">
-                <a tabindex="0" [routerLink]="">AÇÕES <i class="fa fa-chevron-down"></i></a>
-                <ul>
-                  <li><a tabindex="0" class="menu-has-children aoVivo pulse" [routerLink]="['/meu-endipe']">Meu Endipe</a></li>
-                  <li><a tabindex="0" [routerLink]="['/pagamento']">Pagamento</a></li>
-                  <li><a tabindex="0" [routerLink]="['/meus-trabalhos']">Submissão</a></li>
-                  <li><a tabindex="0" [routerLink]="['/certificados']">Certificados</a></li>
-                  <li><a tabindex="0" [routerLink]="['/perfil']">Perfil</a></li>
+
+              <li  *ngIf="isAuth" class="menu-has-children pointer">
+                <a tabindex="0" [routerLink]="" (keydown)="expandMenu($event, 'acoes')">AÇÕES <i class="fa fa-chevron-down"></i></a>
+                <ul class="acoes">
+                  <li><a tabindex="0" alt="Meu Endipe" class="menu-has-children aoVivo pulse" [routerLink]="['/meu-endipe']">Meu Endipe</a></li>
+                  <li><a tabindex="0" alt="Pagamento" [routerLink]="['/pagamento']">Pagamento</a></li>
+                  <li><a tabindex="0" alt="Submissão" [routerLink]="['/meus-trabalhos']">Submissão</a></li>
+                  <li><a tabindex="0" alt="Certificados" [routerLink]="['/certificados']">Certificados</a></li>
+                  <li><a tabindex="0" alt="PErfil" [routerLink]="['/perfil']">Perfil</a></li>
                   <li *ngIf="verifyAcess()">
                     <a tabindex="0" [routerLink]="['/admin']">Dashboard</a>
                   </li>
+
                   <li><a tabindex="0" [routerLink]="" class="pointer" (click)="logout()">Sair</a></li>
+
                 </ul>
               </li>
             </ul>

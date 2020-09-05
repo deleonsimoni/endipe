@@ -33,7 +33,6 @@ async function listSchedule(date) {
 
 async function insertSchedule(schedule) {
 
-  console.log('insert upload book');
   let responseUpload = await uploadBooks(schedule.books);
 
   if (responseUpload.temErro) {

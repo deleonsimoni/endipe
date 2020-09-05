@@ -88,21 +88,19 @@
   }
 
 #schedule {
-    .header-tab {
+      ::ng-deep .mat-tab-label {
         font-size: 18px;
         font-weight: 700;
         color: #0c2e8a;
-      }
 
-    .header-tab-live {
-        color: red;
-    }
-    .pulse {
-        animation: pulse 0.7s infinite;
-        display: table;
-        animation-direction: alternate;
-        -webkit-animation-name: pulse;
-        animation-name: pulse;
+        &:first-child {
+          color: red;
+          animation: pulse 0.7s infinite;
+          animation-direction: alternate;
+          -webkit-animation-name: pulse;
+          animation-name: pulse;
+        }
+
       }
 
       ::ng-deep .mat-tab-list .mat-tab-labels .mat-tab-label-active {

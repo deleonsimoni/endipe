@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
+import { Component, OnInit, ViewChild, Renderer2 } from "@angular/core";
 import $ from "jquery";
 import { BreakpointObserver } from "@angular/cdk/layout";
 import { AccordionComponent } from "ngx-bootstrap/accordion";
@@ -38,6 +38,7 @@ export class AppComponent implements OnInit {
     private share: ShareDataService,
     private toastr: ToastrService,
     private rota: Router,
+    private renderer: Renderer2,
     private auth: AuthService,
     private dialog: MatDialog
   ) {
@@ -110,14 +111,23 @@ export class AppComponent implements OnInit {
       : "";
   }
 
-  expandMenu(event) {
+  expandMenu(event, classe) {
     if (event.keyCode === 40 || event.keyCode === 32 || event.keyCode === 13) {
-      event.dispatchEvent(new MouseEvent('mouseover', {
-        view: window,
-        bubbles: true,
-        cancelable: true
-    }));
+      var element = document.getElementsByClassName(classe)[0];
+      const hasClass = element.classList.contains('hover');
+      if(hasClass) {
+        this.renderer.removeClass(element, 'hover');
+        this.renderer.setStyle(element, 'display', 'none');
+
+      } else {
+        this.renderer.addClass(element, 'hover');
+        this.renderer.setStyle(element, 'display', 'block');
+
+      }
     }
   }
+
+
+
 
 }
