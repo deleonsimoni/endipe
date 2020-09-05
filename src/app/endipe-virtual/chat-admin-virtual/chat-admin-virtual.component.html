@@ -1,16 +1,16 @@
 <section id="forum" class="section-header wow fadeInUp">
     <div>
         <ul>
-          <li *ngFor="let comment of comments">
+          <li *ngFor="let comment of comments.chat">
               
             <header>
-              <h1 [ngClass]="{ 'author': isAuthor(comment.author.email) }">
-                    {{ comment.author.name }}
+              <h1 [ngClass]="{ 'author': isAuthor(comment?.publisher?.email) }">
+                    {{ comment.publisher.name }}
              </h1>
                
               <div>
                 <button (click)="love(comment.id)" [ngClass]="{ 'loved': comment.loved }"></button>
-                <button (click)="reply(comment.author.name)"></button>
+                <button (click)="reply(comment.publisher.name)"></button>
               </div>
 
             </header>
@@ -19,7 +19,7 @@
           </li>
         </ul>
         <form name="form" (ngSubmit)="addNewComment()" novalidate>
-          <textarea placeholder="Digite aqui..." [ngModelOptions]="{standalone: true}" [(ngModel)]="newComment.content" required></textarea>
+          <textarea placeholder="Digite aqui..." [ngModelOptions]="{standalone: true}" [(ngModel)]="newComment" required></textarea>
           <button type="submit">Enviar</button>
         </form>
       </div>

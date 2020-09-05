@@ -22,7 +22,7 @@
   <mat-tab-group  mat-align-tabs="center" animationDuration="1500ms">
     <mat-tab >
       <ng-template mat-tab-label>
-        <span class="header-tab pulse header-tab-live">AO VIVO</span>
+        <span class="header-tab pulse header-tab-live" style="cursor: pointer;">AO VIVO</span>
       </ng-template>
       <div class="container-schedule">
         <app-live-virtual></app-live-virtual>
@@ -30,7 +30,7 @@
     </mat-tab>
     <mat-tab>
       <ng-template mat-tab-label>
-        <span class="header-tab">Timeline</span>
+        <span class="header-tab" style="cursor: pointer;">Timeline</span>
       </ng-template>
       <div class="container-schedule">
         <app-time-line-virtual></app-time-line-virtual>
@@ -38,10 +38,10 @@
     </mat-tab>
     <mat-tab>
       <ng-template mat-tab-label>
-        <span class="header-tab">Tá com dúvidas?</span>
+        <span class="header-tab" style="cursor: pointer;">Tá com dúvidas?</span>
       </ng-template>
       <div class="container-schedule">
-        <app-secretaria-virtual></app-secretaria-virtual>
+        <app-secretaria-virtual [user]="user"></app-secretaria-virtual>
       </div>
     </mat-tab>
   </mat-tab-group>

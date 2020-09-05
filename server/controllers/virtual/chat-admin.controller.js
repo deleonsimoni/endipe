@@ -11,14 +11,14 @@ async function getChat(idChat) {
 }
 
 async function insertChat(mensagem, user) {
-  
-  mensagem.autor = {
+  let chat = {};
+  chat.author = {
     user: user._id,
     name: user.fullname,
     email: user.email
   };
 
-  mensagem.chat = [{
+  chat.chat = [{
     content: mensagem,
     publisher: {
       user: user._id,
@@ -28,7 +28,7 @@ async function insertChat(mensagem, user) {
     }
   }];
 
-  return await new Chat(anais).save();
+  return await new Chat(chat).save();
 }
 
 async function updateChat(idChat, mensagem, user) {
@@ -43,11 +43,10 @@ async function updateChat(idChat, mensagem, user) {
     }
   };
 
-
   return await Chat.findOneAndUpdate({
     _id: idChat
     }, {
-      $push: {
+      $addToSet: {
         chat: chat
       }
     }, {

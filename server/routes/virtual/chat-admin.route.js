@@ -26,6 +26,7 @@ async function getChat(req, res) {
 }
 
 async function insertChat(req, res) {
+
   let rep = await chatCtrl.insertChat(req.body.mensagem, req.user);
   res.json(rep);
 }

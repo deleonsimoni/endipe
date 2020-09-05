@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ChatVirtualComponent } from './chat-virtual.component';
+import { ChatVirtualComponent } from './chat-admin-virtual.component';
 
 describe('ChatVirtualComponent', () => {
   let component: ChatVirtualComponent;
