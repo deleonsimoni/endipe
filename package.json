@@ -28,7 +28,7 @@
     "@compodoc/compodoc": "^1.1.11",
     "@popperjs/core": "^2.4.4",
     "aws-sdk": "^2.738.0",
-    "bcrypt": "^3.0.8",
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.18.2",
     "bootstrap": "^4.5.2",
     "compression": "^1.7.2",
