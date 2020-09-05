@@ -58,6 +58,10 @@ import { ProgramacaoModule } from './programacao/programacao.module';
 import { HomeVirtualComponent } from './endipe-virtual/home-virtual/home-virtual.component';
 import { MeuEndipeComponent } from './meu-endipe/meu-endipe.component';
 import {NgxImageCompressService} from 'ngx-image-compress';
+import { SecretariaVirtualComponent } from './endipe-virtual/secretaria-virtual/secretaria-virtual.component';
+import { LiveVirtualComponent } from './endipe-virtual/live-virtual/live-virtual.component';
+import { TimeLineVirtualComponent } from './endipe-virtual/time-line-virtual/time-line-virtual.component';
+import { ChatVirtualComponent } from './endipe-virtual/chat-virtual/chat-virtual.component';
 
 @NgModule({
   declarations: [
@@ -96,6 +100,10 @@ import {NgxImageCompressService} from 'ngx-image-compress';
     ModalAberturaComponent,
     HomeVirtualComponent,
     MeuEndipeComponent,
+    SecretariaVirtualComponent,
+    LiveVirtualComponent,
+    TimeLineVirtualComponent,
+    ChatVirtualComponent,
 
   ],
   imports: [

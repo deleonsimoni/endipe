@@ -1,0 +1,26 @@
+<section id="forum" class="section-header wow fadeInUp">
+    <div>
+        <ul>
+          <li *ngFor="let comment of comments">
+              
+            <header>
+              <h1 [ngClass]="{ 'author': isAuthor(comment.author.email) }">
+                    {{ comment.author.name }}
+             </h1>
+               
+              <div>
+                <button (click)="love(comment.id)" [ngClass]="{ 'loved': comment.loved }"></button>
+                <button (click)="reply(comment.author.name)"></button>
+              </div>
+
+            </header>
+            <p [innerHTML]="parseContent(comment.content)"></p>
+
+          </li>
+        </ul>
+        <form name="form" (ngSubmit)="addNewComment()" novalidate>
+          <textarea placeholder="Digite aqui..." [ngModelOptions]="{standalone: true}" [(ngModel)]="newComment.content" required></textarea>
+          <button type="submit">Enviar</button>
+        </form>
+      </div>
+</section>

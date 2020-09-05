@@ -28,7 +28,6 @@ export class WorksComponent implements OnInit, OnDestroy {
   private retrieveUser() {
 
     this.user = this.authService.getDecodedAccessToken(this.authService.getToken());
-    console.log(this.user);
     const id = this.user.coordinator ? this.user.coordinator : this.user._id;
     this.listWorks(id);
 

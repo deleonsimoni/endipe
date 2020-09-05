@@ -1,7 +1,7 @@
 const express = require('express');
 const passport = require('passport');
 
-const virtualCtrl = require('../controllers/virtual.controller');
+const virtualCtrl = require('../../controllers/virtual/live.controller');
 
 const router = express.Router();
 

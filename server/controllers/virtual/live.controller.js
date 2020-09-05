@@ -1,10 +1,10 @@
-const aberturaCtrl = require('../controllers/schedule/abertura.controller');
-const simposioCtrl = require('../controllers/schedule/simposio.controller');
-const lancamentoDeLivrosCtrl = require('../controllers/schedule/lancamentoDeLivros.controller');
-const atividadeCulturalCtrl = require('../controllers/schedule/atividadeCultural.controller');
-const sessoesEspeciaisCtrl = require('../controllers/schedule/sessoesEspeciais.controller');
-const rodaReunioesEntidadesRedesCtrl = require('../controllers/schedule/rodaReunioesEntidadesRedes.controller');
-const encerramentoCtrl = require('../controllers/schedule/encerramento.controller');
+const aberturaCtrl = require('../schedule/abertura.controller');
+const simposioCtrl = require('../schedule/simposio.controller');
+const lancamentoDeLivrosCtrl = require('../schedule/lancamentoDeLivros.controller');
+const atividadeCulturalCtrl = require('../schedule/atividadeCultural.controller');
+const sessoesEspeciaisCtrl = require('../schedule/sessoesEspeciais.controller');
+const rodaReunioesEntidadesRedesCtrl = require('../schedule/rodaReunioesEntidadesRedes.controller');
+const encerramentoCtrl = require('../schedule/encerramento.controller');
 
 
 
