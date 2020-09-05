@@ -113,7 +113,7 @@
         </div> -->
         <div class="group" *ngIf="type != '3'">
           <p class="label">Resumo da proposta</p>
-          <p class="title not-dash">
+          <p class="title not-dash" style="text-align: justify !important;">
             {{ schedule.resumePropose }}
           </p>
         </div>
@@ -135,11 +135,11 @@
         </div>-->
         <div class="group">
           <p class="label">E-mail do monitor</p>
-          <p class="hour">{{ schedule.monitor }}</p>
+          <p class="title not-dash">{{ schedule.monitor }}</p>
         </div>
         <div class="group" *ngIf="type == '3'">
           <p class="label">E-mail do mediador</p>
-          <p class="hour">{{ schedule.mediator }}</p>
+          <p class="title not-dash">{{ schedule.mediator }}</p>
         </div>
 
         <!-- <div class="group" *ngIf="type == '4' || type == '9'">

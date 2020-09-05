@@ -5,11 +5,11 @@
         <div class="container clearfix">
           <div class="social-links float-right">
             <a [routerLink]="" *ngIf="userName">{{ 'Olá, ' + userName }}</a>
-            <a href="https://www.facebook.com/xxendiperio2020/" target="_blank" class="facebook"><i
+            <a href="https://www.facebook.com/xxendiperio2020/" title="Facebook Endipe" alt="Facebook Endipe" target="_blank" class="facebook"><i
                 class="fab fa-facebook-f"></i></a>
-            <a href="https://www.instagram.com/endipe.riodejaneiro/" target="_blank" class="instagram"><i
+            <a href="https://www.instagram.com/endipe.riodejaneiro/" title="Instagram Endipe" alt="Instagram Endipe" target="_blank" class="instagram"><i
                 class="fab fa-instagram"></i></a>
-            <a href="https://www.youtube.com/channel/UCbUslY4DzrZs3fQEkky2NJQ" target="_blank" class="youtube"><i
+            <a href="https://www.youtube.com/channel/UCbUslY4DzrZs3fQEkky2NJQ" title="Youtube Endipe" alt="Youtube Endipe" target="_blank" class="youtube"><i
                 class="fab fa-youtube"></i></a>
           </div>
         </div>
@@ -28,8 +28,8 @@
               <li class="pointer">
                 <a tabindex="0" class="menu-has-children aoVivo pulse" [routerLink]="['/endipe-virtual']" >ENDIPE VIRTUAL</a>
               </li>
-              <li tabindex="0" class="menu-has-children pointer">
-                <a tabindex="0">SOBRE <i class="fa fa-chevron-down"></i></a>
+              <li tabindex="0" (keydown)="expandMenu($event)" class="">
+                <a tabindex="0" >SOBRE aaa<i class=""></i></a>
                 <ul>
                   <li><a tabindex="0" [routerLink]="['/home']" fragment="about">Tema</a></li>
                   <li><a tabindex="0" [routerLink]="['/home']" fragment="clients">Apresentação</a></li>

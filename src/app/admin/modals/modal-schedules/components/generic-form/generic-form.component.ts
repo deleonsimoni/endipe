@@ -260,23 +260,20 @@ export class GenericFormComponent {
   }
 
   get title() {
-    switch (this.type) {
-      case "5":
+    switch (Number(this.type)) {
+      case 5:
         return "Títulos e autores";
 
-      case "7":
+      case 7:
         return "Artista(s)";
 
       //    case "11":
       //      return "Conexão Entrevista";
 
-      case "1":
-        return "Título(s)";
-      case "10":
-        return "Título(s)";
-      case "11":
-        return "Título(s)";
-      case "12":
+      case 1:
+      case 10:
+      case 11:
+      case 12:
         return "Título(s)";
     }
   }

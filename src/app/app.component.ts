@@ -109,4 +109,15 @@ export class AppComponent implements OnInit {
       ? this.user.fullname.split(" ")[0]
       : "";
   }
+
+  expandMenu(event) {
+    if (event.keyCode === 40 || event.keyCode === 32 || event.keyCode === 13) {
+      event.dispatchEvent(new MouseEvent('mouseover', {
+        view: window,
+        bubbles: true,
+        cancelable: true
+    }));
+    }
+  }
+
 }
