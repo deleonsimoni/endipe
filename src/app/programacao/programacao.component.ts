@@ -20,7 +20,6 @@ export class ProgramacaoComponent implements OnInit {
   carregando = false;
   public user: any;
   public loading = false;
-  user;
   public modalities = [
     {
       name: 'Minicurso',
@@ -44,7 +43,7 @@ export class ProgramacaoComponent implements OnInit {
   
   }
 
-  ngOnInit() {
+  ngOnInit() { 
     //this.listAllSchedules();
 
     this.user = this.auth.getDecodedAccessToken(this.auth.getToken());

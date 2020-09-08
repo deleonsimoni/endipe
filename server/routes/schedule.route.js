@@ -42,6 +42,14 @@ router.post('/subscribeRodadeConversa/:workId', passport.authenticate('jwt', {
   session: false
 }), asyncHandler(subscribeRodadeConversa));
 
+router.post('/unsubscribePainel/:workId', passport.authenticate('jwt', {
+  session: false
+}), asyncHandler(unsubscribePainel));
+
+router.post('/subscribePainel/:workId', passport.authenticate('jwt', {
+  session: false
+}), asyncHandler(subscribePainel));
+
 
 router.put('/:idType/:id', passport.authenticate('jwt', {
   session: false
@@ -68,6 +76,16 @@ async function unsubscribeRodadeConversa(req, res) {
 
 async function subscribeRodadeConversa(req, res) {
   let users = await rodasDeConversaCtrl.subscribeRodadeConversa(req.params.workId, req.user._id, req.user.email);
+  res.json(users);
+}
+
+async function unsubscribePainel(req, res) {
+  let users = await painelCtrl.unsubscribePainel(req.params.workId, req.user._id);
+  res.json(users);
+}
+
+async function subscribePainel(req, res) {
+  let users = await painelCtrl.subscribePainel(req.params.workId, req.user._id, req.user.email);
   res.json(users);
 }
 

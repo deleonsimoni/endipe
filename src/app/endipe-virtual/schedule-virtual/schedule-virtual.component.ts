@@ -75,12 +75,12 @@ export class ScheduleVirtualComponent implements OnInit {
     );
   }
 
-  public isSubscribe(scheduleSelect) {
-    if (this.user._id && scheduleSelect.hasOwnProperty('subscribers')) {
-        return scheduleSelect.subscribers.some(el => el.userId == this.user._id);
-    }
+public isSubscribe(scheduleSelect) {
+  if (this.user._id && scheduleSelect.hasOwnProperty('subscribers')) {
+      return scheduleSelect.subscribers.some(el => el.userId == this.user._id);
+  }
 
-    return false;
+  return false;
 }
 
   public signUp(type, scheduleFull) {

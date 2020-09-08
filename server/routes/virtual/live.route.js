@@ -8,9 +8,15 @@ module.exports = router;
 
 router.get('/getScheduleByDay/:date', asyncHandler(listVirtual));
 router.get('/scheduleWorkPaginate', asyncHandler(listScheduleWorkPaginate));
+router.get('/getSubscribersUser',  passport.authenticate("jwt", { session: false, }), asyncHandler(getSubscribersUser));
 
 async function listScheduleWorkPaginate(req, res) {
   let rep = await virtualCtrl.listScheduleWorkPaginate(req);
+  res.json(rep);
+}
+
+async function getSubscribersUser(req, res) {
+  let rep = await virtualCtrl.getSubscribersUser(req.user);
   res.json(rep);
 }
 

@@ -14,7 +14,8 @@ const RodasDeConversa = require('../../models/schedule/rodasDeConversa.model');
 
 module.exports = {
   listVirtual,
-  listScheduleWorkPaginate
+  listScheduleWorkPaginate,
+  getSubscribersUser
 }
 
 
@@ -72,8 +73,41 @@ async function listScheduleWorkPaginate(req) {
   };
 }
 
-async function listVirtual(date) {
+async function getSubscribersUser(user) {
 
+  let schedules = [];
+  let schedule = {};
+  if(user.cursosInscritos){
+
+    for (let index = 0; index < user.cursosInscritos.length; index++) {
+      
+      switch (Number(user.cursosInscritos[index].icModalityId)) {
+        case 4:
+          schedule = await Minicurso.findById({_id: user.cursosInscritos[index].idSchedule }).lean();
+          if(schedule) schedule.type = 4;
+        break;
+        case 5:
+          schedule = await Painel.findById({_id: user.cursosInscritos[index].idSchedule }).lean();
+          if(schedule) schedule.type = 5;
+        break;
+        case 2:
+          schedule = await RodasDeConversa.findById({_id: user.cursosInscritos[index].idSchedule }).lean();
+          if(schedule) schedule.type = 2;
+          
+        break;
+      }
+
+      schedules.push(schedule);
+
+    }
+
+    return schedules;
+  }
+
+
+}
+
+async function listVirtual(date) {
 
   let virtual = {};
   if (date == "29/10") {

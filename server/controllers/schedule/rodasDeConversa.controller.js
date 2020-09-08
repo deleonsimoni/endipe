@@ -40,7 +40,9 @@ async function unsubscribeRodadeConversa(workId, userId) {
     _id: userId
   }, {
     $pull: {
-      'cursosInscritos': workId
+      cursosInscritos:{
+        'idSchedule': workId
+      }
     }
   }, function (err, doc) {
     if (err) {
