@@ -61,8 +61,8 @@ import {NgxImageCompressService} from 'ngx-image-compress';
 import { SecretariaVirtualComponent } from './endipe-virtual/secretaria-virtual/secretaria-virtual.component';
 import { LiveVirtualComponent } from './endipe-virtual/live-virtual/live-virtual.component';
 import { TimeLineVirtualComponent } from './endipe-virtual/time-line-virtual/time-line-virtual.component';
-import { ChatVirtualComponent } from './endipe-virtual/chat-admin-virtual/chat-admin-virtual.component';
-
+import { MatPaginatorIntl } from '@angular/material';
+import { getPtBRPaginatorINTL } from './ptBR-paginator-intl';
 @NgModule({
   declarations: [
     AppComponent,
@@ -103,8 +103,6 @@ import { ChatVirtualComponent } from './endipe-virtual/chat-admin-virtual/chat-a
     SecretariaVirtualComponent,
     LiveVirtualComponent,
     TimeLineVirtualComponent,
-    ChatVirtualComponent,
-
   ],
   imports: [
     BrowserModule,
@@ -158,6 +156,7 @@ import { ChatVirtualComponent } from './endipe-virtual/chat-admin-virtual/chat-a
       provide: 'BASE_API_URL',
       useValue: environment.host,
     },
+    { provide: MatPaginatorIntl, useValue: getPtBRPaginatorINTL() },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorService,

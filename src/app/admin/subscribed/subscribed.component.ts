@@ -109,7 +109,6 @@ export class SubscribedComponent implements OnInit {
 
     this.adminService.retrieveUsers(event && event.pageIndex + 1 || 1, encodeURIComponent(JSON.stringify(this.search)))
       .subscribe((res: any) => {
-        //console.log(res);
         this.users = res.usersFound;
         this.pager = res.pager;
       });

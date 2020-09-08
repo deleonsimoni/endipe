@@ -20,7 +20,7 @@ export class SecretariaVirtualComponent implements OnInit {
     private toastr: ToastrService,
     @Inject('BASE_API_URL') private baseUrl: string,
     private http: HttpClient,
-    private authService: AuthService) { }
+    ) { }
 
   ngOnInit() {
     this.getChatAdmin();

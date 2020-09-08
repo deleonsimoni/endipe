@@ -60,14 +60,17 @@ export class ChatVirtualComponent implements OnInit {
 
   addNewComment() {
       if(this.newComment && this.newComment.length > 2){
-      
-            this.newComment = this.newComment.replace(/(@[^@.]+)@/, '<span class="reply">$1</span>')
-            this.newComment = this.newComment.replace(/https?:\/\/(www.)?([a-zA-Z0-9\-_]+\.[a-zA-Z0-9]+)/, '<a href="//$2">$2</a>')
+
+            let chatMessage = this.newComment;
+            chatMessage = chatMessage.replace(/(@[^@.]+)@/, '<span class="reply">$1</span>')
+            chatMessage = chatMessage.replace(/https?:\/\/(www.)?([a-zA-Z0-9\-_]+\.[a-zA-Z0-9]+)/, '<a href="//$2">$2</a>')
+            this.newComment = null;
+
             if(this.comments && this.comments._id){
 
-              this.http.put(`${this.baseUrl}/chat-admin/chat?id=${this.comments._id}`, { mensagem: this.newComment }).subscribe((res: any) => {
+              this.http.put(`${this.baseUrl}/chat-admin/chat?id=${this.comments._id}`, { mensagem: chatMessage }).subscribe((res: any) => {
                 this.comments['chat'].push({
-                    content: this.newComment,
+                    content: chatMessage,
                     publisher: {
                       user: this.user._id,
                       name: this.user.fullname, 
@@ -82,15 +85,16 @@ export class ChatVirtualComponent implements OnInit {
 
             } else {
 
-              this.http.post(`${this.baseUrl}/chat-admin/chat`, { mensagem: this.newComment }).subscribe((res: any) => {
-                this.comments['chat'] = ([{
-                    content: this.newComment,
+              this.http.post(`${this.baseUrl}/chat-admin/chat`, { mensagem: chatMessage }).subscribe((res: any) => {
+                this.comments = res;
+                /*this.comments['chat'] = ([{
+                    content: chatMessage,
                     publisher: {
                       user: this.user._id,
                       name: this.user.fullname, 
                       email: this.user.email
                     }
-                  }]);
+                  }]);*/
 
                 this.toastr.success("Mensagem enviada com sucesso", "Sucesso");
               }, err => {
@@ -98,6 +102,9 @@ export class ChatVirtualComponent implements OnInit {
               });
 
           }
+
+          
+
       } else {
         this.toastr.error("Preencha sua mensagem antes de enviar", "Atenção");
 

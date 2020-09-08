@@ -1,9 +1,39 @@
 const Chat = require('../../models/virtual/chat-admin.model');
+const paginate = require("jw-paginate");
 
 module.exports = {
   getChat,
+  getChatAdmin,
   insertChat,
   updateChat,
+  getHeaderChat,
+}
+
+async function getChatAdmin(idChat) {
+  return await Chat.findById(idChat);
+}
+
+async function getHeaderChat(req) {
+  const pageSize = 10;
+  const page = req.query.page || 1;
+
+  let chat = await Chat
+    .find()
+    .select('author')
+    .sort({
+      createdAt: -1,
+    })
+    .skip(pageSize * page - pageSize)
+    .limit(pageSize);
+
+  const total = await Chat.count();
+
+  const pager = paginate(total, page, pageSize);
+
+  return {
+    chat,
+    pager,
+  };
 }
 
 async function getChat(idChat) {

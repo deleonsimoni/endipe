@@ -10,6 +10,11 @@ router.get('/chat', passport.authenticate('jwt', {
   session: false
 }), asyncHandler(getChat));
 
+
+router.get('/list', passport.authenticate('jwt', {
+  session: false
+}), asyncHandler(getHeaderChat));
+
 router.post('/chat', passport.authenticate('jwt', {
   session: false
 }), asyncHandler(insertChat));
@@ -19,9 +24,18 @@ router.put('/chat', passport.authenticate('jwt', {
 }), asyncHandler(updateChat));
 
 
+async function getHeaderChat(req, res) {
+  let rep = await chatCtrl.getHeaderChat(req);
+  res.json(rep);
+}
 
 async function getChat(req, res) {
-  let rep = await chatCtrl.getChat(req.user._id);
+  let rep;
+  if(req.query.id && req.user.icAdmin){
+    rep = await chatCtrl.getChatAdmin(req.query.id);
+  } else {
+    rep = await chatCtrl.getChat(req.user._id);
+  }
   res.json(rep);
 }
 

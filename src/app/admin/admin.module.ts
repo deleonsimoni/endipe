@@ -31,6 +31,8 @@ import { ModalSchedulesModule } from './modals/modal-schedules/modal-schedules.m
 import { AnaisComponent } from './anais/anais.component';
 import { EmailComponent } from './email/email.component';
 import { QuillModule } from 'ngx-quill';
+import { ChatComponent } from './chat/chat.component';
+
 @NgModule({
     declarations: [
         AdminComponent,
@@ -50,6 +52,8 @@ import { QuillModule } from 'ngx-quill';
         ReviewListWorksComponent,
         AnaisComponent,
         EmailComponent,
+        ChatComponent,
+        
     ],
     entryComponents: [
         AdminComponent,

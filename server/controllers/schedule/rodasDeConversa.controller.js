@@ -15,7 +15,7 @@ async function listSchedule(date) {
       'dates.date': { $in: date }
     })
     .sort({
-      startTime: 1
+      createAt: 1
     });
 }
 

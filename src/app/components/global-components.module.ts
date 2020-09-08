@@ -9,6 +9,9 @@ import { WorkCardComponent } from './work-card/work-card.component';
 import { WorkDataComponent } from './work-data/work-data.component';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { ChatVirtualComponent } from '../endipe-virtual/chat-admin-virtual/chat-admin-virtual.component';
+import { ScheduleVirtualComponent } from '../endipe-virtual/schedule-virtual/schedule-virtual.component';
+import { UtilNgxMaterialModule } from '../util-ngx-material/util-ngx-material.module';
 
 @NgModule({
     declarations: [
@@ -17,12 +20,15 @@ import { RouterModule } from '@angular/router';
         WorkScheduleCardComponent,
         WorkCardComponent,
         WorkDataComponent,
+        ChatVirtualComponent,
+        ScheduleVirtualComponent
     ],
     imports: [
         CommonModule,
         PipesModule,
         FormsModule,
         RouterModule,
+        UtilNgxMaterialModule,
 
     ],
     exports: [
@@ -31,6 +37,8 @@ import { RouterModule } from '@angular/router';
         WorkScheduleCardComponent,
         WorkCardComponent,
         WorkDataComponent,
+        ChatVirtualComponent,
+        ScheduleVirtualComponent
     ]
 })
 export class GlobalComponentsModule { }

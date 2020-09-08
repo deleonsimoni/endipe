@@ -86,7 +86,7 @@ async function listSchedule(req, res) {
       res.json(schedules);
       break;
     case 3:
-      schedules = await posterCtrl.listSchedule(data); simposioCtrl
+      schedules = await posterCtrl.listSchedule(data);
       res.json(schedules);
       break;
     case 4:

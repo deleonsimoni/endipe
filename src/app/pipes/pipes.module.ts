@@ -11,6 +11,8 @@ import { CategoryPaymentPipe } from './category-payment.pipe';
 import { ArraySortPipe } from './array-sort.pipe';
 import { ThemePipe } from './theme.pipe';
 import { CepPipe } from './cep.pipe';
+import { DayMonthPipe } from './day-month.pipe';
+import { DayAndMonthPipe } from './day-and-month.pipe';
 
 @NgModule({
     declarations: [
@@ -24,7 +26,9 @@ import { CepPipe } from './cep.pipe';
         ArraySortPipe,
         TypeWorkRelatorioPipe,
         ThemePipe,
-        CepPipe
+        CepPipe,
+        DayMonthPipe,
+        DayAndMonthPipe
     ],
     exports: [
         MaskCpfPipe,
@@ -37,7 +41,9 @@ import { CepPipe } from './cep.pipe';
         CategoryPaymentPipe,
         ArraySortPipe,
         TypeWorkRelatorioPipe,
-        ThemePipe
+        ThemePipe,
+        DayMonthPipe,
+        DayAndMonthPipe
     ],
 })
 export class PipesModule { }

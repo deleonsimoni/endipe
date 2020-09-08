@@ -12,6 +12,7 @@ import { SchedulesComponent } from './schedules/schedules.component';
 import { ReviewListWorksComponent } from './review-list-works/review-list-works.component';
 import { AnaisComponent } from './anais/anais.component';
 import { EmailComponent } from './email/email.component';
+import { ChatComponent } from './chat/chat.component';
 
 const routes: Routes = [
     {
@@ -45,6 +46,9 @@ const routes: Routes = [
             },
             {
                 path: 'email', component: EmailComponent
+            },
+            {
+                path: 'chat', component: ChatComponent
             },
         ]
     }

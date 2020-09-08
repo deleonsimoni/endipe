@@ -5,11 +5,71 @@ const atividadeCulturalCtrl = require('../schedule/atividadeCultural.controller'
 const sessoesEspeciaisCtrl = require('../schedule/sessoesEspeciais.controller');
 const rodaReunioesEntidadesRedesCtrl = require('../schedule/rodaReunioesEntidadesRedes.controller');
 const encerramentoCtrl = require('../schedule/encerramento.controller');
+const paginate = require("jw-paginate");
+const Minicurso = require('../../models/schedule/minicurso.model');
+const Painel = require('../../models/schedule/painel.model');
+const RodasDeConversa = require('../../models/schedule/rodasDeConversa.model');
 
 
 
 module.exports = {
-  listVirtual
+  listVirtual,
+  listScheduleWorkPaginate
+}
+
+
+
+async function listScheduleWorkPaginate(req) {
+  const pageSize = 5;
+  const page = req.query.page || 1;
+  const date = req.query.date;
+  const total = await Minicurso.find({'dates.date': { $in: date }}).count();
+  let schedule;
+  console.log(req.query.type)
+
+  switch (Number(req.query.type)) {
+    case 4:
+      schedule = await Minicurso.find({
+        'dates.date': { $in: date }
+      })
+      .sort({
+        createAt: 1
+      })
+      .skip(pageSize * page - pageSize)
+      .limit(pageSize);
+
+    break;
+  
+    case 5:
+      schedule = await Painel.find({
+        'dates.date': { $in: date }
+      })
+      .sort({
+        createAt: 1
+      })
+      .skip(pageSize * page - pageSize)
+      .limit(pageSize);
+    break;
+
+    case 2:
+      schedule = await RodasDeConversa.find({
+        'dates.date': { $in: date }
+      })
+      .sort({
+        createAt: 1
+      })
+      .skip(pageSize * page - pageSize)
+      .limit(pageSize);
+    break;
+
+  }
+
+  const pager = await paginate(total, page, pageSize);
+
+  return {
+    schedule,
+    pager,
+  };
 }
 
 async function listVirtual(date) {
