@@ -20,6 +20,7 @@ export class MeuEndipeComponent implements OnInit {
   user;
   schedules = [];
   carregando = false;
+  carregandoLista = false;
   scheduleSelect;
 
   constructor(
@@ -63,15 +64,15 @@ export class MeuEndipeComponent implements OnInit {
   }
 
   getUserSubscribers(){
-    this.carregando = true;
+    this.carregandoLista = true;
     this.http.get(`${this.baseUrl}/live/getSubscribersUser`).subscribe(
       (res: any) => {
         this.schedules = res.filter((obj) => obj );;
-        this.carregando = false;
+        this.carregandoLista = false;
       },
       (err) => {
         this.toastr.error("Servidor momentâneamente inoperante", "Atenção");
-        this.carregando = false;
+        this.carregandoLista = false;
       }
     );
   }

@@ -2,7 +2,7 @@
     <b><span>{{day | dayAndMonth}}</span></b>
 </div>
 
-<div *ngIf="schedules.length > 0">
+<div *ngIf="!carregandoLista && schedules.length > 0">
     <div *ngFor="let schedule of schedules">
         <div class="card-works">
             <div class="row">
@@ -62,4 +62,12 @@
     
       </div>
 
+</div>
+
+<div *ngIf="!carregandoLista && schedules.length == 0">
+    <h2><b>Não há {{type | modalities}} para o dia selecionado</b></h2>
+</div>
+
+<div *ngIf="carregandoLista" class="row" style="display: flex; justify-content: center; align-items: center; height: 300px;">
+    <button type="button" class="btn btn-large btn-primary"><i class="fas fa-spinner fa-pulse ml-1"></i> Aguarde</button>
 </div>

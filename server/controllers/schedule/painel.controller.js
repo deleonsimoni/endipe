@@ -78,7 +78,7 @@ async function subscribePainel(workId, userId, email) {
     $addToSet: {
       'cursosInscritos': {
         idSchedule: workId,
-        icModalityId: 2
+        icModalityId: 5
       }
     }
   }, {

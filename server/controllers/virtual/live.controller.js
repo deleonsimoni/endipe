@@ -9,6 +9,7 @@ const paginate = require("jw-paginate");
 const Minicurso = require('../../models/schedule/minicurso.model');
 const Painel = require('../../models/schedule/painel.model');
 const RodasDeConversa = require('../../models/schedule/rodasDeConversa.model');
+const Poster = require('../../models/schedule/poster.model');
 
 
 
@@ -93,7 +94,10 @@ async function getSubscribersUser(user) {
         case 2:
           schedule = await RodasDeConversa.findById({_id: user.cursosInscritos[index].idSchedule }).lean();
           if(schedule) schedule.type = 2;
-          
+        break;
+        case 3:
+          schedule = await Poster.findById({_id: user.cursosInscritos[index].idSchedule }).lean();
+          if(schedule) schedule.type = 3;
         break;
       }
 

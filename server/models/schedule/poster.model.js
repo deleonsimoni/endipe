@@ -53,6 +53,15 @@ const ScheduleSchema = new mongoose.Schema({
     }
   }],
 
+  subscribers: [{
+    userId: {
+      type: mongoose.Schema.Types.ObjectId
+    },
+    userEmail: {
+      type: String
+    },
+  }],
+
   createAt: {
     type: Date,
     default: Date.now

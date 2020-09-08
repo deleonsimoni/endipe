@@ -21,13 +21,15 @@
             <h2>Suas Inscrições</h2>
         </div> 
 
-        <div *ngIf="schedules.length > 0">
+        <div *ngIf="!carregandoLista && schedules.length > 0">
             <div *ngFor="let schedule of schedules">
                 <div class="card-works">
                     <div class="row">
                         <div class="col-sm-10">
                             <h5 style="color: #0c2e8a">{{schedule.type | modalities}} - {{schedule.axis | axis}}</h5>
-                            <h2><b>{{schedule.workTitle}}</b></h2>
+                            <h2 *ngIf="schedule.type != '3'"><b>{{schedule.workTitle}}</b></h2>
+                            <h2 *ngIf="schedule.type == '3'"><b>Pôster</b></h2>
+
                             <h4 *ngFor="let day of schedule.dates">{{day.date + ' ' + day.startTime + ' - ' + day.endTime}}</h4>
                             <h4>URL de acesso ao conteúdo no dia: <b>Em breve</b></h4>
 
@@ -37,7 +39,7 @@
                             <h4>{{ !subscribed.payment ? 'Não realizou envio' : subscribed.payment.icPaid ? 'Pagamento validado' : subscribed.payment.icValid ? 'Comprovante validado' : 'Aguardando validação'}}
                             </h4>-->
 
-                            <div *ngIf="!carregando">
+                            <div *ngIf="!carregando && schedule.type != '3'">
                                 <ng-container>
                                     <h4 class="mb-4"><button (click)="cancelSignUp(schedule.type, schedule)" class="btn btn-danger">Cancelar Inscrição</button></h4>
                                 </ng-container>
@@ -56,10 +58,28 @@
 
                 <div  class="work-content">
                     <div *ngIf="schedule._id == scheduleSelect">
-                        <div  class="row align-items-center">
+                        <div *ngIf="schedule.type != '3'" class="row align-items-center">
                             <div class="col-12">
                                 <strong>Resumo</strong>
                                 <p style="text-align: justify; text-justify: inter-word;">{{ schedule.resumePropose }}</p>
+                            </div>
+                        </div>
+                        <div *ngIf="schedule.type == '3'" class="row align-items-center">
+                            <div class="col-12">
+                                <strong>Resumo</strong>
+                                <div *ngFor="let item of schedule.worksPoster" style="text-align: justify; text-justify: inter-word;">
+                                    <div class="row">
+                                        <div class="col-sm-8 align-self-center">
+                                            <strong>Nome do Pôster</strong>
+                                            <p>{{ item.workTitle }}</p>
+                                        </div>
+                                        <div class="col-sm-4 align-self-center">
+                                            <strong>Acesse o Conteúdo</strong>
+                                            <p><a href="{{  item.linkPPT  }}" target="_blank">{{ item.linkPPT }}</a></p>
+
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -67,6 +87,18 @@
 
             </div>
         </div>
+
+
+        <div *ngIf="!carregandoLista && schedules.length == 0">
+            <h2><b>Você não realizou nenhuma inscrição até o momento</b></h2>
+        </div>
+        
+        <div *ngIf="carregandoLista" class="row" style="display: flex; justify-content: center; align-items: center; height: 300px;">
+            <button type="button" class="btn btn-large btn-primary"><i class="fas fa-spinner fa-pulse ml-1"></i> Aguarde</button>
+        </div>
+
+
+
     </div>
 </section>
 
