@@ -35,7 +35,7 @@
               </a>
               <a class="dropdown-item pointer" *ngIf="isSubscribe() && (type == '2' || type == '4' || type == '5')"
                 (click)="cancelSignUp(type)">Cancelar inscrição</a>
-              <a class="dropdown-item pointer" (click)="editSchedule()">Editar</a>
+              <a class="dropdown-item pointer" *ngIf="type != '3'" (click)="editSchedule()">Editar</a>
               <a class="dropdown-item pointer" (click)="removeSchedule(schedule._id)">Excluir</a>
             </div>
           </div>
