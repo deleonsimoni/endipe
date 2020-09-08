@@ -13,6 +13,7 @@ import { ResetSenhaComponent } from './reset-senha/reset-senha.component';
 import { ProgramacaoComponent } from './programacao/programacao.component';
 import { HomeVirtualComponent } from './endipe-virtual/home-virtual/home-virtual.component';
 import { MeuEndipeComponent } from './meu-endipe/meu-endipe.component';
+import { InscrevaseComponent } from './programacao/components/inscrevase/inscrevase.component';
 
 const routes: Routes = [
   {
@@ -35,6 +36,10 @@ const routes: Routes = [
   {
     path: 'programacao',
     component: ProgramacaoComponent
+  },
+  {
+    path: 'inscrevase',
+    component: InscrevaseComponent
   },
   {
     path: 'register',

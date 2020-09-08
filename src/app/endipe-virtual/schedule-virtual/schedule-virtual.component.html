@@ -23,7 +23,7 @@
                             <h4 class="mb-4"><button (click)="signUp(type, schedule)" class="btn btn-inscrever">Inscrever</button></h4>
                         </ng-container>
                         <ng-container *ngIf="schedule.qtdSubscribers - schedule.subscribers == 0">
-                            <h4 class="mb-4"><button class="btn btn-danger">Vagas Encerradas</button></h4>
+                            <h4 class="mb-4"><button class="btn btn-warning">Vagas Encerradas</button></h4>
                         </ng-container>
                         <ng-container *ngIf="isSubscribe(schedule)">
                             <h4 class="mb-4"><button (click)="cancelSignUp(type, schedule)" class="btn btn-danger">Cancelar Inscrição</button></h4>

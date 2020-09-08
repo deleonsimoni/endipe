@@ -54,8 +54,8 @@
               <li class="menu-has-children pointer">
                 <a tabindex="0" (keydown)="expandMenu($event, 'programacao')">PROGRAMAÇÃO <i class="fa fa-chevron-down"></i></a>
                 <ul class="programacao">
-                  <li><a tabindex="0" alt="Programação" [routerLink]="['/programacao']">Programação</a></li>
-                  <li><a tabindex="0" alt="Inscreva-se" [routerLink]="['/programacao']" fragment="inscreva">Inscreva-se</a></li>
+                  <li><a tabindex="0" alt="Programação" [routerLink]="['/programacao']">Geral</a></li>
+                  <li><a tabindex="0" alt="Inscreva-se" [routerLink]="['/inscrevase']">Inscreva-se</a></li>
                   <li><a tabindex="0" alt="Conferencistas" (click)="openConferencistasModal()">Conferencistas</a></li>
                 </ul>
               </li>
@@ -164,8 +164,9 @@
         <accordion-group>
           <a accordion-heading>PROGRAMAÇÃO <i class="fa fa-chevron-down"></i></a>
           <ul class="child-list">
-            <li> <a tabindex="0" accordion-heading [routerLink]="['/programacao']" (click)="sidenav.toggle()">PROGRAMAÇÃO</a></li>
-            <li> <a tabindex="0" accordion-heading (click)="openConferencistasModal()">CONFERENCISTA</a></li>
+            <li> <a tabindex="0" accordion-heading [routerLink]="['/programacao']" (click)="sidenav.toggle()">Geral</a></li>
+            <li><a tabindex="0" accordion-heading [routerLink]="['/inscrevase']" (click)="sidenav.toggle()">Inscreva-se</a></li>
+            <li> <a tabindex="0" accordion-heading (click)="openConferencistasModal()">Conferencistas</a></li>
           </ul>
         </accordion-group>
 
