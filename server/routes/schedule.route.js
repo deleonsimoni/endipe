@@ -95,7 +95,7 @@ async function subscribePainel(req, res) {
 }
 
 async function calibrateAllPoster(req, res) {
-  if(req.user.icADmin){
+  if(req.user.icAdmin){
     let users = await posterCtrl.calibrateAllPoster();
     res.json(users);
   } else {
