@@ -59,7 +59,7 @@ export class ChatVirtualComponent implements OnInit {
   }
 
   addNewComment() {
-      if(this.newComment && this.newComment.length > 2){
+      if(this.newComment){
 
             let chatMessage = this.newComment;
             chatMessage = chatMessage.replace(/(@[^@.]+)@/, '<span class="reply">$1</span>')
@@ -102,8 +102,6 @@ export class ChatVirtualComponent implements OnInit {
               });
 
           }
-
-          
 
       } else {
         this.toastr.error("Preencha sua mensagem antes de enviar", "Atenção");
