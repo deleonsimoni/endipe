@@ -19,9 +19,10 @@ async function getHeaderChat(req) {
 
   let chat = await Chat
     .find()
-    .select('author')
+    .select('author icReply')
     .sort({
       createdAt: -1,
+      icReply: false
     })
     .skip(pageSize * page - pageSize)
     .limit(pageSize);
@@ -76,6 +77,7 @@ async function updateChat(idChat, mensagem, user) {
   return await Chat.findOneAndUpdate({
     _id: idChat
     }, {
+      icReply: user.icAdmin,
       $addToSet: {
         chat: chat
       }

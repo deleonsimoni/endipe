@@ -8,7 +8,8 @@ module.exports = {
   updateSchedule,
   deleteSchedule,
   subscribePoster,
-  unsubscribePoster
+  unsubscribePoster,
+  calibrateAllPoster
 }
 
 async function listSchedule(date) {
@@ -129,4 +130,32 @@ async function subscribePoster(workId, userId, email) {
   }, {
     new: true
   });
+}
+
+
+
+
+async function calibrateAllPoster() {
+  const poster = await Poster.find();
+  let workWithUser;
+
+  for (let posterIndex = 0; posterIndex < poster.length; posterIndex++) {
+    const element = poster[posterIndex];
+    if(element.worksPoster){
+      for (let index = 0; index < element.worksPoster.length; index++) {
+        if(!element.worksPoster[index].workTitle) continue;
+        workWithUser = await Work.findById({_id: element.worksPoster[index].work}).select('authors');
+        if(workWithUser.authors){
+  
+          for (let userCount = 0; userCount < workWithUser.authors.length; userCount++) {
+            await subscribePoster(element._id, workWithUser.authors[userCount].userId, workWithUser.authors[userCount].email);
+          }
+        }
+      }
+    }
+  }
+
+
+
+  return 'feito';
 }

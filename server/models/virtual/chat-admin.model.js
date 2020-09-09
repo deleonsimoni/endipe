@@ -45,7 +45,10 @@ const ChatAdminSchema = new mongoose.Schema({
         required: true
       },
   }],
-
+  icReply: {
+    type: Boolean,
+    default: false
+  },
   createAt: {
     type: Date,
     default: Date.now

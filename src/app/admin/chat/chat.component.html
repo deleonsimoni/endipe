@@ -1,6 +1,6 @@
 <div *ngFor="let subscribed of chats; let i = index" [ngClass]="{'mb-3': chats.length > 0}">
 
-    <div class="card-works">
+    <div [ngClass]="{'card-works': subscribed.icReply, 'card-reply': !subscribed.icReply}">
         <div class="row">
             <div class="col-sm-6 border-right">
                 <small>NOME</small>

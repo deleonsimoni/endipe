@@ -5,7 +5,18 @@
   
         <div class="section-header mt-3 mb-5">
           <h2>Se inscreva</h2>
-        </div> 
+        </div>
+
+        <h4 class="title">Selecione a Modalidade</h4>
+        <div class="container">
+         <div class="row">
+             <div *ngFor="let modality of modalities" class="col-lg-3 col-12">
+                 <button (click)="selectModality(modality)" type="button"
+                 [ngClass]="{'btn btn-modalidade-focus btn-lg button-programacao': modality.type == modalitySelect, 'btn btn-modalidade btn-lg button-programacao': modality.type != modalitySelect}">
+                 {{modality.name}}</button>
+           </div>
+         </div>
+       </div>
    
         <h4 class="title">Selecione o Dia</h4>
         <div class="container">
@@ -17,17 +28,6 @@
            </div>
          </div>
        </div>
-   
-       <h4 class="title">Selecione a Modalidade</h4>
-       <div class="container">
-        <div class="row">
-            <div *ngFor="let modality of modalities" class="col-lg-3 col-12">
-                <button (click)="selectModality(modality)" type="button"
-                [ngClass]="{'btn btn-modalidade-focus btn-lg button-programacao': modality.type == modalitySelect, 'btn btn-modalidade btn-lg button-programacao': modality.type != modalitySelect}">
-                {{modality.name}}</button>
-          </div>
-        </div>
-      </div>
   
       <div class="section-header mt-3 mb-5">
         <h2>Programação</h2>
