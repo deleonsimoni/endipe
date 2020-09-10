@@ -4,6 +4,7 @@ const lancamentoDeLivrosCtrl = require('../schedule/lancamentoDeLivros.controlle
 const atividadeCulturalCtrl = require('../schedule/atividadeCultural.controller');
 const sessoesEspeciaisCtrl = require('../schedule/sessoesEspeciais.controller');
 const rodaReunioesEntidadesRedesCtrl = require('../schedule/rodaReunioesEntidadesRedes.controller');
+const posterCtrl = require('../schedule/poster.controller');
 const encerramentoCtrl = require('../schedule/encerramento.controller');
 const paginate = require("jw-paginate");
 const Minicurso = require('../../models/schedule/minicurso.model');
@@ -365,7 +366,7 @@ async function calibrateAllPoster() {
         if(workWithUser.authors){
   
           for (let userCount = 0; userCount < workWithUser.authors.length; userCount++) {
-            await subscribePoster(element._id, workWithUser.authors[userCount].userId, workWithUser.authors[userCount].email);
+            await posterCtrl.subscribePoster(element._id, workWithUser.authors[userCount].userId, workWithUser.authors[userCount].email);
           }
         }
       }

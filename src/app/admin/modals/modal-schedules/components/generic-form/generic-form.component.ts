@@ -266,6 +266,8 @@ export class GenericFormComponent {
 
       case 7:
         return "Artista(s)";
+      case 9:
+        return "Título";
 
       //    case "11":
       //      return "Conexão Entrevista";

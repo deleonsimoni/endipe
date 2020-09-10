@@ -26,7 +26,7 @@
                         </h4>-->
 
                         <div>
-                            <ng-container >
+                            <ng-container *ngIf="type != '3'">
                                 <h4 class="mb-4"><button class="btn btn-warning">Inscrições em breve</button></h4>
                             </ng-container>
                         </div>
@@ -74,7 +74,6 @@
 
                     <div *ngIf="type == '3'" class="row align-items-center">
                         <div class="col-12">
-                            <strong>Resumo</strong>
                             <div *ngFor="let item of schedule.worksPoster" style="text-align: justify; text-justify: inter-word;">
                                 <div class="row">
                                     <div class="col-sm-8 align-self-center">
@@ -83,8 +82,8 @@
                                     </div>
                                     <div class="col-sm-4 align-self-center">
                                         <strong>Acesse o Conteúdo</strong>
-                                        <p><a href="{{  item.linkPPT  }}" target="_blank">Clique aqui</a></p>
-
+                                        <p><a *ngIf="item.linkPPT.includes('http')" [attr.href]="item.linkPPT" target="_blank">Clique aqui</a></p>
+                                        <p><span *ngIf="!item.linkPPT.includes('http')" >Banner não enviado</span></p>
                                     </div>
                                 </div>
                                 <div class="row" *ngIf="item.workAuthor">
@@ -93,7 +92,7 @@
                                         <p *ngFor="let autores of item.workAuthor">{{ autores.fullname }}</p>
                                     </div>
                                 </div>
-                                <hr/>
+                                <br/>
                             </div>
                         </div>
                     </div>
@@ -103,7 +102,7 @@
 
         </div>
 
-        <!-- TRABALHOS SEM INSCRICOES -->
+        <!-- TRABALHOS SEM INSCRICOES - ATIVIDADES ABERTAS -->
         <div *ngIf="type == '1' || type == '7' || type == '8' || type == '10' || type == '11' || type == '12' ">
 
             <div class="card-works">
@@ -111,7 +110,7 @@
                     <div class="col-sm-10">
                         <h5 *ngIf="type != '8'" style="color: #50d8af">{{type | modalitiesWork}}</h5>
                         <h5 *ngIf="type == '8'" style="color: #50d8af">{{schedule.theme | themeSimposio}}</h5>
-                        <h3 *ngIf="type != '8'"><b>{{schedule.titles[0]}}</b></h3>
+                        <h3 *ngIf="type != '8'"><b>{{schedule?.titles[0]}}</b></h3>
                         <h3 *ngIf="type == '8'"><b>{{schedule.themeSpeeches}}</b></h3>
                         <h4 >{{schedule.date + ' ' + (schedule.startTime ? schedule.startTime : '')  + ' - ' + (schedule.endTime ? schedule.endTime : '')}}</h4>
                         <h4>Link para acesso: <b>Em breve</b></h4>
@@ -132,11 +131,11 @@
                 <div *ngIf="schedule._id == scheduleSelect">
                     <div class="row align-items-center">
                         <div *ngIf="type != '8'" class="col-12">
-                            <strong>Conteúdo</strong>
+                            <strong>Título</strong>
                             <p *ngFor="let item of schedule.titles" style="text-align: justify; text-justify: inter-word;">{{ item }}</p>
                         </div>
                         <div *ngIf=" type != '11' && (schedule.coordinators || schedule.coordinator)" class="col-12">
-                            <strong>Coordenadores</strong>
+                            <strong>Conferencistas</strong>
                             <div *ngIf="schedule.coordinators">
                                 <p *ngFor="let item of schedule.coordinators" style="text-align: justify; text-justify: inter-word;">{{ item.name }}</p>
                             </div>
@@ -166,8 +165,8 @@
             <div class="card-works">
                 <div class="row">
                     <div class="col-sm-10">
-                        <h5 style="color: #50d8af"></h5>
-                        <h3><b>Lançamento de Livros</b></h3>
+                        <h5 style="color: #50d8af">{{type | modalitiesWork}}</h5>
+                        <h3 ><b>{{schedule?.titles[0]}}</b></h3>
                         <h4 >{{schedule.date + ' ' + (schedule.startTime ? schedule.startTime : '')  + ' - ' + (schedule.endTime ? schedule.endTime : '')}}</h4>
                         <h4>Link para acesso: <b>Em breve</b></h4>
                     </div>
@@ -210,7 +209,7 @@
                                 <div class="row">
                                     <div class="form-group col-md-12">
                                         <strong>Acesse</strong>
-                                        <p style="text-align: justify; text-justify: inter-word;"><a href="{{item.linkSale}}" target="_blank">Clique aqui</a></p>
+                                        <p style="text-align: justify; text-justify: inter-word;"><a [attr.href]="item.linkSale" target="_blank">Clique aqui</a></p>
                                     </div>
                                     <div class="form-group col-md-12">
                                         <strong>Resumo</strong>

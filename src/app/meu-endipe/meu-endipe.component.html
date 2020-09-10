@@ -31,8 +31,7 @@
                             <h3 *ngIf="schedule.type == '3'"><b>Apresentação de trabalhos</b></h3>
 
                             <h4 *ngFor="let day of schedule.dates">{{day.date + ' ' + day.startTime + ' - ' + day.endTime}}</h4>
-                            <h4>URL de acesso ao conteúdo: <b>Em breve</b></h4>
-
+                            <h4>Link para acesso: <b>Em breve</b></h4>
                         </div>
                         <div class="col-sm-2">
                             <!--<small>STATUS</small>
@@ -68,28 +67,32 @@
                                 <p style="text-align: justify; text-justify: inter-word;">{{ schedule.resumePropose }}</p>
                             </div>
                         </div>
-                        <div *ngIf="schedule.type == '3'" class="row align-items-center">
+                        <div *ngIf="schedule.type == '3'" >
                             <div class="col-12">
-                                <strong>Resumo</strong>
-                                <div *ngFor="let item of schedule.worksPoster" style="text-align: justify; text-justify: inter-word;">
-                                    <div class="row">
-                                        <div class="col-sm-8 align-self-center">
-                                            <strong>Nome do Pôster</strong>
-                                            <p>{{ item.workTitle }}</p>
+                                <div *ngFor="let item of schedule.worksPoster">
+
+                                    <div class="align-items-center" style="text-align: justify; text-justify: inter-word;">
+                                        <div class="row">
+                                            <div class="col-sm-8 align-self-center">
+                                                <strong>Nome do Pôster</strong>
+                                                <p>{{ item.workTitle }}</p>
+                                            </div>
+                                            <div class="col-sm-4 align-self-center">
+                                                <strong>Acesse o Conteúdo</strong>
+                                                <p><a *ngIf="item.linkPPT.includes('http')" [attr.href]="item.linkPPT" target="_blank">Clique aqui</a></p>
+                                                <p><span *ngIf="!item.linkPPT.includes('http')" >Banner não enviado</span></p>        
+                                            </div>
                                         </div>
-                                        <div class="col-sm-4 align-self-center">
-                                            <strong>Acesse o Conteúdo</strong>
-                                            <p><a href="{{  item.linkPPT  }}" target="_blank">Clique aqui</a></p>
-    
+                                        <div class="row" *ngIf="item.workAuthor">
+                                            <div class="col-sm-12 align-self-center">
+                                                <strong>Autore(s)</strong>
+                                                <p *ngFor="let autores of item.workAuthor">{{ autores.fullname }}</p>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="row" *ngIf="item.workAuthor">
-                                        <div class="col-sm-12 align-self-center">
-                                            <strong>Autore(s)</strong>
-                                            <p *ngFor="let autores of item.workAuthor">{{ autores.fullname }}</p>
-                                        </div>
-                                    </div>
-                                    <hr/>
+                                     </div>
+
+                                    <br/>
+
                                 </div>
                             </div>
                         </div>
@@ -130,7 +133,7 @@
                         <h3><b>{{schedule.workTitle}}</b></h3>
 
                         <h4 *ngFor="let day of schedule.dates">{{day.date + ' ' + day.startTime + ' - ' + day.endTime}}</h4>
-                        <h4>URL de acesso ao conteúdo: <b>Em breve</b></h4>
+                        <h4>Link para acesso: <b>Em breve</b></h4>
 
                     </div>
                     <div class="col-sm-2">
