@@ -29,7 +29,8 @@ module.exports = {
   getSubscribersUser,
   calibrateAllPoster,
   calibrateAllWorksAuthors,
-  scheduleBooksPaginate
+  scheduleBooksPaginate,
+  getPresentationsUser
 }
 
 
@@ -237,6 +238,46 @@ async function getSubscribersUser(user) {
 
 
 }
+
+async function getPresentationsUser(req) {
+  
+  let work = [];
+  let response = [];
+  let schedule;
+
+  if(req.user.works) {
+    
+    for (let index = 0; index < req.user.works.length; index++) {   
+      work.push(await Work.findById(req.user.works[index]._id).select('modalityId'));
+    }
+
+    for (let index = 0; index < work.length; index++) {
+      switch (Number(work[index].modalityId)) {
+        case 4:
+          schedule = await Minicurso.findOne({work: work[index]._id }).lean();
+          if(schedule) schedule.type = 4;
+          response.push(schedule);
+        break;
+        case 5:
+          schedule = await Painel.findOne({work: work[index]._id }).lean();
+          if(schedule) schedule.type = 5;
+          response.push(schedule);
+        break;
+        case 2:
+          schedule = await RodasDeConversa.findOne({work: work[index]._id }).lean();
+          if(schedule) schedule.type = 2;
+          response.push(schedule);
+        break;
+      }
+    }
+
+  }
+
+
+  return await response;
+
+}
+
 
 async function listVirtual(date) {
 

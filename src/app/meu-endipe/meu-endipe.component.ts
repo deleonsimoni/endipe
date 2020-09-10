@@ -19,8 +19,10 @@ export class MeuEndipeComponent implements OnInit {
 
   user;
   schedules = [];
+  apresentacoes = [];
   carregando = false;
   carregandoLista = false;
+  carregandoApresentacao = false;
   scheduleSelect;
 
   constructor(
@@ -52,7 +54,9 @@ export class MeuEndipeComponent implements OnInit {
   }*/
   ngOnInit() {
     this.user = this.authService.getDecodedAccessToken(this.authService.getToken());
-    this.getUserSubscribers();
+    //INCRIÇÕES USUARIO
+    //this.getUserSubscribers();
+    this.getUserPresentation();
   }
 
   selectSchedule(id){
@@ -67,12 +71,44 @@ export class MeuEndipeComponent implements OnInit {
     this.carregandoLista = true;
     this.http.get(`${this.baseUrl}/live/getSubscribersUser`).subscribe(
       (res: any) => {
-        this.schedules = res.filter((obj) => obj );;
+        this.schedules = res.filter((obj) => obj );
         this.carregandoLista = false;
+
+        if(this.schedules) {
+          this.schedules.forEach(element => {
+            if(element.type != 3 && element.authors){
+              element.authors = element.authors.split(',');
+            }
+          });
+        }
+
       },
       (err) => {
         this.toastr.error("Servidor momentâneamente inoperante", "Atenção");
         this.carregandoLista = false;
+      }
+    );
+  }
+
+  getUserPresentation(){
+    this.carregandoApresentacao = true;
+    this.http.get(`${this.baseUrl}/live/getPresentationsUser`).subscribe(
+      (res: any) => {
+        this.apresentacoes = res.filter((obj) => obj );
+        this.carregandoApresentacao = false;
+
+        if(this.apresentacoes) {
+          this.apresentacoes.forEach(element => {
+            if(element.authors){
+              element.authors = element.authors.split(',');
+            }
+          });
+        }
+
+      },
+      (err) => {
+        this.toastr.error("Servidor momentâneamente inoperante", "Atenção");
+        this.carregandoApresentacao = false;
       }
     );
   }

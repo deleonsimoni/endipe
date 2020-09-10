@@ -92,7 +92,7 @@
               <li  *ngIf="isAuth" class="menu-has-children pointer">
                 <a tabindex="0" [routerLink]="" (keydown)="expandMenu($event, 'acoes')">AÇÕES <i class="fa fa-chevron-down"></i></a>
                 <ul class="acoes">
-                  <li><a tabindex="0" alt="Meu Endipe" class="menu-has-children aoVivo pulse" [routerLink]="['/meu-endipe']">Meu Endipe</a></li>
+                  <li><a tabindex="0" alt="Meu Endipe" *ngIf="user?.payment?.icPaid || user?.icAdmin" class="menu-has-children aoVivo pulse" [routerLink]="['/meu-endipe']">Meu Endipe</a></li>
                   <li><a tabindex="0" alt="Pagamento" [routerLink]="['/pagamento']">Pagamento</a></li>
                   <li><a tabindex="0" alt="Submissão" [routerLink]="['/meus-trabalhos']">Submissão</a></li>
                   <li><a tabindex="0" alt="Certificados" [routerLink]="['/certificados']">Certificados</a></li>
@@ -212,7 +212,7 @@
         <accordion-group>
           <a tabindex="0" accordion-heading *ngIf="isAuth" [routerLink]="">AÇÕES <i class="fa fa-chevron-down"></i></a>
           <ul class="child-list">
-            <li><a tabindex="0" class="menu-has-children aoVivo pulse" [routerLink]="['/meu-endipe']">Meu Endipe</a></li>
+            <li><a tabindex="0" *ngIf="user?.payment?.icPaid || user?.icAdmin" class="menu-has-children aoVivo pulse" [routerLink]="['/meu-endipe']">Meu Endipe</a></li>
             <li><a tabindex="0" [routerLink]="['/pagamento']" (click)="sidenav.toggle()">Pagamento</a></li>
             <li><a tabindex="0" [routerLink]="['/meus-trabalhos']" (click)="sidenav.toggle()">Submissão</a></li>
             <li><a tabindex="0" [routerLink]="['/certificados']" (click)="sidenav.toggle()">Certificados</a></li>

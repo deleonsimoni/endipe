@@ -135,7 +135,7 @@
                             <strong>Conteúdo</strong>
                             <p *ngFor="let item of schedule.titles" style="text-align: justify; text-justify: inter-word;">{{ item }}</p>
                         </div>
-                        <div *ngIf="schedule.coordinators || schedule.coordinato" class="col-12">
+                        <div *ngIf=" type != '11' && (schedule.coordinators || schedule.coordinator)" class="col-12">
                             <strong>Coordenadores</strong>
                             <div *ngIf="schedule.coordinators">
                                 <p *ngFor="let item of schedule.coordinators" style="text-align: justify; text-justify: inter-word;">{{ item.name }}</p>
@@ -143,6 +143,17 @@
                             <div *ngIf="schedule.coordinator">
                                 <p *ngFor="let item of schedule.coordinator" style="text-align: justify; text-justify: inter-word;">{{ item.name }}</p>
                             </div>
+                        </div>
+                        <div *ngIf="type == '11'" class="col-12">
+                            <strong>Entrevistados</strong>
+                            <div *ngIf="schedule.entrevistados">
+                                <p *ngFor="let item of schedule.entrevistados" style="text-align: justify; text-justify: inter-word;">{{ item.name }}</p>
+                            </div>
+                            <strong>Entrevistadores</strong>
+                            <div *ngIf="schedule.entrevistadores">
+                                <p *ngFor="let item of schedule.entrevistadores" style="text-align: justify; text-justify: inter-word;">{{ item.name }}</p>
+                            </div>
+
                         </div>
                     </div>
                 </div>
