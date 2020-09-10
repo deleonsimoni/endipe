@@ -22,11 +22,6 @@ module.exports = router;
 
 router.get('/:idType/:data', asyncHandler(listSchedule));
 
-router.get('/calibratedAllPosters', passport.authenticate('jwt', {
-  session: false
-}), asyncHandler(calibrateAllPoster));
-
-
 router.post('/:idType', [passport.authenticate('jwt', {
   session: false
 }), fileUpload()], asyncHandler(insertSchedule));
@@ -94,14 +89,6 @@ async function subscribePainel(req, res) {
   res.json(users);
 }
 
-async function calibrateAllPoster(req, res) {
-  if(req.user.icAdmin){
-    let users = await posterCtrl.calibrateAllPoster();
-    res.json(users);
-  } else {
-    res.json('acesso invalido');
-  }
-}
 
 async function listSchedule(req, res) {
 

@@ -1,7 +1,6 @@
 const LancamentoDeLivros = require('../../models/schedule/lancamentoDeLivros.model');
 const S3Uploader = require('../aws.controller');
 const config = require('../../config/config');
-var fs = require('fs');
 
 module.exports = {
   listSchedule,

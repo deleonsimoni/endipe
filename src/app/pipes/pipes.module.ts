@@ -13,6 +13,8 @@ import { ThemePipe } from './theme.pipe';
 import { CepPipe } from './cep.pipe';
 import { DayMonthPipe } from './day-month.pipe';
 import { DayAndMonthPipe } from './day-and-month.pipe';
+import { ThemeSimposioPipe } from './theme-simposio.pipe';
+import { ModalitiesWorkPipe } from './modalities-work.pipe';
 
 @NgModule({
     declarations: [
@@ -28,7 +30,9 @@ import { DayAndMonthPipe } from './day-and-month.pipe';
         ThemePipe,
         CepPipe,
         DayMonthPipe,
-        DayAndMonthPipe
+        DayAndMonthPipe,
+        ThemeSimposioPipe,
+        ModalitiesWorkPipe
     ],
     exports: [
         MaskCpfPipe,
@@ -43,7 +47,9 @@ import { DayAndMonthPipe } from './day-and-month.pipe';
         TypeWorkRelatorioPipe,
         ThemePipe,
         DayMonthPipe,
-        DayAndMonthPipe
+        DayAndMonthPipe,
+        ThemeSimposioPipe,
+        ModalitiesWorkPipe
     ],
 })
 export class PipesModule { }

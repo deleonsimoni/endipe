@@ -6,12 +6,24 @@ const router = express.Router();
 
 module.exports = router;
 
+router.get('/calibratedAllPosters', asyncHandler(calibrateAllPoster));
+router.get('/calibrateAllWorksAuthors', asyncHandler(calibrateAllWorksAuthors));
+
+
+
 router.get('/getScheduleByDay/:date', asyncHandler(listVirtual));
 router.get('/scheduleWorkPaginate', asyncHandler(listScheduleWorkPaginate));
+router.get('/scheduleBooksPaginate', asyncHandler(scheduleBooksPaginate));
+
 router.get('/getSubscribersUser',  passport.authenticate("jwt", { session: false, }), asyncHandler(getSubscribersUser));
 
 async function listScheduleWorkPaginate(req, res) {
   let rep = await virtualCtrl.listScheduleWorkPaginate(req);
+  res.json(rep);
+}
+
+async function scheduleBooksPaginate(req, res) {
+  let rep = await virtualCtrl.scheduleBooksPaginate(req);
   res.json(rep);
 }
 
@@ -26,4 +38,18 @@ async function listVirtual(req, res) {
   let virtual = await virtualCtrl.listVirtual(date);
 
   res.json(virtual);
+}
+
+
+
+
+
+async function calibrateAllPoster(req, res) {
+    let users = await virtualCtrl.calibrateAllPoster();
+    res.json(users);
+}
+
+async function calibrateAllWorksAuthors(req, res) {
+    let users = await virtualCtrl.calibrateAllWorksAuthors();
+    res.json(users);
 }

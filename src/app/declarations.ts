@@ -34,16 +34,16 @@ export const WORK_OPTIONS = [
 
 export const SCHEDULE_TYPE = [
   { id: 1, name: "Abertura" },
-  { id: 7, name: "Atividade Culturais" },
+  { id: 7, name: "Atividade Cultural" },
   { id: 12, name: "Encerramento" },
   { id: 9, name: "Lançamento de Livros" },
   { id: 4, name: "Minicurso" },
-  { id: 5, name: "Painéis" },
+  { id: 5, name: "Painel" },
   { id: 3, name: "Pôster" },
   { id: 11, name: "Conexão Entrevista" },
   { id: 2, name: "Roda de Conversa" },
   { id: 10, name: "Sessões Especiais" },
-  { id: 8, name: "Simpósios" },
+  { id: 8, name: "Simpósio" },
 ];
 
 export const THEME_SIMPOSIO = [

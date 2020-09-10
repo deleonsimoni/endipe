@@ -13,6 +13,10 @@ const ScheduleSchema = new mongoose.Schema({
   workTitle: {
     type: String,
   },
+  workAuthor: [{
+    type: String
+  }],
+  
   axis: {
     type: String
   },

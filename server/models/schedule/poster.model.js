@@ -19,6 +19,7 @@ const ScheduleSchema = new mongoose.Schema({
   mediator: {
     type: String
   },
+  
 
   worksPoster: [{
     work: {
@@ -27,6 +28,7 @@ const ScheduleSchema = new mongoose.Schema({
     workTitle: {
       type: String,
     },
+    workAuthor: [{}],
     linkPPT:{
       type: String,
     }

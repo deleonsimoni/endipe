@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit } from '@angular/core';
 
 import { SCHEDULE_TYPE, WORK_OPTIONS } from "../../../declarations";
 import { BehaviorSubject } from "rxjs";
@@ -6,11 +6,13 @@ import { ScheduleService } from "../../../services/schedule.service";
 import { AuthService } from "../../../services/auth.service";
 
 @Component({
-  selector: 'app-inscrevase',
-  templateUrl: './inscrevase.component.html',
-  styleUrls: ['./inscrevase.component.scss']
+  selector: 'app-programacao-aberta',
+  templateUrl: './programacao-aberta.component.html',
+  styleUrls: ['./programacao-aberta.component.scss']
 })
-export class InscrevaseComponent implements OnInit {
+export class ProgramacaoAbertaComponent implements OnInit {
+
+ 
 
   public workModalities = WORK_OPTIONS;
   public programacoes = SCHEDULE_TYPE;
@@ -23,21 +25,33 @@ export class InscrevaseComponent implements OnInit {
   public loading = false;
   public modalities = [
     {
-      name: 'Minicurso',
-      type: 4
+      name: 'Abertura',
+      type: 1
     },
     {
-      name: 'Painel',
-      type: 5
+      name: 'Atividade Cultural',
+      type: 7
     },
     {
-      name: 'Pôster',
-      type: 3
+      name: 'Conexão Entrevista',
+      type: 11
     },
     {
-      name: 'Roda de Conversa',
-      type: 2
+      name: 'Encerramento',
+      type: 12
     },
+    {
+      name: 'Lançamentos de Livros',
+      type: 9
+    },
+    {
+      name: 'Sessão Especial',
+      type: 10
+    },
+    {
+      name: 'Simpósios',
+      type: 8
+    }
   ];
 
 
@@ -55,15 +69,6 @@ export class InscrevaseComponent implements OnInit {
 
   }
 
-  /*
-  private listAllSchedules() {
-    this.typeId = this.getType();
-    const date = this.daySelected$.getValue().replace("/", "-");
-
-    this.scheduleService.retrieveSchedules(this.typeId, date).subscribe((data) => this.schedules$.next(data));
-  }
-*/
-
   public selectDate(day) {
     this.daySelect = day;
   }
@@ -71,6 +76,5 @@ export class InscrevaseComponent implements OnInit {
   public selectModality(modality) {
     this.modalitySelect = modality.type;
   }
-
 
 }

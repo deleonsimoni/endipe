@@ -18,6 +18,7 @@ export class ScheduleVirtualComponent implements OnInit {
   page = null;
   schedules= [];
   pager: any = {};
+  pagerBooks: any = {};
   carregando = false;
   carregandoLista = false;
   pageHot;
@@ -48,6 +49,16 @@ export class ScheduleVirtualComponent implements OnInit {
     }
   }
 
+  selectBookSchedule(schedule){
+    if(this.scheduleSelect == schedule._id){
+      this.scheduleSelect = null;
+    } else {
+      this.scheduleSelect = schedule._id;
+      this.getBooksPaginated(schedule, null);
+
+    }
+  }
+
   ngDoCheck() {
     const change = this.differ.diff(this);
     if (change) {
@@ -64,13 +75,51 @@ export class ScheduleVirtualComponent implements OnInit {
     let pageChoose = event && event.pageIndex + 1 || 1;
     this.http.get(`${this.baseUrl}/live/scheduleWorkPaginate?page=${pageChoose}&date=${day}&type=${type}`).subscribe(
       (res: any) => {
-        this.schedules = res.schedule;
+        this.schedules = res.schedule || [];
+        if(this.schedules) {
+          this.schedules.forEach(element => {
+            if(element.authors){
+              element.authors = element.authors.split(',');
+            }
+          });
+        }
         this.pager = res.pager;
         this.carregandoLista = false;
       },
       (err) => {
         this.toastr.error("Servidor momentâneamente inoperante", "Atenção");
         this.carregandoLista = false;
+      }
+    );
+  }
+
+  getBooksPaginated(schedule, event){
+    this.carregando = true;
+    let pageChoose = event && event.pageIndex + 1 || 1;
+    this.http.get(`${this.baseUrl}/live/scheduleBooksPaginate?page=${pageChoose}&id=${schedule._id}`).subscribe(
+      (res: any) => {
+        schedule.books = res.books;
+        this.pagerBooks = res.pager;
+        this.carregando = false;
+
+
+        let indexArray = 0;
+        setTimeout( () => {
+          schedule.books.forEach(element => {
+  
+            if((document.getElementById('imageRenderCard' + indexArray) as HTMLImageElement)){
+              let file = element.miniature.data;
+              const base64 = btoa(new Uint8Array(file).reduce((data, byte) => data + String.fromCharCode(byte), ''));
+              (document.getElementById('imageRenderCard' + indexArray) as HTMLImageElement).src = 'data:image/jpg;base64,' + base64;
+              indexArray++;  
+            }
+           
+          }); 
+        }, 100);
+      },
+      (err) => {
+        this.toastr.error("Servidor momentâneamente inoperante", "Atenção");
+        this.carregando = false;
       }
     );
   }

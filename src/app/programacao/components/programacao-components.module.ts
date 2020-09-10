@@ -6,11 +6,13 @@ import { InscrevaseComponent } from './inscrevase/inscrevase.component';
 import { PipesModule } from 'src/app/pipes/pipes.module';
 import { UtilNgxMaterialModule } from 'src/app/util-ngx-material/util-ngx-material.module';
 import { GlobalComponentsModule } from 'src/app/components/global-components.module';
+import { ProgramacaoAbertaComponent } from './programacao-aberta/programacao-aberta.component';
 
 @NgModule({
     declarations: [
         OpeningScheduleCardComponent,
         InscrevaseComponent,
+        ProgramacaoAbertaComponent,
         
     ],
     imports: [

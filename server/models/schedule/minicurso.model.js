@@ -13,6 +13,9 @@ const ScheduleSchema = new mongoose.Schema({
   workTitle: {
     type: String,
   },
+  workAuthor: [{
+    fullname: String
+  }],
   
   dates: [{
 
