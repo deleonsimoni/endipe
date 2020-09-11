@@ -137,7 +137,7 @@
                         <div *ngIf=" type != '11' && (schedule.coordinators || schedule.coordinator)" class="col-12">
                             <strong>Conferencistas</strong>
                             <div *ngIf="schedule.coordinators">
-                                <p *ngFor="let item of schedule.coordinators" style="text-align: justify; text-justify: inter-word;">{{ item.name }}</p>
+                                <p *ngFor="let item of schedule.coordinators" style="text-align: justify; text-justify: inter-word;">{{ item.name }} {{ item.isCoordinator ? '(Coordenador)' : '' }}</p>
                             </div>
                             <div *ngIf="schedule.coordinator">
                                 <p *ngFor="let item of schedule.coordinator" style="text-align: justify; text-justify: inter-word;">{{ item.name }}</p>

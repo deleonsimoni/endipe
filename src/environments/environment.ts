@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  //host: 'http://18.228.5.115:8080/api'
-  'host': "http://localhost:8080/api"
+  host: 'http://18.228.5.115:8080/api'
+  //host: "http://localhost:8080/api"
 };
 
 /*
