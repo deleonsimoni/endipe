@@ -55,8 +55,10 @@ export class MeuEndipeComponent implements OnInit {
   ngOnInit() {
     this.user = this.authService.getDecodedAccessToken(this.authService.getToken());
     //INCRIÇÕES USUARIO
-    this.getUserSubscribers();
-    this.getUserPresentation();
+    if(this.user){
+      this.getUserSubscribers();
+      this.getUserPresentation();
+    }
   }
 
   selectSchedule(id){

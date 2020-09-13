@@ -17,11 +17,14 @@ async function listSchedule(date) {
       'dates.date': { $in: date }
     })
     .sort({
-      startTime: 1
+      'dates.startTime': 1
     });
 }
 
 async function insertSchedule(schedule) {
+
+  schedule = await setAuthorsInPoster(schedule);
+
   const poster = await new Poster(schedule).save();
   let workWithUser;
 
@@ -41,7 +44,12 @@ async function insertSchedule(schedule) {
 }
 
 async function updateSchedule(id, schedule) {
-  return await Poster.findOneAndUpdate({ _id: id }, schedule);
+
+  await deleteSchedule(id);
+  delete schedule._id;
+  return await insertSchedule(schedule);
+
+
 }
 
 async function deleteSchedule(id) {
@@ -56,7 +64,6 @@ async function deleteSchedule(id) {
 
         for (let userCount = 0; userCount < workWithUser.authors.length; userCount++) {
           await unsubscribePoster(poster._id, workWithUser.authors[userCount].userId);
-          
         }
       }
     }
@@ -64,6 +71,34 @@ async function deleteSchedule(id) {
 
   return await Poster.findOneAndRemove({ _id: id });
 
+}
+
+
+
+async function setAuthorsInPoster(posters) {
+  
+  let workWithUser;
+  let namesAuthors = [];
+
+    if(posters.worksPoster){
+      for (let index = 0; index < posters.worksPoster.length; index++) {
+        if(!posters.worksPoster[index].workTitle) continue;
+        namesAuthors = [];
+        workWithUser = await Work.findById({_id: posters.worksPoster[index].work}).select('authors');
+        if(workWithUser.authors){
+          
+          for (let autores = 0; autores < workWithUser.authors.length; autores++) {
+            const autoresTrabalho = workWithUser.authors[autores];
+            namesAuthors.push(await User.findById(autoresTrabalho.userId).select('-_id fullname'))
+          }
+
+          posters.worksPoster[index].workAuthor = namesAuthors
+
+        }
+      }
+    }
+
+  return await posters;
 }
 
 

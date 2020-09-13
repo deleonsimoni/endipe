@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
 import { ScheduleService } from 'src/app/services/schedule.service';
+import { PageEvent } from '@angular/material';
 
 @Component({
   selector: 'app-schedule-virtual',
@@ -19,6 +20,8 @@ export class ScheduleVirtualComponent implements OnInit {
   schedules= [];
   pager: any = {};
   pagerBooks: any = {};
+  pageEvent: PageEvent;
+  pageEventBooks: PageEvent;
   carregando = false;
   carregandoLista = false;
   pageHot;
@@ -38,7 +41,7 @@ export class ScheduleVirtualComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getSchedulePaginate(this.day, this.type, null);
+    this.getSchedulePaginate(null, this.day, this.type);
   }
 
   selectSchedule(id){
@@ -64,13 +67,17 @@ export class ScheduleVirtualComponent implements OnInit {
     if (change) {
       change.forEachChangedItem(item => {
         if(item.key == 'day' || item.key == 'type'){
-          this.getSchedulePaginate(this.day, this.type, null);
+          this.getSchedulePaginate(null, this.day, this.type);
         }
       });
     }
   }
 
-  getSchedulePaginate(day, type, event){
+  alerta(event, a, b){
+    console.log(event)
+  }
+
+  getSchedulePaginate(event, day, type){
     this.carregandoLista = true;
     let pageChoose = event && event.pageIndex + 1 || 1;
     this.http.get(`${this.baseUrl}/live/scheduleWorkPaginate?page=${pageChoose}&date=${day}&type=${type}`).subscribe(
@@ -102,15 +109,14 @@ export class ScheduleVirtualComponent implements OnInit {
         this.pagerBooks = res.pager;
         this.carregando = false;
 
-
         let indexArray = 0;
         setTimeout( () => {
           schedule.books.forEach(element => {
   
-            if((document.getElementById('imageRenderCard' + indexArray) as HTMLImageElement)){
+            if((document.getElementById(element.nameMiniature) as HTMLImageElement)){
               let file = element.miniature.data;
               const base64 = btoa(new Uint8Array(file).reduce((data, byte) => data + String.fromCharCode(byte), ''));
-              (document.getElementById('imageRenderCard' + indexArray) as HTMLImageElement).src = 'data:image/jpg;base64,' + base64;
+              (document.getElementById(element.nameMiniature) as HTMLImageElement).src = 'data:image/jpg;base64,' + base64;
               indexArray++;  
             }
            
@@ -137,7 +143,7 @@ public isSubscribe(scheduleSelect) {
     if (type == 4) {
         this.scheduleService.enrollSchedule(scheduleFull._id)
             .subscribe(res => {
-              this.getSchedulePaginate(this.day, this.type, null);
+              this.getSchedulePaginate(null, this.day, this.type);
               this.toastr.success('Inscrição realizada com sucesso', 'Sucesso');
                 this.carregando = false;
             }, err => {
@@ -147,7 +153,7 @@ public isSubscribe(scheduleSelect) {
     } else if (type == 5) {
         this.scheduleService.enrollSchedulePainel(scheduleFull._id)
             .subscribe(res => {
-              this.getSchedulePaginate(this.day, this.type, null);
+              this.getSchedulePaginate(null, this.day, this.type);
               this.toastr.success('Inscrição realizada com sucesso', 'Sucesso');
                 this.carregando = false;
             }, err => {
@@ -158,7 +164,7 @@ public isSubscribe(scheduleSelect) {
     else {
         this.scheduleService.enrollScheduleRodaDeConversa(scheduleFull._id)
             .subscribe(res => {
-              this.getSchedulePaginate(this.day, this.type, null);
+              this.getSchedulePaginate(null, this.day, this.type);
               this.toastr.success('Inscrição realizada com sucesso', 'Sucesso');
                 this.carregando = false;
             }, err => {
@@ -173,7 +179,7 @@ public cancelSignUp(type, scheduleFull) {
     if (type == 4) {
         this.scheduleService.cancelEnrollSchedule(scheduleFull._id)
             .subscribe(res => {
-              this.getSchedulePaginate(this.day, this.type, null);
+              this.getSchedulePaginate(null, this.day, this.type);
               this.toastr.success('Cancelamento de inscrição realizada com sucesso', 'Sucesso');
                 this.carregando = false;
             }, err => {
@@ -184,7 +190,7 @@ public cancelSignUp(type, scheduleFull) {
     } else if (type == 5) {
         this.scheduleService.cancelEnrollSchedulePainel(scheduleFull._id)
             .subscribe(res => {
-              this.getSchedulePaginate(this.day, this.type, null);
+              this.getSchedulePaginate(null, this.day, this.type);
               this.toastr.success('Cancelamento de inscrição realizada com sucesso', 'Sucesso');
                 this.carregando = false;
             }, err => {
@@ -195,7 +201,7 @@ public cancelSignUp(type, scheduleFull) {
     } else {
         this.scheduleService.cancelEnrollScheduleRodaDeConversa(scheduleFull._id)
             .subscribe(res => {
-              this.getSchedulePaginate(this.day, this.type, null);
+              this.getSchedulePaginate(null, this.day, this.type);
               this.toastr.success('Cancelamento de inscrição realizada com sucesso', 'Sucesso');
                 this.carregando = false;
             }, err => {

@@ -6,7 +6,7 @@
     <b><span>{{day | dayAndMonth}}</span></b>
 </div>
 
-<div *ngIf="!carregandoLista && schedules.length > 0">
+<div *ngIf="schedules.length > 0">
     <div *ngFor="let schedule of schedules">
         <!-- TRABALHOS COM INSCRIÇÕES -->
         <div *ngIf="type == '3' || type == '2' || type == '4' || type == '5'">
@@ -88,7 +88,7 @@
                                 </div>
                                 <div class="row" *ngIf="item.workAuthor">
                                     <div class="col-sm-12 align-self-center">
-                                        <strong>Autore(s)</strong>
+                                        <strong>Autores</strong>
                                         <p *ngFor="let autores of item.workAuthor">{{ autores.fullname }}</p>
                                     </div>
                                 </div>
@@ -201,7 +201,7 @@
 
                             <div class="form-group col-md-2">
                                 <div class="miniature-img ">
-                                    <img width="100px" height="150px" id="imageRenderCard{{i}}">
+                                    <img width="100px" height="150px" id="{{item.nameMiniature}}">
                                 </div>
                             </div>
 
@@ -224,7 +224,7 @@
                     <div *ngIf="pagerBooks.totalItems" class="pagination justify-content-center">
 
                         <mat-paginator [length]="pagerBooks.totalItems" [pageSize]="pagerBooks.pageSize"
-                          (page)="pageEvent = getBooksPaginated(schedule, $event)">
+                          (page)="pageEventBooks = getBooksPaginated(schedule, $event)">
                         </mat-paginator>
                     
                     </div>
@@ -238,7 +238,7 @@
     <div *ngIf="pager.totalItems" class="pagination justify-content-center">
 
         <mat-paginator [length]="pager.totalItems" [pageSize]="pager.pageSize"
-          (page)="pageEvent = getSchedulePaginate(day, type, $event)">
+          (page)="pageEvent = getSchedulePaginate($event, day, type)">
         </mat-paginator>
     
     </div>

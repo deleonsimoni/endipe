@@ -55,15 +55,13 @@ export class ProgramacaoAbertaComponent implements OnInit {
   ];
 
 
-  constructor(private scheduleService: ScheduleService, 
-    private authService: AuthService,
+  constructor(
     private auth: AuthService,
     ) {
   
   }
 
   ngOnInit() { 
-    //this.listAllSchedules();
 
     this.user = this.auth.getDecodedAccessToken(this.auth.getToken());
 

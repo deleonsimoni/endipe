@@ -48,7 +48,7 @@ async function listScheduleWorkPaginate(req) {
         'dates.date': { $in: date }
       })
       .sort({
-        createAt: 1
+        'dates.startTime': 1
       })
       .skip(pageSize * page - pageSize)
       .limit(pageSize);
@@ -60,7 +60,7 @@ async function listScheduleWorkPaginate(req) {
         'dates.date': { $in: date }
       })
       .sort({
-        createAt: 1
+        'dates.startTime': 1
       })
       .skip(pageSize * page - pageSize)
       .limit(pageSize);
@@ -72,7 +72,7 @@ async function listScheduleWorkPaginate(req) {
         'dates.date': { $in: date }
       })
       .sort({
-        createAt: 1
+        'dates.startTime': 1
       })
       .skip(pageSize * page - pageSize)
       .limit(pageSize);
@@ -84,7 +84,7 @@ async function listScheduleWorkPaginate(req) {
         'dates.date': { $in: date }
       })
       .sort({
-        createAt: 1
+        'dates.startTime': 1
       })
       .skip(pageSize * page - pageSize)
       .limit(pageSize);
@@ -98,7 +98,7 @@ async function listScheduleWorkPaginate(req) {
         date: date
       })
       .sort({
-        createAt: 1
+        startTime: 1
       })
       .skip(pageSize * page - pageSize)
       .limit(pageSize);
@@ -109,7 +109,7 @@ async function listScheduleWorkPaginate(req) {
         date: date
       })
       .sort({
-        createAt: 1
+        startTime: 1
       })
       .skip(pageSize * page - pageSize)
       .limit(pageSize);
@@ -120,7 +120,7 @@ async function listScheduleWorkPaginate(req) {
         date: date
       })
       .sort({
-        createAt: 1
+        startTime: 1
       })
       .skip(pageSize * page - pageSize)
       .limit(pageSize);
@@ -131,7 +131,7 @@ async function listScheduleWorkPaginate(req) {
         date: date
       })
       .sort({
-        createAt: 1
+        startTime: 1
       })
       .select('-books')
       .skip(pageSize * page - pageSize)
@@ -143,7 +143,7 @@ async function listScheduleWorkPaginate(req) {
         date: date
       })
       .sort({
-        createAt: 1
+        startTime: 1
       })
       .skip(pageSize * page - pageSize)
       .limit(pageSize);
@@ -154,7 +154,7 @@ async function listScheduleWorkPaginate(req) {
         date: date
       })
       .sort({
-        createAt: 1
+        startTime: 1
       })
       .skip(pageSize * page - pageSize)
       .limit(pageSize);
@@ -165,7 +165,7 @@ async function listScheduleWorkPaginate(req) {
         date: date
       })
       .sort({
-        createAt: 1
+        startTime: 1
       })
       .skip(pageSize * page - pageSize)
       .limit(pageSize);
