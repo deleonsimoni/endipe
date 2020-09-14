@@ -11,12 +11,12 @@ router.get('/calibrateAllWorksAuthors', asyncHandler(calibrateAllWorksAuthors));
 
 
 
-router.get('/getScheduleByDay/:date', asyncHandler(listVirtual));
+router.get('/getScheduleByDay', asyncHandler(listVirtual));
 router.get('/scheduleWorkPaginate', asyncHandler(listScheduleWorkPaginate));
 router.get('/scheduleBooksPaginate', asyncHandler(scheduleBooksPaginate));
 
-router.get('/getSubscribersUser',  passport.authenticate("jwt", { session: false, }), asyncHandler(getSubscribersUser));
-router.get('/getPresentationsUser',  passport.authenticate("jwt", { session: false, }), asyncHandler(getPresentationsUser));
+router.get('/getSubscribersUser', passport.authenticate("jwt", { session: false, }), asyncHandler(getSubscribersUser));
+router.get('/getPresentationsUser', passport.authenticate("jwt", { session: false, }), asyncHandler(getPresentationsUser));
 
 
 async function listScheduleWorkPaginate(req, res) {
@@ -41,7 +41,7 @@ async function getPresentationsUser(req, res) {
 
 async function listVirtual(req, res) {
 
-  let date = req.params.date;
+  let date = req.query.date;
   let virtual = await virtualCtrl.listVirtual(date);
 
   res.json(virtual);
@@ -52,11 +52,11 @@ async function listVirtual(req, res) {
 
 
 async function calibrateAllPoster(req, res) {
-    let users = await virtualCtrl.calibrateAllPoster();
-    res.json(users);
+  let users = await virtualCtrl.calibrateAllPoster();
+  res.json(users);
 }
 
 async function calibrateAllWorksAuthors(req, res) {
-    let users = await virtualCtrl.calibrateAllWorksAuthors();
-    res.json(users);
+  let users = await virtualCtrl.calibrateAllWorksAuthors();
+  res.json(users);
 }
