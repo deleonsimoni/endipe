@@ -117,6 +117,20 @@ const UserSchema = new mongoose.Schema({
     icModalityId: Number
   }],
 
+  monitor: [{
+    idSchedule: {
+      type: mongoose.Schema.Types.ObjectId
+    },
+    icModalityId: Number
+  }],
+
+  mediador: [{
+    idSchedule: {
+      type: mongoose.Schema.Types.ObjectId
+    },
+    icModalityId: Number
+  }],
+
   reviewer: {
     icModalityId: Number,
     icCoordinator: Boolean

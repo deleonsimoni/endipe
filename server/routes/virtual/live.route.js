@@ -17,6 +17,8 @@ router.get('/scheduleBooksPaginate', asyncHandler(scheduleBooksPaginate));
 
 router.get('/getSubscribersUser', passport.authenticate("jwt", { session: false, }), asyncHandler(getSubscribersUser));
 router.get('/getPresentationsUser', passport.authenticate("jwt", { session: false, }), asyncHandler(getPresentationsUser));
+router.get('/getUserMediator', passport.authenticate("jwt", { session: false, }), asyncHandler(getUserMediator));
+router.get('/getUserMonitors', passport.authenticate("jwt", { session: false, }), asyncHandler(getUserMonitors));
 
 
 async function listScheduleWorkPaginate(req, res) {
@@ -36,6 +38,16 @@ async function getSubscribersUser(req, res) {
 
 async function getPresentationsUser(req, res) {
   let rep = await virtualCtrl.getPresentationsUser(req);
+  res.json(rep);
+}
+
+async function getUserMediator(req, res) {
+  let rep = await virtualCtrl.getUserMediator(req);
+  res.json(rep);
+}
+
+async function getUserMonitors(req, res) {
+  let rep = await virtualCtrl.getUserMonitors(req);
   res.json(rep);
 }
 

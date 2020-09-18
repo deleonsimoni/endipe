@@ -21,17 +21,45 @@ async function listSchedule(date) {
 }
 
 async function insertSchedule(schedule) {
-  return await new Painel(schedule).save();
+
+  let painel = await new Painel(schedule).save();
+
+  if(painel.monitor){
+    registerMonitor(painel._id, painel.monitor.toLowerCase());
+  }
+
+  return await painel;
+
 }
 
 async function updateSchedule(id, schedule) {
+
+  let painelOld = await Painel.findById(id);
+
+  if(painelOld.monitor){
+    unRegisterMonitor(id, painelOld.monitor.toLowerCase());
+  }
+
+  if(schedule.monitor){
+    registerMonitor(id, schedule.monitor.toLowerCase());
+  }
+
   return await Painel.findOneAndUpdate({ _id: id }, schedule);
+
 }
 
 async function deleteSchedule(id) {
+
+  let painelOld = await Painel.findById(id);
+
+  if(painelOld.monitor){
+    unRegisterMonitor(id, painelOld.monitor.toLowerCase());
+  }
+
   return await Painel.findOneAndRemove({
     _id: id
   });
+
 
 }
 
@@ -98,5 +126,42 @@ async function subscribePainel(workId, userId, email) {
     }
   }, {
     new: true
+  });
+}
+
+async function registerMonitor(workId, email) {
+  await User.findOneAndUpdate({
+    email: email
+  }, {
+    $addToSet: {
+      monitor: {
+        idSchedule: workId,
+        icModalityId: 5
+      }
+    }
+  }, (err, doc) => {
+    if (err) {
+      console.log("erro ao registrar monitor -> " + err);
+    }
+  });
+}
+
+
+async function unRegisterMonitor(workId, email) {
+  await User.findOneAndUpdate({
+    email: email
+  }, {
+    $pull: {
+      monitor:{
+        'idSchedule': workId
+      }
+      
+    }
+  }, function (err, doc) {
+    if (err) {
+      console.log("Erro ao remover monitor", err);
+    } else {
+      console.log("Sucesso ao remover monitor ", err);
+    }
   });
 }

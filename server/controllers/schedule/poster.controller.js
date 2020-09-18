@@ -26,6 +26,15 @@ async function insertSchedule(schedule) {
   schedule = await setAuthorsInPoster(schedule);
 
   const poster = await new Poster(schedule).save();
+
+  if(poster.monitor){
+    registerMonitor(poster._id, poster.monitor.toLowerCase());
+  }
+
+  if(poster.mediator){
+    registerMediator(poster._id, poster.mediator.toLowerCase());
+  }
+
   let workWithUser;
 
   if(poster.worksPoster){
@@ -56,6 +65,15 @@ async function deleteSchedule(id) {
 
   const poster = await Poster.findById({_id: id});
   let workWithUser;
+
+  if(poster.monitor){
+    unRegisterMonitor(id, poster.monitor.toLowerCase());
+  }
+
+  if(poster.mediator){
+    unRegisterMediator(id, poster.mediator.toLowerCase());
+  }
+
 
   if(poster.worksPoster){
     for (let index = 0; index < poster.worksPoster.length; index++) {
@@ -164,5 +182,80 @@ async function subscribePoster(workId, userId, email) {
     }
   }, {
     new: true
+  });
+}
+
+async function registerMonitor(workId, email) {
+  await User.findOneAndUpdate({
+    email: email
+  }, {
+    $addToSet: {
+      monitor: {
+        idSchedule: workId,
+        icModalityId: 3
+      }
+    }
+  }, (err, doc) => {
+    if (err) {
+      console.log("erro ao registrar monitor -> " + err);
+    }
+  });
+}
+
+
+async function unRegisterMonitor(workId, email) {
+  await User.findOneAndUpdate({
+    email: email
+  }, {
+    $pull: {
+      monitor:{
+        'idSchedule': workId
+      }
+      
+    }
+  }, function (err, doc) {
+    if (err) {
+      console.log("Erro ao remover monitor", err);
+    } else {
+      console.log("Sucesso ao remover monitor ", err);
+    }
+  });
+}
+
+
+async function registerMediator(workId, email) {
+  await User.findOneAndUpdate({
+    email: email
+  }, {
+    $addToSet: {
+      mediador: {
+        idSchedule: workId,
+        icModalityId: 3
+      }
+    }
+  }, (err, doc) => {
+    if (err) {
+      console.log("erro ao registrar mediador -> " + err);
+    }
+  });
+}
+
+
+async function unRegisterMediator(workId, email) {
+  await User.findOneAndUpdate({
+    email: email
+  }, {
+    $pull: {
+      mediador:{
+        'idSchedule': workId
+      }
+      
+    }
+  }, function (err, doc) {
+    if (err) {
+      console.log("Erro ao remover monitor", err);
+    } else {
+      console.log("Sucesso ao remover monitor ", err);
+    }
   });
 }

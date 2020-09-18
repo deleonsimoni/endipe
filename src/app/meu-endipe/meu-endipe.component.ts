@@ -20,6 +20,8 @@ export class MeuEndipeComponent implements OnInit {
   user;
   schedules = [];
   apresentacoes = [];
+  mediators = [];
+  monitors = [];
   carregando = false;
   carregandoLista = false;
   carregandoApresentacao = false;
@@ -54,10 +56,17 @@ export class MeuEndipeComponent implements OnInit {
   }*/
   ngOnInit() {
     this.user = this.authService.getDecodedAccessToken(this.authService.getToken());
+
     //INCRIÇÕES USUARIO
     if(this.user){
       this.getUserSubscribers();
       this.getUserPresentation();
+      if(this.user.monitor){
+        this.getUserMonitors();
+      }
+      if(this.user.mediador){
+        this.getUserMediator();
+      }
     }
   }
 
@@ -111,6 +120,46 @@ export class MeuEndipeComponent implements OnInit {
       (err) => {
         this.toastr.error("Servidor momentâneamente inoperante", "Atenção");
         this.carregandoApresentacao = false;
+      }
+    );
+  }
+
+  getUserMediator(){
+    this.http.get(`${this.baseUrl}/live/getUserMediator`).subscribe(
+      (res: any) => {
+        this.mediators = res.filter((obj) => obj );
+
+        if(this.mediators) {
+          this.mediators.forEach(element => {
+            if(element.authors){
+              element.authors = element.authors.split(',');
+            }
+          });
+        }
+
+      },
+      (err) => {
+        this.toastr.error("Servidor momentâneamente inoperante", "Atenção");
+      }
+    );
+  }
+
+  getUserMonitors(){
+    this.http.get(`${this.baseUrl}/live/getUserMonitors`).subscribe(
+      (res: any) => {
+        this.monitors = res.filter((obj) => obj );
+
+        if(this.monitors) {
+          this.monitors.forEach(element => {
+            if(element.authors){
+              element.authors = element.authors.split(',');
+            }
+          });
+        }
+
+      },
+      (err) => {
+        this.toastr.error("Servidor momentâneamente inoperante", "Atenção");
       }
     );
   }

@@ -1,3 +1,4 @@
+const minicursoModel = require('../../models/schedule/minicurso.model');
 const Minicurso = require('../../models/schedule/minicurso.model');
 const User = require('../../models/user.model');
 
@@ -20,14 +21,39 @@ async function listSchedule(date) {
 }
 
 async function insertSchedule(schedule) {
-  return await new Minicurso(schedule).save();
+  let minicurso = await new Minicurso(schedule).save();
+
+  if(minicurso.monitor){
+    registerMonitor(minicurso._id, minicurso.monitor.toLowerCase());
+  }
+
+  return await minicurso;
 }
 
 async function updateSchedule(id, schedule) {
+
+  let minicursoOld = await Minicurso.findById(id);
+
+  if(minicursoOld.monitor){
+    unRegisterMonitor(id, minicursoOld.monitor.toLowerCase());
+  }
+
+  if(schedule.monitor){
+    registerMonitor(id, schedule.monitor.toLowerCase());
+  }
+
   return await Minicurso.findOneAndUpdate({ _id: id }, schedule);
+
 }
 
 async function deleteSchedule(id) {
+
+  let minicursoOld = await Minicurso.findById(id);
+
+  if(minicursoOld.monitor){
+    unRegisterMonitor(id, minicursoOld.monitor.toLowerCase());
+  }
+
   return await Minicurso.findOneAndRemove({
     _id: id
   });
@@ -96,5 +122,42 @@ async function subscribeMinicurso(workId, userId, email) {
     }
   }, {
     new: true
+  });
+}
+
+async function registerMonitor(workId, email) {
+  await User.findOneAndUpdate({
+    email: email
+  }, {
+    $addToSet: {
+      monitor: {
+        idSchedule: workId,
+        icModalityId: 4
+      }
+    }
+  }, (err, doc) => {
+    if (err) {
+      console.log("erro ao registrar monitor -> " + err);
+    }
+  });
+}
+
+
+async function unRegisterMonitor(workId, email) {
+  await User.findOneAndUpdate({
+    email: email
+  }, {
+    $pull: {
+      monitor:{
+        'idSchedule': workId
+      }
+      
+    }
+  }, function (err, doc) {
+    if (err) {
+      console.log("Erro ao remover monitor", err);
+    } else {
+      console.log("Sucesso ao remover monitor ", err);
+    }
   });
 }

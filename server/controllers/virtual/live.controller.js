@@ -31,7 +31,9 @@ module.exports = {
   calibrateAllPoster,
   calibrateAllWorksAuthors,
   scheduleBooksPaginate,
-  getPresentationsUser
+  getPresentationsUser,
+  getUserMonitors,
+  getUserMediator
 }
 
 
@@ -279,6 +281,73 @@ async function getPresentationsUser(req) {
 
 }
 
+async function getUserMediator(req) {
+
+  let response = [];
+  let schedule = {};
+
+  if(req.user.mediador){
+    for (let index = 0; index < req.user.mediador.length; index++) {
+      switch (Number(req.user.mediador[index].icModalityId)) {
+        case 4: //minicurso
+          schedule = await Minicurso.findById(req.user.mediador[index].idSchedule).lean();
+          if (schedule) schedule.type = 4;
+          response.push(schedule);
+        break;
+        case 5://painel
+          schedule = await Painel.findById(req.user.mediador[index].idSchedule).lean();
+          if (schedule) schedule.type = 5;
+          response.push(schedule);
+        break;
+        case 2: //rodaDeConversa
+          schedule = await RodasDeConversa.findById(req.user.mediador[index].idSchedule).lean();
+          if (schedule) schedule.type = 2;
+          response.push(schedule);
+          break;
+        case 3: //pôster
+          schedule = await Poster.findById(req.user.mediador[index].idSchedule).lean();
+          if (schedule) schedule.type = 3;
+          response.push(schedule);
+        break;
+      }
+    }
+  }
+  return await response;
+}
+
+async function getUserMonitors(req) {
+
+  let response = [];
+  let schedule = {};
+
+  if(req.user.monitor){
+    for (let index = 0; index < req.user.monitor.length; index++) {
+      switch (Number(req.user.monitor[index].icModalityId)) {
+        case 4: //minicurso
+          schedule = await Minicurso.findById(req.user.monitor[index].idSchedule).lean();
+          if (schedule) schedule.type = 4;
+          response.push(schedule);
+        break;
+        case 5://painel
+          schedule = await Painel.findById(req.user.monitor[index].idSchedule).lean();
+          if (schedule) schedule.type = 5;
+          response.push(schedule);
+        break;
+        case 2: //rodaDeConversa
+          schedule = await RodasDeConversa.findById(req.user.monitor[index].idSchedule).lean();
+          if (schedule) schedule.type = 2;
+          response.push(schedule);
+          break;
+        case 3: //pôster
+          schedule = await Poster.findById(req.user.monitor[index].idSchedule).lean();
+          if (schedule) schedule.type = 3;
+          response.push(schedule);
+        break;
+      }
+    }
+  }
+  return await response;
+}
 
 async function listVirtual(date) {
 

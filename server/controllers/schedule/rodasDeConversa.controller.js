@@ -20,17 +20,43 @@ async function listSchedule(date) {
 }
 
 async function insertSchedule(schedule) {
-  return await new RodasDeConversa(schedule).save();
+
+  let roda = await new RodasDeConversa(schedule).save();
+
+  if(roda.monitor){
+    registerMonitor(roda._id, roda.monitor.toLowerCase());
+  }
+
+  return await roda;
 }
 
 async function updateSchedule(id, schedule) {
+
+  let rodaOld = await RodasDeConversa.findById(id);
+
+  if(rodaOld.monitor){
+    unRegisterMonitor(id, rodaOld.monitor.toLowerCase());
+  }
+
+  if(schedule.monitor){
+    registerMonitor(id, schedule.monitor.toLowerCase());
+  }
+
   return await RodasDeConversa.findOneAndUpdate({ _id: id }, schedule);
 }
 
 async function deleteSchedule(id) {
+
+  let rodaOld = await RodasDeConversa.findById(id);
+
+  if(rodaOld.monitor){
+    unRegisterMonitor(id, rodaOld.monitor.toLowerCase());
+  }
+
   return await RodasDeConversa.findOneAndRemove({
     _id: id
   });
+
 
 }
 
@@ -97,5 +123,43 @@ async function subscribeRodadeConversa(workId, userId, email) {
     }
   }, {
     new: true
+  });
+}
+
+
+async function registerMonitor(workId, email) {
+  await User.findOneAndUpdate({
+    email: email
+  }, {
+    $addToSet: {
+      monitor: {
+        idSchedule: workId,
+        icModalityId: 2
+      }
+    }
+  }, (err, doc) => {
+    if (err) {
+      console.log("erro ao registrar monitor -> " + err);
+    }
+  });
+}
+
+
+async function unRegisterMonitor(workId, email) {
+  await User.findOneAndUpdate({
+    email: email
+  }, {
+    $pull: {
+      monitor:{
+        'idSchedule': workId
+      }
+      
+    }
+  }, function (err, doc) {
+    if (err) {
+      console.log("Erro ao remover monitor", err);
+    } else {
+      console.log("Sucesso ao remover monitor ", err);
+    }
   });
 }
