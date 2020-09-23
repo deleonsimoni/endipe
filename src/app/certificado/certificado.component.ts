@@ -17,7 +17,7 @@ export class CertificadoComponent implements OnInit {
     private authService: AuthService,
     @Inject("BASE_API_URL") private baseUrl: string,
     private http: HttpClient
-  ) {}
+  ) { }
 
   user: any;
   carregando = false;
@@ -102,6 +102,9 @@ export class CertificadoComponent implements OnInit {
         this.preencherTemplate(this.templateAutomatico, work.workTitle, horas);
       } else if (this.user.cursosInscritos[control].icModalityId == 2) {
         this.templateAutomatico.target.value = "PARTICIPAÇÃO DE RODA DE CONVERSA";
+        this.preencherTemplate(this.templateAutomatico, work.workTitle, null);
+      } else if (this.user.cursosInscritos[control].icModalityId == 5) {
+        this.templateAutomatico.target.value = "PARTICIPAÇÃO DE PAINEL";
         this.preencherTemplate(this.templateAutomatico, work.workTitle, null);
       }
       control++;
@@ -189,6 +192,9 @@ export class CertificadoComponent implements OnInit {
     } else if (templateSelecionado.target.value == "ATIVIDADE CULTURAL") {
       this.coringa = " realizou a apresentação cultural ";
       this.exibirGT = true;
+    } else if (templateSelecionado.target.value == "SIMPOSIO") {
+      this.coringa = " realizou o simpósio ";
+      this.exibirGT = true;
     } else if (templateSelecionado.target.value == "MEDIAÇÃO DE MINICURSO") {
       this.coringa =
         " desenvolveu o Minicurso " +
@@ -211,7 +217,10 @@ export class CertificadoComponent implements OnInit {
     } else if (templateSelecionado.target.value == "PARTICIPAÇÃO DE RODA DE CONVERSA") {
       this.coringa = " participou da Roda de Conversa " + complementoUm || "______________" + " ";
       this.exibirGT = true;
-    } else if (templateSelecionado.target.value == "PAINEL") {
+    } else if (templateSelecionado.target.value == "PARTICIPAÇÃO DE PAINEL") {
+      this.coringa = " participou do Painel " + complementoUm || "______________" + " ";
+      this.exibirGT = true;
+    } else if (templateSelecionado.target.value == "MEDIAÇÃO DE PAINEL") {
       this.coringa = " apresentou o Painel intitulado " + (complementoUm || "______________");
       this.exibirGT = true;
     } else if (templateSelecionado.target.value == "PÔSTER") {
@@ -224,19 +233,9 @@ export class CertificadoComponent implements OnInit {
 
   templates = [
     {
-      name: "COORDENAÇÃO GERAL",
+      name: "ATIVIDADE CULTURAL",
       value:
-        "coordenou o XX Encontro Nacional de Didática e Prática de Ensino – XX ENDIPE – RIO 2020 – uma promoção interinstitucional coordenada pela Universidade Federal do Rio de Janeiro e pela Universidade Federal do Estado do Rio de Janeiro, no período de 29 de outubro a 12 de novembro de 2020, com carga horária total de 180 horas.",
-    },
-    {
-      name: "COMITÊ ORGANIZADOR",
-      value:
-        "participou do Comitê Organizador do XX Encontro Nacional de Didática e Prática de Ensino – XX ENDIPE – RIO 2020 – uma promoção interinstitucional coordenada pela Universidade Federal do Rio de Janeiro e pela Universidade Federal do Estado do Rio de Janeiro, no período de 29 de outubro a 12 de novembro de 2020, com carga horária total de 180 horas.",
-    },
-    {
-      name: "GT",
-      value:
-        "do XX Encontro Nacional de Didática e Prática de Ensino – XX ENDIPE – RIO 2020 – uma promoção interinstitucional coordenada pela Universidade Federal do Rio de Janeiro e pela Universidade Federal do Estado do Rio de Janeiro, no período de 29 de outubro a 12 de novembro de 2020, com carga horária total de 180 horas.",
+        "no XX Encontro Nacional de Didática e Prática de Ensino – XX ENDIPE – RIO 2020 – uma promoção interinstitucional coordenada pela Universidade Federal do Rio de Janeiro e pela Universidade Federal do Estado do Rio de Janeiro, no período de 29 de outubro a 12 de novembro de 2020, com carga horária total de 180 horas.",
     },
     {
       name: "COMITÊ CIENTÍFICO",
@@ -244,69 +243,105 @@ export class CertificadoComponent implements OnInit {
         "fez parte do Comitê Científico do XX Encontro Nacional de Didática e Prática de Ensino – XX ENDIPE – RIO 2020 – uma promoção interinstitucional coordenada pela Universidade Federal do Rio de Janeiro e pela Universidade Federal do Estado do Rio de Janeiro, no período de 29 de outubro a 12 de novembro de 2020, com carga horária total de 180 horas.",
     },
     {
-      name: "PARECERISTA",
+      name: "COMITÊ ORGANIZADOR",
       value:
-        "participou na condição de parecerista do XX Encontro Nacional de Didática e Prática de Ensino – XX ENDIPE – RIO 2020 – uma promoção interinstitucional coordenada pela Universidade Federal do Rio de Janeiro e pela Universidade Federal do Estado do Rio de Janeiro, no período de 29 de outubro a 12 de novembro de 2020, com carga horária total de 180 horas.",
-    },
-    {
-      name: "PRESTAÇÃO DE SERVIÇO",
-      value:
-        "para fins de realização do XX Encontro Nacional de Didática e Prática de Ensino – XX ENDIPE – RIO 2020 – uma promoção interinstitucional coordenada pela Universidade Federal do Rio de Janeiro e pela Universidade Federal do Estado do Rio de Janeiro, no período de 29 de outubro a 12 de novembro de 2020, com carga horária total de 180 horas.",
-    },
-    {
-      name: "MONITORIA",
-      value:
-        "no XX Encontro Nacional de Didática e Prática de Ensino – XX ENDIPE – RIO 2020 – uma promoção interinstitucional coordenada pela Universidade Federal do Rio de Janeiro e pela Universidade Federal do Estado do Rio de Janeiro, no período de 29 de outubro a 12 de novembro de 2020.",
+        "participou do Comitê Organizador do XX Encontro Nacional de Didática e Prática de Ensino – XX ENDIPE – RIO 2020 – uma promoção interinstitucional coordenada pela Universidade Federal do Rio de Janeiro e pela Universidade Federal do Estado do Rio de Janeiro, no período de 29 de outubro a 12 de novembro de 2020, com carga horária total de 180 horas.",
     },
     {
       name: "COORDENAÇÃO DE ATIVIDADE",
       value:
         "do XX Encontro Nacional de Didática e Prática de Ensino – XX ENDIPE – RIO 2020 – uma promoção interinstitucional coordenada pela Universidade Federal do Rio de Janeiro e pela Universidade Federal do Estado do Rio de Janeiro, no período de 29 de outubro a 12 de novembro de 2020, com carga horária total de 180 horas.",
     },
+
     {
-      name: "SESSÃO ESPECIAL",
+      name: "COORDENAÇÃO GERAL",
       value:
-        "no XX Encontro Nacional de Didática e Prática de Ensino – XX ENDIPE – RIO 2020 – uma promoção interinstitucional coordenada pela Universidade Federal do Rio de Janeiro e pela Universidade Federal do Estado do Rio de Janeiro, no período de 29 de outubro a 12 de novembro de 2020, com carga horária total de 180 horas.",
+        "coordenou o XX Encontro Nacional de Didática e Prática de Ensino – XX ENDIPE – RIO 2020 – uma promoção interinstitucional coordenada pela Universidade Federal do Rio de Janeiro e pela Universidade Federal do Estado do Rio de Janeiro, no período de 29 de outubro a 12 de novembro de 2020, com carga horária total de 180 horas.",
     },
+
     {
-      name: "ATIVIDADE CULTURAL",
+      name: "GT",
       value:
-        "no XX Encontro Nacional de Didática e Prática de Ensino – XX ENDIPE – RIO 2020 – uma promoção interinstitucional coordenada pela Universidade Federal do Rio de Janeiro e pela Universidade Federal do Estado do Rio de Janeiro, no período de 29 de outubro a 12 de novembro de 2020, com carga horária total de 180 horas.",
+        "do XX Encontro Nacional de Didática e Prática de Ensino – XX ENDIPE – RIO 2020 – uma promoção interinstitucional coordenada pela Universidade Federal do Rio de Janeiro e pela Universidade Federal do Estado do Rio de Janeiro, no período de 29 de outubro a 12 de novembro de 2020, com carga horária total de 180 horas.",
     },
-    {
-      name: "PARTICIPAÇÃO GERAL",
-      value:
-        "participou do XX Encontro Nacional de Didática e Prática de Ensino – XX ENDIPE – RIO 2020 – uma promoção interinstitucional coordenada pela Universidade Federal do Rio de Janeiro e pela Universidade Federal do Estado do Rio de Janeiro, no período de 29 de outubro a 12 de novembro de 2020, com carga horária total de 180 horas.",
-    },
+
     {
       name: "MEDIAÇÃO DE MINICURSO",
       value:
         "no XX Encontro Nacional de Didática e Prática de Ensino – XX ENDIPE – RIO 2020 – uma promoção interinstitucional coordenada pela Universidade Federal do Rio de Janeiro e pela Universidade Federal do Estado do Rio de Janeiro, no período de 29 de outubro a 12 de novembro de 2020.",
     },
     {
-      name: "PARTICIPAÇÃO DE MINICURSO",
+      name: "MEDIAÇÃO DE PAINEL",
       value:
-        "no XX Encontro Nacional de Didática e Prática de Ensino – XX ENDIPE – RIO 2020 – uma promoção interinstitucional coordenada pela Universidade Federal do Rio de Janeiro e pela Universidade Federal do Estado do Rio de Janeiro, no período de 29 de outubro a 12 de novembro de 2020.",
+        "no XX Encontro Nacional de Didática e Prática de Ensino – XX ENDIPE – RIO 2020 – uma promoção interinstitucional coordenada pela Universidade Federal do Rio de Janeiro e pela Universidade Federal do Estado do Rio de Janeiro, no período de 29 de outubro a 12 de novembro de 2020, com carga horária total de 180 horas.",
     },
+
+
     {
       name: "MEDIAÇÃO DE RODA DE CONVERSA",
       value:
         "no XX Encontro Nacional de Didática e Prática de Ensino – XX ENDIPE – RIO 2020 – uma promoção interinstitucional coordenada pela Universidade Federal do Rio de Janeiro e pela Universidade Federal do Estado do Rio de Janeiro, no período de 29 de outubro a 12 de novembro de 2020, com carga horária total de 180 horas.",
     },
+
+    {
+      name: "MONITORIA",
+      value:
+        "no XX Encontro Nacional de Didática e Prática de Ensino – XX ENDIPE – RIO 2020 – uma promoção interinstitucional coordenada pela Universidade Federal do Rio de Janeiro e pela Universidade Federal do Estado do Rio de Janeiro, no período de 29 de outubro a 12 de novembro de 2020.",
+    },
+
+
+    {
+      name: "PARECERISTA",
+      value:
+        "participou na condição de parecerista do XX Encontro Nacional de Didática e Prática de Ensino – XX ENDIPE – RIO 2020 – uma promoção interinstitucional coordenada pela Universidade Federal do Rio de Janeiro e pela Universidade Federal do Estado do Rio de Janeiro, no período de 29 de outubro a 12 de novembro de 2020, com carga horária total de 180 horas.",
+    },
+
+    {
+      name: "PARTICIPAÇÃO DE MINICURSO",
+      value:
+        "no XX Encontro Nacional de Didática e Prática de Ensino – XX ENDIPE – RIO 2020 – uma promoção interinstitucional coordenada pela Universidade Federal do Rio de Janeiro e pela Universidade Federal do Estado do Rio de Janeiro, no período de 29 de outubro a 12 de novembro de 2020.",
+    },
+    {
+      name: "PARTICIPAÇÃO DE PAINEL",
+      value:
+        "no XX Encontro Nacional de Didática e Prática de Ensino – XX ENDIPE – RIO 2020 – uma promoção interinstitucional coordenada pela Universidade Federal do Rio de Janeiro e pela Universidade Federal do Estado do Rio de Janeiro, no período de 29 de outubro a 12 de novembro de 2020.",
+    },
+
     {
       name: "PARTICIPAÇÃO DE RODA DE CONVERSA",
       value:
         " com carga horária de 02 horas no XX Encontro Nacional de Didática e Prática de Ensino – XX ENDIPE – RIO 2020 – uma promoção interinstitucional coordenada pela Universidade Federal do Rio de Janeiro e pela Universidade Federal do Estado do Rio de Janeiro, no período de 29 de outubro a 12 de novembro de 2020.",
     },
+
     {
-      name: "PAINEL",
+      name: "PARTICIPAÇÃO GERAL",
       value:
-        "no XX Encontro Nacional de Didática e Prática de Ensino – XX ENDIPE – RIO 2020 – uma promoção interinstitucional coordenada pela Universidade Federal do Rio de Janeiro e pela Universidade Federal do Estado do Rio de Janeiro, no período de 29 de outubro a 12 de novembro de 2020, com carga horária total de 180 horas.",
+        "participou do XX Encontro Nacional de Didática e Prática de Ensino – XX ENDIPE – RIO 2020 – uma promoção interinstitucional coordenada pela Universidade Federal do Rio de Janeiro e pela Universidade Federal do Estado do Rio de Janeiro, no período de 29 de outubro a 12 de novembro de 2020, com carga horária total de 180 horas.",
     },
+
     {
       name: "PÔSTER",
       value:
         "na modalidade Pôster, durante o XX Encontro Nacional de Didática e Prática de Ensino – XX ENDIPE – RIO 2020 – uma promoção interinstitucional coordenada pela Universidade Federal do Rio de Janeiro e pela Universidade Federal do Estado do Rio de Janeiro, no período de 29 de outubro a 12 de novembro de 2020, com carga horária total de 180 horas.",
+    },
+
+    {
+      name: "PRESTAÇÃO DE SERVIÇO",
+      value:
+        "para fins de realização do XX Encontro Nacional de Didática e Prática de Ensino – XX ENDIPE – RIO 2020 – uma promoção interinstitucional coordenada pela Universidade Federal do Rio de Janeiro e pela Universidade Federal do Estado do Rio de Janeiro, no período de 29 de outubro a 12 de novembro de 2020, com carga horária total de 180 horas.",
+    },
+
+
+    {
+      name: "SESSÃO ESPECIAL",
+      value:
+        "no XX Encontro Nacional de Didática e Prática de Ensino – XX ENDIPE – RIO 2020 – uma promoção interinstitucional coordenada pela Universidade Federal do Rio de Janeiro e pela Universidade Federal do Estado do Rio de Janeiro, no período de 29 de outubro a 12 de novembro de 2020, com carga horária total de 180 horas.",
+    },
+
+    {
+      name: "SIMPOSIO",
+      value:
+        "no XX Encontro Nacional de Didática e Prática de Ensino – XX ENDIPE – RIO 2020 – uma promoção interinstitucional coordenada pela Universidade Federal do Rio de Janeiro e pela Universidade Federal do Estado do Rio de Janeiro, no período de 29 de outubro a 12 de novembro de 2020.",
     },
   ];
 }
