@@ -22,12 +22,15 @@ export class ChatVirtualComponent implements OnInit {
   postAuthorEmail = '';
   carregando = false;
   newComment = null;
-  
+  remainingText;
 
   ngOnInit() {
     this.postAuthorEmail = this.user.email;
   }
 
+  justifyChange(value) {
+    this.remainingText = 240 - this.newComment.length;
+  }
 
   parseContent(content) {
     return this.sanitizer.bypassSecurityTrustHtml(content);

@@ -349,7 +349,15 @@ async function getUserMonitors(req) {
   return await response;
 }
 
-async function listVirtual(date) {
+async function listVirtual() {
+
+  const dateNow = new Date();
+  const datea = dateNow.getDate().toString() + '/' + (dateNow.getMonth() + 1);
+  console.log(datea);
+
+  //marretando para homologação.
+  const date = '29/10';
+
 
   let virtual = { schedules: [] };
   if (date == "29/10") {
@@ -368,6 +376,9 @@ async function listVirtual(date) {
     virtual.sessoesEspeciais = await sessoesEspeciaisCtrl.listSchedule(date);
     virtual.simposio = await simposioCtrl.listSchedule(date);
   }
+
+  virtual.date = date;
+
   return await virtual;
 }
 

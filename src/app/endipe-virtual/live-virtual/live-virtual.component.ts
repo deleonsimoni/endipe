@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
 import { ScheduleService } from 'src/app/services/schedule.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 @Component({
@@ -15,7 +16,8 @@ export class LiveVirtualComponent implements OnInit {
   date;
   schedules = [];
   scheduleSelect;
-
+  carregando = false;
+  linkYoutubeSafe;
 
   constructor(
     private auth: AuthService,
@@ -23,32 +25,46 @@ export class LiveVirtualComponent implements OnInit {
     @Inject('BASE_API_URL') private baseUrl: string,
     private http: HttpClient,
     private scheduleService: ScheduleService,
+    private _sanitizer: DomSanitizer,
 
   ) { }
 
   ngOnInit() {
-
-    let dateNow = new Date();
-    let dd = dateNow.getDate().toString();
-    let mm = dateNow.getMonth().toString();
-    let formattedDate = 29 + '/' + 10;
-    this.date = formattedDate;
     this.getListVirtual();
   }
 
 
-  selectSchedule(id) {
-    if (this.scheduleSelect == id) {
+  selectSchedule(schedule) {
+    if (this.scheduleSelect == schedule._id) {
       this.scheduleSelect = null;
     } else {
-      this.scheduleSelect = id;
+      if(schedule.virtual && schedule.virtual.linkYoutube){
+        schedule.virtual.linkYoutube = '//www.youtube.com/embed/' + this.getIdYoutube(schedule.virtual.linkYoutube);
+        this.linkYoutubeSafe = this._sanitizer.bypassSecurityTrustResourceUrl(schedule.virtual.linkYoutube);
+      }
+
+      this.scheduleSelect = schedule._id;
     }
+  }
+
+  getIdYoutube(url) {
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+    const match = url.match(regExp);
+
+    return (match && match[2].length === 11)
+      ? match[2]
+      : null;
   }
 
   public getListVirtual() {
 
-    this.http.get(`${this.baseUrl}/live/getScheduleByDay?date=${this.date}`).subscribe(
+    this.carregando = true;
+
+    this.http.get(`${this.baseUrl}/live/getScheduleByDay`).subscribe(
       (res: any) => {
+
+        this.date = res.date;
+
         if (res.abertura) {
           res.abertura.forEach(element => {
             element.type = 1;
@@ -103,8 +119,16 @@ export class LiveVirtualComponent implements OnInit {
             }
           });
         }
+
+        this.schedules.sort(function (a, b) {
+          return a.startTime.replace(':', '') - b.startTime.replace(':', '');
+        });
+
+        this.carregando = false;
+
       },
       (err) => {
+        this.carregando = false;
         this.toastr.error("Servidor momentâneamente inoperante", "Atenção");
       }
     );

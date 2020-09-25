@@ -24,6 +24,15 @@
       color: #000;
       font: 300 14px/20px 'Helvetica Neue', sans-serif;
   }
+
+  .textarea-wrapper {
+    position:relative;
+    }
+  .remaning {
+    position:absolute;
+    bottom: 10px;
+    right:10px;
+  }   
   
   ul {
       list-style: none;

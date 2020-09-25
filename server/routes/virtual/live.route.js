@@ -6,10 +6,8 @@ const router = express.Router();
 
 module.exports = router;
 
-router.get('/calibratedAllPosters', asyncHandler(calibrateAllPoster));
-router.get('/calibrateAllWorksAuthors', asyncHandler(calibrateAllWorksAuthors));
-
-
+//router.get('/calibratedAllPosters', asyncHandler(calibrateAllPoster));
+//router.get('/calibrateAllWorksAuthors', asyncHandler(calibrateAllWorksAuthors));
 
 router.get('/getScheduleByDay', asyncHandler(listVirtual));
 router.get('/scheduleWorkPaginate', asyncHandler(listScheduleWorkPaginate));
@@ -52,10 +50,7 @@ async function getUserMonitors(req, res) {
 }
 
 async function listVirtual(req, res) {
-
-  let date = req.query.date;
-  let virtual = await virtualCtrl.listVirtual(date);
-
+  let virtual = await virtualCtrl.listVirtual();
   res.json(virtual);
 }
 
