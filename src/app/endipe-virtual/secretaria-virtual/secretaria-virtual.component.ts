@@ -12,6 +12,13 @@ export class SecretariaVirtualComponent implements OnInit {
 
   panelOpenState = false;
   panelOpenState2 = false;
+  panelOpenState3 = false;
+  panelOpenState4 = false;
+  panelOpenState5 = false;
+  panelOpenState6 = false;
+  panelOpenState7 = false;
+  panelOpenState8 = false;
+
   carregando = false;
   @Input() user: any;
   comments;

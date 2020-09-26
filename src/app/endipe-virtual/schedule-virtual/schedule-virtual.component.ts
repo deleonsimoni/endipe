@@ -142,20 +142,28 @@ public isSubscribe(scheduleSelect) {
     this.carregando = true;
     if (type == 4) {
         this.scheduleService.enrollSchedule(scheduleFull._id)
-            .subscribe(res => {
-              this.getSchedulePaginate(null, this.day, this.type);
-              this.toastr.success('Inscrição realizada com sucesso', 'Sucesso');
-                this.carregando = false;
+            .subscribe((res: any) => {
+              this.carregando = false;
+              if(res.msg){
+                this.toastr.error(res.msg, 'Atenção');
+              } else {
+                this.getSchedulePaginate(null, this.day, this.type);
+                this.toastr.success('Inscrição realizada com sucesso', 'Sucesso');
+              }
             }, err => {
                 this.toastr.success('Servidor momentaneamente inoperante', 'Erro');
                 this.carregando = false;
             });
     } else if (type == 5) {
         this.scheduleService.enrollSchedulePainel(scheduleFull._id)
-            .subscribe(res => {
-              this.getSchedulePaginate(null, this.day, this.type);
-              this.toastr.success('Inscrição realizada com sucesso', 'Sucesso');
-                this.carregando = false;
+            .subscribe((res: any) => {
+              this.carregando = false;
+              if(res.msg){
+                this.toastr.error(res.msg, 'Atenção');
+              } else {
+                this.getSchedulePaginate(null, this.day, this.type);
+                this.toastr.success('Inscrição realizada com sucesso', 'Sucesso');
+              }
             }, err => {
                 this.toastr.success('Servidor momentaneamente inoperante', 'Erro');
                 this.carregando = false;
@@ -163,10 +171,14 @@ public isSubscribe(scheduleSelect) {
     }
     else {
         this.scheduleService.enrollScheduleRodaDeConversa(scheduleFull._id)
-            .subscribe(res => {
-              this.getSchedulePaginate(null, this.day, this.type);
-              this.toastr.success('Inscrição realizada com sucesso', 'Sucesso');
-                this.carregando = false;
+            .subscribe((res: any) => {
+              this.carregando = false;
+              if(res.msg){
+                this.toastr.error(res.msg, 'Atenção');
+              } else {
+                this.getSchedulePaginate(null, this.day, this.type);
+                this.toastr.success('Inscrição realizada com sucesso', 'Sucesso');
+              }
             }, err => {
                 this.toastr.success('Servidor momentaneamente inoperante', 'Erro');
                 this.carregando = false;

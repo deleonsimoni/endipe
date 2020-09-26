@@ -1,5 +1,6 @@
 <div *ngIf="!user">
-    Atenção: Você não está logado.
+    Atenção: Você não está logado. Para realizar as inscrições você previsa efetuar <a [routerLink]="['/login']">login</a>.
+    <hr>
 </div>
 
 <div class="prog-day mb-2">  
@@ -21,9 +22,7 @@
 
                     </div>
                     <div class="col-sm-2">
-                        <!--<small>STATUS</small>
-                        <h4>{{ !subscribed.payment ? 'Não realizou envio' : subscribed.payment.icPaid ? 'Pagamento validado' : subscribed.payment.icValid ? 'Comprovante validado' : 'Aguardando validação'}}
-                        </h4>
+                        <!--
 
                         <div>
                             <ng-container *ngIf="type != '3'">
@@ -33,9 +32,8 @@
 
                         <!-- Liberar Inscrição-->
                         <div *ngIf="!carregando && user?.payment?.icPaid && schedule.type != '3'">
-
                             <ng-container *ngIf="!isSubscribe(schedule) && schedule.qtdSubscribers - (schedule.subscribers ? schedule.subscribers.length : 0) > 0">
-                                <h4 class="mb-4"><button (click)="signUp(type, schedule)" class="btn btn-inscrever">Inscrever</button></h4>
+                                <h4 class="mb-4"><button (click)="signUp(type, schedule)" class="btn btn-inscrever">Inscrever </button></h4>
                             </ng-container>
 
                             <ng-container *ngIf="(schedule.qtdSubscribers - schedule?.subscribers.length) == 0 && !isSubscribe(schedule)">
