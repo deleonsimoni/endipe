@@ -1,6 +1,8 @@
 import { Component, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
 import { ScheduleService } from 'src/app/services/schedule.service';
 import { ToastrService } from 'ngx-toastr';
+import { MatDialog } from '@angular/material';
+import { ModalSubscribersScheduleComponent } from 'src/app/admin/modals/modal-subscribers-schedule/modal-subscribers-schedule.component';
 
 @Component({
     selector: 'work-schedule-card',
@@ -22,6 +24,7 @@ export class WorkScheduleCardComponent {
     constructor(
         private scheduleService: ScheduleService,
         private toastr: ToastrService,
+        private dialog: MatDialog,
 
     ) { }
 
@@ -46,6 +49,16 @@ export class WorkScheduleCardComponent {
 
         return false;
     }
+
+    public showSubscribers(titulo, inscritos) {
+        this.dialog.open(ModalSubscribersScheduleComponent, {
+            data: {
+              workTitle: titulo,
+              subscribers: inscritos
+            }
+          });
+    }
+
 
     public signUp(type) {
         this.carregando = true;

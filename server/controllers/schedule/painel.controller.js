@@ -123,7 +123,7 @@ async function checkSubscribeDup(workId, userId) {
 
   let scheduleCompare = await Painel.findById(workId);
 
-  if((scheduleCompare.subscribers.length + 1) >= scheduleCompare.qtdSubscribers){
+  if((scheduleCompare.subscribers.length + 1) > scheduleCompare.qtdSubscribers){
     return {isDup: true, msg: 'Vagas Esgotadas'};
   } else {
 

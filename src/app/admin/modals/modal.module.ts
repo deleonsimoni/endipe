@@ -16,6 +16,7 @@ import { NgxMaskModule } from 'ngx-mask';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { ModalReviewReviewerComponent } from './modal-review-reviewer/modal-review-reviewer.component';
 import { ModalAnaisComponent } from './modal-anais/modal-anais.component';
+import { ModalSubscribersScheduleComponent } from './modal-subscribers-schedule/modal-subscribers-schedule.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ModalAnaisComponent } from './modal-anais/modal-anais.component';
     ModalEditProfileComponent,
     ConfirmationDialogComponent,
     ModalReviewReviewerComponent,
-    ModalAnaisComponent
+    ModalAnaisComponent,
+    ModalSubscribersScheduleComponent
   ],
   entryComponents: [
     ModalConferencerComponent,
@@ -37,6 +39,7 @@ import { ModalAnaisComponent } from './modal-anais/modal-anais.component';
     ModalReviewerComponent,
     ModalEditProfileComponent,
     ConfirmationDialogComponent,
+    ModalSubscribersScheduleComponent,
   ],
   imports: [
     CommonModule,
@@ -55,6 +58,7 @@ import { ModalAnaisComponent } from './modal-anais/modal-anais.component';
     ModalReviewerComponent,
     ModalEditProfileComponent,
     ConfirmationDialogComponent,
+    ModalSubscribersScheduleComponent,
   ]
 })
 export class ModalModule { }
