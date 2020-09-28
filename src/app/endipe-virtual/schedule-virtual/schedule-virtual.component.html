@@ -3,8 +3,8 @@
     <hr>
 </div>
 
-<div class="prog-day mb-2">  
-    <b><span>{{day | dayAndMonth}}</span></b>
+<div  class="prog-day mb-2">  
+    <b tabindex="0" #trabalho alt="Lista programações do dia"><span>{{day | dayAndMonth}}</span></b>
 </div>
 
 <div *ngIf="schedules.length > 0">
@@ -15,9 +15,9 @@
                 <div class="row">
                     <div class="col-sm-10">
                         <h5 style="color: #50d8af">{{type | modalities}} - {{schedule.axis | axis}}</h5>
-                        <h3 *ngIf="type != '3'"><b>{{schedule.workTitle}}</b></h3>
-                        <h3 *ngIf="type == '3'"><b>Apresentação de trabalhos</b></h3>
-                        <h4 *ngFor="let day of schedule.dates">{{day.date + ' ' + (day.startTime ? day.startTime : '')  + ' - ' + (day.endTime ? day.endTime : '')}}</h4>
+                        <h3 *ngIf="type != '3'" tabindex="0" ><b>{{schedule.workTitle}}</b></h3>
+                        <h3 *ngIf="type == '3'" tabindex="0" alt="Pôster"><b>Apresentação de trabalhos</b></h3>
+                        <h4 tabindex="0" *ngFor="let day of schedule.dates">{{day.date + ' ' + (day.startTime ? day.startTime : '')  + ' - ' + (day.endTime ? day.endTime : '')}}</h4>
                         <h4>{{schedule.qtdSubscribers}} Vagas</h4>
 
                     </div>
@@ -108,9 +108,9 @@
                     <div class="col-sm-10">
                         <h5 *ngIf="type != '8'" style="color: #50d8af">{{type | modalitiesWork}}</h5>
                         <h5 *ngIf="type == '8'" style="color: #50d8af">{{schedule.theme | themeSimposio}}</h5>
-                        <h3 *ngIf="type != '8'"><b>{{schedule?.titles[0]}}</b></h3>
-                        <h3 *ngIf="type == '8'"><b>{{schedule.themeSpeeches}}</b></h3>
-                        <h4 >{{schedule.date + ' ' + (schedule.startTime ? schedule.startTime : '')  + ' - ' + (schedule.endTime ? schedule.endTime : '')}}</h4>
+                        <h3 tabindex="0" *ngIf="type != '8'"><b>{{schedule?.titles[0]}}</b></h3>
+                        <h3 tabindex="0" *ngIf="type  == '8'"><b>{{schedule.themeSpeeches}}</b></h3>
+                        <h4 tabindex="0" >{{schedule.date + ' ' + (schedule.startTime ? schedule.startTime : '')  + ' - ' + (schedule.endTime ? schedule.endTime : '')}}</h4>
                         <h4>Link para acesso: <b>Em breve</b></h4>
                     </div>
 
@@ -164,8 +164,8 @@
                 <div class="row">
                     <div class="col-sm-10">
                         <h5 style="color: #50d8af">{{type | modalitiesWork}}</h5>
-                        <h3 ><b>{{schedule?.titles[0]}}</b></h3>
-                        <h4 >{{schedule.date + ' ' + (schedule.startTime ? schedule.startTime : '')  + ' - ' + (schedule.endTime ? schedule.endTime : '')}}</h4>
+                        <h3 tabindex="0" ><b>{{schedule?.titles[0]}}</b></h3>
+                        <h4 tabindex="0" >{{schedule.date + ' ' + (schedule.startTime ? schedule.startTime : '')  + ' - ' + (schedule.endTime ? schedule.endTime : '')}}</h4>
                         <h4>Link para acesso: <b>Em breve</b></h4>
                     </div>
                 
@@ -244,7 +244,7 @@
 </div>
 
 <div *ngIf="!carregandoLista && schedules.length == 0">
-    <h2><b>Não há {{type | modalitiesWork}} para o dia selecionado</b></h2>
+    <h2 tabindex="0"><b>Não há {{type | modalitiesWork}} para o dia selecionado</b></h2>
 </div>
 
 <div *ngIf="carregandoLista" class="row" style="display: flex; justify-content: center; align-items: center; height: 300px;">

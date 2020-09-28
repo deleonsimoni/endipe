@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Inject, KeyValueDiffer, KeyValueDiffers } from '@angular/core';
+import { Component, OnInit, Input, Inject, KeyValueDiffer, KeyValueDiffers, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
@@ -27,6 +27,7 @@ export class ScheduleVirtualComponent implements OnInit {
   pageHot;
   scheduleSelect;
   differ: KeyValueDiffer<string, any>;
+  @ViewChild('trabalho', {static: false}) trabalhoId: any;
 
   constructor(
     private auth: AuthService,
@@ -84,6 +85,7 @@ export class ScheduleVirtualComponent implements OnInit {
       (res: any) => {
         this.schedules = res.schedule || [];
         if(this.schedules) {
+          this.trabalhoId.nativeElement.focus()
           this.schedules.forEach(element => {
             if(element.authors){
               element.authors = element.authors.split(',');

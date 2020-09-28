@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 
 import { SCHEDULE_TYPE, WORK_OPTIONS } from "../../../declarations";
 import { BehaviorSubject } from "rxjs";
@@ -19,6 +19,7 @@ export class InscrevaseComponent implements OnInit {
   daySelect;
   modalitySelect;
   carregando = false;
+  @ViewChild('selecioneDia', {static: false}) selecioneDia: any;
   public user: any;
   public loading = false;
   public modalities = [
@@ -70,6 +71,7 @@ export class InscrevaseComponent implements OnInit {
 
   public selectModality(modality) {
     this.modalitySelect = modality.type;
+    this.selecioneDia.nativeElement.focus();
   }
 
 

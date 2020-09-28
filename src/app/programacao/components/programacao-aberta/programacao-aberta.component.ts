@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { SCHEDULE_TYPE, WORK_OPTIONS } from "../../../declarations";
 import { BehaviorSubject } from "rxjs";
@@ -17,6 +17,7 @@ export class ProgramacaoAbertaComponent implements OnInit {
   public workModalities = WORK_OPTIONS;
   public programacoes = SCHEDULE_TYPE;
   public schedules$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  @ViewChild('selecioneDia', {static: false}) selecioneDia: any;
   public days = ["29/10", "30/10", "31/10", "01/11", "02/11", "03/11", "04/11", "05/11", "06/11", "07/11", "08/11", "09/11", "10/11", "11/11", "12/11"];
   daySelect;
   modalitySelect;
@@ -73,6 +74,8 @@ export class ProgramacaoAbertaComponent implements OnInit {
 
   public selectModality(modality) {
     this.modalitySelect = modality.type;
+    this.selecioneDia.nativeElement.focus();
+
   }
 
 }
