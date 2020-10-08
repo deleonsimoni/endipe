@@ -41,6 +41,10 @@ const UserSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
+  icEditor: {
+    type: Boolean,
+    default: false
+  },
   deficiencyType: {
     type: String
   },
