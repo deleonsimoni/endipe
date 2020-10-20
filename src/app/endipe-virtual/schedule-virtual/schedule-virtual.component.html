@@ -22,15 +22,15 @@
 
                     </div>
                     <div class="col-sm-2">
-                        <!--
+                        
 
                         <div>
                             <ng-container *ngIf="type != '3'">
-                                <h4 class="mb-4"><button class="btn btn-warning">Inscrições em breve</button></h4>
+                                <h4 class="mb-4"><button class="btn btn-warning">Inscrições Encerradas</button></h4>
                             </ng-container>
-                        </div>-->
+                        </div>
 
-                        <!-- Liberar Inscrição-->
+                        <!-- Liberar Inscrição
                         <div *ngIf="!carregando && user?.payment?.icPaid && schedule.type != '3'">
                             <ng-container *ngIf="!isSubscribe(schedule) && schedule.qtdSubscribers - (schedule.subscribers ? schedule.subscribers.length : 0) > 0">
                                 <h4 class="mb-4"><button (click)="signUp(type, schedule)" class="btn btn-inscrever">Inscrever </button></h4>
@@ -44,7 +44,7 @@
                                 <h4 class="mb-4"><button (click)="cancelSignUp(type, schedule)" class="btn btn-danger">Cancelar Inscrição</button></h4>
                             </ng-container>
 
-                        </div> 
+                        </div> -->
                         <div *ngIf="carregando">
                             <h4 class="mb-4"><button class="btn btn-inscrever"><i class="fas fa-spinner fa-pulse"></i></button></h4>
                         </div>
@@ -199,7 +199,7 @@
 
                             <div class="form-group col-md-2">
                                 <div class="miniature-img ">
-                                    <img width="100px" height="150px" id="{{item.nameMiniature}}">
+                                    <img width="100px" height="150px" src="https://ffainfinity.s3-sa-east-1.amazonaws.com/books/{{item.nameMiniature}}">
                                 </div>
                             </div>
 

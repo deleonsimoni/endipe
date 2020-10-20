@@ -96,13 +96,11 @@ export class AppComponent implements OnInit {
   }
 
   public verifyAcess() {
-    if (
-      this.user &&
-      (this.user.icAdmin || this.user.coordinator || this.user.reviewer)
-    ) {
+    if (this.user && (this.user.icAdmin || this.user.coordinator || this.user.reviewer || this.user.icEditor)) {
       return true;
+    } else {
+      return false;
     }
-    return false;
   }
 
   get userName(): string {

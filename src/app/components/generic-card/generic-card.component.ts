@@ -49,7 +49,7 @@ export class GenericCardComponent {
         return 'Título(s)';
     }
   }
-
+/*
   ngAfterViewInit() {
     //renderizar capa dos livros
     if(this.type == 9){
@@ -69,6 +69,6 @@ export class GenericCardComponent {
 
       
     }
-  }
+  }*/
 
 }

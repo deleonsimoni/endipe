@@ -22,49 +22,16 @@
             </a>
 
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-              <a class="dropdown-item pointer" *ngIf="
-                  !isSubscribe() &&
-                  schedule.qtdSubscribers - (schedule.subscribers ? schedule.subscribers.length : 0) > 0 &&
-                  (type == '2' || type == '4' || type == '5')
-                " (click)="signUp(type)">Inscrever-se</a>
-              <a class="dropdown-item pointer" style="background: #bb4949;" *ngIf="
-                  !isSubscribe() &&
-                  schedule.qtdSubscribers - (schedule.subscribers ? schedule.subscribers.length : 0) == 0 &&
-                  (type == '2' || type == '4' || type == '5')
-                ">Vagas Encerradas
-              </a>
-              <a class="dropdown-item pointer" *ngIf="isSubscribe() && (type == '2' || type == '4' || type == '5')"
-                (click)="cancelSignUp(type)">Cancelar inscrição</a>
               <a class="dropdown-item pointer" (click)="showSubscribers(schedule.workTitle, schedule.subscribers)">Ver Inscritos</a>
               <a class="dropdown-item pointer" (click)="editSchedule()">Editar</a>
-              <a class="dropdown-item pointer" (click)="removeSchedule(schedule._id)">Excluir</a>
+              <!--<a class="dropdown-item pointer" (click)="removeSchedule(schedule._id)">Excluir</a>-->
             </div>
           </div>
 
           <div *ngIf="!admin">
-            <ng-container *ngIf="
-                !isSubscribe() &&
-                schedule.qtdSubscribers - (schedule.subscribers ? schedule.subscribers.length : 0) > 0 &&
-                (type == '2' || type == '4' || type == '5')
-              ">
-              <div class="col-12">
-                <div class="expand" (click)="signUp(type)">Inscrever-se</div>
-              </div>
-            </ng-container>
-            <ng-container *ngIf="
-                !isSubscribe() &&
-                schedule.qtdSubscribers - (schedule.subscribers ? schedule.subscribers.length : 0) == 0 &&
-                (type == '2' || type == '4' || type == '5')
-              ">
-              <div class="col-12">
-                <div class="expand" style="background: #bb4949;">Vagas Encerradas</div>
-              </div>
-            </ng-container>
-            <ng-container *ngIf="isSubscribe() && (type == '2' || type == '4' || type == '5')">
-              <div class="col-12">
-                <div class="expand" (click)="cancelSignUp(type)">Cancelar inscrição</div>
-              </div>
-            </ng-container>
+           
+           
+
           </div>
         </div>
       </div>

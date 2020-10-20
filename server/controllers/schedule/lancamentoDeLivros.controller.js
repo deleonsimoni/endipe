@@ -10,23 +10,23 @@ module.exports = {
 }
 
 async function listSchedule(date) {
-  let retornoAws;
   var livro = await LancamentoDeLivros.find({
       date: date
     })
-    .lean()
+    
     .sort({
       startTime: 1
     });
+/*
   for (let i = 0; i < livro.length; i++) {  
     for (let j = 0; j < livro[i].books.length; j++) {
       if(livro[i].books[j].nameMiniature){
         retornoAws = await S3Uploader.downloadFile(config.PATH_S3_DEV ? config.PATH_S3_DEV + 'xxendiperio2020/books/' + livro[i].books[j].nameMiniature : 'xxendiperio2020/books/' + livro[i].books[j].nameMiniature);         
-        livro[i].books[j].miniature = retornoAws.data.Body;
+        livro[i].books[j].miniature = retornoAws.data.Body || '';
       }
     }
   }
-
+*/
   return await livro;
 }
 
@@ -76,7 +76,7 @@ async function uploadBooks(books) {
 
     if (books[i].isChangeImage) {
 
-      fileName = config.PATH_S3_DEV ? config.PATH_S3_DEV + 'xxendiperio2020/books/' + books[i].nameMiniature : 'xxendiperio2020/books/' + books[i].nameMiniature;
+      fileName = 'books/' + books[i].nameMiniature;
 
       let buf = Buffer.from(books[i].miniature.replace(/^data:image\/\w+;base64,/, ""),'base64')
 

@@ -26,7 +26,10 @@ async function insertSchedule(schedule) {
   let roda = await new RodasDeConversa(schedule).save();
 
   if(roda.monitor){
-    registerMonitor(roda._id, roda.monitor.toLowerCase());
+    let monitors = roda.monitor.trim().split(';');
+    monitors.forEach(element => {
+      unRegisterMonitor(roda._id, element.toLowerCase());
+    });
   }
 
   return await roda;
@@ -37,11 +40,17 @@ async function updateSchedule(id, schedule) {
   let rodaOld = await RodasDeConversa.findById(id);
 
   if(rodaOld.monitor){
-    unRegisterMonitor(id, rodaOld.monitor.toLowerCase());
+    let monitors = rodaOld.monitor.trim().split(';');
+    monitors.forEach(element => {
+      unRegisterMonitor(id, element.toLowerCase());
+    });
   }
 
   if(schedule.monitor){
-    registerMonitor(id, schedule.monitor.toLowerCase());
+    let monitors = schedule.monitor.trim().split(';');
+    monitors.forEach(element => {
+      registerMonitor(id, element.toLowerCase());
+    });
   }
 
   return await RodasDeConversa.findOneAndUpdate({ _id: id }, schedule);
@@ -52,7 +61,10 @@ async function deleteSchedule(id) {
   let rodaOld = await RodasDeConversa.findById(id);
 
   if(rodaOld.monitor){
-    unRegisterMonitor(id, rodaOld.monitor.toLowerCase());
+    let monitors = rodaOld.monitor.trim().split(';');
+    monitors.forEach(element => {
+      unRegisterMonitor(id, element.toLowerCase());
+    });
   }
 
   return await RodasDeConversa.findOneAndRemove({

@@ -38,11 +38,7 @@
                             <h4>{{ !subscribed.payment ? 'Não realizou envio' : subscribed.payment.icPaid ? 'Pagamento validado' : subscribed.payment.icValid ? 'Comprovante validado' : 'Aguardando validação'}}
                             </h4>-->
 
-                            <div *ngIf="!carregando && schedule.type != '3'">
-                                <ng-container>
-                                    <h4 class="mb-4"><button (click)="cancelSignUp(schedule.type, schedule)" class="btn btn-danger">Cancelar Inscrição</button></h4>
-                                </ng-container>
-                            </div>
+
                             <div *ngIf="carregando">
                                 <h4 class="mb-4"><button class="btn btn-inscrever"><i class="fas fa-spinner fa-pulse"></i></button></h4>
                             </div>

@@ -14,6 +14,11 @@ export class ScheduleVirtualComponent implements OnInit {
 
   @Input() day: any;
   @Input() type: any;
+  @Input() autor: any;
+  @Input() eixo: any;
+  @Input() titulo: any;
+  @Input() search: any;
+
   @Input() user: any;
 
   page = null;
@@ -42,7 +47,7 @@ export class ScheduleVirtualComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getSchedulePaginate(null, this.day, this.type);
+    this.getSchedulePaginate(null, this.day, this.type, this.autor, this.eixo, this.titulo);
   }
 
   selectSchedule(id){
@@ -67,8 +72,8 @@ export class ScheduleVirtualComponent implements OnInit {
     const change = this.differ.diff(this);
     if (change) {
       change.forEachChangedItem(item => {
-        if(item.key == 'day' || item.key == 'type'){
-          this.getSchedulePaginate(null, this.day, this.type);
+        if(item.key == 'day' || item.key == 'type' || item.key == 'search'){
+          this.getSchedulePaginate(null, this.day, this.type, this.autor, this.eixo, this.titulo);
         }
       });
     }
@@ -78,10 +83,10 @@ export class ScheduleVirtualComponent implements OnInit {
     console.log(event)
   }
 
-  getSchedulePaginate(event, day, type){
+  getSchedulePaginate(event, day, type, autor, eixo, titulo){
     this.carregandoLista = true;
     let pageChoose = event && event.pageIndex + 1 || 1;
-    this.http.get(`${this.baseUrl}/live/scheduleWorkPaginate?page=${pageChoose}&date=${day}&type=${type}`).subscribe(
+    this.http.get(`${this.baseUrl}/live/scheduleWorkPaginate?page=${pageChoose}&date=${day}&type=${type}&eixo=${eixo}&autor=${autor}&titulo=${titulo}`).subscribe(
       (res: any) => {
         this.schedules = res.schedule || [];
         if(this.schedules) {
@@ -149,7 +154,7 @@ public isSubscribe(scheduleSelect) {
               if(res.msg){
                 this.toastr.error(res.msg, 'Atenção');
               } else {
-                this.getSchedulePaginate(null, this.day, this.type);
+                this.getSchedulePaginate(null, this.day, this.type, this.autor, this.eixo, this.titulo);
                 this.toastr.success('Inscrição realizada com sucesso', 'Sucesso');
               }
             }, err => {
@@ -163,7 +168,7 @@ public isSubscribe(scheduleSelect) {
               if(res.msg){
                 this.toastr.error(res.msg, 'Atenção');
               } else {
-                this.getSchedulePaginate(null, this.day, this.type);
+                this.getSchedulePaginate(null, this.day, this.type, this.autor, this.eixo, this.titulo);
                 this.toastr.success('Inscrição realizada com sucesso', 'Sucesso');
               }
             }, err => {
@@ -178,7 +183,7 @@ public isSubscribe(scheduleSelect) {
               if(res.msg){
                 this.toastr.error(res.msg, 'Atenção');
               } else {
-                this.getSchedulePaginate(null, this.day, this.type);
+                this.getSchedulePaginate(null, this.day, this.type, this.autor, this.eixo, this.titulo);
                 this.toastr.success('Inscrição realizada com sucesso', 'Sucesso');
               }
             }, err => {
@@ -193,7 +198,7 @@ public cancelSignUp(type, scheduleFull) {
     if (type == 4) {
         this.scheduleService.cancelEnrollSchedule(scheduleFull._id)
             .subscribe(res => {
-              this.getSchedulePaginate(null, this.day, this.type);
+              this.getSchedulePaginate(null, this.day, this.type, this.autor, this.eixo, this.titulo);
               this.toastr.success('Cancelamento de inscrição realizada com sucesso', 'Sucesso');
                 this.carregando = false;
             }, err => {
@@ -204,7 +209,7 @@ public cancelSignUp(type, scheduleFull) {
     } else if (type == 5) {
         this.scheduleService.cancelEnrollSchedulePainel(scheduleFull._id)
             .subscribe(res => {
-              this.getSchedulePaginate(null, this.day, this.type);
+              this.getSchedulePaginate(null, this.day, this.type, this.autor, this.eixo, this.titulo);
               this.toastr.success('Cancelamento de inscrição realizada com sucesso', 'Sucesso');
                 this.carregando = false;
             }, err => {
@@ -215,7 +220,7 @@ public cancelSignUp(type, scheduleFull) {
     } else {
         this.scheduleService.cancelEnrollScheduleRodaDeConversa(scheduleFull._id)
             .subscribe(res => {
-              this.getSchedulePaginate(null, this.day, this.type);
+              this.getSchedulePaginate(null, this.day, this.type, this.autor, this.eixo, this.titulo);
               this.toastr.success('Cancelamento de inscrição realizada com sucesso', 'Sucesso');
                 this.carregando = false;
             }, err => {

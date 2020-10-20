@@ -7,6 +7,7 @@ import { PipesModule } from 'src/app/pipes/pipes.module';
 import { UtilNgxMaterialModule } from 'src/app/util-ngx-material/util-ngx-material.module';
 import { GlobalComponentsModule } from 'src/app/components/global-components.module';
 import { ProgramacaoAbertaComponent } from './programacao-aberta/programacao-aberta.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
@@ -20,6 +21,7 @@ import { ProgramacaoAbertaComponent } from './programacao-aberta/programacao-abe
         UtilNgxMaterialModule,
         PipesModule,
         GlobalComponentsModule,
+        FormsModule,
     ],
     exports: [
         OpeningScheduleCardComponent

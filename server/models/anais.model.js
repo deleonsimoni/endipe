@@ -7,8 +7,19 @@ const AnaisSchema = new mongoose.Schema({
   },
   link: {
     type: String,
-    required: true
   },
+  image: {
+    type: String,
+  },
+  summary: [{
+      name: {
+        type: String
+      },
+      link: {
+        type: String
+      },
+    }
+  ],
   createAt: {
     type: Date,
     default: Date.now

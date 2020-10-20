@@ -21,18 +21,7 @@ async function insertAnais(anais, idUser) {
 
 async function updateAnais(anais, idUser) {
   anais.user = idUser;
-  return await Anais.findOneAndUpdate({
-      _id: anais._id
-    },
-    anais, {
-      upsert: true
-    },
-    function (err, doc) {
-      if (err) return res.send(500, {
-        error: err
-      });
-      return doc;
-    });
+  return await Anais.findOneAndUpdate({ _id: anais._id }, anais);
 }
 
 async function deleteAnais(id) {

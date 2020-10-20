@@ -43,12 +43,35 @@ async function listScheduleWorkPaginate(req) {
   const date = req.query.date;
   let schedule;
   let total;
+  let search = {};
+
+  //montar pesquisa
+  console.log(req.query.titulo)
+  console.log(req.query.eixo)
+
+  if(req.query.titulo && req.query.titulo != 'undefined') search.workTitle = { $regex: ".*" + req.query.titulo + ".*" };
+  if(req.query.eixo && req.query.eixo != 'undefined') search['axis'] = Number(req.query.eixo);
+  //if(req.query.author) search.workTitle = { $regex: ".*" + req.query.author + ".*" };
+  console.log(search)
+
   switch (Number(req.query.type)) {
     case 4:
-      total = await Minicurso.find({ 'dates.date': { $in: date } }).count();
-      schedule = await Minicurso.find({
-        'dates.date': { $in: date }
-      })
+      total = await Minicurso.find(
+        {
+          $and: 
+          [
+            { 'dates.date': { $in: date } },
+            search
+        
+    ]}).count();
+      schedule = await Minicurso.find(
+        {
+          $and: 
+          [
+            { 'dates.date': { $in: date } },
+            search
+        
+    ]})
         .sort({
           'dates.startTime': 1
         })
@@ -57,10 +80,22 @@ async function listScheduleWorkPaginate(req) {
       break;
 
     case 5:
-      total = await Painel.find({ 'dates.date': { $in: date } }).count();
-      schedule = await Painel.find({
-        'dates.date': { $in: date }
-      })
+      total = await Painel.find(
+        {
+          $and: 
+          [
+            { 'dates.date': { $in: date } },
+            search
+        
+    ]}).count();
+      schedule = await Painel.find(
+        {
+          $and: 
+          [
+            { 'dates.date': { $in: date } },
+            search
+        
+    ]})
         .sort({
           'dates.startTime': 1
         })
@@ -69,10 +104,22 @@ async function listScheduleWorkPaginate(req) {
       break;
 
     case 2:
-      total = await RodasDeConversa.find({ 'dates.date': { $in: date } }).count();
-      schedule = await RodasDeConversa.find({
-        'dates.date': { $in: date }
-      })
+      total = await RodasDeConversa.find(
+        {
+          $and: 
+          [
+            { 'dates.date': { $in: date } },
+            search
+        
+    ]}).count();
+      schedule = await RodasDeConversa.find(
+        {
+          $and: 
+          [
+            { 'dates.date': { $in: date } },
+            search
+        
+    ]})
         .sort({
           'dates.startTime': 1
         })
@@ -81,10 +128,22 @@ async function listScheduleWorkPaginate(req) {
       break;
 
     case 3:
-      total = await Poster.find({ 'dates.date': { $in: date } }).count();
-      schedule = await Poster.find({
-        'dates.date': { $in: date }
-      })
+      total = await Poster.find(
+        {
+          $and: 
+          [
+            { 'dates.date': { $in: date } },
+            search
+        
+    ]}).count();
+      schedule = await Poster.find(
+        {
+          $and: 
+          [
+            { 'dates.date': { $in: date } },
+            search
+        
+    ]})
         .sort({
           'dates.startTime': 1
         })
@@ -94,11 +153,16 @@ async function listScheduleWorkPaginate(req) {
     //FIM WORKS
     //INICIO GENERICS
     case 1:
-      total = await Abertura.find({ date: date }).count();
+      total = await Abertura.find({ $and: [
+        { date: date },
+        search
+      ]})
+        .count();
 
-      schedule = await Abertura.find({
-        date: date
-      })
+      schedule = await Abertura.find({ $and: [
+        { date: date },
+        search
+      ]})
         .sort({
           startTime: 1
         })
@@ -106,10 +170,14 @@ async function listScheduleWorkPaginate(req) {
         .limit(pageSize);
       break;
     case 7:
-      total = await AtividadeCultural.find({ date: date }).count();
-      schedule = await AtividadeCultural.find({
-        date: date
-      })
+      total = await AtividadeCultural.find({ $and: [
+        { date: date },
+        search
+      ]}).count();
+      schedule = await AtividadeCultural.find({ $and: [
+        { date: date },
+        search
+      ]})
         .sort({
           startTime: 1
         })
@@ -117,7 +185,10 @@ async function listScheduleWorkPaginate(req) {
         .limit(pageSize);
       break;
     case 8:
-      total = await Simposio.find({ date: date }).count();
+      total = await Simposio.find({ $and: [
+        { date: date },
+        search
+      ]}).count();
       schedule = await Simposio.find({
         date: date
       })
@@ -128,10 +199,14 @@ async function listScheduleWorkPaginate(req) {
         .limit(pageSize);
       break;
     case 9:
-      total = await LancamentoLivros.find({ date: date }).count();
-      schedule = await LancamentoLivros.find({
-        date: date
-      })
+      total = await LancamentoLivros.find({ $and: [
+        { date: date },
+        search
+      ]}).count();
+      schedule = await LancamentoLivros.find({ $and: [
+        { date: date },
+        search
+      ]})
         .sort({
           startTime: 1
         })
@@ -140,10 +215,14 @@ async function listScheduleWorkPaginate(req) {
         .limit(pageSize);
       break;
     case 10:
-      total = await SessaoEspecial.find({ date: date }).count();
-      schedule = await SessaoEspecial.find({
-        date: date
-      })
+      total = await SessaoEspecial.find({ $and: [
+        { date: date },
+        search
+      ]}).count();
+      schedule = await SessaoEspecial.find({ $and: [
+        { date: date },
+        search
+      ]})
         .sort({
           startTime: 1
         })
@@ -151,10 +230,14 @@ async function listScheduleWorkPaginate(req) {
         .limit(pageSize);
       break;
     case 11:
-      total = await ConexaoEntrevista.find({ date: date }).count();
-      schedule = await ConexaoEntrevista.find({
-        date: date
-      })
+      total = await ConexaoEntrevista.find({ $and: [
+        { date: date },
+        search
+      ]}).count();
+      schedule = await ConexaoEntrevista.find({ $and: [
+        { date: date },
+        search
+      ]})
         .sort({
           startTime: 1
         })
@@ -162,10 +245,14 @@ async function listScheduleWorkPaginate(req) {
         .limit(pageSize);
       break;
     case 12:
-      total = await Encerramento.find({ date: date }).count();
-      schedule = await Encerramento.find({
-        date: date
-      })
+      total = await Encerramento.find({ $and: [
+        { date: date },
+        search
+      ]}).count();
+      schedule = await Encerramento.find({ $and: [
+        { date: date },
+        search
+      ]})
         .sort({
           startTime: 1
         })
@@ -190,12 +277,12 @@ async function scheduleBooksPaginate(req) {
   const begin = ((page - 1) * pageSize);
   const end = begin + pageSize;
   const books = livro.books.slice(begin, end);
-  let retornoAws;
+  /*let retornoAws;
 
   for (let index = 0; index < books.length; index++) {
     retornoAws = await S3Uploader.downloadFile(config.PATH_S3_DEV ? config.PATH_S3_DEV + 'xxendiperio2020/books/' + books[index].nameMiniature : 'xxendiperio2020/books/' + books[index].nameMiniature);
     books[index].miniature = retornoAws.data.Body;
-  }
+  }*/
 
   const pager = await paginate(total, page, pageSize);
 

@@ -27,7 +27,10 @@ async function insertSchedule(schedule) {
   let minicurso = await new Minicurso(schedule).save();
 
   if(minicurso.monitor){
-    registerMonitor(minicurso._id, minicurso.monitor.toLowerCase());
+    let monitors = minicurso.monitor.trim().split(';');
+    monitors.forEach(element => {
+      registerMonitor(minicurso._id, element.toLowerCase());
+    });
   }
 
   return await minicurso;
@@ -38,11 +41,19 @@ async function updateSchedule(id, schedule) {
   let minicursoOld = await Minicurso.findById(id);
 
   if(minicursoOld.monitor){
-    unRegisterMonitor(id, minicursoOld.monitor.toLowerCase());
+    let monitors = minicursoOld.monitor.trim().split(';');
+    monitors.forEach(element => {
+      unRegisterMonitor(id, element.toLowerCase());
+    });
   }
 
   if(schedule.monitor){
-    registerMonitor(id, schedule.monitor.toLowerCase());
+
+    let monitors = schedule.monitor.trim().split(';');
+    monitors.forEach(element => {
+      registerMonitor(id, element.toLowerCase());
+    });
+  
   }
 
   return await Minicurso.findOneAndUpdate({ _id: id }, schedule);
@@ -54,7 +65,10 @@ async function deleteSchedule(id) {
   let minicursoOld = await Minicurso.findById(id);
 
   if(minicursoOld.monitor){
-    unRegisterMonitor(id, minicursoOld.monitor.toLowerCase());
+    let monitors = minicursoOld.monitor.trim().split(';');
+    monitors.forEach(element => {
+      unRegisterMonitor(id, element.toLowerCase());
+    });
   }
 
   return await Minicurso.findOneAndRemove({

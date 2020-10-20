@@ -42,9 +42,10 @@ function uploadBase64(key, file) {
   });
 
   var s3Config = {
-    Bucket: 'endiperio2020',
+    Bucket: 'ffainfinity',
     Key: key,
     Body: file,
+    ACL: "public-read",
     ContentEncoding: 'base64',
     ContentType: 'image/jpeg'
   };

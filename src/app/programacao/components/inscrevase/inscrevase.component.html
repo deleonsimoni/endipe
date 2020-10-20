@@ -28,13 +28,56 @@
            </div>
          </div>
        </div>
+       
+       
+      <div *ngIf="daySelect && modalitySelect" class="row col-12">
+
+        <fieldset class="row col-12">
+          <legend>Mais Filtros</legend>
+            <div class="col-lg-6 col-sm-12">
+                Selecione o eixo
+                <select
+                  class="form-control"
+                  placeholder="Eixo"
+                  id="opt"
+                  [(ngModel)]="axisId">
+                  <option value=""
+                  >Todos
+                </option>
+                  <option *ngFor="let eixo of eixos" [value]="eixo.id"
+                    >{{ eixo.name }}
+                  </option>
+                </select>
+            </div>
+
+        
+          <div class="col-lg-6 col-sm-12">
+            Pesquisar trabalho por nome
+            <input
+              type="text"
+              class="form-control mb-1"
+              [(ngModel)]="workTitle"
+              placeholder="Digite o nome do trabalho que deseja pesquisar"
+            />
+          </div>
+
+          <div class="row col-12">
+            <button class="btn btn-primary" class="btn btn-large btn-primary" (click)="filterWorks()">Buscar</button>
+          </div>
+
+        </fieldset>
+
+      </div>
+       
+
+       
   
       <div class="section-header mt-3 mb-5">
         <h2>Programação</h2>
       </div>
   
       <div class="container" *ngIf="daySelect && modalitySelect">
-        <app-schedule-virtual [day]="daySelect" [user]="user" [type]="modalitySelect"></app-schedule-virtual>
+        <app-schedule-virtual [day]="daySelect" [user]="user" [type]="modalitySelect" [search]="pressbutton" [eixo]="axisId" [titulo]="workTitle"></app-schedule-virtual>
       </div>
   
      </div> 

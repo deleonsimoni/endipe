@@ -232,12 +232,8 @@ export class GenericFormComponent {
     let indexArray = 0;
     dataCtrel.value.forEach(element => {
 
-      if(dataCtrel.at(indexArray).value.miniature) {
-        let file = dataCtrel.at(indexArray).value.miniature.data;
-
-        const base64 = btoa(new Uint8Array(file).reduce((data, byte) => data + String.fromCharCode(byte), ''));
-
-        (document.getElementById('imageRender' + indexArray) as HTMLImageElement).src = 'data:image/jpg;base64,' + base64;
+      if(dataCtrel.at(indexArray).value.nameMiniature) {
+        (document.getElementById('imageRender' + indexArray) as HTMLImageElement).src = "https://ffainfinity.s3-sa-east-1.amazonaws.com/books/" + dataCtrel.at(indexArray).value.nameMiniature;
       }
 
       indexArray++;

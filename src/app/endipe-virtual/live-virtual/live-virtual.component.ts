@@ -18,6 +18,7 @@ export class LiveVirtualComponent implements OnInit {
   scheduleSelect;
   carregando = false;
   linkYoutubeSafe;
+  pagerBooks: any = {};
 
   constructor(
     private auth: AuthService,
@@ -133,6 +134,48 @@ export class LiveVirtualComponent implements OnInit {
       }
     );
 
+  }
+
+
+  selectBookSchedule(schedule){
+    if(this.scheduleSelect == schedule._id){
+      this.scheduleSelect = null;
+    } else {
+      this.scheduleSelect = schedule._id;
+      this.getBooksPaginated(schedule, null);
+
+    }
+  }
+
+  
+  getBooksPaginated(schedule, event){
+    this.carregando = true;
+    let pageChoose = event && event.pageIndex + 1 || 1;
+    this.http.get(`${this.baseUrl}/live/scheduleBooksPaginate?page=${pageChoose}&id=${schedule._id}`).subscribe(
+      (res: any) => {
+        schedule.books = res.books;
+        this.pagerBooks = res.pager;
+        this.carregando = false;
+
+        let indexArray = 0;
+        setTimeout( () => {
+          schedule.books.forEach(element => {
+  
+            if((document.getElementById(element.nameMiniature) as HTMLImageElement)){
+              let file = element.miniature.data;
+              const base64 = btoa(new Uint8Array(file).reduce((data, byte) => data + String.fromCharCode(byte), ''));
+              (document.getElementById(element.nameMiniature) as HTMLImageElement).src = 'data:image/jpg;base64,' + base64;
+              indexArray++;  
+            }
+           
+          }); 
+        }, 100);
+      },
+      (err) => {
+        this.toastr.error("Servidor momentâneamente inoperante", "Atenção");
+        this.carregando = false;
+      }
+    );
   }
 }
 

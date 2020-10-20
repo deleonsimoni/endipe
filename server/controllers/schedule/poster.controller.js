@@ -28,7 +28,10 @@ async function insertSchedule(schedule) {
   const poster = await new Poster(schedule).save();
 
   if(poster.monitor){
-    registerMonitor(poster._id, poster.monitor.toLowerCase());
+    let monitors = poster.monitor.trim().split(';');
+    monitors.forEach(element => {
+      registerMonitor(poster._id, element.toLowerCase());
+    });
   }
 
   if(poster.mediator){
@@ -67,7 +70,10 @@ async function deleteSchedule(id) {
   let workWithUser;
 
   if(poster.monitor){
-    unRegisterMonitor(id, poster.monitor.toLowerCase());
+    let monitors = poster.monitor.trim().split(';');
+    monitors.forEach(element => {
+      unRegisterMonitor(id, element.toLowerCase());
+    });
   }
 
   if(poster.mediator){

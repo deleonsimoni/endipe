@@ -27,7 +27,7 @@ async function getAnais(req, res) {
 }
 
 async function insertAnais(req, res) {
-  if (req.user.icAdmin) {
+  if (req.user.icAdmin || req.user.icEditor) {
     let anais = await anaisCtrl.insertAnais(req.body, req.user._id);
     res.json(anais);
   } else {
@@ -36,7 +36,7 @@ async function insertAnais(req, res) {
 }
 
 async function updateAnais(req, res) {
-  if (req.user.icAdmin) {
+  if (req.user.icAdmin || req.user.icEditor) {
     let anais = await anaisCtrl.updateAnais(req.body, req.user._id);
     res.json(anais);
   } else {
@@ -45,7 +45,7 @@ async function updateAnais(req, res) {
 }
 
 async function deleteAnais(req, res) {
-  if (req.user.icAdmin) {
+  if (req.user.icAdmin || req.user.icEditor) {
     let anais = await anaisCtrl.deleteAnais(req.params.id);
     res.json(anais);
   } else {

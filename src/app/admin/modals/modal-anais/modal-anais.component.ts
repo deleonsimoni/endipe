@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { NoticiasService } from 'src/app/services/noticias.service';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -28,23 +28,52 @@ export class ModalAnaisComponent implements OnInit {
 
   ngOnInit() {
     this.createForm();
+    if(this.data.anal){
+      const dataCtrel = this.anaisForm.get("summary") as FormArray;
+      this.data.anal.summary.forEach((sumary, key) => {
+        dataCtrel.push(this.builder.group(sumary));
+      });
+
+    }
   }
 
   private createForm() {
     this.anaisForm = this.builder.group({
-      _id: [],
+      _id: [null, []],
       name: [null, [Validators.required]],
-      link: [null, [Validators.required]]
+      link: [null, [Validators.required]],
+      image: [null, []],
+      summary: this.builder.array([]),
+
     });
 
     if (this.data.anal) {
-      this.anaisForm.patchValue(this.data.anal);
+      this.anaisForm.patchValue({
+        name: this.data.anal.name,
+        link: this.data.anal.link,
+        _id: this.data.anal._id,
+        image: this.data.anal.image
+      });
     }
 
   }
 
   public close(): void {
     this.dialogRef.close();
+  }
+
+  get summaries() {
+    return this.anaisForm.get("summary");
+  }
+
+  public addSumary() {
+    const dataCtrel = this.anaisForm.get("summary") as FormArray;
+    dataCtrel.push(this.builder.group({ name: [null], link: [null]}));
+  }
+
+  public removeSumary(pos) {
+    const dataCtrel = this.anaisForm.get("summary") as FormArray;
+    dataCtrel.removeAt(pos);
   }
 
   public register() {

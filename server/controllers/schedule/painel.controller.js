@@ -27,7 +27,10 @@ async function insertSchedule(schedule) {
   let painel = await new Painel(schedule).save();
 
   if(painel.monitor){
-    registerMonitor(painel._id, painel.monitor.toLowerCase());
+    let monitors = painel.monitor.trim().split(';');
+    monitors.forEach(element => {
+      registerMonitor(painel._id, element.toLowerCase());
+    });
   }
 
   return await painel;
@@ -39,11 +42,17 @@ async function updateSchedule(id, schedule) {
   let painelOld = await Painel.findById(id);
 
   if(painelOld.monitor){
-    unRegisterMonitor(id, painelOld.monitor.toLowerCase());
+    let monitors = painelOld.monitor.trim().split(';');
+    monitors.forEach(element => {
+      unRegisterMonitor(id, element.toLowerCase());
+    });
   }
 
   if(schedule.monitor){
-    registerMonitor(id, schedule.monitor.toLowerCase());
+    let monitors = schedule.monitor.trim().split(';');
+    monitors.forEach(element => {
+      registerMonitor(id, element.toLowerCase());
+    });
   }
 
   return await Painel.findOneAndUpdate({ _id: id }, schedule);
@@ -55,7 +64,10 @@ async function deleteSchedule(id) {
   let painelOld = await Painel.findById(id);
 
   if(painelOld.monitor){
-    unRegisterMonitor(id, painelOld.monitor.toLowerCase());
+    let monitors = painelOld.monitor.trim().split(';');
+    monitors.forEach(element => {
+      unRegisterMonitor(id, element.toLowerCase());
+    });
   }
 
   return await Painel.findOneAndRemove({
