@@ -23,6 +23,32 @@ router.put('/chat', passport.authenticate('jwt', {
   session: false
 }), asyncHandler(updateChat));
 
+//Mural
+router.get('/mural', passport.authenticate('jwt', {
+  session: false
+}), asyncHandler(getChatMural));
+
+router.post('/mural', passport.authenticate('jwt', {
+  session: false
+}), asyncHandler(insertChatMural));
+
+router.put('/mural', passport.authenticate('jwt', {
+  session: false
+}), asyncHandler(updateChatMural));
+
+//Work
+router.get('/chatWork', passport.authenticate('jwt', {
+  session: false
+}), asyncHandler(getChatWork));
+
+router.post('/chatWork', passport.authenticate('jwt', {
+  session: false
+}), asyncHandler(insertChatWork));
+
+router.put('/chatWork', passport.authenticate('jwt', {
+  session: false
+}), asyncHandler(updateChatWork));
+
 
 async function getHeaderChat(req, res) {
   let rep = await chatCtrl.getHeaderChat(req);
@@ -47,6 +73,41 @@ async function insertChat(req, res) {
 
 async function updateChat(req, res) {
   let rep = await chatCtrl.updateChat(req.query.id, req.body.mensagem, req.user);
+  res.json(rep);
+}
+
+async function getChatMural(req, res) {
+  let rep;
+  rep = await chatCtrl.getChatMural(req.user._id);
+  res.json(rep);
+}
+
+async function insertChatMural(req, res) {
+
+  let rep = await chatCtrl.insertChatMural(req.body.mensagem, req.user);
+  res.json(rep);
+}
+
+async function updateChatMural(req, res) {
+  let rep = await chatCtrl.updateChatMural(req.query.id, req.body.mensagem, req.user);
+  res.json(rep);
+}
+
+//CHAT
+async function getChatWork(req, res) {
+  let rep;
+  rep = await chatCtrl.getChatWork(req.query.idWork);
+  res.json(rep);
+}
+
+async function insertChatWork(req, res) {
+
+  let rep = await chatCtrl.insertChatWork(req.query.idWork, req.body.mensagem, req.user);
+  res.json(rep);
+}
+
+async function updateChatWork(req, res) {
+  let rep = await chatCtrl.updateChatWork(req.query.id, req.body.mensagem, req.user);
   res.json(rep);
 }
 

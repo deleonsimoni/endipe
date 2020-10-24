@@ -2,7 +2,7 @@
     coordenação Section
 ============================-->
 
-<section id="team" class="wow fadeInUp">
+<!--<section id="team" class="wow fadeInUp">
     <div class="container">
         <div class="middle section-header">
             <h1 style="color: #0C2E8A;">Aguarde</h1>
@@ -11,9 +11,8 @@
             <p *ngIf="days" style="font-size:30px">{{days + ' dias ' + hours + ' horas ' + minutes + ' minutos ' + seconds + ' segundos'}}</p>
         </div>
     </div>
-</section>
+</section>-->
 
-<!--
 <section id="schedule" class="wow fadeInUp mt-2">
   <mat-tab-group mat-align-tabs="center" animationDuration="1500ms">
     <mat-tab label="AO VIVO">
@@ -27,7 +26,7 @@
     <mat-tab label="Mural">
       <ng-template matTabContent>
         <div class="container-schedule">
-          <app-time-line-virtual></app-time-line-virtual>
+          <app-time-line-virtual [user]="user"></app-time-line-virtual>
         </div>
       </ng-template>
 
@@ -41,5 +40,5 @@
 
     </mat-tab>
   </mat-tab-group>
-</section>-->
+</section>
 

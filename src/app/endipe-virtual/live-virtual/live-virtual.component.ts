@@ -18,6 +18,8 @@ export class LiveVirtualComponent implements OnInit {
   scheduleSelect;
   carregando = false;
   linkYoutubeSafe;
+  chatYoutubeSafe;
+
   pagerBooks: any = {};
 
   constructor(
@@ -42,6 +44,7 @@ export class LiveVirtualComponent implements OnInit {
       if(schedule.virtual && schedule.virtual.linkYoutube){
         schedule.virtual.linkYoutube = '//www.youtube.com/embed/' + this.getIdYoutube(schedule.virtual.linkYoutube);
         this.linkYoutubeSafe = this._sanitizer.bypassSecurityTrustResourceUrl(schedule.virtual.linkYoutube);
+        this.chatYoutubeSafe = this._sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/live_chat?v='+ this.getIdYoutube(schedule.virtual.linkYoutube) + '&embed_domain=' + window.location.hostname);
       }
 
       this.scheduleSelect = schedule._id;
@@ -93,11 +96,11 @@ export class LiveVirtualComponent implements OnInit {
         //     });
 
         res.rodaReunioesEntidadesRedes.forEach(element => {
-          element.type = 1;
+          element.type = 11;
         });
 
         res.sessoesEspeciais.forEach(element => {
-          element.type = 9;
+          element.type = 10;
         });
 
 

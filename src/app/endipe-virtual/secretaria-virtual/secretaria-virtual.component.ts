@@ -30,7 +30,9 @@ export class SecretariaVirtualComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    this.getChatAdmin();
+    if(this.user){
+      this.getChatAdmin();
+    }
   }
     
   getChatAdmin(){

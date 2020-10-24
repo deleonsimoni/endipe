@@ -15,7 +15,7 @@
 
                                 <div class="card-works">
                                     <div class="row">
-                                        <div class="col-sm-10">
+                                        <div class="col-sm-10 mb-4">
                                             <h5 *ngIf="schedule.type != '8'" style="color: #50d8af">{{schedule.type | modalitiesWork}}</h5>
                                             <h5 *ngIf="schedule.type == '8'" style="color: #50d8af">{{schedule.theme | themeSimposio}}</h5>
                                             <h3 *ngIf="schedule.type != '8'"><b>{{schedule?.titles[0]}}</b></h3>
@@ -29,7 +29,7 @@
                                                 <h4 class="mb-4"><button class="btn btn-inscrever"><i class="fas fa-spinner fa-pulse"></i></button></h4>
                                             </div>
                                             <div style="cursor: pointer !important;">
-                                                <h4 style="position: absolute; bottom: 0; left: 0; cursor: pointer !important;"
+                                                <h4 style="position: absolute; bottom: 0; left: 2px; cursor: pointer !important;"
                                                     (click)="selectSchedule(schedule);">Assistir <i class="fa fa-chevron-down"></i>
                                                 </h4>
                                             </div>
@@ -75,7 +75,9 @@
                                             </div>
                                             <hr/>
                                             <div *ngIf="schedule?.virtual?.linkYoutube" class="row col-12 justify-content-center">
-                                                <iframe width="560" height="315" [src]='linkYoutubeSafe' frameborder="0" allowfullscreen></iframe>                                                
+                                                    <iframe width="75%" height="400" [src]='linkYoutubeSafe' frameborder="0" allowfullscreen></iframe>
+                                                    <iframe width="25%" height="400" [src]='chatYoutubeSafe' frameborder="0" allowfullscreen></iframe>
+                                                    
                                             </div>
                                         </div>
                                     </div>
@@ -87,7 +89,7 @@
 
                                 <div class="card-works">
                                     <div class="row">
-                                        <div class="col-sm-10">
+                                        <div class="col-lg-10 col-sm-12">
                                             <h5 style="color: #50d8af">{{schedule.type | modalitiesWork}}</h5>
                                             <h3><b>{{schedule?.titles[0]}}</b></h3>
                                             <h4>{{schedule.date + ' ' + (schedule.startTime ? schedule.startTime : '')  + ' - ' + (schedule.endTime ? schedule.endTime : '')}}
@@ -95,12 +97,13 @@
                                             <h4>Link para acesso: <b>Em breve</b></h4>
                                         </div>
 
-                                        <div class="col-sm-2">
+                                        <div class="col-lg-2 col-sm-12">
                                             <div *ngIf="carregando">
                                                 <h4 class="mb-4"><button class="btn btn-inscrever"><i
                                                             class="fas fa-spinner fa-pulse"></i></button>
                                                 </h4>
                                             </div>
+                                            <hr/>
                                             <div style="cursor: pointer !important;">
                                                 <h4 *ngIf="!carregando"
                                                     style="position: absolute; bottom: 0; left: 0; cursor: pointer !important;"

@@ -3,6 +3,7 @@ import { AuthService } from '../services/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { ScheduleService } from 'src/app/services/schedule.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-meu-endipe',
@@ -26,6 +27,10 @@ export class MeuEndipeComponent implements OnInit {
   carregandoLista = false;
   carregandoApresentacao = false;
   scheduleSelect;
+  comments: any;
+  postAuthorEmail = '';
+  newComment = null;
+  remainingText;
 
   constructor(
     private authService: AuthService,
@@ -33,7 +38,7 @@ export class MeuEndipeComponent implements OnInit {
     private http: HttpClient,
     private toastr: ToastrService,
     private scheduleService: ScheduleService,
-
+    private sanitizer: DomSanitizer,
 
   ) { }
 /*
@@ -75,6 +80,7 @@ export class MeuEndipeComponent implements OnInit {
       this.scheduleSelect = null;
     } else {
       this.scheduleSelect = id;
+      this.listarChatWork(this.scheduleSelect);
     }
   }
 
@@ -206,6 +212,110 @@ export class MeuEndipeComponent implements OnInit {
                   this.toastr.success('Servidor momentaneamente inoperante', 'Erro');
                   this.carregando = false;
               });
+      }
+  }
+
+
+  //CHAT
+  listarChatWork(id){
+    this.carregando = true;
+    this.http.get(`${this.baseUrl}/chat-admin/chatWork?idWork=${id}`).subscribe(
+      (res: any) => {
+        this.comments = res;
+        this.carregando = false;
+      },
+      (err) => {
+        this.toastr.error("Servidor momentâneamente inoperante", "Atenção");
+        this.carregando = false;
+      }
+    );
+  }
+
+  justifyChange(value) {
+    this.remainingText = 120 - this.newComment.length;
+  }
+
+  atualizarChat(){
+    this.listarChatWork(this.scheduleSelect);
+  }
+
+  parseContent(content) {
+    return this.sanitizer.bypassSecurityTrustHtml(content);
+  };
+
+  isAuthor(email) {
+    return email === this.postAuthorEmail;
+  } 
+
+  love (commentId){
+    this.comments['chat'].forEach(comment => {
+      if (comment.id == commentId)
+        comment.loved = !comment.loved
+    });      
+  }
+
+  reply(author) {
+      if (!this.newComment.content)
+      this.newComment.content = ''
+
+      if (this.newComment.content.search('@' + author + '@') == -1) {
+        if (this.newComment.content[0] == '@')
+          this.newComment.content = ', ' + this.newComment.content
+        else
+          this.newComment.content = ' ' + this.newComment.content
+
+         this.newComment.content = '@' + author + '@' + this.newComment.content
+      }
+  }
+
+  addNewComment() {
+      if(this.newComment){
+
+            let chatMessage = this.newComment;
+            chatMessage = chatMessage.replace(/(@[^@.]+)@/, '<span class="reply">$1</span>')
+            chatMessage = chatMessage.replace(/https?:\/\/(www.)?([a-zA-Z0-9\-_]+\.[a-zA-Z0-9]+)/, '<a href="//$2">$2</a>')
+            this.newComment = null;
+
+            if(this.comments && this.comments._id){
+
+              this.http.put(`${this.baseUrl}/chat-admin/chatWork?id=${this.comments._id}`, { mensagem: chatMessage }).subscribe((res: any) => {
+                this.comments['chat'].push({
+                    content: chatMessage,
+                    publisher: {
+                      user: this.user._id,
+                      name: this.user.fullname, 
+                      email: this.user.email
+                    }
+                  });
+
+                this.toastr.success("Mensagem enviada com sucesso", "Sucesso");
+              }, err => {
+                this.toastr.error("Servidor momentâneamente inoperante", "Atenção");
+              });
+
+            } else {
+
+              this.http.post(`${this.baseUrl}/chat-admin/chatWork?idWork=${this.scheduleSelect}`, { mensagem: chatMessage }).subscribe((res: any) => {
+                this.comments = res;
+                /*this.comments['chat'] = ([{
+                    content: chatMessage,
+                    publisher: {
+                      user: this.user._id,
+                      name: this.user.fullname, 
+                      email: this.user.email
+                    }
+                  }]);*/
+
+                this.toastr.success("Mensagem enviada com sucesso", "Sucesso");
+              }, err => {
+                this.toastr.error("Servidor momentâneamente inoperante", "Atenção");
+              });
+
+          }
+
+      } else {
+        this.toastr.error("Preencha sua mensagem antes de enviar", "Atenção");
+
       }
   }
 

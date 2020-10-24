@@ -30,8 +30,17 @@
                             <h3 *ngIf="schedule.type != '3'"><b>{{schedule.workTitle}}</b></h3>
                             <h3 *ngIf="schedule.type == '3'"><b>Apresentação de trabalhos</b></h3>
 
-                            <h4 *ngFor="let day of schedule.dates">{{day.date + ' ' + day.startTime + ' - ' + day.endTime}}</h4>
-                            <h4>Link para acesso: <b>Em breve</b></h4>
+                            <div *ngFor="let day of schedule.dates">
+                                <h4>
+                                    {{day.date + ' ' + day.startTime + ' - ' + day.endTime}}
+                                </h4>
+                                <h4 class="mb-1">
+                                    Link para acesso: <b>
+                                    <a *ngIf="day.linkZoom" [attr.href]="day.linkZoom" target="_blank">Clique Aqui</a>
+                                    <span *ngIf="!day.linkZoom">Em breve</span></b>
+                                </h4>
+                            </div>
+                            
                         </div>
                         <div class="col-sm-2">
                             <!--<small>STATUS</small>
@@ -92,6 +101,56 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- CHAT -->
+                        <br/>
+                        <section id="forum" class="wow fadeInUp">
+
+                            <h2 style="color: #0c2e8a;">Chat - Discuta sobre o trabalho</h2>
+                            
+                            <div>
+                                <ul style="height: 400px !important; overflow-y: scroll">
+                                <li *ngFor="let comment of comments?.chat">
+                                    
+                                    <header>
+                                    <h1 [ngClass]="{ 'author': isAuthor(comment?.publisher?.email) }">
+                                            {{ comment.publisher.name }}
+                                    </h1>
+                                    
+                                    <!--<div>
+                                        <button (click)="love(comment.id)" [ngClass]="{ 'loved': comment.loved }"></button>
+                                        <button (click)="reply(comment.publisher.name)"></button>
+                                    </div>-->
+        
+                                    </header>
+                                    <p [innerHTML]="parseContent(comment.content)"></p>
+        
+                                </li>
+                                </ul>
+        
+                                <form name="form" (ngSubmit)="addNewComment()" novalidate>
+                                <button type="button" *ngIf="!carregando" class="btn btn-primary" (click)="atualizarChat()">Ver novas mensagens</button>
+                                <button type="button" *ngIf="carregando" class="btn btn-primary"><i class="fa fa-spinner fa-pulse"></i></button> 
+
+                                <div class="textarea-wrapper">
+                                    {{remainingText}}
+                                    <textarea placeholder="Digite aqui..." maxlength="120" 
+                                            [ngModelOptions]="{standalone: true}" 
+                                            [(ngModel)]="newComment" 
+                                            (ngModelChange)="justifyChange(newComment)"
+                                            required>
+                                    </textarea>
+                                    <button type="submit">Enviar</button>
+        
+                                </div>
+        
+                                </form>
+        
+                            </div>
+                        </section>
+                        <!-- FIM CHAT -->
+
+
                     </div>
                 </div>
 
@@ -128,8 +187,16 @@
                         <h5 style="color: #50d8af">{{schedule.type | modalities}} - {{schedule.axis | axis}}</h5>
                         <h3><b>{{schedule.workTitle}}</b></h3>
 
-                        <h4 *ngFor="let day of schedule.dates">{{day.date + ' ' + day.startTime + ' - ' + day.endTime}}</h4>
-                        <h4>Link para acesso: <b>Em breve</b></h4>
+                        <div *ngFor="let day of schedule.dates">
+                            <h4>
+                                {{day.date + ' ' + day.startTime + ' - ' + day.endTime}}
+                            </h4>
+                            <h4 class="mb-1">
+                                Link para acesso: <b>
+                                <a *ngIf="day.linkZoom" [attr.href]="day.linkZoom" target="_blank">Clique Aqui</a>
+                                <span *ngIf="!day.linkZoom">Em breve</span></b>
+                            </h4>
+                        </div>
 
                     </div>
                     <div class="col-sm-2">
@@ -154,6 +221,54 @@
                             <p style="text-align: justify; text-justify: inter-word;">{{ schedule.resumePropose }}</p>
                         </div>
                     </div>
+
+                    <!-- CHAT -->
+                    <br/>
+                    <section id="forum" class="wow fadeInUp">
+
+                        <h2 style="color: #0c2e8a;">Chat - Discuta sobre o trabalho</h2>
+                        
+                        <div>
+                            <ul style="height: 400px !important; overflow-y: scroll">
+                            <li *ngFor="let comment of comments?.chat">
+                                
+                                <header>
+                                <h1 [ngClass]="{ 'author': isAuthor(comment?.publisher?.email) }">
+                                        {{ comment.publisher.name }}
+                                </h1>
+                                
+                                <!--<div>
+                                    <button (click)="love(comment.id)" [ngClass]="{ 'loved': comment.loved }"></button>
+                                    <button (click)="reply(comment.publisher.name)"></button>
+                                </div>-->
+    
+                                </header>
+                                <p [innerHTML]="parseContent(comment.content)"></p>
+    
+                            </li>
+                            </ul>
+    
+                            <form name="form" (ngSubmit)="addNewComment()" novalidate>
+                            <button type="button" *ngIf="!carregando" class="btn btn-primary" (click)="atualizarChat()">Ver novas mensagens</button>
+                            <button type="button" *ngIf="carregando" class="btn btn-primary"><i class="fa fa-spinner fa-pulse"></i></button>    
+
+                            <div class="textarea-wrapper">
+                                {{remainingText}}
+                                <textarea placeholder="Digite aqui..." maxlength="120" 
+                                        [ngModelOptions]="{standalone: true}" 
+                                        [(ngModel)]="newComment" 
+                                        (ngModelChange)="justifyChange(newComment)"
+                                        required>
+                                </textarea>
+                                <button type="submit">Enviar</button>
+    
+                            </div>
+    
+                            </form>
+    
+                        </div>
+                    </section>
+                    <!-- FIM CHAT -->
                 </div>
             </div>
 
@@ -175,8 +290,16 @@
                         <h5 style="color: #50d8af">{{schedule.type | modalities}} - {{schedule.axis | axis}}</h5>
                         <h3><b>{{schedule.workTitle}}</b></h3>
 
-                        <h4 *ngFor="let day of schedule.dates">{{day.date + ' ' + day.startTime + ' - ' + day.endTime}}</h4>
-                        <h4>Link para acesso: <b>Em breve</b></h4>
+                        <div *ngFor="let day of schedule.dates">
+                            <h4>
+                                {{day.date + ' ' + day.startTime + ' - ' + day.endTime}}
+                            </h4>
+                            <h4 class="mb-1">
+                                Link para acesso: <b>
+                                <a *ngIf="day.linkZoom" [attr.href]="day.linkZoom" target="_blank">Clique Aqui</a>
+                                <span *ngIf="!day.linkZoom">Em breve</span></b>
+                            </h4>
+                        </div>
 
                     </div>
                     <div class="col-sm-2">
@@ -215,6 +338,55 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- CHAT -->
+                    <br/>
+                    <section id="forum" class="wow fadeInUp">
+
+                        <h2 style="color: #0c2e8a;">Chat - Discuta sobre o trabalho</h2>
+                        
+                        <div>
+                            <ul style="height: 400px !important; overflow-y: scroll">
+                            <li *ngFor="let comment of comments?.chat">
+                                
+                                <header>
+                                <h1 [ngClass]="{ 'author': isAuthor(comment?.publisher?.email) }">
+                                        {{ comment.publisher.name }}
+                                </h1>
+                                
+                                <!--<div>
+                                    <button (click)="love(comment.id)" [ngClass]="{ 'loved': comment.loved }"></button>
+                                    <button (click)="reply(comment.publisher.name)"></button>
+                                </div>-->
+    
+                                </header>
+                                <p [innerHTML]="parseContent(comment.content)"></p>
+    
+                            </li>
+                            </ul>
+    
+                            <form name="form" (ngSubmit)="addNewComment()" novalidate>
+                            <button type="button" *ngIf="!carregando" class="btn btn-primary" (click)="atualizarChat()">Ver novas mensagens</button>
+                            <button type="button" *ngIf="carregando" class="btn btn-primary"><i class="fas fa-spinner fa-pulse"></i></button>    
+
+                            <div class="textarea-wrapper">
+                                {{remainingText}}
+                                <textarea placeholder="Digite aqui..." maxlength="120" 
+                                        [ngModelOptions]="{standalone: true}" 
+                                        [(ngModel)]="newComment" 
+                                        (ngModelChange)="justifyChange(newComment)"
+                                        required>
+                                </textarea>
+                                <button type="submit">Enviar</button>
+    
+                            </div>
+    
+                            </form>
+    
+                        </div>
+                    </section>
+                    <!-- FIM CHAT -->
+
                 </div>
             </div>
 
@@ -236,8 +408,16 @@
                         <h5 style="color: #50d8af">{{schedule.type | modalities}} - {{schedule.axis | axis}}</h5>
                         <h3><b>{{schedule.workTitle}}</b></h3>
 
-                        <h4 *ngFor="let day of schedule.dates">{{day.date + ' ' + day.startTime + ' - ' + day.endTime}}</h4>
-                        <h4>Link para acesso: <b>Em breve</b></h4>
+                        <div *ngFor="let day of schedule.dates">
+                            <h4>
+                                {{day.date + ' ' + day.startTime + ' - ' + day.endTime}}
+                            </h4>
+                            <h4 class="mb-1">
+                                Link para acesso: <b>
+                                <a *ngIf="day.linkZoom" [attr.href]="day.linkZoom" target="_blank">Clique Aqui</a>
+                                <span *ngIf="!day.linkZoom">Em breve</span></b>
+                            </h4>
+                        </div>
 
                     </div>
                     <div class="col-sm-2">
@@ -287,6 +467,54 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- CHAT -->
+                    <br/>
+                    <section id="forum" class="wow fadeInUp">
+
+                        <h2 style="color: #0c2e8a;">Chat - Discuta sobre o trabalho</h2>
+                        
+                        <div>
+                            <ul style="height: 400px !important; overflow-y: scroll">
+                            <li *ngFor="let comment of comments?.chat">
+                                
+                                <header>
+                                <h1 [ngClass]="{ 'author': isAuthor(comment?.publisher?.email) }">
+                                        {{ comment.publisher.name }}
+                                </h1>
+                                
+                                <!--<div>
+                                    <button (click)="love(comment.id)" [ngClass]="{ 'loved': comment.loved }"></button>
+                                    <button (click)="reply(comment.publisher.name)"></button>
+                                </div>-->
+    
+                                </header>
+                                <p [innerHTML]="parseContent(comment.content)"></p>
+    
+                            </li>
+                            </ul>
+    
+                            <form name="form" (ngSubmit)="addNewComment()" novalidate>
+                            <button type="button" *ngIf="!carregando" class="btn btn-primary" (click)="atualizarChat()">Ver novas mensagens</button>
+                            <button type="button" *ngIf="carregando" class="btn btn-primary"><i class="fas fa-spinner fa-pulse"></i></button>
+
+                            <div class="textarea-wrapper">
+                                {{remainingText}}
+                                <textarea placeholder="Digite aqui..." maxlength="120" 
+                                        [ngModelOptions]="{standalone: true}" 
+                                        [(ngModel)]="newComment" 
+                                        (ngModelChange)="justifyChange(newComment)"
+                                        required>
+                                </textarea>
+                                <button type="submit">Enviar</button>
+    
+                            </div>
+    
+                            </form>
+    
+                        </div>
+                    </section>
+                    <!-- FIM CHAT -->
                 </div>
             </div>
 

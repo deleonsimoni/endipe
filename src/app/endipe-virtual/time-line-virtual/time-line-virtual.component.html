@@ -3,10 +3,56 @@
         <div class="col-md-12">
             <div class="box">
              
-             
-             
-             
-                <p>time-line-virtual works!</p>
+                <div id="faq" class="section-header">
+                    <h2>Intereja com os congressistas</h2>
+                </div>
+
+                <section *ngIf="!user" id="notLogged" class="section-header wow fadeInUp">
+                    Para interagir você precisa estar logado na plataforma.
+                </section>
+
+                <section *ngIf="user" id="forum" class="section-header wow fadeInUp">
+                    <div>
+                        <ul style="height: 400px !important; overflow-y: scroll">
+                        <li *ngFor="let comment of comments?.chat">
+                            
+                            <header>
+                            <h1 [ngClass]="{ 'author': isAuthor(comment?.publisher?.email) }">
+                                    {{ comment.publisher.name }}
+                            </h1>
+                            
+                            <!--<div>
+                                <button (click)="love(comment.id)" [ngClass]="{ 'loved': comment.loved }"></button>
+                                <button (click)="reply(comment.publisher.name)"></button>
+                            </div>-->
+
+                            </header>
+                            <p [innerHTML]="parseContent(comment.content)"></p>
+
+                        </li>
+                        </ul>
+
+                        <form name="form" (ngSubmit)="addNewComment()" novalidate>
+                        <button type="button" class="btn btn-primary" (click)="atualizarChat()">Ver novas mensagens</button>
+
+                        <div class="textarea-wrapper">
+                            {{remainingText}}
+                            <textarea placeholder="Digite aqui..." maxlength="120" 
+                                    [ngModelOptions]="{standalone: true}" 
+                                    [(ngModel)]="newComment" 
+                                    (ngModelChange)="justifyChange(newComment)"
+                                    required>
+                            </textarea>
+                            <span class="remaning">{{remainingText}} Caracteres restantes.</span>
+                            <button type="submit">Enviar</button>
+
+                        </div>
+
+                        </form>
+                        <span class="remaning">{{remainingText}} Caracteres restantes.</span>
+
+                    </div>
+                </section>
 
 
 

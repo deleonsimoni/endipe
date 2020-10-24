@@ -439,30 +439,31 @@ async function getUserMonitors(req) {
 async function listVirtual() {
 
   const dateNow = new Date();
-  const datea = dateNow.getDate().toString() + '/' + (dateNow.getMonth() + 1);
-  console.log(datea);
+  const date = dateNow.getDate().toString() + '/' + (dateNow.getMonth() + 1);
+  console.log(date);
 
   //marretando para homologação.
-  const date = '29/10';
+  //const date = '29/10';
 
 
   let virtual = { schedules: [] };
-  if (date == "29/10") {
+  //if (date == "29/10") {
     virtual.abertura = await aberturaCtrl.listSchedule(date);
-  } else {
-    virtual.abertura = [];
-  }
+  //} else {
+  //  virtual.abertura = [];
+  //}
   if (date == "12/11") {
     virtual.encerramento = await encerramentoCtrl.listSchedule(date);
   }
   else {
     virtual.encerramento = [];
-    virtual.atividadeCultural = await atividadeCulturalCtrl.listSchedule(date);
-    //  virtual.lancamentoDeLivros = await lancamentoDeLivrosCtrl.listSchedule(date);
-    virtual.rodaReunioesEntidadesRedes = await rodaReunioesEntidadesRedesCtrl.listSchedule(date);
-    virtual.sessoesEspeciais = await sessoesEspeciaisCtrl.listSchedule(date);
-    virtual.simposio = await simposioCtrl.listSchedule(date);
   }
+
+  virtual.atividadeCultural = await atividadeCulturalCtrl.listSchedule(date);
+  //  virtual.lancamentoDeLivros = await lancamentoDeLivrosCtrl.listSchedule(date);
+  virtual.rodaReunioesEntidadesRedes = await rodaReunioesEntidadesRedesCtrl.listSchedule(date);
+  virtual.sessoesEspeciais = await sessoesEspeciaisCtrl.listSchedule(date);
+  virtual.simposio = await simposioCtrl.listSchedule(date);
 
   virtual.date = date;
 

@@ -1,6 +1,7 @@
 const Poster = require('../../models/schedule/poster.model');
 const User = require('../../models/user.model');
 const Work = require('../../models/work.model');
+const ChatWork = require('../../models/virtual/chatWork.model');
 
 module.exports = {
   listSchedule,
@@ -21,11 +22,19 @@ async function listSchedule(date) {
     });
 }
 
-async function insertSchedule(schedule) {
+async function insertSchedule(schedule, oldId) {
 
   schedule = await setAuthorsInPoster(schedule);
 
   const poster = await new Poster(schedule).save();
+
+  await ChatWork.findOneAndUpdate({
+    idWork: oldId
+  }, {
+    $set: {
+      idWork: poster._id
+    }
+  });
 
   if(poster.monitor){
     let monitors = poster.monitor.trim().split(';');
@@ -57,9 +66,9 @@ async function insertSchedule(schedule) {
 
 async function updateSchedule(id, schedule) {
 
-  await deleteSchedule(id);
+  let oldId = await deleteSchedule(id);
   delete schedule._id;
-  return await insertSchedule(schedule);
+  return await insertSchedule(schedule, oldId);
 
 
 }
@@ -93,7 +102,8 @@ async function deleteSchedule(id) {
     }
   }
 
-  return await Poster.findOneAndRemove({ _id: id });
+  await Poster.findOneAndRemove({ _id: id });
+  return await poster._id;
 
 }
 

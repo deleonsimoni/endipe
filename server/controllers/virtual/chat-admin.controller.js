@@ -1,4 +1,7 @@
 const Chat = require('../../models/virtual/chat-admin.model');
+const Mural = require('../../models/virtual/mural.model');
+const ChatWork = require('../../models/virtual/chatWork.model');
+
 const paginate = require("jw-paginate");
 
 module.exports = {
@@ -7,6 +10,12 @@ module.exports = {
   insertChat,
   updateChat,
   getHeaderChat,
+  getChatMural,
+  insertChatMural,
+  updateChatMural,
+  getChatWork,
+  insertChatWork,
+  updateChatWork,
 }
 
 async function getChatAdmin(idChat) {
@@ -92,3 +101,130 @@ async function updateChat(idChat, mensagem, user) {
     });
 
 }
+
+
+//MURAL
+async function getChatMural(idChat) {
+  const dateNow = new Date();
+  const date = dateNow.getDate().toString() + '/' + (dateNow.getMonth() + 1);
+  return await Mural.findOne({ 'date': date })
+}
+
+async function insertChatMural(mensagem, user) {
+  let chat = {};
+  chat.author = {
+    user: user._id,
+    name: user.fullname,
+    email: user.email
+  };
+
+  chat.chat = [{
+    content: mensagem,
+    publisher: {
+      user: user._id,
+      name: user.fullname, 
+      email: user.email,
+      icAdmin: user.icAdmin
+    }
+  }];
+
+  return await new Chat(chat).save();
+}
+
+async function updateChatMural(idChat, mensagem, user) {
+
+  const chat = {
+    content: mensagem,
+    publisher: {
+      user: user._id,
+      name: user.fullname,
+      email: user.email,
+      icAdmin: user.icAdmin
+    }
+  };
+
+  return await Mural.findOneAndUpdate({
+    _id: idChat
+    }, {
+      icReply: user.icAdmin,
+      $addToSet: {
+        chat: chat
+      }
+    }, {
+      new: true
+    },
+    function (err, doc) {
+      if (err) return res.send(500, {
+        error: err
+      });
+      return doc;
+    });
+
+}
+
+
+//WORK
+async function getChatWork(idChat) {
+  return await ChatWork.findOne({ 'idWork': idChat })
+}
+
+async function insertChatWork(idWork, mensagem, user) {
+
+  let chatExist = await ChatWork.findOne({ 'idWork': idWork }).select("_id");
+
+  if(chatExist){
+
+    return updateChatWork(chatExist._id, mensagem, user);
+
+  } else {
+    let chat = {};
+
+    chat.idWork = idWork;
+   
+    chat.chat = [{
+      content: mensagem,
+      publisher: {
+        user: user._id,
+        name: user.fullname, 
+        email: user.email,
+        icAdmin: user.icAdmin
+      }
+    }];
+  
+    return await new ChatWork(chat).save();
+  }
+
+
+}
+
+async function updateChatWork(idChat, mensagem, user) {
+
+  const chat = {
+    content: mensagem,
+    publisher: {
+      user: user._id,
+      name: user.fullname,
+      email: user.email,
+      icAdmin: user.icAdmin
+    }
+  };
+
+  return await ChatWork.findOneAndUpdate({
+    _id: idChat
+    }, {
+      icReply: user.icAdmin,
+      $addToSet: {
+        chat: chat
+      }
+    }, {
+      new: true
+    },
+    function (err, doc) {
+      if (err) return res.send(500, {
+        error: err
+      });
+      return doc;
+    });
+
+}
+
