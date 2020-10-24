@@ -26,10 +26,10 @@
                       </div>
                       <div >
 
-                      <div class="form-group col-md-12">
+                      <div class="form-group col-12" style="height: 400px !important; overflow-y: scroll">
                         <strong >Sumário</strong>
 
-                        <ul *ngFor="let summary of anal?.summary">
+                        <ul *ngFor="let summary of anal?.summary" >
                           <li>
                             <span style="text-align: justify; text-justify: inter-word; cursor: pointer;"><a [attr.href]="summary.link" target="_blank">{{summary.name}}</a></span>
                             <br>
@@ -48,7 +48,7 @@
         </div>
 
         <div class="row">
-          <div class="col-sm-1 text-center align-self-center pointer" (click)="deletar(anal)">
+          <div class="col-sm-1 text-center align-self-center pointer" (click)="confirmDeleteAnais(anal)">
             <i class="fa fa-trash"> Excluir</i>
           </div>
 
