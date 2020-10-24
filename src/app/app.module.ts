@@ -63,6 +63,7 @@ import { LiveVirtualComponent } from './endipe-virtual/live-virtual/live-virtual
 import { TimeLineVirtualComponent } from './endipe-virtual/time-line-virtual/time-line-virtual.component';
 import { MatPaginatorIntl } from '@angular/material';
 import { getPtBRPaginatorINTL } from './ptBR-paginator-intl';
+import { ModalBemVindoComponent } from './modal-bem-vindo/modal-bem-vindo.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -84,6 +85,7 @@ import { getPtBRPaginatorINTL } from './ptBR-paginator-intl';
     SubmissaoComponent,
     CertificadoComponent,
     ModalCadastroSucessoComponent,
+    ModalBemVindoComponent,
     TrabalhosComponent,
     ListarTrabalhosComponent,
     PerfilComponent,
@@ -103,6 +105,7 @@ import { getPtBRPaginatorINTL } from './ptBR-paginator-intl';
     SecretariaVirtualComponent,
     LiveVirtualComponent,
     TimeLineVirtualComponent,
+    ModalBemVindoComponent,
   ],
   imports: [
     BrowserModule,
@@ -137,6 +140,7 @@ import { getPtBRPaginatorINTL } from './ptBR-paginator-intl';
     ModalNormasPosterComponent,
     ModalApoiadoresComponent,
     ModalCadastroSucessoComponent,
+    ModalBemVindoComponent,
     RegisterComponent,
     ModalSessoesEspeciaisComponent,
     ModalSimposioComponent,

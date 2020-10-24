@@ -33,7 +33,8 @@
                         </ul>
 
                         <form name="form" (ngSubmit)="addNewComment()" novalidate>
-                        <button type="button" class="btn btn-primary" (click)="atualizarChat()">Ver novas mensagens</button>
+                        <button type="button" *ngIf="!carregando" class="btn btn-primary" (click)="atualizarChat()">Ver novas mensagens</button>
+                        <button type="button" *ngIf="carregando" class="btn btn-primary">Aguarde...</button>
 
                         <div class="textarea-wrapper">
                             {{remainingText}}

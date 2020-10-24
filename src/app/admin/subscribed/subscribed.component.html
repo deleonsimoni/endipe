@@ -37,7 +37,7 @@
     <div class="col-md-4">
       <button class="btn-primary" (click)="retrieveAdminData(null)">Pesquisar</button>
     </div>
-    <div *ngIf="status == 6 && !gerandoRelatorio" style="padding-left: 50%;" class="col-md-8 float-right pull-right">
+    <div *ngIf="status == '6' && !gerandoRelatorio" style="padding-left: 50%;" class="col-md-8 float-right pull-right">
       <button class="btn-danger" (click)="gerarRelatorio()">Gerar Relatório</button>
     </div>
   </div>

@@ -2,6 +2,8 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from 'src/app/services/auth.service';
+import { MatDialog } from '@angular/material';
+import { ModalBemVindoComponent } from 'src/app/modal-bem-vindo/modal-bem-vindo.component';
 
 @Component({
   selector: 'app-home-virtual',
@@ -23,12 +25,20 @@ export class HomeVirtualComponent implements OnInit {
     private toastr: ToastrService,
     @Inject('BASE_API_URL') private baseUrl: string,
     private http: HttpClient,
+    private dialog: MatDialog,
     private authService: AuthService) { }
 
   ngOnInit() {
 
     this.retrieveUser();
 
+    if(!localStorage.getItem("bemVindoEndipe")){
+
+      const dialogRef = this.dialog.open(ModalBemVindoComponent, {});
+
+      localStorage.setItem("bemVindoEndipe", "1");
+
+    }
 
     this.countDownDate = new Date("Oct 29, 2020 00:00:00").getTime();
 
