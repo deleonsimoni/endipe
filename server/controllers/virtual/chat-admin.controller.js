@@ -164,7 +164,7 @@ async function updateChatMural(idChat, mensagem, user) {
 }
 
 
-async function deleteChatMural(req) {
+async function deleteChatMural(req, res) {
 
   let canDelete = false;
 

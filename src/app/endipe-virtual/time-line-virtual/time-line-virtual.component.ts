@@ -100,14 +100,8 @@ export class TimeLineVirtualComponent implements OnInit {
             if(this.comments._id){
 
               this.http.put(`${this.baseUrl}/chat-admin/mural?id=${this.comments._id}`, { mensagem: chatMessage }).subscribe((res: any) => {
-                this.comments['chat'].push({
-                    content: chatMessage,
-                    publisher: {
-                      user: this.user._id,
-                      name: this.user.fullname, 
-                      email: this.user.email
-                    }
-                  });
+                this.comments = res;
+
 
                 this.toastr.success("Mensagem enviada com sucesso", "Sucesso");
               }, err => {

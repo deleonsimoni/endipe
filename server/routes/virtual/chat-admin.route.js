@@ -99,7 +99,7 @@ async function updateChatMural(req, res) {
 
 async function deleteChatMural(req, res) {
 
-  let rep = await chatCtrl.deleteChatMural(req);
+  let rep = await chatCtrl.deleteChatMural(req, res);
   res.json(rep);
   
 }
