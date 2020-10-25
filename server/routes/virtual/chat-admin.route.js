@@ -61,7 +61,7 @@ async function getHeaderChat(req, res) {
 
 async function getChat(req, res) {
   let rep;
-  if(req.query.id && req.user.icAdmin){
+  if (req.query.id && req.user.icAdmin) {
     rep = await chatCtrl.getChatAdmin(req.query.id);
   } else {
     rep = await chatCtrl.getChat(req.user._id);
@@ -101,7 +101,7 @@ async function deleteChatMural(req, res) {
 
   let rep = await chatCtrl.deleteChatMural(req, res);
   res.json(rep);
-  
+
 }
 
 //CHAT
@@ -121,4 +121,3 @@ async function updateChatWork(req, res) {
   let rep = await chatCtrl.updateChatWork(req.query.id, req.body.mensagem, req.user);
   res.json(rep);
 }
-
