@@ -14,22 +14,25 @@
                 <section *ngIf="user" id="forum" class="section-header wow fadeInUp">
                     <div>
                         <ul style="height: 400px !important; overflow-y: scroll">
-                        <li *ngFor="let comment of comments?.chat">
-                            
-                            <header>
-                            <h1 [ngClass]="{ 'author': isAuthor(comment?.publisher?.email) }">
-                                    {{ comment.publisher.name }}
-                            </h1>
-                            
-                            <!--<div>
-                                <button (click)="love(comment.id)" [ngClass]="{ 'loved': comment.loved }"></button>
-                                <button (click)="reply(comment.publisher.name)"></button>
-                            </div>-->
+                            <li *ngFor="let comment of comments?.chat">
+                                
+                                <header>
+                                    <h1 [ngClass]="{ 'author': isAuthor(comment?.publisher?.email) }">
+                                            {{ comment.publisher.name }}
+                                            
+                                    </h1>
+                                    <!--<div>
+                                        <button (click)="love(comment.id)" [ngClass]="{ 'loved': comment.loved }"></button>
+                                        <button (click)="reply(comment.publisher.name)"></button>
+                                    </div>-->
+                                    <div class="oi" style="font: caption; background: red; color: white">
+                                        <button (click)="removerComentario(comment._id)" title="Remover Comentário" alt="Remover Comentário" *ngIf="user.icAdmin || isAuthor(comment?.publisher?.email)" type="button" class="btn btn-danger">X</button>
 
-                            </header>
-                            <p [innerHTML]="parseContent(comment.content)"></p>
+                                    </div>
+                                </header>
+                                <p [innerHTML]="parseContent(comment.content)"></p>
 
-                        </li>
+                            </li>
                         </ul>
 
                         <form name="form" (ngSubmit)="addNewComment()" novalidate>

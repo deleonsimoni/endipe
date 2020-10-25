@@ -13,6 +13,7 @@ module.exports = {
   getChatMural,
   insertChatMural,
   updateChatMural,
+  deleteChatMural,
   getChatWork,
   insertChatWork,
   updateChatWork,
@@ -159,6 +160,46 @@ async function updateChatMural(idChat, mensagem, user) {
       });
       return doc;
     });
+
+}
+
+
+async function deleteChatMural(req) {
+
+  let canDelete = false;
+
+  if(req.user.icAdmin) {
+    canDelete = true;
+  } else {
+    let muralFind = await Mural.find({"chat._id": req.query.idChat},{ "chat.$": 1 });
+    if(muralFind[0].chat && req.user.email == muralFind[0].chat[0].publisher.email){
+      canDelete = true;
+    }
+
+  }
+
+  if(canDelete) {
+    return await Mural.findOneAndUpdate(
+      {
+        _id: req.query.id,
+      },
+      {
+        $pull: {
+          chat: {
+            _id: req.query.idChat
+          },
+        },
+      },
+      function (err, doc) {
+        if (err) return res.send(500, {
+          error: err
+        });
+        return doc;
+      }
+    );
+  } else {
+    return res.send(401);
+  }
 
 }
 

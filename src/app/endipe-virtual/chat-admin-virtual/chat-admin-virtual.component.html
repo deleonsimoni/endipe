@@ -5,10 +5,12 @@
           <li *ngFor="let comment of comments?.chat">
               
             <header>
-              <h1 [ngClass]="{ 'author': isAuthor(comment?.publisher?.email) }">
+              <h1 *ngIf="!comment?.publisher?.icAdmin" [ngClass]="{ 'author': isAuthor(comment?.publisher?.email) }">
                     {{ comment.publisher.name }}
-            </h1>
-              
+              </h1>
+              <h1 *ngIf="comment?.publisher?.icAdmin" [ngClass]="{ 'author': isAuthor(comment?.publisher?.email) }">
+                XX ENDIPE
+              </h1>
               <!--<div>
                 <button (click)="love(comment.id)" [ngClass]="{ 'loved': comment.loved }"></button>
                 <button (click)="reply(comment.publisher.name)"></button>

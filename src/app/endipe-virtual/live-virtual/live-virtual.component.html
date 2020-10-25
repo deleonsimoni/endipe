@@ -3,7 +3,7 @@
         <div class="col-md-12">
             <div class="box">
                 <div *ngIf="!carregando" class="section-header">
-                    <div class="prog-day mb-2">  
+                    <div tabindex="0" alt="Bem vindo ao Endipe Virtual" class="prog-day mb-2">  
                         <b><span>{{date | dayAndMonth}}</span></b>
                     </div>
                 </div>
@@ -16,10 +16,10 @@
                                 <div class="card-works">
                                     <div class="row">
                                         <div class="col-sm-10 mb-4">
-                                            <h5 *ngIf="schedule.type != '8'" style="color: #50d8af">{{schedule.type | modalitiesWork}}</h5>
-                                            <h5 *ngIf="schedule.type == '8'" style="color: #50d8af">{{schedule.theme | themeSimposio}}</h5>
-                                            <h3 *ngIf="schedule.type != '8'"><b>{{schedule?.titles[0]}}</b></h3>
-                                            <h3 *ngIf="schedule.type == '8'"><b>{{schedule.themeSpeeches}}</b></h3>
+                                            <h5 tabindex="0" *ngIf="schedule.type != '8'" style="color: #50d8af">{{schedule.type | modalitiesWork}}</h5>
+                                            <h5 tabindex="0" *ngIf="schedule.type == '8'" style="color: #50d8af">{{schedule.theme | themeSimposio}}</h5>
+                                            <h3 tabindex="0" *ngIf="schedule.type != '8'"><b>{{schedule?.titles[0]}}</b></h3>
+                                            <h3 tabindex="0" *ngIf="schedule.type == '8'"><b>{{schedule.themeSpeeches}}</b></h3>
                                             <h4>{{schedule.date + ' ' + (schedule.startTime ? schedule.startTime : '')  + ' - ' + (schedule.endTime ? schedule.endTime : '')}}
                                             </h4>
                                         </div>
@@ -29,8 +29,8 @@
                                                 <h4 class="mb-4"><button class="btn btn-inscrever"><i class="fas fa-spinner fa-pulse"></i></button></h4>
                                             </div>
                                             <div style="cursor: pointer !important;">
-                                                <h4 style="position: absolute; bottom: 0; left: 2px; cursor: pointer !important;"
-                                                    (click)="selectSchedule(schedule);">Assistir <i class="fa fa-chevron-down"></i>
+                                                <h4 tabindex="0" alt="Clique para ver detalhes" style="position: absolute; bottom: 0; left: 2px; cursor: pointer !important;">
+                                                    <a class="btn btn-primary" (keyup.enter)="selectSchedule(schedule);" (click)="selectSchedule(schedule);">Assistir <i class="fa fa-chevron-down"></i></a>
                                                 </h4>
                                             </div>
                                         </div>
@@ -42,40 +42,40 @@
                                         <div class="row align-items-center">
 
                                             <div *ngIf="schedule.type != '8'" class="col-12">
-                                                <strong>Título</strong>
-                                                <p *ngFor="let item of schedule.titles"
+                                                <strong tabindex="0">Título</strong>
+                                                <p tabindex="0" *ngFor="let item of schedule.titles"
                                                     style="text-align: justify; text-justify: inter-word;">
                                                     {{ item }}</p>
                                             </div>
                                             <div *ngIf=" schedule.type != '11' && (schedule.coordinators || schedule.coordinator)"
                                                 class="col-12">
-                                                <strong>Conferencistas</strong>
+                                                <strong tabindex="0">Conferencistas</strong>
                                                 <div *ngIf="schedule.coordinators">
-                                                    <p *ngFor="let item of schedule.coordinators"
+                                                    <p tabindex="0" *ngFor="let item of schedule.coordinators"
                                                         style="text-align: justify; text-justify: inter-word;">{{ item.name }}
                                                         {{ item.isCoordinator ? '(Coordenador)' : '' }}</p>
                                                 </div>
                                                 <div *ngIf="schedule.coordinator">
-                                                    <p *ngFor="let item of schedule.coordinator"
+                                                    <p tabindex="0" *ngFor="let item of schedule.coordinator"
                                                         style="text-align: justify; text-justify: inter-word;">{{ item.name }}</p>
                                                 </div>
                                             </div>
                                             <div *ngIf="schedule.type == '11'" class="col-12">
-                                                <strong>Entrevistados</strong>
+                                                <strong tabindex="0">Entrevistados</strong>
                                                 <div *ngIf="schedule.entrevistados">
-                                                    <p *ngFor="let item of schedule.entrevistados"
+                                                    <p tabindex="0" *ngFor="let item of schedule.entrevistados"
                                                         style="text-align: justify; text-justify: inter-word;">{{ item.name }}</p>
                                                 </div>
                                                 <strong>Entrevistadores</strong>
                                                 <div *ngIf="schedule.entrevistadores">
-                                                    <p *ngFor="let item of schedule.entrevistadores"
+                                                    <p tabindex="0" *ngFor="let item of schedule.entrevistadores"
                                                         style="text-align: justify; text-justify: inter-word;">{{ item.name }}</p>
                                                 </div>
 
                                             </div>
                                             <hr/>
                                             <div *ngIf="schedule?.virtual?.linkYoutube" class="row col-12 justify-content-center">
-                                                    <iframe width="75%" height="400" [src]='linkYoutubeSafe' frameborder="0" allowfullscreen></iframe>
+                                                    <iframe tabindex="0" alt="clique para assistir" width="75%" height="400" [src]='linkYoutubeSafe' frameborder="0" allowfullscreen></iframe>
                                                     <iframe width="25%" height="400" [src]='chatYoutubeSafe' frameborder="0" allowfullscreen></iframe>
                                                     
                                             </div>

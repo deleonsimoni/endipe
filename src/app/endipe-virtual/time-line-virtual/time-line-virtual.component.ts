@@ -66,6 +66,15 @@ export class TimeLineVirtualComponent implements OnInit {
     });      
   }
 
+  removerComentario(commentId){
+    this.http.delete(`${this.baseUrl}/chat-admin/mural?id=${this.comments._id}&idChat=${commentId}`).subscribe((res: any) => {
+      this.comments = res;
+      this.toastr.success("Mensagem deletada com sucesso", "Sucesso");
+    }, err => {
+      this.toastr.error("Servidor momentâneamente inoperante", "Atenção");
+    });
+  }
+
   reply(author) {
       if (!this.newComment.content)
       this.newComment.content = ''

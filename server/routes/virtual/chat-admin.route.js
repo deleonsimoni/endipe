@@ -36,6 +36,10 @@ router.put('/mural', passport.authenticate('jwt', {
   session: false
 }), asyncHandler(updateChatMural));
 
+router.delete('/mural', passport.authenticate('jwt', {
+  session: false
+}), asyncHandler(deleteChatMural));
+
 //Work
 router.get('/chatWork', passport.authenticate('jwt', {
   session: false
@@ -91,6 +95,13 @@ async function insertChatMural(req, res) {
 async function updateChatMural(req, res) {
   let rep = await chatCtrl.updateChatMural(req.query.id, req.body.mensagem, req.user);
   res.json(rep);
+}
+
+async function deleteChatMural(req, res) {
+
+  let rep = await chatCtrl.deleteChatMural(req);
+  res.json(rep);
+  
 }
 
 //CHAT
