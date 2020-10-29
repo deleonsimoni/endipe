@@ -82,7 +82,7 @@ async function updateChat(req, res) {
 
 async function getChatMural(req, res) {
   let rep;
-  rep = await chatCtrl.getChatMural(req.user._id);
+  rep = await chatCtrl.getChatMural(req);
   res.json(rep);
 }
 
@@ -93,7 +93,7 @@ async function insertChatMural(req, res) {
 }
 
 async function updateChatMural(req, res) {
-  let rep = await chatCtrl.updateChatMural(req.query.id, req.body.mensagem, req.user);
+  let rep = await chatCtrl.updateChatMural(req.query.id, req.body.mensagem, req.user, res);
   res.json(rep);
 }
 

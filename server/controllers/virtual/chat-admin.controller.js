@@ -105,10 +105,36 @@ async function updateChat(idChat, mensagem, user) {
 
 
 //MURAL
-async function getChatMural(idChat) {
+async function getChatMural(req) {
+
   const dateNow = new Date();
   const date = dateNow.getDate().toString() + '/' + (dateNow.getMonth() + 1);
-  return await Mural.findOne({ 'date': date })
+  const pageSize = 6;
+  const page = req.query.page || 1;
+  let total;
+
+  try{
+    total = await Mural.aggregate([{$match: { 'date': date}}, {$project: {chat: {$size: '$chat'}}}]);
+  } catch{
+    console.log('deu erro')
+    const mural = await Mural.findOne({ 'date': date });
+    return {mural};
+  }
+
+  console.log(total)
+  let begin = total[0] ? (total[0].chat - 1) - pageSize : 0;
+  if (begin < 0 ) begin = 0;
+  const end = total[0] ? total[0].chat : 1;
+  console.log("begin " + begin + ' end ' + end)
+  const mural = await Mural.findOne({ 'date': date }, {'chat':{$slice:[begin, end]}});
+
+  const pager = await paginate(total, page, pageSize);
+
+  return {
+    mural,
+    pager,
+  };
+
 }
 
 async function insertChatMural(mensagem, user) {
@@ -132,7 +158,7 @@ async function insertChatMural(mensagem, user) {
   return await new Chat(chat).save();
 }
 
-async function updateChatMural(idChat, mensagem, user) {
+async function updateChatMural(idChat, mensagem, user, res) {
 
   const chat = {
     content: mensagem,
@@ -144,22 +170,16 @@ async function updateChatMural(idChat, mensagem, user) {
     }
   };
 
-  return await Mural.findOneAndUpdate({
+  await Mural.findOneAndUpdate({
     _id: idChat
     }, {
       icReply: user.icAdmin,
       $addToSet: {
         chat: chat
       }
-    }, {
-      new: true
-    },
-    function (err, doc) {
-      if (err) return res.send(500, {
-        error: err
-      });
-      return doc;
     });
+  
+  return await "ok";
 
 }
 
@@ -179,7 +199,7 @@ async function deleteChatMural(req, res) {
   }
 
   if(canDelete) {
-    return await Mural.findOneAndUpdate(
+    await Mural.findOneAndUpdate(
       {
         _id: req.query.id,
       },
@@ -197,6 +217,7 @@ async function deleteChatMural(req, res) {
         return doc;
       }
     );
+    return await "ok";
   } else {
     return res.send(401);
   }

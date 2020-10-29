@@ -27,14 +27,14 @@ export class HomeVirtualComponent implements OnInit {
   ngOnInit() {
 
     this.retrieveUser();
-/*
-    if(!localStorage.getItem("bemVindoEndipe")){
+
+    if(!localStorage.getItem("bemVindoEndipeVirtual")){
 
       const dialogRef = this.dialog.open(ModalBemVindoComponent, {});
 
-      localStorage.setItem("bemVindoEndipe", "1");
+      localStorage.setItem("bemVindoEndipeVirtual", "1");
 
-    }*/
+    }
 
 
   }

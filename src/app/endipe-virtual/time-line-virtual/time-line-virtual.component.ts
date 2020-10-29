@@ -33,7 +33,8 @@ export class TimeLineVirtualComponent implements OnInit {
     this.carregando = true;
     this.http.get(`${this.baseUrl}/chat-admin/mural`).subscribe(
       (res: any) => {
-        this.comments = res;
+        this.comments = res.mural;
+        
         this.carregando = false;
       },
       (err) => {
@@ -68,7 +69,7 @@ export class TimeLineVirtualComponent implements OnInit {
 
   removerComentario(commentId){
     this.http.delete(`${this.baseUrl}/chat-admin/mural?id=${this.comments._id}&idChat=${commentId}`).subscribe((res: any) => {
-      this.comments = res;
+      this.listarMural();
       this.toastr.success("Mensagem deletada com sucesso", "Sucesso");
     }, err => {
       this.toastr.error("Servidor momentâneamente inoperante", "Atenção");
@@ -100,8 +101,8 @@ export class TimeLineVirtualComponent implements OnInit {
             if(this.comments._id){
 
               this.http.put(`${this.baseUrl}/chat-admin/mural?id=${this.comments._id}`, { mensagem: chatMessage }).subscribe((res: any) => {
-                this.comments = res;
 
+                this.listarMural();
 
                 this.toastr.success("Mensagem enviada com sucesso", "Sucesso");
               }, err => {
