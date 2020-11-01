@@ -116,16 +116,14 @@ async function getChatMural(req) {
   try{
     total = await Mural.aggregate([{$match: { 'date': date}}, {$project: {chat: {$size: '$chat'}}}]);
   } catch{
-    console.log('deu erro')
     const mural = await Mural.findOne({ 'date': date });
     return {mural};
   }
 
-  console.log(total)
   let begin = total[0] ? (total[0].chat - 1) - pageSize : 0;
   if (begin < 0 ) begin = 0;
-  const end = total[0] ? total[0].chat : 1;
-  console.log("begin " + begin + ' end ' + end)
+  let end = total[0] ? total[0].chat : 1;
+  if (end == 0 ) end = 1;
   const mural = await Mural.findOne({ 'date': date }, {'chat':{$slice:[begin, end]}});
 
   const pager = await paginate(total, page, pageSize);

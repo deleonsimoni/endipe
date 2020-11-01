@@ -15,6 +15,7 @@ import { HomeVirtualComponent } from './endipe-virtual/home-virtual/home-virtual
 import { MeuEndipeComponent } from './meu-endipe/meu-endipe.component';
 import { InscrevaseComponent } from './programacao/components/inscrevase/inscrevase.component';
 import { ProgramacaoAbertaComponent } from './programacao/components/programacao-aberta/programacao-aberta.component';
+import { AnaisVirtualComponent } from './endipe-virtual/anais-virtual/anais-virtual.component';
 
 const routes: Routes = [
   {
@@ -77,6 +78,10 @@ const routes: Routes = [
   {
     path: 'perfil',
     component: PerfilComponent
+  },
+  {
+    path: 'anais-virtual',
+    component: AnaisVirtualComponent
   }
 ];
 

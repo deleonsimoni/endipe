@@ -64,6 +64,7 @@ import { TimeLineVirtualComponent } from './endipe-virtual/time-line-virtual/tim
 import { MatPaginatorIntl } from '@angular/material';
 import { getPtBRPaginatorINTL } from './ptBR-paginator-intl';
 import { ModalBemVindoComponent } from './modal-bem-vindo/modal-bem-vindo.component';
+import { AnaisVirtualComponent } from './endipe-virtual/anais-virtual/anais-virtual.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -106,6 +107,7 @@ import { ModalBemVindoComponent } from './modal-bem-vindo/modal-bem-vindo.compon
     LiveVirtualComponent,
     TimeLineVirtualComponent,
     ModalBemVindoComponent,
+    AnaisVirtualComponent,
   ],
   imports: [
     BrowserModule,

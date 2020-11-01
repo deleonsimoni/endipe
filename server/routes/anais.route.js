@@ -8,6 +8,11 @@ module.exports = router;
 
 router.get('/anais', getAnais);
 
+router.get('/anaisVirtual', getAnaisVirtual);
+
+router.get('/sumarioVirtual', getSumarioVirtual);
+
+
 router.post('/anais', passport.authenticate('jwt', {
   session: false
 }), insertAnais);
@@ -23,6 +28,16 @@ router.delete('/anais/:id', passport.authenticate('jwt', {
 
 async function getAnais(req, res) {
   let anais = await anaisCtrl.getAnais();
+  res.json(anais);
+}
+
+async function getAnaisVirtual(req, res) {
+  let anais = await anaisCtrl.getAnaisVirtual();
+  res.json(anais);
+}
+
+async function getSumarioVirtual(req, res) {
+  let anais = await anaisCtrl.getSumarioVirtual(req.query.id);
   res.json(anais);
 }
 

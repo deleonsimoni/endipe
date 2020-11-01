@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
 import { ScheduleService } from 'src/app/services/schedule.service';
 import { PageEvent } from '@angular/material';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-schedule-virtual',
@@ -34,6 +35,8 @@ export class ScheduleVirtualComponent implements OnInit {
   differ: KeyValueDiffer<string, any>;
   @ViewChild('trabalho', {static: false}) trabalhoId: any;
 
+  linkYoutubeSafe;
+
   constructor(
     private auth: AuthService,
     private toastr: ToastrService,
@@ -41,6 +44,7 @@ export class ScheduleVirtualComponent implements OnInit {
     private http: HttpClient,
     private differs: KeyValueDiffers,
     private scheduleService: ScheduleService,
+    private _sanitizer: DomSanitizer,
 
   ) { 
     this.differ = this.differs.find({}).create();
@@ -50,12 +54,25 @@ export class ScheduleVirtualComponent implements OnInit {
     this.getSchedulePaginate(null, this.day, this.type, this.autor, this.eixo, this.titulo);
   }
 
-  selectSchedule(id){
-    if(this.scheduleSelect == id){
+  selectSchedule(schedule){
+    if(this.scheduleSelect == schedule._id){
       this.scheduleSelect = null;
     } else {
-      this.scheduleSelect = id;
+      if(schedule.virtual && schedule.virtual.linkYoutube){
+        schedule.virtual.linkYoutube = '//www.youtube.com/embed/' + this.getIdYoutube(schedule.virtual.linkYoutube);
+        this.linkYoutubeSafe = this._sanitizer.bypassSecurityTrustResourceUrl(schedule.virtual.linkYoutube);
+      }
+      this.scheduleSelect = schedule._id;
     }
+  }
+
+  getIdYoutube(url) {
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+    const match = url.match(regExp);
+
+    return (match && match[2].length === 11)
+      ? match[2]
+      : null;
   }
 
   selectBookSchedule(schedule){

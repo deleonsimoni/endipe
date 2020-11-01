@@ -30,7 +30,7 @@
                             </ng-container>
                         </div>
 -->
-                        <div *ngIf="!carregando && user?.payment?.icPaid && schedule.type != '3'">
+                        <div *ngIf="!carregando && user?.payment?.icPaid && type != '3'">
                             <ng-container *ngIf="!isSubscribe(schedule) && schedule.qtdSubscribers - (schedule.subscribers ? schedule.subscribers.length : 0) > 0">
                                 <h4 class="mb-4"><button (click)="signUp(type, schedule)" class="btn btn-inscrever">Inscrever </button></h4>
                             </ng-container>
@@ -51,7 +51,7 @@
 
 
                         <div style="cursor: pointer !important;">
-                            <h4 style="position: absolute; bottom: 0; left: 0; cursor: pointer !important;" (click)="selectSchedule(schedule._id);">Mais detalhes <i class="fa fa-chevron-down"></i></h4>
+                            <h4 style="position: absolute; bottom: 0; left: 0; cursor: pointer !important;" (click)="selectSchedule(schedule);">Mais detalhes <i class="fa fa-chevron-down"></i></h4>
                         </div>
                     </div>
                 </div>
@@ -111,7 +111,6 @@
                         <h3 tabindex="0" *ngIf="type != '8'"><b>{{schedule?.titles[0]}}</b></h3>
                         <h3 tabindex="0" *ngIf="type  == '8'"><b>{{schedule.themeSpeeches}}</b></h3>
                         <h4 tabindex="0" >{{schedule.date + ' ' + (schedule.startTime ? schedule.startTime : '')  + ' - ' + (schedule.endTime ? schedule.endTime : '')}}</h4>
-                        <h4>Link para acesso: <b>Em breve</b></h4>
                     </div>
 
                     <div class="col-sm-2">
@@ -119,7 +118,7 @@
                             <h4 class="mb-4"><button class="btn btn-inscrever"><i class="fas fa-spinner fa-pulse"></i></button></h4>
                         </div>
                         <div style="cursor: pointer !important;">
-                            <h4 style="position: absolute; bottom: 0; left: 0; cursor: pointer !important;" (click)="selectSchedule(schedule._id);">Mais detalhes <i class="fa fa-chevron-down"></i></h4>
+                            <h4 style="position: absolute; bottom: 0; left: 0; cursor: pointer !important;" (click)="selectSchedule(schedule);">Mais detalhes <i class="fa fa-chevron-down"></i></h4>
                         </div>
                     </div>
                 </div>
@@ -152,6 +151,10 @@
                             </div>
 
                         </div>
+                        <hr/>
+                        <div *ngIf="schedule?.virtual?.linkYoutube" class="row col-12 justify-content-center">
+                                <iframe tabindex="0" alt="clique para assistir" width="100%" height="400" [src]='linkYoutubeSafe' frameborder="0" allowfullscreen></iframe>
+                        </div>  
                     </div>
                 </div>
             </div>
@@ -166,7 +169,12 @@
                         <h5 style="color: #50d8af">{{type | modalitiesWork}}</h5>
                         <h3 tabindex="0" ><b>{{schedule?.titles[0]}}</b></h3>
                         <h4 tabindex="0" >{{schedule.date + ' ' + (schedule.startTime ? schedule.startTime : '')  + ' - ' + (schedule.endTime ? schedule.endTime : '')}}</h4>
-                        <h4>Link para acesso: <b>Em breve</b></h4>
+                        <h4 tabindex="0" class="mb-1">
+                            Link para acesso: <b>
+                            <a tabindex="0" *ngIf="schedule?.virtual?.linkZoom" [attr.href]="schedule?.virtual?.linkZoom" target="_blank">Clique Aqui</a>
+                            <span tabindex="0" *ngIf="schedule?.virtual?.linkZoom"> ou copie {{schedule?.virtual?.linkZoom}}</span>
+                            <span tabindex="0" *ngIf="!schedule?.virtual?.linkZoom">Em breve</span></b>
+                        </h4>
                     </div>
                 
                     <div class="col-sm-2">

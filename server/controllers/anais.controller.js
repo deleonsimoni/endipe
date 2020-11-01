@@ -4,10 +4,26 @@ module.exports = {
   getAnais,
   insertAnais,
   deleteAnais,
-  updateAnais
+  updateAnais,
+  getAnaisVirtual,
+  getSumarioVirtual
 }
 
 async function getAnais() {
+  return await Anais.find()
+    .sort({
+      createAt: -1
+    });
+}
+
+async function getAnaisVirtual() {
+  return await Anais.find()
+    .sort({
+      createAt: -1
+    });
+}
+
+async function getSumarioVirtual() {
   return await Anais.find()
     .sort({
       createAt: -1
