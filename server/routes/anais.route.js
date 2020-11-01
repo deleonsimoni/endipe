@@ -10,7 +10,7 @@ router.get('/anais', getAnais);
 
 router.get('/anaisVirtual', getAnaisVirtual);
 
-router.get('/sumarioVirtual', getSumarioVirtual);
+router.get('/anaisSumarioVirtual', getSumarioVirtual);
 
 
 router.post('/anais', passport.authenticate('jwt', {
@@ -37,7 +37,7 @@ async function getAnaisVirtual(req, res) {
 }
 
 async function getSumarioVirtual(req, res) {
-  let anais = await anaisCtrl.getSumarioVirtual(req.query.id);
+  let anais = await anaisCtrl.getSumarioVirtual(req);
   res.json(anais);
 }
 

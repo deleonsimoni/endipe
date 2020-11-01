@@ -34,10 +34,7 @@ export class LiveVirtualComponent implements OnInit {
 
   ngOnInit() {
     this.getListVirtual();
-
-    
   }
-
 
   selectSchedule(schedule) {
     if (this.scheduleSelect == schedule._id) {
@@ -93,9 +90,9 @@ export class LiveVirtualComponent implements OnInit {
           element.type = 7;
         });
 
-        //     res.lancamentoDeLivros.forEach(element => {
-        //       element.type = 9;
-        //     });
+        res.lancamentoDeLivros.forEach(element => {
+          element.type = 9;
+        });
 
         res.rodaReunioesEntidadesRedes.forEach(element => {
           element.type = 11;
@@ -112,7 +109,7 @@ export class LiveVirtualComponent implements OnInit {
           ...res.rodaReunioesEntidadesRedes,
           ...res.simposio,
           ...res.sessoesEspeciais,
-          // ...res.lancamentoDeLivros,
+          ...res.lancamentoDeLivros,
           ...res.abertura,
           ...res.encerramento
 

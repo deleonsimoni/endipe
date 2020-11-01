@@ -45,14 +45,10 @@ async function listScheduleWorkPaginate(req) {
   let total;
   let search = {};
 
-  //montar pesquisa
-  console.log(req.query.titulo)
-  console.log(req.query.eixo)
 
   if(req.query.titulo && req.query.titulo != 'undefined') search.workTitle = { $regex: ".*" + req.query.titulo + ".*" };
   if(req.query.eixo && req.query.eixo != 'undefined') search['axis'] = Number(req.query.eixo);
   //if(req.query.author) search.workTitle = { $regex: ".*" + req.query.author + ".*" };
-  console.log(search)
 
   switch (Number(req.query.type)) {
     case 4:
@@ -439,11 +435,14 @@ async function getUserMonitors(req) {
 async function listVirtual() {
 
   const dateNow = new Date();
-  const date = dateNow.getDate().toString() + '/' + (dateNow.getMonth() + 1);
+  let date = dateNow.getDate().toString() + '/' + (dateNow.getMonth() + 1);
 
   //marretando para homologação.
   //const date = '29/10';
 
+  if(date.length == 4){
+    date = "0" + date;
+  }
 
   let virtual = { schedules: [] };
   //if (date == "29/10") {
@@ -459,7 +458,7 @@ async function listVirtual() {
   }
 
   virtual.atividadeCultural = await atividadeCulturalCtrl.listSchedule(date);
-  //  virtual.lancamentoDeLivros = await lancamentoDeLivrosCtrl.listSchedule(date);
+  virtual.lancamentoDeLivros = await lancamentoDeLivrosCtrl.listSchedule(date);
   virtual.rodaReunioesEntidadesRedes = await rodaReunioesEntidadesRedesCtrl.listSchedule(date);
   virtual.sessoesEspeciais = await sessoesEspeciaisCtrl.listSchedule(date);
   virtual.simposio = await simposioCtrl.listSchedule(date);

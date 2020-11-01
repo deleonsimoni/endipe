@@ -19,8 +19,8 @@ export class AnaisService {
     return this.http.get(`${this.baseUrl}/anais/anaisVirtual`);
   }
 
-  listarSumarioVirtual(id) {
-    return this.http.get(`${this.baseUrl}/anais/anaisSumarioVirtual?id=${id}`);
+  listarSumarioVirtual(id, page) {
+    return this.http.get(`${this.baseUrl}/anais/anaisSumarioVirtual?id=${id}&page=${page}`);
   }
 
   cadastrar(anais) {
