@@ -25,9 +25,9 @@
 
           <nav id="nav-menu-container" [hidden]="isMobile == true">
             <ul class="nav-menu">
-              <li class="pointer">
+              <!--<li class="pointer">
                 <a tabindex="0" class="menu-has-children aoVivo pulse" [routerLink]="['/endipe-virtual']" >ENDIPE VIRTUAL</a>
-              </li>
+              </li>-->
              
 
               <li class="nav-item dropdown">
@@ -157,12 +157,12 @@
     </mat-sidenav-content>
     <mat-sidenav #sidenav mode="over">
       <accordion #accordion [isAnimated]="true" [closeOthers]="true">
-
+        <!--
         <ul class="child-list">
           <li>
             <a tabindex="0" accordion-heading class="menu-has-children aoVivo pulse" [routerLink]="['/endipe-virtual']" (click)="sidenav.toggle()">ENDIPE VIRTUAL</a>
           </li>
-        </ul>
+        </ul>-->
 
         <accordion-group>
           <a tabindex="0" accordion-heading>SOBRE <i class="fa "

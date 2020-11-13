@@ -108,10 +108,14 @@ async function updateChat(idChat, mensagem, user) {
 async function getChatMural(req) {
 
   const dateNow = new Date();
-  const date = dateNow.getDate().toString() + '/' + (dateNow.getMonth() + 1);
+  let date = dateNow.getDate().toString() + '/' + (dateNow.getMonth() + 1);
   const pageSize = 6;
   const page = req.query.page || 1;
   let total;
+
+  if(date.length == 4){
+    date = "0" + date;
+  }
 
   try{
     total = await Mural.aggregate([{$match: { 'date': date}}, {$project: {chat: {$size: '$chat'}}}]);
