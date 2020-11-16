@@ -38,7 +38,7 @@ export class CertificadoComponent implements OnInit {
 
       this.nome = this.user.fullname;
 
-      /*if (!this.user.icAdmin) {
+      if (!this.user.icAdmin) {
         if (this.user.payment && this.user.payment.icPaid) {
           this.templateAutomatico.target.value = 'PARTICIPAÇÃO GERAL';
           this.preencherTemplate(this.templateAutomatico, null, null);
@@ -51,7 +51,7 @@ export class CertificadoComponent implements OnInit {
         }
       } else {
         this.carregando = false;
-      }*/
+      }
       this.carregando = false;
     });
   }
@@ -60,35 +60,29 @@ export class CertificadoComponent implements OnInit {
     this.works.forEach((work) => {
       //MiniCurso
       if (
-        (work.modalityId == 4 && work.reviewAdmin && work.reviewAdmin.review.icAllow == "Sim") ||
-        (work.reviewReviewer && work.reviewReviewer.review && work.reviewReviewer.review.icAllow != "Não")
+        work.modalityId == 4 && ((work.reviewAdmin && work.reviewAdmin.review.icAllow == "Sim") &&
+        (work.reviewReviewer && work.reviewReviewer.review && work.reviewReviewer.review.icAllow != "Nao"))
       ) {
         this.templateAutomatico.target.value = "MEDIAÇÃO DE MINICURSO";
         this.preencherTemplate(this.templateAutomatico, work.title, "04");
-      }
-
-      if (
-        (work.modalityId == 2 && work.reviewAdmin && work.reviewAdmin.review.icAllow == "Sim") ||
-        (work.reviewReviewer && work.reviewReviewer.review && work.reviewReviewer.review.icAllow != "Não")
+      } else if (
+        work.modalityId == 2 && ((work.reviewAdmin && work.reviewAdmin.review.icAllow == "Sim") &&
+        (work.reviewReviewer && work.reviewReviewer.review && work.reviewReviewer.review.icAllow != "Nao"))
       ) {
         this.templateAutomatico.target.value = "MEDIAÇÃO DE RODA DE CONVERSA";
-        this.preencherTemplate(this.templateAutomatico, work.title, null);
-      }
-
-      if (
-        (work.modalityId == 5 && work.reviewAdmin && work.reviewAdmin.review.icAllow == "Sim") ||
-        (work.reviewReviewer && work.reviewReviewer.review && work.reviewReviewer.review.icAllow != "Não")
+        this.preencherTemplate(this.templateAutomatico, work.title, "02");
+      } else if (
+        work.modalityId == 5 && ((work.reviewAdmin && work.reviewAdmin.review.icAllow == "Sim") &&
+        (work.reviewReviewer && work.reviewReviewer.review && work.reviewReviewer.review.icAllow != "Nao"))
       ) {
-        this.templateAutomatico.target.value = "PAINEL";
-        this.preencherTemplate(this.templateAutomatico, work.title, null);
-      }
-
-      if (
-        (work.modalityId == 3 && work.reviewAdmin && work.reviewAdmin.review.icAllow == "Sim") ||
-        (work.reviewReviewer && work.reviewReviewer.review && work.reviewReviewer.review.icAllow != "Não")
+        this.templateAutomatico.target.value = "MEDIAÇÃO DE PAINEL";
+        this.preencherTemplate(this.templateAutomatico, work.title, "05");
+      } else if (
+        work.modalityId == 3 && ((work.reviewAdmin && work.reviewAdmin.review.icAllow == "Sim") &&
+        (work.reviewReviewer && work.reviewReviewer.review && work.reviewReviewer.review.icAllow != "Nao"))
       ) {
         this.templateAutomatico.target.value = "PÔSTER";
-        this.preencherTemplate(this.templateAutomatico, work.title, null);
+        this.preencherTemplate(this.templateAutomatico, work.title, "03");
       }
     });
   }
