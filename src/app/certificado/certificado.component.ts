@@ -60,26 +60,30 @@ export class CertificadoComponent implements OnInit {
     this.works.forEach((work) => {
       //MiniCurso
       if (
-        work.modalityId == 4 && ((work.reviewAdmin && work.reviewAdmin.review.icAllow == "Sim") &&
-        (work.reviewReviewer && work.reviewReviewer.review && work.reviewReviewer.review.icAllow != "Nao"))
+        work.modalityId == 4 && (((work.reviewAdmin && work.reviewAdmin.review.icAllow == "Sim") &&
+        (work.reviewReviewer && work.reviewReviewer.review && work.reviewReviewer.review.icAllow != "Nao")) ||
+        (work.recurso && work.recurso.icAllow == "Sim"))
       ) {
         this.templateAutomatico.target.value = "MEDIAÇÃO DE MINICURSO";
         this.preencherTemplate(this.templateAutomatico, work.title, "04");
       } else if (
-        work.modalityId == 2 && ((work.reviewAdmin && work.reviewAdmin.review.icAllow == "Sim") &&
-        (work.reviewReviewer && work.reviewReviewer.review && work.reviewReviewer.review.icAllow != "Nao"))
+        work.modalityId == 2 && (((work.reviewAdmin && work.reviewAdmin.review.icAllow == "Sim") &&
+        (work.reviewReviewer && work.reviewReviewer.review && work.reviewReviewer.review.icAllow != "Nao")) ||
+        (work.recurso && work.recurso.icAllow == "Sim"))
       ) {
         this.templateAutomatico.target.value = "MEDIAÇÃO DE RODA DE CONVERSA";
         this.preencherTemplate(this.templateAutomatico, work.title, "02");
-      } else if (
-        work.modalityId == 5 && ((work.reviewAdmin && work.reviewAdmin.review.icAllow == "Sim") &&
-        (work.reviewReviewer && work.reviewReviewer.review && work.reviewReviewer.review.icAllow != "Nao"))
+      } else if ( 
+        work.modalityId == 5 && (((work.reviewAdmin && work.reviewAdmin.review.icAllow == "Sim") &&
+        (work.reviewReviewer && work.reviewReviewer.review && work.reviewReviewer.review.icAllow != "Nao")) ||
+        (work.recurso && work.recurso.icAllow == "Sim"))
       ) {
         this.templateAutomatico.target.value = "MEDIAÇÃO DE PAINEL";
         this.preencherTemplate(this.templateAutomatico, work.title, "05");
       } else if (
-        work.modalityId == 3 && ((work.reviewAdmin && work.reviewAdmin.review.icAllow == "Sim") &&
-        (work.reviewReviewer && work.reviewReviewer.review && work.reviewReviewer.review.icAllow != "Nao"))
+        work.modalityId == 3 && (((work.reviewAdmin && work.reviewAdmin.review.icAllow == "Sim") &&
+        (work.reviewReviewer && work.reviewReviewer.review && work.reviewReviewer.review.icAllow != "Nao")) ||
+        (work.recurso && work.recurso.icAllow == "Sim"))
       ) {
         this.templateAutomatico.target.value = "PÔSTER";
         this.preencherTemplate(this.templateAutomatico, work.title, "03");
