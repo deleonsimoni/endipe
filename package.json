@@ -52,7 +52,7 @@
     "joi": "^13.3.0",
     "jquery": "^3.5.1",
     "jsonwebtoken": "^8.2.1",
-    "jspdf": "^1.5.3",
+    "jspdf": "^2.3.1",
     "jw-paginate": "^1.0.4",
     "jwt-decode": "^2.2.0",
     "method-override": "^2.3.10",
