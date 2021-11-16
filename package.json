@@ -27,7 +27,7 @@
     "@angular/router": "~8.0.1",
     "@compodoc/compodoc": "^1.1.11",
     "@popperjs/core": "^2.4.4",
-    "aws-sdk": "^2.738.0",
+    "aws-sdk": "^2.814.0",
     "bcrypt": "^3.0.8",
     "body-parser": "^1.18.2",
     "bootstrap": "^4.5.2",
