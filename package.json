@@ -56,7 +56,7 @@
     "jw-paginate": "^1.0.4",
     "jwt-decode": "^2.2.0",
     "method-override": "^2.3.10",
-    "moment": "^2.27.0",
+    "moment": "^2.29.2",
     "mongoose": "^5.10.0",
     "morgan": "^1.10.0",
     "ng2-dragula": "^1.5.0",
